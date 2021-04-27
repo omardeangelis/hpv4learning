@@ -48,6 +48,8 @@ const SocialBar = ({ className }) => {
               component={Link}
               titleAccess={text}
               href={url}
+              alt={text}
+              target="_blank"
               color="secondary"
               className="social-icon"
             >
