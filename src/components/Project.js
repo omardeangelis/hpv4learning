@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 const Project = ({ data: { titolo, ordine, url, copertina } }) => {
   const classes = useStyles();
   const image = getImage(copertina);
-
   return (
     <Wrapper>
       <Box className="img">
