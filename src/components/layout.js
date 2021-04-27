@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import Container from "@material-ui/core/Container";
 import { Helmet } from "react-helmet";
 const Layout = ({ children }) => {
@@ -17,6 +18,7 @@ const Layout = ({ children }) => {
       <main>
         <Container maxWidth="lg">{children}</Container>
       </main>
+      <Footer />
     </>
   );
 };

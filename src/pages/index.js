@@ -11,7 +11,7 @@ const IndexPage = ({ data }) => {
         title={indexInfo.title}
         description={indexInfo.description}
       ></MetaDecorator>
-      <Projects sectionTitle="React Projects" data={data}></Projects>
+      <Projects sectionTitle="Progetti React" data={data}></Projects>
     </Layout>
   );
 };
