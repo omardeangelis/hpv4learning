@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import Project from "./Project";
-import { Tween } from "react-gsap";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(3),
@@ -35,13 +34,11 @@ const Projects = ({ sectionTitle, data }) => {
         {sectionTitle}
       </Typography>
       <Grid container spacing={3} justify="center" className={classes.projects}>
-        <Tween from={{ y: "200px", opacity: 0 }} stagger={0.1} ease="ease">
-          {nodes.map((progetto) => (
-            <Grid item xs={12} sm={6} md={4} key={progetto.id}>
-              <Project data={progetto} />
-            </Grid>
-          ))}
-        </Tween>
+        {nodes.map((progetto, index) => (
+          <Grid item xs={12} sm={6} md={4} key={progetto.id}>
+            <Project data={progetto} order={index} />
+          </Grid>
+        ))}
       </Grid>
     </section>
   );
