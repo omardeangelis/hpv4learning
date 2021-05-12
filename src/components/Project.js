@@ -24,7 +24,11 @@ const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
   const classes = useStyles();
   const image = getImage(copertina);
   return (
-    <Tween from={{ y: "200px", opacity: 0, delay: order * 0.15 }} ease="ease">
+    <Tween
+      from={{ y: "200px", opacity: 0 }}
+      to={{ opacity: 1, y: "0", delay: order * 0.15 }}
+      ease="ease"
+    >
       <Wrapper>
         <Box className="img">
           <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
@@ -51,6 +55,7 @@ const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
 };
 
 const Wrapper = styled.div`
+  opacity: 0;
   display: grid;
   box-shadow: var(--light-shadow);
   border-radius: var(--radius);
