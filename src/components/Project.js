@@ -6,6 +6,8 @@ import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
+import { Tween } from "react-gsap";
+
 const useStyles = makeStyles((theme) => ({
   cardActions: {
     background: "white",
@@ -18,31 +20,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Project = ({ data: { titolo, ordine, url, copertina } }) => {
+const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
   const classes = useStyles();
   const image = getImage(copertina);
   return (
-    <Wrapper>
-      <Box className="img">
-        <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
-      </Box>
-      <footer className={classes.cardActions}>
-        <Typography variant="overline" className="title">
-          {ordine} {titolo}
-        </Typography>
-        <Button
-          component={Link}
-          variant="contained"
-          href={url}
-          target="_blank"
-          color="secondary"
-          size="small"
-          className="btn"
-        >
-          Vedi
-        </Button>
-      </footer>
-    </Wrapper>
+    <Tween from={{ y: "200px", opacity: 0, delay: order * 0.15 }} ease="ease">
+      <Wrapper>
+        <Box className="img">
+          <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
+        </Box>
+        <footer className={classes.cardActions}>
+          <Typography variant="overline" className="title">
+            {ordine} {titolo}
+          </Typography>
+          <Button
+            component={Link}
+            variant="contained"
+            href={url}
+            target="_blank"
+            color="secondary"
+            size="small"
+            className="btn"
+          >
+            Vedi
+          </Button>
+        </footer>
+      </Wrapper>
+    </Tween>
   );
 };
 
