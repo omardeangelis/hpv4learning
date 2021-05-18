@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -6,8 +6,9 @@ import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
-import { Tween } from "react-gsap";
-
+import Fade from "@material-ui/core/Fade";
+import Slide from "@material-ui/core/Slide";
+import { ThemeContext } from "../../root";
 const useStyles = makeStyles((theme) => ({
   cardActions: {
     background: "white",
@@ -23,39 +24,39 @@ const useStyles = makeStyles((theme) => ({
 const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
   const classes = useStyles();
   const image = getImage(copertina);
+  const prova = useContext(ThemeContext);
+  console.log(prova);
   return (
-    <Tween
-      from={{ y: "200px", opacity: 0 }}
-      to={{ opacity: 1, y: "0", delay: order * 0.15 }}
-      ease="ease"
-    >
-      <Wrapper>
-        <Box className="img">
-          <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
-        </Box>
-        <footer className={classes.cardActions}>
-          <Typography variant="overline" className="title">
-            {ordine} {titolo}
-          </Typography>
-          <Button
-            component={Link}
-            variant="contained"
-            href={url}
-            target="_blank"
-            color="secondary"
-            size="small"
-            className="btn"
-          >
-            Vedi
-          </Button>
-        </footer>
-      </Wrapper>
-    </Tween>
+    <Slide in={true} direction="up" timeout={order * 125}>
+      <Fade in timeout={order * 150}>
+        <Wrapper>
+          <Box className="img">
+            <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
+          </Box>
+          <footer className={classes.cardActions}>
+            <Typography variant="overline" className="title">
+              {ordine} {titolo}
+            </Typography>
+            <Button
+              component={Link}
+              variant="contained"
+              href={url}
+              target="_blank"
+              color="secondary"
+              size="small"
+              className="btn"
+            >
+              Vedi
+            </Button>
+          </footer>
+        </Wrapper>
+      </Fade>
+    </Slide>
   );
 };
 
 const Wrapper = styled.div`
-  opacity: 0;
+  opacity: 1;
   display: grid;
   box-shadow: var(--light-shadow);
   border-radius: var(--radius);
