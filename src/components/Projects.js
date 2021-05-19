@@ -2,7 +2,6 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 import Project from "./Project";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,7 +11,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     textTransform: "lowercase",
     fontVariant: "small-caps",
-    color: red[400],
+    lineHeight: 0.9,
+  },
+  h4: {
+    marginLeft: "-2.5px",
+    paddingLeft: "0px",
+  },
+  subtitle: {
+    marginTop: theme.spacing(2),
+    maxWidth: "75ch",
   },
   projects: {
     marginTop: theme.spacing(3),
@@ -26,12 +33,28 @@ const Projects = ({ sectionTitle, data }) => {
   return (
     <section className={classes.root}>
       <Typography
-        align="center"
-        variant="h3"
-        color="inherit"
+        variant="h4"
+        classes={{
+          h4: classes.h4,
+        }}
         className={classes.title}
       >
-        {sectionTitle}
+        Metti alla prova le tue{" "}
+        <Typography
+          component="span"
+          variant="h4"
+          color="primary"
+          className={classes.title}
+        >
+          nuove compentenze
+        </Typography>
+      </Typography>
+      <Typography color="textSecondary" className={classes.subtitle}>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates
+        dolor possimus maiores ex at eum dolores facilis neque sequi, explicabo
+        sunt ipsum natus mollitia voluptas non laudantium, deleniti porro
+        repellendus cumque id laboriosam doloribus eos sapiente! Totam commodi
+        minus hic.
       </Typography>
       <Grid container spacing={3} justify="center" className={classes.projects}>
         {nodes.map((progetto, index) => (

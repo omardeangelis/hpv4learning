@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import Fade from "@material-ui/core/Fade";
 import Slide from "@material-ui/core/Slide";
-import { ThemeContext } from "../../root";
 const useStyles = makeStyles((theme) => ({
   cardActions: {
     background: "white",
@@ -24,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
 const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
   const classes = useStyles();
   const image = getImage(copertina);
-  const prova = useContext(ThemeContext);
-  console.log(prova);
   return (
     <Slide in={true} direction="up" timeout={order * 125}>
       <Fade in timeout={order * 150}>
@@ -42,7 +39,7 @@ const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
               variant="contained"
               href={url}
               target="_blank"
-              color="secondary"
+              color="primary"
               size="small"
               className="btn"
             >

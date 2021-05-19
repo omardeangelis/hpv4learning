@@ -1,9 +1,17 @@
 import * as React from "react";
+//Global Layoaut
 import Layout from "../components/layout";
-import { graphql } from "gatsby";
-import Projects from "../components/Projects";
-import MetaDecorator from "../components/utils/MetaDecorator";
+//Meta Title e SEO
 import { indexInfo } from "../page_info/indexInfo";
+import MetaDecorator from "../components/utils/MetaDecorator";
+//Components
+import Projects from "../components/Projects";
+import BgImageSection from "../components/BgImageSection";
+import ContactSection from "../components/ContactSection";
+//Gastby
+import { graphql } from "gatsby";
+//Material UI
+import Container from "@material-ui/core/Container/Container";
 const IndexPage = ({ data }) => {
   return (
     <Layout>
@@ -11,7 +19,12 @@ const IndexPage = ({ data }) => {
         title={indexInfo.title}
         description={indexInfo.description}
       ></MetaDecorator>
-      <Projects sectionTitle="Progetti React" data={data}></Projects>
+      <BgImageSection>
+        <ContactSection></ContactSection>
+      </BgImageSection>
+      <Container maxWidth="lg">
+        <Projects data={data}></Projects>
+      </Container>
     </Layout>
   );
 };
