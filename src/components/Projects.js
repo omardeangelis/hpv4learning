@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Projects = ({ sectionTitle, data }) => {
   const classes = useStyles();
-  const { nodes } = data.allContentfulProgetti;
   return (
     <section className={classes.root}>
       <Typography
@@ -57,8 +56,8 @@ const Projects = ({ sectionTitle, data }) => {
         minus hic.
       </Typography>
       <Grid container spacing={3} justify="center" className={classes.projects}>
-        {nodes.map((progetto, index) => (
-          <Grid item xs={12} sm={6} md={4} key={progetto.id}>
+        {data.map((progetto, index) => (
+          <Grid item xs={12} sm={6} md={4} key={progetto.titolo}>
             <Project data={progetto} order={index} />
           </Grid>
         ))}

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 const query = graphql`
   {
     imageSharp(fixed: { originalName: { eq: "Bg.png" } }) {
-      gatsbyImageData(placeholder: BLURRED)
+      gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
     }
   }
 `;
@@ -28,8 +28,13 @@ const ComponentName = ({ children }) => {
   const image = getImage(data.imageSharp);
   const classes = useStyles();
   return (
-    <BgImage image={image}>
-      <Container maxWidth="lg" className={classes.root}>
+    <BgImage
+      image={image}
+      style={{
+        backGroundPosition: "center",
+      }}
+    >
+      <Container maxWidth='lg' className={classes.root}>
         {children}
       </Container>
     </BgImage>

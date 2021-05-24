@@ -15,7 +15,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 //Icon
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 //gatsby
-import { Link as GastbyLink } from "gatsby";
+import { Link as GastbyLink, useStaticQuery, graphql } from "gatsby";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 const Navbar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const data = useStaticQuery(query);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -110,20 +112,18 @@ const Navbar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem
-                  onClick={handleClose}
-                  component={GastbyLink}
-                  to="/react"
-                >
-                  React
-                </MenuItem>
-                <MenuItem
-                  onClick={handleClose}
-                  component={GastbyLink}
-                  to="/videomaker"
-                >
-                  Videomaker
-                </MenuItem>
+                {data.allContentfulCorsi.nodes.map((node) => {
+                  return (
+                    <MenuItem
+                      key={node.slug}
+                      onClick={handleClose}
+                      component={GastbyLink}
+                      to={`/${node.slug}/`}
+                    >
+                      {node.categoria}
+                    </MenuItem>
+                  );
+                })}
               </Menu>
             </Grid>
             <Grid item md={3}>
@@ -144,5 +144,16 @@ const Navbar = () => {
     </div>
   );
 };
+
+const query = graphql`
+  {
+    allContentfulCorsi {
+      nodes {
+        slug
+        categoria
+      }
+    }
+  }
+`;
 
 export default Navbar;

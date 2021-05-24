@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import Fade from "@material-ui/core/Fade";
-import Slide from "@material-ui/core/Slide";
+import VizSensor from "react-visibility-sensor";
 const useStyles = makeStyles((theme) => ({
   cardActions: {
     background: "white",
@@ -23,32 +23,39 @@ const useStyles = makeStyles((theme) => ({
 const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
   const classes = useStyles();
   const image = getImage(copertina);
+  const [isActive, setIsActive] = useState(false);
   return (
-    <Slide in={true} direction="up" timeout={order * 125}>
-      <Fade in timeout={order * 150}>
+    <VizSensor
+      onChange={(isVisible) => {
+        if (!isActive) {
+          setIsActive(isVisible);
+        }
+      }}
+    >
+      <Fade in={isActive} timeout={350}>
         <Wrapper>
-          <Box className="img">
-            <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
+          <Box className='img'>
+            <GatsbyImage image={image} alt={titolo} className='gatsby-img' />
           </Box>
           <footer className={classes.cardActions}>
-            <Typography variant="overline" className="title">
+            <Typography variant='overline' className='title'>
               {ordine} {titolo}
             </Typography>
             <Button
               component={Link}
-              variant="contained"
+              variant='contained'
               href={url}
-              target="_blank"
-              color="primary"
-              size="small"
-              className="btn"
+              target='_blank'
+              color='primary'
+              size='small'
+              className='btn'
             >
               Vedi
             </Button>
           </footer>
         </Wrapper>
       </Fade>
-    </Slide>
+    </VizSensor>
   );
 };
 

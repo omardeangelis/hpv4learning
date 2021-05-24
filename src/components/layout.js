@@ -1,7 +1,10 @@
 import React from "react";
+//Custom Component
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+//Seo
 import { Helmet } from "react-helmet";
+
 const Layout = ({ children }) => {
   return (
     <>

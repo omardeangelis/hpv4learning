@@ -14,6 +14,9 @@
   --soft-dark-gray: #89949e;
   --dark-gray: #6c757dff;
   --extra-dark-gray: #343a40ff;
+  --paragraph-color: rgba(0, 0, 0, 0.54);
+  --paragraph-spacing: 0.00938em;
+
   /* Global */
   --letter-spacing: 0.08rem;
   --transition: all 0.2s ease;
@@ -70,11 +73,18 @@ h3 {
 h4 {
   font-size: 0.875rem;
 }
-p {
-  color: var(--primary-gray);
-  font-size: 0.9rem;
-  letter-spacing: var(--letter-spacing);
+
+.markdown-p {
+  max-width: 75ch;
+  line-height: 1.8;
 }
+
+.video {
+  width: 100%;
+  height: 60vh;
+  border-radius: 20px;
+}
+
 @media screen and (min-width: 753px) {
   h1 {
     font-size: 4rem;
