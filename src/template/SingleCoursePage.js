@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   video: {
     display: "grid",
-    gap: theme.spacing(2),
+    height: "60vh",
   },
   btnContainer: {
     display: "flex",
@@ -93,9 +93,13 @@ const SingleCoursePage = ({ data }) => {
             />
           </Box>
           {/* Container del video di anteprima */}
-          <Box component='section' className={classes.video}>
+          <Container
+            maxWidth='md'
+            component='section'
+            className={classes.video}
+          >
             <Video videoSrcURL={corso.trailer}></Video>
-          </Box>
+          </Container>
           {/* Bottone Centrato per andare su Udemy */}
           <Box className={classes.btnContainer}>
             <CustomButton
@@ -119,6 +123,8 @@ const SingleCoursePage = ({ data }) => {
               }}
             ></Typography>
           </Box>
+          <Divider />
+
           {/* Liste di Requisiti e Concetti del corso */}
           <Box component='section'>
             <Grid container>
@@ -166,7 +172,10 @@ const SingleCoursePage = ({ data }) => {
         {/* Progetti ed esercizatazioni  */}
         {corso.progetti && (
           <Container maxWidth='lg'>
-            <Projects data={corso.progetti}></Projects>
+            <Projects
+              data={corso.progetti}
+              sectionTitle={corso.introduzioneProgetti.childMarkdownRemark.html}
+            ></Projects>
             <Box className={classes.btnContainer}>
               <CustomButton
                 link={corso.udemyUrl}
@@ -212,12 +221,22 @@ export const query = graphql`
       copertina {
         gatsbyImageData
       }
+      introduzioneProgetti {
+        childMarkdownRemark {
+          html
+        }
+      }
       progetti {
         titolo
         url
         ordine
         copertina {
           gatsbyImageData
+        }
+        descrizione {
+          childMarkdownRemark {
+            html
+          }
         }
       }
     }

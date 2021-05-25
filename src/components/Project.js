@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import Fade from "@material-ui/core/Fade";
+import CardContent from "@material-ui/core/CardContent";
 import VizSensor from "react-visibility-sensor";
 const useStyles = makeStyles((theme) => ({
   cardActions: {
@@ -20,12 +21,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
+const Project = ({ data: { titolo, ordine, url, copertina, descrizione } }) => {
   const classes = useStyles();
   const image = getImage(copertina);
   const [isActive, setIsActive] = useState(false);
   return (
     <VizSensor
+      partialVisibility='bottom'
+      offset={{
+        bottom: -300,
+      }}
       onChange={(isVisible) => {
         if (!isActive) {
           setIsActive(isVisible);
@@ -37,22 +42,38 @@ const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
           <Box className='img'>
             <GatsbyImage image={image} alt={titolo} className='gatsby-img' />
           </Box>
-          <footer className={classes.cardActions}>
-            <Typography variant='overline' className='title'>
-              {ordine} {titolo}
-            </Typography>
-            <Button
-              component={Link}
-              variant='contained'
-              href={url}
-              target='_blank'
-              color='primary'
-              size='small'
-              className='btn'
-            >
-              Vedi
-            </Button>
-          </footer>
+          {url ? (
+            <footer className={classes.cardActions}>
+              <Typography variant='overline' className='title'>
+                {ordine} {titolo}
+              </Typography>
+              <Button
+                component={Link}
+                variant='contained'
+                href={url}
+                target='_blank'
+                color='primary'
+                size='small'
+                className='btn'
+              >
+                Vedi
+              </Button>
+            </footer>
+          ) : (
+            <CardContent>
+              <Typography variant='overline' className='title'>
+                {ordine} {titolo}
+              </Typography>
+              <Typography
+                variant='body2'
+                color='textSecondary'
+                component='p'
+                dangerouslySetInnerHTML={{
+                  __html: descrizione.childMarkdownRemark.html,
+                }}
+              ></Typography>
+            </CardContent>
+          )}
         </Wrapper>
       </Fade>
     </VizSensor>

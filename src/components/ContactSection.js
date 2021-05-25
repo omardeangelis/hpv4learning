@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "70ch",
     color: "#f0f0f0",
     lineHeight: 2,
+    "& > strong": {
+      color: theme.palette.secondary.main,
+    },
   },
   inputMail: {
     background: "white",
@@ -62,12 +65,12 @@ const ContactSection = () => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <Typography variant="h3" className={classes.title}>
+      <Typography variant='h3' className={classes.title}>
         Richiedi Coupon{" "}
         <Typography
-          component="span"
-          variant="h3"
-          color="secondary"
+          component='span'
+          variant='h3'
+          color='secondary'
           className={classes.span}
         >
           {" "}
@@ -75,35 +78,35 @@ const ContactSection = () => {
         </Typography>{" "}
         ?
       </Typography>
-      <Typography color="textSecondary" className={classes.bodyText}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure, est
-        recusandae quia praesentium vero ut nesciunt, iste temporibus eligendi,
-        tempora dolor laudantium. Aliquid adipisci in eligendi corrupti quas ut
-        totam.
+      <Typography color='textSecondary' className={classes.bodyText}>
+        E' sempre un buon momento per risparmiare! Inserisci la tua mail per
+        ricevere un coupon per acquistare tutti i{" "}
+        <strong> nostri corsi a 9,99 €. </strong>
+        Non utilizzeremo la tua mail a scopi pubblicitari o per tartassarti.
       </Typography>
-      <Grid component="form" container spacing={0}>
+      <Grid component='form' container spacing={0}>
         <Grid item xs={9} className={classes.formItem}>
           <TextField
             fullWidth
-            id="email"
-            name="email"
-            type="email"
-            aria-label="email"
-            placeholder="Inserisci la tua mail"
-            variant="outlined"
-            autoComplete="email"
+            id='email'
+            name='email'
+            type='email'
+            aria-label='email'
+            placeholder='Inserisci la tua mail'
+            variant='outlined'
+            autoComplete='email'
             className={classes.inputMail}
           ></TextField>
         </Grid>
         <Grid item xs={3}>
           <Button className={classes.formBtn}>
             <Typography
-              variant="button"
+              variant='button'
               className={classes.title}
               style={{ color: "initial" }}
             >
               Richiedi{" "}
-              <Typography component="span" variant="button" color="primary">
+              <Typography component='span' variant='button' color='primary'>
                 {" "}
                 Sconto{" "}
               </Typography>

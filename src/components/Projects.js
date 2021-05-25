@@ -4,9 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Project from "./Project";
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(3),
-  },
+  root: {},
   title: {
     fontWeight: 600,
     textTransform: "lowercase",
@@ -32,7 +30,7 @@ const Projects = ({ sectionTitle, data }) => {
   return (
     <section className={classes.root}>
       <Typography
-        variant="h4"
+        variant='h4'
         classes={{
           h4: classes.h4,
         }}
@@ -40,22 +38,30 @@ const Projects = ({ sectionTitle, data }) => {
       >
         Metti alla prova le tue{" "}
         <Typography
-          component="span"
-          variant="h4"
-          color="primary"
+          component='span'
+          variant='h4'
+          color='primary'
           className={classes.title}
         >
           nuove compentenze
         </Typography>
       </Typography>
-      <Typography color="textSecondary" className={classes.subtitle}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates
-        dolor possimus maiores ex at eum dolores facilis neque sequi, explicabo
-        sunt ipsum natus mollitia voluptas non laudantium, deleniti porro
-        repellendus cumque id laboriosam doloribus eos sapiente! Totam commodi
-        minus hic.
-      </Typography>
-      <Grid container spacing={3} justify="center" className={classes.projects}>
+      <Typography
+        color='textSecondary'
+        variant='body1'
+        component='p'
+        className={classes.subtitle}
+        dangerouslySetInnerHTML={{
+          __html: sectionTitle,
+        }}
+      ></Typography>
+      <Grid
+        container
+        spacing={3}
+        justify='center'
+        alignItems='stretch'
+        className={classes.projects}
+      >
         {data.map((progetto, index) => (
           <Grid item xs={12} sm={6} md={4} key={progetto.titolo}>
             <Project data={progetto} order={index} />
