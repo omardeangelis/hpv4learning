@@ -3,6 +3,8 @@ import { graphql } from "gatsby";
 //Global Component e Variables
 import Layout from "../components/layout";
 import MetaDecorator from "../components/utils/MetaDecorator";
+//Utils
+import { createBoldText } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
 import BgImageSection from "../components/BgImageSection";
@@ -67,9 +69,6 @@ const SingleCoursePage = ({ data }) => {
   const { contentfulCorsi: corso } = data;
   const classes = useStyles();
 
-  const createBoldText = (text) => {
-    return text.replace("**", "<strong>").replace("**", "</strong>");
-  };
   return (
     <Layout>
       <MetaDecorator title={corso.titolo}></MetaDecorator>

@@ -29,9 +29,9 @@ const CustomButton = ({ router, link, type, ...props }) => {
     <Button
       component={RouterLink}
       to={link}
+      color='primary'
       variant={type}
       size={props.size}
-      variant={type}
       style={{
         fontWeight: 600,
         letterSpacing: "0.1rem",

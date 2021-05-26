@@ -23,9 +23,9 @@ const query = graphql`
     }
   }
 `;
-const ComponentName = ({ children }) => {
+const ComponentName = ({ img, children, noPadding }) => {
   const data = useStaticQuery(query);
-  const image = getImage(data.imageSharp);
+  const image = img ? getImage(img) : getImage(data.imageSharp);
   const classes = useStyles();
   return (
     <BgImage
@@ -34,7 +34,13 @@ const ComponentName = ({ children }) => {
         backGroundPosition: "center",
       }}
     >
-      <Container maxWidth='lg' className={classes.root}>
+      <Container
+        maxWidth='lg'
+        className={classes.root}
+        style={{
+          paddingBottom: noPadding ? 0 : "auto",
+        }}
+      >
         {children}
       </Container>
     </BgImage>
