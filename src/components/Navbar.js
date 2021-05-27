@@ -67,27 +67,27 @@ const Navbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.navbar} elevation={0}>
-        <Container component={Toolbar} maxWidth="lg">
+      <AppBar position='static' className={classes.navbar} elevation={0}>
+        <Container component={Toolbar} maxWidth='lg'>
           <Grid
             container
-            justify="center"
-            alignItems="center"
+            justify='center'
+            alignItems='center'
             spacing={8}
             className={classes.navItems}
           >
             <Grid item md={3}>
-              <Typography variant="h5" className={classes.title}>
+              <Typography variant='h5' className={classes.title}>
                 H4L
               </Typography>
             </Grid>
             <Grid item md={3}>
               <Button
                 className={classes.navLink}
-                color="default"
-                variant="text"
+                color='default'
+                variant='text'
                 component={GastbyLink}
-                to="/"
+                to='/'
               >
                 {" "}
                 Home{" "}
@@ -96,17 +96,17 @@ const Navbar = () => {
             <Grid item md={3}>
               <Button
                 className={classes.navLink}
-                color="default"
-                variant="text"
-                aria-controls="fade-menu"
-                aria-haspopup="true"
+                color='default'
+                variant='text'
+                aria-controls='fade-menu'
+                aria-haspopup='true'
                 onClick={handleClick}
                 endIcon={<ArrowDropDownIcon />}
               >
                 Corsi
               </Button>
               <Menu
-                id="simple-menu"
+                id='simple-menu'
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
@@ -129,10 +129,10 @@ const Navbar = () => {
             <Grid item md={3}>
               <Button
                 className={classes.navLink}
-                color="default"
-                variant="text"
+                color='default'
+                variant='text'
                 component={GastbyLink}
-                to="/chisiamo"
+                to='/about/'
               >
                 {" "}
                 Chi Siamo

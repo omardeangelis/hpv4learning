@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 //Gatsby
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 const Hero = ({ image, children, height }) => {
-  const gatsbyImage = getImage(image);
+  const gatsbyImage = image ? getImage(image) : false;
   return (
     <Box
       style={{
@@ -18,9 +18,7 @@ const Hero = ({ image, children, height }) => {
           {children}
         </Grid>
         <Grid item xs={12} lg={6}>
-          <Box>
-            <GatsbyImage image={gatsbyImage} />
-          </Box>
+          <Box>{gatsbyImage && <GatsbyImage image={gatsbyImage} />}</Box>
         </Grid>
       </Grid>
     </Box>

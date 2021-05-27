@@ -206,7 +206,7 @@ const IndexPage = ({ data }) => {
             <strong> Grandi marchi ed imprese </strong>
           </Typography>
           <Box className={classes.btnContainer}>
-            <CustomButton router link='/chi-siamo/' type='outlined' />
+            <CustomButton router link='/about/' type='outlined' />
           </Box>
           <Box>
             <GatsbyImage image={getImage(data.bgGatsby)} />
