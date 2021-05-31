@@ -19,12 +19,14 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Divider from "@material-ui/core/Divider";
 //Icon
 import CodeIcon from "@material-ui/icons/Code";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 //Gatsby
 import { graphql, Link as GatsbyLink } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     "& > strong": {
       color: theme.palette.primary.main,
     },
+    [theme.breakpoints.down("md")]: {
+      lineHeight: 1.4,
+    },
   },
   topHeroDescription: {
     maxWidth: "75ch",
@@ -66,6 +71,8 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     maxWidth: "65ch",
+    lineHeight: 1.8,
+
     color: theme.palette.text.secondary,
     "& strong": {
       color: theme.palette.primary.main,
@@ -83,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AboutPage = ({ data }) => {
   const insegnanti = data.allContentfulInsegnante.nodes;
-  console.log(insegnanti);
+  const { mediaQuery } = useGlobalContext();
   const classes = useStyles();
   return (
     <Layout>
@@ -93,19 +100,24 @@ const AboutPage = ({ data }) => {
           <Box component='section' className={classes.pageSpacer}>
             <Box component='div' className={classes.heroTextBox}>
               <Typography
-                variant='h2'
+                variant={mediaQuery.md ? "h4" : "h2"}
+                component='h2'
                 color='primary'
                 className={classes.topHeroTitle}
               >
                 Chi Siamo
               </Typography>
-              <Typography variant='h6' className={classes.topHeroSubtitle}>
+              <Typography
+                variant={mediaQuery.md ? "body1" : "h6"}
+                component='h6'
+                className={classes.topHeroSubtitle}
+              >
                 La nostra missione è facilitare la diffusione di competenze
-                digitali alla base <br />
+                digitali alla base {!mediaQuery.md && <br />}
                 <strong>del mercato del futuro.</strong>
               </Typography>
               <Typography
-                variant='body1'
+                variant={mediaQuery.md ? "body2" : "body1"}
                 color='textSecondary'
                 className={classes.topHeroDescription}
               >
@@ -132,7 +144,7 @@ const AboutPage = ({ data }) => {
               </Typography>
             </Box>
             <Box className={classes.teamSection} component='section'>
-              <Typography variant='h4' color='primary'>
+              <Typography variant={mediaQuery.md ? "h6" : "h4"} color='primary'>
                 I Nostri Insegnanti
               </Typography>
               {insegnanti.map((insegnante) => {
@@ -162,7 +174,7 @@ const AboutPage = ({ data }) => {
                         <Grid item xs={12} lg={8}>
                           <Typography
                             className={classes.description}
-                            variant='body1'
+                            variant={mediaQuery.md ? "body2" : "body1"}
                             color='textSecondary'
                             dangerouslySetInnerHTML={{
                               __html: insegnante.bio.childMarkdownRemark.html,
@@ -205,6 +217,7 @@ const AboutPage = ({ data }) => {
                           </List>
                         </Grid>
                       </Grid>
+                      {mediaQuery.md && <Divider />}
                     </CardContent>
                   </Card>
                 );

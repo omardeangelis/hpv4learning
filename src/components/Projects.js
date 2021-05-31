@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Project from "./Project";
+import { useGlobalContext } from "../context";
 const useStyles = makeStyles((theme) => ({
   root: {},
   title: {
@@ -18,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     marginTop: theme.spacing(2),
     maxWidth: "75ch",
+    lineHeight: 1.7,
+    "&  strong": {
+      color: theme.palette.primary.main,
+    },
   },
   projects: {
     marginTop: theme.spacing(3),
@@ -26,11 +31,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Projects = ({ sectionTitle, data }) => {
+  const { mediaQuery } = useGlobalContext();
   const classes = useStyles();
   return (
     <section className={classes.root}>
       <Typography
-        variant='h4'
+        variant={mediaQuery.md ? "h5" : "h4"}
         classes={{
           h4: classes.h4,
         }}
@@ -39,7 +45,7 @@ const Projects = ({ sectionTitle, data }) => {
         Metti alla prova le tue{" "}
         <Typography
           component='span'
-          variant='h4'
+          variant={mediaQuery.md ? "h5" : "h4"}
           color='primary'
           className={classes.title}
         >
@@ -48,7 +54,7 @@ const Projects = ({ sectionTitle, data }) => {
       </Typography>
       <Typography
         color='textSecondary'
-        variant='body1'
+        variant={mediaQuery.md ? "body2" : "body1"}
         component='p'
         className={classes.subtitle}
         dangerouslySetInnerHTML={{

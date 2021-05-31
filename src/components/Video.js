@@ -14,7 +14,12 @@ const useStyles = makeStyles((theme) => ({
 const Video = ({ videoSrcURL, videoTitle, ...props }) => {
   const classes = useStyles();
   return (
-    <div className={`video ${classes.root}`}>
+    <div
+      className={`video ${classes.root}`}
+      style={{
+        height: props.height ? props.height : "100%",
+      }}
+    >
       <iframe
         className={classes.frame}
         src={videoSrcURL}

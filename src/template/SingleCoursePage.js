@@ -25,6 +25,8 @@ import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import PersonIcon from "@material-ui/icons/Person";
 //Material Styles
 import { makeStyles } from "@material-ui/core/styles";
+import { useGlobalContext } from "../context";
+//Context
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 800,
     },
   },
+  subtitle: {
+    lineHeight: 1.3,
+  },
   video: {
     display: "grid",
     height: "60vh",
@@ -68,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 const SingleCoursePage = ({ data }) => {
   const { contentfulCorsi: corso } = data;
   const classes = useStyles();
-
+  const { mediaQuery } = useGlobalContext();
   return (
     <Layout>
       <MetaDecorator title={corso.titolo}></MetaDecorator>
@@ -77,13 +82,18 @@ const SingleCoursePage = ({ data }) => {
           {/* Titolo e Sottotiolo */}
           <Box component='div' className={classes.headings}>
             <Typography
-              variant='h3'
+              variant={mediaQuery.md ? "h5" : "h3"}
               className={classes.title}
               dangerouslySetInnerHTML={{
                 __html: createBoldText(corso.titolo),
               }}
             ></Typography>
-            <Typography variant='h5'>{corso.sottotitolo}</Typography>
+            <Typography
+              className={classes.subtitle}
+              variant={mediaQuery.md ? "h6" : "h5"}
+            >
+              {corso.sottotitolo}
+            </Typography>
             {/* Etichette con informazioni sul Corso */}
             <CourseInfo
               livello={corso.livello}
@@ -96,6 +106,9 @@ const SingleCoursePage = ({ data }) => {
             maxWidth='md'
             component='section'
             className={classes.video}
+            style={{
+              height: mediaQuery.md ? "40vh" : "60vh",
+            }}
           >
             <Video videoSrcURL={corso.trailer}></Video>
           </Container>
@@ -110,7 +123,11 @@ const SingleCoursePage = ({ data }) => {
           <Divider />
           {/* Descrizione del corso */}
           <Box>
-            <Typography variant='h3' color='primary' className={classes.title}>
+            <Typography
+              variant={mediaQuery.md ? "h5" : "h3"}
+              color='primary'
+              className={classes.title}
+            >
               DESCRIZIONE
             </Typography>
             <Typography

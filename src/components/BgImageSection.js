@@ -39,6 +39,7 @@ const ComponentName = ({ img, children, noPadding }) => {
         className={classes.root}
         style={{
           paddingBottom: noPadding ? 0 : "auto",
+          paddingTop: noPadding ? 0 : "auto",
         }}
       >
         {children}

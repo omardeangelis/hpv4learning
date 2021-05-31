@@ -2,6 +2,8 @@ import React from "react";
 //Material UI Theme
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
+//Context
+import { AppProvider } from "./src/context";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -24,5 +26,9 @@ const theme = createMuiTheme({
   },
 });
 export const ThemeWrapper = ({ element }) => {
-  return <ThemeProvider theme={theme}>{element}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <AppProvider>{element}</AppProvider>
+    </ThemeProvider>
+  );
 };

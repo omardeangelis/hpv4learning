@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
+import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,17 +24,28 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1,
     "& > strong": {
       color: theme.palette.primary.main,
-      fontWeight: 800,
+      fontWeight: 600,
+    },
+    [theme.breakpoints.down("md")]: {
+      lineHeight: 1.2,
+      "& > strong": {
+        fontWeight: 600,
+      },
     },
   },
   card: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
+      marginBottom: theme.spacing(2),
+    },
   },
   textBox: {
     display: "grid",
     height: "fit-content",
     gap: theme.spacing(5),
+    [theme.breakpoints.down("md")]: {
+      gap: theme.spacing(3),
+    },
   },
   imageBox: {
     width: "100%",
@@ -51,6 +63,7 @@ const CuorseSection = ({ reference }) => {
   const data = useStaticQuery(query);
   const courseTextRef = useRef(null);
   const [textHeight, setTextHeight] = useState("auto");
+  const { mediaQuery } = useGlobalContext();
   useEffect(() => {
     if (courseTextRef.current) {
       const { height } = courseTextRef.current.getBoundingClientRect();
@@ -61,7 +74,7 @@ const CuorseSection = ({ reference }) => {
   return (
     <Box component='div' className={classes.root} ref={reference}>
       {data.allContentfulCorsi.nodes.map((el, index) => {
-        return index === 0 || index % 2 === 0 ? (
+        return (
           <>
             <Grid
               container
@@ -73,13 +86,14 @@ const CuorseSection = ({ reference }) => {
               <Grid
                 item
                 xs={12}
-                lg={6}
+                md={6}
                 className={classes.textBox}
                 ref={courseTextRef}
               >
                 <Typography
                   className={classes.title}
-                  variant='h5'
+                  variant={mediaQuery.md ? "h6" : "h5"}
+                  component='h5'
                   dangerouslySetInnerHTML={{
                     __html: createBoldText(el.titolo),
                   }}
@@ -92,94 +106,41 @@ const CuorseSection = ({ reference }) => {
                 <Typography
                   component='p'
                   color='textSecondary'
+                  variant={mediaQuery.md ? "body2" : "body1"}
                   dangerouslySetInnerHTML={{
                     __html: el.riassunto.childMarkdownRemark.html,
                   }}
                 ></Typography>
-                <Grid container spacing={6}>
-                  <Grid item>
+                <Grid container spacing={mediaQuery.md ? 2 : 6}>
+                  <Grid item xs={6} sm={6}>
                     <CustomButton link={el.udemyUrl} type='contained' />
                   </Grid>
-                  <Grid item>
+                  <Grid item xs={6} sm={6}>
                     <CustomButton router link={`/${el.slug}/`} />
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={12} lg={6}>
+              <Grid item xs={12} md={6}>
                 <Box
                   className={classes.imageBox}
                   style={{
-                    height: textHeight,
+                    height: mediaQuery.md ? "auto" : textHeight,
+                    width: "100%",
                   }}
                 >
                   <GatsbyImage
                     image={getImage(el.copertina)}
                     alt={el.titolo}
                     imgStyle={{
-                      height: textHeight,
+                      height: mediaQuery.md ? "auto" : textHeight,
                     }}
                     className={classes.img}
                   />
                 </Box>{" "}
               </Grid>
             </Grid>
-            <Divider />
+            {(index === 0 || index % 2 === 0) && !mediaQuery.md && <Divider />}
           </>
-        ) : (
-          <Grid
-            container
-            key={el.idCorso}
-            spacing={5}
-            className={classes.card}
-            alignItems='center'
-          >
-            <Grid item xs={12} lg={6}>
-              <Box
-                className={classes.imageBox}
-                style={{
-                  height: textHeight,
-                }}
-              >
-                <GatsbyImage
-                  image={getImage(el.copertina)}
-                  alt={el.titolo}
-                  className={classes.img}
-                  imgStyle={{
-                    height: textHeight,
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12} lg={6} className={classes.textBox}>
-              <Typography
-                className={classes.title}
-                variant='h5'
-                dangerouslySetInnerHTML={{
-                  __html: createBoldText(el.titolo),
-                }}
-              ></Typography>
-              <CourseInfo
-                livello={el.livello}
-                lezioni={el.lezioni}
-                oreDiLezione={el.oreDiLezione}
-              />
-              <Typography
-                component='p'
-                color='textSecondary'
-                dangerouslySetInnerHTML={{
-                  __html: el.riassunto.childMarkdownRemark.html,
-                }}
-              ></Typography>
-              <Grid container spacing={6}>
-                <Grid item>
-                  <CustomButton link={el.udemyUrl} type='contained' />
-                </Grid>
-                <Grid item>
-                  <CustomButton router link={`/${el.slug}/`} type='text' />
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
         );
       })}
     </Box>

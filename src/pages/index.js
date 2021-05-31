@@ -24,23 +24,39 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Icon from "@material-ui/core/Icon/Icon";
 import { makeStyles } from "@material-ui/core/styles";
+import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "grid",
     gap: theme.spacing(5),
+    [theme.breakpoints.down("md")]: {
+      gap: theme.spacing(8),
+    },
   },
   topHeroRoot: {
     display: "grid",
     gap: theme.spacing(8),
+    [theme.breakpoints.down("md")]: {
+      marginTop: theme.spacing(4),
+      gap: theme.spacing(3),
+    },
   },
   title: {
     fontWeight: 800,
     lineHeight: 1,
     textTransform: "uppercase",
+    [theme.breakpoints.down("md")]: {
+      textTransform: "none",
+      lineHeight: 1.2,
+      fontWeight: 600,
+    },
     "& > strong": {
       color: theme.palette.primary.main,
       fontWeight: 800,
+      [theme.breakpoints.down("md")]: {
+        fontWeight: 600,
+      },
     },
   },
   topHeroDescription: {
@@ -59,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "grid",
     gap: theme.spacing(4),
+    [theme.breakpoints.down("md")]: {
+      paddingTop: "0px",
+      gap: theme.spacing(3),
+    },
   },
   cardSection: {
     display: "grid",
@@ -67,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     "& svg": {
       fontSize: "2rem",
+      [theme.breakpoints.down("md")]: {
+        fontSize: "unset",
+      },
     },
   },
   cardText: {
@@ -83,28 +106,48 @@ const useStyles = makeStyles((theme) => ({
 //Sezione Informativa
 const IndexInfo = ({ img }) => {
   const classes = useStyles();
+  const { mediaQuery } = useGlobalContext();
+
   return (
     <BgImageSection img={img} noPadding>
       <Box className={classes.infoSection} component='div'>
-        <Typography variant='h4' className={classes.title}>
+        <Typography
+          variant={mediaQuery.md ? "h5" : "h4"}
+          component='h4'
+          className={classes.title}
+        >
           A chi si rivolge <strong> Hpv 4 Learning</strong>
         </Typography>
         <Box component='section' className={classes.cardSection}>
-          <Grid container alignItems='center' justify='center' spacing={2}>
+          <Grid
+            container
+            alignItems='center'
+            justify='center'
+            spacing={mediaQuery.md ? 4 : 2}
+          >
             {valueInfo.map((el, index) => {
               const { titolo, text, icon } = el;
               return (
                 <Grid item xs={12} md={6} key={index}>
                   <Card component='article' elevation={false}>
-                    <CardContent>
+                    <CardContent
+                      style={{
+                        padding: mediaQuery.md ? "0px" : "auto",
+                      }}
+                    >
                       <Icon
                         color='primary'
-                        fontSize='large'
+                        fontSize={mediaQuery.md ? "medium" : "large"}
                         className={classes.icon}
                       >
                         {icon}
                       </Icon>
-                      <Typography variant='h5'>{titolo}</Typography>
+                      <Typography
+                        component='h5'
+                        variant={mediaQuery.md ? "h6" : "h5"}
+                      >
+                        {titolo}
+                      </Typography>
                       <Typography
                         color='textSecondary'
                         variant='body1'
@@ -127,9 +170,15 @@ const IndexInfo = ({ img }) => {
 //Hero Text and Image Component
 const TopHeroContent = ({ fn }) => {
   const classes = useStyles();
+  const { mediaQuery } = useGlobalContext();
+
   return (
     <Box className={classes.topHeroRoot}>
-      <Typography variant='h2' className={classes.title}>
+      <Typography
+        variant={mediaQuery.sm ? "h4" : "h2"}
+        component='h2'
+        className={classes.title}
+      >
         <strong>PROFESSIONISTI</strong>
         <br />
         NON
@@ -161,6 +210,7 @@ const TopHeroContent = ({ fn }) => {
 const IndexPage = ({ data }) => {
   const classes = useStyles();
   const coursesPositionRef = React.useRef(null);
+  const { mediaQuery } = useGlobalContext();
   const goToCourseSection = () => {
     coursesPositionRef.current.scrollIntoView({
       behavior: "smooth",
@@ -192,8 +242,11 @@ const IndexPage = ({ data }) => {
         {/* Sezione dei nostri corsi */}
         <Container maxWidth='lg'>
           <Box component='section'>
-            <Typography variant='h4' className={classes.title}>
-              Migliora le tue competenze con <br />
+            <Typography
+              variant={mediaQuery.md ? "h5" : "h4"}
+              className={classes.title}
+            >
+              Migliora le tue competenze con {!mediaQuery.md && <br />}
               <strong>i nostri corsi</strong>
             </Typography>
             {/* Sezione dei corsi */}
@@ -201,16 +254,24 @@ const IndexPage = ({ data }) => {
           </Box>
         </Container>
         <Box component='section'>
-          <Typography className={classes.title} variant='h4' align='center'>
-            Più di 10 anni di esperienza al fianco di <br></br>
-            <strong> Grandi marchi ed imprese </strong>
-          </Typography>
-          <Box className={classes.btnContainer}>
-            <CustomButton router link='/about/' type='outlined' />
-          </Box>
-          <Box>
-            <GatsbyImage image={getImage(data.bgGatsby)} />
-          </Box>
+          <Container maxWidth='lg'>
+            <Typography
+              className={classes.title}
+              variant={mediaQuery.sm ? "h5" : "h4"}
+              component='h3'
+              align={mediaQuery.sm ? "left" : "center"}
+            >
+              Più di 10 anni di esperienza al fianco di{" "}
+              {!mediaQuery.md && <br></br>}
+              <strong> Grandi marchi ed imprese </strong>
+            </Typography>
+            <Box className={classes.btnContainer}>
+              <CustomButton router link='/about/' type='outlined' />
+            </Box>
+            <Box>
+              <GatsbyImage image={getImage(data.bgGatsby)} />
+            </Box>
+          </Container>
         </Box>
       </Box>
     </Layout>

@@ -21,7 +21,7 @@ const CustomButton = ({ router, link, type, ...props }) => {
           letterSpacing: "0.1rem",
         }}
       >
-        Acquista Corso
+        Acquista
       </Button>
     );
   }

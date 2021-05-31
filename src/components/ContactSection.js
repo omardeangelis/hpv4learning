@@ -7,6 +7,7 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import { useGlobalContext } from "../context";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "grid",
@@ -86,13 +87,17 @@ const useStyles = makeStyles((theme) => ({
 
 const ContactSection = ({ titolo, strongTitle, isInput = true }) => {
   const classes = useStyles();
+  const { mediaQuery } = useGlobalContext();
   return (
     <Box className={classes.root}>
-      <Typography variant='h3' className={classes.title}>
+      <Typography
+        variant={mediaQuery.md ? "h5" : "h3"}
+        className={classes.title}
+      >
         {titolo || "Richiedi Coupon "}
         <Typography
           component='span'
-          variant='h3'
+          variant={mediaQuery.md ? "h5" : "h3"}
           color='secondary'
           className={classes.span}
         >
@@ -110,7 +115,7 @@ const ContactSection = ({ titolo, strongTitle, isInput = true }) => {
             Non utilizzeremo la tua mail a scopi pubblicitari o per tartassarti.
           </Typography>
           <Grid component='form' container spacing={0}>
-            <Grid item xs={9} className={classes.formItem}>
+            <Grid item xs={6} md={9} className={classes.formItem}>
               <TextField
                 fullWidth
                 id='email'
