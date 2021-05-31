@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from "react";
+import React, { useContext, createContext, useState } from "react";
 //Material UI
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
@@ -12,10 +12,18 @@ const AppProvider = ({ children }) => {
     md: useMediaQuery(theme.breakpoints.down("md")),
     lg: useMediaQuery(theme.breakpoints.down("lg")),
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <AppContext.Provider
       value={{
         mediaQuery,
+        isSidebarOpen,
+        toggleSidebar,
       }}
     >
       {children}

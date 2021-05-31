@@ -39,7 +39,7 @@ const CustomButton = ({ router, link, type, ...props }) => {
       endIcon={<ArrowForwardIcon />}
     >
       {" "}
-      Scopri di più
+      Dettagli
     </Button>
   );
 };

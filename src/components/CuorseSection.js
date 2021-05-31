@@ -92,7 +92,7 @@ const CuorseSection = ({ reference }) => {
               >
                 <Typography
                   className={classes.title}
-                  variant={mediaQuery.md ? "h6" : "h5"}
+                  variant={mediaQuery.md ? "body1" : "h5"}
                   component='h5'
                   dangerouslySetInnerHTML={{
                     __html: createBoldText(el.titolo),

@@ -9,6 +9,9 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+
 //Context
 import { useGlobalContext } from "../context";
 //Icon
@@ -18,6 +21,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import SchoolIcon from "@material-ui/icons/School";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import CodeIcon from "@material-ui/icons/Code";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
 //gatsby
 import { Link as GastbyLink, useStaticQuery, graphql } from "gatsby";
 
@@ -68,7 +73,7 @@ const Navbar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const data = useStaticQuery(query);
-  const { mediaQuery } = useGlobalContext();
+  const { mediaQuery, toggleSidebar } = useGlobalContext();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -89,14 +94,16 @@ const Navbar = () => {
           >
             <Grid item md={mediaQuery.sm ? 6 : 2}>
               <Typography
+                component={GastbyLink}
                 variant={mediaQuery.sm ? "h5" : "h4"}
                 className={classes.title}
+                to='/'
               >
                 H4L
               </Typography>
             </Grid>
             <Grid item xs={6} className={classes.toggleBtn}>
-              <IconButton>
+              <IconButton onClick={toggleSidebar}>
                 <MenuIcon />
               </IconButton>
             </Grid>
@@ -142,18 +149,29 @@ const Navbar = () => {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  {data.allContentfulCorsi.nodes.map((node) => {
-                    return (
-                      <MenuItem
-                        key={node.slug}
-                        onClick={handleClose}
-                        component={GastbyLink}
-                        to={`/${node.slug}/`}
-                      >
-                        {node.categoria}
-                      </MenuItem>
-                    );
-                  })}
+                  <MenuList>
+                    {data.allContentfulCorsi.nodes.map((node) => {
+                      return (
+                        <MenuItem
+                          key={node.slug}
+                          onClick={handleClose}
+                          component={GastbyLink}
+                          to={`/${node.slug}/`}
+                        >
+                          <ListItemIcon>
+                            {node.categoria === "videomaking" ? (
+                              <VideoCallIcon fontSize='small' color='primary' />
+                            ) : (
+                              <CodeIcon fontSize='small' color='primary' />
+                            )}{" "}
+                          </ListItemIcon>
+                          <Typography variant='button'>
+                            {node.categoria}
+                          </Typography>
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
                 </Menu>
               </Grid>
               <Grid item sm={4}>
