@@ -64,6 +64,8 @@ const Sidebar = () => {
     <SwipeableDrawer
       anchor='left'
       open={isSidebarOpen}
+      onClose={() => null}
+      onOpen={() => null}
       className={classes.root}
       classes={{
         paper: classes.paper,
@@ -120,6 +122,7 @@ const Sidebar = () => {
               {data.allContentfulCorsi.nodes.map((link) => {
                 return (
                   <ListItem
+                    key={link.slug}
                     component={GatsbyLink}
                     to={`/${link.slug}/`}
                     onClick={toggleSidebar}

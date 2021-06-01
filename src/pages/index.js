@@ -2,7 +2,6 @@ import * as React from "react";
 //Global Layoaut
 import Layout from "../components/layout";
 //Meta Title e SEO e Utils
-import { indexInfo } from "../page_info/indexInfo";
 import MetaDecorator from "../components/utils/MetaDecorator";
 import valueInfo from "../utils/indexInfo";
 //Components
@@ -218,10 +217,7 @@ const IndexPage = ({ data }) => {
   };
   return (
     <Layout>
-      <MetaDecorator
-        title={indexInfo.title}
-        description={indexInfo.description}
-      ></MetaDecorator>
+      <MetaDecorator type={"website"}></MetaDecorator>
       <Box component='main' className={classes.root}>
         <Container maxWidth='lg'>
           {/* Top Hero Image ** Manca Immagine di Background */}

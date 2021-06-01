@@ -94,7 +94,28 @@ const AboutPage = ({ data }) => {
   const classes = useStyles();
   return (
     <Layout>
-      <MetaDecorator title='Hpv 4 Learning - Chi siamo' />
+      <MetaDecorator
+        title='Chi siamo'
+        desc={
+          "La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi insegnano"
+        }
+        keywords={[
+          "migliori insegnanti",
+          "migliori videocorsi",
+          "migliori corsi videomaking",
+          "migliori corsi di programmazione",
+          "videocorso di react",
+          "videocorsi competenze digitali",
+          "videocorsi in italiano di programmazione",
+          "videocorsi in italiano di javascript",
+          "videocorso videomaker",
+          "react",
+          "html",
+          "css",
+          "javascript",
+          "frontend",
+        ]}
+      />
       <Box component='main' className={classes.root}>
         <Container maxWidth='lg'>
           <Box component='section' className={classes.pageSpacer}>

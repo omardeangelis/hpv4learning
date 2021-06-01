@@ -5,8 +5,22 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "hpv 4 Learning",
-    description:
-      "La piattaforma per rilanciare la tua carriera digitale grazie videocorsi offerti solo da professinisti ed eseperti del settore",
+    desc: "La piattaforma per rilanciare la tua carriera digitale grazie videocorsi offerti solo da professinisti ed eseperti del settore",
+    url: "https://hpv4learning1.netlify.app",
+    siteLanguage: "it",
+    keywords: [
+      "videocorsi in italiano",
+      "diventare sviluppatore",
+      "imparare a programmare",
+      "diventare un videomaker",
+      "premiere",
+      "javascript",
+      "react js",
+      "programmazione frontend",
+      "imparare javascript",
+      "imparare react",
+    ],
+    ogLanguage: "it_IT",
   },
   flags: {
     FUNCTIONS: true,

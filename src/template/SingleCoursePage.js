@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import MetaDecorator from "../components/utils/MetaDecorator";
 //Utils
-import { createBoldText } from "../utils/helpers";
+import { createBoldText, createRowText } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
 import BgImageSection from "../components/BgImageSection";
@@ -76,7 +76,12 @@ const SingleCoursePage = ({ data }) => {
   const { mediaQuery } = useGlobalContext();
   return (
     <Layout>
-      <MetaDecorator title={corso.titolo}></MetaDecorator>
+      <MetaDecorator
+        title={createRowText(corso.titolo)}
+        desc={corso.riassunto.childMarkdownRemark.excerpt}
+        keywords={[...corso.concetti, ...corso.requisiti, ...corso.target]}
+        image={corso.copertina.file.url}
+      ></MetaDecorator>
       <Box className={classes.root}>
         <Container maxWidth='lg' className={classes.courseInfoContainer}>
           {/* Titolo e Sottotiolo */}
@@ -231,7 +236,7 @@ export const query = graphql`
       requisiti
       riassunto {
         childMarkdownRemark {
-          html
+          excerpt(pruneLength: 158)
         }
       }
       descrizione {
@@ -241,6 +246,9 @@ export const query = graphql`
       }
       copertina {
         gatsbyImageData
+        file {
+          url
+        }
       }
       introduzioneProgetti {
         childMarkdownRemark {
