@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 //Material UI
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +7,14 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Alert from "@material-ui/lab/Alert";
+import AlertTitle from "@material-ui/lab/AlertTitle";
+//GlobalContext
 import { useGlobalContext } from "../context";
+//Axios
+import axios from "axios";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "grid",
@@ -85,9 +92,72 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContactSection = ({ titolo, strongTitle, isInput = true }) => {
+const ContactSection = ({
+  titolo,
+  strongTitle,
+  isInput = true,
+  couponCorso,
+  couponLink,
+}) => {
   const classes = useStyles();
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState({ isError: false, msg: "" });
   const { mediaQuery } = useGlobalContext();
+
+  const closeErrorAlert = () => {
+    setError({ isError: false, msg: "" });
+  };
+
+  const closeSuccessAlert = () => {
+    setSuccess(false);
+  };
+
+  useEffect(() => {
+    if (success || error.isError) {
+      const timer = setTimeout(() => {
+        if (success) {
+          setSuccess(false);
+        }
+        if (error.isError) {
+          setError({ isError: false, msg: "" });
+        }
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [success, error.isError]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (input) {
+      setIsLoading(true);
+      try {
+        await axios.post(
+          "/api/send-coupon",
+          {
+            email: input,
+            couponCorso,
+            couponLink,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setIsLoading(false);
+        setSuccess(true);
+        setInput("");
+      } catch (error) {
+        setIsLoading(false);
+        setError({ isError: true, msg: "Impossibile inviare mail" });
+        console.log(error);
+      }
+    } else {
+      setError({ isError: true, msg: "Devi inserire almeno una mail" });
+    }
+  };
   return (
     <Box className={classes.root}>
       <Typography
@@ -102,7 +172,7 @@ const ContactSection = ({ titolo, strongTitle, isInput = true }) => {
           className={classes.span}
         >
           {" "}
-          {strongTitle || "Corsi a 9,99 €"}
+          {strongTitle || "Corsi a 12,99 €"}
         </Typography>{" "}
         ?
       </Typography>
@@ -111,39 +181,71 @@ const ContactSection = ({ titolo, strongTitle, isInput = true }) => {
           <Typography color='textSecondary' className={classes.bodyText}>
             E' sempre un buon momento per risparmiare! Inserisci la tua mail per
             ricevere un coupon per acquistare tutti i{" "}
-            <strong> nostri corsi a 9,99 €. </strong>
+            <strong> nostri corsi a 12,99 €. </strong>
             Non utilizzeremo la tua mail a scopi pubblicitari o per tartassarti.
           </Typography>
-          <Grid component='form' container spacing={0}>
-            <Grid item xs={6} md={9} className={classes.formItem}>
-              <TextField
-                fullWidth
-                id='email'
-                name='email'
-                type='email'
-                aria-label='email'
-                placeholder='Inserisci la tua mail'
-                variant='outlined'
-                autoComplete='email'
-                className={classes.inputMail}
-              ></TextField>
-            </Grid>
-            <Grid item xs={3}>
-              <Button className={classes.formBtn}>
-                <Typography
-                  variant='button'
-                  className={classes.title}
-                  style={{ color: "initial" }}
-                >
-                  Richiedi{" "}
-                  <Typography component='span' variant='button' color='primary'>
-                    {" "}
-                    Sconto{" "}
+          {isLoading ? (
+            <CircularProgress color='secondary' />
+          ) : success || error.isError ? (
+            <Alert
+              severity={success ? "success" : "error"}
+              variant='filled'
+              onClose={success ? closeSuccessAlert : closeErrorAlert}
+            >
+              <AlertTitle>
+                {" "}
+                {success ? "Email inviata con successo " : "Erorre Invio Mail"}
+              </AlertTitle>
+              {success ? (
+                <p>
+                  Controlla anche tra <strong> la posta indesiderta </strong>
+                </p>
+              ) : (
+                <p>{error.msg}</p>
+              )}
+            </Alert>
+          ) : (
+            <Grid
+              component='form'
+              container
+              spacing={0}
+              onSubmit={handleSubmit}
+            >
+              <Grid item xs={6} md={9} className={classes.formItem}>
+                <TextField
+                  fullWidth
+                  id='email'
+                  name='email'
+                  type='email'
+                  aria-label='email'
+                  placeholder='Inserisci la tua mail'
+                  variant='outlined'
+                  autoComplete='email'
+                  onChange={(e) => setInput(e.target.value)}
+                  className={classes.inputMail}
+                ></TextField>
+              </Grid>
+              <Grid item xs={3}>
+                <Button type='submit' className={classes.formBtn}>
+                  <Typography
+                    variant='button'
+                    className={classes.title}
+                    style={{ color: "initial" }}
+                  >
+                    Richiedi{" "}
+                    <Typography
+                      component='span'
+                      variant='button'
+                      color='primary'
+                    >
+                      {" "}
+                      Sconto{" "}
+                    </Typography>
                   </Typography>
-                </Typography>
-              </Button>
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </>
       ) : (
         <>
@@ -156,7 +258,7 @@ const ContactSection = ({ titolo, strongTitle, isInput = true }) => {
           <Button
             className={classes.simpleBtn}
             component={Link}
-            href='mailto:info@hpvfilm.it'
+            href='mailto:hpv4learning@hpvfilm.it'
             color='secondary'
           >
             <Typography

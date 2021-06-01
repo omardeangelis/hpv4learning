@@ -183,7 +183,10 @@ const SingleCoursePage = ({ data }) => {
         </Container>
         {/* Banner per richiedere acquisto Coupon per i corsi a 9,99€ */}
         <BgImageSection>
-          <ContactSection></ContactSection>
+          <ContactSection
+            couponCorso={corso.couponCorso}
+            couponLink={corso.couponLink}
+          ></ContactSection>
         </BgImageSection>
         {/* Progetti ed esercizatazioni  */}
         {corso.progetti && (
@@ -222,6 +225,8 @@ export const query = graphql`
       udemyUrl
       videoLink
       target
+      couponCorso
+      couponLink
       concetti
       requisiti
       riassunto {

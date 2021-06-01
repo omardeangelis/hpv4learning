@@ -8,7 +8,7 @@
 
 :root {
   --extra-light-gray: #f8f9faff;
-  --background-color: #fcfaff
+  --background-color: #fcfaff;
   --soft-light-gray: #f2f2f3;
   --light-gray: #ced4daff;
   --primary-gray: #adb5bdff;
@@ -30,12 +30,12 @@
   --dark-shadow: 4px 5px 15px rgba(5, 6, 6, 0.4);
 }
 
-html{
+html {
   overflow-x: hidden;
 }
 
 body {
-  background-color:var(--background-color);
+  background-color: var(--background-color);
   color: var(--dark-text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

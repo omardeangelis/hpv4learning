@@ -4,7 +4,12 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: "hpv4Learning",
+    title: "hpv 4 Learning",
+    description:
+      "La piattaforma per rilanciare la tua carriera digitale grazie videocorsi offerti solo da professinisti ed eseperti del settore",
+  },
+  flags: {
+    FUNCTIONS: true,
   },
   plugins: [
     {
