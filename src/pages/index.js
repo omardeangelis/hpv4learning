@@ -128,7 +128,7 @@ const IndexInfo = ({ img }) => {
               const { titolo, text, icon } = el;
               return (
                 <Grid item xs={12} md={6} key={index}>
-                  <Card component='article' elevation={false}>
+                  <Card component='article' elevation={0}>
                     <CardContent
                       style={{
                         padding: mediaQuery.md ? "0px" : "auto",
@@ -136,7 +136,7 @@ const IndexInfo = ({ img }) => {
                     >
                       <Icon
                         color='primary'
-                        fontSize={mediaQuery.md ? "medium" : "large"}
+                        fontSize={mediaQuery.md ? "default" : "large"}
                         className={classes.icon}
                       >
                         {icon}
@@ -265,7 +265,10 @@ const IndexPage = ({ data }) => {
               <CustomButton router link='/about/' type='outlined' />
             </Box>
             <Box>
-              <GatsbyImage image={getImage(data.bgGatsby)} />
+              <GatsbyImage
+                image={getImage(data.bgGatsby)}
+                alt='hpv e partner ufficiali'
+              />
             </Box>
           </Container>
         </Box>

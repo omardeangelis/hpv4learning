@@ -75,10 +75,9 @@ const CuorseSection = ({ reference }) => {
     <Box component='div' className={classes.root} ref={reference}>
       {data.allContentfulCorsi.nodes.map((el, index) => {
         return (
-          <>
+          <React.Fragment key={el.idCorso}>
             <Grid
               container
-              key={el.idCorso}
               spacing={5}
               className={classes.card}
               alignItems='center'
@@ -140,7 +139,7 @@ const CuorseSection = ({ reference }) => {
               </Grid>
             </Grid>
             {(index === 0 || index % 2 === 0) && !mediaQuery.md && <Divider />}
-          </>
+          </React.Fragment>
         );
       })}
     </Box>

@@ -173,7 +173,7 @@ const AboutPage = ({ data }) => {
                   <Card
                     key={insegnante.nome}
                     className={classes.card}
-                    elevation={false}
+                    elevation={0}
                   >
                     <CardHeader
                       avatar={

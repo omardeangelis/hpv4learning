@@ -25,6 +25,7 @@ import CodeIcon from "@material-ui/icons/Code";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 //gatsby
 import { Link as GastbyLink, useStaticQuery, graphql } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,7 +82,6 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <div className={classes.root}>
       <AppBar position='static' className={classes.navbar} elevation={0}>
@@ -93,14 +93,16 @@ const Navbar = () => {
             className={classes.navItems}
           >
             <Grid item md={mediaQuery.sm ? 6 : 2}>
-              <Typography
-                component={GastbyLink}
-                variant={mediaQuery.sm ? "h5" : "h4"}
-                className={classes.title}
-                to='/'
-              >
-                H4L
-              </Typography>
+              <GastbyLink to='/'>
+                <StaticImage
+                  src='../images/logo.png'
+                  alt='Logo Hpv 4 Learning'
+                  placeholder='tracedSVG'
+                  layout='fixed'
+                  height={70}
+                  width={70}
+                />
+              </GastbyLink>
             </Grid>
             <Grid item xs={6} className={classes.toggleBtn}>
               <IconButton onClick={toggleSidebar}>

@@ -115,7 +115,7 @@ const SingleCoursePage = ({ data }) => {
               height: mediaQuery.md ? "40vh" : "60vh",
             }}
           >
-            <Video videoSrcURL={corso.trailer}></Video>
+            <Video videoSrcURL={corso.videoLink}></Video>
           </Container>
           {/* Bottone Centrato per andare su Udemy */}
           <Box className={classes.btnContainer}>

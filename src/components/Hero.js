@@ -28,7 +28,11 @@ const Hero = ({ image, children, height }) => {
           {children}
         </Grid>
         <Grid item xs={12} lg={6} className={classes.image}>
-          <Box>{gatsbyImage && <GatsbyImage image={gatsbyImage} />}</Box>
+          <Box>
+            {gatsbyImage && (
+              <GatsbyImage image={gatsbyImage} alt='hero-image' />
+            )}
+          </Box>
         </Grid>
       </Grid>
     </Box>

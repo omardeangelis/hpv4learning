@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container/Container";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -23,6 +22,8 @@ import CodeIcon from "@material-ui/icons/Code";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 //Gatsby
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
+
 //Global Context
 import { useGlobalContext } from "../context";
 
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar = () => {
   const classes = useStyles();
   const data = useStaticQuery(query);
-  const { isSidebarOpen, toggleSidebar, mediaQuery } = useGlobalContext();
+  const { isSidebarOpen, toggleSidebar } = useGlobalContext();
   return (
     <SwipeableDrawer
       anchor='left'
@@ -79,12 +80,14 @@ const Sidebar = () => {
           className={classes.navItems}
         >
           <Grid item xs={6}>
-            <Typography
-              variant={mediaQuery.sm ? "h5" : "h4"}
-              className={classes.title}
-            >
-              H4L
-            </Typography>
+            <StaticImage
+              src='../images/logo.png'
+              alt='Logo Hpv 4 Learning'
+              placeholder='tracedSVG'
+              layout='fixed'
+              height={70}
+              width={70}
+            />
           </Grid>
           <Grid item xs={6} className={classes.toggleBtn}>
             <IconButton onClick={toggleSidebar}>
@@ -104,7 +107,7 @@ const Sidebar = () => {
         <ListItem
           component={Accordion}
           className={classes.accordion}
-          elevation={false}
+          elevation={0}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

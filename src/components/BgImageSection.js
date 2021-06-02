@@ -30,6 +30,7 @@ const ComponentName = ({ img, children, noPadding }) => {
   return (
     <BgImage
       image={image}
+      alt='background-purple-image'
       style={{
         backGroundPosition: "center",
       }}
