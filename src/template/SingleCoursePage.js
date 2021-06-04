@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { graphql } from "gatsby";
 //Global Component e Variables
 import Layout from "../components/layout";
@@ -70,10 +70,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SingleCoursePage = ({ data }) => {
+const SingleCoursePage = ({ data, location }) => {
   const { contentfulCorsi: corso } = data;
   const classes = useStyles();
+  const projectRef = useRef(null);
   const { mediaQuery } = useGlobalContext();
+  const { search } = location;
+  const scrollToProjects = search && search.split("=")[1];
+
+  useEffect(() => {
+    if (projectRef.current && scrollToProjects) {
+      projectRef.current.scrollIntoView();
+    }
+  }, [scrollToProjects]);
+
   return (
     <Layout>
       <MetaDecorator
@@ -195,7 +205,7 @@ const SingleCoursePage = ({ data }) => {
         </BgImageSection>
         {/* Progetti ed esercizatazioni  */}
         {corso.progetti && (
-          <Container maxWidth='lg'>
+          <Container maxWidth='lg' innerRef={projectRef}>
             <Projects
               data={corso.progetti}
               sectionTitle={corso.introduzioneProgetti.childMarkdownRemark.html}
