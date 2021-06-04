@@ -52,13 +52,14 @@ module.exports = {
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
-          "G-36R3F27F8Q", // Google Analytics / GA
-          "195‍-027-9929", // Google Ads / Adwords / AW
+          process.env.GATSBY_GOOGLE_ADS_ID, // Google Analytics / GA
+          process.env.GATSBY_GOOGLE_ANALYTICS_ID,
+          // Google Ads / Adwords / AW
         ],
         // This object gets passed directly to the gtag config command
         // This config will be shared across all trackingIds
         gtagConfig: {
-          optimize_id: "2638612576",
+          optimize_id: process.env.GATSBY_GOOGLE_OPTIMIZE_ID,
           anonymize_ip: true,
           cookie_expires: 0,
         },
