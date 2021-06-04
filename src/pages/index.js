@@ -100,6 +100,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginTop: theme.spacing(5),
   },
+  bgGatsbyImage: {
+    display: "flex",
+    justifyContent: "center",
+  },
 }));
 
 //Sezione Informativa
@@ -264,7 +268,7 @@ const IndexPage = ({ data }) => {
             <Box className={classes.btnContainer}>
               <CustomButton router link='/about/' type='outlined' />
             </Box>
-            <Box>
+            <Box className={classes.bgGatsbyImage}>
               <GatsbyImage
                 image={getImage(data.bgGatsby)}
                 alt='hpv e partner ufficiali'
@@ -286,7 +290,7 @@ export const query = graphql`
       gatsbyImageData(placeholder: NONE, formats: [AUTO, WEBP, AVIF])
     }
     bgGatsby: imageSharp(fluid: { originalName: { eq: "bg-gatsby.png" } }) {
-      gatsbyImageData(placeholder: NONE, formats: [AUTO, WEBP, AVIF])
+      gatsbyImageData(placeholder: TRACED_SVG, formats: [AUTO, WEBP, AVIF])
     }
   }
 `;
