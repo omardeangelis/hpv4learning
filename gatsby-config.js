@@ -6,6 +6,7 @@ module.exports = {
   siteMetadata: {
     title: "hpv 4 Learning",
     desc: "La piattaforma per rilanciare la tua carriera digitale grazie videocorsi offerti solo da professinisti ed eseperti del settore",
+    siteUrl: "https://hpv4learning.it/",
     url: "https://hpv4learning.it/",
     siteLanguage: "it",
     keywords: [
