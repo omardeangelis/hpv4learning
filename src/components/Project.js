@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -6,8 +6,9 @@ import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
-import { Tween } from "react-gsap";
-
+import Fade from "@material-ui/core/Fade";
+import CardContent from "@material-ui/core/CardContent";
+import VizSensor from "react-visibility-sensor";
 const useStyles = makeStyles((theme) => ({
   cardActions: {
     background: "white",
@@ -20,42 +21,67 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Project = ({ data: { titolo, ordine, url, copertina }, order }) => {
+const Project = ({ data: { titolo, ordine, url, copertina, descrizione } }) => {
   const classes = useStyles();
   const image = getImage(copertina);
+  const [isActive, setIsActive] = useState(false);
   return (
-    <Tween
-      from={{ y: "200px", opacity: 0 }}
-      to={{ opacity: 1, y: "0", delay: order * 0.15 }}
-      ease="ease"
+    <VizSensor
+      partialVisibility='bottom'
+      offset={{
+        bottom: -300,
+      }}
+      onChange={(isVisible) => {
+        if (!isActive) {
+          setIsActive(isVisible);
+        }
+      }}
     >
-      <Wrapper>
-        <Box className="img">
-          <GatsbyImage image={image} alt={titolo} className="gatsby-img" />
-        </Box>
-        <footer className={classes.cardActions}>
-          <Typography variant="overline" className="title">
-            {ordine} {titolo}
-          </Typography>
-          <Button
-            component={Link}
-            variant="contained"
-            href={url}
-            target="_blank"
-            color="secondary"
-            size="small"
-            className="btn"
-          >
-            Vedi
-          </Button>
-        </footer>
-      </Wrapper>
-    </Tween>
+      <Fade in={isActive} timeout={350}>
+        <Wrapper>
+          <Box className='img'>
+            <GatsbyImage image={image} alt={titolo} className='gatsby-img' />
+          </Box>
+          {url ? (
+            <footer className={classes.cardActions}>
+              <Typography variant='overline' className='title'>
+                {ordine} {titolo}
+              </Typography>
+              <Button
+                component={Link}
+                variant='contained'
+                href={url}
+                target='_blank'
+                color='primary'
+                size='small'
+                className='btn'
+              >
+                Vedi
+              </Button>
+            </footer>
+          ) : (
+            <CardContent>
+              <Typography variant='overline' className='title'>
+                {ordine} {titolo}
+              </Typography>
+              <Typography
+                variant='body2'
+                color='textSecondary'
+                component='p'
+                dangerouslySetInnerHTML={{
+                  __html: descrizione.childMarkdownRemark.html,
+                }}
+              ></Typography>
+            </CardContent>
+          )}
+        </Wrapper>
+      </Fade>
+    </VizSensor>
   );
 };
 
 const Wrapper = styled.div`
-  opacity: 0;
+  opacity: 1;
   display: grid;
   box-shadow: var(--light-shadow);
   border-radius: var(--radius);

@@ -2,17 +2,27 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 import Project from "./Project";
+import { useGlobalContext } from "../context";
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(3),
-  },
+  root: {},
   title: {
     fontWeight: 600,
     textTransform: "lowercase",
     fontVariant: "small-caps",
-    color: red[400],
+    lineHeight: 0.9,
+  },
+  h4: {
+    marginLeft: "-2.5px",
+    paddingLeft: "0px",
+  },
+  subtitle: {
+    marginTop: theme.spacing(2),
+    maxWidth: "75ch",
+    lineHeight: 1.7,
+    "&  strong": {
+      color: theme.palette.primary.main,
+    },
   },
   projects: {
     marginTop: theme.spacing(3),
@@ -21,21 +31,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Projects = ({ sectionTitle, data }) => {
+  const { mediaQuery } = useGlobalContext();
   const classes = useStyles();
-  const { nodes } = data.allContentfulProgetti;
   return (
     <section className={classes.root}>
       <Typography
-        align="center"
-        variant="h3"
-        color="inherit"
+        variant={mediaQuery.md ? "h5" : "h4"}
+        classes={{
+          h4: classes.h4,
+        }}
         className={classes.title}
       >
-        {sectionTitle}
+        Metti alla prova le tue{" "}
+        <Typography
+          component='span'
+          variant={mediaQuery.md ? "h5" : "h4"}
+          color='primary'
+          className={classes.title}
+        >
+          nuove compentenze
+        </Typography>
       </Typography>
-      <Grid container spacing={3} justify="center" className={classes.projects}>
-        {nodes.map((progetto, index) => (
-          <Grid item xs={12} sm={6} md={4} key={progetto.id}>
+      <Typography
+        color='textSecondary'
+        variant={mediaQuery.md ? "body2" : "body1"}
+        component='p'
+        className={classes.subtitle}
+        dangerouslySetInnerHTML={{
+          __html: sectionTitle,
+        }}
+      ></Typography>
+      <Grid
+        container
+        spacing={3}
+        justify='center'
+        alignItems='stretch'
+        className={classes.projects}
+      >
+        {data.map((progetto, index) => (
+          <Grid item xs={12} sm={6} md={4} key={progetto.titolo}>
             <Project data={progetto} order={index} />
           </Grid>
         ))}

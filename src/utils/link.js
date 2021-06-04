@@ -6,6 +6,8 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
+import { makeStyles } from "@material-ui/core/styles";
+
 import SvgIcon from "@material-ui/core/SvgIcon";
 import Link from "@material-ui/core/Link";
 const socialLinks = [
@@ -36,7 +38,14 @@ const socialLinks = [
   },
 ];
 
+const useStyles = makeStyles((theme) => ({
+  socialIconColor: {
+    color: "white",
+  },
+}));
+
 const SocialBar = ({ className }) => {
+  const classes = useStyles();
   return (
     <ul className={className || "social-row"}>
       {socialLinks.map((social) => {
@@ -50,8 +59,7 @@ const SocialBar = ({ className }) => {
               href={url}
               alt={text}
               target="_blank"
-              color="secondary"
-              className="social-icon"
+              className={`social-icon ${classes.socialIconColor}`}
             >
               {icon}
             </SvgIcon>

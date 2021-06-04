@@ -1,54 +1,51 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import * as React from "react";
+import { Link } from "gatsby";
+//Global Component
+import Layout from "../components/layout";
+//Material Ui
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container/Container";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 // styles
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+  },
+  btnContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "5rem",
+  },
+}));
 // markup
 const NotFoundPage = () => {
+  const classes = useStyles();
   return (
-    <main style={pageStyles}>
-      <title>Not found</title>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry{" "}
-        <span role="img" aria-label="Pensive emoji">
-          😔
-        </span>{" "}
-        we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
-  )
-}
+    <Layout>
+      <Container maxWidth='lg'>
+        <Box className={classes.root}>
+          <Typography variant='h2' align='center'>
+            Pagina non trovata
+          </Typography>
+          <Box className={classes.btnContainer}>
+            <Button
+              component={Link}
+              to='/'
+              variant='contained'
+              size='large'
+              color='primary'
+            >
+              Vai alla Home
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </Layout>
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

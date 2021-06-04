@@ -8,12 +8,16 @@
 
 :root {
   --extra-light-gray: #f8f9faff;
+  --background-color: #fcfaff;
   --soft-light-gray: #f2f2f3;
   --light-gray: #ced4daff;
   --primary-gray: #adb5bdff;
   --soft-dark-gray: #89949e;
   --dark-gray: #6c757dff;
   --extra-dark-gray: #343a40ff;
+  --paragraph-color: rgba(0, 0, 0, 0.54);
+  --paragraph-spacing: 0.00938em;
+
   /* Global */
   --letter-spacing: 0.08rem;
   --transition: all 0.2s ease;
@@ -26,11 +30,16 @@
   --dark-shadow: 4px 5px 15px rgba(5, 6, 6, 0.4);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
-  background-color: white;
+  background-color: var(--background-color);
   color: var(--dark-text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -70,11 +79,18 @@ h3 {
 h4 {
   font-size: 0.875rem;
 }
-p {
-  color: var(--primary-gray);
-  font-size: 0.9rem;
-  letter-spacing: var(--letter-spacing);
+
+.markdown-p {
+  max-width: 75ch;
+  line-height: 1.8;
 }
+
+.video {
+  width: 100%;
+  height: 60vh;
+  border-radius: 20px;
+}
+
 @media screen and (min-width: 753px) {
   h1 {
     font-size: 4rem;
@@ -111,23 +127,4 @@ SOCIAL STYLE
 
 .social-icon {
   margin: 0 1rem;
-}
-
-/*
-Project Animation Style
-*/
-
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 300ms;
-}
-.fade-exit {
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 300ms;
 }
