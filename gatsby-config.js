@@ -49,9 +49,16 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        name: "Hpv 4 Learning",
+        short_name: "H4L",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#7026BA",
+        theme_color: "#ffffff",
+        icon: "./src/images/icon.png",
       },
     },
+    "gatsby-plugin-offline",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-transformer-remark",
