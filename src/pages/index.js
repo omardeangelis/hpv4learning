@@ -1,9 +1,10 @@
 import * as React from "react";
 //Global Layoaut
 import Layout from "../components/ui/navigation/layout";
+import IndexInfo from "../components/IndexInfo";
+import TopHeroContent from "../components/TopHeroContent";
 //Meta Title e SEO e Utils
 import MetaDecorator from "../components/SEO/MetaDecorator";
-import valueInfo from "../utils/indexInfo";
 //Components
 import Hero from "../components/ui/Hero";
 import BgImageSection from "../components/ui/BgImageSection";
@@ -17,11 +18,6 @@ import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import Container from "@material-ui/core/Container/Container";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Icon from "@material-ui/core/Icon/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import { useGlobalContext } from "../context";
 
@@ -31,14 +27,6 @@ const useStyles = makeStyles((theme) => ({
     gap: theme.spacing(5),
     [theme.breakpoints.down("md")]: {
       gap: theme.spacing(8),
-    },
-  },
-  topHeroRoot: {
-    display: "grid",
-    gap: theme.spacing(8),
-    [theme.breakpoints.down("md")]: {
-      marginTop: theme.spacing(4),
-      gap: theme.spacing(3),
     },
   },
   title: {
@@ -57,43 +45,6 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 600,
       },
     },
-  },
-  topHeroDescription: {
-    lineHeight: 1.7,
-    maxWidth: "55ch",
-    "& > strong": {
-      color: theme.palette.primary.main,
-    },
-  },
-  topHeroBtn: {
-    width: "fit-content",
-    height: "6vh",
-    fontWeight: 600,
-  },
-  infoSection: {
-    width: "100%",
-    display: "grid",
-    gap: theme.spacing(4),
-    [theme.breakpoints.down("md")]: {
-      paddingTop: "0px",
-      gap: theme.spacing(3),
-    },
-  },
-  cardSection: {
-    display: "grid",
-    gap: theme.spacing(2),
-  },
-  icon: {
-    "& svg": {
-      fontSize: "2rem",
-      [theme.breakpoints.down("md")]: {
-        fontSize: "unset",
-      },
-    },
-  },
-  cardText: {
-    maxWidth: "55ch",
-    lineHeight: 1.8,
   },
   bottomDescription: {
     maxWidth: "70ch",
@@ -118,110 +69,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
 }));
-
-//Sezione Informativa
-const IndexInfo = ({ img }) => {
-  const classes = useStyles();
-  const { mediaQuery } = useGlobalContext();
-
-  return (
-    <BgImageSection img={img} noPadding>
-      <Box className={classes.infoSection} component='div'>
-        <Typography
-          variant={mediaQuery.md ? "h5" : "h4"}
-          component='h4'
-          className={classes.title}
-        >
-          A chi si rivolge <strong> Hpv 4 Learning</strong>
-        </Typography>
-        <Box component='section' className={classes.cardSection}>
-          <Grid
-            container
-            alignItems='center'
-            justify='center'
-            spacing={mediaQuery.md ? 4 : 2}
-          >
-            {valueInfo.map((el, index) => {
-              const { titolo, text, icon } = el;
-              return (
-                <Grid item xs={12} md={6} key={index}>
-                  <Card component='article' elevation={0}>
-                    <CardContent
-                      style={{
-                        padding: mediaQuery.md ? "0px" : "auto",
-                      }}
-                    >
-                      <Icon
-                        color='primary'
-                        fontSize={mediaQuery.md ? "default" : "large"}
-                        className={classes.icon}
-                      >
-                        {icon}
-                      </Icon>
-                      <Typography
-                        component='h5'
-                        variant={mediaQuery.md ? "h6" : "h5"}
-                      >
-                        {titolo}
-                      </Typography>
-                      <Typography
-                        color='textSecondary'
-                        variant='body1'
-                        className={classes.cardText}
-                      >
-                        {text}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
-      </Box>
-    </BgImageSection>
-  );
-};
-
-//Hero Text and Image Component
-const TopHeroContent = ({ fn }) => {
-  const classes = useStyles();
-  const { mediaQuery } = useGlobalContext();
-
-  return (
-    <Box className={classes.topHeroRoot}>
-      <Typography
-        variant={mediaQuery.sm ? "h4" : "h2"}
-        component='h2'
-        className={classes.title}
-      >
-        <strong>PROFESSIONISTI</strong>
-        <br />
-        NON
-        <br />
-        PROFESSORI
-      </Typography>
-      <Typography
-        variant='h6'
-        color='textPrimary'
-        className={classes.topHeroDescription}
-      >
-        Hpv 4 Learning è una piattaforma che seleziona i migliori corsi tenuti
-        direttamente da <strong>esperti e professionisti</strong> del settore,
-        per rilanciare la tua carriera digitale.
-      </Typography>
-      <Button
-        variant='contained'
-        color='primary'
-        size='large'
-        className={classes.topHeroBtn}
-        onClick={fn}
-      >
-        Vai ai Corsi
-      </Button>
-    </Box>
-  );
-};
 
 const IndexPage = ({ data }) => {
   const classes = useStyles();
@@ -314,7 +161,11 @@ export const query = graphql`
       gatsbyImageData(placeholder: NONE, formats: [AUTO, WEBP, AVIF])
     }
     bgGatsby: imageSharp(fluid: { originalName: { eq: "bg-gatsby.png" } }) {
-      gatsbyImageData(placeholder: TRACED_SVG, formats: [AUTO, WEBP, AVIF])
+      gatsbyImageData(
+        width: 600
+        placeholder: TRACED_SVG
+        formats: [AUTO, WEBP, AVIF]
+      )
     }
   }
 `;
