@@ -1,18 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import { graphql } from "gatsby";
 //Global Component e Variables
-import Layout from "../components/layout";
-import MetaDecorator from "../components/utils/MetaDecorator";
+import Layout from "../components/ui/navigation/layout";
+import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
 import { createBoldText, createRowText } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
-import BgImageSection from "../components/BgImageSection";
+import BgImageSection from "../components/ui/BgImageSection";
 import ContactSection from "../components/ContactSection";
-import Video from "../components/Video";
-import CustomButton from "../components/Button";
+import Video from "../components/ui/Video";
+import CustomButton from "../components/ui/Button";
 import CourseInfo from "../components/CourseInfo";
-import ListSection from "../components/ListSection";
+import ListSection from "../components/ui/ListSection";
 //Material UI
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
@@ -67,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
   descrizione: {
     marginTop: theme.spacing(2),
     lineHeight: 1.7,
+    "& strong": {
+      color: theme.palette.primary.main,
+    },
+  },
+  listSpacer: {
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -174,7 +180,9 @@ const SingleCoursePage = ({ data, location }) => {
                   titleUnderline='rivolge'
                   icon={<PersonIcon color='primary' />}
                   list={corso.target}
-                  className={classes.title}
+                  className={`${classes.title} ${
+                    mediaQuery.sm ? classes.listSpacer : ""
+                  }`}
                 />
               </Grid>
             </Grid>

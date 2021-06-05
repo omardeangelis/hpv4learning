@@ -13,7 +13,7 @@ import MenuList from "@material-ui/core/MenuList";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 //Context
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../../../context";
 //Icon
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import IconButton from "@material-ui/core/IconButton";
@@ -95,7 +95,7 @@ const Navbar = () => {
             <Grid item md={mediaQuery.sm ? 6 : 2}>
               <GastbyLink to='/'>
                 <StaticImage
-                  src='../images/logo.png'
+                  src='../../../images/logo.png'
                   alt='Logo Hpv 4 Learning'
                   placeholder='tracedSVG'
                   layout='fixed'

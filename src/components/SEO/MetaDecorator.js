@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Facebook from "../SEO/Facebook";
+import Facebook from "./Facebook";
 import PropTypes from "prop-types";
 import { graphql, useStaticQuery } from "gatsby";
 import { removeAllPointsFromString } from "../../utils/helpers";
@@ -18,7 +18,7 @@ const MetaDecorator = ({
 }) => {
   const img =
     image ||
-    "https://res.cloudinary.com/thomasdea/image/upload/v1619443199/HPV%204%20Business/Copertina_React_rqzaod.png";
+    "https://res.cloudinary.com/thomasdea/image/upload/v1622903361/HPV%204%20Business/logo-scritta-hpv4_y7k7sd.png";
 
   const data = useStaticQuery(query);
 

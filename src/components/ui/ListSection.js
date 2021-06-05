@@ -5,7 +5,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../../context";
 const ListSection = ({ title, titleUnderline, list, icon, className }) => {
   const { mediaQuery } = useGlobalContext();
   return (

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 //Components
-import CustomButton from "./Button";
+import CustomButton from "./ui/Button";
 import CourseInfo from "./CourseInfo";
 //Utils
 import { createBoldText } from "../utils/helpers";
@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     gap: theme.spacing(5),
     [theme.breakpoints.down("md")]: {
       gap: theme.spacing(3),
+    },
+  },
+  riassunto: {
+    "& strong": {
+      color: theme.palette.primary.main,
     },
   },
   imageBox: {
@@ -105,6 +110,7 @@ const CuorseSection = ({ reference }) => {
                 <Typography
                   component='p'
                   color='textSecondary'
+                  className={classes.riassunto}
                   variant={mediaQuery.md ? "body2" : "body1"}
                   dangerouslySetInnerHTML={{
                     __html: el.riassunto.childMarkdownRemark.html,

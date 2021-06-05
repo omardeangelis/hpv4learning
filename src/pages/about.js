@@ -1,7 +1,7 @@
 import React from "react";
 //Global e Seo
-import Layout from "../components/layout";
-import MetaDecorator from "../components/utils/MetaDecorator";
+import Layout from "../components/ui/navigation/layout";
+import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
 import { createBoldText } from "../utils/helpers";
 //Custom Components
@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
   topHeroDescription: {
     maxWidth: "75ch",
     lineHeight: 1.8,
+    "& strong": {
+      color: theme.palette.primary.main,
+    },
   },
   card: {
     marginTop: theme.spacing(3),
@@ -72,10 +75,12 @@ const useStyles = makeStyles((theme) => ({
   description: {
     maxWidth: "65ch",
     lineHeight: 1.8,
-
     color: theme.palette.text.secondary,
     "& strong": {
       color: theme.palette.primary.main,
+    },
+    "& a": {
+      textDecoration: "underline",
     },
   },
   courseLink: {

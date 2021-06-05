@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 //Global Component
-import Layout from "../components/layout";
+import Layout from "../components/ui/navigation/layout";
 //Material Ui
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container/Container";

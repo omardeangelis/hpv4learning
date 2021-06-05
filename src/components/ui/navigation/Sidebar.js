@@ -25,7 +25,7 @@ import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 
 //Global Context
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../../../context";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -81,7 +81,7 @@ const Sidebar = () => {
         >
           <Grid item xs={6}>
             <StaticImage
-              src='../images/logo.png'
+              src='../../../images/logo.png'
               alt='Logo Hpv 4 Learning'
               placeholder='tracedSVG'
               layout='fixed'
