@@ -1,7 +1,7 @@
 import React from "react";
 //Global e Seo
-import Layout from "../components/layout";
-import MetaDecorator from "../components/utils/MetaDecorator";
+import Layout from "../components/ui/navigation/layout";
+import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
 import { createBoldText } from "../utils/helpers";
 //Custom Components

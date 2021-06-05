@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 //Components
-import CustomButton from "./Button";
+import CustomButton from "./ui/Button";
 import CourseInfo from "./CourseInfo";
 //Utils
 import { createBoldText } from "../utils/helpers";

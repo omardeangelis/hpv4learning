@@ -1,5 +1,5 @@
 import React from "react";
-import { SocialBar } from "../utils/link";
+import { SocialBar } from "../../../utils/link";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const Footer = () => {
   const classes = useStyles();
   return (
     <footer className={classes.root}>
-      <Container maxWidth="lg" className={classes.socialSection}>
+      <Container maxWidth='lg' className={classes.socialSection}>
         <SocialBar />
       </Container>
     </footer>

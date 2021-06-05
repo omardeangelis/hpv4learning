@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Facebook from "../SEO/Facebook";
+import Facebook from "./Facebook";
 import PropTypes from "prop-types";
 import { graphql, useStaticQuery } from "gatsby";
 import { removeAllPointsFromString } from "../../utils/helpers";

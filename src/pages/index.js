@@ -1,15 +1,15 @@
 import * as React from "react";
 //Global Layoaut
-import Layout from "../components/layout";
+import Layout from "../components/ui/navigation/layout";
 //Meta Title e SEO e Utils
-import MetaDecorator from "../components/utils/MetaDecorator";
+import MetaDecorator from "../components/SEO/MetaDecorator";
 import valueInfo from "../utils/indexInfo";
 //Components
-import Hero from "../components/Hero";
-import BgImageSection from "../components/BgImageSection";
+import Hero from "../components/ui/Hero";
+import BgImageSection from "../components/ui/BgImageSection";
 import ContactSection from "../components/ContactSection";
 import CuorseSection from "../components/CuorseSection";
-import CustomButton from "../components/Button";
+import CustomButton from "../components/ui/Button";
 //Gastby
 import { graphql } from "gatsby";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
@@ -113,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
 
   bgGatsbyImage: {
     marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
     display: "flex",
     justifyContent: "center",
   },
