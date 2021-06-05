@@ -67,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
   descrizione: {
     marginTop: theme.spacing(2),
     lineHeight: 1.7,
+    "& strong": {
+      color: theme.palette.primary.main,
+    },
+  },
+  listSpacer: {
+    marginTop: theme.spacing(5),
   },
 }));
 
@@ -174,7 +180,9 @@ const SingleCoursePage = ({ data, location }) => {
                   titleUnderline='rivolge'
                   icon={<PersonIcon color='primary' />}
                   list={corso.target}
-                  className={classes.title}
+                  className={`${classes.title} ${
+                    mediaQuery.sm ? classes.listSpacer : ""
+                  }`}
                 />
               </Grid>
             </Grid>

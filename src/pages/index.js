@@ -95,12 +95,24 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "55ch",
     lineHeight: 1.8,
   },
+  bottomDescription: {
+    maxWidth: "70ch",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: theme.spacing(5),
+
+    "& strong": {
+      color: theme.palette.primary.main,
+    },
+  },
   btnContainer: {
     display: "flex",
     justifyContent: "center",
     marginTop: theme.spacing(5),
   },
+
   bgGatsbyImage: {
+    marginTop: theme.spacing(5),
     display: "flex",
     justifyContent: "center",
   },
@@ -221,7 +233,7 @@ const IndexPage = ({ data }) => {
   };
   return (
     <Layout>
-      <MetaDecorator type={"website"}></MetaDecorator>
+      <MetaDecorator type={"website"} title='Home'></MetaDecorator>
       <Box component='main' className={classes.root}>
         <Container maxWidth='lg'>
           {/* Top Hero Image ** Manca Immagine di Background */}
@@ -264,6 +276,17 @@ const IndexPage = ({ data }) => {
               Più di 10 anni di esperienza al fianco di{" "}
               {!mediaQuery.md && <br></br>}
               <strong> Grandi marchi ed imprese </strong>
+            </Typography>
+            <Typography
+              className={classes.bottomDescription}
+              color='textSecondary'
+              component='p'
+              align={mediaQuery.sm ? "left" : "center"}
+            >
+              Non siamo solo una piattaforma di videocorsi ma prima di tutto un'
+              <strong> azienda </strong>che opera nel settore della
+              comunicazione da più di 10 anni con una grande rete di partner ed
+              aziende che si affidano a noi.
             </Typography>
             <Box className={classes.btnContainer}>
               <CustomButton router link='/about/' type='outlined' />

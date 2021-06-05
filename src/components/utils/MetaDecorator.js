@@ -18,7 +18,7 @@ const MetaDecorator = ({
 }) => {
   const img =
     image ||
-    "https://res.cloudinary.com/thomasdea/image/upload/v1619443199/HPV%204%20Business/Copertina_React_rqzaod.png";
+    "https://res.cloudinary.com/thomasdea/image/upload/v1622903361/HPV%204%20Business/logo-scritta-hpv4_y7k7sd.png";
 
   const data = useStaticQuery(query);
 

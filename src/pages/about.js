@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
   topHeroDescription: {
     maxWidth: "75ch",
     lineHeight: 1.8,
+    "& strong": {
+      color: theme.palette.primary.main,
+    },
   },
   card: {
     marginTop: theme.spacing(3),
@@ -72,10 +75,12 @@ const useStyles = makeStyles((theme) => ({
   description: {
     maxWidth: "65ch",
     lineHeight: 1.8,
-
     color: theme.palette.text.secondary,
     "& strong": {
       color: theme.palette.primary.main,
+    },
+    "& a": {
+      textDecoration: "underline",
     },
   },
   courseLink: {

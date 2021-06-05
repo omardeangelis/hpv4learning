@@ -47,6 +47,11 @@ const useStyles = makeStyles((theme) => ({
       gap: theme.spacing(3),
     },
   },
+  riassunto: {
+    "& strong": {
+      color: theme.palette.primary.main,
+    },
+  },
   imageBox: {
     width: "100%",
     position: "relative",
@@ -105,6 +110,7 @@ const CuorseSection = ({ reference }) => {
                 <Typography
                   component='p'
                   color='textSecondary'
+                  className={classes.riassunto}
                   variant={mediaQuery.md ? "body2" : "body1"}
                   dangerouslySetInnerHTML={{
                     __html: el.riassunto.childMarkdownRemark.html,

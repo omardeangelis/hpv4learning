@@ -7,26 +7,22 @@ const info = [
   {
     titolo: "Crescita Personale",
     icon: <TrendingUpIcon />,
-    text:
-      "Dai un Boost a tutti i tuoi progetti, business idee personali grazie alle competenze fondamentali per competere al 100% sul mercato",
+    text: "Dai un Boost ai tuoi progetti acquisendo competenze fondamentali per realizzare le tue idee",
   },
   {
     titolo: "Freelancer",
     icon: <WorkIcon />,
-    text:
-      "Acquisisci nuove competenze per migliorare la tua offerta ed entrare nel mercato che hai sempre desiderato",
+    text: "Acquisisci nuove competenze per ampliare la tua offerta ed entrare nel mercato che hai sempre desiderato",
   },
   {
     titolo: "Aziende e Team",
     icon: <BusinessIcon />,
-    text:
-      "Crea nuove posizioni lavorative aggiungendo nuovi servizi e sfera di competenza all'interno della tua azienda",
+    text: "Crea nuove posizioni lavorative all'interno della tua squadra ricoprendo nuove sfere di competenza o aggiornando le competenze della tua azienda",
   },
   {
     titolo: "Cambia Lavoro",
     icon: <AutorenewIcon />,
-    text:
-      "Reinventa la tua figura professionale e inizia la carriera lavorative che hai sempre meritato",
+    text: "Reinventa la tua figura professionale e inizia la carriera lavorativa che hai sempre meritato",
   },
 ];
 
