@@ -23,6 +23,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^3.7.1",
     "gatsby-background-image": "^1.5.3",
+    "gatsby-plugin-facebook-pixel": "^1.0.8",
     "gatsby-plugin-gatsby-cloud": "^2.3.0",
     "gatsby-plugin-google-gtag": "^3.6.0",
     "gatsby-plugin-image": "^1.3.1",

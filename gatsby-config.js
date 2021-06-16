@@ -74,6 +74,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: process.env.GATSBY_FACEBOOK_PIXEL_ID,
+      },
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "Hpv 4 Learning",
