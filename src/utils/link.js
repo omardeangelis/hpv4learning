@@ -18,7 +18,7 @@ const socialLinks = [
   },
   {
     text: "instagram",
-    url: "https://www.instagram.com/hpv_film/?hl=it",
+    url: "https://www.instagram.com/hpv_4learning",
     icon: <FaInstagram />,
   },
   {
@@ -53,12 +53,12 @@ const SocialBar = ({ className }) => {
         return (
           <li key={text}>
             <SvgIcon
-              fontSize="default"
+              fontSize='default'
               component={Link}
               titleAccess={text}
               href={url}
               alt={text}
-              target="_blank"
+              target='_blank'
               className={`social-icon ${classes.socialIconColor}`}
             >
               {icon}
