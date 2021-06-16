@@ -149,6 +149,12 @@ const ContactSection = ({
         setIsLoading(false);
         setSuccess(true);
         setInput("");
+        typeof window !== "undefined" &&
+          window.gtag("event", "click", {
+            promotion_name: "coupon_13",
+            currency: "EUR",
+            value: 12.99,
+          });
       } catch (error) {
         setIsLoading(false);
         setError({ isError: true, msg: "Impossibile inviare mail" });
