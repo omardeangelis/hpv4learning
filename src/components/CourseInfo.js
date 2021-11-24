@@ -56,7 +56,7 @@ const CourseInfo = ({ livello, oreDiLezione, lezioni }) => {
     },
     {
       titolo: "Ore :",
-      text: oreDiLezione / 60,
+      text: (oreDiLezione / 60).toFixed(2),
       icon: <AccessTimeIcon />,
     },
   ];
