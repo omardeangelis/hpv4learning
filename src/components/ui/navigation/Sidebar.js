@@ -1,25 +1,25 @@
 import React from "react";
 //Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container/Container";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
+import { makeStyles } from "@mui/styles";
+import Container from "@mui/material/Container/Container";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 //Icon
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import CloseIcon from "@material-ui/icons/Close";
-import HomeIcon from "@material-ui/icons/Home";
-import SchoolIcon from "@material-ui/icons/School";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import CodeIcon from "@material-ui/icons/Code";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CloseIcon from "@mui/icons-material/Close";
+import HomeIcon from "@mui/icons-material/Home";
+import SchoolIcon from "@mui/icons-material/School";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import CodeIcon from "@mui/icons-material/Code";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
 //Gatsby
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";

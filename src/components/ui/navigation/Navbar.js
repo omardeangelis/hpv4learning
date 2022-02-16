@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 //Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Container from "@material-ui/core/Container";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { makeStyles } from "@mui/styles";
+import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 //Context
 import { useGlobalContext } from "../../../context";
 //Icon
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import HomeIcon from "@material-ui/icons/Home";
-import SchoolIcon from "@material-ui/icons/School";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import CodeIcon from "@material-ui/icons/Code";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import SchoolIcon from "@mui/icons-material/School";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import CodeIcon from "@mui/icons-material/Code";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
 //gatsby
 import { Link as GastbyLink, useStaticQuery, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
@@ -119,7 +119,7 @@ const Navbar = () => {
               <Grid item sm={4}>
                 <Button
                   className={classes.navLink}
-                  color='default'
+                  color='inherit'
                   size='large'
                   variant='text'
                   startIcon={<HomeIcon color='primary' />}
@@ -133,7 +133,7 @@ const Navbar = () => {
               <Grid item sm={4}>
                 <Button
                   className={classes.navLink}
-                  color='default'
+                  color='inherit'
                   variant='text'
                   startIcon={<SchoolIcon color='primary' />}
                   size='large'
@@ -179,7 +179,7 @@ const Navbar = () => {
               <Grid item sm={4}>
                 <Button
                   className={classes.navLink}
-                  color='default'
+                  color='inherit'
                   size='large'
                   startIcon={<AssignmentIndIcon color='primary' />}
                   variant='text'

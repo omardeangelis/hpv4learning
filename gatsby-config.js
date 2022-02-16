@@ -23,9 +23,6 @@ module.exports = {
     ],
     ogLanguage: "it_IT",
   },
-  flags: {
-    FUNCTIONS: true,
-  },
   plugins: [
     {
       resolve: "gatsby-source-contentful",
@@ -34,20 +31,10 @@ module.exports = {
         spaceId: process.env.GATSBY_CONTENTFULL_SPACE_ID,
       },
     },
-    {
-      resolve: `gatsby-plugin-material-ui`,
-      options: {
-        stylesProvider: {
-          injectFirst: true,
-        },
-      },
-    },
-    "gatsby-plugin-styled-components",
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
-
     {
       resolve: "gatsby-plugin-manifest",
       options: {

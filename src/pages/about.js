@@ -6,23 +6,23 @@ import MetaDecorator from "../components/SEO/MetaDecorator";
 import { createBoldText } from "../utils/helpers";
 //Custom Components
 //Material UI
-import Container from "@material-ui/core/Container/Container";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Divider from "@material-ui/core/Divider";
+import Container from "@mui/material/Container/Container";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import Avatar from "@mui/material/Avatar";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
 //Icon
-import CodeIcon from "@material-ui/icons/Code";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
+import CodeIcon from "@mui/icons-material/Code";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
 //Gatsby
 import { graphql, Link as GatsbyLink } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";

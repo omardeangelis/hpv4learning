@@ -1,8 +1,8 @@
 import React from "react";
 //Material Ui
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@mui/styles";
 //Gatsby
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 

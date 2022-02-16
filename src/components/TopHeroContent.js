@@ -1,9 +1,9 @@
 import React from "react";
 //Material UI
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
 //Context
 import { useGlobalContext } from "../context";
 

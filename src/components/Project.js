@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
+import { makeStyles } from "@mui/styles";
+import Box from "@mui/material/Box";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Link from "@material-ui/core/Link";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import styled from "styled-components";
-import Fade from "@material-ui/core/Fade";
-import CardContent from "@material-ui/core/CardContent";
+import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import styled from "@emotion/styled";
+import Fade from "@mui/material/Fade";
+import CardContent from "@mui/material/CardContent";
 import VizSensor from "react-visibility-sensor";
 const useStyles = makeStyles((theme) => ({
   cardActions: {

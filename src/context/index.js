@@ -1,7 +1,7 @@
 import React, { useContext, createContext, useState } from "react";
 //Material UI
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/styles";
 
 const AppContext = createContext();
 

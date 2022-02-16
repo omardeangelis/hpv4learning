@@ -6,10 +6,10 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
-import SvgIcon from "@material-ui/core/SvgIcon";
-import Link from "@material-ui/core/Link";
+import SvgIcon from "@mui/material/SvgIcon";
+import Link from "@mui/material/Link";
 const socialLinks = [
   {
     text: "Linkedin",
