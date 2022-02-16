@@ -14,17 +14,17 @@ import CustomButton from "../components/ui/Button";
 import CourseInfo from "../components/CourseInfo";
 import ListSection from "../components/ui/ListSection";
 //Material UI
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
 //Icons
-import DoneIcon from "@material-ui/icons/Done";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import PersonIcon from "@material-ui/icons/Person";
+import DoneIcon from "@mui/icons-material/Done";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import PersonIcon from "@mui/icons-material/Person";
 //Material Styles
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { useGlobalContext } from "../context";
 //Context
 

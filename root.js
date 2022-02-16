@@ -1,10 +1,10 @@
 import React from "react";
-//Material UI Theme
-import { ThemeProvider } from "@material-ui/core/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
 //Context
 import { AppProvider } from "./src/context";
-const theme = createMuiTheme({
+// import { ThemeProvider } from "@mui/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
   palette: {
     primary: {
       main: "#7026BA",
@@ -25,6 +25,7 @@ const theme = createMuiTheme({
     },
   },
 });
+
 export const ThemeWrapper = ({ element }) => {
   return (
     <ThemeProvider theme={theme}>

@@ -1,8 +1,8 @@
 import React from "react";
-import TrendingUpIcon from "@material-ui/icons/TrendingUp";
-import WorkIcon from "@material-ui/icons/Work";
-import BusinessIcon from "@material-ui/icons/Business";
-import AutorenewIcon from "@material-ui/icons/Autorenew";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import WorkIcon from "@mui/icons-material/Work";
+import BusinessIcon from "@mui/icons-material/Business";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
 const info = [
   {
     titolo: "Crescita Personale",

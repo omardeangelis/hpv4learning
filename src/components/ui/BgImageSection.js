@@ -1,9 +1,9 @@
 import React from "react";
 import bgImage from "../../images/Bg.png";
 //Material UI
-import Container from "@material-ui/core/Container/Container";
-import Box from "@material-ui/core/Box";
-import { makeStyles } from "@material-ui/core/styles";
+import Container from "@mui/material/Container/Container";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {

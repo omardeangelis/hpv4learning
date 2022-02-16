@@ -1,12 +1,12 @@
 import React from "react";
 //Material UI
-import Box from "@material-ui/core/Box";
-import Chip from "@material-ui/core/Chip";
-import { makeStyles } from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import { makeStyles } from "@mui/styles";
 //Icons
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import SpeedIcon from "@material-ui/icons/Speed";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import SpeedIcon from "@mui/icons-material/Speed";
 import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles((theme) => ({

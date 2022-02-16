@@ -3,11 +3,11 @@ import { Link } from "gatsby";
 //Global Component
 import Layout from "../components/ui/navigation/layout";
 //Material Ui
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container/Container";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import Container from "@mui/material/Container/Container";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 // styles
 const useStyles = makeStyles((theme) => ({

@@ -15,10 +15,10 @@ import CustomButton from "../components/ui/Button";
 import { graphql } from "gatsby";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 //Material UI
-import Container from "@material-ui/core/Container/Container";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Container from "@mui/material/Container/Container";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
 import { useGlobalContext } from "../context";
 
 const useStyles = makeStyles((theme) => ({
