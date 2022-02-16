@@ -1,5 +1,6 @@
 import React from "react";
 //Material UI
+import Container from "@material-ui/core/Container/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
@@ -8,7 +9,6 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 //Components
-import BgImageSection from "./ui/BgImageSection";
 //Utils
 import valueInfo from "../utils/indexInfo";
 //Context
@@ -65,7 +65,7 @@ const IndexInfo = ({ img }) => {
   const { mediaQuery } = useGlobalContext();
 
   return (
-    <BgImageSection img={img} noPadding>
+    <Container maxWidth='lg'>
       <Box className={classes.infoSection} component='div'>
         <Typography
           variant={mediaQuery.md ? "h5" : "h4"}
@@ -119,7 +119,7 @@ const IndexInfo = ({ img }) => {
           </Grid>
         </Box>
       </Box>
-    </BgImageSection>
+    </Container>
   );
 };
 
