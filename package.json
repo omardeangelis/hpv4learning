@@ -33,17 +33,15 @@
     "gatsby-plugin-react-helmet": "^5.3.0",
     "gatsby-plugin-sharp": "^4.3.0",
     "gatsby-plugin-sitemap": "^5.7.0",
-    "gatsby-source-contentful": "^5.3.0",
+    "gatsby-source-contentful": "^7.5.0",
     "gatsby-source-filesystem": "^4.3.0",
     "gatsby-transformer-json": "^4.3.0",
     "gatsby-transformer-remark": "^4.2.0",
     "gatsby-transformer-sharp": "^4.3.0",
-    "install": "^0.13.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
-    "react-visibility-sensor": "^5.1.1",
-    "uninstall": "^0.0.0"
+    "react-visibility-sensor": "^5.1.1"
   }
 }
