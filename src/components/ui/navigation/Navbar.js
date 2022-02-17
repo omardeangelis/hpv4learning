@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 //Material UI
 import { makeStyles } from "@mui/styles";
-import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
@@ -26,13 +24,34 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 //gatsby
 import { Link as GastbyLink, useStaticQuery, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
+import { Stack } from "@mui/material";
+import styled from "@emotion/styled";
+
+const StyledNav = styled.nav`
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  background: white;
+  z-index: 99999999;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  [role="_link"] {
+    border: 1px solid transparent;
+    transition: all 125ms ease;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 100px;
+    &:hover {
+      background: rgba(98, 0, 238, 0.025);
+      border: 1px solid rgba(98, 0, 238, 0.05);
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  navbar: {
-    background: "transparent",
   },
   menuButton: {
     display: "none",
@@ -79,12 +98,130 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setAnchorEl(null);
-  };
+  }, []);
   return (
-    <div className={classes.root}>
-      <AppBar position='static' className={classes.navbar} elevation={0}>
+    <>
+      <StyledNav>
+        <Container maxWidth='lg'>
+          <Stack direction='row' alignItems='center' spcing={4} height='72px'>
+            <Box>
+              <StaticImage
+                src='../../../images/logo.png'
+                alt='Logo Hpv 4 Learning'
+                placeholder='tracedSVG'
+                layout='fixed'
+                height={70}
+                width={70}
+              />
+            </Box>
+            <Stack
+              sx={{
+                flex: 1,
+              }}
+              direction='row'
+              justifyContent='space-around'
+              align='center'
+              spacing={2}
+            >
+              <GastbyLink to='/'>
+                <Box role='_link'>
+                  <Stack direction='row' spacing={2} alignItems='center'>
+                    <Typography
+                      sx={{
+                        fontSize: "1rem",
+                        lineHeight: "unset",
+                        fontWeight: 500,
+                      }}
+                      variant='button'
+                      color='primary'
+                    >
+                      Home
+                    </Typography>
+                    <HomeIcon color='primary' />
+                  </Stack>
+                </Box>
+              </GastbyLink>
+
+              <GastbyLink to='/'>
+                <Box role='_link'>
+                  <Stack direction='row' spacing={2} alignItems='center'>
+                    <Typography
+                      sx={{
+                        fontSize: "1rem",
+                        lineHeight: "unset",
+                        fontWeight: 500,
+                      }}
+                      variant='button'
+                      color='primary'
+                    >
+                      Corsi
+                    </Typography>
+                    <ArrowDropDownIcon />
+                  </Stack>
+                </Box>
+              </GastbyLink>
+              <GastbyLink to='/'>
+                <Box role='_link'>
+                  <Stack direction='row' spacing={2} alignItems='center'>
+                    <Typography
+                      sx={{
+                        fontSize: "1rem",
+                        lineHeight: "unset",
+                        fontWeight: 500,
+                      }}
+                      variant='button'
+                      color='primary'
+                    >
+                      Chi siamo
+                    </Typography>
+                    <AssignmentIndIcon color='primary' />
+                  </Stack>
+                </Box>
+              </GastbyLink>
+            </Stack>
+          </Stack>
+        </Container>
+        <Menu
+          id='simple-menu'
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuList>
+            {data.allContentfulCorsi.nodes.map((node) => {
+              return (
+                <MenuItem
+                  key={node.slug}
+                  onClick={handleClose}
+                  component={GastbyLink}
+                  to={`/${node.slug}/`}
+                >
+                  <ListItemIcon>
+                    {node.categoria === "videomaking" ? (
+                      <VideoCallIcon fontSize='small' color='primary' />
+                    ) : (
+                      <CodeIcon fontSize='small' color='primary' />
+                    )}{" "}
+                  </ListItemIcon>
+                  <Typography variant='button'>{node.categoria}</Typography>
+                </MenuItem>
+              );
+            })}
+          </MenuList>
+        </Menu>
+      </StyledNav>
+      <Box height='72px' width='100px'></Box>
+    </>
+    /* <AppBar
+        position='static'
+        sx={{
+          background: "white",
+        }}
+        elevation={0}
+      >
         <Container component={Toolbar} maxWidth='lg'>
           <Grid
             container
@@ -144,37 +281,7 @@ const Navbar = () => {
                 >
                   Corsi
                 </Button>
-                <Menu
-                  id='simple-menu'
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuList>
-                    {data.allContentfulCorsi.nodes.map((node) => {
-                      return (
-                        <MenuItem
-                          key={node.slug}
-                          onClick={handleClose}
-                          component={GastbyLink}
-                          to={`/${node.slug}/`}
-                        >
-                          <ListItemIcon>
-                            {node.categoria === "videomaking" ? (
-                              <VideoCallIcon fontSize='small' color='primary' />
-                            ) : (
-                              <CodeIcon fontSize='small' color='primary' />
-                            )}{" "}
-                          </ListItemIcon>
-                          <Typography variant='button'>
-                            {node.categoria}
-                          </Typography>
-                        </MenuItem>
-                      );
-                    })}
-                  </MenuList>
-                </Menu>
+              
               </Grid>
               <Grid item sm={4}>
                 <Button
@@ -193,8 +300,7 @@ const Navbar = () => {
             </Grid>
           </Grid>
         </Container>
-      </AppBar>
-    </div>
+      </AppBar>*/
   );
 };
 

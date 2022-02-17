@@ -3,6 +3,7 @@ import React from "react";
 import { AppProvider } from "./src/context";
 // import { ThemeProvider } from "@mui/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Helmet } from "react-helmet";
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,15 @@ const theme = createTheme({
     },
   },
   typography: {
+    allVariants: {
+      fontFamily: [
+        "Poppins",
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+      ].join(","),
+    },
     h3: {
       margin: "-3px",
     },
@@ -28,8 +38,13 @@ const theme = createTheme({
 
 export const ThemeWrapper = ({ element }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <AppProvider>{element}</AppProvider>
-    </ThemeProvider>
+    <>
+      <Helmet>
+        <meta name='viewport' content='initial-scale=1, width=device-width' />
+      </Helmet>
+      <ThemeProvider theme={theme}>
+        <AppProvider>{element}</AppProvider>
+      </ThemeProvider>
+    </>
   );
 };
