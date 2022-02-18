@@ -12,7 +12,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": false,
-    "preserveConstEnums": true
+    "preserveConstEnums": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "public", ".cache"]

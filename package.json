@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.4.2",
     "@mui/material": "^5.4.2",
     "@mui/styles": "^5.4.2",
+    "@mui/types": "^7.1.2",
     "@sendgrid/mail": "^7.4.4",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
