@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 //Material UI
-import { makeStyles } from "@mui/styles";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
-import ListItemIcon from "@mui/material/ListItemIcon";
-
 //Context
 import { useGlobalContext } from "../../../context";
 //Icon
@@ -26,6 +19,8 @@ import { Link as GastbyLink, useStaticQuery, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { Stack } from "@mui/material";
 import styled from "@emotion/styled";
+import CourseMenu from "./CourseMenu";
+import { useLayoutContext } from "../../../context/layout";
 
 const StyledNav = styled.nav`
   width: 100%;
@@ -50,13 +45,7 @@ const StyledNav = styled.nav`
 `;
 
 const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const data = useStaticQuery(query);
-  const { mediaQuery, toggleSidebar } = useGlobalContext();
-
-  const handleClose = React.useCallback(() => {
-    setAnchorEl(null);
-  }, []);
+  const ctx = useLayoutContext();
   return (
     <>
       <StyledNav>
@@ -100,24 +89,29 @@ const Navbar = () => {
                 </Box>
               </GastbyLink>
 
-              <GastbyLink to='/'>
-                <Box role='_link'>
-                  <Stack direction='row' spacing={2} alignItems='center'>
-                    <Typography
-                      sx={{
-                        fontSize: "1rem",
-                        lineHeight: "unset",
-                        fontWeight: 500,
-                      }}
-                      variant='button'
-                      color='primary'
-                    >
-                      Corsi
-                    </Typography>
-                    <ArrowDropDownIcon />
-                  </Stack>
-                </Box>
-              </GastbyLink>
+              <Box
+                role='_link'
+                id='course_opener'
+                onClick={(e) => {
+                  ctx.toggleCourseMenu();
+                  e.stopPropagation();
+                }}
+              >
+                <Stack direction='row' spacing={2} alignItems='center'>
+                  <Typography
+                    sx={{
+                      fontSize: "1rem",
+                      lineHeight: "unset",
+                      fontWeight: 500,
+                    }}
+                    variant='button'
+                    color='primary'
+                  >
+                    Corsi
+                  </Typography>
+                  <ArrowDropDownIcon />
+                </Stack>
+              </Box>
               <GastbyLink to='/'>
                 <Box role='_link'>
                   <Stack direction='row' spacing={2} alignItems='center'>
@@ -141,6 +135,7 @@ const Navbar = () => {
         </Container>
       </StyledNav>
       <Box height='72px' width='100px'></Box>
+      <CourseMenu />
     </>
   );
 };

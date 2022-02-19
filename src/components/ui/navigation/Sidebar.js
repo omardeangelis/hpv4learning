@@ -25,7 +25,7 @@ import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 
 //Global Context
-import { useGlobalContext } from "../../../context";
+import { useLayoutContext } from "../../../context/layout";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,11 +60,11 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar = () => {
   const classes = useStyles();
   const data = useStaticQuery(query);
-  const { isSidebarOpen, toggleSidebar } = useGlobalContext();
+  const ctx = useLayoutContext();
   return (
     <SwipeableDrawer
       anchor='left'
-      open={isSidebarOpen}
+      open={ctx?.isSidebarOpen}
       onClose={() => null}
       onOpen={() => null}
       className={classes.root}
@@ -90,14 +90,14 @@ const Sidebar = () => {
             />
           </Grid>
           <Grid item xs={6} className={classes.toggleBtn}>
-            <IconButton onClick={toggleSidebar}>
+            <IconButton onClick={ctx?.toggleSidebar}>
               <CloseIcon />
             </IconButton>
           </Grid>
         </Grid>
       </Container>
       <List>
-        <ListItem component={GatsbyLink} to='/' onClick={toggleSidebar}>
+        <ListItem component={GatsbyLink} to='/' onClick={ctx?.toggleSidebar}>
           <ListItemIcon>
             <HomeIcon color='primary' />
           </ListItemIcon>
@@ -128,7 +128,7 @@ const Sidebar = () => {
                     key={link.slug}
                     component={GatsbyLink}
                     to={`/${link.slug}/`}
-                    onClick={toggleSidebar}
+                    onClick={ctx?.toggleSidebar}
                   >
                     <ListItemIcon>
                       {link.categoria === "videomaking" ? (
@@ -145,7 +145,11 @@ const Sidebar = () => {
           </AccordionDetails>
         </ListItem>
 
-        <ListItem component={GatsbyLink} to='/about/' onClick={toggleSidebar}>
+        <ListItem
+          component={GatsbyLink}
+          to='/about/'
+          onClick={ctx?.toggleSidebar}
+        >
           <ListItemIcon>
             <AssignmentIndIcon color='primary' />
           </ListItemIcon>
