@@ -16,7 +16,14 @@ const LayoutProvider = ({ children }: { children: React.ReactChild }) => {
     React.useState<boolean>(false);
 
   const toggleSidebar = React.useCallback(() => {
-    setIsSidebarOpen((old) => !old);
+    setIsSidebarOpen((old) => {
+      if (!old) {
+        document.body.classList.add("sidebar-open");
+      } else {
+        document.body.classList.remove("sidebar-open");
+      }
+      return !old;
+    });
   }, []);
 
   const toggleCourseMenu = React.useCallback(() => {

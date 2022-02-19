@@ -132,3 +132,27 @@ SOCIAL STYLE
 .social-icon {
   margin: 0 1rem;
 }
+
+[id$="menu"] {
+    display: none;
+  }
+
+.show-dropdown {
+    display: inherit !important;
+  }
+
+  .rotate-icon {
+  transform: rotateX(180deg) !important;
+}
+
+.sidebar-open {
+    overflow: hidden;
+    height: 100vh;
+}
+
+@media screen and (min-width: 1024px){
+  .sidebar-open {
+    overflow: auto;
+    height: unset;
+}
+}
