@@ -6,10 +6,10 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa";
-import { makeStyles } from "@mui/styles";
 
 import SvgIcon from "@mui/material/SvgIcon";
-import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import { Stack } from "@mui/material";
 const socialLinks = [
   {
     text: "Linkedin",
@@ -38,35 +38,48 @@ const socialLinks = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
-  socialIconColor: {
-    color: "white",
-  },
-}));
-
-const SocialBar = ({ className }) => {
-  const classes = useStyles();
+const SocialBar = ({ className }: { className?: string }) => {
   return (
-    <ul className={className || "social-row"}>
+    <Stack
+      direction='row'
+      alignItems='center'
+      justifyContent='space-between'
+      mx='auto'
+      component={"ul"}
+      className={className}
+    >
       {socialLinks.map((social) => {
         const { text, url, icon } = social;
         return (
           <li key={text}>
-            <SvgIcon
-              fontSize='default'
-              component={Link}
-              titleAccess={text}
-              href={url}
-              alt={text}
-              target='_blank'
-              className={`social-icon ${classes.socialIconColor}`}
+            <Box
+              sx={{
+                color: "white",
+              }}
             >
-              {icon}
-            </SvgIcon>
+              <a
+                target='_blank'
+                rel='nofollow'
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <SvgIcon
+                  fontSize='medium'
+                  color='inherit'
+                  titleAccess={text}
+                  href={url}
+                  className={`social-icon`}
+                >
+                  {icon}
+                </SvgIcon>
+              </a>
+            </Box>
           </li>
         );
       })}
-    </ul>
+    </Stack>
   );
 };
 

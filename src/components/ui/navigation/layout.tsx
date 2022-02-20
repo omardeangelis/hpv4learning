@@ -3,14 +3,19 @@ import React from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
-const Layout = ({ children }) => {
+import { LayoutProvider } from "../../../context/layout";
+const Layout = ({
+  children,
+}: {
+  children: React.ReactChild | React.ReactChild[];
+}) => {
   return (
-    <>
+    <LayoutProvider>
       <Navbar />
       <Sidebar />
       <main>{children}</main>
       <Footer />
-    </>
+    </LayoutProvider>
   );
 };
 
