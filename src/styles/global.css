@@ -20,6 +20,13 @@
   --paragraph-color: rgba(0, 0, 0, 0.54);
   --paragraph-spacing: 0.00938em;
 
+  /* Palette */
+  --primary-main: #7026BA;
+  --primary-100: rgba(98, 0, 238, 0.05);
+  --secondary-main: #E7A7FF;
+  --tertiary-main: #F3DFFB;
+  --optional--main: #6200EE; 
+
   /* Global */
   --letter-spacing: 0.08rem;
   --transition: all 0.2s ease;

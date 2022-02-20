@@ -17,7 +17,7 @@ const info = [
   {
     titolo: "Aziende e Team",
     icon: <BusinessIcon />,
-    text: "Crea nuove posizioni lavorative all'interno della tua squadra ricoprendo nuove sfere di competenza o aggiornando le competenze della tua azienda",
+    text: "Crea nuove posizioni lavorative e nuove sfere di competenza all'interno della tua azienda",
   },
   {
     titolo: "Cambia Lavoro",
