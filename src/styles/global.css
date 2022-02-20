@@ -123,11 +123,7 @@ h4 {
 SOCIAL STYLE
 */
 
-.social-row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
+
 
 .social-icon {
   margin: 0 1rem;

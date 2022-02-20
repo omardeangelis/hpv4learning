@@ -10,7 +10,11 @@ export type Props = {
 
 const LayoutContext = React.createContext<Props | null>(null);
 
-const LayoutProvider = ({ children }: { children: React.ReactChild }) => {
+const LayoutProvider = ({
+  children,
+}: {
+  children: React.ReactChild | React.ReactChild[];
+}) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState<boolean>(false);
   const [isCourseMenuOpen, setIsCourseMenuOpen] =
     React.useState<boolean>(false);

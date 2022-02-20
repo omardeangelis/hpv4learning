@@ -4,7 +4,11 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import { LayoutProvider } from "../../../context/layout";
-const Layout = ({ children }) => {
+const Layout = ({
+  children,
+}: {
+  children: React.ReactChild | React.ReactChild[];
+}) => {
   return (
     <LayoutProvider>
       <Navbar />
