@@ -2,12 +2,12 @@ import { Box } from "@mui/system";
 import React from "react";
 import styled from "@emotion/styled";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
-import { Button, Typography, useMediaQuery, useTheme } from "@mui/material";
-import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
-import { Link } from "gatsby";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import { createBrandText } from "../../utils/helpers";
 import { CoursePreviewProps } from "../../types/course";
 import CourseIcons from "./CourseIcons";
+import CourseAction from "./CourseAction";
+import LevelChip from "./Chip";
 
 const CustomStack = styled.div`
   display: flex;
@@ -46,6 +46,8 @@ const CourseContent = ({
   riassunto,
   oreDiLezione,
   livello,
+  categoria,
+  couponLink,
   disableIcons,
 }: Props) => {
   const theme = useTheme();
@@ -61,6 +63,7 @@ const CourseContent = ({
               height: { xs: "102px", lg: "143px" },
               borderRadius: "8px",
               overflow: "hidden",
+              position: "relative",
             }}
           >
             <GatsbyImage
@@ -70,6 +73,7 @@ const CourseContent = ({
                 height: "100%",
               }}
             />
+            {categoria && <LevelChip type={categoria} />}
           </Box>
 
           {!disableIcons && md && (
@@ -138,21 +142,11 @@ const CourseContent = ({
               mt: { xs: "4px", lg: "18px" },
             }}
           >
-            <Link
-              to={`/${slug}/`}
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              <Button
-                endIcon={<ArrowRightAltSharpIcon />}
-                size={md ? "small" : "medium"}
-                variant='contained'
-                color='primary'
-              >
-                Vedi
-              </Button>
-            </Link>
+            <CourseAction
+              isFreeCourse={categoria === "free"}
+              buyLink={couponLink && couponLink}
+              pageLink={slug}
+            />
           </Box>
         </Box>
       </CustomStack>

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import styled from "@emotion/styled";
-import { CoursePreviewProps } from "../../types/course";
+import { CourseCategoryProps, CoursePreviewProps } from "../../types/course";
 import CourseContent from "./CourseContent";
 
 const StyledBox = styled(Box)`
@@ -28,7 +28,11 @@ const StyledBox = styled(Box)`
   }
 `;
 
-type DataProps = CoursePreviewProps & { oreDiLezione: number; livello: string };
+type DataProps = CoursePreviewProps & {
+  category: CourseCategoryProps[];
+  oreDiLezione: number;
+  livello: string;
+};
 
 type Props = { data: DataProps[] } & (
   | { disableLink: true; slug?: never; title?: string; disableTitle?: boolean }
@@ -44,7 +48,7 @@ const CuorseSection = ({
   disableTitle,
   data,
 }: Props) => {
-  const handleHeaderJustify = () => {
+  const handleHeaderJustify = React.useCallback(() => {
     if (disableLink) {
       return "flex-start";
     }
@@ -52,7 +56,7 @@ const CuorseSection = ({
       return "flex-end";
     }
     return "space-between";
-  };
+  }, [disableLink, disableTitle]);
 
   return (
     <Box>

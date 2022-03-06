@@ -202,3 +202,13 @@ SOCIAL STYLE
   text-decoration: none;
   color: 'unset',
 }
+
+.desktop-new-line{
+  display: none;
+}
+
+@media screen and (min-width: 767px){
+ .desktop-new-line{
+  display: block;
+}
+}

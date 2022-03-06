@@ -21,3 +21,15 @@ export const convertToHHMMSS = (time: number, short = false) => {
   }
   return `${H}:${i}:${s}`;
 };
+
+export const rowalizer = <T>(array: T[], itemPerRow = 3) => {
+  let newArray: T[][] = [];
+  const rows = Math.ceil(array.length / itemPerRow);
+  Array.from({ length: rows }, (_, index) => {
+    let start = index * itemPerRow;
+    let end = start + itemPerRow;
+    newArray.push(array.slice(start, end));
+  });
+
+  return newArray;
+};
