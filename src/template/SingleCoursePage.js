@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/ui/navigation/layout";
 import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
-import { createBoldText, createRowText } from "../utils/helpers";
+import { createBrandText, createRowText } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
 import BgImageSection from "../components/ui/BgImageSection";
@@ -106,7 +106,7 @@ const SingleCoursePage = ({ data, location }) => {
               variant={mediaQuery.md ? "h5" : "h3"}
               className={classes.title}
               dangerouslySetInnerHTML={{
-                __html: createBoldText(corso.titolo),
+                __html: createBrandText(corso.titolo),
               }}
             ></Typography>
             <Typography
@@ -205,14 +205,14 @@ const SingleCoursePage = ({ data, location }) => {
           </Box>
         </Container>
         {/* Banner per richiedere acquisto Coupon per i corsi a 9,99€ */}
-        <BgImageSection>
+        {/* <BgImageSection>
           <ContactSection
             couponCorso={corso.couponCorso}
             couponLink={corso.couponLink}
           ></ContactSection>
-        </BgImageSection>
+        </BgImageSection> */}
         {/* Progetti ed esercizatazioni  */}
-        {corso.progetti && (
+        {corso.progetti && corso?.introduzioneProgetti && (
           <Container maxWidth='lg' innerRef={projectRef}>
             <Projects
               data={corso.progetti}

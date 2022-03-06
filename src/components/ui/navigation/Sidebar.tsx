@@ -20,11 +20,11 @@ import { Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import useDropDown from "../../../hook/useDropDown";
 import styled from "@emotion/styled";
-import { CategoryType } from "../../../types/layout";
+import { CategoryMenuProps } from "../../../types/layout";
 
 type Props = {
-  allContentfulCorsi: {
-    nodes: CategoryType[];
+  allContentfulCategory: {
+    nodes: CategoryMenuProps[];
   };
 };
 
@@ -50,12 +50,33 @@ const Sidebar = () => {
 
   const getIcon = React.useCallback((type: string) => {
     switch (type) {
-      case "videomaking":
-        return <VideoCallIcon fontSize='small' color='primary' />;
-      case "sviluppo web":
-        return <CodeIcon fontSize='small' color='primary' />;
+      case "videomakers":
+        return (
+          <VideoCallIcon
+            fontSize='small'
+            sx={{
+              color: "purple.400",
+            }}
+          />
+        );
+      case "sviluppatori-web":
+        return (
+          <CodeIcon
+            fontSize='small'
+            sx={{
+              color: "purple.400",
+            }}
+          />
+        );
       default:
-        return <BeenhereIcon fontSize='small' color='primary' />;
+        return (
+          <BeenhereIcon
+            fontSize='small'
+            sx={{
+              color: "purple.400",
+            }}
+          />
+        );
     }
   }, []);
   return (
@@ -78,15 +99,18 @@ const Sidebar = () => {
             <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
               <Box py='18px'>
                 <Stack direction='row' spacing={2} alignItems='center'>
-                  <HomeIcon color='primary' />
+                  <HomeIcon
+                    sx={{
+                      color: "purple.400",
+                    }}
+                  />
                   <Typography
                     sx={{
                       fontSize: "1rem",
                       lineHeight: "unset",
                       fontWeight: 500,
                     }}
-                    variant='button'
-                    color='primary'
+                    color='grey.800'
                   >
                     Home
                   </Typography>
@@ -101,37 +125,43 @@ const Sidebar = () => {
                 alignItems='center'
                 onClick={() => toggleMenu("corsi")}
               >
-                <SchoolIcon color='primary' />
+                <SchoolIcon
+                  sx={{
+                    color: "purple.400",
+                  }}
+                />
                 <Typography
                   sx={{
                     fontSize: "1rem",
                     lineHeight: "unset",
                     fontWeight: 500,
                   }}
-                  variant='button'
-                  color='primary'
+                  color='gray.800'
                 >
                   Corsi
                 </Typography>
                 <ExpandMoreIcon />
               </Stack>
               <Box id='corsi-menu' pt='18px' pl='8px'>
-                {data.allContentfulCorsi.nodes.map((item) => {
+                {data.allContentfulCategory.nodes.map(({ name, slug }) => {
                   return (
-                    <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
+                    <GatsbyLink
+                      to={`/corsi/${slug}/`}
+                      onClick={ctx?.toggleSidebar}
+                      key={slug}
+                    >
                       <Box py='18px'>
                         <Stack direction='row' spacing={2} alignItems='center'>
-                          {getIcon(item.categoria)}
+                          {getIcon(slug)}
                           <Typography
                             sx={{
                               fontSize: "1rem",
                               lineHeight: "unset",
                               fontWeight: 500,
                             }}
-                            variant='button'
-                            color='primary'
+                            color='gray.800'
                           >
-                            {item.categoria}
+                            {name}
                           </Typography>
                         </Stack>
                       </Box>
@@ -143,15 +173,18 @@ const Sidebar = () => {
             <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
               <Box py='18px'>
                 <Stack direction='row' spacing={2} alignItems='center'>
-                  <AssignmentIndIcon color='primary' />
+                  <AssignmentIndIcon
+                    sx={{
+                      color: "purple.400",
+                    }}
+                  />
                   <Typography
                     sx={{
                       fontSize: "1rem",
                       lineHeight: "unset",
                       fontWeight: 500,
                     }}
-                    variant='button'
-                    color='primary'
+                    color='grey.800'
                   >
                     Chi siamo
                   </Typography>
@@ -167,10 +200,16 @@ const Sidebar = () => {
 
 const query = graphql`
   {
-    allContentfulCorsi {
+    allContentfulCategory {
       nodes {
         slug
-        categoria
+        name
+        seoDescription
+        image {
+          file {
+            url
+          }
+        }
       }
     }
   }

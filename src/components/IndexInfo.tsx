@@ -9,12 +9,6 @@ import valueInfo from "../utils/indexInfo";
 //Context
 import styled from "@emotion/styled";
 
-const CustomBox = styled(Box)`
-  strong {
-    color: var(--primary-main);
-  }
-`;
-
 const PureCssStack = styled(Box)`
   display: flex;
   flex-direction: column;
@@ -55,7 +49,7 @@ const IndexInfo = () => {
 
   return (
     <Container maxWidth='lg'>
-      <CustomBox>
+      <Box>
         <Typography
           component='h2'
           fontWeight={600}
@@ -64,7 +58,8 @@ const IndexInfo = () => {
             lineHeight: { xs: "34px", lg: "49px" },
           }}
         >
-          A chi si rivolge <strong> Hpv 4 Learning</strong>
+          A chi si rivolge{" "}
+          <strong className='brand-text'> Hpv 4 Learning</strong>
         </Typography>
         <Box
           component='section'
@@ -88,7 +83,7 @@ const IndexInfo = () => {
                       width='100%'
                       sx={{
                         border: "1px solid",
-                        borderColor: "primary.100",
+                        borderColor: "purple.200",
                         background: "white",
                       }}
                     >
@@ -97,7 +92,13 @@ const IndexInfo = () => {
                           padding: "24px",
                         }}
                       >
-                        <Icon color='primary'>{icon}</Icon>
+                        <Icon
+                          sx={{
+                            color: "purple.400",
+                          }}
+                        >
+                          {icon}
+                        </Icon>
                         <Box mt='10px'>
                           <Typography
                             component='p'
@@ -130,7 +131,7 @@ const IndexInfo = () => {
             );
           })}
         </Box>
-      </CustomBox>
+      </Box>
     </Container>
   );
 };

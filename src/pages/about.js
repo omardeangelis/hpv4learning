@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/ui/navigation/layout";
 import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
-import { createBoldText } from "../utils/helpers";
+import { createBrandText } from "../utils/helpers";
 //Custom Components
 //Material UI
 import Container from "@mui/material/Container/Container";
@@ -234,7 +234,7 @@ const AboutPage = ({ data }) => {
                                     component={ListItemText}
                                     to={`/${corso.slug}/`}
                                     dangerouslySetInnerHTML={{
-                                      __html: createBoldText(corso.titolo),
+                                      __html: createBrandText(corso.titolo),
                                     }}
                                   ></GatsbyLink>
                                 </ListItem>

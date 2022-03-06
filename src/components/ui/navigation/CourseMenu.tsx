@@ -5,7 +5,8 @@ import { Stack, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import useHasMounted from "../../../hook/useHasMounted";
 import { useLayoutContext } from "../../../context/layout";
-import { Link } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
+import { CategoryMenuProps } from "../../../types/layout";
 
 const StyledBox = styled(Box)`
   & [role="_hover"] {
@@ -20,6 +21,12 @@ const StyledBox = styled(Box)`
   }
 `;
 
+const StyledImage = styled.img`
+  max-width: 91px;
+  height: 100%;
+  width: 100%;
+`;
+
 const MenuContainer = styled.div`
   display: none;
 
@@ -27,6 +34,12 @@ const MenuContainer = styled.div`
     display: block;
   }
 `;
+
+type Props = {
+  allContentfulCategory: {
+    nodes: CategoryMenuProps[];
+  };
+};
 
 const CourseMenu = () => {
   const anchorRef = React.useRef<HTMLDivElement | undefined>();
@@ -47,17 +60,7 @@ const CourseMenu = () => {
       ctx?.handleClickAway();
     }
   }, []);
-  const tempText = [
-    {
-      title: "Per Sviluppatori",
-    },
-    {
-      title: "Per VideoMakers",
-    },
-    {
-      title: "Corsi Gratuiti",
-    },
-  ];
+  const data: Props = useStaticQuery(query);
 
   React.useEffect(() => {
     if (hasMounted && ctx?.isCourseMenuOpen) {
@@ -85,9 +88,8 @@ const CourseMenu = () => {
                 borderRadius='16px'
                 sx={{
                   border: "1px solid",
-                  borderColor: "primary.100",
+                  borderColor: "purple.200",
                   background: "white",
-                  boxShadow: 1,
                 }}
               >
                 <Stack
@@ -95,46 +97,54 @@ const CourseMenu = () => {
                   justifyContent='space-between'
                   alignItems='center'
                 >
-                  {tempText.map(({ title }) => {
-                    return (
-                      <Link to='/about'>
-                        <Box
-                          px='16px'
-                          py='24px'
-                          role='_hover'
-                          borderRadius='16px'
-                        >
-                          <Stack
-                            direction='row'
-                            alignItems='center'
-                            spacing={4}
+                  {data.allContentfulCategory.nodes.map(
+                    ({ name, slug, image, seoDescription }) => {
+                      return (
+                        <Link to={`/corsi/${slug}/`} key={slug}>
+                          <Box
+                            px='16px'
+                            py='24px'
+                            maxWidth='343px'
+                            width='100%'
+                            role='_hover'
+                            borderRadius='16px'
                           >
-                            <Box
-                              height='91px'
-                              maxWidth='91px'
-                              width='100%'
-                              borderRadius='12px'
-                              sx={{
-                                backgroundColor: "secondary.main",
-                                flexGrow: 1,
-                              }}
-                            />
-                            <Box>
-                              <Typography variant='subtitle1'>
-                                {title}
-                              </Typography>
-                              <Box lineHeight='12px'>
-                                <Typography variant='caption'>
-                                  Lorem, ipsum dolor sit amet consectetur
-                                  adipisicing elit. Aperiam, totam.
-                                </Typography>
+                            <Stack
+                              direction='row'
+                              alignItems='center'
+                              spacing={4}
+                            >
+                              <Box
+                                height='91px'
+                                maxWidth='91px'
+                                width='100%'
+                                borderRadius='12px'
+                                sx={{
+                                  backgroundColor: "purple.300",
+                                  flexGrow: 1,
+                                }}
+                              >
+                                <StyledImage
+                                  src={image && image.file.url}
+                                  alt='category image'
+                                />
                               </Box>
-                            </Box>
-                          </Stack>
-                        </Box>
-                      </Link>
-                    );
-                  })}
+                              <Box>
+                                <Typography variant='subtitle1'>
+                                  {name}
+                                </Typography>
+                                <Box lineHeight='12px'>
+                                  <Typography variant='caption'>
+                                    {seoDescription}
+                                  </Typography>
+                                </Box>
+                              </Box>
+                            </Stack>
+                          </Box>
+                        </Link>
+                      );
+                    }
+                  )}
                 </Stack>
               </Box>
             </Container>
@@ -144,5 +154,22 @@ const CourseMenu = () => {
     </MenuContainer>
   );
 };
+
+const query = graphql`
+  {
+    allContentfulCategory {
+      nodes {
+        slug
+        name
+        seoDescription
+        image {
+          file {
+            url
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default CourseMenu;
