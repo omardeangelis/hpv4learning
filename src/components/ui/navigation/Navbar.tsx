@@ -11,7 +11,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 //gatsby
-import { Link as GastbyLink, graphql } from "gatsby";
+import { Link as GastbyLink } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { Stack } from "@mui/material";
 import styled from "@emotion/styled";
@@ -26,7 +26,7 @@ const StyledNav = styled.nav`
   right: 0px;
   background: white;
   z-index: 99999999;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--purple-200);
   [role="_link"] {
     border: 1px solid transparent;
     transition: all 125ms ease;
@@ -94,12 +94,15 @@ const Navbar = () => {
                           lineHeight: "unset",
                           fontWeight: 500,
                         }}
-                        variant='button'
-                        color='primary'
+                        color='gray.800'
                       >
                         Home
                       </Typography>
-                      <HomeIcon color='primary' />
+                      <HomeIcon
+                        sx={{
+                          color: "purple.400",
+                        }}
+                      />
                     </Stack>
                   </Box>
                 </GastbyLink>
@@ -119,8 +122,7 @@ const Navbar = () => {
                         lineHeight: "unset",
                         fontWeight: 500,
                       }}
-                      variant='button'
-                      color='primary'
+                      color='gray.800'
                     >
                       Corsi
                     </Typography>
@@ -136,12 +138,15 @@ const Navbar = () => {
                           lineHeight: "unset",
                           fontWeight: 500,
                         }}
-                        variant='button'
-                        color='primary'
+                        color='gray.800'
                       >
                         Chi siamo
                       </Typography>
-                      <AssignmentIndIcon color='primary' />
+                      <AssignmentIndIcon
+                        sx={{
+                          color: "purple.400",
+                        }}
+                      />
                     </Stack>
                   </Box>
                 </GastbyLink>
@@ -166,16 +171,4 @@ const Navbar = () => {
     </>
   );
 };
-
-const query = graphql`
-  {
-    allContentfulCorsi {
-      nodes {
-        slug
-        categoria
-      }
-    }
-  }
-`;
-
 export default Navbar;

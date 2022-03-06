@@ -1,41 +1,9 @@
 import React from "react";
 //Context
 import { AppProvider } from "./src/context";
-// import { ThemeProvider } from "@mui/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { Helmet } from "react-helmet";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#7026BA",
-      100: "rgba(98, 0, 238, 0.05)",
-    },
-    secondary: {
-      main: "#E7A7FF",
-    },
-    tertiary: {
-      main: "#F3DFFB",
-    },
-    optional: {
-      main: "#6200EE",
-    },
-  },
-  typography: {
-    allVariants: {
-      fontFamily: [
-        "Poppins",
-        "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        "sans-serif",
-      ].join(","),
-    },
-    h3: {
-      margin: "-3px",
-    },
-  },
-});
+import { theme } from "./theme";
 
 export const ThemeWrapper = ({ element }) => {
   return (
