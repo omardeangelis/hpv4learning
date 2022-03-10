@@ -7,82 +7,34 @@ import MetaDecorator from "../components/SEO/MetaDecorator";
 import { createBrandText, createRowText } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
-import BgImageSection from "../components/ui/BgImageSection";
-import ContactSection from "../components/ContactSection";
-import Video from "../components/ui/Video";
-import CustomButton from "../components/ui/Button";
+// import BgImageSection from "../components/ui/BgImageSection";
+// import ContactSection from "../components/ContactSection";
+import Video from "../components/ui/FrameVideo";
 import CourseInfo from "../components/CourseInfo";
 import ListSection from "../components/ui/ListSection";
+import Insegnante from "../components/shared/Insegnante";
 //Material UI
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 //Icons
 import DoneIcon from "@mui/icons-material/Done";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
-//Material Styles
-import { makeStyles } from "@mui/styles";
-import { useGlobalContext } from "../context";
-//Context
+import { useMediaQuery, useTheme } from "@mui/material";
+import { lineHeight } from "@mui/system";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "grid",
-    gap: theme.spacing(5),
-    paddingBottom: theme.spacing(5),
-    paddingTop: theme.spacing(5),
-  },
-  courseInfoContainer: {
-    display: "grid",
-    gap: theme.spacing(5),
-  },
-  headings: {
-    display: "grid",
-    gap: theme.spacing(2),
-  },
-  title: {
-    fontWeight: 800,
-    lineHeight: 1.05,
-    maxWidth: "80%",
-    textTransform: "uppercase",
-    "& strong": {
-      color: theme.palette.primary.main,
-      fontWeight: 800,
-    },
-  },
-  subtitle: {
-    lineHeight: 1.3,
-  },
-  video: {
-    display: "grid",
-    height: "60vh",
-  },
-  btnContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  descrizione: {
-    marginTop: theme.spacing(2),
-    lineHeight: 1.7,
-    "& strong": {
-      color: theme.palette.primary.main,
-    },
-  },
-  listSpacer: {
-    marginTop: theme.spacing(5),
-  },
-}));
+//Material Styles
 
 const SingleCoursePage = ({ data, location }) => {
   const { contentfulCorsi: corso } = data;
-  const classes = useStyles();
   const projectRef = useRef(null);
-  const { mediaQuery } = useGlobalContext();
   const { search } = location;
   const scrollToProjects = search && search.split("=")[1];
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (projectRef.current && scrollToProjects) {
@@ -98,135 +50,241 @@ const SingleCoursePage = ({ data, location }) => {
         keywords={[...corso.concetti, ...corso.requisiti, ...corso.target]}
         image={corso.copertina.file.url}
       ></MetaDecorator>
-      <Box className={classes.root}>
-        <Container maxWidth='lg' className={classes.courseInfoContainer}>
+      <Box>
+        <Container maxWidth='lg'>
           {/* Titolo e Sottotiolo */}
-          <Box component='div' className={classes.headings}>
-            <Typography
-              variant={mediaQuery.md ? "h5" : "h3"}
-              className={classes.title}
-              dangerouslySetInnerHTML={{
-                __html: createBrandText(corso.titolo),
-              }}
-            ></Typography>
-            <Typography
-              className={classes.subtitle}
-              variant={mediaQuery.md ? "h6" : "h5"}
-            >
-              {corso.sottotitolo}
-            </Typography>
-            {/* Etichette con informazioni sul Corso */}
+          <Box
+            component='div'
+            sx={{
+              mt: { xs: "48px", lg: "96px" },
+            }}
+          >
+            <Box>
+              <Typography
+                sx={{
+                  fontSize: { xs: "36px", lg: "72px" },
+                  lineHeight: { xs: "39px", lg: "64px" },
+                }}
+                component='h1'
+                textAlign='center'
+                fontWeight={700}
+                dangerouslySetInnerHTML={{
+                  __html: createBrandText(corso.titolo),
+                }}
+              />
+            </Box>
+          </Box>
+        </Container>
+        <Box
+          sx={{
+            mt: { xs: "48px", lg: "96px" },
+          }}
+        >
+          <Container maxWidth='lg' component='section'>
             <CourseInfo
               livello={corso.livello}
               oreDiLezione={corso.oreDiLezione}
               lezioni={corso.lezioni}
             />
-          </Box>
-          {/* Container del video di anteprima */}
-          <Container
-            maxWidth='md'
-            component='section'
-            className={classes.video}
-            style={{
-              height: mediaQuery.md ? "40vh" : "60vh",
-            }}
-          >
-            <Video videoSrcURL={corso.videoLink}></Video>
-          </Container>
-          {/* Bottone Centrato per andare su Udemy */}
-          <Box className={classes.btnContainer}>
-            <CustomButton
-              link={corso.udemyUrl}
-              type={"contained"}
-              size='large'
-            ></CustomButton>
-          </Box>
-          <Divider />
-          {/* Descrizione del corso */}
-          <Box>
-            <Typography
-              variant={mediaQuery.md ? "h5" : "h3"}
-              color='primary'
-              className={classes.title}
-            >
-              DESCRIZIONE
-            </Typography>
-            <Typography
-              color='textSecondary'
-              variant='body1'
-              className={classes.descrizione}
-              dangerouslySetInnerHTML={{
-                __html: corso.descrizione.childMarkdownRemark.html,
+            <Box
+              sx={{
+                mt: { xs: "8px", lg: "8px" },
               }}
-            ></Typography>
-          </Box>
-          <Divider />
-
-          {/* Liste di Requisiti e Concetti del corso */}
-          <Box component='section'>
-            <Grid container>
-              <Grid item lg={6} xs={12}>
-                <ListSection
-                  title='Che Cosa'
-                  titleUnderline='Imparerai'
-                  icon={<DoneIcon color='primary' />}
-                  list={corso.concetti}
-                  className={classes.title}
-                />
-              </Grid>
-              <Grid item lg={6} xs={12}>
-                <ListSection
-                  title='A chi si'
-                  titleUnderline='rivolge'
-                  icon={<PersonIcon color='primary' />}
-                  list={corso.target}
-                  className={`${classes.title} ${
-                    mediaQuery.sm ? classes.listSpacer : ""
-                  }`}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box component='section'>
-            <ListSection
-              title='Requisiti'
-              titleUnderline='Minimi'
-              icon={<ArrowRightIcon color='primary' />}
-              list={corso.requisiti}
-              className={classes.title}
-            />
-          </Box>
-          <Box className={classes.btnContainer}>
-            <CustomButton
-              link={corso.udemyUrl}
-              type={"contained"}
-              size='large'
-            ></CustomButton>
-          </Box>
-        </Container>
-        {/* Banner per richiedere acquisto Coupon per i corsi a 9,99€ */}
-        {/* <BgImageSection>
-          <ContactSection
-            couponCorso={corso.couponCorso}
-            couponLink={corso.couponLink}
-          ></ContactSection>
-        </BgImageSection> */}
-        {/* Progetti ed esercizatazioni  */}
-        {corso.progetti && corso?.introduzioneProgetti && (
-          <Container maxWidth='lg' innerRef={projectRef}>
-            <Projects
-              data={corso.progetti}
-              sectionTitle={corso.introduzioneProgetti.childMarkdownRemark.html}
-            ></Projects>
-            <Box className={classes.btnContainer}>
-              <CustomButton
-                link={corso.udemyUrl}
-                type={"contained"}
-                size='large'
-              ></CustomButton>
+            >
+              <Video video={corso.videoLink} />
             </Box>
           </Container>
+        </Box>
+        {corso.categoria !== "free" && (
+          <Box
+            sx={{
+              mt: { xs: "24px", lg: "36px" },
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              size={sm ? "medium" : "large"}
+              variant='contained'
+              color='primary'
+            >
+              Acquista
+            </Button>
+          </Box>
         )}
+        {/* Descrizione del corso */}
+        <Box
+          sx={{
+            mt: { xs: "48px", lg: "96px" },
+          }}
+        >
+          <Container maxWidth='lg'>
+            <Box
+              sx={{
+                maxWidth: { xs: "unset", lg: "712px" },
+              }}
+            >
+              <Typography
+                component='h2'
+                fontWeight={500}
+                color='gray.700'
+                sx={{
+                  fontSize: { xs: "18px", lg: "36px" },
+                  lineHeight: { xs: "24px", lg: "39px" },
+                }}
+              >
+                {corso.sottotitolo}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                maxWidth: { xs: "unset", lg: "712px" },
+                mt: { xs: "12px", lg: "24" },
+              }}
+            >
+              <Typography
+                color='grey.500'
+                sx={{
+                  fontSize: { xs: "14px", lg: "16px" },
+                  lineHeight: { xs: "19px", lg: "22px" },
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: corso.descrizione.childMarkdownRemark.html,
+                }}
+              />
+            </Box>
+          </Container>
+        </Box>
+
+        {/* Liste di Requisiti e Concetti del corso */}
+        <Box
+          component='section'
+          sx={{
+            mt: { xs: "36px", lg: "72px" },
+          }}
+        >
+          <Container maxWidth='lg'>
+            <Box>
+              <ListSection
+                title='Che Cosa'
+                titleUnderline='Imparerai'
+                icon={<DoneIcon color='primary' />}
+                list={corso.concetti}
+              />
+            </Box>
+            <Box
+              sx={{
+                mt: { xs: "24px", lg: "34px" },
+              }}
+            >
+              <ListSection
+                title='A chi si'
+                titleUnderline='rivolge'
+                icon={<PersonIcon color='primary' />}
+                list={corso.target}
+              />
+            </Box>
+            <Box
+              sx={{
+                mt: { xs: "24px", lg: "34px" },
+              }}
+            >
+              <ListSection
+                title='Requisiti'
+                titleUnderline='Minimi'
+                icon={<ArrowRightIcon color='primary' />}
+                list={corso.requisiti}
+              />
+            </Box>
+          </Container>
+        </Box>
+        {corso.categoria !== "free" && (
+          <Box
+            sx={{
+              mt: { xs: "12px", lg: "24px" },
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              size={sm ? "medium" : "large"}
+              variant='contained'
+              color='primary'
+            >
+              Acquista
+            </Button>
+          </Box>
+        )}
+
+        <Container maxWidth='lg'>
+          {data.contentfulCorsi.insegnante.map((insegnante) => {
+            return (
+              <Box
+                sx={{
+                  mt: { xs: "24px", lg: "48px" },
+                }}
+              >
+                <Insegnante {...insegnante} />
+              </Box>
+            );
+          })}
+        </Container>
+
+        <Box
+          sx={{
+            mt: { xs: "72px", lg: "96px" },
+          }}
+        >
+          {corso.progetti && corso?.introduzioneProgetti && (
+            <Container maxWidth='lg' innerRef={projectRef}>
+              <Typography
+                color='purple.400'
+                fontWeight={600}
+                sx={{
+                  fontSize: { xs: "36px", lg: "56px" },
+                }}
+              >
+                Progetti
+              </Typography>
+              <Box
+                sx={{
+                  mt: { xs: "16px", lg: "24px" },
+                }}
+              >
+                <Typography
+                  color={"grey.500"}
+                  sx={{
+                    fontSize: { xs: "14px", lg: "16px" },
+                    lineHeight: { xs: "19px", lg: "22px" },
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: corso.introduzioneProgetti.childMarkdownRemark.html,
+                  }}
+                ></Typography>
+              </Box>
+              <Box mt='24px'>
+                <Projects data={corso.progetti} />
+              </Box>
+              {corso.categoria !== "free" && (
+                <Box
+                  sx={{
+                    mt: { xs: "12px", lg: "24px" },
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button
+                    size={sm ? "medium" : "large"}
+                    variant='contained'
+                    color='primary'
+                  >
+                    Acquista
+                  </Button>
+                </Box>
+              )}
+            </Container>
+          )}
+        </Box>
       </Box>
     </Layout>
   );
@@ -251,6 +309,24 @@ export const query = graphql`
       couponCorso
       couponLink
       concetti
+      insegnante {
+        nome
+        cognome
+        professione
+        img {
+          gatsbyImageData
+        }
+        bio {
+          bio
+        }
+        corsi {
+          titolo
+          slug
+          category {
+            slug
+          }
+        }
+      }
       requisiti
       riassunto {
         childMarkdownRemark {
