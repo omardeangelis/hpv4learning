@@ -13,7 +13,7 @@ import Hero from "../components/ui/Hero";
 import Container from "@mui/material/Container/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import DiscordBanner from "../components/banner/DiscordBanner";
+import ComunityBanner from "../components/banner/ComunityBanner";
 import CourseWall from "../components/course/CourseWall";
 
 const IndexPage = () => {
@@ -75,7 +75,7 @@ const IndexPage = () => {
           mt: { xs: "48px", lg: "96px" },
         }}
       >
-        <DiscordBanner />
+        <ComunityBanner />
       </Box>
     </Layout>
   );

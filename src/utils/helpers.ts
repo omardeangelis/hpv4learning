@@ -33,3 +33,16 @@ export const rowalizer = <T>(array: T[], itemPerRow = 3) => {
 
   return newArray;
 };
+
+//Permette di dispatchare eventi Google
+// export const createGAEvent = (event: string, content: string) => {
+//   return () => {
+//     if (typeof window !== "undefined") {
+//       window.dataLayer = window.dataLayer || [];
+//       window.dataLayer.push({
+//         event: event,
+//         content: content,
+//       });
+//     }
+//   };
+// };

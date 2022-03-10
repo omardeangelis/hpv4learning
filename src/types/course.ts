@@ -18,3 +18,20 @@ export type CourseCategoryProps = {
     description: string;
   };
 };
+
+export type InsegnanteProps = {
+  nome: string;
+  professione: string;
+  img: ImageDataLike;
+  cognome: string;
+  bio: {
+    bio: string;
+  };
+  corsi: {
+    titolo: string;
+    slug: string;
+    category: {
+      slug: string;
+    }[];
+  }[];
+};

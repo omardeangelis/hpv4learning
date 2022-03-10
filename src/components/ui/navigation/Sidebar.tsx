@@ -8,9 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import SchoolIcon from "@mui/icons-material/School";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import CodeIcon from "@mui/icons-material/Code";
-import VideoCallIcon from "@mui/icons-material/VideoCall";
-import BeenhereIcon from "@mui/icons-material/Beenhere";
+
 //Gatsby
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
 //Global Context
@@ -21,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import useDropDown from "../../../hook/useDropDown";
 import styled from "@emotion/styled";
 import { CategoryMenuProps } from "../../../types/layout";
+import { getIcon } from "../../../utils/general";
 
 type Props = {
   allContentfulCategory: {
@@ -48,37 +47,6 @@ const Sidebar = () => {
 
   const { toggleMenu } = useDropDown(["corsi"]);
 
-  const getIcon = React.useCallback((type: string) => {
-    switch (type) {
-      case "videomakers":
-        return (
-          <VideoCallIcon
-            fontSize='small'
-            sx={{
-              color: "purple.400",
-            }}
-          />
-        );
-      case "sviluppatori-web":
-        return (
-          <CodeIcon
-            fontSize='small'
-            sx={{
-              color: "purple.400",
-            }}
-          />
-        );
-      default:
-        return (
-          <BeenhereIcon
-            fontSize='small'
-            sx={{
-              color: "purple.400",
-            }}
-          />
-        );
-    }
-  }, []);
   return (
     <StyledDrawer
       anchor='left'
