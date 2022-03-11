@@ -136,7 +136,7 @@ const DiscordBanner = () => {
                       lineHeight: { xs: "18px", lg: "22px" },
                     }}
                   >
-                    {`Unisciti al nostro canale ${type} per riamnere sermpre aggiornato sui nostri contenuti. sconti ed iniziative.`}
+                    {`Unisciti al nostro canale ${type} per rimanere sempre aggiornato sui nostri contenuti, sconti ed iniziative.`}
                   </Typography>
                 </Box>
 

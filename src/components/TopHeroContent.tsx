@@ -17,8 +17,8 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
           component='h1'
           fontWeight={600}
           sx={{
-            fontSize: { xs: "48px", lg: "72px" },
-            lineHeight: { xs: "56px", lg: "79px" },
+            fontSize: { xs: "44px", lg: "72px" },
+            lineHeight: { xs: "52px", lg: "79px" },
             wordBreak: "break-all",
           }}
         >
@@ -40,9 +40,9 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
             lineHeight: 1.7,
           }}
         >
-          Siamo un team di giovani professionisti impegnata nel costruire una
+          Siamo un team di giovani professionisti impegnati nel costruire una
           piattaforma
-          <strong className='brand-text'>di videocorsi italiana</strong> per le
+          <strong className='brand-text'> di videocorsi italiana</strong> per le
           nuove competenze digitali
         </Typography>
       </Box>
