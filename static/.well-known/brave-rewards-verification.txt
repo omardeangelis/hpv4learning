@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: hpv4learning.it
+Token: 6e3df8b542a8ea1123bee3668490c624bfab1a297e04c70bb37acd2357b35241

@@ -1,38 +1,28 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
-import { BgImage } from "gbimage-bridge";
-
+import bgImage from "../../images/Bg.png";
 //Material UI
-import Container from "@material-ui/core/Container/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import Container from "@mui/material/Container/Container";
+import Box from "@mui/material/Box";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "grid",
+    position: "relative",
+    zIndex: 9999,
     placeItems: "center start",
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
   },
 }));
 
-const query = graphql`
-  {
-    imageSharp(fixed: { originalName: { eq: "Bg.png" } }) {
-      gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
-    }
-  }
-`;
 const ComponentName = ({ img, children, noPadding }) => {
-  const data = useStaticQuery(query);
-  const image = img ? getImage(img) : getImage(data.imageSharp);
   const classes = useStyles();
   return (
-    <BgImage
-      image={image}
-      alt='background-purple-image'
+    <Box
       style={{
-        backGroundPosition: "center",
+        backgroundImage: 'url("/Bg.png")',
+        backgroundPosition: "left",
       }}
     >
       <Container
@@ -45,7 +35,7 @@ const ComponentName = ({ img, children, noPadding }) => {
       >
         {children}
       </Container>
-    </BgImage>
+    </Box>
   );
 };
 

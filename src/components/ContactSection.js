@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 //Material UI
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Alert from "@material-ui/lab/Alert";
-import AlertTitle from "@material-ui/lab/AlertTitle";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 //GlobalContext
 import { useGlobalContext } from "../context";
 //Axios
@@ -149,15 +149,15 @@ const ContactSection = ({
         setIsLoading(false);
         setSuccess(true);
         setInput("");
-        typeof window !== "undefined" &&
-          window.gtag("event", "click", {
-            promotion_name: "coupon_13",
-            currency: "EUR",
-            value: 12.99,
-          });
-        typeof window !== "undefined" &&
-          fbq != null &&
-          window.fbq("track", "Submit", { currency: "EUR", value: 12.99 });
+        // typeof window !== "undefined" &&
+        //   window.gtag("event", "click", {
+        //     promotion_name: "coupon_13",
+        //     currency: "EUR",
+        //     value: 12.99,
+        //   });
+        // typeof window !== "undefined" &&
+        //   fbq != null &&
+        //   window.fbq("track", "Submit", { currency: "EUR", value: 12.99 });
       } catch (error) {
         setIsLoading(false);
         setError({ isError: true, msg: "Impossibile inviare mail" });

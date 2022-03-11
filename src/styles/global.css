@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap');
+
 *,
 *::after,
 *::before {
@@ -7,6 +9,7 @@
 }
 
 :root {
+  /* Not official theme - See theme.js */
   --extra-light-gray: #f8f9faff;
   --background-color: #fcfaff;
   --soft-light-gray: #f2f2f3;
@@ -18,6 +21,13 @@
   --paragraph-color: rgba(0, 0, 0, 0.54);
   --paragraph-spacing: 0.00938em;
 
+  /* Palette */
+  --primary-main: #7026BA;
+  --primary-100: rgba(98, 0, 238, 0.05);
+  --secondary-main: #E7A7FF;
+  --tertiary-main: #F3DFFB;
+  --optional--main: #6200EE; 
+
   /* Global */
   --letter-spacing: 0.08rem;
   --transition: all 0.2s ease;
@@ -28,14 +38,44 @@
   --btn-radius: 16px;
   --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --dark-shadow: 4px 5px 15px rgba(5, 6, 6, 0.4);
+
+  /*
+  Official Theme
+  */
+      --gray-300: #E4E7EC;
+      --gray-400: #D0D5DD;
+      --gray-500: #6C757D;
+      --gray-600: #4B4B4B;
+      --gray-700: #343A40;
+      --gray-800: #000000;
+
+      --purple-alpha-100: rgba(98, 0, 238, 0.025);
+      --purple-alpha-200: rgba(98, 0, 238, 0.05);
+      --purple-200: #E9E3FF;
+      --purple-300: #E7A7FF;
+      --purple-400: #8769FE;
+      --purple-500: #A435F0;
+      --purple-800: #341268;
+      --purple-gradient-200: linear-gradient( to bottom, #E9E3FF, white );
+      --purple-gradient-800:: linear-gradient( to bottom, #341268, #A435F0 );
+
+      --blue-400: #5865F2;
+
+      --red-300: #FF3434;
+      --red-400: #f00;
+
+      --green-300: #1AC99F;
+
 }
 
 html {
   overflow-x: hidden;
+  font-family: 'Poppins', sans-serif !important;
+
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: white;
   color: var(--dark-text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -119,12 +159,56 @@ h4 {
 SOCIAL STYLE
 */
 
-.social-row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
+
 
 .social-icon {
   margin: 0 1rem;
+}
+
+[id$="menu"] {
+    display: none;
+  }
+
+.show-dropdown {
+    display: inherit !important;
+  }
+
+  .rotate-icon {
+  transform: rotateX(180deg) !important;
+}
+
+.sidebar-open {
+    overflow: hidden;
+    height: 100vh;
+}
+
+@media screen and (min-width: 1024px){
+  .sidebar-open {
+    overflow: auto;
+    height: unset;
+}
+}
+
+
+.brand-text{
+  color: var(--purple-400)
+}
+
+.brand-background{
+  background-color: var(--purple-300);
+}
+
+.link-default-style{
+  text-decoration: none;
+  color: 'unset',
+}
+
+.desktop-new-line{
+  display: none;
+}
+
+@media screen and (min-width: 767px){
+ .desktop-new-line{
+  display: block;
+}
 }

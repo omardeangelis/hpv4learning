@@ -1,9 +1,9 @@
 import React from "react";
 //Material UI
-import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 //Icon
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 //Gatsby
 import { Link as RouterLink } from "gatsby";
 const CustomButton = ({ router, link, type, ...props }) => {
@@ -11,7 +11,7 @@ const CustomButton = ({ router, link, type, ...props }) => {
     return (
       <Button
         component={Link}
-        color='primary'
+        // color='primary'
         size={props.size}
         href={link}
         variant={type}
@@ -29,7 +29,7 @@ const CustomButton = ({ router, link, type, ...props }) => {
     <Button
       component={RouterLink}
       to={link}
-      color='primary'
+      // color='primary'
       variant={type}
       size={props.size}
       style={{
