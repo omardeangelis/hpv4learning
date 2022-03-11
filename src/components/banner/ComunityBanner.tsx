@@ -146,26 +146,39 @@ const DiscordBanner = () => {
                     mx: { xs: "auto", sm: "unset" },
                   }}
                 >
-                  <Button
-                    variant='contained'
-                    color='primary'
-                    endIcon={
-                      <ArrowRightAltSharpIcon
-                        sx={{
-                          color: type === "youtube" ? "red.300" : "black",
-                        }}
-                      />
+                  <a
+                    rel='noopener'
+                    target='_blank'
+                    href={
+                      type === "discord"
+                        ? "https://discord.gg/pNhjB78F"
+                        : "https://www.youtube.com/c/HPVfilm"
                     }
-                    size={sm ? "medium" : "large"}
-                    sx={{
-                      borderColor: "#000",
-                      borderRadius: "100px",
-                      color: type === "youtube" ? "red.300" : "black",
-                      background: type === "youtube" ? "white" : "pruple.400",
+                    style={{
+                      textDecoration: "none",
                     }}
                   >
-                    Unisciti
-                  </Button>
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      endIcon={
+                        <ArrowRightAltSharpIcon
+                          sx={{
+                            color: type === "youtube" ? "red.300" : "black",
+                          }}
+                        />
+                      }
+                      size={sm ? "medium" : "large"}
+                      sx={{
+                        borderColor: "#000",
+                        borderRadius: "100px",
+                        color: type === "youtube" ? "red.300" : "black",
+                        background: type === "youtube" ? "white" : "pruple.400",
+                      }}
+                    >
+                      Unisciti
+                    </Button>
+                  </a>
                 </Box>
               </Box>
               <Box

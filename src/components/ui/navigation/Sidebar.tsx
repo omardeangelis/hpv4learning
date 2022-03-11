@@ -138,7 +138,7 @@ const Sidebar = () => {
                 })}
               </Box>
             </Box>
-            <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
+            <GatsbyLink to='/about/' onClick={ctx?.toggleSidebar}>
               <Box py='18px'>
                 <Stack direction='row' spacing={2} alignItems='center'>
                   <AssignmentIndIcon

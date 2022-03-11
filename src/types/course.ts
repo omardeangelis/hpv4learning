@@ -26,6 +26,9 @@ export type InsegnanteProps = {
   cognome: string;
   bio: {
     bio: string;
+    childMarkdownRemark: {
+      html: string;
+    };
   };
   corsi: {
     titolo: string;

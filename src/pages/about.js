@@ -3,35 +3,19 @@ import React from "react";
 import Layout from "../components/ui/navigation/layout";
 import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
-import { createBrandText } from "../utils/helpers";
-//Custom Components
-//Material UI
+
 import Container from "@mui/material/Container/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
-import Avatar from "@mui/material/Avatar";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-//Icon
-import CodeIcon from "@mui/icons-material/Code";
-import VideoCallIcon from "@mui/icons-material/VideoCall";
+
 //Gatsby
-import { graphql, Link as GatsbyLink } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { graphql } from "gatsby";
 import { useGlobalContext } from "../context";
+import Insegnante from "../components/shared/Insegnante";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: theme.spacing(5),
-    paddingBottom: theme.spacing(5),
     display: "grid",
     gap: theme.spacing(3),
   },
@@ -51,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   topHeroSubtitle: {
     lineHeight: 1.1,
     "& > strong": {
-      color: theme.palette.primary.main,
+      color: theme.palette.purple["400"],
     },
     [theme.breakpoints.down("md")]: {
       lineHeight: 1.4,
@@ -61,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "75ch",
     lineHeight: 1.8,
     "& strong": {
-      color: theme.palette.primary.main,
+      color: theme.palette.purple["400"],
     },
   },
   card: {
@@ -77,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.8,
     color: theme.palette.text.secondary,
     "& strong": {
-      color: theme.palette.primary.main,
+      color: theme.palette.purple["400"],
     },
     "& a": {
       textDecoration: "underline",
@@ -88,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "underline",
     transition: "var(--traniston)",
     "&:hover": {
-      color: theme.palette.primary.main,
+      color: theme.palette.purple["400"],
     },
   },
 }));
@@ -121,47 +105,65 @@ const AboutPage = ({ data }) => {
           "frontend",
         ]}
       />
-      <Box component='main' className={classes.root}>
+      <Box
+        className={classes.root}
+        sx={{
+          mt: { xs: "48px", lg: "96px" },
+        }}
+      >
         <Container maxWidth='lg'>
           <Box component='section' className={classes.pageSpacer}>
-            <Box component='div' className={classes.heroTextBox}>
+            <Box
+              component='div'
+              className={classes.heroTextBox}
+              sx={{
+                maxWidth: "712px",
+              }}
+            >
               <Typography
-                variant={mediaQuery.md ? "h4" : "h2"}
-                component='h2'
-                color='primary'
-                className={classes.topHeroTitle}
+                component='h1'
+                color='purple.400'
+                fontWeight={600}
+                sx={{
+                  fontSize: { xs: "36px", lg: "72px" },
+                  lineHeight: { xs: "39px", lg: "64px" },
+                }}
               >
                 Chi Siamo
               </Typography>
               <Typography
-                variant={mediaQuery.md ? "body1" : "h6"}
-                component='h6'
-                className={classes.topHeroSubtitle}
+                color='grey.500'
+                sx={{
+                  fontSize: { xs: "14px", lg: "16px" },
+                  lineHeight: { xs: "19px", lg: "24px" },
+                }}
               >
                 La nostra missione è facilitare la diffusione di competenze
                 digitali alla base {!mediaQuery.md && <br />}
-                <strong>del mercato del futuro.</strong>
+                <strong className='brand-text'>del mercato del futuro.</strong>
               </Typography>
               <Typography
-                variant={mediaQuery.md ? "body2" : "body1"}
-                color='textSecondary'
-                className={classes.topHeroDescription}
+                color='grey.500'
+                sx={{
+                  fontSize: { xs: "14px", lg: "16px" },
+                  lineHeight: { xs: "19px", lg: "24px" },
+                }}
               >
                 Il Mercato del lavoro si sta rivoluzionando e con lui anche
                 quello educativo e formativo. Il divario tra le{" "}
-                <strong>competenze necessarie</strong> per il futuro e la
-                domanda del mercato fatica ad essere coperto dalle istituzioni e
-                dai percorsi formativi universitari.
+                <strong className='brand-text'>competenze necessarie</strong>{" "}
+                per il futuro e la domanda del mercato fatica ad essere coperto
+                dalle istituzioni e dai percorsi formativi universitari.
                 <br />
                 <br />
                 Molte volte nell'intervallo di tempo che intercorre tra l'inizio
                 e la fine di un percorso di studio, esso viene rivoluzionato
                 prima che noi possiamo accorgercene. Il nostro{" "}
-                <strong>compito ed impegno</strong> è quello di individuare e
-                selezionare professionisti desiderosi di insegnare il proprio
-                mestiere, fornendogli tutti gli strumenti ed il supporto
-                necessario per produrre corsi e percorsi formativi di qualità e
-                sempre al passo con i tempi.
+                <strong className='brand-text'>compito ed impegno</strong> è
+                quello di individuare e selezionare professionisti desiderosi di
+                insegnare il proprio mestiere, fornendogli tutti gli strumenti
+                ed il supporto necessario per produrre corsi e percorsi
+                formativi di qualità e sempre al passo con i tempi.
                 <br />
                 <br />
                 Il Nostro percorso è solo all'inizio e al ci vede impeganti
@@ -170,82 +172,26 @@ const AboutPage = ({ data }) => {
               </Typography>
             </Box>
             <Box className={classes.teamSection} component='section'>
-              <Typography variant={mediaQuery.md ? "h6" : "h4"} color='primary'>
-                I Nostri Insegnanti
+              <Typography
+                color='purple.400'
+                fontWeight={500}
+                sx={{
+                  fontSize: { xs: "24px", lg: "48px" },
+                  lineHeight: { xs: "28px", lg: "56px" },
+                }}
+              >
+                Insegnanti
               </Typography>
               {insegnanti.map((insegnante) => {
                 return (
-                  <Card
+                  <Box
                     key={insegnante.nome}
-                    className={classes.card}
-                    elevation={0}
+                    sx={{
+                      mt: { xs: "24px", lg: "48px" },
+                    }}
                   >
-                    <CardHeader
-                      avatar={
-                        <Avatar className={classes.avatar}>
-                          <GatsbyImage
-                            image={getImage(insegnante.img)}
-                            alt={`${insegnante.nome} ${insegnante.cognome}`}
-                            imgStyle={{
-                              top: "13px",
-                            }}
-                          />
-                        </Avatar>
-                      }
-                      title={`${insegnante.nome} ${insegnante.cognome}`}
-                      subheader={insegnante.professione}
-                    ></CardHeader>
-                    <CardContent>
-                      <Grid container spacing={6}>
-                        <Grid item xs={12} lg={8}>
-                          <Typography
-                            className={classes.description}
-                            variant={mediaQuery.md ? "body2" : "body1"}
-                            color='textSecondary'
-                            dangerouslySetInnerHTML={{
-                              __html: insegnante.bio.childMarkdownRemark.html,
-                            }}
-                          />
-                        </Grid>
-                        <Grid item xs={12} lg={4}>
-                          <Typography variant='h6' color='primary'>
-                            Insegna{" "}
-                          </Typography>
-
-                          <List>
-                            {insegnante.corsi.map((corso) => {
-                              return (
-                                <ListItem key={corso.titolo}>
-                                  <ListItemIcon>
-                                    {corso.categoria === "videomaking" ? (
-                                      <VideoCallIcon
-                                        fontSize='small'
-                                        color='primary'
-                                      />
-                                    ) : (
-                                      <CodeIcon
-                                        fontSize='small'
-                                        color='primary'
-                                      />
-                                    )}
-                                  </ListItemIcon>
-                                  <GatsbyLink
-                                    className={classes.courseLink}
-                                    component={ListItemText}
-                                    to={`/${corso.slug}/`}
-                                    dangerouslySetInnerHTML={{
-                                      __html: createBrandText(corso.titolo),
-                                    }}
-                                  ></GatsbyLink>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </Grid>
-                      </Grid>
-                      {mediaQuery.md && <Divider />}
-                    </CardContent>
-                  </Card>
+                    <Insegnante {...insegnante} />
+                  </Box>
                 );
               })}
             </Box>
@@ -260,21 +206,24 @@ export const query = graphql`
   {
     allContentfulInsegnante {
       nodes {
-        bio {
-          childMarkdownRemark {
-            html
-          }
-        }
         nome
         cognome
         professione
         img {
-          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP])
+          gatsbyImageData
+        }
+        bio {
+          bio
+          childMarkdownRemark {
+            html
+          }
         }
         corsi {
           titolo
-          categoria
           slug
+          category {
+            slug
+          }
         }
       }
     }

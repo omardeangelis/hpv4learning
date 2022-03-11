@@ -17,16 +17,35 @@ import Insegnante from "../components/shared/Insegnante";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 //Icons
 import DoneIcon from "@mui/icons-material/Done";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
 import { useMediaQuery, useTheme } from "@mui/material";
-import { lineHeight } from "@mui/system";
+import styled from "@emotion/styled";
 
-//Material Styles
+const StyledBox = styled(Box)`
+  strong {
+    color: var(--purple-400);
+  }
+`;
+
+const TextWrapper = styled.div`
+  h2 {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 8px 0px;
+  }
+
+  @media screen and (min-width: 767px) {
+    h2 {
+      font-size: 21px;
+      line-height: 24px;
+      margin: 12px 0px;
+    }
+  }
+`;
 
 const SingleCoursePage = ({ data, location }) => {
   const { contentfulCorsi: corso } = data;
@@ -50,7 +69,7 @@ const SingleCoursePage = ({ data, location }) => {
         keywords={[...corso.concetti, ...corso.requisiti, ...corso.target]}
         image={corso.copertina.file.url}
       ></MetaDecorator>
-      <Box>
+      <StyledBox>
         <Container maxWidth='lg'>
           {/* Titolo e Sottotiolo */}
           <Box
@@ -139,19 +158,21 @@ const SingleCoursePage = ({ data, location }) => {
             <Box
               sx={{
                 maxWidth: { xs: "unset", lg: "712px" },
-                mt: { xs: "12px", lg: "24" },
+                mt: { xs: "12px", lg: "24px" },
               }}
             >
-              <Typography
-                color='grey.500'
-                sx={{
-                  fontSize: { xs: "14px", lg: "16px" },
-                  lineHeight: { xs: "19px", lg: "22px" },
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: corso.descrizione.childMarkdownRemark.html,
-                }}
-              />
+              <TextWrapper>
+                <Typography
+                  color='grey.500'
+                  sx={{
+                    fontSize: { xs: "14px", lg: "16px" },
+                    lineHeight: { xs: "19px", lg: "24px" },
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: corso.descrizione.childMarkdownRemark.html,
+                  }}
+                />
+              </TextWrapper>
             </Box>
           </Container>
         </Box>
@@ -166,9 +187,14 @@ const SingleCoursePage = ({ data, location }) => {
           <Container maxWidth='lg'>
             <Box>
               <ListSection
-                title='Che Cosa'
-                titleUnderline='Imparerai'
-                icon={<DoneIcon color='primary' />}
+                title='Che Cosa Imparerai'
+                icon={
+                  <DoneIcon
+                    sx={{
+                      color: "purple.400",
+                    }}
+                  />
+                }
                 list={corso.concetti}
               />
             </Box>
@@ -178,9 +204,14 @@ const SingleCoursePage = ({ data, location }) => {
               }}
             >
               <ListSection
-                title='A chi si'
-                titleUnderline='rivolge'
-                icon={<PersonIcon color='primary' />}
+                title='A chi si rivolge'
+                icon={
+                  <PersonIcon
+                    sx={{
+                      color: "purple.400",
+                    }}
+                  />
+                }
                 list={corso.target}
               />
             </Box>
@@ -190,9 +221,14 @@ const SingleCoursePage = ({ data, location }) => {
               }}
             >
               <ListSection
-                title='Requisiti'
-                titleUnderline='Minimi'
-                icon={<ArrowRightIcon color='primary' />}
+                title='Requisiti Minimi'
+                icon={
+                  <ArrowRightIcon
+                    sx={{
+                      color: "purple.400",
+                    }}
+                  />
+                }
                 list={corso.requisiti}
               />
             </Box>
@@ -285,7 +321,7 @@ const SingleCoursePage = ({ data, location }) => {
             </Container>
           )}
         </Box>
-      </Box>
+      </StyledBox>
     </Layout>
   );
 };
@@ -318,6 +354,9 @@ export const query = graphql`
         }
         bio {
           bio
+          childMarkdownRemark {
+            html
+          }
         }
         corsi {
           titolo
