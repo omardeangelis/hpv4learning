@@ -3,10 +3,13 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useMediaQuery, useTheme } from "@mui/material";
 //Context
 
 //Hero Text and Image Component
 const TopHeroContent = ({ fn }: { fn: () => any }) => {
+  const theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box>
       <Box>
@@ -14,15 +17,13 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
           component='h1'
           fontWeight={600}
           sx={{
-            fontSize: { xs: "34px", lg: "64px" },
-            lineHeight: { xs: "39px", lg: "69px" },
+            fontSize: { xs: "48px", lg: "72px" },
+            lineHeight: { xs: "56px", lg: "79px" },
+            wordBreak: "break-all",
           }}
         >
-          <strong className='brand-text'>Professionisti</strong>
-          <br />
-          Non
-          <br />
-          Professori
+          <strong className='brand-text'>Professionisti</strong> {!md && <br />}{" "}
+          Non Professori
         </Typography>
       </Box>
       <Box
@@ -31,18 +32,18 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
         }}
       >
         <Typography
-          variant='h6'
-          color='textSecondary'
+          color='grey.700'
           fontWeight={500}
           sx={{
+            fontSize: { xs: "24px", lg: "24px" },
             maxWidth: "55ch",
             lineHeight: 1.7,
           }}
         >
-          Hpv 4 Learning è una piattaforma che seleziona i migliori corsi tenuti
-          direttamente da{" "}
-          <strong className='brand-text'>esperti e professionisti</strong> del
-          settore, per rilanciare la tua carriera digitale.
+          Siamo un team di giovani professionisti impegnata nel costruire una
+          piattaforma
+          <strong className='brand-text'>di videocorsi italiana</strong> per le
+          nuove competenze digitali
         </Typography>
       </Box>
       <Box

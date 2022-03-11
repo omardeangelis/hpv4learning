@@ -5,19 +5,19 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { useGlobalContext } from "../../context";
-const ListSection = ({ title, titleUnderline, list, icon, className }) => {
-  const { mediaQuery } = useGlobalContext();
+const ListSection = ({ title, list, icon }) => {
   return (
     <>
-      <Typography variant={mediaQuery.md ? "h6" : "h5"} className={className}>
-        {title}{" "}
-        <strong color='primary' variant='h4'>
-          {titleUnderline}
-        </strong>
+      <Typography
+        fontWeight={600}
+        sx={{
+          fontSize: { xs: "24px", lg: "36px" },
+        }}
+      >
+        {title}
       </Typography>
 
-      <List>
+      <List dense>
         {list.map((el) => {
           return (
             <ListItem
@@ -26,11 +26,24 @@ const ListSection = ({ title, titleUnderline, list, icon, className }) => {
                 paddingLeft: "0px",
               }}
             >
-              <ListItemIcon size={mediaQuery.md ? "small" : "medium"}>
+              <ListItemIcon
+                sx={{
+                  mr: { xs: "6px", lg: "8px" },
+                  minWidth: "unset",
+                }}
+                size='small'
+              >
                 {icon}
               </ListItemIcon>
-              <ListItemText variant={mediaQuery.md ? "body2" : "bdoy1"}>
-                {el}
+              <ListItemText>
+                <Typography
+                  color='grey.500'
+                  sx={{
+                    fontSize: { xs: "14px", lg: "18px" },
+                  }}
+                >
+                  {el}
+                </Typography>
               </ListItemText>
             </ListItem>
           );

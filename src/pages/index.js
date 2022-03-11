@@ -65,7 +65,7 @@ const IndexPage = () => {
           >
             I nostri <span className='brand-text'>corsi</span>
           </Typography>
-          <Box mt='34px'>
+          <Box mt='34px' ref={coursesPositionRef}>
             <CourseWall />
           </Box>
         </Box>

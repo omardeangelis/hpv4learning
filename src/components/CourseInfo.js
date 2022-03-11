@@ -8,6 +8,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import SpeedIcon from "@mui/icons-material/Speed";
 import { useGlobalContext } from "../context";
+import { convertToHHMMSS } from "../utils/helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,18 +28,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   iconColorPrimary: {
-    color: theme.palette.primary.main,
+    fill: theme.palette.purple["400"],
   },
   chip: {
     transition: "var(--transition)",
-    "&:hover": {
-      tranform: "scaleX(1.1)",
-      color: theme.palette.primary.contrastText,
-      background: theme.palette.primary.main,
-      "& svg": {
-        color: theme.palette.primary.contrastText,
-      },
-    },
+    borderColor: theme.palette.purple["400"],
   },
 }));
 
@@ -47,17 +41,35 @@ const CourseInfo = ({ livello, oreDiLezione, lezioni }) => {
     {
       titolo: "",
       text: livello,
-      icon: <SpeedIcon />,
+      icon: (
+        <SpeedIcon
+          sx={{
+            color: "purple.400",
+          }}
+        />
+      ),
     },
     {
       titolo: "Video :",
       text: lezioni,
-      icon: <MenuBookIcon />,
+      icon: (
+        <MenuBookIcon
+          sx={{
+            color: "purple.400",
+          }}
+        />
+      ),
     },
     {
       titolo: "Ore :",
-      text: (oreDiLezione / 60).toFixed(2),
-      icon: <AccessTimeIcon />,
+      text: convertToHHMMSS(oreDiLezione),
+      icon: (
+        <AccessTimeIcon
+          sx={{
+            color: "purple.400",
+          }}
+        />
+      ),
     },
   ];
   const classes = useStyles();
@@ -78,7 +90,9 @@ const CourseInfo = ({ livello, oreDiLezione, lezioni }) => {
             size={mediaQuery.md ? "small" : "medium"}
             icon={icon}
             label={`${titolo} ${text}`}
-            color='default'
+            sx={{
+              color: "purple.400",
+            }}
             classes={{
               icon: classes.iconColorPrimary,
             }}

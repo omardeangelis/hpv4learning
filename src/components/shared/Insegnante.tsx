@@ -7,6 +7,7 @@ import { Link as GatsbyLink } from "gatsby";
 import { getIcon } from "../../utils/general";
 import { InsegnanteProps } from "../../types/course";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { createBrandText } from "../../utils/helpers";
 
 const CustomStack = styled(Box)`
   & > * {
@@ -16,9 +17,14 @@ const CustomStack = styled(Box)`
       border-top-color: var(--purple-200);
     }
   }
+  strong {
+    color: var(--grey-600);
+  }
+
   @media screen and (min-width: 767px) {
     display: flex;
     justify-content: space-between;
+
     & > * {
       padding: 24px;
 
@@ -109,13 +115,14 @@ const Insegnante = ({
             <Typography
               color='grey.500'
               fontWeight={300}
+              dangerouslySetInnerHTML={{
+                __html: bio.childMarkdownRemark.html,
+              }}
               sx={{
                 fontSize: { xs: "12px", lg: "14px" },
                 lineHeight: { xs: "16px", lg: "21px" },
               }}
-            >
-              {bio.bio}
-            </Typography>
+            ></Typography>
           </Box>
         </Box>
 
@@ -156,9 +163,10 @@ const Insegnante = ({
                             fontWeight: 500,
                           }}
                           color='purple.400'
-                        >
-                          {corso.titolo}
-                        </Typography>
+                          dangerouslySetInnerHTML={{
+                            __html: createBrandText(corso.titolo),
+                          }}
+                        ></Typography>
                       </Stack>
                     </Box>
                   </GatsbyLink>

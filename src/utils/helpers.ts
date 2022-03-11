@@ -19,7 +19,7 @@ export const convertToHHMMSS = (time: number, short = false) => {
   if (short) {
     return (time / 3600).toFixed(1);
   }
-  return `${H}:${i}:${s}`;
+  return `${H}h ${i}m ${s}s`;
 };
 
 export const rowalizer = <T>(array: T[], itemPerRow = 3) => {

@@ -65,16 +65,23 @@ const Navbar = () => {
       <StyledNav>
         <Container maxWidth='lg'>
           <Stack direction='row' alignItems='center' height='72px'>
-            <Box>
-              <StaticImage
-                src='../../../images/logo.png'
-                alt='Logo Hpv 4 Learning'
-                placeholder='tracedSVG'
-                layout='fixed'
-                height={70}
-                width={70}
-              />
-            </Box>
+            <GastbyLink
+              to='/'
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <Box>
+                <StaticImage
+                  src='../../../images/logo.png'
+                  alt='Logo Hpv 4 Learning'
+                  placeholder='tracedSVG'
+                  layout='fixed'
+                  height={70}
+                  width={70}
+                />
+              </Box>
+            </GastbyLink>
             <StyledCenter>
               <Stack
                 direction='row'
@@ -129,7 +136,7 @@ const Navbar = () => {
                     <ArrowDropDownIcon />
                   </Stack>
                 </Box>
-                <GastbyLink to='/'>
+                <GastbyLink to='/about/'>
                   <Box role='_link'>
                     <Stack direction='row' spacing={2} alignItems='center'>
                       <Typography
