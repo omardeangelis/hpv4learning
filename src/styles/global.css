@@ -8,6 +8,41 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: white;
+}
+::-o-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: white;
+}
+::-moz-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  width: 7px;
+  height: 7px;
+  background: var(--purple-200);
+  border-radius: 4px;
+}
+
+::-o-scrollbar-thumb {
+  width: 7px;
+  height: 7px;
+  background: var(--purple-200);
+  border-radius: 4px;
+}
+::-moz-scrollbar-thumb {
+  width: 7px;
+  height: 7px;
+  background: var(--purple-200);
+  border-radius: 4px;
+}
+
 :root {
   /* Not official theme - See theme.js */
   --extra-light-gray: #f8f9faff;
@@ -211,4 +246,17 @@ SOCIAL STYLE
  .desktop-new-line{
   display: block;
 }
+}
+
+.rotate-icon {
+  transform: rotateX(180deg) !important;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

@@ -253,17 +253,32 @@ const SingleCoursePage = ({ data, location }) => {
         )}
 
         <Container maxWidth='lg'>
-          {data.contentfulCorsi.insegnante.map((insegnante) => {
-            return (
-              <Box
-                sx={{
-                  mt: { xs: "24px", lg: "48px" },
-                }}
-              >
-                <Insegnante {...insegnante} />
-              </Box>
-            );
-          })}
+          <Box
+            sx={{
+              mt: { xs: "48px", lg: "72px" },
+            }}
+          >
+            <Typography
+              color='purple.400'
+              fontWeight={500}
+              sx={{
+                fontSize: { xs: "24px", lg: "36px" },
+              }}
+            >
+              Insegnanti
+            </Typography>
+            {data.contentfulCorsi.insegnante.map((insegnante) => {
+              return (
+                <Box
+                  sx={{
+                    mt: { xs: "24px", lg: "48px" },
+                  }}
+                >
+                  <Insegnante {...insegnante} />
+                </Box>
+              );
+            })}
+          </Box>
         </Container>
 
         <Box

@@ -14,27 +14,27 @@ const socialLinks = [
   {
     text: "Linkedin",
     url: "https://www.linkedin.com/company/hpv-film/",
-    icon: <FaLinkedin />,
+    icon: <FaLinkedin size='small' color='purple.400' />,
   },
   {
     text: "instagram",
     url: "https://www.instagram.com/hpv_4learning",
-    icon: <FaInstagram />,
+    icon: <FaInstagram size='small' color='purple.400' />,
   },
   {
     text: "youtube",
     url: "https://www.youtube.com/channel/UC9kv8nH9i9kSj_q0FqckiYw",
-    icon: <FaYoutube />,
+    icon: <FaYoutube size='small' color='purple.400' />,
   },
   {
     text: "facebook",
     url: "https://www.facebook.com/hpvfilm/",
-    icon: <FaFacebook />,
+    icon: <FaFacebook size='small' color='purple.400' />,
   },
   {
     text: "vimeo",
     url: "https://vimeo.com/hpvfilm",
-    icon: <FaVimeoSquare />,
+    icon: <FaVimeoSquare size='small' color='purple.400' />,
   },
 ];
 
