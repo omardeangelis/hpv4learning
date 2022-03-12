@@ -3,13 +3,10 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useMediaQuery, useTheme } from "@mui/material";
 //Context
 
 //Hero Text and Image Component
 const TopHeroContent = ({ fn }: { fn: () => any }) => {
-  const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box>
       <Box>
@@ -17,12 +14,13 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
           component='h1'
           fontWeight={600}
           sx={{
-            fontSize: { xs: "48px", lg: "72px" },
-            lineHeight: { xs: "56px", lg: "79px" },
+            fontSize: { xs: "44px", lg: "72px" },
+            lineHeight: { xs: "52px", lg: "79px" },
             wordBreak: "break-all",
           }}
         >
-          <strong className='brand-text'>Professionisti</strong> {!md && <br />}{" "}
+          <strong className='brand-text'>Professionisti</strong>
+          <br />
           Non Professori
         </Typography>
       </Box>
@@ -40,9 +38,9 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
             lineHeight: 1.7,
           }}
         >
-          Siamo un team di giovani professionisti impegnata nel costruire una
+          Siamo un team di giovani professionisti impegnati nel costruire una
           piattaforma
-          <strong className='brand-text'>di videocorsi italiana</strong> per le
+          <strong className='brand-text'> di videocorsi italiana</strong> per le
           nuove competenze digitali
         </Typography>
       </Box>

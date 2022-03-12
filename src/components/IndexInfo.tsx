@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import valueInfo from "../utils/indexInfo";
 //Context
 import styled from "@emotion/styled";
+import { rowalizer } from "../utils/helpers";
 
 const PureCssStack = styled(Box)`
   display: flex;
@@ -37,15 +38,7 @@ const PureCssStack = styled(Box)`
 
 //Sezione Informativa
 const IndexInfo = () => {
-  const cardsArray = React.useMemo(
-    () =>
-      Array.from({ length: 2 }, (_, index) => {
-        let start = index;
-        let end = index + 2;
-        return valueInfo.slice(start, end);
-      }),
-    []
-  );
+  const cardsArray = React.useMemo(() => rowalizer(valueInfo, 2), []);
 
   return (
     <Container maxWidth='lg'>

@@ -68,6 +68,7 @@ const Insegnante = ({
                   width: { xs: "34px", lg: "64px" },
                   borderRadius: "50%",
                   overflow: "hidden",
+                  transform: "translateZ(0)",
                 }}
               >
                 <GatsbyImage

@@ -86,7 +86,7 @@ const AboutPage = ({ data }) => {
       <MetaDecorator
         title='Chi siamo'
         desc={
-          "La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi insegnano"
+          "La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi"
         }
         keywords={[
           "migliori insegnanti",

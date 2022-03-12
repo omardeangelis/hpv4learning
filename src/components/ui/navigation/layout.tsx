@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import { LayoutProvider } from "../../../context/layout";
-import { Box } from "@mui/material";
 const Layout = ({
   children,
 }: {
@@ -15,13 +14,8 @@ const Layout = ({
       <Navbar />
       <Sidebar />
       <main>{children}</main>
-      <Box
-        sx={{
-          mt: { xs: "72px", lg: "122px" },
-        }}
-      >
-        <Footer />
-      </Box>
+
+      <Footer />
     </LayoutProvider>
   );
 };
