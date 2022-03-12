@@ -64,6 +64,7 @@ const CourseContent = ({
               borderRadius: "8px",
               overflow: "hidden",
               position: "relative",
+              transform: "translateZ(0)",
             }}
           >
             <GatsbyImage

@@ -3,13 +3,10 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useMediaQuery, useTheme } from "@mui/material";
 //Context
 
 //Hero Text and Image Component
 const TopHeroContent = ({ fn }: { fn: () => any }) => {
-  const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box>
       <Box>
@@ -22,7 +19,8 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
             wordBreak: "break-all",
           }}
         >
-          <strong className='brand-text'>Professionisti</strong> {!md && <br />}{" "}
+          <strong className='brand-text'>Professionisti</strong>
+          <br />
           Non Professori
         </Typography>
       </Box>
