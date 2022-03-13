@@ -38,3 +38,11 @@ export type InsegnanteProps = {
     }[];
   }[];
 };
+
+export type ProjectProps = {
+  titolo: string;
+  descrizione: string;
+  ordine?: number;
+  copertina: ImageDataLike;
+  url?: string;
+};

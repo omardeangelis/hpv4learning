@@ -112,6 +112,13 @@ const theme = createTheme({
             borderColor: "white",
           },
         },
+        textPrimary: {
+          borderColor: "transparent",
+          color: "#8769FE",
+          ":hover": {
+            color: "#A435F0",
+          },
+        },
       },
     },
   },
