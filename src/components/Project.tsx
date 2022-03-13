@@ -82,7 +82,7 @@ const Project = ({ data: { titolo, url, copertina, descrizione } }: Props) => {
               }}
               dangerouslySetInnerHTML={{
                 __html:
-                  descrizione ||
+                  descrizione.childMarkdownRemark.html ||
                   "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti, animi!",
               }}
             />

@@ -19,6 +19,12 @@ export type CourseCategoryProps = {
   };
 };
 
+export type RemarkType = {
+  childMarkdownRemark: {
+    html: string;
+  };
+};
+
 export type InsegnanteProps = {
   nome: string;
   professione: string;
@@ -41,7 +47,7 @@ export type InsegnanteProps = {
 
 export type ProjectProps = {
   titolo: string;
-  descrizione: string;
+  descrizione: RemarkType;
   ordine?: number;
   copertina: ImageDataLike;
   url?: string;

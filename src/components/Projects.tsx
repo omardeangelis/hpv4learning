@@ -10,6 +10,7 @@ type Props = {
 };
 
 const CustomStack = styled(Box)`
+  height: 100%;
   & > *:not(:last-of-type) {
     margin-bottom: 24px;
   }
