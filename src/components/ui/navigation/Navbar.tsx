@@ -18,15 +18,13 @@ import styled from "@emotion/styled";
 import CourseMenu from "./CourseMenu";
 import { useLayoutContext } from "../../../context/layout";
 
-const StyledNav = styled.nav`
+const StyledNav = styled(Box)`
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
   top: 0px;
   left: 0px;
   right: 0px;
-  background: white;
   z-index: 99999999;
-  border-bottom: 1px solid var(--purple-200);
   [role="_link"] {
     border: 1px solid transparent;
     transition: all 125ms ease;
@@ -58,11 +56,19 @@ const StyledRight = styled(Box)`
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({ disableColor }: { disableColor?: true }) => {
   const ctx = useLayoutContext();
   return (
     <>
-      <StyledNav>
+      <StyledNav
+        component='nav'
+        sx={{
+          background: disableColor ? "transparent" : "white",
+          borderBottom: "1px solid",
+          borderBottomColor: disableColor ? "transparent" : "purple.200",
+          position: disableColor ? "absolute" : "fixed",
+        }}
+      >
         <Container maxWidth='lg'>
           <Stack direction='row' alignItems='center' height='72px'>
             <GastbyLink
@@ -101,13 +107,13 @@ const Navbar = () => {
                           lineHeight: "unset",
                           fontWeight: 500,
                         }}
-                        color='gray.800'
+                        color={disableColor ? "white" : "gray.800"}
                       >
                         Home
                       </Typography>
                       <HomeIcon
                         sx={{
-                          color: "purple.400",
+                          color: disableColor ? "white" : "purple.400",
                         }}
                       />
                     </Stack>
@@ -129,11 +135,15 @@ const Navbar = () => {
                         lineHeight: "unset",
                         fontWeight: 500,
                       }}
-                      color='gray.800'
+                      color={disableColor ? "white" : "gray.800"}
                     >
                       Corsi
                     </Typography>
-                    <ArrowDropDownIcon />
+                    <ArrowDropDownIcon
+                      sx={{
+                        color: disableColor ? "white" : "inherit",
+                      }}
+                    />
                   </Stack>
                 </Box>
                 <GastbyLink to='/about/'>
@@ -145,13 +155,13 @@ const Navbar = () => {
                           lineHeight: "unset",
                           fontWeight: 500,
                         }}
-                        color='gray.800'
+                        color={disableColor ? "white" : "gray.800"}
                       >
                         Chi siamo
                       </Typography>
                       <AssignmentIndIcon
                         sx={{
-                          color: "purple.400",
+                          color: disableColor ? "white" : "purple.400",
                         }}
                       />
                     </Stack>
@@ -165,7 +175,13 @@ const Navbar = () => {
                 justifyContent='flex-end'
                 alignItems='center'
               >
-                <IconButton color='default' onClick={ctx?.toggleSidebar}>
+                <IconButton
+                  color='default'
+                  onClick={ctx?.toggleSidebar}
+                  sx={{
+                    background: disableColor ? "#E9E3FF" : "inherit",
+                  }}
+                >
                   <MenuRoundedIcon />
                 </IconButton>
               </Stack>

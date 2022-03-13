@@ -51,7 +51,11 @@ const Footer = () => {
       <Container maxWidth='lg'>
         <CustomStack>
           <SeoLink isExternal={false} link='/'>
-            <Box>
+            <Box
+              sx={{
+                mb: { xs: "24px", md: "0px" },
+              }}
+            >
               <StaticImage
                 src='../../../images/logo.png'
                 alt='Logo Hpv 4 Learning'

@@ -30,6 +30,11 @@ const data = [
         slug: "/about/",
         isExternal: false,
       },
+      {
+        title: "Lavora con noi",
+        slug: "/join-us/",
+        isExternal: false,
+      },
     ],
   },
   {
