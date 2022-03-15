@@ -91,8 +91,8 @@
       --purple-400: #8769FE;
       --purple-500: #A435F0;
       --purple-800: #341268;
-      --purple-gradient-200: linear-gradient( to bottom, #E9E3FF, white );
-      --purple-gradient-800:: linear-gradient( to bottom, #341268, #A435F0 );
+      --purple-gradient-200: linear-gradient(180deg, #E9E3FF, white );
+      --purple-gradient-800:: linear-gradient(180deg, #341268, #8769FE);
 
       --blue-400: #5865F2;
 
@@ -114,7 +114,7 @@ body {
   color: var(--dark-text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 code {

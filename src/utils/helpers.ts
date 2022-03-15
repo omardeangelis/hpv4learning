@@ -34,6 +34,14 @@ export const rowalizer = <T>(array: T[], itemPerRow = 3) => {
   return newArray;
 };
 
+export const dateFormatter = (date: string) => {
+  return new Intl.DateTimeFormat("it", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(Date.parse(date)));
+};
+
 //Permette di dispatchare eventi Google
 // export const createGAEvent = (event: string, content: string) => {
 //   return () => {

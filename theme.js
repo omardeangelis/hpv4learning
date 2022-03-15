@@ -32,8 +32,8 @@ const theme = createTheme({
       400: `#8769FE`,
       500: "#A435F0",
       800: "#341268",
-      G200: "linear-gradient( to bottom, #E9E3FF, white )",
-      G800: "linear-gradient( to bottom, #341268, #A435F0 )",
+      G200: "linear-gradient(180deg, #E9E3FF, white )",
+      G800: "linear-gradient(180deg, #341268, #8769FE)",
     },
     blue: {
       400: "#5865F2",
@@ -61,6 +61,13 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiContainer: {
+      styleOverrides: {
+        maxWidthLg: {
+          maxWidth: "1153px",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         sizeSmall: {
@@ -110,6 +117,13 @@ const theme = createTheme({
           ":hover": {
             background: "white",
             borderColor: "white",
+          },
+        },
+        textPrimary: {
+          borderColor: "transparent",
+          color: "#8769FE",
+          ":hover": {
+            color: "#A435F0",
           },
         },
       },

@@ -50,18 +50,29 @@ const Footer = () => {
     >
       <Container maxWidth='lg'>
         <CustomStack>
-          <SeoLink isExternal={false} link='/'>
-            <Box>
-              <StaticImage
-                src='../../../images/logo.png'
-                alt='Logo Hpv 4 Learning'
-                placeholder='tracedSVG'
-                layout='fixed'
-                height={70}
-                width={70}
-              />
-            </Box>
-          </SeoLink>
+          <Box
+            sx={{
+              display: { xs: "none", lg: "block" },
+            }}
+          >
+            <SeoLink isExternal={false} link='/'>
+              <Box
+                sx={{
+                  mb: { xs: "24px", md: "0px" },
+                  zIndex: 1,
+                }}
+              >
+                <StaticImage
+                  src='../../../images/logo.png'
+                  alt='Logo Hpv 4 Learning'
+                  placeholder='tracedSVG'
+                  layout='fixed'
+                  height={70}
+                  width={70}
+                />
+              </Box>
+            </SeoLink>
+          </Box>
           {data.map((el) => {
             return (
               <Box key={el.id}>

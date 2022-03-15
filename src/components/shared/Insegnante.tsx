@@ -84,7 +84,7 @@ const Insegnante = ({
                   color='purple.800'
                   fontWeight={500}
                   sx={{
-                    fontSize: { xs: "14px", lg: "18px" },
+                    fontSize: { xs: "16px", lg: "18px" },
                   }}
                 >
                   {`${nome} ${cognome}`}
@@ -99,7 +99,7 @@ const Insegnante = ({
                   color='grey.500'
                   fontWeight={400}
                   sx={{
-                    fontSize: { xs: "10px", lg: "12px" },
+                    fontSize: { xs: "12px", lg: "14px" },
                   }}
                 >
                   {professione}
@@ -120,8 +120,8 @@ const Insegnante = ({
                 __html: bio.childMarkdownRemark.html,
               }}
               sx={{
-                fontSize: { xs: "12px", lg: "14px" },
-                lineHeight: { xs: "16px", lg: "21px" },
+                fontSize: { xs: "14px", lg: "16px" },
+                lineHeight: { xs: "21px", lg: "24px" },
               }}
             ></Typography>
           </Box>
@@ -130,17 +130,17 @@ const Insegnante = ({
         <Box>
           <Box>
             <Typography
-              color='grey.600'
+              color='grey.800'
               fontWeight={600}
               sx={{
-                fontSize: { xs: "12px", md: "14px" },
+                fontSize: { xs: "14px", md: "16px" },
               }}
             >
               Insegna in
             </Typography>
             <Box
               sx={{
-                mt: { xs: "6px", lg: "8px" },
+                mt: { xs: "8px", lg: "12px" },
               }}
             >
               {corsi.map((corso) => {
@@ -160,7 +160,7 @@ const Insegnante = ({
                         </Box>
                         <Typography
                           sx={{
-                            fontSize: { xs: "10px", lg: "12px" },
+                            fontSize: { xs: "12px", lg: "14px" },
                             fontWeight: 500,
                           }}
                           color='purple.400'
