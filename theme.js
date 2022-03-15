@@ -61,6 +61,13 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiContainer: {
+      styleOverrides: {
+        maxWidthLg: {
+          maxWidth: "1153px",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         sizeSmall: {

@@ -1,7 +1,11 @@
 import { ImageDataLike } from "gatsby-plugin-image";
 
 export type CoursePreviewProps = {
-  copertina: ImageDataLike;
+  copertina: ImageDataLike & {
+    file?: {
+      url: string;
+    };
+  };
   slug: string;
   titolo: string;
   couponLink?: string;
@@ -10,6 +14,29 @@ export type CoursePreviewProps = {
     riassunto: string;
   };
 };
+
+export type SingleCourseProps = CoursePreviewProps &
+  CourseInfoProps & {
+    category: {
+      name: string;
+    }[];
+    prezzo: number;
+    sottotitolo: string;
+    insegnante: InsegnanteProps[];
+    slug: string;
+    idCorso: number;
+    udemyUrl: string;
+    videoLink: string;
+    target: string[];
+    oreDiLezione: number;
+    couponCorso?: string;
+    concetti: string[];
+    requisiti: string[];
+    descrizione: RemarkType;
+    introduzioneProgetti: RemarkType;
+    progetti?: ProjectProps[];
+    updatedAt: Date;
+  };
 
 export type CourseCategoryProps = {
   name: string;
@@ -51,4 +78,24 @@ export type ProjectProps = {
   ordine?: number;
   copertina: ImageDataLike;
   url?: string;
+};
+
+export type CourseInfoProps = {
+  livello: string;
+  lezioni: number;
+  durata: number;
+  progetti: number;
+  recensioni: number;
+  categoria: string;
+  tipologia: "free" | "udemy";
+  lastUpdate: string;
+};
+
+export type ResponsiveInfoProps = {
+  livello: string;
+  lezioni: number;
+  durata: number;
+  progetti: number;
+  tipologia: "free" | "udemy";
+  recensioni: number;
 };

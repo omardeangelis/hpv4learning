@@ -33,7 +33,7 @@ const CustomStack = styled(Box)`
 `;
 
 const Projects = ({ data }: Props) => {
-  const rows = React.useMemo(() => rowalizer(data, 3), []);
+  const rows = React.useMemo(() => rowalizer(data, 2), []);
   return (
     <CustomStack>
       {rows.map((row) => {
