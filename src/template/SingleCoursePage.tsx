@@ -117,7 +117,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
                 <Typography
                   sx={{
                     fontSize: { xs: "36px", lg: "72px" },
-                    lineHeight: { xs: "39px", lg: "64px" },
+                    lineHeight: { xs: "39px", lg: "79px" },
                   }}
                   component='h1'
                   textAlign='center'
