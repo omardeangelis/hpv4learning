@@ -42,7 +42,7 @@ const IndexPage = () => {
       {/* Sezione con le card  */}
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: "96px", lg: "136px" },
         }}
       >
         <IndexInfo />
@@ -51,7 +51,7 @@ const IndexPage = () => {
       <Container
         maxWidth='lg'
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: "96px", lg: "136px" },
         }}
       >
         <Box component='section'>
@@ -72,7 +72,7 @@ const IndexPage = () => {
       </Container>
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: "96px", lg: "136px" },
         }}
       >
         <ComunityBanner />

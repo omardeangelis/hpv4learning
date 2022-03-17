@@ -45,7 +45,7 @@ const Footer = () => {
     <Box
       component='footer'
       sx={{
-        py: { xs: "18px", lg: "34px" },
+        py: { xs: "72px", lg: "48px" },
       }}
     >
       <Container maxWidth='lg'>
