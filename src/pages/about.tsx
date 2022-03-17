@@ -96,7 +96,7 @@ const AboutPage = ({
       </Box>
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: "96px", lg: "136px" },
         }}
       >
         <ComunityBanner />

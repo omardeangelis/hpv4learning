@@ -131,7 +131,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
           </StyledContainer>
           <Box
             sx={{
-              mt: { xs: "48px", lg: "96px" },
+              mt: { xs: "96px", lg: "136px" },
             }}
           >
             <StyledContainer component='section'>
@@ -164,7 +164,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
 
           <Box
             sx={{
-              mt: { xs: "48px", lg: "96px" },
+              mt: { xs: "96px", lg: "136px" },
             }}
           >
             <StyledContainer>
@@ -296,7 +296,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
 
           <Box
             sx={{
-              mt: { xs: "72px", lg: "96px" },
+              mt: { xs: "96px", lg: "136px" },
             }}
           >
             {corso.progetti && corso?.introduzioneProgetti && (
@@ -337,7 +337,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
         <Box
           maxWidth='261px'
           sx={{
-            mt: { xs: "48px", lg: "96px" },
+            mt: { xs: "96px", lg: "136px" },
             height: "fit-content",
             position: "sticky",
             top: "96px",
