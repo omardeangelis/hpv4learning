@@ -5,7 +5,7 @@ import Layout from "../components/ui/navigation/layout";
 //@ts-ignore
 import MetaDecorator from "../components/SEO/MetaDecorator";
 //Utils
-import { createBrandText, createRowText } from "../utils/helpers";
+import { createBrandText, createRowText, isExpired } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
 // import BgImageSection from "../components/ui/BgImageSection";
@@ -24,9 +24,11 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
-import { SingleCourseProps } from "../types/course";
+import { CoursePreviewProps, SingleCourseProps } from "../types/course";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import CourseContainer from "../components/course/CourseContainer";
+import CourseContent from "../components/course/CourseContent";
 dayjs.extend(relativeTime);
 
 const StyledContainer = styled(Box)`
@@ -56,14 +58,14 @@ const TextWrapper = styled.div`
   h2 {
     font-size: 18px;
     line-height: 22px;
-    margin: 8px 0px;
+    margin: 18px 0px;
   }
 
   @media screen and (min-width: 767px) {
     h2 {
       font-size: 21px;
       line-height: 24px;
-      margin: 12px 0px;
+      margin: 21px 0px;
     }
   }
 `;
@@ -71,11 +73,39 @@ const TextWrapper = styled.div`
 type Props = {
   data: {
     contentfulCorsi: SingleCourseProps;
+    allContentfulCorsi: {
+      nodes: (CoursePreviewProps & {
+        oreDiLezione: number;
+        livello: string;
+      })[];
+    };
   };
   location: {
     search: string;
   };
 };
+
+type StyledProps = {
+  full: boolean;
+};
+
+const CustomStack = styled.div<StyledProps>`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  & > *:not(:last-of-type) {
+    margin-bottom: 16px;
+  }
+  @media screen and (min-width: 767px) {
+    & > *:not(:last-of-type) {
+      margin-bottom: 0px;
+      margin-right: ${(props) => (props.full ? "unset" : "61px")};
+    }
+    flex-direction: row;
+    justify-content: ${(props) =>
+      props.full ? "space-between" : "flex-start"};
+  }
+`;
 
 const SingleCoursePage = ({ data, location }: Props) => {
   const { contentfulCorsi: corso } = data;
@@ -88,12 +118,6 @@ const SingleCoursePage = ({ data, location }: Props) => {
       projectRef.current.scrollIntoView();
     }
   }, [scrollToProjects]);
-
-  console.log(
-    corso.updatedAt,
-
-    dayjs().isAfter(dayjs(corso.updatedAt).add(0, "day"), "day")
-  );
 
   return (
     <Layout>
@@ -131,7 +155,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
           </StyledContainer>
           <Box
             sx={{
-              mt: { xs: "96px", lg: "136px" },
+              mt: { xs: "48px", lg: "72px" },
             }}
           >
             <StyledContainer component='section'>
@@ -148,7 +172,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
           <Box
             sx={{
               display: { xs: "block", lg: "none" },
-              mt: "24px",
+              mt: "48px",
             }}
           >
             <ResponsiveInfoBox
@@ -164,7 +188,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
 
           <Box
             sx={{
-              mt: { xs: "96px", lg: "136px" },
+              mt: { xs: "48px", lg: "136px" },
             }}
           >
             <StyledContainer>
@@ -193,7 +217,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
               >
                 <TextWrapper>
                   <Typography
-                    color='grey.500'
+                    color='grey.600'
                     fontWeight={300}
                     sx={{
                       fontSize: { xs: "16px", lg: "16px" },
@@ -294,12 +318,12 @@ const SingleCoursePage = ({ data, location }: Props) => {
             </Box>
           </StyledContainer>
 
-          <Box
-            sx={{
-              mt: { xs: "96px", lg: "136px" },
-            }}
-          >
-            {corso.progetti && corso?.introduzioneProgetti && (
+          {corso.progetti && corso?.introduzioneProgetti && (
+            <Box
+              sx={{
+                mt: { xs: "96px", lg: "136px" },
+              }}
+            >
               <StyledContainer ref={projectRef}>
                 <Typography
                   color='purple.400'
@@ -331,13 +355,45 @@ const SingleCoursePage = ({ data, location }: Props) => {
                   <Projects data={corso.progetti} />
                 </Box>
               </StyledContainer>
+            </Box>
+          )}
+          {data?.allContentfulCorsi?.nodes &&
+            data?.allContentfulCorsi?.nodes.length > 0 && (
+              <Box
+                sx={{
+                  mt: { xs: "96px", lg: "136px" },
+                }}
+              >
+                <Typography
+                  fontWeight={500}
+                  sx={{
+                    fontSize: { xs: "24px", lg: "34px" },
+                  }}
+                >
+                  Corsi Correlati
+                </Typography>
+                <Box
+                  sx={{
+                    mt: { xs: "24px", lg: "36px" },
+                  }}
+                >
+                  <CustomStack full={false}>
+                    {data.allContentfulCorsi.nodes.map((corso) => {
+                      return (
+                        <CourseContainer key={corso.slug}>
+                          <CourseContent {...corso} />
+                        </CourseContainer>
+                      );
+                    })}
+                  </CustomStack>
+                </Box>
+              </Box>
             )}
-          </Box>
         </StyledBox>
         <Box
           maxWidth='261px'
           sx={{
-            mt: { xs: "96px", lg: "136px" },
+            mt: { xs: "0px", lg: "136px" },
             height: "fit-content",
             position: "sticky",
             top: "96px",
@@ -364,10 +420,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
               <CourseCoupon
                 link={corso.couponLink}
                 prezzo={corso.prezzo}
-                isDisabled={dayjs().isAfter(
-                  dayjs(corso.updatedAt).add(30, "day"),
-                  "day"
-                )}
+                isDisabled={isExpired(corso.updatedAt)}
               />
             )}
           </Box>
@@ -378,7 +431,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
 };
 
 export const query = graphql`
-  query SingleCoursePage($slug: String) {
+  query SingleCoursePage($slug: String, $categorySlug: String!) {
     contentfulCorsi(slug: { eq: $slug }) {
       category {
         name
@@ -453,6 +506,28 @@ export const query = graphql`
           childMarkdownRemark {
             html
           }
+        }
+      }
+    }
+    allContentfulCorsi(
+      filter: {
+        category: { elemMatch: { slug: { eq: $categorySlug } } }
+        slug: { ne: $slug }
+      }
+      limit: 2
+    ) {
+      nodes {
+        titolo
+        copertina {
+          gatsbyImageData
+        }
+        categoria
+        couponLink
+        slug
+        livello
+        oreDiLezione
+        riassunto {
+          riassunto
         }
       }
     }
