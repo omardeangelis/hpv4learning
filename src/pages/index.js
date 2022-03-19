@@ -143,6 +143,13 @@ const IndexPage = ({ data }) => {
                     <Button
                       variant='text'
                       color='primary'
+                      size='medium'
+                      sx={{
+                        pl: "0px",
+                        "&:hover": {
+                          background: "transparent",
+                        },
+                      }}
                       endIcon={
                         <ArrowRightAltSharpIcon
                           fontSize='small'

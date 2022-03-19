@@ -153,8 +153,7 @@ const Category = ({
                   lineHeight: { xs: "29px", lg: "56px" },
                 }}
               >
-                Coupon e scontri{" "}
-                <span className='brand-text'>riscattabili</span>
+                Coupon e sconti <span className='brand-text'>riscattabili</span>
               </Typography>
 
               <Box
