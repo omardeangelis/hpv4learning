@@ -125,7 +125,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
         title={createRowText(corso.titolo)}
         desc={corso.riassunto.riassunto}
         keywords={[...corso.concetti, ...corso.requisiti, ...corso.target]}
-        // image={corso && corso?.copertina?.file.url}
+        image={corso && corso.copertina.file?.url}
       ></MetaDecorator>
       <FlexContainer maxWidth='lg'>
         <StyledBox>

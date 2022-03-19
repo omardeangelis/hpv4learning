@@ -8,6 +8,10 @@ import CourseSection from "./CuorseSection";
 type CourseDispettoProps = CoursePreviewProps & {
   oreDiLezione: number;
   livello: string;
+  category: {
+    slug: string;
+    name: string;
+  }[];
 };
 
 type Props = {
@@ -42,7 +46,7 @@ const CourseWall = () => {
     <StyledBox>
       {data.allContentfulCorsi.group.map(({ fieldValue, nodes }) => {
         return (
-          <Box sx={{}}>
+          <Box>
             <CourseSection
               slug={fieldValue}
               title={getCourseCategoryName(nodes[0].category, fieldValue)}
