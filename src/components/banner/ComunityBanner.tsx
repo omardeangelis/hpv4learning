@@ -119,7 +119,7 @@ const DiscordBanner = () => {
                       lineHeight: { xs: "30px", lg: "44px" },
                     }}
                   >
-                    Unisciti all Community
+                    Unisciti alla Community
                   </Typography>
                 </Box>
                 <Box
