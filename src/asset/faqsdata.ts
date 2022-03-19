@@ -2,7 +2,7 @@ export const faqs = [
   {
     title: "Che insegnanti cercate ?",
     description:
-      "Per la prima espansione dell'offerta formativa siamo alla ricerca Designer del Prodotto, Sviluppatori Backend e Paid Adverter",
+      "Per la prima espansione dell'offerta formativa siamo alla ricerca Designer del Prodotto, Sviluppatori Backend e Paid Advertiser",
   },
   {
     title: " Ci sono dei requisiti ? ",
@@ -12,6 +12,6 @@ export const faqs = [
   {
     title: "E' previsto uno stipendio ?",
     description:
-      "Il nostro è un'ecosistema dove ogni insegnante percepisce i guadagni dervianti dal proprio corso.",
+      "Il nostro è un ecosistema dove ogni insegnante percepisce i guadagni dervianti dal proprio corso.",
   },
 ];

@@ -284,6 +284,12 @@ const JoinUs = () => {
                       height: { xs: "48px", lg: "72px" },
                       minWidth: { xs: "auto", lg: "72px" },
                       px: { xs: "auto", lg: "24px" },
+                      "&:hover": {
+                        color: "purple.800",
+                        "& *": {
+                          color: "purple.800",
+                        },
+                      },
                     }}
                   >
                     Insegnanti
