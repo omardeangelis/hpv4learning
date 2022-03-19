@@ -1,60 +1,58 @@
-import React from "react"
+import React from "react";
 
 const useDropDownMenu = (menus: string[]) => {
-  const [open, setOpen] = React.useState<string[]>([])
-  console.log(menus)
+  const [open, setOpen] = React.useState<string[]>([]);
   const openMenu = React.useCallback(
     (item: string) => {
-        console.log(item)
-      setOpen(items => [...items, item])
+      setOpen((items) => [...items, item]);
     },
     [open]
-  )
+  );
 
   const closeMenu = React.useCallback(
-    item => {
+    (item) => {
       setOpen(() => {
-        let element = document.querySelector(`#${item}-menu`)
+        let element = document.querySelector(`#${item}-menu`);
         if (element) {
           if (element.classList.contains("show-dropdown"))
-            element.classList.remove("show-dropdown")
-          let icon = element.previousSibling?.lastChild as HTMLElement
-          icon.classList.remove("rotate-icon")
+            element.classList.remove("show-dropdown");
+          let icon = element.previousSibling?.lastChild as HTMLElement;
+          icon.classList.remove("rotate-icon");
         }
-        return open.filter(menu => menu !== item)
-      })
+        return open.filter((menu) => menu !== item);
+      });
     },
     [open]
-  )
+  );
 
   const toggleMenu = React.useCallback(
     (item: string) => {
-      if (open.find(x => x === item)) {
-        closeMenu(item)
-        return
+      if (open.find((x) => x === item)) {
+        closeMenu(item);
+        return;
       }
-      openMenu(item)
+      openMenu(item);
     },
     [openMenu, closeMenu]
-  )
+  );
 
   React.useEffect(() => {
-    open.forEach(el => {
+    open.forEach((el) => {
       if (typeof window !== "undefined") {
-        let element = document.querySelector(`#${el}-menu`)
+        let element = document.querySelector(`#${el}-menu`);
         if (element) {
-          if (menus.find(x => x === el)) {
-            let icon = element.previousSibling?.lastChild as HTMLElement
-            icon.classList.add("rotate-icon")
+          if (menus.find((x) => x === el)) {
+            let icon = element.previousSibling?.lastChild as HTMLElement;
+            icon.classList.add("rotate-icon");
 
-            element.classList.add("show-dropdown")
+            element.classList.add("show-dropdown");
           }
         }
       }
-    })
-  }, [open])
+    });
+  }, [open]);
 
-  return { toggleMenu }
-}
+  return { toggleMenu };
+};
 
-export default useDropDownMenu
+export default useDropDownMenu;

@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
+
 export const createBrandText = (text: string) => {
   return text
-    .replace("**", "<strong class='brand-text'>")
-    .replace("**", "</strong>");
+    .replace("**", "<span class='brand-text'>")
+    .replace("**", "</span>");
 };
 
 export const createRowText = (text: string) => {
@@ -47,6 +49,10 @@ export function cleanStringFromHtlmTags(text: string) {
     .replace(/<\/?[^>]+(>|$)/g, "")
     .replace(/(<p>&nbsp;<\/p>)|(<h2><span>&nbsp;<\/span><\/h2>)/g, "");
 }
+
+export const isExpired = (date: Date) => {
+  return dayjs().isAfter(dayjs(date).add(30, "day"), "day");
+};
 
 //Permette di dispatchare eventi Google
 // export const createGAEvent = (event: string, content: string) => {

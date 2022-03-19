@@ -3,6 +3,9 @@ const allCourseQuery = `
     allContentfulCorsi {
         nodes {
             slug
+             category {
+              slug
+            }
         }
     }
 }
@@ -14,6 +17,7 @@ const allCourseCategory = `
     nodes {
       slug
       name
+      alias
       description{
           description
       }
