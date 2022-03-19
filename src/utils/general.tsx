@@ -76,3 +76,26 @@ export const createStarReview = (value: number) => {
     );
   });
 };
+
+// export const parseMail = React.useCallback((text: string) => {
+//   const splittedMail = text.split("*mail*");
+//   let array: JSX.Element[] = [];
+
+//   splittedMail.forEach((p, index) => {
+//     if (index != 0 && index % 2 != 0) {
+//       array.push(
+//         <a
+//           href={`mailto:${p}`}
+//           target='_blank'
+//           className={"link-style link-hover"}
+//           key={index}
+//         >
+//           {p}
+//         </a>
+//       );
+//     } else {
+//       array.push(<span>{p}</span>);
+//     }
+//   });
+//   return array;
+// }, []);

@@ -42,6 +42,12 @@ export const dateFormatter = (date: string) => {
   }).format(new Date(Date.parse(date)));
 };
 
+export function cleanStringFromHtlmTags(text: string) {
+  return text
+    .replace(/<\/?[^>]+(>|$)/g, "")
+    .replace(/(<p>&nbsp;<\/p>)|(<h2><span>&nbsp;<\/span><\/h2>)/g, "");
+}
+
 //Permette di dispatchare eventi Google
 // export const createGAEvent = (event: string, content: string) => {
 //   return () => {

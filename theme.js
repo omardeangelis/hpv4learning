@@ -122,6 +122,7 @@ const theme = createTheme({
         textPrimary: {
           borderColor: "transparent",
           color: "#8769FE",
+          paddingLeft: "0px",
           ":hover": {
             color: "#A435F0",
           },
