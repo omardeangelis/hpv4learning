@@ -9,6 +9,7 @@ import {
 } from "gatsby-plugin-image";
 import { dateFormatter, isExpired } from "../../utils/helpers";
 import SeoLink from "../shared/SeoLink";
+import dayjs from "dayjs";
 
 const StyledBox = styled(Box)`
   border: 1px solid;
@@ -83,7 +84,9 @@ const CourseBanner = ({ title, date, prezzo, link, img }: Props) => {
                 }}
               >
                 <Typography fontWeight={300} fontSize='10px'>
-                  {`Scade il: ${dateFormatter(date.toString())}`}
+                  {`Scade il: ${dateFormatter(
+                    dayjs(date).add(30, "day").toString()
+                  )}`}
                 </Typography>
               </Box>
             </Box>
