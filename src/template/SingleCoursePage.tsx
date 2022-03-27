@@ -124,7 +124,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
       <MetaDecorator
         metaTitle={createRowText(corso.titolo)}
         metaDescription={corso.riassunto.riassunto}
-        image={corso && corso.copertina.file?.url}
+        image={corso && "https:" + corso.copertina.file?.url}
       ></MetaDecorator>
       <FlexContainer maxWidth='lg'>
         <StyledBox>
