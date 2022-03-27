@@ -11,7 +11,7 @@ import {
   SingleFaq,
 } from "../components/faq";
 //Meta Title e SEO e Utils
-import MetaDecorator from "../components/SEO/MetaDecorator";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import SeoLink from "../components/shared/SeoLink";
 //Components
 import Hero from "../components/ui/Hero";
@@ -51,7 +51,7 @@ const IndexPage = ({ data }) => {
   };
   return (
     <Layout>
-      <MetaDecorator type={"website"} title='Home'></MetaDecorator>
+      <MetaDecorator metaTitle='Home'></MetaDecorator>
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },

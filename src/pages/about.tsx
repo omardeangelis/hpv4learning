@@ -2,7 +2,7 @@ import React from "react";
 //Global e Seo
 import Layout from "../components/ui/navigation/layout";
 //@ts-ignore
-import MetaDecorator from "../components/SEO/MetaDecorator";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import ComunityBanner from "../components/banner/ComunityBanner";
 import Container from "@mui/material/Container/Container";
@@ -23,26 +23,10 @@ const AboutPage = ({
   return (
     <Layout>
       <MetaDecorator
-        title='Chi siamo'
-        desc={
+        metaTitle='Chi siamo'
+        metaDescription={
           "La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi"
         }
-        keywords={[
-          "migliori insegnanti",
-          "migliori videocorsi",
-          "migliori corsi videomaking",
-          "migliori corsi di programmazione",
-          "videocorso di react",
-          "videocorsi competenze digitali",
-          "videocorsi in italiano di programmazione",
-          "videocorsi in italiano di javascript",
-          "videocorso videomaker",
-          "react",
-          "html",
-          "css",
-          "javascript",
-          "frontend",
-        ]}
       />
       <Box
         sx={{
