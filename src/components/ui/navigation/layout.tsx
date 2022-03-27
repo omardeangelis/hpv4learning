@@ -6,12 +6,14 @@ import Footer from "./Footer";
 import { LayoutProvider } from "../../../context/layout";
 const Layout = ({
   children,
+  disableColor,
 }: {
   children: React.ReactChild | React.ReactChild[];
+  disableColor?: true;
 }) => {
   return (
     <LayoutProvider>
-      <Navbar />
+      <Navbar disableColor={disableColor} />
       <Sidebar />
       <main>{children}</main>
 

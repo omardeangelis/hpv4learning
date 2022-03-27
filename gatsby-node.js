@@ -9,9 +9,12 @@ exports.createPages = async ({ graphql, actions }) => {
   singleCourseQuery.data.allContentfulCorsi.nodes.forEach((node) => {
     createPage({
       path: node.slug,
-      component: path.resolve(`./src/template/SingleCoursePage.js`),
+      component: path.resolve(`./src/template/SingleCoursePage.tsx`),
       context: {
         slug: node.slug,
+        categorySlug: node.category.filter(
+          (category) => category.slug !== "gratuiti"
+        )[0].slug,
       },
     });
   });
@@ -21,6 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
       slug,
       name,
       description: { description },
+      alias,
     } = category;
     createPage({
       path: `/corsi/${slug}/`,
@@ -28,6 +32,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug,
         name,
+        alias,
         description,
       },
     });

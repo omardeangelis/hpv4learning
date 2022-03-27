@@ -3,8 +3,10 @@ import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { graphql } from "gatsby";
 import React from "react";
+import CourseBanner from "../components/banner/CourseBanner";
 import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import Layout from "../components/ui/navigation/layout";
 import { CoursePreviewProps } from "../types/course";
 import { rowalizer } from "../utils/helpers";
@@ -13,10 +15,16 @@ type Props = {
   pageContext: {
     description: string;
     name: string;
+    alias?: string;
   };
   data: {
     allContentfulCorsi: {
-      nodes: (CoursePreviewProps & { oreDiLezione: number; livello: string })[];
+      nodes: (CoursePreviewProps & {
+        oreDiLezione: number;
+        livello: string;
+        updatedAt: Date;
+        prezzo: number;
+      })[];
     };
   };
 };
@@ -42,11 +50,27 @@ const CustomStack = styled.div<StyledProps>`
   }
 `;
 
-const Category = ({ pageContext: { description, name }, data }: Props) => {
-  const rows = rowalizer(data.allContentfulCorsi.nodes);
+const Category = ({
+  pageContext: { description, name, alias },
+  data,
+}: Props) => {
+  const rows = React.useMemo(
+    () => rowalizer(data.allContentfulCorsi.nodes),
+    []
+  );
+  const couponCourses = React.useMemo(() => {
+    return data.allContentfulCorsi.nodes.filter(
+      (corso) => corso.categoria && corso.categoria?.toLowerCase() !== "free"
+    );
+  }, []);
 
   return (
     <Layout>
+      <MetaDecorator
+        metaTitle={`Corsi per ${alias || name}`}
+        disableSlogan
+        metaDescription={description}
+      />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
@@ -64,7 +88,7 @@ const Category = ({ pageContext: { description, name }, data }: Props) => {
               }}
             >
               Corsi per <br className='desktop-new-line' />
-              <strong className='brand-text'>{name}</strong>
+              <strong className='brand-text'>{alias || name}</strong>
             </Typography>
           </Box>
           <Box
@@ -117,6 +141,86 @@ const Category = ({ pageContext: { description, name }, data }: Props) => {
             })}
           </Container>
         </Box>
+        {couponCourses && couponCourses.length > 0 && (
+          <Box
+            sx={{
+              mt: {
+                xs: "72px",
+                lg: "136px",
+              },
+            }}
+          >
+            <Container maxWidth='lg'>
+              <Typography
+                component='h2'
+                fontWeight={600}
+                sx={{
+                  fontSize: { xs: "24px", lg: "48px" },
+                  lineHeight: { xs: "29px", lg: "56px" },
+                }}
+              >
+                Coupon e sconti <span className='brand-text'>riscattabili</span>
+              </Typography>
+
+              <Box
+                sx={{
+                  mt: {
+                    xs: "12px",
+                    lg: "18px",
+                  },
+                  maxWidth: "537px",
+                }}
+              >
+                <Typography
+                  fontWeight={400}
+                  color='grey.6'
+                  sx={{
+                    fontSize: {
+                      xs: "14px",
+                      lg: "16px",
+                    },
+                    lineHeight: {
+                      xs: "18px",
+                      lg: "21px",
+                    },
+                  }}
+                >
+                  Qui puoi trovare una lista dei coupon dei nostri corsi, il
+                  loro stato, prezzo e validità. Approfittane e riscatta a
+                  prezzo scontato il tuo corso.
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  mt: {
+                    xs: "24px",
+                    lg: "36px",
+                  },
+                }}
+              >
+                {couponCourses.map((corso) => {
+                  return (
+                    <Box
+                      key={corso.titolo}
+                      sx={{
+                        mb: "12px",
+                      }}
+                    >
+                      <CourseBanner
+                        title={corso.titolo}
+                        img={corso.copertina}
+                        prezzo={corso.prezzo}
+                        link={corso.couponLink as string}
+                        date={corso.updatedAt}
+                      />
+                    </Box>
+                  );
+                })}
+              </Box>
+            </Container>
+          </Box>
+        )}
       </Box>
     </Layout>
   );
@@ -136,6 +240,8 @@ export const query = graphql`
         couponLink
         slug
         livello
+        updatedAt
+        prezzo
         oreDiLezione
         riassunto {
           riassunto
