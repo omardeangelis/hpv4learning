@@ -37,16 +37,6 @@ const MetaDecorator = ({
       title={seoProps.title}
       titleTemplate={seoProps.slogan ? `%s | ${seoProps.slogan}` : undefined}
     >
-      <link
-        href='https://www.googletagmanager.com/gtag/js?id=GTM-N3H7Q8B'
-        rel='preconnect'
-        as='script'
-      />
-      <link
-        href='https://connect.facebook.net/en_US/fbevents.js'
-        rel='preconnect'
-        as='script'
-      />
       <meta name='description' content={seoProps.description} />
       <meta property='og:title' content={seoProps.title} />
       <meta property='og:description' content={seoProps.description} />
