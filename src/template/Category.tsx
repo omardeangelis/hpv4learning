@@ -6,6 +6,7 @@ import React from "react";
 import CourseBanner from "../components/banner/CourseBanner";
 import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import Layout from "../components/ui/navigation/layout";
 import { CoursePreviewProps } from "../types/course";
 import { rowalizer } from "../utils/helpers";
@@ -65,6 +66,11 @@ const Category = ({
 
   return (
     <Layout>
+      <MetaDecorator
+        metaTitle={`Corsi per ${alias || name}`}
+        disableSlogan
+        metaDescription={description}
+      />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },

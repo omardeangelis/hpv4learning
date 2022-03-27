@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 //Global Component e Variables
 import Layout from "../components/ui/navigation/layout";
 //@ts-ignore
-import MetaDecorator from "../components/SEO/MetaDecorator";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
 //Components
@@ -122,9 +122,8 @@ const SingleCoursePage = ({ data, location }: Props) => {
   return (
     <Layout>
       <MetaDecorator
-        title={createRowText(corso.titolo)}
-        desc={corso.riassunto.riassunto}
-        keywords={[...corso.concetti, ...corso.requisiti, ...corso.target]}
+        metaTitle={createRowText(corso.titolo)}
+        metaDescription={corso.riassunto.riassunto}
         image={corso && corso.copertina.file?.url}
       ></MetaDecorator>
       <FlexContainer maxWidth='lg'>

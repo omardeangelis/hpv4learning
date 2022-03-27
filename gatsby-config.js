@@ -5,23 +5,15 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "hpv 4 Learning",
-    desc: "La piattaforma per rilanciare la tua carriera digitale grazie videocorsi offerti solo da professinisti ed eseperti del settore",
-    siteUrl: "https://hpv4learning.it/",
-    url: "https://hpv4learning.it/",
-    siteLanguage: "it",
-    keywords: [
-      "videocorsi in italiano",
-      "diventare sviluppatore",
-      "imparare a programmare",
-      "diventare un videomaker",
-      "premiere",
-      "javascript",
-      "react js",
-      "programmazione frontend",
-      "imparare javascript",
-      "imparare react",
-    ],
-    ogLanguage: "it_IT",
+    slogan: "hpv 4 Learning",
+    description:
+      "Corsi di Programmazione e videomaking in italiano creati da professionisti del settore.",
+    siteUrl: process.env.GASTBY_SITE_URL,
+    youtube: "https://www.youtube.com/channel/UC9kv8nH9i9kSj_q0FqckiYw",
+    author: "@hpv4learning",
+    image: "/share.png",
+    imageWidth: "512",
+    imageHeight: "288",
   },
   plugins: [
     {

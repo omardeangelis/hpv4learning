@@ -6,6 +6,7 @@ import SeoLink from "../components/shared/SeoLink";
 import Layout from "../components/ui/navigation/layout";
 import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
 import { jobs } from "../asset/jobsdata";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 
 const CustomStack = styled(Box)`
   .desktop-image {
@@ -38,6 +39,10 @@ const JobsStack = styled(Box)`
 const JoinUs = () => {
   return (
     <Layout disableColor>
+      <MetaDecorator
+        metaTitle='Lavora con noi'
+        metaDescription='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
+      />
       <Box
         sx={{
           background: "linear-gradient(180deg, #341268, #8769FE)",
