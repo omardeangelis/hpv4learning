@@ -44,9 +44,9 @@ const CourseWall = () => {
   );
   return (
     <StyledBox>
-      {data.allContentfulCorsi.group.map(({ fieldValue, nodes }) => {
+      {data.allContentfulCorsi.group.map(({ fieldValue, nodes }, index) => {
         return (
-          <Box>
+          <Box key={"course-wall" + index}>
             <CourseSection
               slug={fieldValue}
               title={getCourseCategoryName(nodes[0].category, fieldValue)}
