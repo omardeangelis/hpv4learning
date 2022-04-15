@@ -6,6 +6,7 @@ import React from "react";
 import CourseBanner from "../components/banner/CourseBanner";
 import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
+import LinkHandler from "../components/SEO/components/LinkHandler";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import Layout from "../components/ui/navigation/layout";
 import { CoursePreviewProps } from "../types/course";
@@ -71,6 +72,7 @@ const Category = ({
         disableSlogan
         metaDescription={description}
       />
+      <LinkHandler />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },

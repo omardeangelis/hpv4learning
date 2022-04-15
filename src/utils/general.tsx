@@ -49,6 +49,7 @@ export const createStarReview = (value: number) => {
     if (value >= integer) {
       return (
         <StarRateRoundedIcon
+          key={`star-${index}`}
           sx={{
             color: "purple.400",
             fontSize: "14px",
@@ -59,6 +60,7 @@ export const createStarReview = (value: number) => {
     if (Math.ceil(value) >= half) {
       return (
         <StarHalfRoundedIcon
+          key={`star-${index}`}
           sx={{
             color: "purple.400",
             fontSize: "14px",
@@ -68,6 +70,7 @@ export const createStarReview = (value: number) => {
     }
     return (
       <StarOutlineRoundedIcon
+        key={`star-${index}`}
         sx={{
           color: "purple.400",
           fontSize: "14px",

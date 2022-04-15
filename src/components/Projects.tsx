@@ -36,9 +36,10 @@ const Projects = ({ data }: Props) => {
   const rows = React.useMemo(() => rowalizer(data, 2), []);
   return (
     <CustomStack>
-      {rows.map((row) => {
+      {rows.map((row, index) => {
         return (
           <Box
+            key={"progetto" + index}
             className='row-container'
             sx={{
               mb: { xs: "0px", lg: "24px" },

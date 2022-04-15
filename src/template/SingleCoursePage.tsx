@@ -8,8 +8,6 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
-// import BgImageSection from "../components/ui/BgImageSection";
-// import ContactSection from "../components/ContactSection";
 import Video from "../components/ui/FrameVideo";
 import { CourseInfo, ResponsiveInfoBox } from "../components/CourseInfo";
 import CourseCoupon from "../components/coupon/CourseCoupon";
@@ -29,6 +27,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
+import LinkHandler from "../components/SEO/components/LinkHandler";
 dayjs.extend(relativeTime);
 
 const StyledContainer = styled(Box)`
@@ -126,6 +125,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
         metaDescription={corso.riassunto.riassunto}
         image={corso && "https:" + corso.copertina.file?.url}
       ></MetaDecorator>
+      <LinkHandler />
       <FlexContainer maxWidth='lg'>
         <StyledBox>
           <StyledContainer>
