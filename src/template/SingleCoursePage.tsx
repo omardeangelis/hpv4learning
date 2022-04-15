@@ -27,6 +27,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
+import LinkHandler from "../components/SEO/components/LinkHandler";
 dayjs.extend(relativeTime);
 
 const StyledContainer = styled(Box)`
@@ -124,6 +125,7 @@ const SingleCoursePage = ({ data, location }: Props) => {
         metaDescription={corso.riassunto.riassunto}
         image={corso && "https:" + corso.copertina.file?.url}
       ></MetaDecorator>
+      <LinkHandler />
       <FlexContainer maxWidth='lg'>
         <StyledBox>
           <StyledContainer>

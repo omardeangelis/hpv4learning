@@ -13,6 +13,7 @@ import {
 //Meta Title e SEO e Utils
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import SeoLink from "../components/shared/SeoLink";
+import LinkHandler from "../components/SEO/components/LinkHandler";
 //Components
 import Hero from "../components/ui/Hero";
 //Material UI
@@ -51,7 +52,8 @@ const IndexPage = ({ data }) => {
   };
   return (
     <Layout>
-      <MetaDecorator metaTitle='Home'></MetaDecorator>
+      <MetaDecorator metaTitle='Home' />
+      <LinkHandler />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },

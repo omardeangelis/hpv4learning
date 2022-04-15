@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import { graphql } from "gatsby";
 import Insegnante from "../components/shared/Insegnante";
 import { InsegnanteProps } from "../types/course";
+import LinkHandler from "../components/SEO/components/LinkHandler";
 
 const AboutPage = ({
   data,
@@ -28,6 +29,7 @@ const AboutPage = ({
           "La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi"
         }
       />
+      <LinkHandler />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
