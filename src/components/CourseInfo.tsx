@@ -41,24 +41,44 @@ const CourseInfo = ({
       <Box mt='9px'>
         <Stack direction='row' spacing='18px' alignItems='center'>
           <Box>
-            <InfoText text='Livello:' weight={300} />
-            <InfoText text='Lezioni:' weight={300} />
-            <InfoText text='Durata:' weight={300} />
-            <InfoText text='Categoria:' weight={300} />
-            <InfoText text='Tipologia:' weight={300} />
-            <InfoText text='Last Update:' weight={300} />
-            <InfoText text='Progetti:' weight={300} />
-            <InfoText text='Recensioni:' weight={300} />
+            <InfoText key={`livello`} text='Livello:' weight={300} />
+            <InfoText key={`lezioni`} text='Lezioni:' weight={300} />
+            <InfoText key={`durata`} text='Durata:' weight={300} />
+            <InfoText key={`categoria`} text='Categoria:' weight={300} />
+            <InfoText key={`tipologia`} text='Tipologia:' weight={300} />
+            <InfoText key={`last-update`} text='Last Update:' weight={300} />
+            <InfoText key={`progetti`} text='Progetti:' weight={300} />
+            <InfoText key={`recensioni`} text='Recensioni:' weight={300} />
           </Box>
 
           <Box>
-            <InfoText text={livello} weight={400} />
-            <InfoText text={lezioni} weight={400} />
-            <InfoText text={convertToHHMMSS(durata)} weight={400} />
-            <InfoText text={categoria} weight={400} />
-            <InfoText text={tipologia} weight={400} />
-            <InfoText text={dateFormatter(lastUpdate)} weight={400} />
-            <InfoText text={progetti} weight={400} />
+            <InfoText key={`livello-${livello}`} text={livello} weight={400} />
+            <InfoText key={`lezioni-${lezioni}`} text={lezioni} weight={400} />
+            <InfoText
+              key={`durata-${durata}`}
+              text={convertToHHMMSS(durata)}
+              weight={400}
+            />
+            <InfoText
+              key={`categoria-${categoria}`}
+              text={categoria}
+              weight={400}
+            />
+            <InfoText
+              key={`tipologia-${tipologia}`}
+              text={tipologia}
+              weight={400}
+            />
+            <InfoText
+              key={`data-${lastUpdate}`}
+              text={dateFormatter(lastUpdate)}
+              weight={400}
+            />
+            <InfoText
+              key={`progetti-${progetti}`}
+              text={progetti}
+              weight={400}
+            />
             <Box py='3px'>
               <Stack direction='row' alignItems='center' spacing={0.1}>
                 {createStarReview(recensioni)}
@@ -141,7 +161,7 @@ const ResponsiveInfoBox = ({
           <Box>
             <InfoText text={livello} weight={400} />
             <InfoText text={lezioni} weight={400} />
-            <InfoText text={durata} weight={400} />
+            <InfoText text={convertToHHMMSS(durata)} weight={400} />
             <InfoText text={progetti} weight={400} />
             <Box py='3px'>
               <Stack direction='row' alignItems='center' spacing={0.1}>

@@ -8,8 +8,6 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
 //Components
 import Projects from "../components/Projects";
-// import BgImageSection from "../components/ui/BgImageSection";
-// import ContactSection from "../components/ContactSection";
 import Video from "../components/ui/FrameVideo";
 import { CourseInfo, ResponsiveInfoBox } from "../components/CourseInfo";
 import CourseCoupon from "../components/coupon/CourseCoupon";
