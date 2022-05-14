@@ -63,3 +63,15 @@ export type ArticleSchemaProps = {
   modifiedDate: string;
   authorName: string;
 };
+
+export type CourseSchemsProps = {
+  title: string;
+  description: string;
+  image: string;
+  isAccessibleForFree: boolean;
+  audienceType: string[];
+  about: string;
+  creator: string | string[];
+  rating: string;
+  coursePrerequisites: string[];
+};
