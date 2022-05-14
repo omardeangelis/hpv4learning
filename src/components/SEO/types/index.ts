@@ -74,4 +74,5 @@ export type CourseSchemsProps = {
   creator: string | string[];
   rating: string;
   coursePrerequisites: string[];
+  recensioniRicevute: number;
 };

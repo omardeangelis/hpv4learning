@@ -14,6 +14,7 @@ const useCourseSchema = ({
   creator,
   rating,
   coursePrerequisites,
+  recensioniRicevute,
 }: CourseSchemsProps) => {
   const {
     site: { siteMetadata },
@@ -59,6 +60,7 @@ const useCourseSchema = ({
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": rating,
+        "ratingCount": recensioniRicevute,
         "bestRating": 5,
         "worstRating": 1,
       },

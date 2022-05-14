@@ -22,6 +22,7 @@ const CourseSchema = ({
   isAccessibleForFree,
   rating,
   coursePrerequisites,
+  recensioniRicevute
 }: Props) => {
   const schema = useWebPageSchema({ title, description, image, imageAltText });
 
@@ -36,6 +37,7 @@ const CourseSchema = ({
     isAccessibleForFree,
     rating,
     coursePrerequisites,
+    recensioniRicevute,
   });
 
   return (
