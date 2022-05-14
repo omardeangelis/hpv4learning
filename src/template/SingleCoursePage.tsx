@@ -28,6 +28,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
 import LinkHandler from "../components/SEO/components/LinkHandler";
+import CourseSchema from "../components/SEO/components/CourseSchema";
 dayjs.extend(relativeTime);
 
 const StyledContainer = styled(Box)`
@@ -82,6 +83,8 @@ type Props = {
   location: {
     search: string;
   };
+  slug: string;
+  categorySlug: string;
 };
 
 type StyledProps = {
@@ -106,11 +109,31 @@ const CustomStack = styled.div<StyledProps>`
   }
 `;
 
-const SingleCoursePage = ({ data, location }: Props) => {
+const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
   const { contentfulCorsi: corso } = data;
   const projectRef = useRef<null | HTMLDivElement>(null);
   const { search } = location;
   const scrollToProjects = search && search.split("=")[1];
+
+  const creator = React.useMemo(() => {
+    if (corso.insegnante.length > 1)
+      return corso.insegnante.map((el) => el.nome);
+    return corso.insegnante[0].nome;
+  }, [corso.insegnante]);
+
+  const categoryName = React.useMemo(() => {
+    return corso.category.filter(
+      (el) => el.name.toLowerCase() !== "gratuiti"
+    )[0].name as string;
+  }, [corso.category]);
+
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      { text: categoryName, link: `/corsi/${categorySlug}/` },
+      { text: corso.titolo, link: `/${slug}/` },
+    ];
+  }, [categoryName, categorySlug]);
 
   useEffect(() => {
     if (projectRef.current && scrollToProjects) {
@@ -126,6 +149,21 @@ const SingleCoursePage = ({ data, location }: Props) => {
         image={corso && "https:" + corso.copertina.file?.url}
       ></MetaDecorator>
       <LinkHandler />
+      <CourseSchema
+        title={createRowText(corso.titolo)}
+        description={corso.riassunto.riassunto}
+        image={corso && "https:" + corso.copertina.file?.url}
+        imageAltText={createRowText(corso.titolo)}
+        rating={corso.recensioni.toString()}
+        creator={creator}
+        about={categorySlug}
+        audienceType={corso.target}
+        isAccessibleForFree={corso.category.some(
+          (el) => el.name.toLowerCase() === "gratuiti"
+        )}
+        breadcrumbs={breadcrumbs}
+        coursePrerequisites={corso.requisiti}
+      />
       <FlexContainer maxWidth='lg'>
         <StyledBox>
           <StyledContainer>

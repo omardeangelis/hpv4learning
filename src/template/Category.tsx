@@ -8,6 +8,7 @@ import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
+import WebPageSchema from "../components/SEO/components/WebPageSchema";
 import Layout from "../components/ui/navigation/layout";
 import { CoursePreviewProps } from "../types/course";
 import { rowalizer } from "../utils/helpers";
@@ -65,6 +66,16 @@ const Category = ({
     );
   }, []);
 
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      {
+        text: `Corsi per ${alias || name}`,
+        link: `/corsi/${name.toLowerCase()}/`,
+      },
+    ];
+  }, []);
+
   return (
     <Layout>
       <MetaDecorator
@@ -73,6 +84,11 @@ const Category = ({
         metaDescription={description}
       />
       <LinkHandler />
+      <WebPageSchema
+        title={`Corsi per ${alias || name}`}
+        description={description}
+        breadcrumbs={breadcrumbs}
+      />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
