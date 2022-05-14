@@ -27,6 +27,7 @@ import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
 import { graphql } from "gatsby";
 import styled from "@emotion/styled";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import OrganizationSchema from "../components/SEO/components/OrganizationSchema";
 
 const CustomStack = styled.div`
   .faq-image {
@@ -54,6 +55,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <MetaDecorator metaTitle='Home' />
       <LinkHandler />
+      <OrganizationSchema />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
