@@ -163,6 +163,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
         )}
         breadcrumbs={breadcrumbs}
         coursePrerequisites={corso.requisiti}
+        recensioniRicevute={corso.recensioniRicevute}
       />
       <FlexContainer maxWidth='lg'>
         <StyledBox>
@@ -491,6 +492,7 @@ export const query = graphql`
       couponLink
       concetti
       updatedAt
+      recensioniRicevute
       insegnante {
         nome
         cognome

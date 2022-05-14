@@ -36,6 +36,7 @@ export type SingleCourseProps = CoursePreviewProps &
     introduzioneProgetti: RemarkType;
     progetti?: ProjectProps[];
     updatedAt: Date;
+    recensioniRicevute: number;
   };
 
 export type CourseCategoryProps = {
