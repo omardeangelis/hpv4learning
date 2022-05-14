@@ -27,3 +27,39 @@ export type MetaDecoratorProps = {
     content: string;
   }[];
 };
+
+export type GlobalSeoProps = {
+  title?: string;
+  description?: string;
+  isArticle?: true;
+  image?: string;
+  imageAltText?: string;
+  publishDate?: string;
+  modifiedDate?: string;
+};
+
+export type BreadcrumbElementProps = {
+  "@type": string;
+  position: number;
+  item: {
+    "@type": string;
+    "@id": string;
+    url: string;
+    name: string;
+  };
+};
+
+export type breadCrumbProps = {
+  link: string;
+  text: string;
+};
+
+export type ArticleSchemaProps = {
+  type?: string;
+  title: string;
+  description: string;
+  image: string;
+  publishDate: string;
+  modifiedDate: string;
+  authorName: string;
+};

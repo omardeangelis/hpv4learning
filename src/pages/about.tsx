@@ -14,6 +14,7 @@ import { graphql } from "gatsby";
 import Insegnante from "../components/shared/Insegnante";
 import { InsegnanteProps } from "../types/course";
 import LinkHandler from "../components/SEO/components/LinkHandler";
+import WebPageSchema from "../components/SEO/components/WebPageSchema";
 
 const AboutPage = ({
   data,
@@ -21,6 +22,12 @@ const AboutPage = ({
   data: { allContentfulInsegnante: { nodes: InsegnanteProps[] } };
 }) => {
   const insegnanti = data.allContentfulInsegnante.nodes;
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      { text: "Chi siamo", link: "/about/" },
+    ];
+  }, []);
   return (
     <Layout>
       <MetaDecorator
@@ -30,6 +37,11 @@ const AboutPage = ({
         }
       />
       <LinkHandler />
+      <WebPageSchema
+        title='Chi siamo'
+        description='La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi'
+        breadcrumbs={breadcrumbs}
+      />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },

@@ -8,6 +8,7 @@ import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
 import { jobs } from "../asset/jobsdata";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import LinkHandler from "../components/SEO/components/LinkHandler";
+import WebPageSchema from "../components/SEO/components/WebPageSchema";
 
 const CustomStack = styled(Box)`
   .desktop-image {
@@ -38,6 +39,13 @@ const JobsStack = styled(Box)`
 `;
 
 const JoinUs = () => {
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      { text: "Join us", link: "/join-us/" },
+    ];
+  }, []);
+
   return (
     <Layout disableColor>
       <MetaDecorator
@@ -45,6 +53,11 @@ const JoinUs = () => {
         metaDescription='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
       />
       <LinkHandler />
+      <WebPageSchema
+        title='Lavora con noi'
+        description='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
+        breadcrumbs={breadcrumbs}
+      />
       <Box
         sx={{
           background: "linear-gradient(180deg, #341268, #8769FE)",
