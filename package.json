@@ -38,7 +38,7 @@
     "gatsby-plugin-sharp": "^4.10.1",
     "gatsby-plugin-sitemap": "^5.10.1",
     "gatsby-react-router-scroll": "^5.13.0",
-    "gatsby-source-contentful": "^7.8.1",
+    "gatsby-source-contentful": "^7.12.0",
     "gatsby-source-filesystem": "^4.10.0",
     "gatsby-transformer-json": "^4.3.0",
     "gatsby-transformer-remark": "^5.10.1",
