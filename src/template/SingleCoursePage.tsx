@@ -83,8 +83,10 @@ type Props = {
   location: {
     search: string;
   };
-  slug: string;
-  categorySlug: string;
+  pageContext: {
+    slug: string;
+    categorySlug: string;
+  };
 };
 
 type StyledProps = {
@@ -109,7 +111,11 @@ const CustomStack = styled.div<StyledProps>`
   }
 `;
 
-const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
+const SingleCoursePage = ({
+  data,
+  location,
+  pageContext: { slug, categorySlug },
+}: Props) => {
   const { contentfulCorsi: corso } = data;
   const projectRef = useRef<null | HTMLDivElement>(null);
   const { search } = location;
@@ -123,7 +129,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
 
   const categoryName = React.useMemo(() => {
     return corso.category.filter(
-      (el) => el.name.toLowerCase() !== "gratuiti"
+      (el) => el.name.toLowerCase() !== "gratuiti",
     )[0].name as string;
   }, [corso.category]);
 
@@ -133,7 +139,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
       { text: categoryName, link: `/corsi/${categorySlug}/` },
       { text: corso.titolo, link: `/${slug}/` },
     ];
-  }, [categoryName, categorySlug]);
+  }, [categoryName, categorySlug, corso.titolo]);
 
   useEffect(() => {
     if (projectRef.current && scrollToProjects) {
@@ -159,18 +165,18 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
         about={categorySlug}
         audienceType={corso.target}
         isAccessibleForFree={corso.category.some(
-          (el) => el.name.toLowerCase() === "gratuiti"
+          (el) => el.name.toLowerCase() === "gratuiti",
         )}
         breadcrumbs={breadcrumbs}
         coursePrerequisites={corso.requisiti}
         recensioniRicevute={corso.recensioniRicevute}
       />
-      <FlexContainer maxWidth='lg'>
+      <FlexContainer maxWidth="lg">
         <StyledBox>
           <StyledContainer>
             {/* Titolo e Sottotiolo */}
             <Box
-              component='div'
+              component="div"
               sx={{
                 mt: { xs: "48px", lg: "96px" },
               }}
@@ -181,8 +187,8 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
                     fontSize: { xs: "36px", lg: "72px" },
                     lineHeight: { xs: "39px", lg: "79px" },
                   }}
-                  component='h1'
-                  textAlign='center'
+                  component="h1"
+                  textAlign="center"
                   fontWeight={700}
                   dangerouslySetInnerHTML={{
                     __html: createBrandText(corso.titolo),
@@ -196,7 +202,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
               mt: { xs: "48px", lg: "72px" },
             }}
           >
-            <StyledContainer component='section'>
+            <StyledContainer component="section">
               <Box
                 sx={{
                   mt: { xs: "8px", lg: "8px" },
@@ -236,9 +242,9 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
                 }}
               >
                 <Typography
-                  component='h2'
+                  component="h2"
                   fontWeight={500}
-                  color='gray.700'
+                  color="gray.700"
                   sx={{
                     fontSize: { xs: "21px", lg: "36px" },
                     lineHeight: { xs: "28px", lg: "39px" },
@@ -255,7 +261,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
               >
                 <TextWrapper>
                   <Typography
-                    color='grey.600'
+                    color="grey.600"
                     fontWeight={300}
                     sx={{
                       fontSize: { xs: "16px", lg: "16px" },
@@ -272,7 +278,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
 
           {/* Liste di Requisiti e Concetti del corso */}
           <Box
-            component='section'
+            component="section"
             sx={{
               mt: { xs: "36px", lg: "72px" },
             }}
@@ -280,7 +286,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
             <StyledContainer>
               <Box>
                 <ListSection
-                  title='Che Cosa Imparerai'
+                  title="Che Cosa Imparerai"
                   icon={
                     <DoneIcon
                       sx={{
@@ -297,7 +303,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
                 }}
               >
                 <ListSection
-                  title='A chi si rivolge'
+                  title="A chi si rivolge"
                   icon={
                     <PersonIcon
                       sx={{
@@ -314,7 +320,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
                 }}
               >
                 <ListSection
-                  title='Requisiti Minimi'
+                  title="Requisiti Minimi"
                   icon={
                     <ArrowRightIcon
                       sx={{
@@ -334,7 +340,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
               }}
             >
               <Typography
-                color='purple.400'
+                color="purple.400"
                 fontWeight={500}
                 sx={{
                   fontSize: { xs: "24px", lg: "36px" },
@@ -345,6 +351,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
               {data.contentfulCorsi.insegnante.map((insegnante) => {
                 return (
                   <Box
+                    key={insegnante.cognome}
                     sx={{
                       mt: { xs: "24px", lg: "48px" },
                     }}
@@ -364,7 +371,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
             >
               <StyledContainer ref={projectRef}>
                 <Typography
-                  color='purple.400'
+                  color="purple.400"
                   fontWeight={600}
                   sx={{
                     fontSize: { xs: "36px", lg: "56px" },
@@ -389,7 +396,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
                     }}
                   ></Typography>
                 </Box>
-                <Box mt='24px'>
+                <Box mt="24px">
                   <Projects data={corso.progetti} />
                 </Box>
               </StyledContainer>
@@ -429,7 +436,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
             )}
         </StyledBox>
         <Box
-          maxWidth='261px'
+          maxWidth="261px"
           sx={{
             mt: { xs: "0px", lg: "136px" },
             height: "fit-content",
@@ -447,7 +454,7 @@ const SingleCoursePage = ({ data, location, slug, categorySlug }: Props) => {
               lastUpdate={corso.lastUpdate.toString()}
               categoria={
                 corso.category.filter(
-                  (el) => el.name.toLowerCase() !== "gratuiti"
+                  (el) => el.name.toLowerCase() !== "gratuiti",
                 )[0].name as string
               }
               tipologia={corso.categoria}

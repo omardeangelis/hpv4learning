@@ -35,7 +35,6 @@ const LayoutProvider = ({
   }, []);
 
   const handleClickAway = React.useCallback(() => {
-    console.log("dio porco");
     setIsCourseMenuOpen(false);
   }, []);
 
