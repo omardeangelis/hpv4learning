@@ -5,12 +5,11 @@ import { useLocation } from "@reach/router";
 
 const LinkHandler = () => {
   const { href } = useLocation();
-  console.log(href);
 
   return (
     <Helmet>
-      <link href={href} rel='alternate' hrefLang={'it-IT"'} key={"it"} />
-      <link href={href} rel='canonical' key={"it-IT"} />
+      <link href={href} rel="alternate" hrefLang={'it-IT"'} key={"it"} />
+      <link href={href} rel="canonical" key={"it-IT"} />
     </Helmet>
   );
 };
