@@ -7,9 +7,11 @@ import { LayoutProvider } from "../../../context/layout";
 const Layout = ({
   children,
   disableColor,
+  enableFooterPadding,
 }: {
   children: React.ReactChild | React.ReactChild[];
   disableColor?: true;
+  enableFooterPadding?: true;
 }) => {
   return (
     <LayoutProvider>
@@ -17,7 +19,7 @@ const Layout = ({
       <Sidebar />
       <main>{children}</main>
 
-      <Footer />
+      <Footer enableFooterPadding={enableFooterPadding} />
     </LayoutProvider>
   );
 };

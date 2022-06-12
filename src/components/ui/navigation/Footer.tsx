@@ -38,14 +38,15 @@ const CustomStack = styled(Box)`
   }
 `;
 
-const Footer = () => {
+const Footer = ({ enableFooterPadding }: { enableFooterPadding?: boolean }) => {
   const { toggleMenu } = useDropDownMenu(data.map((el) => el.id));
 
   return (
     <Box
       component='footer'
       sx={{
-        py: { xs: "96px", lg: "96px" },
+        pb: { xs: enableFooterPadding ? "96px" : "32px", lg: "96px" },
+        pt: { xs: "64px", lg: "96px" },
       }}
     >
       <Container maxWidth='lg'>
