@@ -129,7 +129,7 @@ const SingleCoursePage = ({
 
   const categoryName = React.useMemo(() => {
     return corso.category.filter(
-      (el) => el.name.toLowerCase() !== "gratuiti",
+      (el) => el.name.toLowerCase() !== "gratuiti"
     )[0].name as string;
   }, [corso.category]);
 
@@ -148,7 +148,7 @@ const SingleCoursePage = ({
   }, [scrollToProjects]);
 
   return (
-    <Layout>
+    <Layout enableFooterPadding>
       <MetaDecorator
         metaTitle={createRowText(corso.titolo)}
         metaDescription={corso.riassunto.riassunto}
@@ -165,18 +165,18 @@ const SingleCoursePage = ({
         about={categorySlug}
         audienceType={corso.target}
         isAccessibleForFree={corso.category.some(
-          (el) => el.name.toLowerCase() === "gratuiti",
+          (el) => el.name.toLowerCase() === "gratuiti"
         )}
         breadcrumbs={breadcrumbs}
         coursePrerequisites={corso.requisiti}
         recensioniRicevute={corso.recensioniRicevute}
       />
-      <FlexContainer maxWidth="lg">
+      <FlexContainer maxWidth='lg'>
         <StyledBox>
           <StyledContainer>
             {/* Titolo e Sottotiolo */}
             <Box
-              component="div"
+              component='div'
               sx={{
                 mt: { xs: "48px", lg: "96px" },
               }}
@@ -187,8 +187,8 @@ const SingleCoursePage = ({
                     fontSize: { xs: "36px", lg: "72px" },
                     lineHeight: { xs: "39px", lg: "79px" },
                   }}
-                  component="h1"
-                  textAlign="center"
+                  component='h1'
+                  textAlign='center'
                   fontWeight={700}
                   dangerouslySetInnerHTML={{
                     __html: createBrandText(corso.titolo),
@@ -202,7 +202,7 @@ const SingleCoursePage = ({
               mt: { xs: "48px", lg: "72px" },
             }}
           >
-            <StyledContainer component="section">
+            <StyledContainer component='section'>
               <Box
                 sx={{
                   mt: { xs: "8px", lg: "8px" },
@@ -242,9 +242,9 @@ const SingleCoursePage = ({
                 }}
               >
                 <Typography
-                  component="h2"
+                  component='h2'
                   fontWeight={500}
-                  color="gray.700"
+                  color='gray.700'
                   sx={{
                     fontSize: { xs: "21px", lg: "36px" },
                     lineHeight: { xs: "28px", lg: "39px" },
@@ -261,7 +261,7 @@ const SingleCoursePage = ({
               >
                 <TextWrapper>
                   <Typography
-                    color="grey.600"
+                    color='grey.600'
                     fontWeight={300}
                     sx={{
                       fontSize: { xs: "16px", lg: "16px" },
@@ -278,7 +278,7 @@ const SingleCoursePage = ({
 
           {/* Liste di Requisiti e Concetti del corso */}
           <Box
-            component="section"
+            component='section'
             sx={{
               mt: { xs: "36px", lg: "72px" },
             }}
@@ -286,7 +286,7 @@ const SingleCoursePage = ({
             <StyledContainer>
               <Box>
                 <ListSection
-                  title="Che Cosa Imparerai"
+                  title='Che Cosa Imparerai'
                   icon={
                     <DoneIcon
                       sx={{
@@ -303,7 +303,7 @@ const SingleCoursePage = ({
                 }}
               >
                 <ListSection
-                  title="A chi si rivolge"
+                  title='A chi si rivolge'
                   icon={
                     <PersonIcon
                       sx={{
@@ -320,7 +320,7 @@ const SingleCoursePage = ({
                 }}
               >
                 <ListSection
-                  title="Requisiti Minimi"
+                  title='Requisiti Minimi'
                   icon={
                     <ArrowRightIcon
                       sx={{
@@ -340,7 +340,7 @@ const SingleCoursePage = ({
               }}
             >
               <Typography
-                color="purple.400"
+                color='purple.400'
                 fontWeight={500}
                 sx={{
                   fontSize: { xs: "24px", lg: "36px" },
@@ -371,7 +371,7 @@ const SingleCoursePage = ({
             >
               <StyledContainer ref={projectRef}>
                 <Typography
-                  color="purple.400"
+                  color='purple.400'
                   fontWeight={600}
                   sx={{
                     fontSize: { xs: "36px", lg: "56px" },
@@ -396,7 +396,7 @@ const SingleCoursePage = ({
                     }}
                   ></Typography>
                 </Box>
-                <Box mt="24px">
+                <Box mt='24px'>
                   <Projects data={corso.progetti} />
                 </Box>
               </StyledContainer>
@@ -436,7 +436,7 @@ const SingleCoursePage = ({
             )}
         </StyledBox>
         <Box
-          maxWidth="261px"
+          maxWidth='261px'
           sx={{
             mt: { xs: "0px", lg: "136px" },
             height: "fit-content",
@@ -454,7 +454,7 @@ const SingleCoursePage = ({
               lastUpdate={corso.lastUpdate.toString()}
               categoria={
                 corso.category.filter(
-                  (el) => el.name.toLowerCase() !== "gratuiti",
+                  (el) => el.name.toLowerCase() !== "gratuiti"
                 )[0].name as string
               }
               tipologia={corso.categoria}

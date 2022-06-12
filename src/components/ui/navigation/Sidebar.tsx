@@ -5,9 +5,6 @@ import Container from "@mui/material/Container/Container";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 //Icon
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import HomeIcon from "@mui/icons-material/Home";
-import SchoolIcon from "@mui/icons-material/School";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
 //Gatsby
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
@@ -19,7 +16,9 @@ import Typography from "@mui/material/Typography";
 import useDropDown from "../../../hook/useDropDown";
 import styled from "@emotion/styled";
 import { CategoryMenuProps } from "../../../types/layout";
+import { getIcon as getLayoutIcon } from "../../../feature/navigation/utils";
 import { getIcon } from "../../../utils/general";
+import { useNavigationLink } from "../../../feature/navigation/hooks/useNavigationLink";
 
 type Props = {
   allContentfulCategory: {
@@ -46,6 +45,7 @@ const Sidebar = () => {
   const ctx = useLayoutContext();
 
   const { toggleMenu } = useDropDown(["corsi"]);
+  const links = useNavigationLink();
 
   return (
     <StyledDrawer
@@ -64,7 +64,97 @@ const Sidebar = () => {
       <Container maxWidth='lg'>
         <Stack direction='row' justifyContent='flex-start'>
           <Box pt='24px'>
-            <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
+            {links.map(({ text, icon, link }) => {
+              if (!link) {
+                return (
+                  <Box py='18px'>
+                    <Stack
+                      direction='row'
+                      spacing={2}
+                      alignItems='center'
+                      onClick={() => toggleMenu("corsi")}
+                    >
+                      {getLayoutIcon("school", {
+                        color: "purple.400",
+                      })}
+                      <Typography
+                        sx={{
+                          fontSize: "1rem",
+                          lineHeight: "unset",
+                          fontWeight: 500,
+                        }}
+                        color='gray.800'
+                      >
+                        Corsi
+                      </Typography>
+                      <ExpandMoreIcon />
+                    </Stack>
+
+                    <Box id='corsi-menu' pt='18px' pl='8px'>
+                      {data.allContentfulCategory.nodes.map(
+                        ({ name, slug }) => {
+                          return (
+                            <React.Fragment key={name}>
+                              {/* @ts-ignore */}
+                              <GatsbyLink
+                                to={`/corsi/${slug}/`}
+                                onClick={ctx?.toggleSidebar}
+                                key={slug}
+                              >
+                                <Box py='18px'>
+                                  <Stack
+                                    direction='row'
+                                    spacing={2}
+                                    alignItems='center'
+                                  >
+                                    {getIcon(slug)}
+                                    <Typography
+                                      sx={{
+                                        fontSize: "1rem",
+                                        lineHeight: "unset",
+                                        fontWeight: 500,
+                                      }}
+                                      color='gray.800'
+                                    >
+                                      {name}
+                                    </Typography>
+                                  </Stack>
+                                </Box>
+                              </GatsbyLink>
+                            </React.Fragment>
+                          );
+                        }
+                      )}
+                    </Box>
+                  </Box>
+                );
+              }
+              return (
+                <React.Fragment key={text}>
+                  {/* @ts-ignore */}
+                  <GatsbyLink to={link} onClick={ctx?.toggleSidebar}>
+                    <Box py='18px'>
+                      <Stack direction='row' spacing={2} alignItems='center'>
+                        {getLayoutIcon(icon, {
+                          color: "purple.400",
+                        })}
+                        <Typography
+                          sx={{
+                            fontSize: "1rem",
+                            lineHeight: "unset",
+                            fontWeight: 500,
+                          }}
+                          color='grey.800'
+                        >
+                          {text}
+                        </Typography>
+                      </Stack>
+                    </Box>
+                  </GatsbyLink>
+                </React.Fragment>
+              );
+            })}
+            {/* <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
               <Box py='18px'>
                 <Stack direction='row' spacing={2} alignItems='center'>
                   <HomeIcon
@@ -110,33 +200,7 @@ const Sidebar = () => {
                 </Typography>
                 <ExpandMoreIcon />
               </Stack>
-              <Box id='corsi-menu' pt='18px' pl='8px'>
-                {data.allContentfulCategory.nodes.map(({ name, slug }) => {
-                  return (
-                    <GatsbyLink
-                      to={`/corsi/${slug}/`}
-                      onClick={ctx?.toggleSidebar}
-                      key={slug}
-                    >
-                      <Box py='18px'>
-                        <Stack direction='row' spacing={2} alignItems='center'>
-                          {getIcon(slug)}
-                          <Typography
-                            sx={{
-                              fontSize: "1rem",
-                              lineHeight: "unset",
-                              fontWeight: 500,
-                            }}
-                            color='gray.800'
-                          >
-                            {name}
-                          </Typography>
-                        </Stack>
-                      </Box>
-                    </GatsbyLink>
-                  );
-                })}
-              </Box>
+              
             </Box>
             <GatsbyLink to='/about/' onClick={ctx?.toggleSidebar}>
               <Box py='18px'>
@@ -158,7 +222,7 @@ const Sidebar = () => {
                   </Typography>
                 </Stack>
               </Box>
-            </GatsbyLink>
+            </GatsbyLink> */}
           </Box>
         </Stack>
       </Container>

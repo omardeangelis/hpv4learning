@@ -4,11 +4,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-
 //Icon
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import HomeIcon from "@mui/icons-material/Home";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 //gatsby
 import { Link as GastbyLink } from "gatsby";
@@ -17,6 +13,8 @@ import { Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import CourseMenu from "./CourseMenu";
 import { useLayoutContext } from "../../../context/layout";
+import { useNavigationLink } from "../../../feature/navigation/hooks/useNavigationLink";
+import { getIcon } from "../../../feature/navigation/utils";
 
 const StyledNav = styled(Box)`
   width: 100%;
@@ -58,6 +56,7 @@ const StyledRight = styled(Box)`
 
 const Navbar = ({ disableColor }: { disableColor?: true }) => {
   const ctx = useLayoutContext();
+  const links = useNavigationLink();
   return (
     <>
       <StyledNav
@@ -71,6 +70,7 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
       >
         <Container maxWidth='lg'>
           <Stack direction='row' alignItems='center' height='72px'>
+            {/* @ts-ignore*/}
             <GastbyLink
               to='/'
               style={{
@@ -93,80 +93,68 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
                 direction='row'
                 justifyContent='space-around'
                 alignItems='center'
-                spacing={2}
                 sx={{
                   flex: 1,
                 }}
               >
-                <GastbyLink to='/'>
-                  <Box role='_link'>
-                    <Stack direction='row' spacing={2} alignItems='center'>
-                      <Typography
-                        sx={{
-                          fontSize: "1rem",
-                          lineHeight: "unset",
-                          fontWeight: 500,
+                {links.map(({ text, link, icon }) => {
+                  if (!link) {
+                    return (
+                      <Box
+                        role='_link'
+                        id='course_opener'
+                        onClick={(e) => {
+                          ctx?.toggleCourseMenu();
+                          e.stopPropagation();
                         }}
-                        color={disableColor ? "white" : "gray.800"}
                       >
-                        Home
-                      </Typography>
-                      <HomeIcon
-                        sx={{
-                          color: disableColor ? "white" : "purple.400",
-                        }}
-                      />
-                    </Stack>
-                  </Box>
-                </GastbyLink>
-
-                <Box
-                  role='_link'
-                  id='course_opener'
-                  onClick={(e) => {
-                    ctx?.toggleCourseMenu();
-                    e.stopPropagation();
-                  }}
-                >
-                  <Stack direction='row' spacing={2} alignItems='center'>
-                    <Typography
-                      sx={{
-                        fontSize: "1rem",
-                        lineHeight: "unset",
-                        fontWeight: 500,
-                      }}
-                      color={disableColor ? "white" : "gray.800"}
-                    >
-                      Corsi
-                    </Typography>
-                    <ArrowDropDownIcon
-                      sx={{
-                        color: disableColor ? "white" : "inherit",
-                      }}
-                    />
-                  </Stack>
-                </Box>
-                <GastbyLink to='/about/'>
-                  <Box role='_link'>
-                    <Stack direction='row' spacing={2} alignItems='center'>
-                      <Typography
-                        sx={{
-                          fontSize: "1rem",
-                          lineHeight: "unset",
-                          fontWeight: 500,
-                        }}
-                        color={disableColor ? "white" : "gray.800"}
-                      >
-                        Chi siamo
-                      </Typography>
-                      <AssignmentIndIcon
-                        sx={{
-                          color: disableColor ? "white" : "purple.400",
-                        }}
-                      />
-                    </Stack>
-                  </Box>
-                </GastbyLink>
+                        <Stack direction='row' spacing={2} alignItems='center'>
+                          <Typography
+                            sx={{
+                              fontSize: "1rem",
+                              lineHeight: "unset",
+                              fontWeight: 500,
+                            }}
+                            color={disableColor ? "white" : "gray.800"}
+                          >
+                            {text}
+                          </Typography>
+                          {getIcon(icon, {
+                            color: disableColor ? "white" : "inherit",
+                          })}
+                        </Stack>
+                      </Box>
+                    );
+                  }
+                  return (
+                    <>
+                      {/* @ts-ignore*/}
+                      <GastbyLink to={link}>
+                        <Box role='_link'>
+                          <Stack
+                            direction='row'
+                            spacing={2}
+                            alignItems='center'
+                          >
+                            <Typography
+                              sx={{
+                                fontSize: "1rem",
+                                lineHeight: "unset",
+                                fontWeight: 500,
+                              }}
+                              color={disableColor ? "white" : "gray.800"}
+                            >
+                              {text}
+                            </Typography>
+                            {getIcon(icon, {
+                              color: disableColor ? "white" : "purple.400",
+                            })}
+                          </Stack>
+                        </Box>
+                      </GastbyLink>
+                    </>
+                  );
+                })}
               </Stack>
             </StyledCenter>
             <StyledRight>
