@@ -48,11 +48,9 @@ exports.createPages = async ({ graphql, actions }) => {
     const slug = project.titolo.split(" ").join("-").toLowerCase();
 
     createPage({
-      path: `/progetti/${courseSlug}/${slug}`,
+      path: `/progetti/${courseSlug}/${slug}/`,
       component: path.resolve(`./src/template/ProjectArticle.tsx`),
       context: {
-        slug: `/progetti/${courseSlug}/${slug}`,
-        title: project.titolo,
         id: project.id,
       },
     });

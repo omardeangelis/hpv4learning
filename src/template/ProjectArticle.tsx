@@ -6,11 +6,6 @@ import { Box, Container, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 
 type Props = {
-  pageContext: {
-    slug: string;
-    title: string;
-    id: string;
-  };
   data: {
     allContentfulProgetti: {
       nodes: ProjectProps[];
@@ -35,12 +30,13 @@ const StyledContainer = styled(Box)`
   }
 `;
 
-const ProjectArticle = ({ pageContext: { slug, title, id }, data }: Props) => {
+const ProjectArticle = ({ data }: Props) => {
   console.log(data);
 
-  const body =
-    data.allContentfulProgetti.nodes[0].body.childMarkdownRemark
+  const body = React.useMemo(() => {
+    return data.allContentfulProgetti.nodes[0].body.childMarkdownRemark
       .rawMarkdownBody;
+  }, []);
 
   return (
     <Layout>
@@ -63,7 +59,7 @@ const ProjectArticle = ({ pageContext: { slug, title, id }, data }: Props) => {
                       lineHeight: { xs: "44px", lg: "56px" },
                     }}
                   >
-                    {title}
+                    {data.allContentfulProgetti.nodes[0].titolo}
                   </Typography>
                 </Box>
               </Container>
