@@ -1,4 +1,2 @@
-export type BlockDescriptionProps = {
-  description: string;
-  title: string;
-};
+export * from "./layout";
+export * from "./course";
