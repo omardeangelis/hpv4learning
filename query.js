@@ -35,6 +35,9 @@ const allProjectArticle = `
       project_category {
         slug
       }
+      body {
+        body
+      }
     }
   }
 }

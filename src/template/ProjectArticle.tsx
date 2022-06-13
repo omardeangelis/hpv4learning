@@ -31,12 +31,22 @@ const StyledContainer = styled(Box)`
 `;
 
 const ProjectArticle = ({ data }: Props) => {
-  console.log(data);
+  const queryData = React.useMemo(() => {
+    return data.allContentfulProgetti.nodes[0];
+  }, [data]);
 
-  const body = React.useMemo(() => {
-    return data.allContentfulProgetti.nodes[0].body.childMarkdownRemark
-      .rawMarkdownBody;
-  }, []);
+  const { body, copertina, descrizione, metaDescription, ordine, titolo, url } =
+    queryData;
+
+  console.log(
+    body,
+    copertina,
+    descrizione,
+    metaDescription,
+    ordine,
+    titolo,
+    url
+  );
 
   return (
     <Layout>
@@ -59,7 +69,7 @@ const ProjectArticle = ({ data }: Props) => {
                       lineHeight: { xs: "44px", lg: "56px" },
                     }}
                   >
-                    {data.allContentfulProgetti.nodes[0].titolo}
+                    {titolo}
                   </Typography>
                 </Box>
               </Container>
