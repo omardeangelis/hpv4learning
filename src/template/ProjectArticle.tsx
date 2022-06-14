@@ -2,8 +2,12 @@ import React from "react";
 import { graphql } from "gatsby";
 import { ProjectProps } from "../types/course";
 import Layout from "../components/ui/navigation/layout";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography, css } from "@mui/material";
 import styled from "@emotion/styled";
+import ReactMarkdown from "react-markdown";
+import "../styles/projectArticle.css";
+import ListSection from "../components/ui/ListSection";
+import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 
 type Props = {
   data: {
@@ -30,6 +34,26 @@ const StyledContainer = styled(Box)`
   }
 `;
 
+const StyledListSectionBox = styled(Box)`
+  margin-top: 25px;
+  border: 1px;
+  border-color: #e4e7ec;
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  & > p {
+    padding: 20px 16px;
+    padding-bottom: 0;
+    font-weight: 500;
+    font-size: 20px;
+  }
+  & > ul > li > div > p {
+    padding-left: 16px;
+    font-weight: 400;
+    font-size: 14px;
+    color: #000;
+  }
+`;
+
 const ProjectArticle = ({ data }: Props) => {
   const queryData = React.useMemo(() => {
     return data.allContentfulProgetti.nodes[0];
@@ -38,6 +62,15 @@ const ProjectArticle = ({ data }: Props) => {
   const { body, copertina, descrizione, metaDescription, ordine, titolo, url } =
     queryData;
 
+  const image = getImage(copertina) as IGatsbyImageData;
+
+  const headings = React.useMemo(() => {
+    const array = body.childMarkdownRemark.headings.map((heading) => {
+      return heading.value;
+    });
+    return array;
+  }, []);
+
   console.log(
     body,
     copertina,
@@ -45,12 +78,18 @@ const ProjectArticle = ({ data }: Props) => {
     metaDescription,
     ordine,
     titolo,
-    url
+    url,
+    headings
   );
 
   return (
     <Layout>
-      <FlexContainer maxWidth='lg'>
+      <FlexContainer
+        sx={{
+          padding: "0",
+        }}
+        maxWidth='lg'
+      >
         <Box>
           <StyledContainer>
             <Box
@@ -59,6 +98,14 @@ const ProjectArticle = ({ data }: Props) => {
               }}
             >
               <Container maxWidth='lg'>
+                <Stack
+                  direction='row'
+                  alignItems='center'
+                  justifyContent='space-between'
+                >
+                  <p>a</p>
+                  <p>a</p>
+                </Stack>
                 <Box mx='auto'>
                   <Typography
                     component='h1'
@@ -72,11 +119,29 @@ const ProjectArticle = ({ data }: Props) => {
                     {titolo}
                   </Typography>
                 </Box>
+                <GatsbyImage
+                  image={image}
+                  alt={titolo}
+                  style={{
+                    width: "100%",
+                    height: "215px",
+                    borderRadius: "16px",
+                    marginTop: "25px",
+                  }}
+                />
+                <StyledListSectionBox>
+                  <ListSection
+                    title='Troverai nel progetto'
+                    list={headings}
+                    icon={<div></div>}
+                  ></ListSection>
+                </StyledListSectionBox>
+                <ReactMarkdown children={body.body} className='markdown' />
               </Container>
             </Box>
           </StyledContainer>
         </Box>
-        {/* <Box>{Colonna a destra}</Box> */}
+        {/* <Box>Colonna a destra</Box> */}
       </FlexContainer>
     </Layout>
   );

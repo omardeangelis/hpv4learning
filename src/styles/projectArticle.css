@@ -1,0 +1,30 @@
+.markdown h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+  margin-top: 24px;
+}
+
+.markdown h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+  margin-top: 20px;
+}
+
+.markdown p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 16px;
+}
+
+.markdown pre {
+  margin: 20px auto 20px auto;
+  padding: 30px 0 30px 15px;
+  border-radius: 16px;
+  background: #4b4b4b;
+  color: white;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
