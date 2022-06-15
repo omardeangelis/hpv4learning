@@ -1,7 +1,6 @@
 import React from "react";
 //Global e Seo
 import Layout from "../components/ui/navigation/layout";
-//@ts-ignore
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import ComunityBanner from "../components/banner/ComunityBanner";
