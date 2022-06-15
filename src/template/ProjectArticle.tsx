@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import "../styles/projectArticle.css";
 import ListSection from "../components/ui/ListSection";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
+import ArticleHero from "../components/article/ArticleHero";
 
 type Props = {
   data: {
@@ -59,8 +60,19 @@ const ProjectArticle = ({ data }: Props) => {
     return data.allContentfulProgetti.nodes[0];
   }, [data]);
 
-  const { body, copertina, descrizione, metaDescription, ordine, titolo, url } =
-    queryData;
+  console.log(queryData);
+
+  const {
+    body,
+    copertina,
+    descrizione,
+    metaDescription,
+    ordine,
+    titolo,
+    url,
+    project_category: { slug },
+    createdAt,
+  } = queryData;
 
   const image = getImage(copertina) as IGatsbyImageData;
 
@@ -79,7 +91,9 @@ const ProjectArticle = ({ data }: Props) => {
     ordine,
     titolo,
     url,
-    headings
+    headings,
+    slug,
+    createdAt
   );
 
   return (
@@ -98,37 +112,27 @@ const ProjectArticle = ({ data }: Props) => {
               }}
             >
               <Container maxWidth='lg'>
-                <Stack
-                  direction='row'
-                  alignItems='center'
-                  justifyContent='space-between'
-                >
-                  <p>a</p>
-                  <p>a</p>
-                </Stack>
-                <Box mx='auto'>
-                  <Typography
-                    component='h1'
-                    textAlign='center'
-                    fontWeight={600}
-                    sx={{
-                      fontSize: { xs: "36px", lg: "48px" },
-                      lineHeight: { xs: "44px", lg: "56px" },
-                    }}
-                  >
-                    {titolo}
-                  </Typography>
-                </Box>
-                <GatsbyImage
-                  image={image}
-                  alt={titolo}
-                  style={{
-                    width: "100%",
-                    height: "215px",
-                    borderRadius: "16px",
-                    marginTop: "25px",
-                  }}
+                <ArticleHero
+                  // category='react'
+                  // titolo={titolo}
+                  // url={url}
+                  // createdAt={createdAt}
+                  // timeToRead={body.childMarkdownRemark.timeToRead}
+                  data={queryData}
                 />
+
+                {image && (
+                  <GatsbyImage
+                    image={image}
+                    alt={titolo}
+                    style={{
+                      width: "100%",
+                      height: "215px",
+                      borderRadius: "16px",
+                      marginTop: "25px",
+                    }}
+                  />
+                )}
                 <StyledListSectionBox>
                   <ListSection
                     title='Troverai nel progetto'
@@ -172,7 +176,12 @@ export const query = graphql`
             }
             html
             rawMarkdownBody
+            timeToRead
           }
+        }
+        createdAt
+        project_category {
+          slug
         }
       }
     }

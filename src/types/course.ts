@@ -81,6 +81,12 @@ export type ProjectProps = {
   url?: string;
   metaDescription?: string;
   body: ProjectBodyProps;
+  project_category: [
+    {
+      slug: string;
+    }
+  ];
+  createdAt: string;
 };
 
 export type ProjectBodyProps = {
@@ -89,6 +95,7 @@ export type ProjectBodyProps = {
     headings: object[];
     html: string;
     rawMarkdownBody: string;
+    timeToRead: string;
   };
 };
 
