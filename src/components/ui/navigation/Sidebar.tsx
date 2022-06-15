@@ -95,7 +95,7 @@ const Sidebar = () => {
                         ({ name, slug }) => {
                           return (
                             <React.Fragment key={name}>
-                              {/* @ts-ignore */}
+                              {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
                               <GatsbyLink
                                 to={`/corsi/${slug}/`}
                                 onClick={ctx?.toggleSidebar}
@@ -123,7 +123,7 @@ const Sidebar = () => {
                               </GatsbyLink>
                             </React.Fragment>
                           );
-                        }
+                        },
                       )}
                     </Box>
                   </Box>
@@ -131,7 +131,7 @@ const Sidebar = () => {
               }
               return (
                 <React.Fragment key={text}>
-                  {/* @ts-ignore */}
+                  {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
                   <GatsbyLink to={link} onClick={ctx?.toggleSidebar}>
                     <Box py='18px'>
                       <Stack direction='row' spacing={2} alignItems='center'>
@@ -154,75 +154,6 @@ const Sidebar = () => {
                 </React.Fragment>
               );
             })}
-            {/* <GatsbyLink to='/' onClick={ctx?.toggleSidebar}>
-              <Box py='18px'>
-                <Stack direction='row' spacing={2} alignItems='center'>
-                  <HomeIcon
-                    sx={{
-                      color: "purple.400",
-                    }}
-                  />
-                  <Typography
-                    sx={{
-                      fontSize: "1rem",
-                      lineHeight: "unset",
-                      fontWeight: 500,
-                    }}
-                    color='grey.800'
-                  >
-                    Home
-                  </Typography>
-                </Stack>
-              </Box>
-            </GatsbyLink>
-
-            <Box py='18px'>
-              <Stack
-                direction='row'
-                spacing={2}
-                alignItems='center'
-                onClick={() => toggleMenu("corsi")}
-              >
-                <SchoolIcon
-                  sx={{
-                    color: "purple.400",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    fontSize: "1rem",
-                    lineHeight: "unset",
-                    fontWeight: 500,
-                  }}
-                  color='gray.800'
-                >
-                  Corsi
-                </Typography>
-                <ExpandMoreIcon />
-              </Stack>
-              
-            </Box>
-            <GatsbyLink to='/about/' onClick={ctx?.toggleSidebar}>
-              <Box py='18px'>
-                <Stack direction='row' spacing={2} alignItems='center'>
-                  <AssignmentIndIcon
-                    sx={{
-                      color: "purple.400",
-                    }}
-                  />
-                  <Typography
-                    sx={{
-                      fontSize: "1rem",
-                      lineHeight: "unset",
-                      fontWeight: 500,
-                    }}
-                    color='grey.800'
-                  >
-                    Chi siamo
-                  </Typography>
-                </Stack>
-              </Box>
-            </GatsbyLink> */}
           </Box>
         </Stack>
       </Container>
@@ -231,7 +162,7 @@ const Sidebar = () => {
 };
 
 const query = graphql`
-  {
+  query SidebarCourseLink {
     allContentfulCategory {
       nodes {
         slug

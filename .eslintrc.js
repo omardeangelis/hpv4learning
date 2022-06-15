@@ -1,5 +1,12 @@
 module.exports = {
   root: true,
+  parser: "@babel/eslint-parser",
+  rules: {
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      { "ts-ignore": "allow-with-description" },
+    ],
+  },
   overrides: [
     {
       files: ["*.ts", "*.tsx"],
