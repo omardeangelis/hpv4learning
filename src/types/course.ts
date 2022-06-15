@@ -92,7 +92,7 @@ export type ProjectProps = {
 export type ProjectBodyProps = {
   body: string;
   childMarkdownRemark: {
-    headings: object[];
+    headings: [{ value: string }];
     html: string;
     rawMarkdownBody: string;
     timeToRead: string;

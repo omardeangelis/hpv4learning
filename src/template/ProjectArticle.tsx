@@ -2,13 +2,10 @@ import React from "react";
 import { graphql } from "gatsby";
 import { ProjectProps } from "../types/course";
 import Layout from "../components/ui/navigation/layout";
-import { Box, Container, Stack, Typography, css } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
-import ReactMarkdown from "react-markdown";
-import "../styles/projectArticle.css";
-import ListSection from "../components/ui/ListSection";
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 import ArticleHero from "../components/article/ArticleHero";
+import ArticleBody from "../components/article/ArticleBody";
 
 type Props = {
   data: {
@@ -35,66 +32,10 @@ const StyledContainer = styled(Box)`
   }
 `;
 
-const StyledListSectionBox = styled(Box)`
-  margin-top: 25px;
-  border: 1px;
-  border-color: #e4e7ec;
-  border-radius: 12px;
-  background-color: #f8f8f8;
-  & > p {
-    padding: 20px 16px;
-    padding-bottom: 0;
-    font-weight: 500;
-    font-size: 20px;
-  }
-  & > ul > li > div > p {
-    padding-left: 16px;
-    font-weight: 400;
-    font-size: 14px;
-    color: #000;
-  }
-`;
-
 const ProjectArticle = ({ data }: Props) => {
   const queryData = React.useMemo(() => {
     return data.allContentfulProgetti.nodes[0];
   }, [data]);
-
-  console.log(queryData);
-
-  const {
-    body,
-    copertina,
-    descrizione,
-    metaDescription,
-    ordine,
-    titolo,
-    url,
-    project_category: { slug },
-    createdAt,
-  } = queryData;
-
-  const image = getImage(copertina) as IGatsbyImageData;
-
-  const headings = React.useMemo(() => {
-    const array = body.childMarkdownRemark.headings.map((heading) => {
-      return heading.value;
-    });
-    return array;
-  }, []);
-
-  console.log(
-    body,
-    copertina,
-    descrizione,
-    metaDescription,
-    ordine,
-    titolo,
-    url,
-    headings,
-    slug,
-    createdAt
-  );
 
   return (
     <Layout>
@@ -112,35 +53,8 @@ const ProjectArticle = ({ data }: Props) => {
               }}
             >
               <Container maxWidth='lg'>
-                <ArticleHero
-                  // category='react'
-                  // titolo={titolo}
-                  // url={url}
-                  // createdAt={createdAt}
-                  // timeToRead={body.childMarkdownRemark.timeToRead}
-                  data={queryData}
-                />
-
-                {image && (
-                  <GatsbyImage
-                    image={image}
-                    alt={titolo}
-                    style={{
-                      width: "100%",
-                      height: "215px",
-                      borderRadius: "16px",
-                      marginTop: "25px",
-                    }}
-                  />
-                )}
-                <StyledListSectionBox>
-                  <ListSection
-                    title='Troverai nel progetto'
-                    list={headings}
-                    icon={<div></div>}
-                  ></ListSection>
-                </StyledListSectionBox>
-                <ReactMarkdown children={body.body} className='markdown' />
+                <ArticleHero data={queryData} />
+                <ArticleBody data={queryData} />
               </Container>
             </Box>
           </StyledContainer>
