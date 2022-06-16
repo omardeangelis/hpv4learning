@@ -103,7 +103,7 @@ const AboutPage = ({
 };
 
 export const query = graphql`
-  {
+  query AboutPageInsegnanti {
     allContentfulInsegnante {
       nodes {
         nome
