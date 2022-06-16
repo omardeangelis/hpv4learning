@@ -97,6 +97,7 @@ export const query = graphql`
         project_category {
           slug
         }
+        linkGithub
       }
     }
   }
