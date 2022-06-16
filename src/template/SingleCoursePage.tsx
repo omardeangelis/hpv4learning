@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from "react";
 import { graphql } from "gatsby";
 //Global Component e Variables
 import Layout from "../components/ui/navigation/layout";
-//@ts-ignore
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
@@ -129,7 +128,7 @@ const SingleCoursePage = ({
 
   const categoryName = React.useMemo(() => {
     return corso.category.filter(
-      (el) => el.name.toLowerCase() !== "gratuiti"
+      (el) => el.name.toLowerCase() !== "gratuiti",
     )[0].name as string;
   }, [corso.category]);
 
@@ -165,7 +164,7 @@ const SingleCoursePage = ({
         about={categorySlug}
         audienceType={corso.target}
         isAccessibleForFree={corso.category.some(
-          (el) => el.name.toLowerCase() === "gratuiti"
+          (el) => el.name.toLowerCase() === "gratuiti",
         )}
         breadcrumbs={breadcrumbs}
         coursePrerequisites={corso.requisiti}
@@ -454,7 +453,7 @@ const SingleCoursePage = ({
               lastUpdate={corso.lastUpdate.toString()}
               categoria={
                 corso.category.filter(
-                  (el) => el.name.toLowerCase() !== "gratuiti"
+                  (el) => el.name.toLowerCase() !== "gratuiti",
                 )[0].name as string
               }
               tipologia={corso.categoria}

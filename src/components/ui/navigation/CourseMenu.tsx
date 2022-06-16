@@ -100,50 +100,53 @@ const CourseMenu = () => {
                   {data.allContentfulCategory.nodes.map(
                     ({ name, slug, image, seoDescription }) => {
                       return (
-                        <Link to={`/corsi/${slug}/`} key={slug}>
-                          <Box
-                            px='16px'
-                            py='24px'
-                            maxWidth='343px'
-                            width='100%'
-                            role='_hover'
-                            borderRadius='16px'
-                          >
-                            <Stack
-                              direction='row'
-                              alignItems='center'
-                              spacing={4}
+                        <>
+                          {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
+                          <Link to={`/corsi/${slug}/`} key={slug}>
+                            <Box
+                              px='16px'
+                              py='24px'
+                              maxWidth='343px'
+                              width='100%'
+                              role='_hover'
+                              borderRadius='16px'
                             >
-                              <Box
-                                height='91px'
-                                maxWidth='91px'
-                                width='100%'
-                                borderRadius='12px'
-                                sx={{
-                                  backgroundColor: "purple.300",
-                                  flexGrow: 1,
-                                }}
+                              <Stack
+                                direction='row'
+                                alignItems='center'
+                                spacing={4}
                               >
-                                <StyledImage
-                                  src={image && image.file.url}
-                                  alt='category image'
-                                />
-                              </Box>
-                              <Box>
-                                <Typography variant='subtitle1'>
-                                  {name}
-                                </Typography>
-                                <Box lineHeight='12px'>
-                                  <Typography variant='caption'>
-                                    {seoDescription}
-                                  </Typography>
+                                <Box
+                                  height='91px'
+                                  maxWidth='91px'
+                                  width='100%'
+                                  borderRadius='12px'
+                                  sx={{
+                                    backgroundColor: "purple.300",
+                                    flexGrow: 1,
+                                  }}
+                                >
+                                  <StyledImage
+                                    src={image && image.file.url}
+                                    alt='category image'
+                                  />
                                 </Box>
-                              </Box>
-                            </Stack>
-                          </Box>
-                        </Link>
+                                <Box>
+                                  <Typography variant='subtitle1'>
+                                    {name}
+                                  </Typography>
+                                  <Box lineHeight='12px'>
+                                    <Typography variant='caption'>
+                                      {seoDescription}
+                                    </Typography>
+                                  </Box>
+                                </Box>
+                              </Stack>
+                            </Box>
+                          </Link>
+                        </>
                       );
-                    }
+                    },
                   )}
                 </Stack>
               </Box>
@@ -156,7 +159,7 @@ const CourseMenu = () => {
 };
 
 const query = graphql`
-  {
+  query CategoryMenu {
     allContentfulCategory {
       nodes {
         slug
