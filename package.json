@@ -28,6 +28,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^4.15.1",
     "gatsby-link": "^4.15.0",
+    "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-force-trailing-slashes": "^1.0.6",
     "gatsby-plugin-gatsby-cloud": "^4.8.0-next.3",
     "gatsby-plugin-google-gtag": "^4.15.0",

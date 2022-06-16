@@ -4,32 +4,12 @@ import styled from "@emotion/styled";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { ProjectProps } from "../../types";
 import ReactMarkdown from "react-markdown";
-import ListSection from "../ui/ListSection";
 import { Typography } from "@mui/material";
+import HeadingsList from "./HeadingsList";
 
 interface Props {
   data: ProjectProps;
 }
-
-const StyledListSectionBox = styled(Box)`
-  margin-top: 25px;
-  border: 1px;
-  border-color: #e4e7ec;
-  border-radius: 12px;
-  background-color: #f8f8f8;
-  & > p {
-    padding: 20px 16px;
-    padding-bottom: 0;
-    font-weight: 500;
-    font-size: 20px;
-  }
-  & > ul > li > div > p {
-    padding-left: 16px;
-    font-weight: 400;
-    font-size: 14px;
-    color: #000;
-  }
-`;
 
 const ImageBox = styled(Box)(
   css({
@@ -85,6 +65,7 @@ const ArticleBody = ({ data }: Props) => {
   const image = getImage(copertina) as IGatsbyImageData;
 
   const headings = React.useMemo(() => {
+    if (!body.childMarkdownRemark.headings) return null;
     const array = body.childMarkdownRemark.headings.map((heading) => {
       return heading.value;
     });
@@ -98,17 +79,19 @@ const ArticleBody = ({ data }: Props) => {
           <GatsbyImage image={image} alt={titolo} />
         </ImageBox>
       )}
-      <StyledListSectionBox>
-        <ListSection
-          title='Troverai nel progetto'
-          list={headings}
-          icon={<div></div>}
-        ></ListSection>
-      </StyledListSectionBox>
+      {headings && (
+        <HeadingsList title='Troverai nel progetto' list={headings} />
+      )}
       <ReactMarkdown
         children={body.body}
         components={{
-          h2: ({ node, ...props }) => <StyledH2 component='h2' {...props} />,
+          h2: ({ node, ...props }) => (
+            <StyledH2
+              component='h2'
+              // id={}
+              {...props}
+            />
+          ),
           h3: ({ node, ...props }) => <StyledH3 component='h3' {...props} />,
           p: ({ node, ...props }) => <StyledP component='p' {...props} />,
           code: StyledCode,
