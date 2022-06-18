@@ -43,17 +43,17 @@ const data = [
     items: [
       {
         title: "React",
-        slug: "/",
+        slug: "/progetti/react/",
         isExternal: false,
       },
       {
         title: "Javascript",
-        slug: "/",
+        slug: "/progetti/javascript/",
         isExternal: false,
       },
       {
         title: "Videomaking",
-        slug: "/",
+        slug: "/progetti/videomaker/",
         isExternal: false,
       },
     ],
