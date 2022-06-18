@@ -1,10 +1,8 @@
 import React from "react";
-//Material UI
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 type Props = {
   title: string;
@@ -26,7 +24,7 @@ const HeadingsList = ({ title, list }: Props) => {
       </Typography>
 
       <List dense>
-        {list.map((el) => {
+        {list.map((el, index) => {
           return (
             <ListItem
               key={el}
@@ -34,7 +32,8 @@ const HeadingsList = ({ title, list }: Props) => {
                 paddingLeft: "16px",
               }}
             >
-              <AnchorLink to={`./#`} title={el}>
+              {" "}
+              <a href={`#${index}`} title={el}>
                 <ListItemText>
                   <Typography
                     color='#000'
@@ -46,7 +45,7 @@ const HeadingsList = ({ title, list }: Props) => {
                     {el}
                   </Typography>
                 </ListItemText>
-              </AnchorLink>
+              </a>
             </ListItem>
           );
         })}

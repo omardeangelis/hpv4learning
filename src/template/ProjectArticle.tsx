@@ -85,7 +85,7 @@ export const query = graphql`
         body {
           body
           childMarkdownRemark {
-            headings {
+            headings(depth: h2) {
               value
             }
             html
