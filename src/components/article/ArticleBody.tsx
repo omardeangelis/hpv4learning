@@ -60,6 +60,7 @@ const StyledCode = styled(Box)(
     overflowX: "auto",
     overflowY: "hidden",
     fontSize: "16px",
+    lineHeight: "18px",
   }),
 );
 
@@ -125,10 +126,19 @@ const ArticleBody = React.memo((props: Props) => {
         </ImageBox>
       ) : null}
       {headings ? (
-        <HeadingsList
-          title='Troverai nel progetto'
-          list={headings.filter(Boolean)}
-        />
+        <Box
+          sx={{
+            backgroundColor: "grey.100",
+            borderRadius: "12px",
+            p: ["20px 16px", "20px 32px"],
+            mt: ["24px", "36px"],
+          }}
+        >
+          <HeadingsList
+            title='Troverai nel progetto'
+            list={headings.filter(Boolean)}
+          />
+        </Box>
       ) : null}
       {body?.body ? (
         <ReactMarkdown

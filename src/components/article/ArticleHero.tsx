@@ -20,13 +20,14 @@ const Styledtypography = styled(Typography)(
 const StyledBox = styled(Box)(
   css({
     width: "100%",
-    height: "94px",
     padding: "15px",
     borderLeft: "6px solid #1AC99F",
-    backgroundColor: " #F8F8F8",
     marginTop: ["25px", "36px"],
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     overflowX: "hidden",
-    overflowY: "auto",
+    borderRadius: "0px 8px 8px 0px",
   }),
 );
 
@@ -82,7 +83,13 @@ const ArticleHero = (props: Props) => {
         ) : null}
       </Stack>
 
-      {metaDescription && <StyledBox>{`"${metaDescription}"`}</StyledBox>}
+      {metaDescription && (
+        <StyledBox
+          sx={{
+            backgroundColor: "grey.100",
+          }}
+        >{`"${metaDescription}"`}</StyledBox>
+      )}
     </div>
   );
 };

@@ -34,7 +34,13 @@ const HeadingsList = ({ title, list }: Props) => {
                 }}
               >
                 {" "}
-                <a href={`#${index}`} title={el || "Heading di " + title}>
+                <a
+                  href={`#${index}`}
+                  title={el || "Heading di " + title}
+                  style={{
+                    textDecoration: "underline",
+                  }}
+                >
                   <ListItemText>
                     <Typography
                       color='#000'

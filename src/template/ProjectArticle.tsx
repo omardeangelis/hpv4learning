@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import ArticleHero from "../components/article/ArticleHero";
 import ArticleBody from "../components/article/ArticleBody";
 
-const FlexContainer = styled(Container)`
+const FlexContainer = styled(Box)`
   display: block;
   position: relative;
   @media screen and (min-width: 1024px) {
@@ -14,7 +14,7 @@ const FlexContainer = styled(Container)`
   }
 `;
 
-const StyledContainer = styled(Box)`
+const StyledBox = styled(Box)`
   padding: 0px 0px;
 
   @media screen and (min-width: 1024px) {
@@ -30,28 +30,25 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 
   return (
     <Layout>
-      <FlexContainer
-        sx={{
-          padding: "0",
-        }}
-        maxWidth='lg'
-      >
-        <Box>
-          <StyledContainer>
-            <Box
-              sx={{
-                mt: { xs: "48px", lg: "96px" },
-              }}
-            >
-              <Container maxWidth='lg'>
-                <ArticleHero {...queryData} />
-                <ArticleBody {...queryData} />
-              </Container>
-            </Box>
-          </StyledContainer>
-        </Box>
-        {/* <Box>Colonna a destra</Box> */}
-      </FlexContainer>
+      <Container sx={{ padding: "0px" }} maxWidth={"lg"}>
+        <FlexContainer>
+          <Box>
+            <StyledBox>
+              <Box
+                sx={{
+                  mt: { xs: "48px", lg: "96px" },
+                }}
+              >
+                <Container maxWidth='lg'>
+                  <ArticleHero {...queryData} />
+                  <ArticleBody {...queryData} />
+                </Container>
+              </Box>
+            </StyledBox>
+          </Box>
+          {/* <Box>Colonna a destra</Box> */}
+        </FlexContainer>
+      </Container>
     </Layout>
   );
 };
