@@ -3,9 +3,9 @@ import React from "react";
 import { Stack, Typography, css } from "@mui/material";
 import styled from "@emotion/styled";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LinkSection from "./LinkSection";
+import { LinkSection } from "./LinkSection";
 import dayjs from "dayjs";
-import { ArticleNodeProps } from "../../feature/projects/types";
+import { ArticleNodeProps } from "../types";
 
 type Props = ArticleNodeProps;
 const Styledtypography = styled(Typography)(
@@ -31,7 +31,7 @@ const StyledBox = styled(Box)(
   }),
 );
 
-const ArticleHero = (props: Props) => {
+export const ArticleHero = (props: Props) => {
   const {
     titolo,
     url,
@@ -93,5 +93,3 @@ const ArticleHero = (props: Props) => {
     </div>
   );
 };
-
-export default ArticleHero;

@@ -9,8 +9,8 @@ import {
 } from "gatsby-plugin-image";
 import ReactMarkdown from "react-markdown";
 import { Typography } from "@mui/material";
-import HeadingsList from "./HeadingsList";
-import { ArticleNodeProps } from "../../feature/projects/types";
+import { HeadingsList } from "./HeadingsList";
+import { ArticleNodeProps } from "../types";
 
 type Props = ArticleNodeProps;
 
@@ -64,7 +64,7 @@ const StyledCode = styled(Box)(
   }),
 );
 
-const ArticleBody = React.memo((props: Props) => {
+export const ArticleBody = React.memo((props: Props) => {
   const [hasMounted, setHasMounted] = React.useState<boolean>(false);
   const { titolo, body, copertina } = props;
 
@@ -158,5 +158,3 @@ const ArticleBody = React.memo((props: Props) => {
     </div>
   );
 });
-
-export default ArticleBody;

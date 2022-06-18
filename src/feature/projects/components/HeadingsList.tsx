@@ -10,7 +10,7 @@ type Props = {
   list?: (string | null | undefined)[];
 };
 
-const HeadingsList = ({ title, list }: Props) => {
+export const HeadingsList = ({ title, list }: Props) => {
   return (
     <>
       <Typography
@@ -61,5 +61,3 @@ const HeadingsList = ({ title, list }: Props) => {
     </>
   );
 };
-
-export default HeadingsList;

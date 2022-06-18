@@ -22,7 +22,7 @@ const LinkContainer = styled(Box)(
   }),
 );
 
-const LinkSection = ({ category, url, githubUrl }: Props) => {
+export const LinkSection = ({ category, url, githubUrl }: Props) => {
   const handleLabel = React.useCallback((category?: string | null) => {
     switch (category) {
       case "javascript":
@@ -74,5 +74,3 @@ const LinkSection = ({ category, url, githubUrl }: Props) => {
     </Stack>
   );
 };
-
-export default LinkSection;

@@ -3,8 +3,7 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../components/ui/navigation/layout";
 import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
-import ArticleHero from "../components/article/ArticleHero";
-import ArticleBody from "../components/article/ArticleBody";
+import { ArticleBody, ArticleHero } from "../feature/projects/components";
 
 const FlexContainer = styled(Box)`
   display: block;
