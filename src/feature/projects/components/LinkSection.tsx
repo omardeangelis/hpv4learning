@@ -5,9 +5,9 @@ import { Stack, Box, Chip, css } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 interface Props {
-  category: string;
-  url?: string;
-  githubUrl: string;
+  category?: string | null;
+  url?: string | null;
+  githubUrl?: string | null;
 }
 
 const LinkContainer = styled(Box)(
@@ -19,19 +19,18 @@ const LinkContainer = styled(Box)(
     fontWeight: "300",
     color: "#E7A7FF",
     marginRight: "18px",
-  })
+  }),
 );
 
-const LinkSection = ({ category, url, githubUrl }: Props) => {
-  const handleLabel = React.useCallback((category: string) => {
-    let label;
+export const LinkSection = ({ category, url, githubUrl }: Props) => {
+  const handleLabel = React.useCallback((category?: string | null) => {
     switch (category) {
       case "javascript":
-        return (label = "sviluppatori web");
+        return "sviluppatori web";
       case "react":
-        return (label = "sviluppatori web");
+        return "sviluppatori web";
       case "videomaker":
-        return (label = "videomaker");
+        return "videomaker";
     }
   }, []);
 
@@ -54,24 +53,24 @@ const LinkSection = ({ category, url, githubUrl }: Props) => {
       />
 
       <Stack direction='row'>
-        {url && (
+        {url ? (
           <LinkContainer>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
             <GatsbyLink to={url} target='_blank'>
               Vedi
             </GatsbyLink>
           </LinkContainer>
-        )}
+        ) : null}
 
-        {githubUrl && (
+        {githubUrl ? (
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           /* @ts-ignore */
           <GatsbyLink to={githubUrl} target='_blank'>
             <GitHubIcon />
           </GatsbyLink>
-        )}
+        ) : null}
       </Stack>
     </Stack>
   );
 };
-
-export default LinkSection;

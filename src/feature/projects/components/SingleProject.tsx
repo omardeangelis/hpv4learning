@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectBox, ProjectCard } from "../layout";
+import { ProjectCard, ProjectBox } from "./ProjectCard";
 export const SingleProject = ({
   isMobileOnly,
   children,

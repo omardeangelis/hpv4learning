@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { Box, BoxProps } from "@mui/system";
 import React from "react";
-import { BlockDescriptionProps } from "../../types";
+import { BlockDescriptionProps } from "../../../types";
 
 type Props = {
   label: string;
