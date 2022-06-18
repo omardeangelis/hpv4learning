@@ -2,8 +2,10 @@ import React from "react";
 import { graphql } from "gatsby";
 import { ProjectProps } from "../types/course";
 import Layout from "../components/ui/navigation/layout";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
+import ArticleHero from "../components/article/ArticleHero";
+import ArticleBody from "../components/article/ArticleBody";
 
 type Props = {
   data: {
@@ -35,22 +37,14 @@ const ProjectArticle = ({ data }: Props) => {
     return data.allContentfulProgetti.nodes[0];
   }, [data]);
 
-  const { body, copertina, descrizione, metaDescription, ordine, titolo, url } =
-    queryData;
-
-  console.log(
-    body,
-    copertina,
-    descrizione,
-    metaDescription,
-    ordine,
-    titolo,
-    url
-  );
-
   return (
     <Layout>
-      <FlexContainer maxWidth='lg'>
+      <FlexContainer
+        sx={{
+          padding: "0",
+        }}
+        maxWidth='lg'
+      >
         <Box>
           <StyledContainer>
             <Box
@@ -59,24 +53,13 @@ const ProjectArticle = ({ data }: Props) => {
               }}
             >
               <Container maxWidth='lg'>
-                <Box mx='auto'>
-                  <Typography
-                    component='h1'
-                    textAlign='center'
-                    fontWeight={600}
-                    sx={{
-                      fontSize: { xs: "36px", lg: "48px" },
-                      lineHeight: { xs: "44px", lg: "56px" },
-                    }}
-                  >
-                    {titolo}
-                  </Typography>
-                </Box>
+                <ArticleHero data={queryData} />
+                <ArticleBody data={queryData} />
               </Container>
             </Box>
           </StyledContainer>
         </Box>
-        {/* <Box>{Colonna a destra}</Box> */}
+        {/* <Box>Colonna a destra</Box> */}
       </FlexContainer>
     </Layout>
   );
@@ -102,13 +85,19 @@ export const query = graphql`
         body {
           body
           childMarkdownRemark {
-            headings {
+            headings(depth: h2) {
               value
             }
             html
             rawMarkdownBody
+            timeToRead
           }
         }
+        createdAt
+        project_category {
+          slug
+        }
+        linkGithub
       }
     }
   }
