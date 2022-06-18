@@ -2,7 +2,7 @@ import React from "react";
 //Custom Component
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import Footer from "./Footer";
+import { Footer } from "../../../feature/footer/";
 import { LayoutProvider } from "../../../context/layout";
 const Layout = ({
   children,

@@ -81,6 +81,7 @@ export type ProjectProps = {
   url?: string;
   metaDescription?: string;
   body: ProjectBodyProps;
+  linkGithub: string;
   project_category: [
     {
       slug: string;

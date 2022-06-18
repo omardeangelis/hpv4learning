@@ -40,6 +40,7 @@ const ArticleHero = ({ data }: Props) => {
     createdAt,
     metaDescription,
     project_category,
+    linkGithub,
     body: {
       childMarkdownRemark: { timeToRead },
     },
@@ -47,7 +48,11 @@ const ArticleHero = ({ data }: Props) => {
 
   return (
     <div>
-      <LinkSection category={project_category[0].slug} url={url} />
+      <LinkSection
+        category={project_category[0].slug}
+        url={url}
+        githubUrl={linkGithub}
+      />
       <Box mx='auto' sx={{ marginTop: "10px" }}>
         <Typography
           component='h1'

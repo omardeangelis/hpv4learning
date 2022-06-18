@@ -70,7 +70,7 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
       >
         <Container maxWidth='lg'>
           <Stack direction='row' alignItems='center' height='72px'>
-            {/* @ts-ignore*/}
+            {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
             <GastbyLink
               to='/'
               style={{
@@ -128,7 +128,7 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
                   }
                   return (
                     <>
-                      {/* @ts-ignore*/}
+                      {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
                       <GastbyLink to={link}>
                         <Box role='_link'>
                           <Stack
