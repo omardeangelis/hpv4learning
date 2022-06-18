@@ -1,19 +1,10 @@
 import React from "react";
-import { graphql } from "gatsby";
-import { ProjectProps } from "../types/course";
+import { graphql, PageProps } from "gatsby";
 import Layout from "../components/ui/navigation/layout";
 import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
 import ArticleHero from "../components/article/ArticleHero";
 import ArticleBody from "../components/article/ArticleBody";
-
-type Props = {
-  data: {
-    allContentfulProgetti: {
-      nodes: ProjectProps[];
-    };
-  };
-};
 
 const FlexContainer = styled(Container)`
   display: block;
@@ -32,7 +23,7 @@ const StyledContainer = styled(Box)`
   }
 `;
 
-const ProjectArticle = ({ data }: Props) => {
+const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   const queryData = React.useMemo(() => {
     return data.allContentfulProgetti.nodes[0];
   }, [data]);
@@ -53,8 +44,8 @@ const ProjectArticle = ({ data }: Props) => {
               }}
             >
               <Container maxWidth='lg'>
-                <ArticleHero data={queryData} />
-                <ArticleBody data={queryData} />
+                <ArticleHero {...queryData} />
+                <ArticleBody {...queryData} />
               </Container>
             </Box>
           </StyledContainer>

@@ -5,19 +5,16 @@ import styled from "@emotion/styled";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LinkSection from "./LinkSection";
 import dayjs from "dayjs";
-import { ProjectProps } from "../../types";
+import { ArticleNodeProps } from "../../feature/projects/types";
 
-interface Props {
-  data: ProjectProps;
-}
-
+type Props = ArticleNodeProps;
 const Styledtypography = styled(Typography)(
   css({
     color: "#6C757D",
     fontSize: "14px",
     lineHeight: "18px",
     fontWeight: "300",
-  })
+  }),
 );
 
 const StyledBox = styled(Box)(
@@ -30,10 +27,10 @@ const StyledBox = styled(Box)(
     marginTop: ["25px", "36px"],
     overflowX: "hidden",
     overflowY: "auto",
-  })
+  }),
 );
 
-const ArticleHero = ({ data }: Props) => {
+const ArticleHero = (props: Props) => {
   const {
     titolo,
     url,
@@ -41,15 +38,13 @@ const ArticleHero = ({ data }: Props) => {
     metaDescription,
     project_category,
     linkGithub,
-    body: {
-      childMarkdownRemark: { timeToRead },
-    },
-  } = data;
+    body,
+  } = props;
 
   return (
     <div>
       <LinkSection
-        category={project_category[0].slug}
+        category={project_category?.[0]?.slug}
         url={url}
         githubUrl={linkGithub}
       />
@@ -68,7 +63,7 @@ const ArticleHero = ({ data }: Props) => {
 
       <Stack direction='row' spacing='20px' alignItems='center' mt='10px'>
         <Styledtypography variant='caption'>By Hpv4Learning</Styledtypography>
-        {timeToRead && (
+        {body?.childMarkdownRemark?.timeToRead ? (
           <Styledtypography
             variant='caption'
             sx={{
@@ -77,14 +72,14 @@ const ArticleHero = ({ data }: Props) => {
               gap: "7px",
             }}
           >
-            <AccessTimeIcon /> {timeToRead} min
+            <AccessTimeIcon /> {body?.childMarkdownRemark?.timeToRead} min
           </Styledtypography>
-        )}
-        {createdAt && (
+        ) : null}
+        {createdAt ? (
           <Styledtypography variant='caption'>
             {dayjs(createdAt).format("DD/MM/YYYY")}
           </Styledtypography>
-        )}
+        ) : null}
       </Stack>
 
       {metaDescription && <StyledBox>{`"${metaDescription}"`}</StyledBox>}

@@ -52,7 +52,8 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
     "react-markdown": "^8.0.3",
-    "react-visibility-sensor": "^5.1.1"
+    "react-visibility-sensor": "^5.1.1",
+    "type-fest": "^2.13.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
