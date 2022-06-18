@@ -43,8 +43,8 @@ export const getIcon = (type: string, size?: { xs: string; lg: string }) => {
 
 export const createStarReview = (value: number) => {
   return Array.from({ length: 5 }, (_, index) => {
-    let integer = index + 1;
-    let half = index + 0.5;
+    const integer = index + 1;
+    const half = index + 0.5;
 
     if (value >= integer) {
       return (

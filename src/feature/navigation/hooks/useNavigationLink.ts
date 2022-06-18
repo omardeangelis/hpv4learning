@@ -32,7 +32,7 @@ export const useNavigationLink = () => {
         icon: "project",
       },
     ],
-    []
+    [],
   );
 
   return links;

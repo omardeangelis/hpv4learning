@@ -7,13 +7,13 @@ import { theme } from "./theme";
 
 export const ThemeWrapper = ({ element }) => {
   return (
-    <>
+    <React.Fragment>
       <Helmet>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Helmet>
       <ThemeProvider theme={theme}>
         <AppProvider>{element}</AppProvider>
       </ThemeProvider>
-    </>
+    </React.Fragment>
   );
 };
