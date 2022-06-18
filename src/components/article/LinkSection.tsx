@@ -1,28 +1,14 @@
 import React from "react";
+import { Link as GatsbyLink } from "gatsby";
 import styled from "@emotion/styled";
-import { Stack, Box, css } from "@mui/material";
+import { Stack, Box, Chip, css } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 interface Props {
   category: string;
   url?: string;
+  githubUrl: string;
 }
-
-const CategoryChip = styled(Box)(
-  css({
-    width: ["120px", "130px"],
-    height: "20px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: "20px",
-    border: "1px solid #E9E3FF",
-    color: "#8769FE",
-    fontSize: "12px",
-  })
-);
-
-const LinkStack = styled(Stack)(css({}));
 
 const LinkContainer = styled(Box)(
   css({
@@ -36,7 +22,7 @@ const LinkContainer = styled(Box)(
   })
 );
 
-const LinkSection = ({ category, url }: Props) => {
+const LinkSection = ({ category, url, githubUrl }: Props) => {
   const handleLabel = React.useCallback((category: string) => {
     let label;
     switch (category) {
@@ -55,21 +41,35 @@ const LinkSection = ({ category, url }: Props) => {
 
   return (
     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-      <CategoryChip>{label}</CategoryChip>
+      <Chip
+        label={label}
+        variant='outlined'
+        sx={{
+          height: "20px",
+          fontSize: "12px",
+          borderRadius: "20px",
+          border: "1px solid #E9E3FF",
+          color: "#8769FE",
+        }}
+      />
 
-      <LinkStack direction='row'>
+      <Stack direction='row'>
         {url && (
           <LinkContainer>
-            <a href={url} target='_blank' rel='noopener noreferrer'>
+            {/* @ts-ignore */}
+            <GatsbyLink to={url} target='_blank'>
               Vedi
-            </a>
+            </GatsbyLink>
           </LinkContainer>
         )}
 
-        <a href={url} target='_blank' rel='noopener noreferrer'>
-          <GitHubIcon />
-        </a>
-      </LinkStack>
+        {githubUrl && (
+          /* @ts-ignore */
+          <GatsbyLink to={githubUrl} target='_blank'>
+            <GitHubIcon />
+          </GatsbyLink>
+        )}
+      </Stack>
     </Stack>
   );
 };

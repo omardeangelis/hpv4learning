@@ -20,7 +20,7 @@ const useBreadcrumbSchema = (breadcrumbs: breadCrumbProps[]) => {
 
     breadcrumbs.forEach((el, index) => {
       const { link, text } = el;
-      let breadcrumbElement = {
+      const breadcrumbElement = {
         "@type": "ListItem",
         "position": index + 1,
         "item": {

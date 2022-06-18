@@ -5,10 +5,10 @@ import { Typography, Stack } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import styled from "@emotion/styled";
-import { data } from "../../../asset/footerdata";
-import SeoLink from "../../shared/SeoLink";
+import { data } from "./footerdata";
+import SeoLink from "../../components/shared/SeoLink";
 import { StaticImage } from "gatsby-plugin-image";
-import useDropDownMenu from "../../../hook/useDropDown";
+import useDropDownMenu from "../../hook/useDropDown";
 
 const CustomStack = styled(Box)`
   a:hover {
@@ -38,7 +38,11 @@ const CustomStack = styled(Box)`
   }
 `;
 
-const Footer = ({ enableFooterPadding }: { enableFooterPadding?: boolean }) => {
+export const Footer = ({
+  enableFooterPadding,
+}: {
+  enableFooterPadding?: boolean;
+}) => {
   const { toggleMenu } = useDropDownMenu(data.map((el) => el.id));
 
   return (
@@ -64,7 +68,7 @@ const Footer = ({ enableFooterPadding }: { enableFooterPadding?: boolean }) => {
                 }}
               >
                 <StaticImage
-                  src='../../../images/logo.png'
+                  src='../../images/logo.png'
                   alt='Logo Hpv 4 Learning'
                   placeholder='tracedSVG'
                   layout='fixed'
@@ -147,5 +151,3 @@ const Footer = ({ enableFooterPadding }: { enableFooterPadding?: boolean }) => {
     </Box>
   );
 };
-
-export default Footer;
