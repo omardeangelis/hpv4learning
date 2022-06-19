@@ -6,3 +6,4 @@ export * from "./ProjectCard";
 export * from "./ProjectContent";
 export * from "./ProjectImage";
 export * from "./SingleProject";
+export * from "./Projects";

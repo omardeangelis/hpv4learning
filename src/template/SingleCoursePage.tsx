@@ -6,7 +6,7 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
 //Components
-import Projects from "../feature/projects/components/Projects";
+import { Projects } from "../feature/projects/components";
 import Video from "../components/ui/FrameVideo";
 import { CourseInfo, ResponsiveInfoBox } from "../components/CourseInfo";
 import CourseCoupon from "../components/coupon/CourseCoupon";
