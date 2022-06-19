@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 //Global Component e Variables
 import Layout from "../components/ui/navigation/layout";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
 //Components
-import Projects from "../components/Projects";
+import Projects from "../feature/projects/components/Projects";
 import Video from "../components/ui/FrameVideo";
 import { CourseInfo, ResponsiveInfoBox } from "../components/CourseInfo";
 import CourseCoupon from "../components/coupon/CourseCoupon";
@@ -21,7 +21,6 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
 import { Container } from "@mui/material";
 import styled from "@emotion/styled";
-import { CoursePreviewProps, SingleCourseProps } from "../types/course";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import CourseContainer from "../components/course/CourseContainer";
@@ -70,15 +69,6 @@ const TextWrapper = styled.div`
 `;
 
 type Props = {
-  data: {
-    contentfulCorsi: SingleCourseProps;
-    allContentfulCorsi: {
-      nodes: (CoursePreviewProps & {
-        oreDiLezione: number;
-        livello: string;
-      })[];
-    };
-  };
   location: {
     search: string;
   };
@@ -114,31 +104,31 @@ const SingleCoursePage = ({
   data,
   location,
   pageContext: { slug, categorySlug },
-}: Props) => {
+}: Props & PageProps<Queries.SingleCoursePageQuery>) => {
   const { contentfulCorsi: corso } = data;
   const projectRef = useRef<null | HTMLDivElement>(null);
   const { search } = location;
   const scrollToProjects = search && search.split("=")[1];
 
   const creator = React.useMemo(() => {
-    if (corso.insegnante.length > 1)
-      return corso.insegnante.map((el) => el.nome);
-    return corso.insegnante[0].nome;
-  }, [corso.insegnante]);
+    if (corso?.insegnante && corso?.insegnante.length > 1)
+      return corso.insegnante.map((el) => el?.nome);
+    return corso?.insegnante?.[0]?.nome;
+  }, [corso?.insegnante]);
 
   const categoryName = React.useMemo(() => {
-    return corso.category.filter(
-      (el) => el.name.toLowerCase() !== "gratuiti",
-    )[0].name as string;
-  }, [corso.category]);
+    return corso?.category?.filter(
+      (el) => el?.name?.toLowerCase() !== "gratuiti",
+    )?.[0]?.name as string;
+  }, [corso?.category]);
 
   const breadcrumbs = React.useMemo(() => {
     return [
       { text: "Home", link: "/" },
       { text: categoryName, link: `/corsi/${categorySlug}/` },
-      { text: corso.titolo, link: `/${slug}/` },
+      { text: corso?.titolo, link: `/${slug}/` },
     ];
-  }, [categoryName, categorySlug, corso.titolo]);
+  }, [categoryName, categorySlug, corso?.titolo]);
 
   useEffect(() => {
     if (projectRef.current && scrollToProjects) {
@@ -149,26 +139,28 @@ const SingleCoursePage = ({
   return (
     <Layout enableFooterPadding>
       <MetaDecorator
-        metaTitle={createRowText(corso.titolo)}
-        metaDescription={corso.riassunto.riassunto}
-        image={corso && "https:" + corso.copertina.file?.url}
+        metaTitle={createRowText(corso?.titolo as any)}
+        metaDescription={corso?.riassunto?.riassunto as any}
+        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
       ></MetaDecorator>
       <LinkHandler />
       <CourseSchema
-        title={createRowText(corso.titolo)}
-        description={corso.riassunto.riassunto}
-        image={corso && "https:" + corso.copertina.file?.url}
-        imageAltText={createRowText(corso.titolo)}
-        rating={corso.recensioni.toString()}
-        creator={creator}
+        title={createRowText(corso?.titolo as any)}
+        description={corso?.riassunto?.riassunto as any}
+        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
+        imageAltText={createRowText(corso?.titolo as any)}
+        rating={corso?.recensioni?.toString() as any}
+        creator={creator as any}
         about={categorySlug}
-        audienceType={corso.target}
-        isAccessibleForFree={corso.category.some(
-          (el) => el.name.toLowerCase() === "gratuiti",
-        )}
-        breadcrumbs={breadcrumbs}
-        coursePrerequisites={corso.requisiti}
-        recensioniRicevute={corso.recensioniRicevute}
+        audienceType={corso?.target as any}
+        isAccessibleForFree={
+          corso?.category?.some(
+            (el) => el?.name?.toLowerCase() === "gratuiti",
+          ) as any
+        }
+        breadcrumbs={breadcrumbs as any}
+        coursePrerequisites={corso?.requisiti as any}
+        recensioniRicevute={corso?.recensioniRicevute as any}
       />
       <FlexContainer maxWidth='lg'>
         <StyledBox>
@@ -190,7 +182,7 @@ const SingleCoursePage = ({
                   textAlign='center'
                   fontWeight={700}
                   dangerouslySetInnerHTML={{
-                    __html: createBrandText(corso.titolo),
+                    __html: createBrandText(corso?.titolo as any),
                   }}
                 />
               </Box>
@@ -207,7 +199,7 @@ const SingleCoursePage = ({
                   mt: { xs: "8px", lg: "8px" },
                 }}
               >
-                <Video video={corso.videoLink} />
+                <Video video={corso?.videoLink as any} />
               </Box>
             </StyledContainer>
           </Box>
@@ -219,13 +211,13 @@ const SingleCoursePage = ({
             }}
           >
             <ResponsiveInfoBox
-              livello={corso.livello}
-              recensioni={corso.recensioni}
-              durata={corso.oreDiLezione}
+              livello={corso?.livello as any}
+              recensioni={corso?.recensioni as any}
+              durata={corso?.oreDiLezione as any}
               progetti={corso?.progetti?.length || 0}
-              lezioni={corso.lezioni}
-              link={corso.udemyUrl && corso.udemyUrl}
-              tipologia={corso.categoria}
+              lezioni={corso?.lezioni as any}
+              link={corso?.udemyUrl && (corso?.udemyUrl as any)}
+              tipologia={corso?.categoria as any}
             />
           </Box>
 
@@ -249,7 +241,7 @@ const SingleCoursePage = ({
                     lineHeight: { xs: "28px", lg: "39px" },
                   }}
                 >
-                  {corso.sottotitolo}
+                  {corso?.sottotitolo}
                 </Typography>
               </Box>
               <Box
@@ -267,7 +259,8 @@ const SingleCoursePage = ({
                       lineHeight: { xs: "24px", lg: "24px" },
                     }}
                     dangerouslySetInnerHTML={{
-                      __html: corso.descrizione.childMarkdownRemark.html,
+                      __html: corso?.descrizione?.childMarkdownRemark
+                        ?.html as string,
                     }}
                   />
                 </TextWrapper>
@@ -293,7 +286,7 @@ const SingleCoursePage = ({
                       }}
                     />
                   }
-                  list={corso.concetti}
+                  list={corso?.concetti as any}
                 />
               </Box>
               <Box
@@ -310,7 +303,7 @@ const SingleCoursePage = ({
                       }}
                     />
                   }
-                  list={corso.target}
+                  list={corso?.target as any}
                 />
               </Box>
               <Box
@@ -327,12 +320,12 @@ const SingleCoursePage = ({
                       }}
                     />
                   }
-                  list={corso.requisiti}
+                  list={corso?.requisiti as any}
                 />
               </Box>
             </StyledContainer>
           </Box>
-          {corso.progetti && corso?.introduzioneProgetti ? (
+          {corso?.progetti && corso?.introduzioneProgetti ? (
             <Box
               sx={{
                 mt: { xs: "96px", lg: "136px" },
@@ -360,13 +353,15 @@ const SingleCoursePage = ({
                       lineHeight: { xs: "19px", lg: "22px" },
                     }}
                     dangerouslySetInnerHTML={{
-                      __html:
-                        corso.introduzioneProgetti.childMarkdownRemark.html,
+                      __html: corso?.introduzioneProgetti?.childMarkdownRemark
+                        ?.html as any,
                     }}
                   ></Typography>
                 </Box>
                 <Box mt='24px'>
-                  <Projects data={corso.progetti} />
+                  <Projects
+                    {...(corso.progetti as Queries.ContentfulProgetti[])}
+                  />
                 </Box>
               </StyledContainer>
             </Box>
@@ -386,15 +381,15 @@ const SingleCoursePage = ({
               >
                 Insegnanti
               </Typography>
-              {data.contentfulCorsi.insegnante.map((insegnante) => {
+              {data?.contentfulCorsi?.insegnante?.map((insegnante) => {
                 return (
                   <Box
-                    key={insegnante.cognome}
+                    key={insegnante?.cognome}
                     sx={{
                       mt: { xs: "24px", lg: "48px" },
                     }}
                   >
-                    <Insegnante {...insegnante} />
+                    <Insegnante {...(insegnante as any)} />
                   </Box>
                 );
               })}
@@ -424,7 +419,7 @@ const SingleCoursePage = ({
                     {data.allContentfulCorsi.nodes.map((corso) => {
                       return (
                         <CourseContainer key={corso.slug}>
-                          <CourseContent {...corso} />
+                          <CourseContent {...(corso as any)} />
                         </CourseContainer>
                       );
                     })}
@@ -444,26 +439,22 @@ const SingleCoursePage = ({
         >
           <Box>
             <CourseInfo
-              livello={corso.livello}
-              recensioni={corso.recensioni}
-              durata={corso.oreDiLezione}
+              livello={corso?.livello as any}
+              recensioni={corso?.recensioni as any}
+              durata={corso?.oreDiLezione as any}
               progetti={corso?.progetti?.length || 0}
-              lezioni={corso.lezioni}
-              lastUpdate={corso.lastUpdate.toString()}
-              categoria={
-                corso.category.filter(
-                  (el) => el.name.toLowerCase() !== "gratuiti",
-                )[0].name as string
-              }
-              tipologia={corso.categoria}
-              link={corso.udemyUrl}
+              lezioni={corso?.lezioni as any}
+              lastUpdate={corso?.lastUpdate?.toString() as any}
+              categoria={categoryName}
+              tipologia={corso?.categoria as any}
+              link={corso?.udemyUrl as any}
             />
-            {corso.categoria.toLowerCase() === "free" &&
+            {corso?.categoria?.toLowerCase() === "free" &&
             corso.couponLink ? null : (
               <CourseCoupon
-                link={corso.couponLink}
-                prezzo={corso.prezzo}
-                isDisabled={isExpired(corso.updatedAt)}
+                link={corso?.couponLink as any}
+                prezzo={corso?.prezzo as any}
+                isDisabled={isExpired(corso?.updatedAt as any)}
               />
             )}
           </Box>

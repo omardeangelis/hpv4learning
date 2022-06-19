@@ -1,18 +1,18 @@
 import React from "react";
-import { ProjectProps } from "../types/course";
 import styled from "@emotion/styled";
 import { Box } from "@mui/material";
-import { cleanStringFromHtlmTags, rowalizer } from "../utils/helpers";
-import SeoLink from "./shared/SeoLink";
-import { SingleProject } from "../feature/projects/components";
-import ProjectImage from "../feature/projects/components/ProjectImage";
-import ProjectContent from "../feature/projects/components/ProjectContent";
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
-import { createSlugFromTitle } from "../feature/projects/utils";
-
-type Props = {
-  data: ProjectProps[];
-};
+import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers";
+import SeoLink from "../../../components/shared/SeoLink";
+import { SingleProject } from ".";
+import ProjectImage from "./ProjectImage";
+import ProjectContent from "./ProjectContent";
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike,
+} from "gatsby-plugin-image";
+import { createSlugFromTitle } from "../utils";
 
 const CustomStack = styled(Box)`
   height: 100%;
@@ -39,7 +39,7 @@ const CustomStack = styled(Box)`
   }
 `;
 
-const Projects = ({ data }: Props) => {
+const Projects = (data: Queries.ContentfulProgetti[]) => {
   const rows = React.useMemo(() => rowalizer(data, 2), []);
   return (
     <CustomStack>
@@ -56,8 +56,8 @@ const Projects = ({ data }: Props) => {
               <SeoLink
                 isExternal={false}
                 link={`/progetti/${
-                  progetto?.project_category?.[0].slug
-                }/${createSlugFromTitle(progetto.titolo)}/`}
+                  progetto?.project_category?.[0]?.slug
+                }/${createSlugFromTitle(progetto?.titolo)}/`}
                 style={{
                   display: "flex",
                   width: "fit-content",
@@ -70,19 +70,33 @@ const Projects = ({ data }: Props) => {
                   }}
                 >
                   <ProjectImage>
-                    <GatsbyImage
-                      image={getImage(progetto.copertina) as IGatsbyImageData}
-                      alt={progetto.titolo}
-                      style={{
-                        height: "100%",
-                      }}
-                    />
+                    {progetto?.copertina ? (
+                      <GatsbyImage
+                        image={
+                          getImage(
+                            progetto?.copertina as unknown as ImageDataLike,
+                          ) as IGatsbyImageData
+                        }
+                        alt={progetto.titolo || "Anteprima del progetto"}
+                        style={{
+                          height: "100%",
+                        }}
+                      />
+                    ) : (
+                      <Box
+                        sx={{
+                          backgroundColor: "purple.A100",
+                        }}
+                        width='100%'
+                      ></Box>
+                    )}
                   </ProjectImage>
+
                   <ProjectContent
-                    title={progetto.titolo}
-                    label={progetto?.project_category?.[0].title}
+                    title={progetto?.titolo as string | undefined}
+                    label={progetto?.project_category?.[0]?.title}
                     description={cleanStringFromHtlmTags(
-                      progetto.descrizione.childMarkdownRemark.html,
+                      progetto?.descrizione?.childMarkdownRemark?.html,
                     )}
                   ></ProjectContent>
                 </SingleProject>

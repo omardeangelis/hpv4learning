@@ -44,7 +44,8 @@ export const dateFormatter = (date: string) => {
   }).format(new Date(Date.parse(date)));
 };
 
-export function cleanStringFromHtlmTags(text: string) {
+export function cleanStringFromHtlmTags(text?: string | null) {
+  if (!text) return;
   return text
     .replace(/<\/?[^>]+(>|$)/g, "")
     .replace(/(<p>&nbsp;<\/p>)|(<h2><span>&nbsp;<\/span><\/h2>)/g, "");
