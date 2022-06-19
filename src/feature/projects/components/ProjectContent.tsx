@@ -4,7 +4,7 @@ import React from "react";
 import { BlockDescriptionProps } from "../../../types";
 
 type Props = {
-  label: string;
+  label?: string;
 } & BlockDescriptionProps;
 
 const ProjectContent = ({
@@ -28,7 +28,7 @@ const ProjectContent = ({
         >
           {description}
         </Typography>
-        <Box className='label-box'>{label}</Box>
+        {label ? <Box className='label-box'>{label}</Box> : null}
       </Stack>
     </Box>
   );

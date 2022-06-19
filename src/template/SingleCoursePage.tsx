@@ -332,37 +332,7 @@ const SingleCoursePage = ({
               </Box>
             </StyledContainer>
           </Box>
-          <StyledContainer>
-            <Box
-              sx={{
-                mt: { xs: "48px", lg: "72px" },
-              }}
-            >
-              <Typography
-                color='purple.400'
-                fontWeight={500}
-                sx={{
-                  fontSize: { xs: "24px", lg: "36px" },
-                }}
-              >
-                Insegnanti
-              </Typography>
-              {data.contentfulCorsi.insegnante.map((insegnante) => {
-                return (
-                  <Box
-                    key={insegnante.cognome}
-                    sx={{
-                      mt: { xs: "24px", lg: "48px" },
-                    }}
-                  >
-                    <Insegnante {...insegnante} />
-                  </Box>
-                );
-              })}
-            </Box>
-          </StyledContainer>
-
-          {corso.progetti && corso?.introduzioneProgetti && (
+          {corso.progetti && corso?.introduzioneProgetti ? (
             <Box
               sx={{
                 mt: { xs: "96px", lg: "136px" },
@@ -400,7 +370,36 @@ const SingleCoursePage = ({
                 </Box>
               </StyledContainer>
             </Box>
-          )}
+          ) : null}
+          <StyledContainer>
+            <Box
+              sx={{
+                mt: { xs: "48px", lg: "72px" },
+              }}
+            >
+              <Typography
+                color='purple.400'
+                fontWeight={500}
+                sx={{
+                  fontSize: { xs: "24px", lg: "36px" },
+                }}
+              >
+                Insegnanti
+              </Typography>
+              {data.contentfulCorsi.insegnante.map((insegnante) => {
+                return (
+                  <Box
+                    key={insegnante.cognome}
+                    sx={{
+                      mt: { xs: "24px", lg: "48px" },
+                    }}
+                  >
+                    <Insegnante {...insegnante} />
+                  </Box>
+                );
+              })}
+            </Box>
+          </StyledContainer>
           {data?.allContentfulCorsi?.nodes &&
             data?.allContentfulCorsi?.nodes.length > 0 && (
               <Box
@@ -546,6 +545,10 @@ export const query = graphql`
         ordine
         copertina {
           gatsbyImageData
+        }
+        project_category {
+          title
+          slug
         }
         descrizione {
           childMarkdownRemark {

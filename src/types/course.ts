@@ -82,10 +82,11 @@ export type ProjectProps = {
   metaDescription?: string;
   body: ProjectBodyProps;
   linkGithub: string;
-  project_category: [
+  project_category?: [
     {
+      title: string;
       slug: string;
-    }
+    },
   ];
   createdAt: string;
 };
