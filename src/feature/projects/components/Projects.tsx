@@ -39,7 +39,7 @@ const CustomStack = styled(Box)`
   }
 `;
 
-const Projects = (data: Queries.ContentfulProgetti[]) => {
+const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
   const rows = React.useMemo(() => rowalizer(data, 2), []);
   return (
     <CustomStack>

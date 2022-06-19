@@ -360,7 +360,7 @@ const SingleCoursePage = ({
                 </Box>
                 <Box mt='24px'>
                   <Projects
-                    {...(corso.progetti as Queries.ContentfulProgetti[])}
+                    data={corso.progetti as Queries.ContentfulProgetti[]}
                   />
                 </Box>
               </StyledContainer>
