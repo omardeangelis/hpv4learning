@@ -12,6 +12,11 @@ export const ProjectCard = styled(Box)<ProjectBox>(
     width: "100%",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
     overflow: "hidden",
+    transition: "all 75ms ease",
+    border: "1px solid #e7e7e8",
+    "&:hover": {
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
+    },
     "& .img-box": {
       width: "100%",
       transform: "translateZ(0%)",
@@ -33,10 +38,9 @@ export const ProjectCard = styled(Box)<ProjectBox>(
   ({ isMobileOnly }) => ({
     flexDirection: isMobileOnly ? "row" : ["row", "column"],
     alignItems: "center",
-    maxWidth: ["unset", "351px"],
     "& .img-box": {
       maxWidth: isMobileOnly ? "120px" : ["120px", "unset"],
-      height: isMobileOnly ? "120px" : ["120px", "unset"],
+      height: isMobileOnly ? "100%" : ["100%", "unset"],
     },
     "& .content-box": {
       "& h3": {
