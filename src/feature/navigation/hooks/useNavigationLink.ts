@@ -28,7 +28,7 @@ export const useNavigationLink = () => {
       },
       {
         text: "Progetti",
-        link: "/",
+        link: "/progetti/",
         icon: "project",
       },
     ],

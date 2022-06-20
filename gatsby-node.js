@@ -3,6 +3,7 @@ const {
   allCourseQuery,
   allCourseCategory,
   allProjectArticle,
+  projectCategoriesPageQuery,
 } = require("./query");
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -10,6 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const singleCourseQuery = await graphql(allCourseQuery);
   const courseCategoryQuery = await graphql(allCourseCategory);
   const projectArticleQuery = await graphql(allProjectArticle);
+  const categoryProjectQuery = await graphql(projectCategoriesPageQuery);
 
   singleCourseQuery.data.allContentfulCorsi.nodes.forEach((node) => {
     createPage({
@@ -39,6 +41,21 @@ exports.createPages = async ({ graphql, actions }) => {
         name,
         alias,
         description,
+      },
+    });
+  });
+
+  createPage({
+    path: "/progetti/",
+    component: path.resolve("./src/template/ProjectsHome.tsx"),
+  });
+
+  categoryProjectQuery.data.allContentfulProgetti.group.forEach((category) => {
+    createPage({
+      path: `/progetti/${category.fieldValue}/`,
+      component: path.resolve("./src/template/ProjectsCategory.tsx"),
+      context: {
+        slug: category.fieldValue,
       },
     });
   });
