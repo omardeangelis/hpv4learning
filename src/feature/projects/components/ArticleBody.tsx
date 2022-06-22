@@ -11,6 +11,8 @@ import ReactMarkdown from "react-markdown";
 import { Typography } from "@mui/material";
 import { HeadingsList } from "./HeadingsList";
 import { ArticleNodeProps } from "../types";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type Props = ArticleNodeProps;
 
@@ -20,7 +22,7 @@ const ImageBox = styled(Box)(
     borderRadius: "16px",
     overflow: "hidden",
     marginTop: "25px",
-  }),
+  })
 );
 
 const StyledH2 = styled(Typography)(
@@ -29,7 +31,7 @@ const StyledH2 = styled(Typography)(
     fontWeight: "600",
     lineHeigth: "29px",
     marginTop: "24px",
-  }),
+  })
 ) as typeof Typography;
 
 const StyledH3 = styled(Typography)(
@@ -38,7 +40,7 @@ const StyledH3 = styled(Typography)(
     fontWeight: "600",
     lineHeigth: "25px",
     marginTop: "20px",
-  }),
+  })
 ) as typeof Typography;
 
 const StyledP = styled(Typography)(
@@ -47,29 +49,15 @@ const StyledP = styled(Typography)(
     fontWeight: "400",
     lineHeigth: "12px",
     marginTop: "16px",
-  }),
+  })
 ) as typeof Typography;
-
-const StyledCode = styled(Box)(
-  css({
-    margin: "20px auto 20px auto",
-    padding: "30px 0 30px 15px",
-    borderRadius: "16px",
-    background: "#4b4b4b",
-    color: "#fff",
-    overflowX: "auto",
-    overflowY: "hidden",
-    fontSize: "16px",
-    lineHeight: "18px",
-  }),
-);
 
 export const ArticleBody = React.memo((props: Props) => {
   const [hasMounted, setHasMounted] = React.useState<boolean>(false);
   const { titolo, body, copertina } = props;
 
   const image = getImage(
-    copertina as unknown as ImageDataLike,
+    copertina as unknown as ImageDataLike
   ) as IGatsbyImageData;
 
   const headings = React.useMemo(() => {
@@ -94,7 +82,7 @@ export const ArticleBody = React.memo((props: Props) => {
         }
       }
     },
-    [hasMounted],
+    [hasMounted]
   );
 
   React.useEffect(() => {
@@ -102,7 +90,7 @@ export const ArticleBody = React.memo((props: Props) => {
       const h2Arrays = Array.from(document.getElementsByTagName("h2"));
 
       h2Arrays.forEach((el, index) =>
-        el.setAttribute("data-hash", `#${index}`),
+        el.setAttribute("data-hash", `#${index}`)
       );
     }
   }, [hasMounted]);
@@ -151,7 +139,13 @@ export const ArticleBody = React.memo((props: Props) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             p: ({ node, ...props }) => <StyledP component='p' {...props} />,
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            code: ({ node, ...props }) => <StyledCode {...props} />,
+            code: ({ node, ...props }) => (
+              <SyntaxHighlighter
+                language='javascript'
+                style={dracula}
+                {...props}
+              />
+            ),
           }}
         />
       ) : null}
