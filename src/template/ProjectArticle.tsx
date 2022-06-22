@@ -3,7 +3,11 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../components/ui/navigation/layout";
 import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
-import { ArticleBody, ArticleHero } from "../feature/projects/components";
+import {
+  ArticleBody,
+  ArticleHero,
+  ProjectBanner,
+} from "../feature/projects/components";
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -46,6 +50,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
             </StyledBox>
           </Box>
           {/* <Box>Colonna a destra</Box> */}
+          <ProjectBanner courseTitle={queryData.corsi[0].titolo} />
         </FlexContainer>
       </Container>
     </Layout>
@@ -85,6 +90,9 @@ export const query = graphql`
           slug
         }
         linkGithub
+        corsi {
+          titolo
+        }
       }
     }
   }
