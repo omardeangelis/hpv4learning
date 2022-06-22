@@ -3,6 +3,7 @@ const {
   allCourseQuery,
   allCourseCategory,
   allProjectArticle,
+  projectCategoriesPageQuery,
 } = require("./query");
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -10,6 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const singleCourseQuery = await graphql(allCourseQuery);
   const courseCategoryQuery = await graphql(allCourseCategory);
   const projectArticleQuery = await graphql(allProjectArticle);
+  const categoryProjectQuery = await graphql(projectCategoriesPageQuery);
 
   singleCourseQuery.data.allContentfulCorsi.nodes.forEach((node) => {
     createPage({
@@ -43,15 +45,29 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
+  createPage({
+    path: "/progetti/",
+    component: path.resolve("./src/template/ProjectsHome.tsx"),
+  });
+
+  categoryProjectQuery.data.allContentfulProgetti.group.forEach((category) => {
+    createPage({
+      path: `/progetti/${category.fieldValue}/`,
+      component: path.resolve("./src/template/ProjectsCategory.tsx"),
+      context: {
+        slug: category.fieldValue,
+      },
+    });
+  });
+
   projectArticleQuery.data.allContentfulProgetti.nodes.forEach((project) => {
-    const courseSlug = project.project_category[0].slug;
+    const courseSlug = project.project_category?.[0]?.slug;
     let slug = project.titolo;
     const reg = /\s/g;
     const regex = /[^a-zA-Z0-9-]/g;
     slug = slug.replace(reg, "-");
     slug = slug.replace(regex, "").toLowerCase();
-
-    if (project.body) {
+    if (project.body && courseSlug) {
       createPage({
         path: `/progetti/${courseSlug}/${slug}/`,
         component: path.resolve(`./src/template/ProjectArticle.tsx`),
