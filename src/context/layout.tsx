@@ -3,6 +3,8 @@ import React from "react";
 export type Props = {
   isSidebarOpen: boolean;
   isCourseMenuOpen: boolean;
+  isBannerOpen: boolean;
+  setIsBannerOpen: () => void;
   toggleSidebar: () => void;
   toggleCourseMenu: () => void;
   handleClickAway: () => void;
@@ -18,6 +20,7 @@ const LayoutProvider = ({
   const [isSidebarOpen, setIsSidebarOpen] = React.useState<boolean>(false);
   const [isCourseMenuOpen, setIsCourseMenuOpen] =
     React.useState<boolean>(false);
+  const [isBannerOpen, setIsBannerOpen] = React.useState<boolean>(true);
 
   const toggleSidebar = React.useCallback(() => {
     setIsSidebarOpen((old) => {
@@ -42,11 +45,13 @@ const LayoutProvider = ({
     return {
       isCourseMenuOpen,
       isSidebarOpen,
+      isBannerOpen,
+      setIsBannerOpen,
       toggleCourseMenu,
       toggleSidebar,
       handleClickAway,
     };
-  }, [isCourseMenuOpen, isSidebarOpen]);
+  }, [isCourseMenuOpen, isSidebarOpen, isBannerOpen]);
 
   return (
     <LayoutContext.Provider value={contextValue}>
