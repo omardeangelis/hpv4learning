@@ -43,4 +43,19 @@ const allProjectArticle = `
 }
 `;
 
-module.exports = { allCourseQuery, allCourseCategory, allProjectArticle };
+const projectCategoriesPageQuery = `
+{
+  allContentfulProgetti {
+    group(field: project_category___slug, limit: 1) {
+      fieldValue
+    }
+  }
+}
+`;
+
+module.exports = {
+  allCourseQuery,
+  allCourseCategory,
+  allProjectArticle,
+  projectCategoriesPageQuery,
+};
