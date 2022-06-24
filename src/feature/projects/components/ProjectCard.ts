@@ -1,21 +1,32 @@
+import { Box, BoxProps } from "@mui/system";
 import styled from "@emotion/styled";
-import { Box, BoxProps, css } from "@mui/system";
-
 export interface ProjectBox extends BoxProps {
   isMobileOnly?: true;
 }
 
-export const ProjectCard = styled(Box)<ProjectBox>(
-  css({
-    borderRadius: ["6px", "8px"],
-    display: "flex",
-    width: "100%",
-    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
-    overflow: "hidden",
-    transition: "all 75ms ease",
-    border: "1px solid #e7e7e8",
-    "&:hover": {
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
+export const ProjectCard = styled(Box)({
+  flexDirection: "row",
+  alignItems: "center",
+  borderRadius: "8px",
+  display: "flex",
+  width: "100%",
+  overflow: "hidden",
+  transition: "all 75ms ease",
+  border: "1px solid #e7e7e8",
+  "&:hover": {
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
+  },
+  "& .img-box": {
+    maxWidth: "120px",
+    height: "100%",
+  },
+  "& .content-box": {
+    "& h3": {
+      fontSize: "16px",
+    },
+    "& p": {
+      fontSize: "14px",
+      lineHeight: "18px",
     },
     "& .img-box": {
       width: "100%",
@@ -26,6 +37,9 @@ export const ProjectCard = styled(Box)<ProjectBox>(
       padding: "12px",
     },
     "& .label-box": {
+      fontSize: "12px",
+      height: "16px",
+      width: "fit-content",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -34,27 +48,77 @@ export const ProjectCard = styled(Box)<ProjectBox>(
       backgroundColor: "#E4E7EC",
       color: "#6C757D",
     },
-  }),
-  ({ isMobileOnly }) => ({
-    flexDirection: isMobileOnly ? "row" : ["row", "column"],
+  },
+  "@media screen and (min-width:1024px)": {
+    flexDirection: "column",
     alignItems: "center",
     "& .img-box": {
-      maxWidth: isMobileOnly ? "120px" : ["120px", "unset"],
-      height: isMobileOnly ? "100%" : ["100%", "unset"],
+      maxWidth: "unset",
+      height: "unset",
     },
     "& .content-box": {
+      padding: "12px",
       "& h3": {
-        fontSize: isMobileOnly ? "16px" : ["16px", "18px"],
+        fontSize: "18px",
       },
       "& p": {
-        fontSize: isMobileOnly ? "14px" : ["14px", "16px"],
-        lineHeight: isMobileOnly ? "18px" : ["18px", "21px"],
+        fontSize: "16px",
+        lineHeight: "21px",
       },
       "& .label-box": {
-        fontSize: isMobileOnly ? "12px" : ["12px", "12px"],
-        height: isMobileOnly ? "16px" : ["16px", "21px"],
+        fontSize: "12px",
+        height: "21px",
         width: "fit-content",
       },
     },
-  }),
-);
+  },
+});
+
+export const MobileOnlyProjectCard = styled(Box)({
+  flexDirection: "row",
+  alignItems: "center",
+  borderRadius: "6px",
+  display: "flex",
+  width: "100%",
+  height: "100%",
+  overflow: "hidden",
+  transition: "all 75ms ease",
+  border: "1px solid #e7e7e8",
+  "&:hover": {
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
+  },
+  "& .img-box": {
+    maxWidth: "120px",
+    height: "100%",
+  },
+  "& .content-box": {
+    padding: "12px",
+    "& h3": {
+      fontSize: "16px",
+    },
+    "& p": {
+      fontSize: "14px",
+      lineHeight: "18px",
+    },
+    "& .img-box": {
+      width: "100%",
+      transform: "translateZ(0%)",
+      overflow: "hidden",
+    },
+    "& .content-box": {
+      padding: "12px",
+    },
+    "& .label-box": {
+      fontSize: "12px",
+      height: "16px",
+      width: "fit-content",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: "4px",
+      padding: "4px 11px",
+      backgroundColor: "#E4E7EC",
+      color: "#6C757D",
+    },
+  },
+});
