@@ -63,10 +63,10 @@ exports.createPages = async ({ graphql, actions }) => {
   projectArticleQuery.data.allContentfulProgetti.nodes.forEach((project) => {
     const courseSlug = project.project_category?.[0]?.slug;
     let slug = project.titolo;
-    const reg = /\s/g;
-    const regex = /[^a-zA-Z0-9-]/g;
-    slug = slug.replace(reg, "-");
-    slug = slug.replace(regex, "").toLowerCase();
+    slug = slug
+      .replace(/\s/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
     const nextProjectOrder = project.ordine + 1;
     const courseTitle = project.corsi[0].titolo;
     if (project.body && courseSlug) {

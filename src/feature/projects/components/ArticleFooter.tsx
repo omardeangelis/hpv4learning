@@ -13,6 +13,7 @@ import {
   ImageDataLike,
 } from "gatsby-plugin-image";
 import { cleanStringFromHtlmTags } from "../../../utils/helpers";
+import { Link as GatsbyLink } from "gatsby";
 
 type Props = ArticleNodeProps;
 
@@ -50,6 +51,16 @@ export const ArticleFooter = (props: Props) => {
     return props.nextProject.nodes[0];
   }, []);
 
+  const nextProjectUrl = React.useMemo(() => {
+    const courseSlug = props.project.nodes[0].project_category[0].slug;
+    let slug = props.nextProject.nodes[0].titolo;
+    slug = slug
+      .replace(/\s/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
+    return `/progetti/${courseSlug}/${slug}/`;
+  }, []);
+
   return (
     <div>
       <StyledTypography>Prossimo Progetto</StyledTypography>
@@ -58,36 +69,39 @@ export const ArticleFooter = (props: Props) => {
           maxWidth: { xs: "unset", sm: "351px" },
         }}
       >
-        <ProjectImage>
-          {nextProject?.copertina ? (
-            <GatsbyImage
-              image={
-                getImage(
-                  nextProject?.copertina as unknown as ImageDataLike
-                ) as IGatsbyImageData
-              }
-              alt={nextProject.titolo || "Anteprima del progetto"}
-              style={{
-                height: "100%",
-              }}
-            />
-          ) : (
-            <Box
-              sx={{
-                backgroundColor: "purple.A100",
-              }}
-              width='100%'
-            ></Box>
-          )}
-        </ProjectImage>
+        {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
+        <GatsbyLink to={nextProjectUrl}>
+          <ProjectImage>
+            {nextProject?.copertina ? (
+              <GatsbyImage
+                image={
+                  getImage(
+                    nextProject?.copertina as unknown as ImageDataLike
+                  ) as IGatsbyImageData
+                }
+                alt={nextProject.titolo || "Anteprima del progetto"}
+                style={{
+                  height: "100%",
+                }}
+              />
+            ) : (
+              <Box
+                sx={{
+                  backgroundColor: "purple.A100",
+                }}
+                width='100%'
+              ></Box>
+            )}
+          </ProjectImage>
 
-        <ProjectContent
-          title={nextProject?.titolo as string | undefined}
-          label={nextProject?.project_category?.[0]?.title}
-          description={cleanStringFromHtlmTags(
-            nextProject?.descrizione?.descrizione
-          )}
-        ></ProjectContent>
+          <ProjectContent
+            title={nextProject?.titolo as string | undefined}
+            label={nextProject?.project_category?.[0]?.title}
+            description={cleanStringFromHtlmTags(
+              nextProject?.descrizione?.descrizione
+            )}
+          ></ProjectContent>
+        </GatsbyLink>
       </SingleProject>
 
       <BottomBanner title={bannerTitle}>
