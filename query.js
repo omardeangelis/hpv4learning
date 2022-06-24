@@ -40,7 +40,7 @@ const allProjectArticle = `
         body
       }
       corsi {
-        titolo
+        idCorso
       }
     }
   }

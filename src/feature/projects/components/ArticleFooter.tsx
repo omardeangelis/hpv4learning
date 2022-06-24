@@ -40,7 +40,7 @@ const StyledTypography = styled(Typography)`
 
 export const ArticleFooter = (props: Props) => {
   const corsi = React.useMemo(() => {
-    return props.project.nodes[0].corsi[0];
+    return props.project.corsi[0];
   }, []);
 
   const bannerTitle = React.useMemo(() => {
@@ -48,12 +48,12 @@ export const ArticleFooter = (props: Props) => {
   }, [corsi]);
 
   const nextProject = React.useMemo(() => {
-    return props.nextProject.nodes[0];
+    return props.nextProject;
   }, []);
 
   const nextProjectUrl = React.useMemo(() => {
-    const courseSlug = props.project.nodes[0].project_category[0].slug;
-    let slug = props.nextProject.nodes[0].titolo;
+    const courseSlug = props.project.project_category[0].slug;
+    let slug = props.nextProject.titolo;
     slug = slug
       .replace(/\s/g, "-")
       .replace(/[^a-zA-Z0-9-]/g, "")
@@ -95,11 +95,9 @@ export const ArticleFooter = (props: Props) => {
           </ProjectImage>
 
           <ProjectContent
-            title={nextProject?.titolo as string | undefined}
+            titolo={nextProject?.titolo as string | undefined}
             label={nextProject?.project_category?.[0]?.title}
-            description={cleanStringFromHtlmTags(
-              nextProject?.descrizione?.descrizione
-            )}
+            description={nextProject?.descrizione?.descrizione}
           ></ProjectContent>
         </GatsbyLink>
       </ProjectCard>

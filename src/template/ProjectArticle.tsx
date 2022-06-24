@@ -28,7 +28,7 @@ const StyledBox = styled(Box)`
 
 const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   const queryData = React.useMemo(() => {
-    return data.project.nodes[0];
+    return data.project;
   }, [data]);
 
   return (
@@ -62,59 +62,49 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 export default ProjectArticle;
 
 export const query = graphql`
-  query SingleProject(
-    $id: String
-    $nextProjectOrder: Int
-    $courseTitle: String
-  ) {
-    project: allContentfulProgetti(filter: { id: { eq: $id } }) {
-      nodes {
-        id
-        titolo
-        metaDescription
-        ordine
-        url
-        copertina {
-          gatsbyImageData
-        }
-        descrizione {
-          descrizione
-        }
-        body {
-          body
-          childMarkdownRemark {
-            headings(depth: h2) {
-              value
-            }
-            html
-            rawMarkdownBody
-            timeToRead
+  query SingleProject($id: String, $nextProjectOrder: Int, $courseId: String) {
+    project: contentfulProgetti(id: { eq: $id }) {
+      id
+      titolo
+      metaDescription
+      ordine
+      url
+      copertina {
+        gatsbyImageData
+      }
+      descrizione {
+        descrizione
+      }
+      body {
+        body
+        childMarkdownRemark {
+          headings(depth: h2) {
+            value
           }
+          html
+          rawMarkdownBody
+          timeToRead
         }
-        createdAt
-        project_category {
-          slug
-        }
-        linkGithub
-        corsi {
-          titolo
-        }
+      }
+      createdAt
+      project_category {
+        slug
+      }
+      linkGithub
+      corsi {
+        titolo
       }
     }
-    nextProject: allContentfulProgetti(
-      filter: {
-        ordine: { eq: $nextProjectOrder }
-        corsi: { elemMatch: { titolo: { eq: $courseTitle } } }
-      }
+    nextProject: contentfulProgetti(
+      ordine: { eq: $nextProjectOrder }
+      corsi: { elemMatch: { idCorso: { eq: $courseId } } }
     ) {
-      nodes {
-        titolo
-        descrizione {
-          descrizione
-        }
-        copertina {
-          gatsbyImageData
-        }
+      titolo
+      descrizione {
+        descrizione
+      }
+      copertina {
+        gatsbyImageData
       }
     }
   }

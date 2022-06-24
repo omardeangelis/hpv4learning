@@ -68,7 +68,7 @@ exports.createPages = async ({ graphql, actions }) => {
       .replace(/[^a-zA-Z0-9-]/g, "")
       .toLowerCase();
     const nextProjectOrder = project.ordine + 1;
-    const courseTitle = project.corsi[0].titolo;
+    const courseId = project.corsi[0].idCorso;
     if (project.body && courseSlug) {
       createPage({
         path: `/progetti/${courseSlug}/${slug}/`,
@@ -76,7 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
         context: {
           id: project.id,
           nextProjectOrder,
-          courseTitle,
+          courseId,
         },
       });
     }
