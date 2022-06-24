@@ -1,5 +1,6 @@
 export * from "./ArticleBody";
 export * from "./ArticleHero";
+export * from "./ArticleFooter";
 export * from "./HeadingsList";
 export * from "./LinkSection";
 export * from "./ProjectCard";

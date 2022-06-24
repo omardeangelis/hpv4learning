@@ -3,7 +3,11 @@ import { graphql, PageProps } from "gatsby";
 import Layout from "../components/ui/navigation/layout";
 import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
-import { ArticleBody, ArticleHero } from "../feature/projects/components";
+import {
+  ArticleBody,
+  ArticleHero,
+  ArticleFooter,
+} from "../feature/projects/components";
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -24,7 +28,7 @@ const StyledBox = styled(Box)`
 
 const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   const queryData = React.useMemo(() => {
-    return data.allContentfulProgetti.nodes[0];
+    return data.project.nodes[0];
   }, [data]);
 
   return (
@@ -47,6 +51,9 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
           </Box>
           {/* <Box>Colonna a destra</Box> */}
         </FlexContainer>
+        <Container maxWidth='lg'>
+          <ArticleFooter {...data} />
+        </Container>
       </Container>
     </Layout>
   );
@@ -55,8 +62,12 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 export default ProjectArticle;
 
 export const query = graphql`
-  query SingleProject($id: String) {
-    allContentfulProgetti(filter: { id: { eq: $id } }) {
+  query SingleProject(
+    $id: String
+    $nextProjectOrder: Int
+    $courseTitle: String
+  ) {
+    project: allContentfulProgetti(filter: { id: { eq: $id } }) {
       nodes {
         id
         titolo
@@ -85,6 +96,25 @@ export const query = graphql`
           slug
         }
         linkGithub
+        corsi {
+          titolo
+        }
+      }
+    }
+    nextProject: allContentfulProgetti(
+      filter: {
+        ordine: { eq: $nextProjectOrder }
+        corsi: { elemMatch: { titolo: { eq: $courseTitle } } }
+      }
+    ) {
+      nodes {
+        titolo
+        descrizione {
+          descrizione
+        }
+        copertina {
+          gatsbyImageData
+        }
       }
     }
   }
