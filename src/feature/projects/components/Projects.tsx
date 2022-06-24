@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers";
 import SeoLink from "../../../components/shared/SeoLink";
-import { SingleProject } from ".";
-import ProjectImage from "./ProjectImage";
-import ProjectContent from "./ProjectContent";
+import { MobileOnlyProjectCard } from "./ProjectCard";
+import { ProjectImage } from "./ProjectImage";
+import { ProjectContent } from "./ProjectContent";
 import {
   GatsbyImage,
   getImage,
@@ -63,43 +63,44 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
                   width: "fit-content",
                 }}
               >
-                <SingleProject
-                  isMobileOnly
+                <Box
                   sx={{
                     maxWidth: { xs: "unset", sm: "351px" },
                   }}
                 >
-                  <ProjectImage>
-                    {progetto?.copertina ? (
-                      <GatsbyImage
-                        image={
-                          getImage(
-                            progetto?.copertina as unknown as ImageDataLike,
-                          ) as IGatsbyImageData
-                        }
-                        alt={progetto.titolo || "Anteprima del progetto"}
-                        style={{
-                          height: "100%",
-                        }}
-                      />
-                    ) : (
-                      <Box
-                        sx={{
-                          backgroundColor: "purple.A100",
-                        }}
-                        width='100%'
-                      ></Box>
-                    )}
-                  </ProjectImage>
+                  <MobileOnlyProjectCard>
+                    <ProjectImage>
+                      {progetto?.copertina ? (
+                        <GatsbyImage
+                          image={
+                            getImage(
+                              progetto?.copertina as unknown as ImageDataLike,
+                            ) as IGatsbyImageData
+                          }
+                          alt={progetto.titolo || "Anteprima del progetto"}
+                          style={{
+                            height: "100%",
+                          }}
+                        />
+                      ) : (
+                        <Box
+                          sx={{
+                            backgroundColor: "purple.A100",
+                          }}
+                          width='100%'
+                        ></Box>
+                      )}
+                    </ProjectImage>
 
-                  <ProjectContent
-                    title={progetto?.titolo as string | undefined}
-                    label={progetto?.project_category?.[0]?.title}
-                    description={cleanStringFromHtlmTags(
-                      progetto?.descrizione?.childMarkdownRemark?.html,
-                    )}
-                  ></ProjectContent>
-                </SingleProject>
+                    <ProjectContent
+                      titolo={progetto?.titolo}
+                      label={progetto?.project_category?.[0]?.title}
+                      description={cleanStringFromHtlmTags(
+                        progetto?.descrizione?.childMarkdownRemark?.html,
+                      )}
+                    />
+                  </MobileOnlyProjectCard>
+                </Box>
               </SeoLink>
             ))}
           </Box>
