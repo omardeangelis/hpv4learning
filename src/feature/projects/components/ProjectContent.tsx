@@ -3,13 +3,13 @@ import { Box, BoxProps } from "@mui/system";
 import React from "react";
 
 type Props = {
-  title?: null | string;
+  titolo?: null | string;
   label?: string | null;
   description?: string | null;
 };
 
-const ProjectContent = ({
-  title,
+export const ProjectContent = ({
+  titolo,
   description,
   label,
   ...rest
@@ -17,9 +17,9 @@ const ProjectContent = ({
   return (
     <Box className='content-box' {...rest}>
       <Stack direction='column' alignItems='initial' spacing='8px'>
-        {title ? (
+        {titolo ? (
           <Typography component='h3' fontWeight={600}>
-            {title}
+            {titolo}
           </Typography>
         ) : null}
         {description ? (
@@ -38,5 +38,3 @@ const ProjectContent = ({
     </Box>
   );
 };
-
-export default ProjectContent;
