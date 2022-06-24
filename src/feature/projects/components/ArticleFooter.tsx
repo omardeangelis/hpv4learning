@@ -1,11 +1,11 @@
 import React from "react";
-import { SingleProject } from "./index";
+import { ProjectCard, ProjectImage, ProjectContent } from "./index";
 import { BottomBanner } from "../../../components/layout";
 import { ArticleNodeProps } from "../types";
 import { Box, Button, Typography, css } from "@mui/material";
 import styled from "@emotion/styled";
-import ProjectImage from "./ProjectImage";
-import ProjectContent from "./ProjectContent";
+// import ProjectImage from "./ProjectImage";
+// import ProjectContent from "./ProjectContent";
 import {
   GatsbyImage,
   getImage,
@@ -64,7 +64,7 @@ export const ArticleFooter = (props: Props) => {
   return (
     <div>
       <StyledTypography>Prossimo Progetto</StyledTypography>
-      <SingleProject
+      <ProjectCard
         sx={{
           maxWidth: { xs: "unset", sm: "351px" },
         }}
@@ -102,7 +102,7 @@ export const ArticleFooter = (props: Props) => {
             )}
           ></ProjectContent>
         </GatsbyLink>
-      </SingleProject>
+      </ProjectCard>
 
       <BottomBanner title={bannerTitle}>
         <Button
