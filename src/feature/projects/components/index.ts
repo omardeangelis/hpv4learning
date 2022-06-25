@@ -6,5 +6,6 @@ export * from "./LinkSection";
 export * from "./ProjectCard";
 export * from "./ProjectContent";
 export * from "./ProjectImage";
+export * from "./ProjectBanner";
 export * from "./Projects";
 export * from "./HomeSection";
