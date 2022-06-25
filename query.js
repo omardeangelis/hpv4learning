@@ -32,11 +32,15 @@ const allProjectArticle = `
     nodes {
       id
       titolo
+      ordine
       project_category {
         slug
       }
       body {
         body
+      }
+      corsi {
+        idCorso
       }
     }
   }

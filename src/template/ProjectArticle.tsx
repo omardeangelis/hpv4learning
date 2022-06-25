@@ -7,6 +7,7 @@ import {
   ArticleBody,
   ArticleHero,
   ProjectBanner,
+  ArticleFooter,
 } from "../feature/projects/components";
 
 const FlexContainer = styled(Box)`
@@ -28,7 +29,7 @@ const StyledBox = styled(Box)`
 
 const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   const queryData = React.useMemo(() => {
-    return data.allContentfulProgetti.nodes[0];
+    return data.project;
   }, [data]);
 
   return (
@@ -52,6 +53,9 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
           {/* <Box>Colonna a destra</Box> */}
           <ProjectBanner courseTitle={queryData.corsi[0].titolo} />
         </FlexContainer>
+        <Container maxWidth='lg'>
+          <ArticleFooter {...data} />
+        </Container>
       </Container>
     </Layout>
   );
@@ -60,39 +64,49 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 export default ProjectArticle;
 
 export const query = graphql`
-  query SingleProject($id: String) {
-    allContentfulProgetti(filter: { id: { eq: $id } }) {
-      nodes {
-        id
-        titolo
-        metaDescription
-        ordine
-        url
-        copertina {
-          gatsbyImageData
-        }
-        descrizione {
-          descrizione
-        }
-        body {
-          body
-          childMarkdownRemark {
-            headings(depth: h2) {
-              value
-            }
-            html
-            rawMarkdownBody
-            timeToRead
+  query SingleProject($id: String, $nextProjectOrder: Int, $courseId: String) {
+    project: contentfulProgetti(id: { eq: $id }) {
+      id
+      titolo
+      metaDescription
+      ordine
+      url
+      copertina {
+        gatsbyImageData
+      }
+      descrizione {
+        descrizione
+      }
+      body {
+        body
+        childMarkdownRemark {
+          headings(depth: h2) {
+            value
           }
+          html
+          rawMarkdownBody
+          timeToRead
         }
-        createdAt
-        project_category {
-          slug
-        }
-        linkGithub
-        corsi {
-          titolo
-        }
+      }
+      createdAt
+      project_category {
+        slug
+      }
+      linkGithub
+      corsi {
+        titolo
+      }
+    }
+    nextProject: contentfulProgetti(
+      ordine: { eq: $nextProjectOrder }
+      corsi: { elemMatch: { idCorso: { eq: $courseId } } }
+    ) {
+      titolo
+      descrizione {
+        descrizione
+      }
+      copertina {
+        gatsbyImageData
       }
     }
   }
