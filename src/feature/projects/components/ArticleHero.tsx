@@ -5,9 +5,7 @@ import styled from "@emotion/styled";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { LinkSection } from "./LinkSection";
 import dayjs from "dayjs";
-import { ArticleNodeProps } from "../types";
 
-type Props = ArticleNodeProps;
 const Styledtypography = styled(Typography)(
   css({
     color: "#6C757D",
@@ -31,7 +29,9 @@ const StyledBox = styled(Box)(
   }),
 );
 
-export const ArticleHero = (props: Props) => {
+export const ArticleHero = (
+  props: Omit<Queries.SingleProjectQuery["project"], "id">,
+) => {
   const {
     titolo,
     url,
@@ -40,7 +40,7 @@ export const ArticleHero = (props: Props) => {
     project_category,
     linkGithub,
     body,
-  } = props;
+  } = props as NonNullable<Queries.SingleProjectQuery["project"]>;
 
   return (
     <div>

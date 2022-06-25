@@ -14,6 +14,7 @@ import { createRowText } from "../utils/helpers";
 import ArticleSchema from "../components/SEO/components/ArticleSchema";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import { BottomBanner } from "../components/layout";
+import { createSlugFromTitle } from "../feature/projects/utils";
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -40,23 +41,20 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   console.log(queryData);
 
   const breadcrumbs = React.useMemo(() => {
-    const courseSlug = queryData.project_category?.[0]?.slug;
-    let slug = queryData.titolo
-      .replace(/\s/g, "-")
-      .replace(/[^a-zA-Z0-9-]/g, "")
-      .toLowerCase();
+    const courseSlug = queryData?.project_category?.[0]?.slug;
+    const slug = createSlugFromTitle(queryData?.titolo);
     return [
       { text: "Home", link: "/" },
       { text: "Progetti", link: "/progetti/" },
       { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
-      { text: queryData.titolo, link: `/progetti/${courseSlug}/${slug}/` },
+      { text: queryData?.titolo, link: `/progetti/${courseSlug}/${slug}/` },
     ];
   }, [queryData]);
 
   const bannerTitle = React.useMemo(() => {
-    const corsi = queryData.corsi[0];
-    return `Inizia ora a studiare ${createRowText(corsi.titolo)}`;
-  }, [queryData]);
+    const corsi = queryData?.corsi?.[0];
+    return `Inizia ora a studiare ${createRowText(corsi?.titolo as string)}`;
+  }, [queryData?.corsi?.[0]]);
 
   return (
     <Layout>
@@ -98,9 +96,9 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
           </Box>
           {/* <Box>Colonna a destra</Box> */}
           <ProjectBanner
-            courseTitle={queryData.corsi[0].titolo}
-            prezzo={queryData.corsi[0].prezzo}
-            couponLink={queryData.corsi[0].couponLink}
+            courseTitle={queryData?.corsi?.[0]?.titolo}
+            prezzo={queryData?.corsi?.[0]?.prezzo}
+            couponLink={queryData?.corsi?.[0]?.couponLink}
           />
         </FlexContainer>
         <Container maxWidth='lg'>

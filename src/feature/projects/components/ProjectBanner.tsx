@@ -1,14 +1,14 @@
 import React from "react";
 import { Stack, Typography, Button } from "@mui/material";
-import { Box, BoxProps, css } from "@mui/system";
+import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useLayoutContext } from "../../../context/layout";
 import SeoLink from "../../../components/shared/SeoLink";
 
 interface Props {
-  courseTitle?: string;
-  prezzo?: number;
+  courseTitle?: string | null;
+  prezzo?: number | null;
   couponLink?: string | null;
 }
 
@@ -119,7 +119,7 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               <SaleBox>
                 {prezzo
                   ? `-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                      0
+                      0,
                     )}%`
                   : null}
               </SaleBox>
