@@ -35,7 +35,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   return (
     <Layout>
       <Container sx={{ padding: "0px" }} maxWidth={"lg"}>
-        <FlexContainer>
+        <FlexContainer sx={{ position: "relative", alignItems: "flex-start" }}>
           <Box>
             <StyledBox>
               <Box
@@ -51,7 +51,11 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
             </StyledBox>
           </Box>
           {/* <Box>Colonna a destra</Box> */}
-          <ProjectBanner courseTitle={queryData.corsi[0].titolo} />
+          <ProjectBanner
+            courseTitle={queryData.corsi[0].titolo}
+            prezzo={queryData.corsi[0].prezzo}
+            couponLink={queryData.corsi[0].couponLink}
+          />
         </FlexContainer>
         <Container maxWidth='lg'>
           <ArticleFooter {...data} />
@@ -95,6 +99,8 @@ export const query = graphql`
       linkGithub
       corsi {
         titolo
+        prezzo
+        couponLink
       }
     }
     nextProject: contentfulProgetti(

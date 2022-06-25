@@ -4,67 +4,37 @@ import { Box, BoxProps, css } from "@mui/system";
 import styled from "@emotion/styled";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useLayoutContext } from "../../../context/layout";
+import SeoLink from "../../../components/shared/SeoLink";
 
 interface Props {
-  courseTitle: string;
+  courseTitle?: string;
+  prezzo?: number;
+  couponLink?: string | null;
 }
-
-// const BannerContainer = styled(Box)<BoxProps>(
-//   css({
-//     position: ["fixed", "relative"],
-//     bottom: "0",
-//     right: "0",
-//     left: "0",
-//     height: ["75px", "155px"],
-//     width: ["unset", "260px"],
-//     boxShadow: "0px 1px 2px 0px rgba(0, 0, 0, 0.1)",
-//     border: "1px solid rgba(98, 0, 238, 0.05)",
-//     borderRadius: "12px",
-//     margin: "15px",
-//     paddingLeft: ["12px", "18px"],
-//     paddingTop: ["10px", "25px"],
-//     background: "#fff",
-//   })
-// );
 
 const BannerContainer = styled(Box)`
   position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
-  height: 80px;
   box-shadow: 0px 1px 2px 0px #0000001a;
-  border: 1px solid rgba(98, 0, 238, 0.05);
   border-radius: 12px;
   margin: 15px;
   padding: 10px;
   background: #fff;
+  z-index: 2;
   @media screen and (min-width: 1024px) {
+    position: sticky;
     right: 5%;
     top: 140px;
     left: unset;
     bottom: unset;
-    height: 155px;
     width: 260px;
     padding-left: 18px;
     padding-top: 25px;
+    padding-bottom: 12px;
   }
 `;
-
-// const SaleBox = styled(Box)<BoxProps>(
-//   css({
-//     display: ["none", "flex"],
-//     width: "28px",
-//     height: "28px",
-//     borderRadius: "50%",
-//     background: "#8769fe",
-//     color: "#fff",
-//     fontWeight: "600",
-//     fontSize: "8px",
-//     alignItems: ["unset", "center"],
-//     justifyContent: ["unset", "center"],
-//   })
-// );
 
 const SaleBox = styled(Box)`
   display: none;
@@ -83,15 +53,6 @@ const SaleBox = styled(Box)`
   }
 `;
 
-// const CloseButton = styled(Button)<BoxProps>(
-//   css({
-//     display: ["block", "none"],
-//     padding: "0",
-//     width: "15px",
-//     height: "15px",
-//   })
-// );
-
 const CloseButton = styled(Button)`
   padding: 0;
   width: 15px;
@@ -101,12 +62,12 @@ const CloseButton = styled(Button)`
   }
 `;
 
-export const ProjectBanner = ({ courseTitle }: Props) => {
-  const { isBannerOpen, setIsBannerOpen } = useLayoutContext();
+export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
+  const context = useLayoutContext();
 
-  if (isBannerOpen) {
+  if (context?.isBannerOpen) {
     return (
-      <BannerContainer>
+      <BannerContainer sx={{ border: "1px solid", borderColor: "purple.200" }}>
         <Stack direction='column' spacing={{ xs: "unset", lg: "15px" }}>
           <Stack
             direction='row'
@@ -126,7 +87,7 @@ export const ProjectBanner = ({ courseTitle }: Props) => {
               {courseTitle}
             </Typography>
 
-            <CloseButton onClick={() => setIsBannerOpen(false)}>
+            <CloseButton onClick={() => context?.setIsBannerOpen(false)}>
               <DoDisturbOnIcon
                 sx={{
                   color: "#E4E7EC",
@@ -153,9 +114,15 @@ export const ProjectBanner = ({ courseTitle }: Props) => {
                   textDecoration: "line-through",
                 }}
               >
-                29.99€
+                {prezzo ? `${(prezzo / 100).toFixed(2)}€` : null}
               </Typography>
-              <SaleBox>-57%</SaleBox>
+              <SaleBox>
+                {prezzo
+                  ? `-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
+                      0
+                    )}%`
+                  : null}
+              </SaleBox>
               <Typography
                 fontWeight={500}
                 sx={{
@@ -163,21 +130,25 @@ export const ProjectBanner = ({ courseTitle }: Props) => {
                   color: "#000",
                 }}
               >
-                19.99€
+                12.99€
               </Typography>
             </Stack>
-            <Button
-              sx={{
-                width: "100%",
-                maxWidth: { xs: "105px", lg: "unset" },
-                height: "27px",
-                background: "#8769FE",
-                color: "#fff",
-                borderRadius: "100px",
-              }}
-            >
-              riscatta
-            </Button>
+            {couponLink ? (
+              <SeoLink isExternal={true} link={couponLink} rel='noopener'>
+                <Button
+                  sx={{
+                    width: "100%",
+                    maxWidth: { xs: "105px", lg: "unset" },
+                    height: "27px",
+                    background: "#8769FE",
+                    color: "#fff",
+                    borderRadius: "100px",
+                  }}
+                >
+                  riscatta
+                </Button>
+              </SeoLink>
+            ) : null}
           </Stack>
         </Stack>
       </BannerContainer>

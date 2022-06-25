@@ -2,10 +2,8 @@ import React from "react";
 import { ProjectCard, ProjectImage, ProjectContent } from "./index";
 import { BottomBanner } from "../../../components/layout";
 import { ArticleNodeProps } from "../types";
-import { Box, Button, Typography, css } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import styled from "@emotion/styled";
-// import ProjectImage from "./ProjectImage";
-// import ProjectContent from "./ProjectContent";
 import {
   GatsbyImage,
   getImage,
@@ -16,15 +14,6 @@ import { cleanStringFromHtlmTags } from "../../../utils/helpers";
 import { Link as GatsbyLink } from "gatsby";
 
 type Props = ArticleNodeProps;
-
-// const StyledTypography = styled(Typography)(
-//   css({
-//     fontWeight: "600",
-//     fontSize: ["20px", "24px"],
-//     marginTop: ["48px", "75px"],
-//     marginBottom: ["20px", "40px"],
-//   })
-// );
 
 const StyledTypography = styled(Typography)`
   font-weight: 600;

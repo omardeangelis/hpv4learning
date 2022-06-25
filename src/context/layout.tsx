@@ -4,7 +4,7 @@ export type Props = {
   isSidebarOpen: boolean;
   isCourseMenuOpen: boolean;
   isBannerOpen: boolean;
-  setIsBannerOpen: () => void;
+  setIsBannerOpen: React.Dispatch<React.SetStateAction<boolean>>;
   toggleSidebar: () => void;
   toggleCourseMenu: () => void;
   handleClickAway: () => void;
