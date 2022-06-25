@@ -1,9 +1,7 @@
 import React from "react";
 import { ProjectCard, ProjectImage, ProjectContent } from "./index";
-import { BottomBanner } from "../../../components/layout";
-import { ArticleNodeProps } from "../types";
 
-import { Box, Button, Typography, css, Container } from "@mui/material";
+import { Box, Typography, Container } from "@mui/material";
 import styled from "@emotion/styled";
 import {
   GatsbyImage,
@@ -11,9 +9,8 @@ import {
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image";
+import { createSlugFromTitle } from "../utils";
 import SeoLink from "../../../components/shared/SeoLink";
-
-type Props = ArticleNodeProps;
 
 const StyledTypography = styled(Typography)`
   font-weight: 600;
@@ -23,22 +20,17 @@ const StyledTypography = styled(Typography)`
   @media screen and (min-width: 1024px) {
     font-size: 24px;
     margin-top: 75px;
-    /* margin-bottom: 40px; */
   }
 `;
 
-export const ArticleFooter = (props: Props) => {
+export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
   const nextProject = React.useMemo(() => {
     return props.nextProject;
   }, []);
 
   const nextProjectUrl = React.useMemo(() => {
-    const courseSlug = props.project.project_category[0].slug;
-    let slug = props.nextProject.titolo;
-    slug = slug
-      .replace(/\s/g, "-")
-      .replace(/[^a-zA-Z0-9-]/g, "")
-      .toLowerCase();
+    const courseSlug = props?.project?.project_category?.[0]?.slug;
+    const slug = createSlugFromTitle(props?.nextProject?.titolo);
     return `/progetti/${courseSlug}/${slug}/`;
   }, []);
 
@@ -70,7 +62,7 @@ export const ArticleFooter = (props: Props) => {
                   <GatsbyImage
                     image={
                       getImage(
-                        nextProject?.copertina as unknown as ImageDataLike
+                        nextProject?.copertina as unknown as ImageDataLike,
                       ) as IGatsbyImageData
                     }
                     alt={nextProject.titolo || "Anteprima del progetto"}
