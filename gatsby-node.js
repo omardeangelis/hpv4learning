@@ -20,7 +20,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: node.slug,
         categorySlug: node.category.filter(
-          (category) => category.slug !== "gratuiti",
+          (category) => category.slug !== "gratuiti"
         )[0].slug,
       },
     });
@@ -63,16 +63,20 @@ exports.createPages = async ({ graphql, actions }) => {
   projectArticleQuery.data.allContentfulProgetti.nodes.forEach((project) => {
     const courseSlug = project.project_category?.[0]?.slug;
     let slug = project.titolo;
-    const reg = /\s/g;
-    const regex = /[^a-zA-Z0-9-]/g;
-    slug = slug.replace(reg, "-");
-    slug = slug.replace(regex, "").toLowerCase();
+    slug = slug
+      .replace(/\s/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
+    const nextProjectOrder = project.ordine + 1;
+    const courseId = project.corsi[0].idCorso;
     if (project.body && courseSlug) {
       createPage({
         path: `/progetti/${courseSlug}/${slug}/`,
         component: path.resolve(`./src/template/ProjectArticle.tsx`),
         context: {
           id: project.id,
+          nextProjectOrder,
+          courseId,
         },
       });
     }
