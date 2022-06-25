@@ -1,13 +1,18 @@
 import React from "react";
 import { graphql, PageProps } from "gatsby";
 import Layout from "../components/ui/navigation/layout";
-import { Box, Container } from "@mui/material";
+import { Box, Button, Container } from "@mui/material";
 import styled from "@emotion/styled";
 import {
   ArticleBody,
   ArticleHero,
   ArticleFooter,
 } from "../feature/projects/components";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
+import { createRowText } from "../utils/helpers";
+import ArticleSchema from "../components/SEO/components/ArticleSchema";
+import LinkHandler from "../components/SEO/components/LinkHandler";
+import { BottomBanner } from "../components/layout";
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -31,8 +36,49 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
     return data.project;
   }, [data]);
 
+  console.log(queryData);
+
+  const breadcrumbs = React.useMemo(() => {
+    const courseSlug = queryData.project_category?.[0]?.slug;
+    let slug = queryData.titolo
+      .replace(/\s/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
+    return [
+      { text: "Home", link: "/" },
+      { text: "Progetti", link: "/progetti/" },
+      { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
+      { text: queryData.titolo, link: `/progetti/${courseSlug}/${slug}/` },
+    ];
+  }, [queryData]);
+
+  const bannerTitle = React.useMemo(() => {
+    const corsi = queryData.corsi[0];
+    return `Inizia ora a studiare ${createRowText(corsi.titolo)}`;
+  }, [queryData]);
+
   return (
     <Layout>
+      <MetaDecorator
+        metaTitle={createRowText(queryData?.titolo as any)}
+        metaDescription={queryData?.metaDescription as any}
+        image={
+          queryData && (("https:" + queryData?.copertina?.file?.url) as any)
+        }
+      ></MetaDecorator>
+      <LinkHandler />
+      <ArticleSchema
+        title={createRowText(queryData?.titolo as any)}
+        description={queryData?.descrizione?.descrizione as any}
+        authorName='hpv4learning'
+        breadcrumbs={breadcrumbs as any}
+        image={
+          queryData && (("https:" + queryData?.copertina?.file?.url) as any)
+        }
+        imageAltText={createRowText(queryData?.titolo as any)}
+        modifiedDate={queryData?.updatedAt as any}
+        publishDate={queryData?.createdAt as any}
+      />
       <Container sx={{ padding: "0px" }} maxWidth={"lg"}>
         <FlexContainer>
           <Box>
@@ -55,6 +101,22 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
           <ArticleFooter {...data} />
         </Container>
       </Container>
+      <BottomBanner
+        title={bannerTitle}
+        sx={{ backgroundColor: "purple.A100", mt: { xs: "48px", lg: "96px" } }}
+      >
+        <Button
+          size='large'
+          sx={{
+            borderRadius: "100px",
+            background: "#8769FE",
+            color: "#fff",
+            fontSize: "18px",
+          }}
+        >
+          Riscatta coupon
+        </Button>
+      </BottomBanner>
     </Layout>
   );
 };
@@ -71,6 +133,9 @@ export const query = graphql`
       url
       copertina {
         gatsbyImageData
+        file {
+          url
+        }
       }
       descrizione {
         descrizione
@@ -87,6 +152,7 @@ export const query = graphql`
         }
       }
       createdAt
+      updatedAt
       project_category {
         slug
       }
