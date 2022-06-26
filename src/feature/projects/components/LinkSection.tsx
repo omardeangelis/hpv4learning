@@ -3,6 +3,8 @@ import { Link as GatsbyLink } from "gatsby";
 import styled from "@emotion/styled";
 import { Stack, Box, Chip, css } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import SeoLink from "../../../components/shared/SeoLink";
+import { createSlugFromTitle } from "../utils";
 
 interface Props {
   category?: string | null;
@@ -19,7 +21,7 @@ const LinkContainer = styled(Box)(
     fontWeight: "300",
     color: "#E7A7FF",
     marginRight: "18px",
-  }),
+  })
 );
 
 export const LinkSection = ({ category, url, githubUrl }: Props) => {
@@ -40,35 +42,41 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
 
   return (
     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-      <Chip
-        label={label}
-        variant='outlined'
-        sx={{
-          height: "20px",
-          fontSize: "12px",
-          borderRadius: "20px",
-          border: "1px solid #E9E3FF",
-          color: "#8769FE",
-        }}
-      />
+      <SeoLink
+        isExternal={false}
+        link={`/corsi/${createSlugFromTitle(label)}/`}
+      >
+        <Chip
+          label={label}
+          variant='outlined'
+          sx={{
+            height: "20px",
+            fontSize: "12px",
+            borderRadius: "20px",
+            border: "1px solid #E9E3FF",
+            color: "#8769FE",
+            cursor: "pointer",
+          }}
+        />
+      </SeoLink>
 
       <Stack direction='row'>
         {url ? (
           <LinkContainer>
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
-            <GatsbyLink to={url} target='_blank'>
+            <SeoLink link={url} isExternal target='_blank'>
               Vedi
-            </GatsbyLink>
+            </SeoLink>
           </LinkContainer>
         ) : null}
 
         {githubUrl ? (
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           /* @ts-ignore */
-          <GatsbyLink to={githubUrl} target='_blank'>
+          <SeoLink link={githubUrl} isExternal target='_blank'>
             <GitHubIcon />
-          </GatsbyLink>
+          </SeoLink>
         ) : null}
       </Stack>
     </Stack>
