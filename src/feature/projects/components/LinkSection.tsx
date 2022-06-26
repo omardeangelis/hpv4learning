@@ -65,18 +65,18 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
           <LinkContainer>
             {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
             {/* @ts-ignore */}
-            <GatsbyLink to={url} target='_blank'>
+            <SeoLink link={url} isExternal target='_blank'>
               Vedi
-            </GatsbyLink>
+            </SeoLink>
           </LinkContainer>
         ) : null}
 
         {githubUrl ? (
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           /* @ts-ignore */
-          <GatsbyLink to={githubUrl} target='_blank'>
+          <SeoLink link={githubUrl} isExternal target='_blank'>
             <GitHubIcon />
-          </GatsbyLink>
+          </SeoLink>
         ) : null}
       </Stack>
     </Stack>
