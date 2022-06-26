@@ -52,6 +52,8 @@ const projectCategoriesPageQuery = `
   allContentfulProjectCategory {
     nodes {
       slug
+      title
+      description
       id
       categoryProjects {
         titolo

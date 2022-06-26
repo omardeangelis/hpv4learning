@@ -68,6 +68,8 @@ exports.createPages = async ({ graphql, actions }) => {
             component: path.resolve("./src/template/ProjectsCategory.tsx"),
             context: {
               slug: category.slug,
+              title: category.title,
+              description: category.description,
               limit: numOfElement,
               skip: start,
               pages,
