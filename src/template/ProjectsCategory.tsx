@@ -8,6 +8,7 @@ import { ProjectSectionProps } from "../feature/projects/types";
 import { ProjectSection } from "../feature/projects/components";
 import { BottomBanner, RoundedButton } from "../components/layout";
 import SeoLink from "../components/shared/SeoLink";
+import Paginatior from "../feature/navigation/components/Paginatior";
 
 type Props = {
   pageContext: {
@@ -70,6 +71,22 @@ const ProjectsCategory = ({
           })}
         </Stack>
       </Container>
+      {hasNextPage || currentPage > 1 ? (
+        <Container maxWidth='lg'>
+          <Box
+            sx={{
+              mt: { xs: "24px", lg: "48px" },
+            }}
+          >
+            <Paginatior
+              pages={pages}
+              currentPage={currentPage}
+              link={`progetti/${slug}`}
+            />
+          </Box>
+        </Container>
+      ) : null}
+
       <BottomBanner
         title={`${createRowText(corso?.titolo as any)}`}
         sx={{ backgroundColor: "purple.A100", mt: { xs: "48px", lg: "96px" } }}
@@ -102,6 +119,7 @@ export const query = graphql`
         }
         project_category {
           title
+          slug
         }
       }
     }

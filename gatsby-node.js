@@ -74,7 +74,7 @@ exports.createPages = async ({ graphql, actions }) => {
               skip: start,
               pages,
               currentPage: index + 1,
-              hasNextPage: pages <= index + 2,
+              hasNextPage: pages >= index + 2,
               id: category.id,
             },
           });

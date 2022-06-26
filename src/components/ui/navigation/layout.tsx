@@ -9,7 +9,7 @@ const Layout = ({
   disableColor,
   enableFooterPadding,
 }: {
-  children: React.ReactChild | React.ReactChild[];
+  children: React.ReactNode;
   disableColor?: true;
   enableFooterPadding?: true;
 }) => {
