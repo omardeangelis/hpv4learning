@@ -1,23 +1,60 @@
+import { Stack, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
+import styled from "@emotion/styled";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 import SeoLink from "../components/shared/SeoLink";
 import Layout from "../components/ui/navigation/layout";
+import { ProjectSection } from "../feature/projects/components/ProjectSection";
+
+const LinkContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #8769fe;
+  @media screen and (min-width: 1024px) {
+    font-size: 24px;
+  }
+`;
+
+const StyledStack = styled(Stack)`
+  margin-top: 72px;
+  margin-bottom: 20px;
+  @media screen and (min-width: 1024px) {
+    margin-top: 96px;
+    margin-bottom: 30px;
+  }
+`;
 
 const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
   return (
     <Layout>
       <Container maxWidth='lg'>
-        {data.allContentfulProgetti.group.map((section) => (
-          <Box>
-            <SeoLink
-              isExternal={false}
-              link={section.nodes[0].project_category?.[0]?.slug as string}
-            >
-              {section.fieldValue}
-            </SeoLink>
-          </Box>
-        ))}
+        {data.allContentfulProgetti.group.map((post, index) => {
+          return (
+            <div key={index}>
+              <StyledStack direction='row' justifyContent='space-between'>
+                <Typography
+                  fontWeight={600}
+                  fontSize={{ xs: "20px", lg: "34px" }}
+                >
+                  {post.fieldValue}
+                </Typography>
+                <LinkContainer>
+                  <SeoLink
+                    isExternal={false}
+                    link={`/progetti/${post.fieldValue.toLowerCase()}/`}
+                  >
+                    Vedi tutti
+                  </SeoLink>
+                </LinkContainer>
+              </StyledStack>
+              <ProjectSection projects={post.nodes}></ProjectSection>
+            </div>
+          );
+        })}
       </Container>
     </Layout>
   );
@@ -35,6 +72,7 @@ export const query = graphql`
           }
           project_category {
             slug
+            title
           }
           copertina {
             gatsbyImageData
