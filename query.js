@@ -49,9 +49,13 @@ const allProjectArticle = `
 
 const projectCategoriesPageQuery = `
 {
-  allContentfulProgetti {
-    group(field: project_category___slug, limit: 1) {
-      fieldValue
+  allContentfulProjectCategory {
+    nodes {
+      slug
+      id
+      categoryProjects {
+        titolo
+      }
     }
   }
 }
