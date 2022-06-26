@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { Stack, Box, Chip, css } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SeoLink from "../../../components/shared/SeoLink";
+import { createSlugFromTitle } from "../utils";
 
 interface Props {
   category?: string | null;
@@ -41,7 +42,10 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
 
   return (
     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-      <SeoLink isExternal={false} link={`/progetti/${category}`}>
+      <SeoLink
+        isExternal={false}
+        link={`/corsi/${createSlugFromTitle(label)}/`}
+      >
         <Chip
           label={label}
           variant='outlined'
