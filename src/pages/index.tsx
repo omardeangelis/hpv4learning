@@ -71,7 +71,6 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
         }}
       >
         <Container maxWidth='lg'>
-          {/* Top Hero Image ** Manca Immagine di Background */}
           <Hero>
             <TopHeroContent fn={goToCourseSection} />
           </Hero>

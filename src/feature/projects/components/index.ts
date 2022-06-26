@@ -9,3 +9,4 @@ export * from "./ProjectImage";
 export * from "./ProjectBanner";
 export * from "./Projects";
 export * from "./HomeSection";
+export * from "./ProjectSection";
