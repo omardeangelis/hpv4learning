@@ -110,11 +110,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
         title={bannerTitle}
         sx={{ backgroundColor: "purple.A100", mt: { xs: "48px", lg: "96px" } }}
       >
-        <SeoLink
-          isExternal={true}
-          link={queryData?.corsi?.[0]?.couponLink}
-          rel='noopener'
-        >
+        <SeoLink isExternal={false} link={`/${queryData?.corsi?.[0]?.slug}/`}>
           <Button
             size='large'
             sx={{
@@ -124,7 +120,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
               fontSize: "18px",
             }}
           >
-            Riscatta coupon
+            Vai al corso
           </Button>
         </SeoLink>
       </BottomBanner>
@@ -172,6 +168,7 @@ export const query = graphql`
         titolo
         prezzo
         couponLink
+        slug
       }
     }
     nextProject: contentfulProgetti(
