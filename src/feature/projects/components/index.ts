@@ -10,3 +10,4 @@ export * from "./ProjectBanner";
 export * from "./Projects";
 export * from "./HomeSection";
 export * from "./ProjectSection";
+export * from "./LatestProject";
