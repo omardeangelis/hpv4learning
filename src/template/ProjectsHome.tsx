@@ -3,12 +3,17 @@ import { graphql, PageProps } from "gatsby";
 import React from "react";
 import SeoLink from "../components/shared/SeoLink";
 import Layout from "../components/ui/navigation/layout";
+import { LatestProject } from "../feature/projects/components";
 
 const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
+  const latestProject = React.useMemo(() => {
+    return data.latestProjects.edges[0];
+  }, []);
   return (
     <Layout>
       <Container maxWidth='lg'>
-        {data.allContentfulProgetti.group.map((section) => (
+        {latestProject ? <LatestProject {...latestProject} /> : null}
+        {data.projects.group.map((section) => (
           <Box>
             <SeoLink
               isExternal={false}
@@ -25,7 +30,7 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
 
 export const query = graphql`
   query ProjectHomePage {
-    allContentfulProgetti(sort: { fields: createdAt, order: DESC }) {
+    projects: allContentfulProgetti(sort: { fields: createdAt, order: DESC }) {
       group(field: project_category___title, limit: 3) {
         fieldValue
         nodes {
@@ -35,6 +40,28 @@ export const query = graphql`
           }
           project_category {
             slug
+          }
+          copertina {
+            gatsbyImageData
+          }
+        }
+      }
+    }
+    latestProjects: allContentfulProgetti(
+      sort: { fields: createdAt, order: DESC }
+      limit: 1
+    ) {
+      edges {
+        node {
+          titolo
+          project_category {
+            slug
+          }
+          createdAt
+          body {
+            childMarkdownRemark {
+              timeToRead
+            }
           }
           copertina {
             gatsbyImageData
