@@ -5,7 +5,7 @@ import {
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image";
-import { Box, Button, Chip, Stack, Typography } from "@mui/material";
+import { Box, Chip, Stack, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { Styledtypography } from "./ArticleHero";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SeoLink from "../../../components/shared/SeoLink";
 import { createSlugFromTitle } from "../utils";
+import { RoundedButton } from "../../../components/layout";
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -48,6 +49,7 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
   const image = getImage(
     latestProject?.copertina as unknown as ImageDataLike
   ) as IGatsbyImageData;
+
   return (
     <StyledBox>
       <div>
@@ -79,10 +81,9 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: "7px",
               }}
             >
-              <AccessTimeIcon />{" "}
+              <AccessTimeIcon sx={{ mr: "7px" }} />{" "}
               {latestProject?.body?.childMarkdownRemark?.timeToRead} min
             </Styledtypography>
           ) : null}
@@ -99,14 +100,10 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
             latestProject?.project_category?.[0]?.slug
           }/${createSlugFromTitle(latestProject?.titolo)}/`}
         >
-          <Button
+          <RoundedButton
             size='small'
+            variant='outlined'
             sx={{
-              border: "1px solid #8769FE",
-              borderRadius: "100px",
-              color: "#8769FE",
-              background: "trasparent",
-              fontSize: "12px",
               height: { xs: "24px", lg: "36px" },
               mt: { xs: "20px", lg: "24px" },
             }}
@@ -115,14 +112,15 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
             <ArrowForwardIcon
               sx={{ width: "12px", height: "12px", ml: "7px" }}
             />
-          </Button>
+          </RoundedButton>
         </SeoLink>
       </div>
       {image ? (
         <Box
           sx={{
             heigth: { xs: "205px", lg: "305px" },
-            width: { xs: "100%", lg: "50%" },
+            maxWidth: "535px",
+            width: "100%",
             borderRadius: "16px",
             marginTop: { xs: "24px", lg: "0" },
             overflow: "hidden",

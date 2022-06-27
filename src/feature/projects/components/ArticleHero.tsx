@@ -6,13 +6,13 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { LinkSection } from "./LinkSection";
 import dayjs from "dayjs";
 
-const Styledtypography = styled(Typography)(
+export const Styledtypography = styled(Typography)(
   css({
     color: "#6C757D",
     fontSize: "14px",
     lineHeight: "18px",
     fontWeight: "300",
-  }),
+  })
 );
 
 const StyledBox = styled(Box)(
@@ -26,11 +26,11 @@ const StyledBox = styled(Box)(
     alignItems: "center",
     overflowX: "hidden",
     borderRadius: "0px 8px 8px 0px",
-  }),
+  })
 );
 
 export const ArticleHero = (
-  props: Omit<Queries.SingleProjectQuery["project"], "id">,
+  props: Omit<Queries.SingleProjectQuery["project"], "id">
 ) => {
   const {
     titolo,

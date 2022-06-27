@@ -48,7 +48,8 @@ export const query = graphql`
       }
     }
     latestProjects: allContentfulProgetti(
-      sort: { fields: createdAt, order: ASC }
+      sort: { fields: createdAt, order: DESC }
+      limit: 1
     ) {
       edges {
         node {
