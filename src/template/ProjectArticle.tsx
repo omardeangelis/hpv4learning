@@ -15,6 +15,7 @@ import ArticleSchema from "../components/SEO/components/ArticleSchema";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import { BottomBanner } from "../components/layout";
 import { createSlugFromTitle } from "../feature/projects/utils";
+import SeoLink from "../components/shared/SeoLink";
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -109,17 +110,19 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
         title={bannerTitle}
         sx={{ backgroundColor: "purple.A100", mt: { xs: "48px", lg: "96px" } }}
       >
-        <Button
-          size='large'
-          sx={{
-            borderRadius: "100px",
-            background: "#8769FE",
-            color: "#fff",
-            fontSize: "18px",
-          }}
-        >
-          Riscatta coupon
-        </Button>
+        <SeoLink isExternal={false} link={`/${queryData?.corsi?.[0]?.slug}/`}>
+          <Button
+            size='large'
+            sx={{
+              borderRadius: "100px",
+              background: "#8769FE",
+              color: "#fff",
+              fontSize: "18px",
+            }}
+          >
+            Vai al corso
+          </Button>
+        </SeoLink>
       </BottomBanner>
     </Layout>
   );
@@ -165,6 +168,7 @@ export const query = graphql`
         titolo
         prezzo
         couponLink
+        slug
       }
     }
     nextProject: contentfulProgetti(

@@ -6,6 +6,7 @@ import React from "react";
 import SeoLink from "../components/shared/SeoLink";
 import Layout from "../components/ui/navigation/layout";
 import { ProjectSection } from "../feature/projects/components/ProjectSection";
+import { LatestProject } from "../feature/projects/components";
 
 const LinkContainer = styled(Box)`
   display: flex;
@@ -29,14 +30,19 @@ const StyledStack = styled(Stack)`
 `;
 
 const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
+  const latestProject = React.useMemo(() => {
+    return data.latestProjects.edges[0];
+  }, []);
   return (
     <Layout>
       <Container maxWidth='lg'>
-        {data.allContentfulProgetti.group.map((post, index) => {
+        {latestProject ? <LatestProject {...latestProject} /> : null}
+        {data.projects.group.map((post, index) => {
           return (
             <div key={index}>
               <StyledStack direction='row' justifyContent='space-between'>
                 <Typography
+                  component='h2'
                   fontWeight={600}
                   fontSize={{ xs: "20px", lg: "34px" }}
                 >
@@ -62,7 +68,7 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
 
 export const query = graphql`
   query ProjectHomePage {
-    allContentfulProgetti(sort: { fields: createdAt, order: DESC }) {
+    projects: allContentfulProgetti(sort: { fields: createdAt, order: DESC }) {
       group(field: project_category___title, limit: 3) {
         fieldValue
         nodes {
@@ -73,6 +79,28 @@ export const query = graphql`
           project_category {
             slug
             title
+          }
+          copertina {
+            gatsbyImageData
+          }
+        }
+      }
+    }
+    latestProjects: allContentfulProgetti(
+      sort: { fields: createdAt, order: DESC }
+      limit: 1
+    ) {
+      edges {
+        node {
+          titolo
+          project_category {
+            slug
+          }
+          createdAt
+          body {
+            childMarkdownRemark {
+              timeToRead
+            }
           }
           copertina {
             gatsbyImageData

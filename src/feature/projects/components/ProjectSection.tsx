@@ -21,19 +21,13 @@ export const ProjectSection = ({
   return (
     <Stack
       direction={{ xs: "column", lg: "row" }}
-      spacing={{ xs: "20px", lg: "0px" }}
+      spacing={{ xs: "20px", lg: "47px" }}
       alignItems='stretch'
-      justifyContent='space-between'
+      justifyContent='flex-start'
     >
       {projects.map((post, index) => {
         return (
-          <Box
-            key={"progetto" + index}
-            className='row-container'
-            sx={{
-              mb: { xs: "0px", lg: "24px" },
-            }}
-          >
+          <Box key={"progetto" + index} className='row-container'>
             <SeoLink
               isExternal={false}
               link={`/progetti/${
@@ -42,11 +36,12 @@ export const ProjectSection = ({
               style={{
                 display: "flex",
                 width: "fit-content",
+                height: "100%",
               }}
             >
               <Box
                 sx={{
-                  maxWidth: { xs: "unset", sm: "351px" },
+                  maxWidth: { xs: "unset", lg: "351px" },
                 }}
               >
                 <ProjectCard>
