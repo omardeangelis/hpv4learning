@@ -1,6 +1,6 @@
 import React from "react";
 //Global e Seo
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import ComunityBanner from "../components/banner/ComunityBanner";

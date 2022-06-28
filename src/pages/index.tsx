@@ -1,6 +1,6 @@
 import * as React from "react";
 //Global Layoaut
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import IndexInfo from "../components/IndexInfo";
 import TopHeroContent from "../components/TopHeroContent";
 import { faqs } from "../asset/faqsdata";

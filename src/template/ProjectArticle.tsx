@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql, PageProps } from "gatsby";
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import { Box, Button, Container } from "@mui/material";
 import styled from "@emotion/styled";
 import {

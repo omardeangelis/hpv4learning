@@ -16,9 +16,9 @@ import Typography from "@mui/material/Typography";
 import useDropDown from "../../../hook/useDropDown";
 import styled from "@emotion/styled";
 import { CategoryMenuProps } from "../../../types/layout";
-import { getIcon as getLayoutIcon } from "../../../feature/navigation/utils";
+import { getIcon as getLayoutIcon } from "../utils";
 import { getIcon } from "../../../utils/general";
-import { useNavigationLink } from "../../../feature/navigation/hooks/useNavigationLink";
+import { useNavigationLink } from "../hooks/useNavigationLink";
 
 type Props = {
   allContentfulCategory: {
@@ -39,7 +39,7 @@ const StyledDrawer = styled(SwipeableDrawer)`
   }
 `;
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const classes = useStyles();
   const data: Props = useStaticQuery(query);
   const ctx = useLayoutContext();
@@ -177,5 +177,3 @@ const query = graphql`
     }
   }
 `;
-
-export default Sidebar;

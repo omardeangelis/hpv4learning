@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
 import React from "react";
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 
 type Props = {
   pageContext: { slug: string };

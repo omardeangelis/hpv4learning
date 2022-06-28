@@ -3,7 +3,7 @@ import { Button, Container, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import SeoLink from "../components/shared/SeoLink";
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
 import { jobs } from "../asset/jobsdata";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
