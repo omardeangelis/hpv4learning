@@ -1,3 +1,4 @@
+const { isEmpty } = require("lodash");
 const path = require(`path`);
 const {
   allCourseQuery,
@@ -20,7 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: node.slug,
         categorySlug: node.category.filter(
-          (category) => category.slug !== "gratuiti"
+          (category) => category.slug !== "gratuiti",
         )[0].slug,
       },
     });
@@ -50,15 +51,37 @@ exports.createPages = async ({ graphql, actions }) => {
     component: path.resolve("./src/template/ProjectsHome.tsx"),
   });
 
-  categoryProjectQuery.data.allContentfulProgetti.group.forEach((category) => {
-    createPage({
-      path: `/progetti/${category.fieldValue}/`,
-      component: path.resolve("./src/template/ProjectsCategory.tsx"),
-      context: {
-        slug: category.fieldValue,
-      },
-    });
-  });
+  categoryProjectQuery.data.allContentfulProjectCategory.nodes.forEach(
+    (category) => {
+      if (!isEmpty(category.categoryProjects)) {
+        const numOfElement = 9;
+        const pages = Math.ceil(
+          category.categoryProjects.length / numOfElement,
+        );
+
+        Array.from({ length: pages }, (_, index) => {
+          const start = numOfElement * index;
+          createPage({
+            path: `/progetti/${category.slug}${
+              index === 0 ? "/" : `/${index + 1}/`
+            }`,
+            component: path.resolve("./src/template/ProjectsCategory.tsx"),
+            context: {
+              slug: category.slug,
+              title: category.title,
+              description: category.description,
+              limit: numOfElement,
+              skip: start,
+              pages,
+              currentPage: index + 1,
+              hasNextPage: pages >= index + 2,
+              id: category.id,
+            },
+          });
+        });
+      }
+    },
+  );
 
   projectArticleQuery.data.allContentfulProgetti.nodes.forEach((project) => {
     const courseSlug = project.project_category?.[0]?.slug;
