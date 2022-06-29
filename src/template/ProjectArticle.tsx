@@ -39,8 +39,6 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
     return data.project;
   }, [data]);
 
-  console.log(queryData);
-
   const breadcrumbs = React.useMemo(() => {
     const courseSlug = queryData?.project_category?.[0]?.slug;
     const slug = createSlugFromTitle(queryData?.titolo);
