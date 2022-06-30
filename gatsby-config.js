@@ -29,6 +29,32 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
+      resolve: "gatsby-plugin-sitemap",
+      excludes: [
+        "/progetti/javascript/2",
+        "/progetti/javascript/3",
+        "/progetti/javascript/4",
+        "/progetti/javascript/5",
+        "/progetti/javascript/6",
+        "/progetti/javascript/7",
+        "/progetti/javascript/8",
+        "/progetti/react/2",
+        "/progetti/react/3",
+        "/progetti/react/4",
+        "/progetti/react/5",
+        "/progetti/react/6",
+        "/progetti/react/7",
+        "/progetti/react/8",
+        "/progetti/videomaker/2",
+        "/progetti/videomaker/3",
+        "/progetti/videomaker/4",
+        "/progetti/videomaker/5",
+        "/progetti/videomaker/6",
+        "/progetti/videomaker/7",
+        "/progetti/videomaker/8",
+      ],
+    },
+    {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.

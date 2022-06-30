@@ -9,6 +9,9 @@ import { ProjectSection } from "../feature/projects/components";
 import { BottomBanner, RoundedButton } from "../components/layout";
 import SeoLink from "../components/shared/SeoLink";
 import Paginatior from "../feature/navigation/components/Paginatior";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
+import WebPageSchema from "../components/SEO/components/WebPageSchema";
+import LinkHandler from "../components/SEO/components/LinkHandler";
 
 type Props = {
   pageContext: {
@@ -28,8 +31,35 @@ const ProjectsCategory = ({
     corso,
   },
 }: PageProps<Queries.ProjectCategoryPageQuery> & Props) => {
+  const breadcrumbs = React.useMemo(
+    () => [
+      {
+        text: "Home",
+        link: "/",
+      },
+      {
+        text: "Home",
+        link: "/progetti/",
+      },
+      {
+        text: "Home",
+        link: `/progetti/${slug}/`,
+      },
+    ],
+    [],
+  );
   return (
     <Layout>
+      <MetaDecorator
+        metaTitle={`Realizza Progetti pratici per ${title}`}
+        metaDescription={description}
+      />
+      <WebPageSchema
+        title={`Realizza Progetti pratici per ${title}`}
+        description={description}
+        breadcrumbs={breadcrumbs}
+      />
+      <LinkHandler paginatedPath={`progetti/${slug}`} />
       <Container maxWidth='lg'>
         <Box maxWidth='756px' mx='auto' mt={{ xs: "48px", lg: "96px" }}>
           <Typography

@@ -137,7 +137,7 @@ const Category = ({
           }}
         >
           <Container maxWidth='lg'>
-            {rows.map((row, index) => {
+            {rows?.map((row, index) => {
               return (
                 <Box
                   key={`${name}-section-${index}`}
