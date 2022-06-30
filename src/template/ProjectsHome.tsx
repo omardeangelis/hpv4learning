@@ -4,9 +4,10 @@ import styled from "@emotion/styled";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 import SeoLink from "../components/shared/SeoLink";
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import { ProjectSection } from "../feature/projects/components/ProjectSection";
 import { LatestProject } from "../feature/projects/components";
+import { ProjectSectionProps } from "../feature/projects/types";
 
 const LinkContainer = styled(Box)`
   display: flex;
@@ -51,13 +52,15 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
                 <LinkContainer>
                   <SeoLink
                     isExternal={false}
-                    link={`/progetti/${post.fieldValue.toLowerCase()}/`}
+                    link={`/progetti/${post?.fieldValue?.toLowerCase()}/`}
                   >
                     Vedi tutti
                   </SeoLink>
                 </LinkContainer>
               </StyledStack>
-              <ProjectSection projects={post.nodes}></ProjectSection>
+              <ProjectSection
+                projects={post.nodes as ProjectSectionProps}
+              ></ProjectSection>
             </div>
           );
         })}
@@ -93,6 +96,9 @@ export const query = graphql`
       edges {
         node {
           titolo
+          descrizione {
+            descrizione
+          }
           project_category {
             slug
           }

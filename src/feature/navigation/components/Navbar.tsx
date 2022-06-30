@@ -11,10 +11,23 @@ import { Link as GastbyLink } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { Stack } from "@mui/material";
 import styled from "@emotion/styled";
-import CourseMenu from "./CourseMenu";
+import { CourseMenu } from "./CourseMenu";
 import { useLayoutContext } from "../../../context/layout";
-import { useNavigationLink } from "../../../feature/navigation/hooks/useNavigationLink";
-import { getIcon } from "../../../feature/navigation/utils";
+import { useNavigationLink } from "../hooks/useNavigationLink";
+import { getIcon } from "../utils";
+import SeoLink from "../../../components/shared/SeoLink";
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useDismiss,
+  useFloating,
+  useFocus,
+  useClick,
+  useInteractions,
+  useRole,
+} from "@floating-ui/react-dom-interactions";
 
 const StyledNav = styled(Box)`
   width: 100%;
@@ -54,7 +67,22 @@ const StyledRight = styled(Box)`
   }
 `;
 
-const Navbar = ({ disableColor }: { disableColor?: true }) => {
+export const Navbar = ({ disableColor }: { disableColor?: true }) => {
+  const [open, setOpen] = React.useState(false);
+  const { x, y, reference, floating, strategy, context } = useFloating({
+    placement: "top",
+    open,
+    onOpenChange: setOpen,
+    middleware: [offset(5), flip(), shift({ padding: 8 })],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    useClick(context),
+    useFocus(context),
+    useRole(context, { role: "tooltip" }),
+    useDismiss(context),
+  ]);
   const ctx = useLayoutContext();
   const links = useNavigationLink();
   return (
@@ -101,12 +129,10 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
                   if (!link) {
                     return (
                       <Box
-                        role='_link'
-                        id='course_opener'
-                        onClick={(e) => {
-                          ctx?.toggleCourseMenu();
-                          e.stopPropagation();
-                        }}
+                        {...getReferenceProps({
+                          ref: reference,
+                          role: "_link",
+                        })}
                       >
                         <Stack direction='row' spacing={2} alignItems='center'>
                           <Typography
@@ -129,7 +155,7 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
                   return (
                     <>
                       {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
-                      <GastbyLink to={link}>
+                      <SeoLink isExternal={false} link={link}>
                         <Box role='_link'>
                           <Stack
                             direction='row'
@@ -151,7 +177,7 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
                             })}
                           </Stack>
                         </Box>
-                      </GastbyLink>
+                      </SeoLink>
                     </>
                   );
                 })}
@@ -178,8 +204,20 @@ const Navbar = ({ disableColor }: { disableColor?: true }) => {
         </Container>
       </StyledNav>
       <Box height='72px' width='100px'></Box>
-      <CourseMenu />
+      {open ? (
+        <Box
+          {...getFloatingProps({
+            ref: floating,
+            style: {
+              position: strategy,
+              top: y ?? 0,
+              left: x ?? 0,
+            },
+          })}
+        >
+          <CourseMenu />
+        </Box>
+      ) : null}
     </>
   );
 };
-export default Navbar;

@@ -1,9 +1,8 @@
 import React from "react";
 //Custom Component
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import { Footer } from "../../../feature/footer/";
-import { LayoutProvider } from "../../../context/layout";
+import { Navbar, Sidebar } from "../../feature/navigation/components";
+import { Footer } from "../../feature/footer";
+import { LayoutProvider } from "../../context/layout";
 const Layout = ({
   children,
   disableColor,

@@ -26,7 +26,9 @@ const StyledBox = styled(Box)`
   }
 `;
 
-export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
+export const LatestProject = (
+  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number],
+) => {
   const latestProject = React.useMemo(() => {
     return props.node;
   }, [props]);
@@ -47,7 +49,7 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
   }, [latestProject]);
 
   const image = getImage(
-    latestProject?.copertina as unknown as ImageDataLike
+    latestProject?.copertina as unknown as ImageDataLike,
   ) as IGatsbyImageData;
 
   return (
@@ -69,11 +71,33 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
             }}
           />
         </SeoLink>
-        <Typography fontSize={{ xs: "34px", lg: "48px" }} fontWeight={600}>
-          {latestProject?.titolo}
-        </Typography>
+        <Box
+          sx={{
+            maxWidth: { lg: "486px" },
+            mt: { xs: "10px", lg: "16px" },
+          }}
+        >
+          <Typography
+            fontSize={{ xs: "34px", lg: "48px" }}
+            lineHeight={{ xs: "39px", lg: "54px" }}
+            fontWeight={600}
+          >
+            {latestProject?.titolo}
+          </Typography>
+          <Box mt={{ xs: "6px", lg: "8px" }}>
+            <Typography
+              fontSize='16px'
+              lineHeight='20px'
+              sx={{
+                color: "grey.600",
+              }}
+            >
+              {latestProject.descrizione?.descrizione}
+            </Typography>
+          </Box>
+        </Box>
 
-        <Stack direction='row' spacing='20px' alignItems='center' mt='10px'>
+        <Stack direction='row' spacing='20px' alignItems='center' mt='12px'>
           <Styledtypography variant='caption'>By Hpv4Learning</Styledtypography>
           {latestProject?.body?.childMarkdownRemark?.timeToRead ? (
             <Styledtypography
@@ -118,7 +142,7 @@ export const LatestProject = (props: Queries.ProjectHomePageQuery) => {
       {image ? (
         <Box
           sx={{
-            heigth: { xs: "205px", lg: "305px" },
+            maxHeight: { xs: "205px", lg: "305px" },
             maxWidth: "535px",
             width: "100%",
             borderRadius: "16px",

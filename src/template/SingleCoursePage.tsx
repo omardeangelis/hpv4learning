@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { graphql, PageProps } from "gatsby";
 //Global Component e Variables
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 //Utils
 import { createBrandText, createRowText, isExpired } from "../utils/helpers";
