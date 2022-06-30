@@ -8,7 +8,6 @@ import {
 import React from "react";
 import SeoLink from "../../../components/shared/SeoLink";
 import { ProjectSectionProps } from "../types";
-import { createSlugFromTitle } from "../utils";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectContent } from "./ProjectContent";
 import { ProjectImage } from "./ProjectImage";
@@ -30,9 +29,7 @@ export const ProjectSection = ({
           <Box key={"progetto" + index} className='row-container'>
             <SeoLink
               isExternal={false}
-              link={`/progetti/${
-                post?.project_category?.[0]?.slug
-              }/${createSlugFromTitle(post?.titolo)}/`}
+              link={`/progetti/${post?.project_category?.[0]?.slug}/${post?.slug}/`}
               style={{
                 display: "flex",
                 width: "fit-content",
@@ -55,11 +52,11 @@ export const ProjectSection = ({
                           post.copertina?.gatsbyImageData as ImageDataLike,
                         ) as IGatsbyImageData
                       }
-                      alt={post.titolo as string}
+                      alt={post.articleTitle as string}
                     />
                   </ProjectImage>
                   <ProjectContent
-                    titolo={post.titolo}
+                    titolo={post.articleTitle}
                     description={post.descrizione?.descrizione}
                     label={post?.project_category?.[0]?.title}
                   />

@@ -82,7 +82,7 @@ export const LatestProject = (
             lineHeight={{ xs: "39px", lg: "54px" }}
             fontWeight={600}
           >
-            {latestProject?.titolo}
+            {latestProject?.articleTitle}
           </Typography>
           <Box mt={{ xs: "6px", lg: "8px" }}>
             <Typography
@@ -120,9 +120,7 @@ export const LatestProject = (
 
         <SeoLink
           isExternal={false}
-          link={`/progetti/${
-            latestProject?.project_category?.[0]?.slug
-          }/${createSlugFromTitle(latestProject?.titolo)}/`}
+          link={`/progetti/${latestProject?.project_category?.[0]?.slug}/${latestProject?.slug}/`}
         >
           <RoundedButton
             size='small'
@@ -150,7 +148,10 @@ export const LatestProject = (
             overflow: "hidden",
           }}
         >
-          <GatsbyImage image={image} alt={latestProject?.titolo as string} />
+          <GatsbyImage
+            image={image}
+            alt={latestProject?.articleTitle as string}
+          />
         </Box>
       ) : null}
     </StyledBox>

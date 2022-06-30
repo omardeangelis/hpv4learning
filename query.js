@@ -31,13 +31,10 @@ const allProjectArticle = `
   allContentfulProgetti {
     nodes {
       id
-      titolo
+      slug
       ordine
       project_category {
         slug
-      }
-      body {
-        body
       }
       corsi {
         idCorso

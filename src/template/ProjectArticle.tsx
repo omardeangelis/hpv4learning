@@ -14,7 +14,6 @@ import { createRowText } from "../utils/helpers";
 import ArticleSchema from "../components/SEO/components/ArticleSchema";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import { BottomBanner } from "../components/layout";
-import { createSlugFromTitle } from "../feature/projects/utils";
 import SeoLink from "../components/shared/SeoLink";
 
 const FlexContainer = styled(Box)`
@@ -41,12 +40,15 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 
   const breadcrumbs = React.useMemo(() => {
     const courseSlug = queryData?.project_category?.[0]?.slug;
-    const slug = createSlugFromTitle(queryData?.titolo);
+    const slug = queryData?.slug;
     return [
       { text: "Home", link: "/" },
       { text: "Progetti", link: "/progetti/" },
       { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
-      { text: queryData?.titolo, link: `/progetti/${courseSlug}/${slug}/` },
+      {
+        text: queryData?.articleTitle,
+        link: `/progetti/${courseSlug}/${slug}/`,
+      },
     ];
   }, [queryData]);
 
@@ -58,7 +60,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   return (
     <Layout>
       <MetaDecorator
-        metaTitle={createRowText(queryData?.titolo as any)}
+        metaTitle={createRowText(queryData?.articleTitle as any)}
         metaDescription={queryData?.metaDescription as any}
         image={
           queryData && (("https:" + queryData?.copertina?.file?.url) as any)
@@ -66,14 +68,14 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
       ></MetaDecorator>
       <LinkHandler />
       <ArticleSchema
-        title={createRowText(queryData?.titolo as any)}
+        title={createRowText(queryData?.articleTitle as any)}
         description={queryData?.descrizione?.descrizione as any}
         authorName='hpv4learning'
         breadcrumbs={breadcrumbs as any}
         image={
           queryData && (("https:" + queryData?.copertina?.file?.url) as any)
         }
-        imageAltText={createRowText(queryData?.titolo as any)}
+        imageAltText={createRowText(queryData?.articleTitle as any)}
         modifiedDate={queryData?.updatedAt as any}
         publishDate={queryData?.createdAt as any}
       />
@@ -133,6 +135,8 @@ export const query = graphql`
     project: contentfulProgetti(id: { eq: $id }) {
       id
       titolo
+      articleTitle
+      slug
       metaDescription
       ordine
       url
@@ -173,7 +177,8 @@ export const query = graphql`
       ordine: { eq: $nextProjectOrder }
       corsi: { elemMatch: { idCorso: { eq: $courseId } } }
     ) {
-      titolo
+      articleTitle
+      slug
       descrizione {
         descrizione
       }
