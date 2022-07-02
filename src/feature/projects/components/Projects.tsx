@@ -92,7 +92,7 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
                     </ProjectImage>
 
                     <ProjectContent
-                      titolo={progetto?.articleTitle}
+                      titolo={progetto?.titolo}
                       label={progetto?.project_category?.[0]?.title}
                       description={cleanStringFromHtlmTags(
                         progetto?.descrizione?.childMarkdownRemark?.html,
