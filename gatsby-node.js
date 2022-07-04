@@ -85,16 +85,11 @@ exports.createPages = async ({ graphql, actions }) => {
 
   projectArticleQuery.data.allContentfulProgetti.nodes.forEach((project) => {
     const courseSlug = project.project_category?.[0]?.slug;
-    let slug = project.titolo;
-    slug = slug
-      .replace(/\s/g, "-")
-      .replace(/[^a-zA-Z0-9-]/g, "")
-      .toLowerCase();
     const nextProjectOrder = project.ordine + 1;
     const courseId = project.corsi[0].idCorso;
-    if (project.body && courseSlug) {
+    if (courseSlug) {
       createPage({
-        path: `/progetti/${courseSlug}/${slug}/`,
+        path: `/progetti/${courseSlug}/${project.slug}/`,
         component: path.resolve(`./src/template/ProjectArticle.tsx`),
         context: {
           id: project.id,

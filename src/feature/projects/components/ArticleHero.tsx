@@ -12,7 +12,7 @@ export const Styledtypography = styled(Typography)(
     fontSize: "14px",
     lineHeight: "18px",
     fontWeight: "300",
-  })
+  }),
 );
 
 const StyledBox = styled(Box)(
@@ -26,14 +26,14 @@ const StyledBox = styled(Box)(
     alignItems: "center",
     overflowX: "hidden",
     borderRadius: "0px 8px 8px 0px",
-  })
+  }),
 );
 
 export const ArticleHero = (
-  props: Omit<Queries.SingleProjectQuery["project"], "id">
+  props: Omit<Queries.SingleProjectQuery["project"], "id">,
 ) => {
   const {
-    titolo,
+    articleTitle,
     url,
     createdAt,
     metaDescription,
@@ -58,7 +58,7 @@ export const ArticleHero = (
             lineHeight: { xs: "44px", lg: "56px" },
           }}
         >
-          {titolo}
+          {articleTitle}
         </Typography>
       </Box>
 

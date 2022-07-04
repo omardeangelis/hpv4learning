@@ -12,7 +12,6 @@ import {
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image";
-import { createSlugFromTitle } from "../utils";
 
 const CustomStack = styled(Box)`
   height: 100%;
@@ -43,7 +42,7 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
   const rows = React.useMemo(() => rowalizer(data, 2), []);
   return (
     <CustomStack>
-      {rows.map((row, index) => {
+      {rows?.map((row, index) => {
         return (
           <Box
             key={"progetto" + index}
@@ -55,9 +54,7 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
             {row.map((progetto) => (
               <SeoLink
                 isExternal={false}
-                link={`/progetti/${
-                  progetto?.project_category?.[0]?.slug
-                }/${createSlugFromTitle(progetto?.titolo)}/`}
+                link={`/progetti/${progetto?.project_category?.[0]?.slug}/${progetto?.slug}/`}
                 style={{
                   display: "flex",
                   width: "fit-content",
@@ -77,7 +74,9 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
                               progetto?.copertina as unknown as ImageDataLike,
                             ) as IGatsbyImageData
                           }
-                          alt={progetto.titolo || "Anteprima del progetto"}
+                          alt={
+                            progetto.articleTitle || "Anteprima del progetto"
+                          }
                           style={{
                             height: "100%",
                           }}

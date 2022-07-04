@@ -9,7 +9,6 @@ import {
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image";
-import { createSlugFromTitle } from "../utils";
 import SeoLink from "../../../components/shared/SeoLink";
 
 const StyledTypography = styled(Typography)`
@@ -30,7 +29,7 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
 
   const nextProjectUrl = React.useMemo(() => {
     const courseSlug = props?.project?.project_category?.[0]?.slug;
-    const slug = createSlugFromTitle(props?.nextProject?.titolo);
+    const slug = props?.nextProject?.slug;
     return `/progetti/${courseSlug}/${slug}/`;
   }, []);
 
@@ -65,7 +64,7 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
                         nextProject?.copertina as unknown as ImageDataLike,
                       ) as IGatsbyImageData
                     }
-                    alt={nextProject.titolo || "Anteprima del progetto"}
+                    alt={nextProject.articleTitle || "Anteprima del progetto"}
                     style={{
                       height: "100%",
                     }}
@@ -81,7 +80,7 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
               </ProjectImage>
 
               <ProjectContent
-                titolo={nextProject?.titolo as string | undefined}
+                titolo={nextProject?.articleTitle as string | undefined}
                 label={props.project?.project_category?.[0]?.slug}
                 description={nextProject?.descrizione?.descrizione}
               ></ProjectContent>

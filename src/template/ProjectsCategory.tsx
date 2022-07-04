@@ -141,6 +141,8 @@ export const query = graphql`
     ) {
       nodes {
         titolo
+        slug
+        articleTitle
         copertina {
           gatsbyImageData
         }

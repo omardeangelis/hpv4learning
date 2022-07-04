@@ -532,6 +532,8 @@ export const query = graphql`
       }
       progetti {
         titolo
+        slug
+        articleTitle
         url
         ordine
         copertina {

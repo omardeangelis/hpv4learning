@@ -1,5 +1,4 @@
 import React from "react";
-import { Link as GatsbyLink } from "gatsby";
 import styled from "@emotion/styled";
 import { Stack, Box, Chip, css } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -21,7 +20,7 @@ const LinkContainer = styled(Box)(
     fontWeight: "300",
     color: "#E7A7FF",
     marginRight: "18px",
-  })
+  }),
 );
 
 export const LinkSection = ({ category, url, githubUrl }: Props) => {
