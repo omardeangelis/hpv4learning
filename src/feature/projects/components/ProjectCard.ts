@@ -12,6 +12,7 @@ export const ProjectCard = styled(Box)({
   width: "100%",
   height: "100%",
   overflow: "hidden",
+  transform: "translateZ(0)",
   transition: "all 75ms ease",
   border: "1px solid #E9E3FF",
   "&:hover": {

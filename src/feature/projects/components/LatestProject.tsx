@@ -27,7 +27,7 @@ const StyledBox = styled(Box)`
 `;
 
 export const LatestProject = (
-  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number],
+  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number]
 ) => {
   const latestProject = React.useMemo(() => {
     return props.node;
@@ -49,7 +49,7 @@ export const LatestProject = (
   }, [latestProject]);
 
   const image = getImage(
-    latestProject?.copertina as unknown as ImageDataLike,
+    latestProject?.copertina as unknown as ImageDataLike
   ) as IGatsbyImageData;
 
   return (
@@ -146,6 +146,7 @@ export const LatestProject = (
             borderRadius: "16px",
             marginTop: { xs: "24px", lg: "0" },
             overflow: "hidden",
+            transform: "translateZ(0)",
           }}
         >
           <GatsbyImage
