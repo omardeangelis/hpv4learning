@@ -182,7 +182,7 @@ const SingleCoursePage = ({
                   textAlign='center'
                   fontWeight={700}
                   dangerouslySetInnerHTML={{
-                    __html: createBrandText(corso?.titolo as any),
+                    __html: createBrandText(corso?.titolo as any) as string,
                   }}
                 />
               </Box>
