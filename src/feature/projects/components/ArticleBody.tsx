@@ -19,7 +19,8 @@ const ImageBox = styled(Box)(
     borderRadius: "16px",
     overflow: "hidden",
     marginTop: "25px",
-  }),
+    transform: "translateZ(0)",
+  })
 );
 
 const StyledH2 = styled(Typography)(
@@ -28,7 +29,7 @@ const StyledH2 = styled(Typography)(
     fontWeight: "600",
     lineHeigth: "29px",
     marginTop: "24px",
-  }),
+  })
 ) as typeof Typography;
 
 const StyledH3 = styled(Typography)(
@@ -37,7 +38,7 @@ const StyledH3 = styled(Typography)(
     fontWeight: "600",
     lineHeigth: "25px",
     marginTop: "20px",
-  }),
+  })
 ) as typeof Typography;
 
 const StyledP = styled(Typography)(
@@ -46,7 +47,7 @@ const StyledP = styled(Typography)(
     fontWeight: "400",
     lineHeigth: "12px",
     marginTop: "16px",
-  }),
+  })
 ) as typeof Typography;
 
 export const ArticleBody = React.memo(
@@ -58,7 +59,7 @@ export const ArticleBody = React.memo(
     >;
 
     const image = getImage(
-      copertina as unknown as ImageDataLike,
+      copertina as unknown as ImageDataLike
     ) as IGatsbyImageData;
 
     const headings = React.useMemo(() => {
@@ -83,7 +84,7 @@ export const ArticleBody = React.memo(
           }
         }
       },
-      [hasMounted],
+      [hasMounted]
     );
 
     React.useEffect(() => {
@@ -91,7 +92,7 @@ export const ArticleBody = React.memo(
         const h2Arrays = Array.from(document.getElementsByTagName("h2"));
 
         h2Arrays.forEach((el, index) =>
-          el.setAttribute("data-hash", `#${index}`),
+          el.setAttribute("data-hash", `#${index}`)
         );
       }
     }, [hasMounted]);
@@ -158,5 +159,5 @@ export const ArticleBody = React.memo(
         ) : null}
       </div>
     );
-  },
+  }
 );
