@@ -21,11 +21,22 @@ type Props = {
     currentPage: number;
     title: string;
     description: string;
+    metaTitle: string;
+    metaDescription: string;
   };
 };
 
 const ProjectsCategory = ({
-  pageContext: { slug, hasNextPage, pages, currentPage, title, description },
+  pageContext: {
+    slug,
+    hasNextPage,
+    pages,
+    currentPage,
+    title,
+    description,
+    metaDescription,
+    metaTitle,
+  },
   data: {
     allContentfulProgetti: { nodes: progetti },
     corso,
@@ -50,13 +61,10 @@ const ProjectsCategory = ({
   );
   return (
     <Layout>
-      <MetaDecorator
-        metaTitle={`Realizza Progetti pratici per ${title}`}
-        metaDescription={description}
-      />
+      <MetaDecorator metaTitle={metaTitle} metaDescription={metaDescription} />
       <WebPageSchema
-        title={`Realizza Progetti pratici per ${title}`}
-        description={description}
+        title={metaTitle}
+        description={metaDescription}
         breadcrumbs={breadcrumbs}
       />
       <LinkHandler paginatedPath={`progetti/${slug}`} />
