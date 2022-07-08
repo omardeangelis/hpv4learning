@@ -7,7 +7,7 @@ const useSeoData = () => {
 };
 
 const query = graphql`
-  {
+  query SiteMetaData {
     site {
       siteMetadata {
         title

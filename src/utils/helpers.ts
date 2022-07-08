@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 
-export const createBrandText = (text: string) => {
-  return text
-    .replace("**", "<span class='brand-text'>")
-    .replace("**", "</span>");
+export const createBrandText = (text?: string | null) => {
+  if (text) {
+    return text
+      .replace("**", "<span class='brand-text'>")
+      .replace("**", "</span>");
+  }
 };
 
 export const createRowText = (text: string) => {
@@ -25,15 +27,17 @@ export const convertToHHMMSS = (time: number, short = false) => {
 };
 
 export const rowalizer = <T>(array: T[], itemPerRow = 3) => {
-  let newArray: T[][] = [];
-  const rows = Math.ceil(array.length / itemPerRow);
-  Array.from({ length: rows }, (_, index) => {
-    let start = index * itemPerRow;
-    let end = start + itemPerRow;
-    newArray.push(array.slice(start, end));
-  });
+  if (array) {
+    const newArray: T[][] = [];
+    const rows = Math.ceil(array.length / itemPerRow);
+    Array.from({ length: rows }, (_, index) => {
+      const start = index * itemPerRow;
+      const end = start + itemPerRow;
+      newArray.push(array.slice(start, end));
+    });
 
-  return newArray;
+    return newArray;
+  }
 };
 
 export const dateFormatter = (date: string) => {
@@ -44,7 +48,8 @@ export const dateFormatter = (date: string) => {
   }).format(new Date(Date.parse(date)));
 };
 
-export function cleanStringFromHtlmTags(text: string) {
+export function cleanStringFromHtlmTags(text?: string | null) {
+  if (!text) return;
   return text
     .replace(/<\/?[^>]+(>|$)/g, "")
     .replace(/(<p>&nbsp;<\/p>)|(<h2><span>&nbsp;<\/span><\/h2>)/g, "");

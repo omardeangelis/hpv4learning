@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "gatsby";
 //Material UI
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -7,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import styled from "@emotion/styled";
 import { CourseCategoryProps, CoursePreviewProps } from "../../types/course";
 import CourseContent from "./CourseContent";
+import SeoLink from "../shared/SeoLink";
 
 const StyledBox = styled(Box)`
   border-radius: 36px;
@@ -73,7 +73,11 @@ const CuorseSection = ({
             </Typography>
           )}
           {!disableLink && (
-            <Link to={`/corsi/${slug}/`} className='slug-default-style'>
+            <SeoLink
+              isExternal={false}
+              link={`/corsi/${slug}/`}
+              className='slug-default-style'
+            >
               <Typography
                 sx={{
                   fontSize: { xs: "14px", lg: "18px" },
@@ -82,7 +86,7 @@ const CuorseSection = ({
               >
                 Vedi tutti
               </Typography>
-            </Link>
+            </SeoLink>
           )}
         </Stack>
       )}
@@ -100,6 +104,7 @@ const CuorseSection = ({
               key={el.slug}
               sx={{
                 maxWidth: { xs: "unset", lg: "382px" },
+                width: "100%",
                 px: { xs: "12px", lg: "64px" },
                 py: { xs: "24px", lg: "51px" },
               }}

@@ -1,5 +1,8 @@
-import { Link } from "gatsby";
+import { GatsbyLinkProps, Link } from "gatsby";
 import React from "react";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type NoToLink = Omit<GatsbyLinkProps<{ state: any }>, "to" | "ref">;
 
 const SeoLink = ({
   isExternal,
@@ -8,6 +11,7 @@ const SeoLink = ({
   children,
   target,
   style,
+  className,
 }: {
   isExternal: boolean;
   link: string;
@@ -15,7 +19,8 @@ const SeoLink = ({
   rel?: string;
   target?: string;
   style?: any;
-}) => {
+  className?: string;
+} & NoToLink) => {
   if (isExternal) {
     return (
       <a
@@ -23,7 +28,7 @@ const SeoLink = ({
         href={`${link}`}
         rel={rel}
         target={target}
-        className='noselect'
+        className={className ? `noselect ${className}` : "noselect"}
       >
         {children}
       </a>

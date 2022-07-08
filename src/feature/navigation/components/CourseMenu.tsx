@@ -3,10 +3,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { Stack, Typography } from "@mui/material";
 import styled from "@emotion/styled";
-import useHasMounted from "../../../hook/useHasMounted";
-import { useLayoutContext } from "../../../context/layout";
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import { CategoryMenuProps } from "../../../types/layout";
+import SeoLink from "../../../components/shared/SeoLink";
 
 const StyledBox = styled(Box)`
   & [role="_hover"] {
@@ -41,66 +40,45 @@ type Props = {
   };
 };
 
-const CourseMenu = () => {
-  const anchorRef = React.useRef<HTMLDivElement | undefined>();
-  const hasMounted = useHasMounted();
-
-  const ctx = useLayoutContext();
-
-  const handleOutSideClick = React.useCallback((e: MouseEvent) => {
-    if (!anchorRef.current && !anchorRef) {
-      return;
-    }
-
-    const isOutSideClick =
-      e.target !== anchorRef.current ||
-      !Array.from(anchorRef.current.childNodes).some((x) => x === e.target);
-
-    if (isOutSideClick) {
-      ctx?.handleClickAway();
-    }
-  }, []);
+export const CourseMenu = () => {
   const data: Props = useStaticQuery(query);
-
-  React.useEffect(() => {
-    if (hasMounted && ctx?.isCourseMenuOpen) {
-      document.addEventListener("click", handleOutSideClick);
-      return () => document.removeEventListener("click", handleOutSideClick);
-    }
-  }, [hasMounted, ctx?.isCourseMenuOpen]);
 
   return (
     <MenuContainer>
-      {ctx?.isCourseMenuOpen ? (
-        <Box ref={anchorRef}>
-          <StyledBox
-            position='fixed'
-            top='96px'
-            left='0px'
-            right='0px'
-            width='100%'
-            zIndex={99}
-          >
-            <Container maxWidth='lg'>
-              <Box
-                px='24px'
-                py='36px'
-                borderRadius='16px'
-                sx={{
-                  border: "1px solid",
-                  borderColor: "purple.200",
-                  background: "white",
-                }}
+      <Box>
+        <StyledBox
+          position='fixed'
+          top='96px'
+          left='0px'
+          right='0px'
+          width='100%'
+          zIndex={99}
+        >
+          <Container maxWidth='lg'>
+            <Box
+              px='24px'
+              py='36px'
+              borderRadius='16px'
+              sx={{
+                border: "1px solid",
+                borderColor: "purple.200",
+                background: "white",
+              }}
+            >
+              <Stack
+                direction='row'
+                justifyContent='space-between'
+                alignItems='center'
               >
-                <Stack
-                  direction='row'
-                  justifyContent='space-between'
-                  alignItems='center'
-                >
-                  {data.allContentfulCategory.nodes.map(
-                    ({ name, slug, image, seoDescription }) => {
-                      return (
-                        <Link to={`/corsi/${slug}/`} key={slug}>
+                {data.allContentfulCategory.nodes.map(
+                  ({ name, slug, image, seoDescription }) => {
+                    return (
+                      <>
+                        <SeoLink
+                          isExternal={false}
+                          link={`/corsi/${slug}/`}
+                          key={slug}
+                        >
                           <Box
                             px='16px'
                             py='24px'
@@ -141,22 +119,22 @@ const CourseMenu = () => {
                               </Box>
                             </Stack>
                           </Box>
-                        </Link>
-                      );
-                    }
-                  )}
-                </Stack>
-              </Box>
-            </Container>
-          </StyledBox>
-        </Box>
-      ) : null}
+                        </SeoLink>
+                      </>
+                    );
+                  },
+                )}
+              </Stack>
+            </Box>
+          </Container>
+        </StyledBox>
+      </Box>
     </MenuContainer>
   );
 };
 
 const query = graphql`
-  {
+  query CategoryMenu {
     allContentfulCategory {
       nodes {
         slug
@@ -171,5 +149,3 @@ const query = graphql`
     }
   }
 `;
-
-export default CourseMenu;

@@ -79,6 +79,26 @@ export type ProjectProps = {
   ordine?: number;
   copertina: ImageDataLike;
   url?: string;
+  metaDescription?: string;
+  body: ProjectBodyProps;
+  linkGithub: string;
+  project_category?: [
+    {
+      title: string;
+      slug: string;
+    },
+  ];
+  createdAt: string;
+};
+
+export type ProjectBodyProps = {
+  body: string;
+  childMarkdownRemark: {
+    headings: [{ value: string }];
+    html: string;
+    rawMarkdownBody: string;
+    timeToRead: string;
+  };
 };
 
 export type CourseInfoProps = {

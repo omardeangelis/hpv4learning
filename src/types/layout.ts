@@ -13,3 +13,18 @@ export type CategoryMenuProps = {
     };
   };
 };
+
+export type BlockDescriptionProps = {
+  description: string;
+  title: string;
+};
+
+export type IconTypeProps =
+  | "home"
+  | "dropdown"
+  | "project"
+  | "about"
+  | "videomakers"
+  | "code"
+  | "free"
+  | "school";

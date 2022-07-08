@@ -26,4 +26,45 @@ const allCourseCategory = `
 }
 `;
 
-module.exports = { allCourseQuery, allCourseCategory };
+const allProjectArticle = `
+{
+  allContentfulProgetti {
+    nodes {
+      id
+      slug
+      ordine
+      project_category {
+        slug
+      }
+      corsi {
+        idCorso
+      }
+    }
+  }
+}
+`;
+
+const projectCategoriesPageQuery = `
+{
+  allContentfulProjectCategory {
+    nodes {
+      slug
+      title
+      description
+      metaDescription
+      metaTitle
+      id
+      categoryProjects {
+        titolo
+      }
+    }
+  }
+}
+`;
+
+module.exports = {
+  allCourseQuery,
+  allCourseCategory,
+  allProjectArticle,
+  projectCategoriesPageQuery,
+};

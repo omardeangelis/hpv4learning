@@ -1,6 +1,6 @@
 import * as React from "react";
 //Global Layoaut
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import IndexInfo from "../components/IndexInfo";
 import TopHeroContent from "../components/TopHeroContent";
 import { faqs } from "../asset/faqsdata";
@@ -22,12 +22,18 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ComunityBanner from "../components/banner/ComunityBanner";
 import CourseWall from "../components/course/CourseWall";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import styled from "@emotion/styled";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike,
+} from "gatsby-plugin-image";
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema";
+import { HomeSection } from "../feature/projects/components";
 
 const CustomStack = styled.div`
   .faq-image {
@@ -44,10 +50,13 @@ const CustomStack = styled.div`
   }
 `;
 
-const IndexPage = ({ data }) => {
-  const coursesPositionRef = React.useRef(null);
+const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
+  const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
   const goToCourseSection = () => {
-    coursesPositionRef.current.scrollIntoView({
+    if (!coursesPositionRef.current) {
+      return;
+    }
+    coursesPositionRef.current?.scrollIntoView({
       behavior: "smooth",
     });
   };
@@ -62,7 +71,6 @@ const IndexPage = ({ data }) => {
         }}
       >
         <Container maxWidth='lg'>
-          {/* Top Hero Image ** Manca Immagine di Background */}
           <Hero>
             <TopHeroContent fn={goToCourseSection} />
           </Hero>
@@ -108,6 +116,83 @@ const IndexPage = ({ data }) => {
         <ComunityBanner />
       </Box>
 
+      <Box
+        sx={{
+          mt: { xs: "96px", lg: "136px" },
+        }}
+      >
+        <Container maxWidth='lg'>
+          <Box mx='auto'>
+            <Box mx='auto' maxWidth='656px'>
+              <Typography
+                fontWeight={600}
+                textAlign='center'
+                component='h2'
+                lineHeight={{
+                  xs: "39px",
+                  lg: "56px",
+                }}
+                fontSize={{
+                  xs: "34px",
+                  lg: "48px",
+                }}
+              >
+                Impara realizzando dei progetti pratici
+              </Typography>
+            </Box>
+            <Box
+              mx='auto'
+              maxWidth='656px'
+              mt={{
+                xs: "16px",
+                lg: "24px",
+              }}
+            >
+              <Typography
+                fontWeight={400}
+                textAlign='center'
+                sx={{
+                  color: "grey.600",
+                }}
+                lineHeight={{
+                  xs: "20px",
+                  lg: "29px",
+                }}
+                fontSize={{
+                  xs: "18px",
+                  lg: "24px",
+                }}
+              >
+                Un giusto equilibrio tra pratica e teoria è il miglior modo per
+                padroneggiare ogni concetto
+              </Typography>
+            </Box>
+          </Box>
+
+          <Stack
+            alignItems='center'
+            justifyContent='center'
+            mt={{
+              xs: "24px",
+              lg: "34px",
+            }}
+          >
+            <SeoLink isExternal={false} link='/progetti/'>
+              <Button variant='contained' size='large'>
+                Vedi tutti
+              </Button>
+            </SeoLink>
+          </Stack>
+        </Container>
+        <Box
+          mt={{
+            xs: "36px",
+            lg: "48px",
+          }}
+        >
+          <HomeSection />
+        </Box>
+      </Box>
       <Box
         sx={{
           mt: { xs: "96px", lg: "136px" },
@@ -196,7 +281,11 @@ const IndexPage = ({ data }) => {
             </FaqContainer>
             <Box maxWidth='384px' className='faq-image'>
               <GatsbyImage
-                image={getImage(data.file.childImageSharp)}
+                image={
+                  getImage(
+                    data?.file?.childImageSharp as unknown as ImageDataLike,
+                  ) as IGatsbyImageData
+                }
                 alt='work with us image'
               />
             </Box>
@@ -208,7 +297,7 @@ const IndexPage = ({ data }) => {
 };
 
 export const query = graphql`
-  {
+  query IndexPage {
     file(relativePath: { eq: "work-with-us.png" }) {
       childImageSharp {
         gatsbyImageData(placeholder: TRACED_SVG)
