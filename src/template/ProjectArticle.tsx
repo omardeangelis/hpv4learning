@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, PageProps } from "gatsby";
 import Layout from "../components/shared/layout";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import styled from "@emotion/styled";
 import {
   ArticleBody,
@@ -13,7 +13,7 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import { createRowText } from "../utils/helpers";
 import ArticleSchema from "../components/SEO/components/ArticleSchema";
 import LinkHandler from "../components/SEO/components/LinkHandler";
-import { BottomBanner } from "../components/layout";
+import { BottomBanner, RoundedButton } from "../components/layout";
 import SeoLink from "../components/shared/SeoLink";
 
 const FlexContainer = styled(Box)`
@@ -33,15 +33,10 @@ const StyledBox = styled(Box)`
   }
 `;
 
-const ProjectArticle = ({
-  data,
-  pageContext: { nextProjectOrder },
-}: PageProps<Queries.SingleProjectQuery, { nextProjectOrder: number }>) => {
+const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
   const queryData = React.useMemo(() => {
     return data.project;
   }, [data]);
-
-  console.log(nextProjectOrder);
 
   const breadcrumbs = React.useMemo(() => {
     const courseSlug = queryData?.project_category?.[0]?.slug;
@@ -100,7 +95,6 @@ const ProjectArticle = ({
               </Box>
             </StyledBox>
           </Box>
-          {/* <Box>Colonna a destra</Box> */}
           <ProjectBanner
             courseTitle={queryData?.corsi?.[0]?.titolo}
             prezzo={queryData?.corsi?.[0]?.prezzo}
@@ -116,17 +110,17 @@ const ProjectArticle = ({
         sx={{ backgroundColor: "purple.A100", mt: { xs: "48px", lg: "96px" } }}
       >
         <SeoLink isExternal={false} link={`/${queryData?.corsi?.[0]?.slug}/`}>
-          <Button
+          <RoundedButton
             size='large'
+            color='primary'
+            variant='contained'
             sx={{
-              borderRadius: "100px",
-              background: "#8769FE",
               color: "#fff",
               fontSize: "18px",
             }}
           >
             Vai al corso
-          </Button>
+          </RoundedButton>
         </SeoLink>
       </BottomBanner>
     </Layout>

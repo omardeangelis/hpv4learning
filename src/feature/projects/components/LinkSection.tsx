@@ -35,8 +35,7 @@ const StyledChip = styled(Chip)`
   cursor: pointer;
 
   &:hover {
-    color: #e7a7ff;
-    border-color: #e7a7ff;
+    background-color: #e9e3ff;
   }
 `;
 
