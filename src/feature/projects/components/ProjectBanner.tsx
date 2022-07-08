@@ -119,7 +119,7 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               <SaleBox>
                 {prezzo
                   ? `-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                      0,
+                      0
                     )}%`
                   : null}
               </SaleBox>
@@ -134,20 +134,22 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               </Typography>
             </Stack>
             {couponLink ? (
-              <SeoLink isExternal={true} link={couponLink} rel='noopener'>
-                <Button
-                  sx={{
-                    width: "100%",
-                    maxWidth: { xs: "105px", lg: "unset" },
-                    height: "27px",
-                    background: "#8769FE",
-                    color: "#fff",
-                    borderRadius: "100px",
-                  }}
-                >
-                  riscatta
-                </Button>
-              </SeoLink>
+              <Box sx={{ width: { xs: "unset", lg: "100%" } }}>
+                <SeoLink isExternal={true} link={couponLink} rel='noopener'>
+                  <Button
+                    sx={{
+                      width: "100%",
+                      maxWidth: { xs: "105px", lg: "unset" },
+                      height: "27px",
+                      background: "#8769FE",
+                      color: "#fff",
+                      borderRadius: "100px",
+                    }}
+                  >
+                    riscatta
+                  </Button>
+                </SeoLink>
+              </Box>
             ) : null}
           </Stack>
         </Stack>
