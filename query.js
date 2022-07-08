@@ -29,15 +29,15 @@ const allCourseCategory = `
 const allProjectArticle = `
 {
   allContentfulProgetti {
-    nodes {
-      id
-      slug
-      ordine
-      project_category {
+    group(field: project_category___slug) {
+      fieldValue
+      nodes {
+        id
         slug
-      }
-      corsi {
-        idCorso
+        ordine
+        corsi {
+          idCorso
+        }
       }
     }
   }

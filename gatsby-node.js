@@ -85,20 +85,24 @@ exports.createPages = async ({ graphql, actions }) => {
     },
   );
 
-  projectArticleQuery.data.allContentfulProgetti.nodes.forEach((project) => {
-    const courseSlug = project.project_category?.[0]?.slug;
-    const nextProjectOrder = project.ordine + 1;
-    const courseId = project.corsi[0].idCorso;
-    if (courseSlug) {
+  projectArticleQuery.data.allContentfulProgetti.group.forEach((category) => {
+    const slug = category.fieldValue;
+    const maxProjectsOrders = Math.max(
+      ...category.nodes.map((project) => project.ordine),
+    );
+    category.nodes.forEach((project) => {
+      const nextProjectOrder =
+        project.ordine === maxProjectsOrders ? 1 : project.ordine + 1;
+
       createPage({
-        path: `/progetti/${courseSlug}/${project.slug}/`,
+        path: `/progetti/${slug}/${project.slug}/`,
         component: path.resolve(`./src/template/ProjectArticle.tsx`),
         context: {
           id: project.id,
           nextProjectOrder,
-          courseId,
+          courseId: project.corsi[0].idCorso,
         },
       });
-    }
+    });
   });
 };

@@ -33,10 +33,15 @@ const StyledBox = styled(Box)`
   }
 `;
 
-const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
+const ProjectArticle = ({
+  data,
+  pageContext: { nextProjectOrder },
+}: PageProps<Queries.SingleProjectQuery, { nextProjectOrder: number }>) => {
   const queryData = React.useMemo(() => {
     return data.project;
   }, [data]);
+
+  console.log(nextProjectOrder);
 
   const breadcrumbs = React.useMemo(() => {
     const courseSlug = queryData?.project_category?.[0]?.slug;
