@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useLayoutContext } from "../../../context/layout";
 import SeoLink from "../../../components/shared/SeoLink";
+import { createRowText } from "../../../utils/helpers";
 
 interface Props {
   courseTitle?: string | null;
@@ -81,10 +82,10 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                 fontSize: { xs: "12px", lg: "14px" },
                 color: { xs: "#343A40", lg: "#000" },
                 maxWidth: { xs: "220px", lg: "100%" },
-                lineHeight: "14px",
+                lineHeight: { xs: "16px", lg: "18px" },
               }}
             >
-              {courseTitle}
+              {createRowText(courseTitle as string)}
             </Typography>
 
             <CloseButton onClick={() => context?.setIsBannerOpen(false)}>
