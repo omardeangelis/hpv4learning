@@ -154,6 +154,13 @@ export const ArticleBody = React.memo(
                   {...props}
                 />
               ),
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              img: ({ node, ...props }) => (
+                <img
+                  style={{ width: "100%", borderRadius: "16px" }}
+                  {...props}
+                />
+              ),
             }}
           />
         ) : null}
