@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "@emotion/styled";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,6 +10,19 @@ type Props = {
   title?: string;
   list?: (string | null | undefined)[];
 };
+
+export const StyledTypography = styled(Typography)`
+  font-size: 14px;
+  text-decoration: underline;
+
+  @media screen and (min-width: 1024px) {
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 export const HeadingsList = ({ title, list }: Props) => {
   return (
@@ -34,23 +48,11 @@ export const HeadingsList = ({ title, list }: Props) => {
                 }}
               >
                 {" "}
-                <a
-                  href={`#${index}`}
-                  title={el || "Heading di " + title}
-                  style={{
-                    textDecoration: "underline",
-                  }}
-                >
+                <a href={`#${index}`} title={el || "Heading di " + title}>
                   <ListItemText>
-                    <Typography
-                      color='#000'
-                      fontWeight={400}
-                      sx={{
-                        fontSize: "14px",
-                      }}
-                    >
+                    <StyledTypography color='#000' fontWeight={400}>
                       {el}
-                    </Typography>
+                    </StyledTypography>
                   </ListItemText>
                 </a>
               </ListItem>

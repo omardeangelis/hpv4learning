@@ -11,17 +11,46 @@ interface Props {
   githubUrl?: string | null;
 }
 
-const LinkContainer = styled(Box)(
-  css({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "14px",
-    fontWeight: "300",
-    color: "#E7A7FF",
-    marginRight: "18px",
-  }),
-);
+const LinkContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: #e7a7ff;
+  margin-right: 18px;
+
+  &:hover {
+    color: #8769fe;
+    text-decoration: underline;
+  }
+`;
+
+const StyledChip = styled(Chip)`
+  height: 20px;
+  font-size: 12px;
+  border-radius: 20px;
+  border: 1px solid #e9e3ff;
+  color: #8769fe;
+  cursor: pointer;
+
+  &:hover {
+    color: #e7a7ff;
+    border-color: #e7a7ff;
+  }
+`;
+
+const StyledGithubBox = styled(Box)`
+  width: 24px;
+  height: 24px;
+  transition: width 0.01s, height 0.01s;
+
+  &:hover {
+    width: 32px;
+    height: 32px;
+    transition: width 1s, height 1s;
+  }
+`;
 
 export const LinkSection = ({ category, url, githubUrl }: Props) => {
   const handleLabel = React.useCallback((category?: string | null) => {
@@ -31,7 +60,7 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
       case "react":
         return "sviluppatori web";
       case "videomaker":
-        return "videomaker";
+        return "videomakers";
     }
   }, []);
 
@@ -45,18 +74,7 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
         isExternal={false}
         link={`/corsi/${createSlugFromTitle(label)}/`}
       >
-        <Chip
-          label={label}
-          variant='outlined'
-          sx={{
-            height: "20px",
-            fontSize: "12px",
-            borderRadius: "20px",
-            border: "1px solid #E9E3FF",
-            color: "#8769FE",
-            cursor: "pointer",
-          }}
-        />
+        <StyledChip label={label} variant='outlined' />
       </SeoLink>
 
       <Stack direction='row'>
@@ -74,7 +92,14 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           /* @ts-ignore */
           <SeoLink link={githubUrl} isExternal target='_blank'>
-            <GitHubIcon />
+            <StyledGithubBox>
+              <GitHubIcon
+                style={{
+                  height: "100%",
+                  width: "100%",
+                }}
+              />
+            </StyledGithubBox>
           </SeoLink>
         ) : null}
       </Stack>
