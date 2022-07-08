@@ -51,6 +51,8 @@ const projectCategoriesPageQuery = `
       slug
       title
       description
+      metaDescription
+      metaTitle
       id
       categoryProjects {
         titolo
