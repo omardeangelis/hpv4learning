@@ -3,7 +3,13 @@ import React from "react";
 
 export const ProjectImage = ({ children, ...rest }: BoxProps) => {
   return (
-    <Box className='img-box' {...rest}>
+    <Box
+      className='img-box'
+      {...rest}
+      style={{
+        transform: "transalateZ(0)",
+      }}
+    >
       {children}
     </Box>
   );

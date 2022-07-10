@@ -19,8 +19,11 @@ export const ProjectCard = styled(Box)({
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
   },
   "& .img-box": {
+    width: "100%",
+    transform: "translateZ(0)",
     maxWidth: "120px",
     height: "100%",
+    overflow: "hidden",
   },
   "& .content-box": {
     padding: "12px",
@@ -83,14 +86,18 @@ export const MobileOnlyProjectCard = styled(Box)({
   width: "100%",
   height: "100%",
   overflow: "hidden",
+  transform: "translateZ(0)",
   transition: "all 75ms ease",
   border: "1px solid #E9E3FF",
   "&:hover": {
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
   },
   "& .img-box": {
+    width: "100%",
+    transform: "translateZ(0)",
     maxWidth: "120px",
     height: "100%",
+    overflow: "hidden",
   },
   "& .content-box": {
     padding: "12px",
@@ -100,11 +107,6 @@ export const MobileOnlyProjectCard = styled(Box)({
     "& p": {
       fontSize: "14px",
       lineHeight: "18px",
-    },
-    "& .img-box": {
-      width: "100%",
-      transform: "translateZ(0%)",
-      overflow: "hidden",
     },
     "& .content-box": {
       padding: "12px",
