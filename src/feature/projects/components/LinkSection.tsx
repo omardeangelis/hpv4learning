@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Stack, Box, Chip, css } from "@mui/material";
+import { Stack, Box, Chip } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SeoLink from "../../../components/shared/SeoLink";
 import { createSlugFromTitle } from "../utils";
@@ -35,21 +35,13 @@ const StyledChip = styled(Chip)`
   cursor: pointer;
 
   &:hover {
-    color: #e7a7ff;
-    border-color: #e7a7ff;
+    background-color: #e9e3ff;
   }
 `;
 
 const StyledGithubBox = styled(Box)`
   width: 24px;
   height: 24px;
-  transition: width 0.01s, height 0.01s;
-
-  &:hover {
-    width: 32px;
-    height: 32px;
-    transition: width 1s, height 1s;
-  }
 `;
 
 export const LinkSection = ({ category, url, githubUrl }: Props) => {

@@ -23,6 +23,8 @@ const query = graphql`
     allContentfulProgetti(limit: 3, sort: { order: ASC, fields: createdAt }) {
       nodes {
         titolo
+        slug
+        articleTitle
         descrizione {
           descrizione
         }
