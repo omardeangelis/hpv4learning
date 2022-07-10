@@ -51,7 +51,7 @@ const StyledP = styled(Typography)(
 ) as typeof Typography;
 
 const StyledBox = styled(Box)`
-  width: 100%;
+  max-width: 1280px;
   border-radius: 16px;
   overflow: hidden;
   transform: translateZ(0);
