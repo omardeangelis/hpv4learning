@@ -26,8 +26,21 @@ const StyledBox = styled(Box)`
   }
 `;
 
+const StyledChip = styled(Chip)`
+  height: 20px;
+  font-size: 12px;
+  border-radius: 20px;
+  border: 1px solid #e9e3ff;
+  color: #8769fe;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e9e3ff;
+  }
+`;
+
 export const LatestProject = (
-  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number]
+  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number],
 ) => {
   const latestProject = React.useMemo(() => {
     return props.node;
@@ -40,7 +53,7 @@ export const LatestProject = (
       case "react":
         return "sviluppatori web";
       case "videomaker":
-        return "videomaker";
+        return "videomakers";
     }
   }, []);
 
@@ -49,7 +62,7 @@ export const LatestProject = (
   }, [latestProject]);
 
   const image = getImage(
-    latestProject?.copertina as unknown as ImageDataLike
+    latestProject?.copertina as unknown as ImageDataLike,
   ) as IGatsbyImageData;
 
   return (
@@ -59,17 +72,7 @@ export const LatestProject = (
           isExternal={false}
           link={`/corsi/${createSlugFromTitle(label)}/`}
         >
-          <Chip
-            label={label}
-            variant='outlined'
-            sx={{
-              height: "20px",
-              fontSize: "12px",
-              borderRadius: "20px",
-              border: "1px solid #E9E3FF",
-              color: "#8769FE",
-            }}
-          />
+          <StyledChip label={label} variant='outlined' />
         </SeoLink>
         <Box
           sx={{

@@ -50,6 +50,18 @@ const StyledP = styled(Typography)(
   })
 ) as typeof Typography;
 
+const StyledBox = styled(Box)`
+  max-width: 1280px;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: translateZ(0);
+  height: 205px;
+
+  @media screen and (min-width: 767px) {
+    height: 405px;
+  }
+`;
+
 export const ArticleBody = React.memo(
   (props: Omit<Queries.SingleProjectQuery["project"], "id">) => {
     const [hasMounted, setHasMounted] = React.useState<boolean>(false);
@@ -111,7 +123,7 @@ export const ArticleBody = React.memo(
     return (
       <div>
         {image ? (
-          <ImageBox sx={{ heigth: { xs: "205px", lg: "405px" } }}>
+          <ImageBox sx={{ height: { xs: "205px", lg: "405px" } }}>
             <GatsbyImage image={image} alt={titolo as string} />
           </ImageBox>
         ) : null}
@@ -153,6 +165,12 @@ export const ArticleBody = React.memo(
                   style={dracula}
                   {...props}
                 />
+              ),
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              img: ({ node, ...props }) => (
+                <StyledBox>
+                  <img style={{ width: "100%", height: "100%" }} {...props} />
+                </StyledBox>
               ),
             }}
           />

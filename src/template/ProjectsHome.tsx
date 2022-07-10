@@ -22,6 +22,9 @@ const LinkContainer = styled(Box)`
   @media screen and (min-width: 1024px) {
     font-size: 24px;
   }
+  &:hover {
+    text-decoration: underline !important;
+  }
 `;
 
 const StyledStack = styled(Stack)`
@@ -89,9 +92,7 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
                   </SeoLink>
                 </LinkContainer>
               </StyledStack>
-              <ProjectSection
-                projects={post.nodes as ProjectSectionProps}
-              ></ProjectSection>
+              <ProjectSection projects={post.nodes as ProjectSectionProps} />
             </div>
           );
         })}

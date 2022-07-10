@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useLayoutContext } from "../../../context/layout";
 import SeoLink from "../../../components/shared/SeoLink";
+import { createRowText } from "../../../utils/helpers";
 
 interface Props {
   courseTitle?: string | null;
@@ -81,10 +82,10 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                 fontSize: { xs: "12px", lg: "14px" },
                 color: { xs: "#343A40", lg: "#000" },
                 maxWidth: { xs: "220px", lg: "100%" },
-                lineHeight: "14px",
+                lineHeight: { xs: "16px", lg: "18px" },
               }}
             >
-              {courseTitle}
+              {createRowText(courseTitle as string)}
             </Typography>
 
             <CloseButton onClick={() => context?.setIsBannerOpen(false)}>
@@ -119,7 +120,7 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               <SaleBox>
                 {prezzo
                   ? `-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                      0
+                      0,
                     )}%`
                   : null}
               </SaleBox>
@@ -137,6 +138,8 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               <Box sx={{ width: { xs: "unset", lg: "100%" } }}>
                 <SeoLink isExternal={true} link={couponLink} rel='noopener'>
                   <Button
+                    color='primary'
+                    variant='contained'
                     sx={{
                       width: "100%",
                       maxWidth: { xs: "105px", lg: "unset" },
