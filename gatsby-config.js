@@ -4,6 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   graphqlTypegen: true,
+  trailingSlash: "always",
   siteMetadata: {
     title: "hpv 4 Learning",
     slogan: "hpv 4 Learning",
