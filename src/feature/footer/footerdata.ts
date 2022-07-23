@@ -38,6 +38,27 @@ const data = [
     ],
   },
   {
+    id: "wcfcvhdgcbhdb",
+    title: "Pratica",
+    items: [
+      {
+        title: "React",
+        slug: "/progetti/react/",
+        isExternal: false,
+      },
+      {
+        title: "Javascript",
+        slug: "/progetti/javascript/",
+        isExternal: false,
+      },
+      {
+        title: "Videomaking",
+        slug: "/progetti/videomaker/",
+        isExternal: false,
+      },
+    ],
+  },
+  {
     id: "wertj",
     title: "Community",
     items: [

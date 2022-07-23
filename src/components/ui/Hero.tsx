@@ -45,7 +45,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => {
 };
 
 const query = graphql`
-  {
+  query HeroImage {
     file(relativePath: { eq: "people-hero.png" }) {
       childImageSharp {
         gatsbyImageData(placeholder: TRACED_SVG)

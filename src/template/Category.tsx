@@ -9,7 +9,7 @@ import CourseContent from "../components/course/CourseContent";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import WebPageSchema from "../components/SEO/components/WebPageSchema";
-import Layout from "../components/ui/navigation/layout";
+import Layout from "../components/shared/layout";
 import { CoursePreviewProps } from "../types/course";
 import { rowalizer } from "../utils/helpers";
 
@@ -58,11 +58,11 @@ const Category = ({
 }: Props) => {
   const rows = React.useMemo(
     () => rowalizer(data.allContentfulCorsi.nodes),
-    []
+    [],
   );
   const couponCourses = React.useMemo(() => {
     return data.allContentfulCorsi.nodes.filter(
-      (corso) => corso.categoria && corso.categoria?.toLowerCase() !== "free"
+      (corso) => corso.categoria && corso.categoria?.toLowerCase() !== "free",
     );
   }, []);
 
@@ -137,7 +137,7 @@ const Category = ({
           }}
         >
           <Container maxWidth='lg'>
-            {rows.map((row, index) => {
+            {rows?.map((row, index) => {
               return (
                 <Box
                   key={`${name}-section-${index}`}

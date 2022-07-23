@@ -23,6 +23,7 @@ const useArticleSchema = ({
         "@type": type || "Article",
         "@id": url + "#article",
         "isPartOf": {
+          "@type": "WebPage",
           "@id": url + "#webpage",
         },
         "author": {
@@ -39,6 +40,7 @@ const useArticleSchema = ({
         "dateModified": modifiedDate,
         "mainEntityOfPage": url + "#webpage",
         "image": {
+          "@type": "ImageObject",
           "@id": image + "/#primaryImage",
         },
       },

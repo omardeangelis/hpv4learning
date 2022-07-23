@@ -6,23 +6,23 @@ const useDropDownMenu = (menus: string[]) => {
     (item: string) => {
       setOpen((items) => [...items, item]);
     },
-    [open]
+    [open],
   );
 
   const closeMenu = React.useCallback(
     (item) => {
       setOpen(() => {
-        let element = document.querySelector(`#${item}-menu`);
+        const element = document.querySelector(`#${item}-menu`);
         if (element) {
           if (element.classList.contains("show-dropdown"))
             element.classList.remove("show-dropdown");
-          let icon = element.previousSibling?.lastChild as HTMLElement;
+          const icon = element.previousSibling?.lastChild as HTMLElement;
           icon.classList.remove("rotate-icon");
         }
         return open.filter((menu) => menu !== item);
       });
     },
-    [open]
+    [open],
   );
 
   const toggleMenu = React.useCallback(
@@ -33,16 +33,16 @@ const useDropDownMenu = (menus: string[]) => {
       }
       openMenu(item);
     },
-    [openMenu, closeMenu]
+    [openMenu, closeMenu],
   );
 
   React.useEffect(() => {
     open.forEach((el) => {
       if (typeof window !== "undefined") {
-        let element = document.querySelector(`#${el}-menu`);
+        const element = document.querySelector(`#${el}-menu`);
         if (element) {
           if (menus.find((x) => x === el)) {
-            let icon = element.previousSibling?.lastChild as HTMLElement;
+            const icon = element.previousSibling?.lastChild as HTMLElement;
             icon.classList.add("rotate-icon");
 
             element.classList.add("show-dropdown");

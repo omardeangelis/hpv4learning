@@ -40,7 +40,7 @@ const CourseWall = () => {
     (category: CourseCategoryProps[], categorySlug: string) => {
       return category.find((x) => x.slug === categorySlug.toLowerCase())?.name;
     },
-    []
+    [],
   );
   return (
     <StyledBox>
@@ -60,7 +60,7 @@ const CourseWall = () => {
 };
 
 const query = graphql`
-  {
+  query RelatedCourse {
     allContentfulCorsi(sort: { fields: createdAt }) {
       group(field: category___slug, limit: 3) {
         fieldValue
