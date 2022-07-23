@@ -12,7 +12,6 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import dayjs from "dayjs";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SeoLink from "../../../components/shared/SeoLink";
-import { createSlugFromTitle } from "../utils";
 import { RoundedButton } from "../../../components/layout";
 
 const StyledBox = styled(Box)`
@@ -46,19 +45,8 @@ export const LatestProject = (
     return props.node;
   }, [props]);
 
-  const handleLabel = React.useCallback((category?: string | null) => {
-    switch (category) {
-      case "javascript":
-        return "sviluppatori web";
-      case "react":
-        return "sviluppatori web";
-      case "videomaker":
-        return "videomakers";
-    }
-  }, []);
-
   const label = React.useMemo(() => {
-    return handleLabel(latestProject?.project_category?.[0]?.slug);
+    return latestProject?.project_category?.[0]?.slug;
   }, [latestProject]);
 
   const image = getImage(
@@ -68,10 +56,7 @@ export const LatestProject = (
   return (
     <StyledBox>
       <div>
-        <SeoLink
-          isExternal={false}
-          link={`/corsi/${createSlugFromTitle(label)}/`}
-        >
+        <SeoLink isExternal={false} link={`/progetti/${label}/`}>
           <StyledChip label={label} variant='outlined' />
         </SeoLink>
         <Box
@@ -123,7 +108,7 @@ export const LatestProject = (
 
         <SeoLink
           isExternal={false}
-          link={`/progetti/${latestProject?.project_category?.[0]?.slug}/${latestProject?.slug}/`}
+          link={`/progetti/${label}/${latestProject?.slug}/`}
         >
           <RoundedButton
             size='small'
