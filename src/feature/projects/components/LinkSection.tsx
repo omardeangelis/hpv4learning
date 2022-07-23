@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { Stack, Box, Chip } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SeoLink from "../../../components/shared/SeoLink";
-import { createSlugFromTitle } from "../utils";
 
 interface Props {
   category?: string | null;
@@ -45,28 +44,10 @@ const StyledGithubBox = styled(Box)`
 `;
 
 export const LinkSection = ({ category, url, githubUrl }: Props) => {
-  const handleLabel = React.useCallback((category?: string | null) => {
-    switch (category) {
-      case "javascript":
-        return "sviluppatori web";
-      case "react":
-        return "sviluppatori web";
-      case "videomaker":
-        return "videomakers";
-    }
-  }, []);
-
-  const label = React.useMemo(() => {
-    return handleLabel(category);
-  }, []);
-
   return (
     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-      <SeoLink
-        isExternal={false}
-        link={`/corsi/${createSlugFromTitle(label)}/`}
-      >
-        <StyledChip label={label} variant='outlined' />
+      <SeoLink isExternal={false} link={`/progetti/${category}/`}>
+        <StyledChip label={category} variant='outlined' />
       </SeoLink>
 
       <Stack direction='row'>
