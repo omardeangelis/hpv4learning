@@ -52,14 +52,14 @@ const CustomStack = styled.div`
 
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
-  const goToCourseSection = () => {
+  const goToCourseSection = React.useCallback(() => {
     if (!coursesPositionRef.current) {
       return;
     }
     coursesPositionRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  };
+  }, [coursesPositionRef.current]);
   return (
     <Layout>
       <MetaDecorator
