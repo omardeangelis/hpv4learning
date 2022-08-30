@@ -62,7 +62,10 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   };
   return (
     <Layout>
-      <MetaDecorator metaTitle='Home' />
+      <MetaDecorator
+        metaTitle='Videocorsi per sviluppatori web e videomakers'
+        metaDescription='Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti'
+      />
       <LinkHandler />
       <OrganizationSchema />
       <Box
