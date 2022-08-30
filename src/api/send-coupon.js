@@ -33,7 +33,7 @@ const handler = (req, res) => {
         if (error.response) {
           return res.status(500).json({ error: error.response });
         }
-      }
+      },
     );
   } catch (error) {
     console.log(error);
