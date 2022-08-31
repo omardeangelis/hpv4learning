@@ -13,7 +13,8 @@ type ReqProps = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = (req: ReqProps, res: any) => {
-  if (req.method !== "GET") throw new Error("Use Get Method");
+  if (req.method !== "POST" && process.env.NODE_ENV === "production")
+    throw new Error("Use POST Method");
 
   if (!isValidMail(req?.body?.mail)) {
     if (process.env.NODE_ENV === "production") throw new Error("Invalid Mail");
@@ -36,7 +37,7 @@ async function userHasApointment(email: string) {
     timeMin: new Date(Date.now()).toISOString(),
   });
 
-  return isEmpty(appointemnt) ? [] : appointemnt;
+  return isEmpty(appointemnt.data.items) ? [] : appointemnt.data.items;
 }
 
 export default handler;

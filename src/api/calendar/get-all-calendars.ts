@@ -10,9 +10,10 @@ type ReqProps = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handler = async (_: ReqProps, res: any) => {
+const handler = async (req: ReqProps, res: any) => {
+  if (req.method !== "GET") throw new Error("Use GET Method");
   getAllAvialableConsulenze()
-    .then((response) => res.status(200).json(response.data))
+    .then((response) => res.status(200).json(response.data.items))
     .catch((error) =>
       res.status(500).json({
         error: error,
