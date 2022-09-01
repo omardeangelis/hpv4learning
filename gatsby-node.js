@@ -21,7 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: node.slug,
         categorySlug: node.category.filter(
-          (category) => category.slug !== "gratuiti",
+          (category) => category.slug !== "gratuiti"
         )[0].slug,
       },
     });
@@ -51,12 +51,17 @@ exports.createPages = async ({ graphql, actions }) => {
     component: path.resolve("./src/template/ProjectsHome.tsx"),
   });
 
+  createPage({
+    path: "/consulenze/",
+    component: path.resolve("./src/template/Consulenze.tsx"),
+  });
+
   categoryProjectQuery.data.allContentfulProjectCategory.nodes.forEach(
     (category) => {
       if (!isEmpty(category.categoryProjects)) {
         const numOfElement = 9;
         const pages = Math.ceil(
-          category.categoryProjects.length / numOfElement,
+          category.categoryProjects.length / numOfElement
         );
 
         Array.from({ length: pages }, (_, index) => {
@@ -82,13 +87,13 @@ exports.createPages = async ({ graphql, actions }) => {
           });
         });
       }
-    },
+    }
   );
 
   projectArticleQuery.data.allContentfulProgetti.group.forEach((category) => {
     const slug = category.fieldValue;
     const maxProjectsOrders = Math.max(
-      ...category.nodes.map((project) => project.ordine),
+      ...category.nodes.map((project) => project.ordine)
     );
     category.nodes.forEach((project) => {
       const nextProjectOrder =
