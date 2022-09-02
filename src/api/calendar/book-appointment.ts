@@ -1,7 +1,10 @@
 import { calendarId, calendar_key, testingMail } from "../../server/constants";
-import { calendar, auth } from "../../server/utils/api";
+import { calendar, auth, sendGrid } from "../../server/utils/api";
 import { HttpMethod } from "../../server/types";
-import { isValidMail } from "../../server/utils";
+import {
+  isValidMail,
+  createCalendarConfirmationMail,
+} from "../../server/utils";
 
 type ReqProps = {
   method: HttpMethod;
@@ -14,6 +17,7 @@ type ReqProps = {
     cognome?: string;
     professione?: string;
     description?: string;
+    shouldSendMail?: boolean;
   };
 };
 
@@ -24,7 +28,7 @@ const createCalendarDescription = (props: ReqProps["body"]) => {
       const element = props[key as keyof ReqProps["body"]];
 
       if (element) {
-        if (key === "email" || key === "description") continue;
+        if (key === "email" || key === "shouldSendMail") continue;
         calendarDescription += ` ${element}`;
       }
     }
@@ -58,6 +62,7 @@ const handler = async (req: ReqProps, res: any) => {
         eventId,
         auth,
         key: calendar_key,
+
         requestBody: {
           attendees: [
             {
@@ -75,7 +80,18 @@ const handler = async (req: ReqProps, res: any) => {
       });
 
       const { start, hangoutLink } = responseData;
-      res.status(200).json({ start, hangoutLink });
+      if (req.body.shouldSendMail)
+        try {
+          const message = createCalendarConfirmationMail(
+            userMail,
+            hangoutLink as string,
+            new Date(Date.parse(start?.date as string)).toISOString(),
+          );
+          await sendGrid.send(message);
+        } catch (error) {
+          res.status(500).json({ message: "Impossibile inviare mail", error });
+        }
+      res.status(200).json({ start, hangoutLink, mailSended: true });
     } catch (error) {
       res.status(400).json({ error });
     }
