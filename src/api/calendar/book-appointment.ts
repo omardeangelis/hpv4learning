@@ -34,6 +34,8 @@ const createCalendarDescription = (props: ReqProps["body"]) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = async (req: ReqProps, res: any) => {
+  if (req.method === "PUT" && process.env.NODE_ENV === "production")
+    throw new Error("Use PUT Method");
   if (!req.query) throw new Error("Mancano i query params nell'URL");
   if (!req.body && process.env.NODE_ENV === "production")
     throw new Error("Body mancante");

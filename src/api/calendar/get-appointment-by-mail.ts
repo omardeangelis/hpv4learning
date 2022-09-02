@@ -40,7 +40,13 @@ async function userHasApointment(email: string) {
     timeMin: new Date(Date.now()).toISOString(),
   });
 
-  return isEmpty(appointemnt.data.items) ? [] : appointemnt.data.items;
+  return isEmpty(appointemnt.data.items)
+    ? []
+    : appointemnt.data.items?.filter((item) => ({
+        eventId: item.id,
+        start: item.start,
+        end: item.end,
+      }));
 }
 
 export default handler;
