@@ -1,5 +1,5 @@
 import { calendar, auth } from "../../server/utils/api";
-import { calendarId } from "../../server/constants";
+import { calendarId, testingMail } from "../../server/constants";
 import { isEmpty } from "lodash";
 import { isValidMail } from "../../server/utils";
 import { HttpMethod } from "../../server/types";
@@ -20,7 +20,10 @@ const handler = (req: ReqProps, res: any) => {
     if (process.env.NODE_ENV === "production") throw new Error("Invalid Mail");
   }
 
-  userHasApointment(req?.body?.mail || "gianni@gmail.com")
+  const userMail =
+    process.env.NODE_ENV === "production" ? req.body.mail : testingMail;
+
+  userHasApointment(userMail)
     .then((response) => res.status(200).json(response))
     .catch((error) =>
       res
