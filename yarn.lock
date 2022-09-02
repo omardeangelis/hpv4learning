@@ -7450,6 +7450,20 @@ gray-matter@^4.0.3:
     section-matter "^1.0.0"
     strip-bom-string "^1.0.0"
 
+gtoken@^6.1.0:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/gtoken/-/gtoken-6.1.1.tgz#29ebf3e6893719176d180f5694f1cad525ce3c04"
+  integrity sha512-HPM4VzzPEGxjQ7T2xLrdSYBs+h1c0yHAUiN+8RHPDoiZbndlpg9Sx3SjWcrTt9+N3FHsSABEpjvdQVan5AAuZQ==
+  dependencies:
+    gaxios "^5.0.1"
+    google-p12-pem "^4.0.0"
+    jws "^4.0.0"
+
+gud@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
+  integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
+
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-6.0.0.tgz#065367fd50c239c0671cbcbad5be3e2eeb10e462"
