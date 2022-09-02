@@ -4,15 +4,15 @@ import { auth, calendar } from "../../server/utils/api";
 
 type ReqProps = {
   method: HttpMethod;
-  body: {
-    email: string;
+  query?: {
+    startDate: string;
   };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = async (req: ReqProps, res: any) => {
   if (req.method !== "GET") throw new Error("Use GET Method");
-  getAllAvialableConsulenze()
+  getAllAvialableConsulenze(req?.query?.startDate)
     .then((response) => res.status(200).json(response.data.items))
     .catch((error) =>
       res.status(500).json({
@@ -21,13 +21,15 @@ const handler = async (req: ReqProps, res: any) => {
     );
 };
 
-async function getAllAvialableConsulenze() {
+async function getAllAvialableConsulenze(date?: string) {
+  const startDate = date ? Date.parse(date) : Date.now();
+
   return calendar.events.list({
     calendarId: calendarId,
     q: "#consulenze",
     auth,
-    timeMin: new Date(Date.now()).toISOString(),
-    timeMax: new Date(Date.now() + 1000 * 60 * 60 * 24 * 21).toISOString(),
+    timeMin: new Date(startDate).toISOString(),
+    timeMax: new Date(startDate + 1000 * 60 * 60 * 24 * 21).toISOString(),
   });
 }
 
