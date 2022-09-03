@@ -38,6 +38,7 @@ export const Hero = () => {
         <StaticImage
           src='../images/desktop-hero-layer.png'
           alt='Scegli il sito su misura per te'
+          placeholder='tracedSVG'
         />
       </Box>
 
@@ -55,6 +56,7 @@ export const Hero = () => {
         <StaticImage
           src='../images/small-overlay.png'
           alt='Scegli il sito su misura per te'
+          placeholder='tracedSVG'
         />
       </Box>
       <Box
@@ -69,6 +71,7 @@ export const Hero = () => {
         <StaticImage
           src='../images/bottom-hero.png'
           alt='Guadagna Grazie ad un Sito performante'
+          placeholder='tracedSVG'
         />
       </Box>
 
@@ -85,6 +88,7 @@ export const Hero = () => {
         <StaticImage
           src='../images/mongolfiera.png'
           alt='Ottieni clienti grazie ad un sito web'
+          placeholder='tracedSVG'
         />
       </Box>
       <Box display='flex' alignItems='center' justifyContent='center'>
