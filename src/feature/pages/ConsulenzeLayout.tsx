@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import React from "react";
-import { Hero, IconSection } from "../consulenze/components";
+import { CardsSection, Hero, IconSection } from "../consulenze/components";
 
 export const ConsulenzeLayout = () => {
   return (
@@ -22,6 +22,16 @@ export const ConsulenzeLayout = () => {
             }}
           >
             <IconSection />
+          </Box>
+          <Box
+            sx={{
+              mt: {
+                xs: "48px",
+                lg: "144px",
+              },
+            }}
+          >
+            <CardsSection />
           </Box>
         </Box>
       </Box>
