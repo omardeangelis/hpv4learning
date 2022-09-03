@@ -1,10 +1,24 @@
 import { Box } from "@mui/system";
+import { navigate } from "gatsby";
 import React from "react";
-import { CardsSection, Hero, IconSection } from "../consulenze/components";
+import { BottomBanner, RoundedButton } from "../../components/layout";
+import {
+  CardsSection,
+  Hero,
+  IconSection,
+  ReviewSection,
+} from "../consulenze/components";
+import { ConsulenzeProvider } from "../consulenze/context";
 
 export const ConsulenzeLayout = () => {
+  const openModal = React.useCallback(
+    () => navigate("/consulenze/prenota/"),
+    [],
+  );
+
+  const context = React.useMemo(() => ({ openModal }), [openModal]);
   return (
-    <>
+    <ConsulenzeProvider value={context}>
       <Box mt='-72px'>
         <Hero />
         <Box
@@ -33,8 +47,42 @@ export const ConsulenzeLayout = () => {
           >
             <CardsSection />
           </Box>
+          <Box
+            sx={{
+              mt: {
+                xs: "48px",
+                lg: "144px",
+              },
+            }}
+          >
+            <ReviewSection />
+          </Box>
+          <Box
+            sx={{
+              mt: {
+                xs: "48px",
+                lg: "144px",
+              },
+            }}
+          >
+            <BottomBanner
+              title='Facciamo due chiacchiere, è gratis'
+              sx={{
+                backgroundColor: "purple.A100",
+              }}
+            >
+              <RoundedButton
+                size='large'
+                variant='contained'
+                color='primary'
+                onClick={openModal}
+              >
+                Prenota una call
+              </RoundedButton>
+            </BottomBanner>
+          </Box>
         </Box>
       </Box>
-    </>
+    </ConsulenzeProvider>
   );
 };

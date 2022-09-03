@@ -12,12 +12,11 @@ import {
   StaticImage,
 } from "gatsby-plugin-image";
 import { LabelSquaredBox } from "../../../components/ui/LabelSquaredBox";
+import { BorderBox } from "../../../components/layout";
 
 type ImageKey = "first" | "second" | "third";
 
-const CardWrapper = styled(Box)({
-  border: "1px solid",
-  borderColor: "#E4E7EC",
+const CardWrapper = styled(BorderBox)({
   borderRadius: "16px",
   boxShadow: " 0px 1px 15px rgba(0, 0, 0, 0.05)",
 });
@@ -136,7 +135,7 @@ export const CardsSection = () => {
                     <Box>
                       <Typography
                         component='h3'
-                        fontWeight={500}
+                        fontWeight={600}
                         sx={{
                           fontSize: { xs: "24px", lg: "34px" },
                           lineHeight: { xs: "29px", lg: "39px" },

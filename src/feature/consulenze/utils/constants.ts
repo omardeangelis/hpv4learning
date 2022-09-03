@@ -1,4 +1,24 @@
 export const text = {
+  reviews: [
+    {
+      title: "Renato",
+      description:
+        "Molto Smart: fissata una coll, ascoltata l’idea, ritornati con proposte e iniziato il lavoro.",
+      star: 5,
+    },
+    {
+      title: "Martina",
+      description:
+        "Ragazzi giovani e pragmatici che non cercano di venderti il solito pacchetto preconfezionato. Nice!",
+      star: 5,
+    },
+    {
+      title: "Andrea",
+      description:
+        "Molto professionali e attenti alle nostre esigenze e richieste.",
+      star: 5,
+    },
+  ],
   cards: [
     {
       title: "Dai visibilità a servizi e prodotti",

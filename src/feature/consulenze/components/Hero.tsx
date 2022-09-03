@@ -1,10 +1,10 @@
 import React from "react";
-import { navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import { Box, Container } from "@mui/system";
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
 import { RoundedButton } from "../../../components/layout";
+import { useConsulenzeContext } from "../context";
 
 const StyledBox = styled(Box)({
   backgroundImage:
@@ -17,10 +17,7 @@ const StyledBox = styled(Box)({
 });
 
 export const Hero = () => {
-  const openModal = React.useCallback(
-    () => navigate("/consulenze/prenota/"),
-    [],
-  );
+  const { openModal } = useConsulenzeContext() || {};
 
   return (
     <StyledBox>
