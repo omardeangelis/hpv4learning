@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 interface Props {
-  color: string;
+  color?: string;
   closeModal?: () => void;
   children: JSX.Element;
 }
@@ -23,11 +23,11 @@ export const ModalOverlay = ({
     align-items: center;
     justify-content: center;
     z-index: 10;
-    background-color: ${color};
+    background-color: ${color ? color : "rgba(208, 213, 221, 0.9)"};
   `;
 
   return (
-    <Overlay onClick={!!closeModal && closeModal} {...rest}>
+    <Overlay onClick={closeModal && closeModal} {...rest}>
       {children}
     </Overlay>
   );
