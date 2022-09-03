@@ -74,11 +74,12 @@ export const Hero = () => {
 
       <Box
         position='absolute'
-        top='80px'
+        top='50%'
         right='27px'
         maxWidth='321px'
         sx={{
           display: { xs: "none", xl: "block" },
+          transform: "translateY(-50%)",
         }}
       >
         <StaticImage
