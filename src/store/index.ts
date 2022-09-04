@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { googleCalendarApi } from "./services/calendar";
 import consulenzaSlice from "./reducers/consulenze";
 
 const rootReducer = combineReducers({
   consulenza: consulenzaSlice,
+  [googleCalendarApi.reducerPath]: googleCalendarApi.reducer,
 });
 
 export const store = configureStore({
@@ -12,7 +14,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST"],
       },
-    });
+    }).concat(googleCalendarApi.middleware);
   },
 });
 
