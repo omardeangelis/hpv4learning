@@ -9,6 +9,7 @@ import {
   ReviewSection,
 } from "../consulenze/components";
 import { ConsulenzeProvider } from "../consulenze/context";
+// import { useGetAllAvailableCalendarsQuery } from "../../store/services/calendar";
 
 export const ConsulenzeLayout = () => {
   const openModal = React.useCallback(
@@ -17,6 +18,18 @@ export const ConsulenzeLayout = () => {
   );
 
   const context = React.useMemo(() => ({ openModal }), [openModal]);
+  // const [createNewResource, {data, isLoading, isError}] = useCreateNewResourceMutation()
+
+  // const prova = React.useCallback(() => {
+  //   createNewResource({
+  //     title: 'Gianni Cafone',
+  //     body: "E' veramente un graaaaeeendee",
+  //     userId: 943268632843864
+  //   })
+  // }, [createNewResource])
+
+  // const { data, isLoading } = useGetAllAvailableCalendarsQuery();
+
   return (
     <ConsulenzeProvider value={context}>
       <Box mt='-72px'>
