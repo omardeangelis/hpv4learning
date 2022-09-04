@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import useOrganizationSchema from "../hooks/useOrganizationSchema";
 import useWebPageSchema from "../hooks/useWebPageSchema";
 
@@ -10,14 +9,12 @@ const OrganizationSchema = () => {
   const organizarionSchema = useOrganizationSchema();
 
   return (
-    <Helmet>
-      <script type='application/ld+json'>
-        {JSON.stringify({
-          ...schema,
-          ["@graph"]: [...schema["@graph"], organizarionSchema],
-        })}
-      </script>
-    </Helmet>
+    <script type='application/ld+json'>
+      {JSON.stringify({
+        ...schema,
+        ["@graph"]: [...schema["@graph"], organizarionSchema],
+      })}
+    </script>
   );
 };
 

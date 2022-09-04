@@ -11,7 +11,6 @@ import {
   SingleFaq,
 } from "../components/faq";
 //Meta Title e SEO e Utils
-import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import SeoLink from "../components/shared/SeoLink";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 //Components
@@ -34,6 +33,7 @@ import {
 } from "gatsby-plugin-image";
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema";
 import { HomeSection } from "../feature/projects/components";
+import MetaDecorator from "../components/SEO/components/MetaDecorator";
 
 const CustomStack = styled.div`
   .faq-image {
@@ -52,19 +52,20 @@ const CustomStack = styled.div`
 
 const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
-  const goToCourseSection = () => {
+  const goToCourseSection = React.useCallback(() => {
     if (!coursesPositionRef.current) {
       return;
     }
     coursesPositionRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  };
+  }, [coursesPositionRef.current]);
   return (
     <Layout>
-      <MetaDecorator metaTitle='Home' />
-      <LinkHandler />
-      <OrganizationSchema />
+      {/* <MetaDecorator
+        metaTitle='Videocorsi per sviluppatori web e videomakers'
+        metaDescription='Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti'
+      /> */}
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
@@ -293,6 +294,19 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
         </Container>
       </Box>
     </Layout>
+  );
+};
+
+export const Head = () => {
+  return (
+    <>
+      <MetaDecorator
+        metaTitle='Videocorsi per sviluppatori web e videomakers'
+        metaDescription='Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti'
+      />
+      <OrganizationSchema />
+      <LinkHandler />
+    </>
   );
 };
 

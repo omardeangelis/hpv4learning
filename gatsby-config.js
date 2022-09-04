@@ -6,10 +6,10 @@ module.exports = {
   graphqlTypegen: true,
   trailingSlash: "always",
   siteMetadata: {
-    title: "hpv 4 Learning",
+    title: "Videocorsi per sviluppatori web e videomakers",
     slogan: "hpv 4 Learning",
     description:
-      "Corsi di Programmazione e videomaking in italiano creati da professionisti del settore.",
+      "Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti.",
     siteUrl: process.env.GASTBY_SITE_URL,
     youtube: "https://www.youtube.com/channel/UC9kv8nH9i9kSj_q0FqckiYw",
     author: "@hpv4learning",
@@ -27,7 +27,6 @@ module.exports = {
     },
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
-    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-sitemap",

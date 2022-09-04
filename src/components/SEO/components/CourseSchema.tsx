@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import useBreadcrumbSchema from "../hooks/useBreadcrumbSchema";
 import useCourseSchema from "../hooks/useCourseSchema";
 import useWebPageSchema from "../hooks/useWebPageSchema";
@@ -22,7 +21,7 @@ const CourseSchema = ({
   isAccessibleForFree,
   rating,
   coursePrerequisites,
-  recensioniRicevute
+  recensioniRicevute,
 }: Props) => {
   const schema = useWebPageSchema({ title, description, image, imageAltText });
 
@@ -41,14 +40,12 @@ const CourseSchema = ({
   });
 
   return (
-    <Helmet>
-      <script type='application/ld+json'>
-        {JSON.stringify({
-          ...schema,
-          ["@graph"]: [...schema["@graph"], breadcrumbSchema, courseSchema],
-        })}
-      </script>
-    </Helmet>
+    <script type='application/ld+json'>
+      {JSON.stringify({
+        ...schema,
+        ["@graph"]: [...schema["@graph"], breadcrumbSchema, courseSchema],
+      })}
+    </script>
   );
 };
 
