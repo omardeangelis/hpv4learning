@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import React from "react";
 import CourseBanner from "../components/banner/CourseBanner";
 import CourseContainer from "../components/course/CourseContainer";
@@ -66,29 +66,8 @@ const Category = ({
     );
   }, []);
 
-  const breadcrumbs = React.useMemo(() => {
-    return [
-      { text: "Home", link: "/" },
-      {
-        text: `Corsi per ${alias || name}`,
-        link: `/corsi/${name.toLowerCase()}/`,
-      },
-    ];
-  }, []);
-
   return (
     <Layout>
-      <MetaDecorator
-        metaTitle={`Corsi per ${alias || name}`}
-        disableSlogan
-        metaDescription={description}
-      />
-      <LinkHandler />
-      <WebPageSchema
-        title={`Corsi per ${alias || name}`}
-        description={description}
-        breadcrumbs={breadcrumbs}
-      />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
@@ -241,6 +220,39 @@ const Category = ({
         )}
       </Box>
     </Layout>
+  );
+};
+
+export const Head = ({
+  pageContext,
+}: PageProps<
+  unknown,
+  { description: string; name: string; alias?: string }
+>) => {
+  const { description, name, alias } = pageContext;
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      {
+        text: `Corsi per ${alias || name}`,
+        link: `/corsi/${name.toLowerCase()}/`,
+      },
+    ];
+  }, []);
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={`Corsi per ${alias || name}`}
+        disableSlogan
+        metaDescription={description}
+      />
+      <LinkHandler />
+      <WebPageSchema
+        title={`Corsi per ${alias || name}`}
+        description={description}
+        breadcrumbs={breadcrumbs}
+      />
+    </>
   );
 };
 

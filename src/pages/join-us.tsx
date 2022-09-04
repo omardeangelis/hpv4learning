@@ -39,25 +39,8 @@ const JobsStack = styled(Box)`
 `;
 
 const JoinUs = () => {
-  const breadcrumbs = React.useMemo(() => {
-    return [
-      { text: "Home", link: "/" },
-      { text: "Join us", link: "/join-us/" },
-    ];
-  }, []);
-
   return (
     <Layout disableColor>
-      <MetaDecorator
-        metaTitle='Lavora con noi'
-        metaDescription='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
-      />
-      <LinkHandler />
-      <WebPageSchema
-        title='Lavora con noi'
-        description='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
-        breadcrumbs={breadcrumbs}
-      />
       <Box
         sx={{
           background: "linear-gradient(180deg, #341268, #8769FE)",
@@ -429,6 +412,29 @@ const JoinUs = () => {
         </Container>
       </Box>
     </Layout>
+  );
+};
+
+export const Head = () => {
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      { text: "Join us", link: "/join-us/" },
+    ];
+  }, []);
+  return (
+    <>
+      <MetaDecorator
+        metaTitle='Lavora con noi'
+        metaDescription='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
+      />
+      <LinkHandler />
+      <WebPageSchema
+        title='Lavora con noi'
+        description='Unisciti al nostro team di insegnanti e aiutaci a far crescere la community'
+        breadcrumbs={breadcrumbs}
+      />
+    </>
   );
 };
 

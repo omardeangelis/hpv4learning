@@ -21,53 +21,18 @@ type Props = {
     currentPage: number;
     title: string;
     description: string;
-    metaTitle: string;
-    metaDescription: string;
   };
 };
 
 const ProjectsCategory = ({
-  pageContext: {
-    slug,
-    hasNextPage,
-    pages,
-    currentPage,
-    title,
-    description,
-    metaDescription,
-    metaTitle,
-  },
+  pageContext: { slug, hasNextPage, pages, currentPage, title, description },
   data: {
     allContentfulProgetti: { nodes: progetti },
     corso,
   },
 }: PageProps<Queries.ProjectCategoryPageQuery> & Props) => {
-  const breadcrumbs = React.useMemo(
-    () => [
-      {
-        text: "Home",
-        link: "/",
-      },
-      {
-        text: "Home",
-        link: "/progetti/",
-      },
-      {
-        text: "Home",
-        link: `/progetti/${slug}/`,
-      },
-    ],
-    [],
-  );
   return (
     <Layout>
-      <MetaDecorator metaTitle={metaTitle} metaDescription={metaDescription} />
-      <WebPageSchema
-        title={metaTitle}
-        description={metaDescription}
-        breadcrumbs={breadcrumbs}
-      />
-      <LinkHandler paginatedPath={`progetti/${slug}`} />
       <Container maxWidth='lg'>
         <Box maxWidth='756px' mx='auto' mt={{ xs: "48px", lg: "96px" }}>
           <Typography
@@ -136,6 +101,44 @@ const ProjectsCategory = ({
         </SeoLink>
       </BottomBanner>
     </Layout>
+  );
+};
+
+export const Head = ({
+  pageContext,
+}: PageProps<
+  unknown,
+  { slug: string; metaTitle: string; metaDescription: string }
+>) => {
+  const { slug, metaDescription, metaTitle } = pageContext;
+  const breadcrumbs = React.useMemo(
+    () => [
+      {
+        text: "Home",
+        link: "/",
+      },
+      {
+        text: "Home",
+        link: "/progetti/",
+      },
+      {
+        text: "Home",
+        link: `/progetti/${slug}/`,
+      },
+    ],
+    [],
+  );
+
+  return (
+    <>
+      <MetaDecorator metaTitle={metaTitle} metaDescription={metaDescription} />
+      <WebPageSchema
+        title={metaTitle}
+        description={metaDescription}
+        breadcrumbs={breadcrumbs}
+      />
+      <LinkHandler paginatedPath={`progetti/${slug}`} />
+    </>
   );
 };
 
