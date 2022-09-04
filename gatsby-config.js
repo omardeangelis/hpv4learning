@@ -101,6 +101,14 @@ module.exports = {
       __key: "images",
     },
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "consulenze-images",
+        path: "./src/feature/consulenze/images/",
+      },
+      __key: "images",
+    },
+    {
       resolve: `gatsby-plugin-create-client-paths`,
       options: { prefixes: [`/consulenze/*`] },
     },
