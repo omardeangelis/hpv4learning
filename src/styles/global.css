@@ -279,3 +279,89 @@ SOCIAL STYLE
     pointer-events: none;
 
 }
+
+.float-animation {
+    animation: buttonStartFloatMobile 0ms ease 0s 1 forwards;
+}
+
+.unfloat-animation {
+    animation: buttonStopFloatMobile 0ms ease 0s 1 forwards;
+}
+
+@media screen and (min-width: 768px) {
+    .float-animation {
+        animation: buttonStartFloat 0ms ease 0s 1 forwards;
+    }
+
+    .unfloat-animation {
+        animation: buttonStopFloat 0ms ease 0s 1 forwards;
+    }
+}
+
+
+@keyframes buttonStopFloat {
+    0% {
+        border-radius: 50%;
+        width: 72px;
+        height: 72px;
+        background-color: var(--purple-400);
+    }
+
+    100% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 64px;
+        background-color: white;
+    }
+}
+
+
+@keyframes buttonStartFloat {
+    0% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 64px;
+        background-color: white;
+    }
+
+    100% {
+        border-radius: 50%;
+        width: 72px;
+        height: 72px;
+        background-color: var(--purple-400);
+    }
+}
+
+
+@keyframes buttonStopFloatMobile {
+    0% {
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        background-color: var(--purple-400);
+    }
+
+    100% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 56px;
+        background-color: white;
+    }
+}
+
+
+@keyframes buttonStartFloatMobile {
+    0% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 56px;
+        background-color: white;
+    }
+
+    100% {
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        background-color: var(--purple-400);
+    }
+}
