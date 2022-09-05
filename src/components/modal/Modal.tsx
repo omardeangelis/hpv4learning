@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { BoxProps } from "@mui/system";
+import { BorderBox } from "../layout/BorderBox";
 
 type Props = {
+  onClose: () => void;
   width?: string;
   height?: string;
   backgroundColor?: string;
@@ -14,10 +17,9 @@ export const Modal = ({
   backgroundColor,
   children,
   ...rest
-}: Props) => {
-  const ModalContent = styled.div`
+}: Props & BoxProps) => {
+  const ModalContent = styled(BorderBox)`
     background-color: ${backgroundColor ? backgroundColor : "white"};
-    border: 1px solid #f8f8f8;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
     width: 100vw;
     height: 100vh;

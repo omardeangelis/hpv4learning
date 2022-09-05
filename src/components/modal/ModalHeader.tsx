@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { Box, BoxProps } from "@mui/system";
 
 interface Props {
   hasBorder?: boolean;
   children: JSX.Element | JSX.Element[];
 }
 
-export const ModalHeader = ({ hasBorder = true, children }: Props) => {
-  const Header = styled.div`
+export const ModalHeader = ({
+  hasBorder = true,
+  children,
+}: Props & BoxProps) => {
+  const Header = styled(Box)`
     height: 48px;
     display: flex;
     justify-content: space-between;
