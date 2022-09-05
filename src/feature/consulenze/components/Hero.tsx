@@ -209,10 +209,6 @@ export const Hero = () => {
             >
               <RoundedButton
                 id='placeholder-cta-btn'
-                variant='contained'
-                size='large'
-                color='secondary'
-                onClick={openModal}
                 sx={{
                   background: "#fff",
                   color: "purple.400",

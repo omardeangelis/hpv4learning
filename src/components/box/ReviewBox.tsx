@@ -1,5 +1,5 @@
 import { Avatar, Typography } from "@mui/material";
-import { Box, Stack } from "@mui/system";
+import { Box, BoxProps, Stack } from "@mui/system";
 import React from "react";
 import { createStarReview } from "../../utils/general";
 import { BorderBox } from "../layout";
@@ -11,15 +11,15 @@ type Props = {
   image?: React.ReactElement;
 };
 
-export const ReviewBox = ({ image, title, description, star }: Props) => {
+export const ReviewBox = ({
+  image,
+  title,
+  description,
+  star,
+  ...rest
+}: Props & BoxProps) => {
   return (
-    <BorderBox
-      borderRadius='16px'
-      sx={{
-        maxWidth: { xs: "unset", lg: "346px" },
-        width: "100%",
-      }}
-    >
+    <BorderBox borderRadius='16px' {...rest}>
       <Box sx={{ p: { xs: "16px", lg: "24px" } }}>
         <Stack spacing='14px' alignItems='flex-start' flexDirection='column'>
           <Box display='flex' alignItems='center'>
