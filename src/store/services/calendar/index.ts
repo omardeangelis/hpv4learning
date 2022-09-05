@@ -44,8 +44,7 @@ export const googleCalendarApi = createApi({
       { id: string; startDate: string; endDate: string }[],
       string | void
     >({
-      query: (mail) =>
-        "/api/calendar/get-appointment-by-mail" + (mail ? `?mail=${mail}` : ""),
+      query: () => "/api/calendar/get-appointment-by-mail",
       transformResponse: (data: CalendarEventsItems) => {
         if (data)
           return data.map((item) => ({
