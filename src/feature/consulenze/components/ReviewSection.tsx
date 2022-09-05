@@ -39,6 +39,7 @@ export const ReviewSection = () => {
         textAlign='center'
         sx={{
           fontSize: { xs: "34px", lg: "48px" },
+          lineHeight: { xs: "39px", lg: "56px" },
         }}
       >
         Cosa dicono di noi ?
@@ -59,6 +60,11 @@ export const ReviewSection = () => {
         {reviews.map((review) => {
           return (
             <ReviewBox
+              sx={{
+                background: "white",
+                maxWidth: { xs: "unset", lg: "346px" },
+                width: "100%",
+              }}
               key={review.title}
               image={getReviewImage(review.title)}
               {...review}

@@ -64,6 +64,7 @@ export const IconSection = () => {
         textAlign='center'
         sx={{
           fontSize: { xs: "34px", lg: "48px" },
+          lineHeight: { xs: "39px", lg: "56px" },
         }}
       >
         Che cosa facciamo
