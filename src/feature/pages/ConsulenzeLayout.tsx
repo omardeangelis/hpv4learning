@@ -9,16 +9,22 @@ import {
   ReviewSection,
 } from "../consulenze/components";
 import { ConsulenzeProvider } from "../consulenze/context";
-// import { useGetAllAvailableCalendarsQuery } from "../../store/services/calendar";
+// import {
+//   useGetAllAvailableCalendarsQuery,
+//   useGetAppointmentByMailQuery,
+// } from "../../store/services/calendar";
 
 export const ConsulenzeLayout = () => {
   const openModal = React.useCallback(
     () => navigate("/consulenze/prenota/"),
-    [],
+    []
   );
 
   const context = React.useMemo(() => ({ openModal }), [openModal]);
   // const [createNewResource, {data, isLoading, isError}] = useCreateNewResourceMutation()
+  // const { data, isLoading } = useGetAllAvailableCalendarsQuery();
+  // const { data, isLoading } = useGetAppointmentByMailQuery();
+  // console.log(data, isLoading);
 
   // const prova = React.useCallback(() => {
   //   createNewResource({
@@ -27,8 +33,6 @@ export const ConsulenzeLayout = () => {
   //     userId: 943268632843864
   //   })
   // }, [createNewResource])
-
-  // const { data, isLoading } = useGetAllAvailableCalendarsQuery();
 
   return (
     <ConsulenzeProvider value={context}>
