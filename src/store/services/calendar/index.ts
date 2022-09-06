@@ -40,6 +40,23 @@ export const googleCalendarApi = createApi({
       keepUnusedDataFor: 60 * 60 * 24,
     }),
 
+    getAppointmentByMail: builder.query<
+      { id: string; startDate: string; endDate: string }[],
+      string | void
+    >({
+      query: (mail) => `/api/calendar/get-appointment-by-mail?email=${mail}`,
+      transformResponse: (data: CalendarEventsItems) => {
+        if (data)
+          return data.map((item) => ({
+            id: item.id,
+            startDate: item.start,
+            endDate: item.end,
+          })) as { id: string; startDate: string; endDate: string }[];
+        return [];
+      },
+      keepUnusedDataFor: 60 * 60 * 24,
+    }),
+
     // createNewResource: builder.mutation<
     //   any,
     //   { title: string; body: string; userId: number }
@@ -59,5 +76,6 @@ export const googleCalendarApi = createApi({
 
 export const {
   useGetAllAvailableCalendarsQuery,
+  useGetAppointmentByMailQuery,
   //   useCreateNewResourceMutation,
 } = googleCalendarApi;
