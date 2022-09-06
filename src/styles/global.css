@@ -281,7 +281,7 @@ SOCIAL STYLE
 }
 
 .float-animation {
-    animation: buttonStartFloatMobile 0ms ease 0s 1 forwards;
+    animation: buttonStartFloatMobile 0ms ease 0s 1 forwards, buttonRotateAfterFloat 500ms ease 0s 1 forwards;
 }
 
 .unfloat-animation {
@@ -290,7 +290,7 @@ SOCIAL STYLE
 
 @media screen and (min-width: 768px) {
     .float-animation {
-        animation: buttonStartFloat 0ms ease 0s 1 forwards;
+        animation: buttonStartFloat 0ms ease 0s 1 forwards, buttonRotateAfterFloat 500ms ease 0s 1 forwards;
     }
 
     .unfloat-animation {
@@ -363,5 +363,16 @@ SOCIAL STYLE
         width: 56px;
         height: 56px;
         background-color: var(--purple-400);
+    }
+}
+
+@keyframes buttonRotateAfterFloat {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+
+    100% {
+        transform: rotateZ(720deg);
     }
 }

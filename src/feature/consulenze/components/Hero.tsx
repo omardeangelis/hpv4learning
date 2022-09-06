@@ -63,8 +63,11 @@ export const Hero = () => {
     if (!animationCompleted) {
       if (top && top <= windowY - window.screen.height) {
         buttonElement.classList.remove("unfloat-animation");
-        buttonElement.classList.add("start-float");
-        buttonElement.classList.add("float-animation");
+        buttonElement.classList.add(
+          "start-float",
+          "float-animation",
+          "rotate-btn-animation",
+        );
         placeholderBtn.style.display = "block";
         setTimeout(() => setAnimationCompleted(true), 750);
       }
@@ -72,8 +75,11 @@ export const Hero = () => {
       if (bottom && top && bottom > windowY - window.screen.height) {
         placeholderBtn.style.display = "none";
 
-        buttonElement.classList.remove("start-float");
-        buttonElement.classList.remove("float-animation");
+        buttonElement.classList.remove(
+          "start-float",
+          "float-animation",
+          "rotate-btn-animation",
+        );
         buttonElement.classList.add("unfloat-animation");
 
         setTimeout(() => setAnimationCompleted(false), 750);
