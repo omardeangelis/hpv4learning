@@ -30,6 +30,8 @@ async function getAllAvialableConsulenze(date?: string) {
     auth,
     timeMin: new Date(startDate).toISOString(),
     timeMax: new Date(startDate + 1000 * 60 * 60 * 24 * 21).toISOString(),
+    timeZone: "Europe/Rome",
+    singleEvents: true,
   });
 }
 

@@ -53,6 +53,7 @@ const handler = async (req: ReqProps, res: any) => {
       calendarId,
       eventId,
       auth,
+      timeZone: "Europe/Rome",
     });
 
     try {
@@ -62,7 +63,6 @@ const handler = async (req: ReqProps, res: any) => {
         eventId,
         auth,
         key: calendar_key,
-
         requestBody: {
           attendees: [
             {
@@ -70,16 +70,26 @@ const handler = async (req: ReqProps, res: any) => {
               responseStatus: "accepted",
               displayName: req.body?.nome,
             },
+            {
+              email: "omardeangelis.business@gmail.com",
+              responseStatus: "accepted",
+              displayName: "Omar De Angelis",
+            },
+            {
+              email: "demarco.leonardo2000@gmail.com",
+              responseStatus: "accepted",
+              displayName: "Leonardo De Marco",
+            },
           ],
           description: description || "#booked",
           summary: `Consulenza con ${userMail}`,
-
           start: data.start,
           end: data.end,
         },
       });
 
       const { start, hangoutLink } = responseData;
+      let mailSended: boolean | undefined;
       if (req.body.shouldSendMail)
         try {
           const message = createCalendarConfirmationMail(
@@ -88,10 +98,11 @@ const handler = async (req: ReqProps, res: any) => {
             new Date(Date.parse(start?.date as string)).toISOString(),
           );
           await sendGrid.send(message);
+          mailSended = true;
         } catch (error) {
           res.status(500).json({ message: "Impossibile inviare mail", error });
         }
-      res.status(200).json({ start, hangoutLink, mailSended: true });
+      res.status(200).json({ start, hangoutLink, mailSended: !!mailSended });
     } catch (error) {
       res.status(400).json({ error });
     }

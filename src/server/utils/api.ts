@@ -13,6 +13,7 @@ export const auth = new google.auth.JWT(
   undefined,
   CREDENTIALS.private_key,
   SCOPES,
+  "hpv4learning@hpvfilm.it",
 );
 
 if (process.env.GATSBY_SENDGRID_API_KEY)

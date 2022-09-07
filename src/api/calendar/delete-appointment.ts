@@ -12,7 +12,8 @@ type ReqProps = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = async (req: ReqProps, res: any) => {
-  if (req.method !== "DELETE") throw new Error("Use DELETE method");
+  if (req.method !== "DELETE" && process.env.NODE_ENV === "production")
+    throw new Error("Use DELETE method");
   if (isEmpty(req.query)) throw new Error("Pass eventId as query param");
 
   const { eventId } = req.query;
@@ -22,6 +23,7 @@ const handler = async (req: ReqProps, res: any) => {
       calendarId,
       eventId,
       auth,
+      timeZone: "Europe/Rome",
     });
 
     try {
