@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  HeaderTitle,
   Modal,
   ModalBackButton,
   ModalBody,
@@ -11,11 +10,8 @@ import {
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
-import { useIsMobile } from "../../../hook/useIsMobile";
-import { renderModalTitle } from "../utils";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
-  const isMobile = useIsMobile();
   const { step, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
@@ -59,8 +55,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     <Modal onClose={handleClose}>
       <ModalContent>
         <ModalHeader hasBorder>
-          {step !== "success" ? <ModalBackButton onBack={handleBack} /> : null}
-          {!isMobile && <HeaderTitle>{renderModalTitle(step)}</HeaderTitle>}
+          {step === "success" ? <ModalBackButton onBack={handleBack} /> : null}
           <ModalCloseButton onClose={handleClose} />
         </ModalHeader>
         <ModalBody>{renderModalContent()}</ModalBody>
