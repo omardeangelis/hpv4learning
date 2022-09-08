@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { navigate } from "gatsby";
 import React from "react";
+import { useLocation } from "@reach/router";
 import { BottomBanner, RoundedButton } from "../../components/layout";
 import {
   CardsSection,
@@ -15,6 +16,8 @@ import { ConsulenzeProvider } from "../consulenze/context";
 // } from "../../store/services/calendar";
 
 export const ConsulenzeLayout = () => {
+  const location = useLocation();
+
   const openModal = React.useCallback(
     () => navigate("/consulenze/prenota/"),
     []
@@ -33,6 +36,16 @@ export const ConsulenzeLayout = () => {
   //     userId: 943268632843864
   //   })
   // }, [createNewResource])
+
+  React.useEffect(() => {
+    if (location.pathname === "/consulenze/prenota/") {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.position = "static";
+    }
+  }, [location.pathname]);
 
   return (
     <ConsulenzeProvider value={context}>
