@@ -35,7 +35,7 @@ const StyledNav = styled(Box)`
   top: 0px;
   left: 0px;
   right: 0px;
-  z-index: 99999999;
+  z-index: 4;
   [role="_link"] {
     border: 1px solid transparent;
     transition: all 125ms ease;

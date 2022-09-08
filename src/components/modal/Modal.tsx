@@ -1,38 +1,54 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { BoxProps } from "@mui/system";
-import { BorderBox } from "../layout/BorderBox";
+import { Box } from "@mui/system";
+import { Global } from "@emotion/react";
+import { ModalProvider } from "./context";
+
+const ModalWrapper = styled(Box)({
+  position: "fixed",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  top: "0",
+  left: "0",
+  height: "100vh",
+  width: "100vw",
+  zIndex: 200,
+});
 
 type Props = {
   onClose: () => void;
-  width?: string;
-  height?: string;
-  backgroundColor?: string;
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 };
 
-export const Modal = ({
-  width,
-  height,
-  backgroundColor,
-  children,
-  ...rest
-}: Props & BoxProps) => {
-  const ModalContent = styled(BorderBox)`
-    background-color: ${backgroundColor ? backgroundColor : "white"};
-    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+const ModalOverlay = styled(Box)({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  height: "100vh",
+  width: "100vw",
+  backgroundColor: "rgba(208, 213, 221, 0.9)",
+  opacity: "0.95",
+});
 
-    @media screen and (min-width: 1024px) {
-      width: ${width ? width : "632px"};
-      height: ${height ? height : "890px"};
-      max-height: 90%;
-      border-radius: 24px;
-    }
-  `;
-
-  return <ModalContent {...rest}>{children}</ModalContent>;
+export const Modal = ({ onClose, children }: Props) => {
+  return (
+    <ModalWrapper>
+      <ModalOverlay onClick={onClose} />
+      <Global
+        styles={{
+          "body": {
+            overflow: "hidden !important",
+          },
+        }}
+      />
+      <ModalProvider
+        value={{
+          onClose,
+        }}
+      >
+        {children}
+      </ModalProvider>
+    </ModalWrapper>
+  );
 };
