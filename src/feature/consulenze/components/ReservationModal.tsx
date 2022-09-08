@@ -55,7 +55,9 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     <Modal onClose={handleClose}>
       <ModalContent>
         <ModalHeader hasBorder>
-          {step === "success" ? <ModalBackButton onBack={handleBack} /> : null}
+          {step !== ("success" || "error") ? (
+            <ModalBackButton onBack={handleBack} />
+          ) : null}
           <ModalCloseButton onClose={handleClose} />
         </ModalHeader>
         <ModalBody>{renderModalContent()}</ModalBody>
