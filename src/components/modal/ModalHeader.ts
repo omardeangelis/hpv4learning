@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 export const ModalHeader = styled(Box)<{ hasBorder?: true }>`
@@ -19,4 +20,17 @@ export const ModalHeader = styled(Box)<{ hasBorder?: true }>`
       margin: auto 20px auto 20px;
     }
   }
+`;
+
+export const HeaderTitle = styled(Typography)`
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 600;
+  color: black;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 `;
