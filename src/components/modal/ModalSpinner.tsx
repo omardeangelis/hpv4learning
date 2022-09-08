@@ -2,12 +2,6 @@ import React from "react";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 
-interface Props {
-  color?: string;
-  width?: string;
-  height?: string;
-}
-
 const rotate = keyframes`
   100% {
     transform: rotate(360deg);
@@ -29,10 +23,10 @@ const dash = keyframes`
   }
 `;
 
-const Wrapper = styled.div<{ color?: string; width?: string; height?: string }>`
-  width: ${(props) => (props.width ? props.width : "60px")};
-  height: ${(props) => (props.height ? props.height : "60px")};
-  color: ${(props) => (props.color ? props.color : "var(--gray-500)")};
+const Wrapper = styled.div`
+  width: 100px;
+  height: 100px;
+  color: var(--purple-400);
   animation: ${rotate} 1s linear infinite;
 `;
 
@@ -46,9 +40,9 @@ const StyledSpinner = styled.svg`
   }
 `;
 
-export const Spinner: React.FC<Props> = ({ color, width, height, ...rest }) => {
+export const Spinner: React.FC = ({ ...rest }) => {
   return (
-    <Wrapper color={color} width={width} height={height} {...rest}>
+    <Wrapper {...rest}>
       <StyledSpinner viewBox='0 0 50 50'>
         <circle
           className='path'
