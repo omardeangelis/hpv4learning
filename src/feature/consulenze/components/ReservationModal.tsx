@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  ModalBackButton,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-} from "../../../components/modal";
+import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
@@ -46,20 +39,12 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         return <div onClick={handleContinue}>Success</div>;
       case "error":
         return <div onClick={() => gotoStep("welcome")}>Error</div>;
-      default:
-        return null;
     }
   }, [step]);
 
   return (
     <Modal onClose={handleClose}>
-      <ModalContent>
-        <ModalHeader hasBorder>
-          {step === "success" ? <ModalBackButton onBack={handleBack} /> : null}
-          <ModalCloseButton onClose={handleClose} />
-        </ModalHeader>
-        <ModalBody>{renderModalContent()}</ModalBody>
-      </ModalContent>
+      <ModalContent>{renderModalContent()}</ModalContent>
     </Modal>
   );
 };
