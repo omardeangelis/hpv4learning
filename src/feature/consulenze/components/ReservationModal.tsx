@@ -3,10 +3,8 @@ import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
-import { useResponsive } from "../../../hook/useResponsive";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
-  const { isMobile } = useResponsive();
   const { step, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
