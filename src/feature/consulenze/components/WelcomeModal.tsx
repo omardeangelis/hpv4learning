@@ -7,10 +7,11 @@ import {
   ModalTitle,
   ModalBody,
   ModalElipse,
+  ModalTypography,
 } from "../../../components/modal";
 import { useResponsive } from "../../../hook/useResponsive";
 import { StaticImage } from "gatsby-plugin-image";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 
 type Props = {
   onBack: () => void;
@@ -47,7 +48,7 @@ const WelcomeModal = ({ onBack, onClose, onContinue }: Props) => {
             {isMobile ? (
               <ModalTitle>Prenota una videochiamata</ModalTitle>
             ) : null}
-            <Typography
+            <ModalTypography
               color='var(--gray--500)'
               textAlign='center'
               fontSize='16px'
@@ -57,9 +58,9 @@ const WelcomeModal = ({ onBack, onClose, onContinue }: Props) => {
             >
               Il mondo va veloce e noi anche. Lasciamo da parte i convenevoli e
               la burocrazia e mettiamoci direttamente in contatto.
-            </Typography>
+            </ModalTypography>
             {isMobile ? (
-              <Typography
+              <ModalTypography
                 color='var(--gray--500)'
                 textAlign='center'
                 fontSize='16px'
@@ -69,7 +70,7 @@ const WelcomeModal = ({ onBack, onClose, onContinue }: Props) => {
               >
                 Nelle prossime schermate potrai prenotare una videochiamata che
                 ti verrà subito confermata scegliendo tra le date disponibili.
-              </Typography>
+              </ModalTypography>
             ) : null}
           </Stack>
         </Box>
