@@ -1,21 +1,12 @@
 import React from "react";
-import {
-  Modal,
-  ModalBackButton,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  HeaderTitle,
-} from "../../../components/modal";
+import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
-import { useIsMobile } from "../../../hook/useIsMobile";
-import { renderModalTitle } from "../utils";
+import { useResponsive } from "../../../hook/useResponsive";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
-  const isMobile = useIsMobile();
+  const { isMobile } = useResponsive();
   const { step, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
@@ -50,21 +41,12 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         return <div onClick={handleContinue}>Success</div>;
       case "error":
         return <div onClick={() => gotoStep("welcome")}>Error</div>;
-      default:
-        return null;
     }
   }, [step]);
 
   return (
     <Modal onClose={handleClose}>
-      <ModalContent>
-        <ModalHeader hasBorder>
-          {step !== "success" ? <ModalBackButton onBack={handleBack} /> : null}
-          {!isMobile && <HeaderTitle>{renderModalTitle(step)}</HeaderTitle>}
-          <ModalCloseButton onClose={handleClose} />
-        </ModalHeader>
-        <ModalBody>{renderModalContent()}</ModalBody>
-      </ModalContent>
+      <ModalContent>{renderModalContent()}</ModalContent>
     </Modal>
   );
 };

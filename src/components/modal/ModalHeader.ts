@@ -22,7 +22,7 @@ export const ModalHeader = styled(Box)<{ hasBorder?: true }>`
   }
 `;
 
-export const HeaderTitle = styled(Typography)`
+export const ModalTitle = styled(Typography)`
   font-size: 24px;
   line-height: 36px;
   font-weight: 600;
