@@ -23,14 +23,19 @@ export const ModalHeader = styled(Box)<{ hasBorder?: true }>`
 `;
 
 export const ModalTitle = styled(Typography)`
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 20px;
+  line-height: 30px;
   font-weight: 600;
   color: black;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
   text-align: center;
+
+  @media screen and (min-width: 1024px) {
+    font-size: 24px;
+    line-height: 36px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

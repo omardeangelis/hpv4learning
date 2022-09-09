@@ -7,4 +7,5 @@ export const ModalBody = styled(Box)`
   flex-grow: 1;
   overflow-x: hidden;
   overflow-y: scroll;
+  position: relative;
 `;

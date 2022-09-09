@@ -3,6 +3,7 @@ import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
+import WelcomeModal from "./WelcomeModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const { step, nextStep, prevStep, gotoStep } = useSteps([
@@ -18,12 +19,23 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     navigate("/consulenze/");
   }, [navigate]);
 
+  const handleBack = React.useCallback(() => {
+    if (step === "welcome") handleClose();
+    prevStep();
+  }, [step, handleClose, prevStep]);
+
   const handleContinue = React.useCallback(() => nextStep(), [nextStep]);
 
   const renderModalContent = React.useCallback(() => {
     switch (step) {
       case "welcome":
-        return <div onClick={handleContinue}>Welcome</div>;
+        return (
+          <WelcomeModal
+            onClose={handleClose}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
       case "provider":
         return <div onClick={handleContinue}>Provider</div>;
       case "datepicker":
