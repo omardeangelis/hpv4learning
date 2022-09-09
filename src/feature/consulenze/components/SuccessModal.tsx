@@ -47,7 +47,7 @@ const SuccessModal = React.memo(({ start, hangoutLink }: Props) => {
       <Box
         sx={{
           py: { xs: "60px", lg: "38px" },
-          backgroundColor: "purple.A100",
+          // backgroundColor: "purple.A100",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
