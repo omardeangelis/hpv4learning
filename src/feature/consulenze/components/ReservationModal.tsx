@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  ModalBackButton,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-} from "../../../components/modal";
+import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
@@ -25,11 +18,6 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     navigate("/consulenze/");
   }, [navigate]);
 
-  const handleBack = React.useCallback(() => {
-    if (step === "welcome") handleClose();
-    prevStep();
-  }, [step, handleClose, prevStep]);
-
   const handleContinue = React.useCallback(() => nextStep(), [nextStep]);
 
   const renderModalContent = React.useCallback(() => {
@@ -46,20 +34,12 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         return <div onClick={handleContinue}>Success</div>;
       case "error":
         return <div onClick={() => gotoStep("welcome")}>Error</div>;
-      default:
-        return null;
     }
   }, [step]);
 
   return (
-    <Modal onClose={handleClose} stepIndex={stepIndex}>
-      <ModalContent>
-        <ModalHeader hasBorder>
-          {step === "success" ? <ModalBackButton onBack={handleBack} /> : null}
-          <ModalCloseButton onClose={handleClose} />
-        </ModalHeader>
-        <ModalBody>{renderModalContent()}</ModalBody>
-      </ModalContent>
+    <Modal onClose={handleClose}>
+      <ModalContent>{renderModalContent()}</ModalContent>
     </Modal>
   );
 };

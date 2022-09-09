@@ -4,3 +4,4 @@ export * from "./ModalBody";
 export * from "./ModalButtons";
 export * from "./Modal";
 export * from "./ModalStepper";
+export * from "./ModalElipse";
