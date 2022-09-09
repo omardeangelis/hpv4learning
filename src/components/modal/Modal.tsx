@@ -38,9 +38,8 @@ export const Modal = ({ onClose, children }: Props) => {
       <Global
         styles={css`
           body {
-            overflow: hidden !important;
-            position: fixed;
-            width: 100%;
+            overflow-y: hidden !important;
+            height: 100vh;
           }
         `}
       />
