@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
-import { Global } from "@emotion/react";
+import { Global, css } from "@emotion/react";
 import { ModalProvider } from "./context";
 
 const ModalWrapper = styled(Box)({
@@ -36,11 +36,13 @@ export const Modal = ({ onClose, children }: Props) => {
     <ModalWrapper>
       <ModalOverlay onClick={onClose} />
       <Global
-        styles={{
-          "body": {
-            overflow: "hidden !important",
-          },
-        }}
+        styles={css`
+          body {
+            overflow: hidden !important;
+            position: fixed;
+            width: 100%;
+          }
+        `}
       />
       <ModalProvider
         value={{
