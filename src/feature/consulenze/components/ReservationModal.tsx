@@ -18,11 +18,6 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     navigate("/consulenze/");
   }, [navigate]);
 
-  const handleBack = React.useCallback(() => {
-    if (step === "welcome") handleClose();
-    prevStep();
-  }, [step, handleClose, prevStep]);
-
   const handleContinue = React.useCallback(() => nextStep(), [nextStep]);
 
   const renderModalContent = React.useCallback(() => {
