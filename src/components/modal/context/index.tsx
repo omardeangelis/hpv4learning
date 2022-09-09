@@ -1,6 +1,6 @@
 import React from "react";
 
-type ContextProps = {
+export type ContextProps = {
   onClose: () => void;
   stepIndex?: number;
 };

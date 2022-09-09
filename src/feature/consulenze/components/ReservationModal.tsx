@@ -38,7 +38,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [step]);
 
   return (
-    <Modal onClose={handleClose}>
+    <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
     </Modal>
   );
