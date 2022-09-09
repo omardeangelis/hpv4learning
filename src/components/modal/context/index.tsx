@@ -1,9 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 
 type ContextProps = {
   onClose: () => void;
   stepIndex?: number;
-  setStepIndex?: Dispatch<SetStateAction<number>>;
 };
 
 const modalContext = React.createContext<null | ContextProps>(null);

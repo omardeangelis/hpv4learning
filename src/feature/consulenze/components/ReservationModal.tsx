@@ -12,7 +12,7 @@ import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
-  const { step, nextStep, prevStep, gotoStep } = useSteps([
+  const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
     "datepicker" as const,
@@ -52,7 +52,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [step]);
 
   return (
-    <Modal onClose={handleClose}>
+    <Modal onClose={handleClose} stepIndex={stepIndex}>
       <ModalContent>
         <ModalHeader hasBorder>
           {step === "success" ? <ModalBackButton onBack={handleBack} /> : null}
