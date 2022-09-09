@@ -32,6 +32,7 @@ const ModalOverlay = styled(Box)({
 });
 
 export const Modal = ({ onClose, children }: Props) => {
+  const [stepIndex, setStepIndex] = React.useState<number>(0);
   return (
     <ModalWrapper>
       <ModalOverlay onClick={onClose} />
@@ -45,6 +46,8 @@ export const Modal = ({ onClose, children }: Props) => {
       <ModalProvider
         value={{
           onClose,
+          stepIndex,
+          setStepIndex,
         }}
       >
         {children}

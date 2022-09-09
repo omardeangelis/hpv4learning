@@ -9,9 +9,6 @@ type Props = {
   labels: string[];
 };
 
-// label per ogni punto
-// const labels = ["Welcome", "Prenota", "Scegli la data", "Dicci di più"];
-
 export const ModalStepper = ({ step, labels }: Props) => {
   return (
     <Box sx={{ width: "100%" }}>
