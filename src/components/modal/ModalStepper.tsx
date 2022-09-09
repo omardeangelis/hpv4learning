@@ -6,16 +6,17 @@ import StepLabel from "@mui/material/StepLabel";
 
 type Props = {
   step: number;
+  labels: string[];
 };
 
 // label per ogni punto
-const steps = ["Welcome", "Prenota", "Scegli la data", "Dicci di più"];
+// const labels = ["Welcome", "Prenota", "Scegli la data", "Dicci di più"];
 
-export const ModalStepper = ({ step }: Props) => {
+export const ModalStepper = ({ step, labels }: Props) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={step}>
-        {steps.map((label, index) => {
+        {labels.map((label, index) => {
           return (
             <Step key={index}>
               <StepLabel sx={{ flexDirection: "column", gap: "4px" }}>
