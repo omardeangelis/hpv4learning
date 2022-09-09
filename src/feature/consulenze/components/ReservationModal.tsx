@@ -3,6 +3,7 @@ import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
+import SuccessModal from "./SuccessModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const { step, nextStep, prevStep, gotoStep } = useSteps([
@@ -31,7 +32,15 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
       case "info":
         return <div onClick={handleContinue}>info</div>;
       case "success":
-        return <div onClick={handleContinue}>Success</div>;
+        return (
+          <SuccessModal
+            start={{
+              "dateTime": "2022-08-12T21:00:00+02:00",
+              "timeZone": "Europe/Rome",
+            }}
+            hangoutLink='Suca'
+          />
+        );
       case "error":
         return <div onClick={() => gotoStep("welcome")}>Error</div>;
     }

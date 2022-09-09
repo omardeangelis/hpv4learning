@@ -17,6 +17,7 @@ const theme = createTheme({
     },
     //Official Theme Colors - Need to be full implemented
     gray: {
+      200: "#F8F8F8",
       300: "#E4E7EC",
       400: "#D0D5DD",
       500: "#6C757D",
