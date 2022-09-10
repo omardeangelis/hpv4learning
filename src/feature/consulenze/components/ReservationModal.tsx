@@ -24,7 +24,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const renderModalContent = React.useCallback(() => {
     switch (step) {
       case "welcome":
-        return <WelcomeModal />;
+        return <WelcomeModal onContinue={handleContinue} />;
       case "provider":
         return <div onClick={handleContinue}>Provider</div>;
       case "datepicker":
@@ -39,11 +39,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [step]);
 
   return (
-    <Modal
-      stepIndex={stepIndex}
-      onClose={handleClose}
-      onContinue={handleContinue}
-    >
+    <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
     </Modal>
   );

@@ -2,7 +2,6 @@ import React from "react";
 
 type ContextProps = {
   onClose?: () => any;
-  onContinue?: () => any;
   stepIndex?: number;
 };
 

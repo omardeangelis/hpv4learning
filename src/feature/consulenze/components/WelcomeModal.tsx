@@ -16,9 +16,13 @@ import { StaticImage } from "gatsby-plugin-image";
 import { Button, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
 
-const WelcomeModal = () => {
+type Props = {
+  onContinue: () => void;
+};
+
+const WelcomeModal = ({ onContinue }: Props) => {
   const { isMobile } = useResponsive();
-  const { onClose, onContinue } = useModalContext();
+  const { onClose } = useModalContext();
 
   return (
     <>
