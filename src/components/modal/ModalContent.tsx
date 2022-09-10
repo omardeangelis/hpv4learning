@@ -15,7 +15,7 @@ const ModalContainer = styled(BorderBox)`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     max-width: 632px;
     min-height: 200px;
     max-height: 90%;
