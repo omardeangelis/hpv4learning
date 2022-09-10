@@ -3,7 +3,6 @@ import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import { useResponsive } from "../../hook/useResponsive";
 import { useModalContext } from "./context";
-import { ModalBody } from "./ModalBody";
 import { ModalCloseButton } from "./ModalButtons";
 import { ModalElipse } from "./ModalElipse";
 import { ModalHeader, ModalTitle } from "./ModalHeader";
@@ -30,7 +29,7 @@ const ErrorModal = ({ children }: Props) => {
           />
         </Box>
       </ModalElipse>
-      <ModalBody>{children}</ModalBody>
+      {children}
     </>
   );
 };
