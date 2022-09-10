@@ -1,15 +1,16 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { Stepper, Step, StepLabel } from "@mui/material";
-import { ContextProps, useModalContext } from "./context";
+import { useModalContext } from "./context";
 
 interface Props {
   labels: string[];
 }
 
 export const ModalStepper = ({ labels }: Props) => {
-  const { stepIndex } = useModalContext() as ContextProps;
+  const { stepIndex } = useModalContext() || {};
 
+  if (!stepIndex) return null;
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={stepIndex}>
