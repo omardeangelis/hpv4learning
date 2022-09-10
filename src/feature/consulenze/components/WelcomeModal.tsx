@@ -8,7 +8,9 @@ import {
   ModalBody,
   ModalElipse,
   ModalTypography,
+  ModalStepper,
 } from "../../../components/modal";
+import { reservationModalLabels } from "../utils/constants";
 import { useResponsive } from "../../../hook/useResponsive";
 import { StaticImage } from "gatsby-plugin-image";
 import { Button } from "@mui/material";
@@ -30,13 +32,21 @@ const WelcomeModal = ({ onBack, onClose, onContinue }: Props) => {
       </ModalHeader>
       <ModalBody width='100%'>
         <ModalElipse>
-          <Box maxWidth='184px'>
-            <StaticImage
-              src='../../../components/modal/images/calendar.png'
-              alt='Calendario'
-              placeholder='tracedSVG'
-            />
-          </Box>
+          <Stack
+            direction='column'
+            spacing={2}
+            alignItems='center'
+            alignContent='center'
+          >
+            <ModalStepper labels={reservationModalLabels} />
+            <Box maxWidth='184px'>
+              <StaticImage
+                src='../../../components/modal/images/calendar.png'
+                alt='Calendario'
+                placeholder='tracedSVG'
+              />
+            </Box>
+          </Stack>
         </ModalElipse>
         <Box px='12px' mb={{ xs: "auto", lg: "120px" }}>
           <Stack
