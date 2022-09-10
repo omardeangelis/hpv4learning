@@ -1,6 +1,5 @@
 import React from "react";
 //Material UI
-import { makeStyles } from "@mui/styles";
 import Container from "@mui/material/Container/Container";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 //Icon
@@ -9,7 +8,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 //Gatsby
 import { Link as GatsbyLink, graphql, useStaticQuery } from "gatsby";
 //Global Context
-import { useLayoutContext } from "../../../context/layout";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -19,6 +17,9 @@ import { CategoryMenuProps } from "../../../types/layout";
 import { getIcon as getLayoutIcon } from "../utils";
 import { getIcon } from "../../../utils/general";
 import { useNavigationLink } from "../hooks/useNavigationLink";
+import { useSelector } from "react-redux";
+import { toggleSidebar } from "../../../store/reducers/uiSlice";
+import { RootState } from "../../../store";
 
 type Props = {
   allContentfulCategory: {
@@ -26,13 +27,8 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles(() => ({
-  paper: {
-    width: "100%",
-  },
-}));
-
 const StyledDrawer = styled(SwipeableDrawer)`
+  z-index: 3;
   display: block;
   @media screen and (min-width: 1024px) {
     display: none;
@@ -40,9 +36,8 @@ const StyledDrawer = styled(SwipeableDrawer)`
 `;
 
 export const Sidebar = () => {
-  const classes = useStyles();
   const data: Props = useStaticQuery(query);
-  const ctx = useLayoutContext();
+  const { isSidebarOpen } = useSelector((state: RootState) => state.ui);
 
   const { toggleMenu } = useDropDown(["corsi"]);
   const links = useNavigationLink();
@@ -50,11 +45,13 @@ export const Sidebar = () => {
   return (
     <StyledDrawer
       anchor='left'
-      open={ctx?.isSidebarOpen || false}
+      open={isSidebarOpen}
       onClose={() => null}
       onOpen={() => null}
-      classes={{
-        paper: classes.paper,
+      PaperProps={{
+        sx: {
+          width: "100%",
+        },
       }}
       sx={{
         width: "100%",
@@ -67,7 +64,7 @@ export const Sidebar = () => {
             {links.map(({ text, icon, link }) => {
               if (!link) {
                 return (
-                  <Box py='18px'>
+                  <Box py='18px' key={text}>
                     <Stack
                       direction='row'
                       spacing={2}
@@ -98,7 +95,7 @@ export const Sidebar = () => {
                               {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
                               <GatsbyLink
                                 to={`/corsi/${slug}/`}
-                                onClick={ctx?.toggleSidebar}
+                                onClick={toggleSidebar}
                                 key={slug}
                               >
                                 <Box py='18px'>
@@ -132,7 +129,7 @@ export const Sidebar = () => {
               return (
                 <React.Fragment key={text}>
                   {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
-                  <GatsbyLink to={link} onClick={ctx?.toggleSidebar}>
+                  <GatsbyLink to={link} onClick={toggleSidebar}>
                     <Box py='18px'>
                       <Stack direction='row' spacing={2} alignItems='center'>
                         {getLayoutIcon(icon, {
