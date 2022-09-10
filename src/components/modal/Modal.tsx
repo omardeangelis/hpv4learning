@@ -18,6 +18,7 @@ const ModalWrapper = styled(Box)({
 
 type Props = {
   onClose: () => void;
+  onContinue: () => void;
   stepIndex: number;
   children: React.ReactNode;
 };
@@ -32,7 +33,7 @@ const ModalOverlay = styled(Box)({
   opacity: "0.95",
 });
 
-export const Modal = ({ onClose, stepIndex, children }: Props) => {
+export const Modal = ({ onClose, onContinue, stepIndex, children }: Props) => {
   return (
     <ModalWrapper>
       <ModalOverlay onClick={onClose} />
@@ -47,6 +48,7 @@ export const Modal = ({ onClose, stepIndex, children }: Props) => {
       <ModalProvider
         value={{
           onClose,
+          onContinue,
           stepIndex,
         }}
       >

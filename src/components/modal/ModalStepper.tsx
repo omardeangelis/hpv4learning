@@ -10,7 +10,7 @@ interface Props {
 export const ModalStepper = ({ labels }: Props) => {
   const { stepIndex } = useModalContext() || {};
 
-  if (stepIndex === null) return null;
+  if (stepIndex === null || undefined) return null;
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={stepIndex}>

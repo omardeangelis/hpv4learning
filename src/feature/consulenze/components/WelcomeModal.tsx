@@ -13,22 +13,19 @@ import {
 import { reservationModalLabels } from "../utils/constants";
 import { useResponsive } from "../../../hook/useResponsive";
 import { StaticImage } from "gatsby-plugin-image";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { useModalContext } from "../../../components/modal/context";
 
-type Props = {
-  onBack: () => void;
-  onClose: () => void;
-  onContinue: () => void;
-};
-
-const WelcomeModal = ({ onBack, onClose, onContinue }: Props) => {
+const WelcomeModal = () => {
   const { isMobile } = useResponsive();
+  const { onClose, onContinue } = useModalContext();
+
   return (
     <>
       <ModalHeader hasBorder>
-        <ModalBackButton onBack={onBack} />
+        {onClose ? <ModalBackButton onBack={onClose} /> : null}
         {!isMobile ? <ModalTitle>Prenota una videochiamata</ModalTitle> : null}
-        <ModalCloseButton onClose={onClose} />
+        {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>
       <ModalBody width='100%'>
         <ModalElipse>
@@ -56,7 +53,14 @@ const WelcomeModal = ({ onBack, onClose, onContinue }: Props) => {
             alignContent='center'
           >
             {isMobile ? (
-              <ModalTitle>Prenota una videochiamata</ModalTitle>
+              <Typography
+                fontSize='20px'
+                lineHeight='24px'
+                fontWeight={600}
+                textAlign='center'
+              >
+                Prenota una chiamata
+              </Typography>
             ) : null}
             <ModalTypography
               color='var(--gray--500)'
