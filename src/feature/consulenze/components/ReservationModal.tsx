@@ -48,7 +48,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [step]);
 
   //Questa serve in sviluppo per avere sempre il modal su cui si sta lavorando.
-  React.useEffect(() => gotoStep("error"), [gotoStep]);
+  // React.useEffect(() => gotoStep("error"), [gotoStep]);
   return (
     <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
