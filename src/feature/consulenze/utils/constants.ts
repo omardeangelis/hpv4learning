@@ -46,3 +46,10 @@ export const text = {
     },
   ],
 };
+
+export const reservationModalLabels = [
+  "Welcome",
+  "Prenota",
+  "Scegli la data",
+  "Dicci di più",
+];
