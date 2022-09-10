@@ -29,7 +29,7 @@ export const Head = () => {
       },
       {
         text: "Contattaci",
-        link: "consulenze",
+        link: "/consulenze/",
       },
     ];
   }, []);
