@@ -12,7 +12,6 @@ import { StaticImage } from "gatsby-plugin-image";
 import { Stack } from "@mui/material";
 import styled from "@emotion/styled";
 import { CourseMenu } from "./CourseMenu";
-import { useLayoutContext } from "../../../context/layout";
 import { useNavigationLink } from "../hooks/useNavigationLink";
 import { getIcon } from "../utils";
 import SeoLink from "../../../components/shared/SeoLink";
@@ -28,6 +27,7 @@ import {
   useInteractions,
   useRole,
 } from "@floating-ui/react-dom-interactions";
+import { toggleSidebar } from "../../../store/reducers/uiSlice";
 
 const StyledNav = styled(Box)`
   width: 100%;
@@ -83,7 +83,6 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
     useRole(context, { role: "tooltip" }),
     useDismiss(context),
   ]);
-  const ctx = useLayoutContext();
   const links = useNavigationLink();
   return (
     <>
@@ -129,6 +128,7 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
                   if (!link) {
                     return (
                       <Box
+                        key={text + "navbar"}
                         {...getReferenceProps({
                           ref: reference,
                           role: "_link",
@@ -154,8 +154,11 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
                   }
                   return (
                     <>
-                      {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
-                      <SeoLink isExternal={false} link={link}>
+                      <SeoLink
+                        isExternal={false}
+                        link={link}
+                        key={text + "navbar"}
+                      >
                         <Box role='_link'>
                           <Stack
                             direction='row'
@@ -191,7 +194,7 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
               >
                 <IconButton
                   color='default'
-                  onClick={ctx?.toggleSidebar}
+                  onClick={toggleSidebar}
                   sx={{
                     background: disableColor ? "#E9E3FF" : "inherit",
                   }}
