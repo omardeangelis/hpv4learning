@@ -2,6 +2,7 @@ import React from "react";
 
 type ContextProps = {
   onClose: () => void;
+  stepIndex?: number;
 };
 
 const modalContext = React.createContext<null | ContextProps>(null);

@@ -6,7 +6,7 @@ import { RouteComponentProps } from "@reach/router";
 import WelcomeModal from "./WelcomeModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
-  const { step, nextStep, prevStep, gotoStep } = useSteps([
+  const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
     "datepicker" as const,
@@ -50,7 +50,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [step]);
 
   return (
-    <Modal onClose={handleClose}>
+    <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
     </Modal>
   );
