@@ -33,6 +33,7 @@ const theme = createTheme({
       400: `#8769FE`,
       500: "#A435F0",
       800: "#341268",
+      900: "#11081F",
       G200: "linear-gradient(180deg, #E9E3FF, white )",
       G800: "linear-gradient(180deg, #341268, #8769FE)",
     },
