@@ -39,7 +39,7 @@ const useOrganizationSchema = () => {
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "contactType": "Customer Service",
+          "contactType": "Servizio Clienti",
           "email": "hpv4learning@hpvfilm.it",
           "contactOption": "TollFree",
           "availableLanguage": [
@@ -47,6 +47,44 @@ const useOrganizationSchema = () => {
               "@type": "Language",
               "name": "Italian",
               "alternateName": "it",
+            },
+          ],
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "Richiesta Consulenza",
+          "email": "omardeangelis.business@gmail.com",
+          "contactOption": "TollFree",
+          "telephone": "3496788159",
+          "availableLanguage": [
+            {
+              "@type": "Language",
+              "name": "Italian",
+              "alternateName": "it",
+            },
+            {
+              "@type": "Language",
+              "name": "English",
+              "alternateName": "en",
+            },
+          ],
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "Richiesta Consulenza",
+          "email": "demarco.leonardo2000@gmail.com",
+          "contactOption": "TollFree",
+          "telephone": "3921327896",
+          "availableLanguage": [
+            {
+              "@type": "Language",
+              "name": "Italian",
+              "alternateName": "it",
+            },
+            {
+              "@type": "Language",
+              "name": "English",
+              "alternateName": "en",
             },
           ],
         },

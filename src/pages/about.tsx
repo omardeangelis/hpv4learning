@@ -103,6 +103,7 @@ export const Head = () => {
       <WebPageSchema
         title='Chi siamo'
         description='La storia dei nostri insegnanti e le competenze che insegnano nei loro videocorsi'
+        type='AboutPage'
         breadcrumbs={breadcrumbs}
       />
     </>

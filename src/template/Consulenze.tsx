@@ -36,13 +36,14 @@ export const Head = () => {
   return (
     <>
       <MetaDecorator
-        metaTitle='Contattaci: Siti Web professinali'
-        metaDescription='Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo misurato sulle tue esigenze'
+        metaTitle='Contattaci: Siti Web per professionisti'
+        metaDescription='Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web'
         disableSlogan
       />
       <WebPageSchema
-        title='Contattaci: Siti Web professinali'
-        description='Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo misurato sulle tue esigenze'
+        title='Contattaci: Siti Web per professionisti'
+        description='Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web'
+        type='ContactPage'
         breadcrumbs={breadcrumbs}
       />
       <LinkHandler />
