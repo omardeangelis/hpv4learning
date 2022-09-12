@@ -4,6 +4,7 @@ import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
 import SuccessModal from "./SuccessModal";
+import { ConsulenzeErrorModal } from "./ConsulenzeErrorModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
@@ -42,10 +43,12 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
           />
         );
       case "error":
-        return <div onClick={() => gotoStep("welcome")}>Error</div>;
+        return <ConsulenzeErrorModal onContinue={() => gotoStep("welcome")} />;
     }
   }, [step]);
 
+  //Questa serve in sviluppo per avere sempre il modal su cui si sta lavorando.
+  // React.useEffect(() => gotoStep("error"), [gotoStep]);
   return (
     <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
