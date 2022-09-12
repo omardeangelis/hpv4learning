@@ -3,13 +3,7 @@ import * as React from "react";
 import Layout from "../components/shared/layout";
 import IndexInfo from "../components/IndexInfo";
 import TopHeroContent from "../components/TopHeroContent";
-import { faqs } from "../asset/faqsdata";
-import {
-  FaqContainer,
-  FaqContent,
-  FaqTitle,
-  SingleFaq,
-} from "../components/faq";
+
 //Meta Title e SEO e Utils
 import SeoLink from "../components/shared/SeoLink";
 import LinkHandler from "../components/SEO/components/LinkHandler";
@@ -22,35 +16,12 @@ import Typography from "@mui/material/Typography";
 import ComunityBanner from "../components/banner/ComunityBanner";
 import CourseWall from "../components/course/CourseWall";
 import { Button, Stack } from "@mui/material";
-import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
-import { graphql, PageProps } from "gatsby";
-import styled from "@emotion/styled";
-import {
-  GatsbyImage,
-  getImage,
-  IGatsbyImageData,
-  ImageDataLike,
-} from "gatsby-plugin-image";
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema";
 import { HomeSection } from "../feature/projects/components";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
+import { BottomBanner, RoundedButton } from "../components/layout";
 
-const CustomStack = styled.div`
-  .faq-image {
-    display: none;
-  }
-  @media screen and (min-width: 1024px) {
-    .faq-image {
-      display: block;
-    }
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-`;
-
-const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
+const IndexPage = () => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
   const goToCourseSection = React.useCallback(() => {
     if (!coursesPositionRef.current) {
@@ -62,10 +33,6 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
   }, [coursesPositionRef.current]);
   return (
     <Layout>
-      {/* <MetaDecorator
-        metaTitle='Videocorsi per sviluppatori web e videomakers'
-        metaDescription='Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti'
-      /> */}
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
@@ -196,102 +163,55 @@ const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
       </Box>
       <Box
         sx={{
-          mt: { xs: "96px", lg: "136px" },
+          mt: { xs: "96px", lg: "108px" },
         }}
       >
-        <Container maxWidth='lg'>
-          <CustomStack>
-            <FaqContainer>
-              <FaqTitle text={"Lavora con noi"} />
-
-              <FaqContent
-                sx={{
-                  mt: { xs: "12px", lg: "18px" },
-                }}
-              >
-                <Box maxWidth='646px'>
-                  <Typography
-                    color='gray.5'
-                    fontWeight={300}
-                    sx={{
-                      fontSize: { xs: "16px", lg: "18px" },
-                      lineHeight: { xs: "24px", lg: "24px" },
-                    }}
-                  >
-                    Il nostro è un progetto in espansione, con una visione a
-                    lungo termine che prevede oltre alla crescita della
-                    community anche un perenne miglioramento dell'offerta
-                    educativa.
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    mt: { xs: "8px", lg: "12px" },
-                  }}
-                >
-                  <SeoLink isExternal={false} link={"/join-us/"}>
-                    <Button
-                      variant='text'
-                      color='primary'
-                      size='medium'
-                      sx={{
-                        pl: "0px",
-                        "&:hover": {
-                          background: "transparent",
-                        },
-                      }}
-                      endIcon={
-                        <ArrowRightAltSharpIcon
-                          fontSize='small'
-                          sx={{
-                            color: "purple.400",
-                          }}
-                        />
-                      }
-                    >
-                      Scopri di più
-                    </Button>
-                  </SeoLink>
-                </Box>
-                <Box
-                  sx={{
-                    mt: {
-                      xs: "12px",
-                      lg: "36px",
-                    },
-                  }}
-                >
-                  {faqs.map((faq) => {
-                    return (
-                      <Box
-                        key={faq.title}
-                        sx={{
-                          mt: { xs: "12px", lg: "24px" },
-                        }}
-                      >
-                        <SingleFaq
-                          disableInject
-                          title={faq.title}
-                          description={faq.description}
-                        />
-                      </Box>
-                    );
-                  })}
-                </Box>
-              </FaqContent>
-            </FaqContainer>
-            <Box maxWidth='384px' className='faq-image'>
-              <GatsbyImage
-                image={
-                  getImage(
-                    data?.file?.childImageSharp as unknown as ImageDataLike,
-                  ) as IGatsbyImageData
-                }
-                alt='work with us image'
-              />
-            </Box>
-          </CustomStack>
-        </Container>
+        <BottomBanner
+          position='relative'
+          overflow='hidden'
+          title={
+            <Typography
+              color='white'
+              fontSize={["24px", "34px"]}
+              lineHeight={["29px", "39px"]}
+              textAlign='center'
+              fontWeight={600}
+            >
+              Hai bisogno di un <span className='brand-text'>sito web </span>su
+              misura per le tue esigenze ?
+            </Typography>
+          }
+          sx={{
+            backgroundColor: "purple.900",
+          }}
+        >
+          <Typography
+            width='100%'
+            fontSize='21px'
+            lineHeight='24px'
+            color='gray.200'
+            textAlign='center'
+            sx={{
+              maxWidth: { xs: "unset", lg: "611px" },
+            }}
+          >
+            Fissa una videochiamata in pochi step e raccontaci di che cosa hai
+            bisogno.
+          </Typography>
+          <SeoLink link='/consulenze/' isExternal={false}>
+            <RoundedButton
+              variant='contained'
+              color='primary'
+              size='large'
+              sx={{
+                px: "30px",
+                width: { xs: "100%", md: "unset" },
+              }}
+            >
+              Scopri di più
+            </RoundedButton>
+          </SeoLink>
+        </BottomBanner>
       </Box>
     </Layout>
   );
@@ -309,15 +229,5 @@ export const Head = () => {
     </>
   );
 };
-
-export const query = graphql`
-  query IndexPage {
-    file(relativePath: { eq: "work-with-us.png" }) {
-      childImageSharp {
-        gatsbyImageData(placeholder: TRACED_SVG)
-      }
-    }
-  }
-`;
 
 export default IndexPage;
