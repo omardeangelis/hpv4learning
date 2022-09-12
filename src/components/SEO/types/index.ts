@@ -38,6 +38,8 @@ export type GlobalSeoProps = {
   modifiedDate?: string;
 };
 
+export type WebPageType = "AboutPage" | "ContactPage" | "ProductPage";
+
 export type BreadcrumbElementProps = {
   "@type": string;
   position: number;

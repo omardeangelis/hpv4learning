@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 import { Box, BoxProps, Container, css } from "@mui/system";
 import React from "react";
 
-type Props = { title: string } & BoxProps;
+type Props = { title: string | React.ReactElement } & Omit<BoxProps, "title">;
 
 const StyledBanner = styled(Box)(
   css({
@@ -22,17 +22,22 @@ export const BottomBanner = ({ title, children, ...rest }: Props) => {
           <Stack
             direction='column'
             alignItems={"center"}
-            spacing={["24px", "34px"]}
+            justifyContent='center'
+            spacing={"24px"}
           >
-            <Typography
-              color='purple.800'
-              fontSize={["24px", "34px"]}
-              lineHeight={["29px", "39px"]}
-              textAlign='center'
-              fontWeight={600}
-            >
-              {title}
-            </Typography>
+            {typeof title === "string" ? (
+              <Typography
+                color='purple.800'
+                fontSize={["24px", "34px"]}
+                lineHeight={["29px", "39px"]}
+                textAlign='center'
+                fontWeight={600}
+              >
+                {title}
+              </Typography>
+            ) : (
+              title
+            )}
             {children ? children : null}
           </Stack>
         </Box>
