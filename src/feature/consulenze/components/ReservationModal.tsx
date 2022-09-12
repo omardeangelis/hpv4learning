@@ -4,6 +4,7 @@ import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
 import SuccessModal from "./SuccessModal";
+import ProviderModal from "./ProviderModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
@@ -21,12 +22,16 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
 
   const handleContinue = React.useCallback(() => nextStep(), [nextStep]);
 
+  const handleBack = React.useCallback(() => prevStep(), [prevStep]);
+
   const renderModalContent = React.useCallback(() => {
     switch (step) {
       case "welcome":
         return <div onClick={handleContinue}>Welcome</div>;
       case "provider":
-        return <div onClick={handleContinue}>Provider</div>;
+        return (
+          <ProviderModal onContinue={handleContinue} onBack={handleBack} />
+        );
       case "datepicker":
         return <div onClick={handleContinue}>Scegli Data</div>;
       case "info":
