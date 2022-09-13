@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { googleCalendarApi } from "./services/calendar";
+import { googleCalendarApi } from "../services/calendar";
 import consulenzaSlice from "./reducers/consulenze";
 import uiReducer from "./reducers/uiSlice";
 
