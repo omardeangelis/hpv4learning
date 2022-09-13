@@ -24,16 +24,12 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
 
   const handleContinue = React.useCallback(() => nextStep(), [nextStep]);
 
-  const handleBack = React.useCallback(() => prevStep(), [prevStep]);
-
   const renderModalContent = React.useCallback(() => {
     switch (step) {
       case "welcome":
         return <WelcomeModal onContinue={handleContinue} />;
       case "provider":
-        return (
-          <ProviderModal onContinue={handleContinue} onBack={handleBack} />
-        );
+        return <ProviderModal onContinue={handleContinue} onBack={prevStep} />;
       case "datepicker":
         return <div onClick={handleContinue}>Scegli Data</div>;
       case "info":

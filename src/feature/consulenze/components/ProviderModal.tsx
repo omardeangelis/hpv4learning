@@ -6,7 +6,7 @@ import {
   ModalCloseButton,
   ModalTitle,
   ModalBody,
-  // ModalTypography,
+  ModalTypography,
   ModalStepper,
   ModalElipse,
   ModalTab,
@@ -15,18 +15,33 @@ import { useResponsive } from "../../../hook/useResponsive";
 import { Button, TextField, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
+import { ProviderModalProvider } from "../context/providerModalContext";
 
 type Props = {
   onBack: () => void;
   onContinue: () => void;
 };
 
+type Provider = "gmail" | "manual";
+
 const ProviderModal = ({ onBack, onContinue }: Props) => {
-  const [isGMail, setIsGMail] = React.useState<boolean>(true);
+  const [provider, setProvider] = React.useState<Provider>("gmail");
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
+
+  const handleOnClick = React.useCallback(
+    (value: Provider) => {
+      setProvider(value);
+    },
+    [setProvider]
+  );
+
   return (
-    <>
+    <ProviderModalProvider
+      value={{
+        provider,
+      }}
+    >
       <ModalHeader hasBorder>
         <ModalBackButton onBack={onBack} />
         {!isMobile ? (
@@ -44,8 +59,11 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
               spacing={4}
               pb={isMobile ? "35px" : "20px"}
             >
-              <ModalTab isGMail={true} onClick={() => setIsGMail(true)} />
-              <ModalTab isGMail={false} onClick={() => setIsGMail(false)} />
+              <ModalTab isGMail={true} onClick={() => handleOnClick("gmail")} />
+              <ModalTab
+                isGMail={false}
+                onClick={() => handleOnClick("manual")}
+              />
             </Stack>
           </Stack>
         </ModalElipse>
@@ -67,35 +85,21 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
                   Scegli come prenotare la chiamata
                 </Typography>
 
-                <Typography
-                  color='var(--gray--500)'
-                  textAlign='center'
-                  fontSize='16px'
-                  fontWeight={400}
-                  lineHeight='24px'
-                  maxWidth='480px'
-                >
+                <ModalTypography maxWidth='480px'>
                   Usa un account Google per creare un promemoria sul tuo
                   calendario o ricevi una mail dopo aver compilato il form.
-                </Typography>
+                </ModalTypography>
               </>
             ) : null}
             {!isMobile ? (
-              <Typography
-                color='var(--gray--500)'
-                textAlign='center'
-                fontSize='18px'
-                fontWeight={400}
-                lineHeight='27px'
-                maxWidth='480px'
-              >
+              <ModalTypography maxWidth='480px'>
                 Scegli se usare Google Calendar o ricevere una mail
-              </Typography>
+              </ModalTypography>
             ) : null}
           </Stack>
           <Box mt={{ xs: "32px", lg: "40px" }}>
             <Stack spacing={2}>
-              {!isGMail ? (
+              {provider === "manual" ? (
                 // <form>
                 <Stack direction={{ xs: "column", lg: "row" }} spacing={2}>
                   <TextField id='outlined-basic' label='Nome' required />
@@ -123,7 +127,7 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
           </Button>
         </Box>
       </ModalBody>
-    </>
+    </ProviderModalProvider>
   );
 };
 

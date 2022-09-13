@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
+import { useProviderModalContext } from "../../feature/consulenze/context/providerModalContext";
 
 type Props = {
   isGMail: boolean;
@@ -12,7 +13,7 @@ const StyledTab = styled(Box)<{ isGMail: boolean }>(({ isGMail }) => ({
   width: "153px",
   height: "153px",
   borderRadius: "8px",
-  border: "1px solid var(--gray-300)",
+  border: "1px solid ",
   backgroundColor: "white",
   display: "flex",
   justifyContent: "space-between",
@@ -35,10 +36,19 @@ const ImageBox = styled(Box)`
 `;
 
 export const ModalTab = ({ isGMail, onClick }: Props) => {
+  const { provider } = useProviderModalContext() || {};
+
   return (
-    <StyledTab isGMail={isGMail} onClick={onClick}>
+    <>
       {isGMail ? (
-        <>
+        <StyledTab
+          isGMail={isGMail}
+          onClick={onClick}
+          style={{
+            borderColor:
+              provider === "gmail" ? "var(--purple-400)" : "var(--gray-300)",
+          }}
+        >
           <Typography
             fontSize='10px'
             lineHeight='15px'
@@ -62,9 +72,16 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
           >
             Usa Account Google
           </Typography>
-        </>
+        </StyledTab>
       ) : (
-        <>
+        <StyledTab
+          isGMail={isGMail}
+          onClick={onClick}
+          style={{
+            borderColor:
+              provider === "manual" ? "var(--purple-400)" : "var(--gray-300)",
+          }}
+        >
           <ImageBox>
             <StaticImage
               src='./images/form-line.png'
@@ -81,8 +98,8 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
           >
             Compila manualmente
           </Typography>
-        </>
+        </StyledTab>
       )}
-    </StyledTab>
+    </>
   );
 };
