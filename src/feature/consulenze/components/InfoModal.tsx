@@ -6,7 +6,7 @@ import {
   ModalCloseButton,
   ModalTitle,
   ModalBody,
-  // ModalTypography,
+  ModalTypography,
   ModalStepper,
 } from "../../../components/modal";
 import { useResponsive } from "../../../hook/useResponsive";
@@ -30,8 +30,8 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>
       <ModalBody>
-        <Box px='12px' mb={{ xs: "auto", lg: "120px" }}>
-          <Box sx={{ padding: "38px 0px" }}>
+        <Box px='12px' mb={{ xs: "auto", lg: "100px" }}>
+          <Box px={{ xs: "10px", lg: "50px" }} py='38px'>
             <ModalStepper labels={reservationModalLabels} />
           </Box>
           <Stack
@@ -52,28 +52,14 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
                 </Typography>
               </>
             ) : null}
-            <Typography
-              color='var(--gray--500)'
-              textAlign='center'
-              fontSize={isMobile ? "16px" : "18px"}
-              lineHeight={isMobile ? "24px" : "27px"}
-              fontWeight={400}
-              maxWidth='480px'
-            >
+            <ModalTypography maxWidth='480px'>
               Aggiungi link e informazioni che possano aiutarci a preparare la
               soluzione più adatta alla tua richiesta.
-            </Typography>
-            <Typography
-              color='var(--gray--500)'
-              textAlign='center'
-              fontSize={isMobile ? "16px" : "18px"}
-              lineHeight={isMobile ? "24px" : "27px"}
-              fontWeight={400}
-              maxWidth='480px'
-            >
+            </ModalTypography>
+            <ModalTypography maxWidth='480px'>
               Questi campi sono facoltativi, nessuna informazione da voi
               lasciata sarà usata a scopi pubblicitari o per spammare promozioni
-            </Typography>
+            </ModalTypography>
           </Stack>
           <Box mt={isMobile ? "56px" : "74px"}>
             <Stack direction='column' spacing={2}>
