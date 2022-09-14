@@ -5,5 +5,6 @@ export * from "./ModalButtons";
 export * from "./Modal";
 export * from "./ModalStepper";
 export * from "./ModalElipse";
+export * from "./ModalTab";
 export * from "./ErrorModal";
 export * from "./ModalFooter";

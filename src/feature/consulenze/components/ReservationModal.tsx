@@ -5,6 +5,7 @@ import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
 import WelcomeModal from "./WelcomeModal";
 import SuccessModal from "./SuccessModal";
+import ProviderModal from "./ProviderModal";
 import { ConsulenzeErrorModal } from "./ConsulenzeErrorModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
@@ -28,7 +29,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
       case "welcome":
         return <WelcomeModal onContinue={handleContinue} />;
       case "provider":
-        return <div onClick={handleContinue}>Provider</div>;
+        return <ProviderModal onContinue={handleContinue} onBack={prevStep} />;
       case "datepicker":
         return <div onClick={handleContinue}>Scegli Data</div>;
       case "info":
