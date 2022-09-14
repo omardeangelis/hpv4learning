@@ -18,6 +18,7 @@ const ModalWrapper = styled(Box)({
 
 type Props = {
   onClose: () => void;
+  onContinue: () => void;
   stepIndex: number;
   children: React.ReactNode;
 };

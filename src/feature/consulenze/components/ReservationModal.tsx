@@ -3,6 +3,7 @@ import { Modal, ModalContent } from "../../../components/modal";
 import { useSteps } from "../../../hook/useSteps";
 import { navigate } from "gatsby";
 import { RouteComponentProps } from "@reach/router";
+import WelcomeModal from "./WelcomeModal";
 import SuccessModal from "./SuccessModal";
 import { ConsulenzeErrorModal } from "./ConsulenzeErrorModal";
 import InfoModal from "./InfoModal";
@@ -28,7 +29,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const renderModalContent = React.useCallback(() => {
     switch (step) {
       case "welcome":
-        return <div onClick={handleContinue}>Welcome</div>;
+        return <WelcomeModal onContinue={handleContinue} />;
       case "provider":
         return <div onClick={handleContinue}>Provider</div>;
       case "datepicker":
