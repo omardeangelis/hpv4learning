@@ -81,4 +81,5 @@ export const {
   useGetAllAvailableCalendarsQuery,
   useGetAppointmentByMailQuery,
   useDeleteAppointmentMutation,
+  useBookAppointmentMutation,
 } = googleCalendarApi;
