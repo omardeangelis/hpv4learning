@@ -20,9 +20,9 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve(`./src/template/SingleCoursePage.tsx`),
       context: {
         slug: node.slug,
-        categorySlug: node.category.filter(
-          (category) => category.slug !== "gratuiti"
-        )[0].slug,
+        categorySlug: node.category
+          .filter((category) => category.slug.toLowerCase() !== "gratuiti")[0]
+          .slug.toLowerCase(),
       },
     });
   });
@@ -35,7 +35,7 @@ exports.createPages = async ({ graphql, actions }) => {
       alias,
     } = category;
     createPage({
-      path: `/corsi/${slug}/`,
+      path: `/corsi/${slug.toLowerCase()}/`,
       component: path.resolve("./src/template/Category.tsx"),
       context: {
         slug,
@@ -61,18 +61,18 @@ exports.createPages = async ({ graphql, actions }) => {
       if (!isEmpty(category.categoryProjects)) {
         const numOfElement = 9;
         const pages = Math.ceil(
-          category.categoryProjects.length / numOfElement
+          category.categoryProjects.length / numOfElement,
         );
 
         Array.from({ length: pages }, (_, index) => {
           const start = numOfElement * index;
           createPage({
-            path: `/progetti/${category.slug}${
+            path: `/progetti/${category.slug.toLowerCase()}${
               index === 0 ? "/" : `/${index + 1}/`
             }`,
             component: path.resolve("./src/template/ProjectsCategory.tsx"),
             context: {
-              slug: category.slug,
+              slug: category.slug.toLowerCase(),
               title: category.title,
               metaDescription: category.metaDescription,
               metaTitle: category.metaTitle,
@@ -87,13 +87,13 @@ exports.createPages = async ({ graphql, actions }) => {
           });
         });
       }
-    }
+    },
   );
 
   projectArticleQuery.data.allContentfulProgetti.group.forEach((category) => {
     const slug = category.fieldValue;
     const maxProjectsOrders = Math.max(
-      ...category.nodes.map((project) => project.ordine)
+      ...category.nodes.map((project) => project.ordine),
     );
     category.nodes.forEach((project) => {
       const nextProjectOrder =
