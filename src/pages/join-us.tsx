@@ -61,6 +61,7 @@ const JoinUs = () => {
                 <Typography
                   fontWeight={700}
                   color='purple.200'
+                  component='h1'
                   sx={{
                     textAlign: { xs: "center", md: "left" },
                     fontSize: { xs: "40px", lg: "72px" },
@@ -80,6 +81,7 @@ const JoinUs = () => {
                   <Typography
                     fontWeight={500}
                     color='purple.200'
+                    component='h2'
                     sx={{
                       textAlign: { xs: "center", md: "left" },
 
@@ -172,8 +174,9 @@ const JoinUs = () => {
             >
               <Box>
                 <Typography
-                  fontWeight={700}
+                  fontWeight={600}
                   color='white'
+                  component='h2'
                   sx={{
                     textAlign: { xs: "center", md: "left" },
 
@@ -228,9 +231,10 @@ const JoinUs = () => {
               }}
             >
               <Typography
-                fontWeight={700}
+                fontWeight={600}
                 color='purple.800'
                 textAlign='center'
+                component='h2'
                 sx={{
                   fontSize: { xs: "40px", lg: "72px" },
                   lineHeight: { xs: "49px", lg: "79px" },
@@ -317,6 +321,7 @@ const JoinUs = () => {
               sx={{
                 fontSize: { xs: "36px", lg: "56px" },
               }}
+              component='h2'
             >
               Chi cerchiamo
             </Typography>
@@ -385,6 +390,7 @@ const JoinUs = () => {
                       <Typography
                         fontWeight={600}
                         color='grey.800'
+                        component='h3'
                         sx={{
                           fontSize: "24px",
                           lineHeight: "36px",
