@@ -35,11 +35,16 @@ const data = [
         slug: "/join-us/",
         isExternal: false,
       },
+      {
+        title: "Contattaci",
+        slug: "/consulenze/",
+        isExternal: false,
+      },
     ],
   },
   {
     id: "wcfcvhdgcbhdb",
-    title: "Pratica",
+    title: "Progetti pratici",
     items: [
       {
         title: "React",

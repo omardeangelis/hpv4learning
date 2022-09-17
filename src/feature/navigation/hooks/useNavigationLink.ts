@@ -20,16 +20,15 @@ export const useNavigationLink = () => {
         link: null,
         icon: "dropdown",
       },
-
       {
-        text: "Chi siamo",
-        link: "/about/",
-        icon: "about",
-      },
-      {
-        text: "Progetti",
+        text: "Progetti pratici",
         link: "/progetti/",
         icon: "project",
+      },
+      {
+        text: "Contattaci",
+        link: "/consulenze/",
+        icon: "about",
       },
     ],
     [],
