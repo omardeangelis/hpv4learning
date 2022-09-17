@@ -2,19 +2,19 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { calendar_v3 } from "googleapis";
 
 type CalendarEventsItems = calendar_v3.Schema$Events["items"];
-
-/**
- * 'https://jsonplaceholder.typicode.com/posts', {
-  method: 'POST',
-  body: JSON.stringify({
-    title: 'foo',
-    body: 'bar',
-    userId: 1,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
- */
+type CalendarBookedResponse = Pick<
+  calendar_v3.Schema$Event,
+  "start" | "hangoutLink"
+> & { mailSanded: boolean };
+type CalendarBookRequestProps = {
+  email: string;
+  eventId: string;
+  nome?: string;
+  cognome?: string;
+  professione?: string;
+  description?: string;
+  shouldSendMail?: boolean;
+};
 
 export const googleCalendarApi = createApi({
   reducerPath: "calendar",
@@ -56,26 +56,30 @@ export const googleCalendarApi = createApi({
       },
       keepUnusedDataFor: 60 * 60 * 24,
     }),
-
-    // createNewResource: builder.mutation<
-    //   any,
-    //   { title: string; body: string; userId: number }
-    // >({
-    //   query: ({ title, body, userId }) => ({
-    //     url: "https://jsonplaceholder.typicode.com/posts",
-    //     method: "POST",
-    //     body: {
-    //       title: title,
-    //       body: body,
-    //       userId: userId,
-    //     },
-    //   }),
-    // }),
+    bookAppointment: builder.mutation<
+      CalendarBookedResponse,
+      CalendarBookRequestProps
+    >({
+      query: (props) => ({
+        method: "PUT",
+        url: `/api/calendar/get-appointment-by-mail?eventId=${props.eventId}`,
+        body: JSON.stringify({
+          ...props,
+        }),
+      }),
+    }),
+    deleteAppointment: builder.mutation<boolean, string>({
+      query: (eventId) => ({
+        url: `/api/calendar/get-appointment-by-mail?eventId=${eventId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAllAvailableCalendarsQuery,
   useGetAppointmentByMailQuery,
-  //   useCreateNewResourceMutation,
+  useDeleteAppointmentMutation,
+  useBookAppointmentMutation,
 } = googleCalendarApi;
