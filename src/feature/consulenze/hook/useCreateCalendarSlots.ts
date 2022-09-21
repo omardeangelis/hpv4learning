@@ -5,8 +5,15 @@ import {
 } from "../../../services/calendar";
 import { formatDates } from "../utils/helpers";
 
-export const useCreateCalendarSlots = () => {
-  const { data, isLoading } = useGetAllAvailableCalendarsQuery();
+export const useCreateCalendarSlots = (startDate?: string) => {
+  const [slots, setSlots] = React.useState<
+    | {
+        date: string | undefined;
+        items: AvailableCalendarResponse[];
+      }[]
+    | undefined
+  >([]);
+  const { data, isLoading } = useGetAllAvailableCalendarsQuery(startDate);
 
   const uniqueDates = React.useMemo(() => {
     if (!data || isLoading) return;
@@ -22,7 +29,8 @@ export const useCreateCalendarSlots = () => {
   const availableDates = React.useMemo(() => {
     if (!uniqueDates) return;
     return uniqueDates.map((el) => ({
-      [`${el}`]: [] as AvailableCalendarResponse[],
+      date: el,
+      items: [] as AvailableCalendarResponse[],
     }));
   }, [uniqueDates]);
 
@@ -32,22 +40,16 @@ export const useCreateCalendarSlots = () => {
 
     data.forEach((calendar) => {
       if (calendar?.startDate?.dateTime) {
-        const timeIndex = Object.keys(availableDates).findIndex(
-          (x) => formatDates(x) === formatDates(calendar?.startDate?.dateTime)
+        const timeIndex = availableDates.findIndex(
+          (x) => x.date === formatDates(calendar?.startDate?.dateTime)
         );
-        if (timeIndex >= 0 && formatDates(calendar?.startDate?.dateTime)) {
-          if (
-            availableDates[timeIndex][
-              formatDates(calendar?.startDate?.dateTime) as string
-            ]
-          )
-            availableDates[timeIndex][
-              formatDates(calendar?.startDate?.dateTime) as string
-            ]?.push(calendar);
+        if (timeIndex >= 0) {
+          availableDates[timeIndex].items.push(calendar);
         }
       }
+      setSlots(availableDates);
     });
   }, [availableDates, data, isLoading]);
 
-  return availableDates;
+  return slots;
 };

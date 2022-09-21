@@ -28,17 +28,3 @@ export const formatDates = (
 
   return `${day}/${month}`;
 };
-
-// export const getHour = (date: calendar_v3.Schema$Event["start"]) => {
-//   const aaa = new Date(`${date}`);
-//   return `${aaa.getHours()}`;
-// };
-
-// export const getMinute = (date: calendar_v3.Schema$Event["start"]) => {
-//   const aaa = new Date(`${date}`);
-//   let min = `${aaa.getMinutes()}`;
-//   if (min === "0") {
-//     min = "00";
-//   }
-//   return min;
-// };

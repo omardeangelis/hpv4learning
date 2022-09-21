@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalTypography,
   ModalStepper,
+  Spinner,
 } from "../../../components/modal";
 import { Button, Typography, FormControl, TextField } from "@mui/material";
 import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
@@ -17,8 +18,10 @@ import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { useCreateCalendarSlots } from "../hook/useCreateCalendarSlots";
+import { isEmpty } from "lodash";
+import { getDataFromCalendar } from "../utils/helpers";
 
 type Props = {
   onBack: () => void;
@@ -50,16 +53,16 @@ const StyledBox = styled(Box)`
 `;
 
 const DatepickerModal = ({ onBack, onContinue }: Props) => {
+  const [selectedDate, setSelectedDate] = React.useState<
+    Dayjs | undefined | null
+  >();
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
-  const slots = useCreateCalendarSlots();
+  const slots = useCreateCalendarSlots(selectedDate?.toDate().toString());
   console.log(slots);
 
-  // data scelta nel datepicker
-  const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>();
-
-  const handleChange = (date: Dayjs | null) => {
-    setSelectedDate(date);
+  const handleChange = (newValue?: Dayjs | null) => {
+    setSelectedDate(newValue);
   };
 
   return (
@@ -84,15 +87,15 @@ const DatepickerModal = ({ onBack, onContinue }: Props) => {
             </Box>
             <Box maxWidth='500px' mt='20px'>
               <Stack
-                direction={{ xs: "column", lg: "row" }}
+                direction='row'
                 spacing={2}
                 justifyContent='center'
                 alignItems='center'
               >
-                {/* {slots &&
-                  slots.map((date) => {
+                {slots && slots.length > 0 ? (
+                  slots.map((slot) => {
                     return (
-                      <Box>
+                      <Box key={slot.date}>
                         <Typography
                           fontSize='12px'
                           lineHeight='18px'
@@ -100,20 +103,26 @@ const DatepickerModal = ({ onBack, onContinue }: Props) => {
                           textAlign={isMobile ? "left" : "center"}
                           mb={isMobile ? "3px" : "6px"}
                         >
-                          {date}
+                          {slot.date}
                         </Typography>
-                        <Stack
-                          direction={{ xs: "row", lg: "column" }}
-                          spacing={1}
-                        >
-                          <StyledBox>18.30 - 19.00</StyledBox>
-                          <StyledBox>19.00 - 19.30</StyledBox>
-                          <StyledBox>19.30 - 20.00</StyledBox>
-                          <StyledBox>20.00 - 20.30</StyledBox>
+                        <Stack direction='column' spacing={1}>
+                          {slot.items && !isEmpty(slot.items)
+                            ? slot.items.reverse().map((item) => (
+                                <StyledBox
+                                  key={item?.startDate?.dateTime as string}
+                                >
+                                  {getDataFromCalendar(item?.startDate)?.time} -{" "}
+                                  {getDataFromCalendar(item?.endDate)?.time}
+                                </StyledBox>
+                              ))
+                            : null}
                         </Stack>
                       </Box>
                     );
-                  })} */}
+                  })
+                ) : (
+                  <Spinner />
+                )}
               </Stack>
             </Box>
             <Box mb={{ xs: "32px", lg: "18px" }} mt='38px'>

@@ -8,3 +8,4 @@ export * from "./ModalElipse";
 export * from "./ModalTab";
 export * from "./ErrorModal";
 export * from "./ModalFooter";
+export * from "./ModalSpinner";
