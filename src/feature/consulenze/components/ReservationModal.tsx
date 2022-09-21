@@ -7,6 +7,7 @@ import WelcomeModal from "./WelcomeModal";
 import SuccessModal from "./SuccessModal";
 import ProviderModal from "./ProviderModal";
 import { ConsulenzeErrorModal } from "./ConsulenzeErrorModal";
+import InfoModal from "./InfoModal";
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
@@ -33,7 +34,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
       case "datepicker":
         return <div onClick={handleContinue}>Scegli Data</div>;
       case "info":
-        return <div onClick={handleContinue}>info</div>;
+        return <InfoModal onBack={prevStep} onContinue={handleContinue} />;
       case "success":
         return (
           <SuccessModal
@@ -49,8 +50,8 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     }
   }, [step]);
 
-  //Questa serve in sviluppo per avere sempre il modal su cui si sta lavorando.
-  // React.useEffect(() => gotoStep("error"), [gotoStep]);
+  // Questa serve in sviluppo per avere sempre il modal su cui si sta lavorando.
+  // React.useEffect(() => gotoStep("info"), [gotoStep]);
   return (
     <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
