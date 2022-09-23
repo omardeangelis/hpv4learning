@@ -16,13 +16,23 @@ type CalendarBookRequestProps = {
   shouldSendMail?: boolean;
 };
 
+export type AvailableCalendarResponse = {
+  id: string;
+  startDate: calendar_v3.Schema$Event["start"];
+  endDate: calendar_v3.Schema$Event["end"];
+};
+
 export const googleCalendarApi = createApi({
   reducerPath: "calendar",
   baseQuery: fetchBaseQuery(),
   tagTypes: [],
   endpoints: (builder) => ({
     getAllAvailableCalendars: builder.query<
-      { id: string; startDate: string; endDate: string }[],
+      {
+        id: string;
+        startDate: calendar_v3.Schema$Event["start"];
+        endDate: calendar_v3.Schema$Event["end"];
+      }[],
       string | void
     >({
       query: (startDate) =>
@@ -34,7 +44,7 @@ export const googleCalendarApi = createApi({
             id: item.id,
             startDate: item.start,
             endDate: item.end,
-          })) as { id: string; startDate: string; endDate: string }[];
+          })) as AvailableCalendarResponse[];
         return [];
       },
       keepUnusedDataFor: 60 * 60 * 24,
