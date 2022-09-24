@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack } from "@mui/system";
+import { Box, Container, Stack } from "@mui/system";
 import {
   ModalHeader,
   ModalBackButton,
@@ -9,6 +9,7 @@ import {
   ModalElipse,
   ModalTypography,
   ModalStepper,
+  ModalFooter,
 } from "../../../components/modal";
 import { reservationModalLabels } from "../utils/constants";
 import { useResponsive } from "../../../hook/useResponsive";
@@ -92,21 +93,19 @@ const WelcomeModal = ({ onContinue }: Props) => {
             ) : null}
           </Stack>
         </Box>
-        <Box
-          px={{ xs: "12px", lg: "65px" }}
-          mb='18px'
-          sx={{ position: "absolute", bottom: "0", width: "100%" }}
-        >
-          <Button
-            onClick={onContinue}
-            variant='contained'
-            sx={{
-              width: "100%",
-            }}
-          >
-            Avanti
-          </Button>
-        </Box>
+        <ModalFooter>
+          <Container>
+            <Button
+              onClick={onContinue}
+              variant='contained'
+              sx={{
+                width: "100%",
+              }}
+            >
+              Avanti
+            </Button>
+          </Container>
+        </ModalFooter>
       </ModalBody>
     </>
   );

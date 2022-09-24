@@ -52,7 +52,7 @@ export const googleCalendarApi = createApi({
 
     getAppointmentByMail: builder.query<
       { id: string; startDate: string; endDate: string }[],
-      string | void
+      string
     >({
       query: (mail) => `/api/calendar/get-appointment-by-mail?email=${mail}`,
       transformResponse: (data: CalendarEventsItems) => {
@@ -72,7 +72,7 @@ export const googleCalendarApi = createApi({
     >({
       query: (props) => ({
         method: "PUT",
-        url: `/api/calendar/get-appointment-by-mail?eventId=${props.eventId}`,
+        url: `/api/calendar/book-appointment?eventId=${props.eventId}`,
         body: JSON.stringify({
           ...props,
         }),
@@ -80,7 +80,7 @@ export const googleCalendarApi = createApi({
     }),
     deleteAppointment: builder.mutation<boolean, string>({
       query: (eventId) => ({
-        url: `/api/calendar/get-appointment-by-mail?eventId=${eventId}`,
+        url: `/api/calendar/delete-appointment?eventId=${eventId}`,
         method: "DELETE",
       }),
     }),

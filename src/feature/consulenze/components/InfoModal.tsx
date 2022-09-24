@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack } from "@mui/system";
+import { Box, Container, Stack } from "@mui/system";
 import {
   ModalHeader,
   ModalBackButton,
@@ -8,20 +8,28 @@ import {
   ModalBody,
   ModalTypography,
   ModalStepper,
+  ModalFooter,
 } from "../../../components/modal";
 import { useResponsive } from "../../../hook/useResponsive";
 import { Button, TextField, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
+import { Form, Formik } from "formik";
 
 type Props = {
   onBack: () => void;
-  onContinue: () => void;
+  onContinue: (params: { professione: string; description: string }) => void;
+};
+
+const initialState = {
+  professione: "",
+  description: "",
 };
 
 const InfoModal = ({ onBack, onContinue }: Props) => {
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
+
   return (
     <>
       <ModalHeader hasBorder>
@@ -61,33 +69,43 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
               lasciata sarà usata a scopi pubblicitari o per spammare promozioni
             </ModalTypography>
           </Stack>
-          <Box mt={isMobile ? "38px" : "74px"}>
-            <Stack direction='column' spacing={2}>
-              <TextField
-                id='outlined-basic'
-                label='Professione'
-                size={isMobile ? "small" : "medium"}
-              />
-              <TextField
-                id='outlined-basic'
-                label='Link ed ulteriori informazioni'
-                sx={{
-                  "& .MuiInputBase-root": {
-                    height: 100,
-                  },
-                }}
-              />
-            </Stack>
-          </Box>
+          <Formik onSubmit={onContinue} initialValues={initialState}>
+            {({ handleChange }) => {
+              return (
+                <Form id='info-form'>
+                  <Box mt={isMobile ? "38px" : "74px"}>
+                    <Stack direction='column' spacing={2}>
+                      <TextField
+                        name='professione'
+                        id='outlined-basic'
+                        label='Professione'
+                        onChange={handleChange}
+                        size={isMobile ? "small" : "medium"}
+                      />
+                      <TextField
+                        name='description'
+                        id='outlined-basic'
+                        label='Descrizione'
+                        onChange={handleChange}
+                        sx={{
+                          "& .MuiInputBase-root": {
+                            height: 100,
+                          },
+                        }}
+                      />
+                    </Stack>
+                  </Box>
+                </Form>
+              );
+            }}
+          </Formik>
         </Box>
-
-        <Box
-          px={{ xs: "12px", lg: "65px" }}
-          mb={{ xs: "18px", lg: "22px" }}
-          sx={{ position: "absolute", bottom: "0", width: "100%" }}
-        >
+      </ModalBody>
+      <ModalFooter>
+        <Container>
           <Button
-            onClick={onContinue}
+            form='info-form'
+            type='submit'
             variant='contained'
             sx={{
               width: "100%",
@@ -95,8 +113,8 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
           >
             Avanti
           </Button>
-        </Box>
-      </ModalBody>
+        </Container>
+      </ModalFooter>
     </>
   );
 };

@@ -20,6 +20,7 @@ const StyledButton = styled(IconButton)<{ align: "left" | "right" }>(
     border: "none",
     cursor: "pointer",
     position: "absolute",
+    zIndex: "1",
 
     left: align === "left" ? ["12px", "16px"] : "inherit",
     right: align === "right" ? ["12px", "16px"] : "inherit",
