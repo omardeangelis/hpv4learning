@@ -3,26 +3,30 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
 import { useProviderModalContext } from "../../feature/consulenze/context/providerModalContext";
+import { BorderBox } from "../layout";
+import { useResponsive } from "../../hook/useResponsive";
 
 type Props = {
   isGMail: boolean;
   onClick: () => void;
 };
 
-const StyledTab = styled(Box)<{ isGMail: boolean }>(({ isGMail }) => ({
-  width: "153px",
-  height: "153px",
-  borderRadius: "8px",
-  border: "1px solid ",
-  backgroundColor: "white",
-  display: "flex",
-  justifyContent: "space-between",
-  position: "relative",
-  cursor: "pointer",
+const StyledTab = styled(BorderBox)<{ isGMail: boolean; isMobile: boolean }>(
+  ({ isGMail, isMobile }) => ({
+    width: isMobile ? "132px" : "153px",
+    height: isMobile ? "132px" : "153px",
+    borderRadius: "8px",
+    border: "1px solid ",
+    backgroundColor: "white",
+    display: "flex",
+    justifyContent: "space-between",
+    position: "relative",
+    cursor: "pointer",
 
-  flexDirection: isGMail ? "column" : "column-reverse",
-  padding: isGMail ? "10px" : "10px 0px",
-}));
+    flexDirection: isGMail ? "column" : "column-reverse",
+    padding: isGMail ? "10px" : "10px 0px",
+  })
+);
 
 const ImageBox = styled(Box)`
   position: absolute;
@@ -31,18 +35,25 @@ const ImageBox = styled(Box)`
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
+
+  @media screen and (min-width: 767px) {
+    width: 72px;
+    height: 72px;
+  }
 `;
 
 export const ModalTab = ({ isGMail, onClick }: Props) => {
   const { provider } = useProviderModalContext() || {};
+  const { isMobile } = useResponsive();
 
   return (
     <>
       {isGMail ? (
         <StyledTab
           isGMail={isGMail}
+          isMobile={isMobile}
           onClick={onClick}
           style={{
             borderColor:
@@ -50,7 +61,7 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
           }}
         >
           <Typography
-            fontSize='10px'
+            fontSize={isMobile ? "8px" : "10px"}
             lineHeight='15px'
             fontWeight={400}
             color='var(--gray-500)'
@@ -65,7 +76,7 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
             />
           </ImageBox>
           <Typography
-            fontSize='12px'
+            fontSize={isMobile ? "10px" : "12px"}
             lineHeight='18px'
             fontWeight={400}
             color='var(--gray-500)'
@@ -76,6 +87,7 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
       ) : (
         <StyledTab
           isGMail={isGMail}
+          isMobile={isMobile}
           onClick={onClick}
           style={{
             borderColor:
@@ -90,7 +102,7 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
             />
           </ImageBox>
           <Typography
-            fontSize='12px'
+            fontSize={isMobile ? "10px" : "12px"}
             lineHeight='18px'
             fontWeight={400}
             color='var(--gray-500)'

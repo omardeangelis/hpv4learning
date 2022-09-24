@@ -50,7 +50,7 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>
       <ModalBody>
-        <ModalElipse>
+        <ModalElipse pb={{ xs: "24px", lg: "38px" }}>
           <Stack direction='column' spacing={2}>
             <ModalStepper labels={reservationModalLabels} />
             <Stack
@@ -75,23 +75,16 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
             alignContent='center'
           >
             {isMobile ? (
-              <>
-                <Typography
-                  fontSize='20px'
-                  lineHeight='24px'
-                  fontWeight={600}
-                  textAlign='center'
-                >
-                  Scegli come prenotare la chiamata
-                </Typography>
-
-                <ModalTypography maxWidth='480px'>
-                  Usa un account Google per creare un promemoria sul tuo
-                  calendario o ricevi una mail dopo aver compilato il form.
-                </ModalTypography>
-              </>
+              <Typography
+                fontSize='20px'
+                lineHeight='24px'
+                fontWeight={600}
+                textAlign='center'
+              >
+                Scegli come prenotare la chiamata
+              </Typography>
             ) : null}
-            {!isMobile ? (
+            {!isMobile || (isMobile && provider === "gmail") ? (
               <ModalTypography maxWidth='480px'>
                 Scegli se usare Google Calendar o ricevere una mail
               </ModalTypography>
@@ -102,12 +95,27 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
               {provider === "manual" ? (
                 // <form>
                 <Stack direction={{ xs: "column", lg: "row" }} spacing={2}>
-                  <TextField id='outlined-basic' label='Nome' required />
-                  <TextField id='outlined-basic' label='Cognome' required />
+                  <TextField
+                    id='outlined-basic'
+                    label='Nome'
+                    size={isMobile ? "small" : "medium"}
+                    required
+                  />
+                  <TextField
+                    id='outlined-basic'
+                    label='Cognome'
+                    size={isMobile ? "small" : "medium"}
+                    required
+                  />
                 </Stack>
               ) : // </form>
               null}
-              <TextField id='outlined-basic' label='Mail' required />
+              <TextField
+                id='outlined-basic'
+                label='Mail'
+                size={isMobile ? "small" : "medium"}
+                required
+              />
             </Stack>
           </Box>
         </Box>
