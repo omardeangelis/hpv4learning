@@ -2,19 +2,25 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { calendar_v3 } from "googleapis";
 
 type CalendarEventsItems = calendar_v3.Schema$Events["items"];
+type CalendarBookedResponse = Pick<
+  calendar_v3.Schema$Event,
+  "start" | "hangoutLink"
+> & { mailSanded: boolean };
+type CalendarBookRequestProps = {
+  email: string;
+  eventId: string;
+  nome?: string;
+  cognome?: string;
+  professione?: string;
+  description?: string;
+  shouldSendMail?: boolean;
+};
 
-/**
- * 'https://jsonplaceholder.typicode.com/posts', {
-  method: 'POST',
-  body: JSON.stringify({
-    title: 'foo',
-    body: 'bar',
-    userId: 1,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
- */
+export type AvailableCalendarResponse = {
+  id: string;
+  startDate: calendar_v3.Schema$Event["start"];
+  endDate: calendar_v3.Schema$Event["end"];
+};
 
 export const googleCalendarApi = createApi({
   reducerPath: "calendar",
@@ -22,7 +28,11 @@ export const googleCalendarApi = createApi({
   tagTypes: [],
   endpoints: (builder) => ({
     getAllAvailableCalendars: builder.query<
-      { id: string; startDate: string; endDate: string }[],
+      {
+        id: string;
+        startDate: calendar_v3.Schema$Event["start"];
+        endDate: calendar_v3.Schema$Event["end"];
+      }[],
       string | void
     >({
       query: (startDate) =>
@@ -34,7 +44,7 @@ export const googleCalendarApi = createApi({
             id: item.id,
             startDate: item.start,
             endDate: item.end,
-          })) as { id: string; startDate: string; endDate: string }[];
+          })) as AvailableCalendarResponse[];
         return [];
       },
       keepUnusedDataFor: 60 * 60 * 24,
@@ -56,26 +66,30 @@ export const googleCalendarApi = createApi({
       },
       keepUnusedDataFor: 60 * 60 * 24,
     }),
-
-    // createNewResource: builder.mutation<
-    //   any,
-    //   { title: string; body: string; userId: number }
-    // >({
-    //   query: ({ title, body, userId }) => ({
-    //     url: "https://jsonplaceholder.typicode.com/posts",
-    //     method: "POST",
-    //     body: {
-    //       title: title,
-    //       body: body,
-    //       userId: userId,
-    //     },
-    //   }),
-    // }),
+    bookAppointment: builder.mutation<
+      CalendarBookedResponse,
+      CalendarBookRequestProps
+    >({
+      query: (props) => ({
+        method: "PUT",
+        url: `/api/calendar/get-appointment-by-mail?eventId=${props.eventId}`,
+        body: JSON.stringify({
+          ...props,
+        }),
+      }),
+    }),
+    deleteAppointment: builder.mutation<boolean, string>({
+      query: (eventId) => ({
+        url: `/api/calendar/get-appointment-by-mail?eventId=${eventId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 export const {
   useGetAllAvailableCalendarsQuery,
   useGetAppointmentByMailQuery,
-  //   useCreateNewResourceMutation,
+  useDeleteAppointmentMutation,
+  useBookAppointmentMutation,
 } = googleCalendarApi;
