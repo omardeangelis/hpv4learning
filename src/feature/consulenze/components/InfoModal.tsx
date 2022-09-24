@@ -31,7 +31,7 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
       </ModalHeader>
       <ModalBody>
         <Box px='12px' mb={{ xs: "auto", lg: "100px" }}>
-          <Box px={{ xs: "10px", lg: "50px" }} py='38px'>
+          <Box px={{ xs: "10px", lg: "50px" }} py='28px'>
             <ModalStepper labels={reservationModalLabels} />
           </Box>
           <Stack
@@ -61,9 +61,13 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
               lasciata sarà usata a scopi pubblicitari o per spammare promozioni
             </ModalTypography>
           </Stack>
-          <Box mt={isMobile ? "56px" : "74px"}>
+          <Box mt={isMobile ? "38px" : "74px"}>
             <Stack direction='column' spacing={2}>
-              <TextField id='outlined-basic' label='Professione' />
+              <TextField
+                id='outlined-basic'
+                label='Professione'
+                size={isMobile ? "small" : "medium"}
+              />
               <TextField
                 id='outlined-basic'
                 label='Link ed ulteriori informazioni'
