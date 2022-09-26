@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Container, Stack } from "@mui/system";
+import { Box, Container, css, Stack } from "@mui/system";
 import {
   ModalHeader,
   ModalBackButton,
@@ -34,36 +34,36 @@ type Props = {
   userMail: string;
 };
 
-const StyledBox = styled(Box)`
-  width: 84px;
-  height: 40px;
-  border: 1px solid var(--gray-300);
-  border-radius: 8px;
-  color: var(--gray-600);
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    border: 1px solid var(--purple-400);
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 115px;
-    height: 45px;
-  }
-`;
+const StyledBox = styled(Box)<{ isBooked?: boolean; isMobile: boolean }>(
+  ({ isMobile, isBooked }) => ({
+    width: isMobile ? "84px" : "115px",
+    height: isMobile ? "40px" : "45px",
+    border: isBooked ? "1px solid var(--gray-300)" : "none",
+    borderRadius: "8px",
+    color: isBooked ? "var(--gray-500)" : "var(--gray-600)",
+    backgroundColor: isBooked ? "var(--gray-300)" : "none",
+    textDecoration: isBooked ? "line-through" : "none",
+    fontSize: "10px",
+    fontWeight: "400",
+    lineHeight: "15px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  }),
+  css`
+    &:hover {
+      border: 1px solid var(--purple-400);
+    }
+  `
+);
 
 const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const [selectedDate, setSelectedDate] = React.useState<
     Dayjs | undefined | null
   >();
   const [selectedEventId, setSelectEventId] = React.useState<string | null>(
-    null,
+    null
   );
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
@@ -143,7 +143,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                 direction='row'
                 spacing={2}
                 justifyContent='center'
-                alignItems='center'
+                alignItems='flex-start'
               >
                 {slotsFurbi && slotsFurbi.length > 0 ? (
                   slotsFurbi.map((slot) => {
@@ -162,6 +162,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                           {slot.items && !isEmpty(slot.items)
                             ? slot.items.map((item) => (
                                 <StyledBox
+                                  isMobile={isMobile}
                                   onClick={() => handleSlotSelection(item.id)}
                                   key={item?.startDate?.dateTime as string}
                                 >
