@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Stack } from "@mui/system";
+import { Box, Container, Stack } from "@mui/system";
 import {
   ModalHeader,
   ModalBackButton,
@@ -10,6 +10,7 @@ import {
   ModalTypography,
   ModalStepper,
   Spinner,
+  ModalFooter,
 } from "../../../components/modal";
 import { Button, Typography, FormControl, TextField } from "@mui/material";
 import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
@@ -22,10 +23,15 @@ import { Dayjs } from "dayjs";
 import { useCreateCalendarSlots } from "../hook/useCreateCalendarSlots";
 import { isEmpty } from "lodash";
 import { getDataFromCalendar } from "../utils/helpers";
+import {
+  useDeleteAppointmentMutation,
+  useGetAppointmentByMailQuery,
+} from "../../../services/calendar";
 
 type Props = {
   onBack: () => void;
-  onContinue: () => void;
+  onContinue: (param: string) => void;
+  userMail: string;
 };
 
 const StyledBox = styled(Box)`
@@ -52,18 +58,65 @@ const StyledBox = styled(Box)`
   }
 `;
 
-const DatepickerModal = ({ onBack, onContinue }: Props) => {
+const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const [selectedDate, setSelectedDate] = React.useState<
     Dayjs | undefined | null
   >();
+  const [selectedEventId, setSelectEventId] = React.useState<string | null>(
+    null,
+  );
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
   const slots = useCreateCalendarSlots(selectedDate?.toDate().toString());
-  console.log(slots);
+  const { data: userAppointment, isLoading } =
+    useGetAppointmentByMailQuery(userMail);
+
+  const slotsFurbi = React.useMemo(() => {
+    if (!slots) return;
+    return slots.map((slot) => ({ ...slot, items: slot.items.reverse() }));
+  }, [slots]);
+
+  const [customError, setCustomError] = React.useState({
+    msg: "",
+    value: false,
+  });
 
   const handleChange = (newValue?: Dayjs | null) => {
     setSelectedDate(newValue);
   };
+
+  const handleSlotSelection = React.useCallback((id: string) => {
+    setSelectEventId(id);
+    setCustomError({
+      msg: "",
+      value: false,
+    });
+  }, []);
+
+  const [deleteAppointment, { isLoading: deleteLoading }] =
+    useDeleteAppointmentMutation();
+
+  const handleContinue = React.useCallback(async () => {
+    if (!selectedEventId) {
+      setCustomError({ msg: "scegli il giorno", value: true });
+      return;
+    }
+    if (userAppointment && !isEmpty(userAppointment)) {
+      try {
+        await deleteAppointment(userAppointment[0].id);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (!deleteLoading) onContinue(selectedEventId);
+  }, [
+    userAppointment,
+    userAppointment?.[0]?.id,
+    selectedEventId,
+    deleteLoading,
+    deleteAppointment,
+  ]);
 
   return (
     <>
@@ -92,8 +145,8 @@ const DatepickerModal = ({ onBack, onContinue }: Props) => {
                 justifyContent='center'
                 alignItems='center'
               >
-                {slots && slots.length > 0 ? (
-                  slots.map((slot) => {
+                {slotsFurbi && slotsFurbi.length > 0 ? (
+                  slotsFurbi.map((slot) => {
                     return (
                       <Box key={slot.date}>
                         <Typography
@@ -107,8 +160,9 @@ const DatepickerModal = ({ onBack, onContinue }: Props) => {
                         </Typography>
                         <Stack direction='column' spacing={1}>
                           {slot.items && !isEmpty(slot.items)
-                            ? slot.items.reverse().map((item) => (
+                            ? slot.items.map((item) => (
                                 <StyledBox
+                                  onClick={() => handleSlotSelection(item.id)}
                                   key={item?.startDate?.dateTime as string}
                                 >
                                   {getDataFromCalendar(item?.startDate)?.time} -{" "}
@@ -168,13 +222,22 @@ const DatepickerModal = ({ onBack, onContinue }: Props) => {
               )}
             </FormControl>
           </Box>
-          <Box
-            px={{ xs: "12px", lg: "65px" }}
-            mb={{ xs: "18px", lg: "22px" }}
-            sx={{ position: "absolute", bottom: "0", width: "100%" }}
-          >
+        </ModalBody>
+        <ModalFooter>
+          <Container>
+            {!isLoading && !isEmpty(userAppointment) ? (
+              <Typography color='red.400' variant='caption'>
+                Fatti furbo
+              </Typography>
+            ) : null}
+            {customError.value ? (
+              <Typography color='red.400' variant='caption'>
+                {customError.msg}
+              </Typography>
+            ) : null}
             <Button
-              onClick={onContinue}
+              disabled={deleteLoading || isLoading || !slots}
+              onClick={handleContinue}
               variant='contained'
               sx={{
                 width: "100%",
@@ -182,8 +245,8 @@ const DatepickerModal = ({ onBack, onContinue }: Props) => {
             >
               Avanti
             </Button>
-          </Box>
-        </ModalBody>
+          </Container>
+        </ModalFooter>
       </LocalizationProvider>
     </>
   );

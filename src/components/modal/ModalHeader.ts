@@ -14,7 +14,7 @@ export const ModalHeader = styled(Box)<{ hasBorder?: true }>`
     margin: auto 12px auto 12px;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     height: 56px;
     & * {
       margin: auto 20px auto 20px;
@@ -33,4 +33,5 @@ export const ModalTitle = styled(Typography)`
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  z-index: 0;
 `;

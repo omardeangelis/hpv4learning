@@ -16,7 +16,7 @@ const handler = (req: ReqProps, res: any) => {
   if (req.method !== "GET" && process.env.NODE_ENV === "production")
     throw new Error("Use GET Method");
   const userMail =
-    process.env.NODE_ENV === "production" && req.query.email
+    process.env.NODE_ENV === "production" || req.query.email
       ? req.query.email
       : testingMail;
   if (!isValidMail(userMail)) {
