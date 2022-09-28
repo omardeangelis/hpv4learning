@@ -26,8 +26,8 @@ async function getAllAvialableConsulenze(date?: string) {
 
   return calendar.events.list({
     calendarId: calendarId,
-    q: "#consulenze",
     auth,
+    q: "consulenza",
     timeMin: new Date(startDate).toISOString(),
     timeMax: new Date(startDate + 1000 * 60 * 60 * 24 * 21).toISOString(),
     timeZone: "Europe/Rome",

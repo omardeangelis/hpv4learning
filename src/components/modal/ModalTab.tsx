@@ -7,14 +7,14 @@ import { BorderBox } from "../layout";
 import { useResponsive } from "../../hook/useResponsive";
 
 type Props = {
-  isGMail: boolean;
+  isgmail: boolean;
   onClick: () => void;
 };
 
-const StyledTab = styled(BorderBox)<{ isGMail: boolean; isMobile: boolean }>(
-  ({ isGMail, isMobile }) => ({
-    width: isMobile ? "132px" : "153px",
-    height: isMobile ? "132px" : "153px",
+const StyledTab = styled(BorderBox)<{ isgmail: boolean; ismobile: boolean }>(
+  ({ isgmail, ismobile }) => ({
+    width: ismobile ? "132px" : "153px",
+    height: ismobile ? "132px" : "153px",
     borderRadius: "8px",
     border: "1px solid ",
     backgroundColor: "white",
@@ -23,9 +23,9 @@ const StyledTab = styled(BorderBox)<{ isGMail: boolean; isMobile: boolean }>(
     position: "relative",
     cursor: "pointer",
 
-    flexDirection: isGMail ? "column" : "column-reverse",
-    padding: isGMail ? "10px" : "10px 0px",
-  })
+    flexDirection: isgmail ? "column" : "column-reverse",
+    padding: isgmail ? "10px" : "10px 0px",
+  }),
 );
 
 const ImageBox = styled(Box)`
@@ -44,16 +44,16 @@ const ImageBox = styled(Box)`
   }
 `;
 
-export const ModalTab = ({ isGMail, onClick }: Props) => {
+export const ModalTab = ({ isgmail, onClick }: Props) => {
   const { provider } = useProviderModalContext() || {};
   const { isMobile } = useResponsive();
 
   return (
     <>
-      {isGMail ? (
+      {isgmail ? (
         <StyledTab
-          isGMail={isGMail}
-          isMobile={isMobile}
+          isgmail={isgmail}
+          ismobile={isMobile}
           onClick={onClick}
           style={{
             borderColor:
@@ -86,8 +86,8 @@ export const ModalTab = ({ isGMail, onClick }: Props) => {
         </StyledTab>
       ) : (
         <StyledTab
-          isGMail={isGMail}
-          isMobile={isMobile}
+          isgmail={isgmail}
+          ismobile={isMobile}
           onClick={onClick}
           style={{
             borderColor:
