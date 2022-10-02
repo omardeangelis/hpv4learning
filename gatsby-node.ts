@@ -1,13 +1,13 @@
-const { isEmpty } = require("lodash");
-const path = require(`path`);
-const {
+import { isEmpty } from "lodash";
+import path from "path";
+import {
   allCourseQuery,
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
-} = require("./query");
+} from "./query";
 
-exports.createPages = async ({ graphql, actions }) => {
+export const createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const singleCourseQuery = await graphql(allCourseQuery);
   const courseCategoryQuery = await graphql(allCourseCategory);

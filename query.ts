@@ -62,7 +62,7 @@ const projectCategoriesPageQuery = `
 }
 `;
 
-module.exports = {
+export {
   allCourseQuery,
   allCourseCategory,
   allProjectArticle,
