@@ -55,7 +55,7 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
         provider,
       }}
     >
-      <ModalHeader hasBorder>
+      <ModalHeader hasborder>
         <ModalBackButton onBack={onBack} />
         {!isMobile ? (
           <ModalTitle>Scegli come prenotare la chiamata</ModalTitle>
@@ -72,8 +72,8 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
               spacing={4}
               pb={isMobile ? "35px" : "20px"}
             >
-              <ModalTab isGMail={true} onClick={handleOnClick} />
-              <ModalTab isGMail={false} onClick={handleOnClick} />
+              <ModalTab isgmail={true} onClick={handleOnClick} />
+              <ModalTab isgmail={false} onClick={handleOnClick} />
             </Stack>
           </Stack>
         </ModalElipse>

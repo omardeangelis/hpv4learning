@@ -34,8 +34,15 @@ type Props = {
   userMail: string;
 };
 
+/**
+ * Trasformarlo in un oggetto che riceve una props disabled e cambia lo stile in base ad esso.
+ *
+ * P.S
+ * Smetti di usare ste porco dio dio width fisse e usa maxWidth.
+ */
 const StyledBox = styled(Box)`
-  width: 84px;
+  max-width: 84px;
+  width: 100%;
   height: 40px;
   border: 1px solid var(--gray-300);
   border-radius: 8px;
@@ -53,7 +60,7 @@ const StyledBox = styled(Box)`
   }
 
   @media screen and (min-width: 768px) {
-    width: 115px;
+    max-width: 115px;
     height: 45px;
   }
 `;
@@ -70,11 +77,6 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const slots = useCreateCalendarSlots(selectedDate?.toDate().toString());
   const { data: userAppointment, isLoading } =
     useGetAppointmentByMailQuery(userMail);
-
-  const slotsFurbi = React.useMemo(() => {
-    if (!slots) return;
-    return slots.map((slot) => ({ ...slot, items: slot.items.reverse() }));
-  }, [slots]);
 
   const [customError, setCustomError] = React.useState({
     msg: "",
@@ -121,7 +123,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ModalHeader hasBorder>
+        <ModalHeader hasborder>
           <ModalBackButton onBack={onBack} />
           {!isMobile ? (
             <ModalTitle>Prenota il tuo appuntamento</ModalTitle>
@@ -143,10 +145,10 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                 direction='row'
                 spacing={2}
                 justifyContent='center'
-                alignItems='center'
+                alignItems='flex-start'
               >
-                {slotsFurbi && slotsFurbi.length > 0 ? (
-                  slotsFurbi.map((slot) => {
+                {slots && slots.length > 0 ? (
+                  slots.map((slot) => {
                     return (
                       <Box key={slot.date}>
                         <Typography
@@ -165,8 +167,20 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                                   onClick={() => handleSlotSelection(item.id)}
                                   key={item?.startDate?.dateTime as string}
                                 >
-                                  {getDataFromCalendar(item?.startDate)?.time} -{" "}
-                                  {getDataFromCalendar(item?.endDate)?.time}
+                                  <Box px='6px'>
+                                    <Typography
+                                      sx={{
+                                        fontSize: { xs: "10px", md: "12px" },
+                                      }}
+                                    >
+                                      {
+                                        getDataFromCalendar(item?.startDate)
+                                          ?.time
+                                      }{" "}
+                                      -{" "}
+                                      {getDataFromCalendar(item?.endDate)?.time}
+                                    </Typography>
+                                  </Box>
                                 </StyledBox>
                               ))
                             : null}
@@ -236,7 +250,9 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
               </Typography>
             ) : null}
             <Button
-              disabled={deleteLoading || isLoading || !slots}
+              disabled={
+                deleteLoading || isLoading || !slots || !selectedEventId
+              }
               onClick={handleContinue}
               variant='contained'
               sx={{

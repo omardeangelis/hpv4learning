@@ -27,7 +27,7 @@ const WelcomeModal = ({ onContinue }: Props) => {
 
   return (
     <>
-      <ModalHeader hasBorder>
+      <ModalHeader hasborder>
         {onClose ? <ModalBackButton onBack={onClose} /> : null}
         {!isMobile ? <ModalTitle>Prenota una videochiamata</ModalTitle> : null}
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}

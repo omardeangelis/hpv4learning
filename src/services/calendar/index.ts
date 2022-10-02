@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { calendar_v3 } from "googleapis";
 
-type CalendarEventsItems = calendar_v3.Schema$Events["items"];
+type CalendarEventsItem = calendar_v3.Schema$Event;
 type CalendarBookedResponse = Pick<
-  calendar_v3.Schema$Event,
+  CalendarEventsItem,
   "start" | "hangoutLink"
 > & { mailSanded: boolean };
 type CalendarBookRequestProps = {
@@ -20,6 +20,7 @@ export type AvailableCalendarResponse = {
   id: string;
   startDate: calendar_v3.Schema$Event["start"];
   endDate: calendar_v3.Schema$Event["end"];
+  appointemntStatus: "booked" | "free";
 };
 
 export const googleCalendarApi = createApi({
@@ -38,12 +39,16 @@ export const googleCalendarApi = createApi({
       query: (startDate) =>
         "/api/calendar/get-all-calendars" +
         (startDate ? `?startDate=${startDate}` : ""),
-      transformResponse: (data: CalendarEventsItems) => {
+      transformResponse: (
+        data: (CalendarEventsItem & { appointemntStatus: "booked" | "free" })[],
+      ) => {
         if (data)
           return data.map((item) => ({
             id: item.id,
             startDate: item.start,
             endDate: item.end,
+            appointemntStatus:
+              item.extendedProperties?.private?.appointemntStatus || "free",
           })) as AvailableCalendarResponse[];
         return [];
       },
@@ -55,7 +60,7 @@ export const googleCalendarApi = createApi({
       string
     >({
       query: (mail) => `/api/calendar/get-appointment-by-mail?email=${mail}`,
-      transformResponse: (data: CalendarEventsItems) => {
+      transformResponse: (data: CalendarEventsItem[]) => {
         if (data)
           return data.map((item) => ({
             id: item.id,

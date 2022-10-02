@@ -32,7 +32,7 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
 
   return (
     <>
-      <ModalHeader hasBorder>
+      <ModalHeader hasborder>
         <ModalBackButton onBack={onBack} />
         {!isMobile ? <ModalTitle>Informazioni Aggiuntive</ModalTitle> : null}
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
