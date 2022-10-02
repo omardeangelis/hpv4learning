@@ -1,8 +1,10 @@
-import "./src/styles/global.css";
-import "./src/styles/font.css";
 import React from "react";
-import { ThemeWrapper } from "./root";
-export const onRenderBody = ({ setHeadComponents }) => {
+
+export const useServeStaticFonts = ({
+  setHeadComponents,
+}: {
+  setHeadComponents: (param: React.ReactNode[]) => void;
+}) => {
   setHeadComponents([
     <link
       key='Poppins'
@@ -152,4 +154,3 @@ export const onRenderBody = ({ setHeadComponents }) => {
     />,
   ]);
 };
-export const wrapRootElement = ThemeWrapper;

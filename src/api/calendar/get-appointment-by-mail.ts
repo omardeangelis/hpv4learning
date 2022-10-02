@@ -12,7 +12,7 @@ type ReqProps = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handler = (req: ReqProps, res: any) => {
+const handler = async (req: ReqProps, res: any) => {
   if (req.method !== "GET" && process.env.NODE_ENV === "production")
     throw new Error("Use GET Method");
   const userMail =

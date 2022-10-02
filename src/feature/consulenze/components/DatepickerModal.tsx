@@ -34,15 +34,22 @@ type Props = {
   userMail: string;
 };
 
-const StyledBox = styled(Box)<{ isBooked?: boolean; isMobile: boolean }>(
-  ({ isMobile, isBooked }) => ({
-    width: isMobile ? "84px" : "115px",
+const StyledBox = styled(Box)<{
+  appointmentStatus?: string;
+  isMobile: boolean;
+}>(
+  ({ isMobile, appointmentStatus }) => ({
+    maxWidth: isMobile ? "84px" : "115px",
+    width: "100%",
     height: isMobile ? "40px" : "45px",
-    border: isBooked ? "1px solid var(--gray-300)" : "none",
+    border:
+      appointmentStatus === "booked" ? "none" : "1px solid var(--gray-300)",
     borderRadius: "8px",
-    color: isBooked ? "var(--gray-500)" : "var(--gray-600)",
-    backgroundColor: isBooked ? "var(--gray-300)" : "none",
-    textDecoration: isBooked ? "line-through" : "none",
+    color:
+      appointmentStatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
+    backgroundColor:
+      appointmentStatus === "booked" ? "var(--gray-300)" : "none",
+    textDecoration: appointmentStatus === "booked" ? "line-through" : "none",
     fontSize: "10px",
     fontWeight: "400",
     lineHeight: "15px",
@@ -70,11 +77,6 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const slots = useCreateCalendarSlots(selectedDate?.toDate().toString());
   const { data: userAppointment, isLoading } =
     useGetAppointmentByMailQuery(userMail);
-
-  const slotsFurbi = React.useMemo(() => {
-    if (!slots) return;
-    return slots.map((slot) => ({ ...slot, items: slot.items.reverse() }));
-  }, [slots]);
 
   const [customError, setCustomError] = React.useState({
     msg: "",
@@ -121,7 +123,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <ModalHeader hasBorder>
+        <ModalHeader hasborder>
           <ModalBackButton onBack={onBack} />
           {!isMobile ? (
             <ModalTitle>Prenota il tuo appuntamento</ModalTitle>
@@ -145,8 +147,8 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                 justifyContent='center'
                 alignItems='flex-start'
               >
-                {slotsFurbi && slotsFurbi.length > 0 ? (
-                  slotsFurbi.map((slot) => {
+                {slots && slots.length > 0 ? (
+                  slots.map((slot) => {
                     return (
                       <Box key={slot.date}>
                         <Typography
@@ -163,11 +165,24 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                             ? slot.items.map((item) => (
                                 <StyledBox
                                   isMobile={isMobile}
+                                  appointmentStatus={item.appointemntStatus}
                                   onClick={() => handleSlotSelection(item.id)}
                                   key={item?.startDate?.dateTime as string}
                                 >
-                                  {getDataFromCalendar(item?.startDate)?.time} -{" "}
-                                  {getDataFromCalendar(item?.endDate)?.time}
+                                  <Box px='6px'>
+                                    <Typography
+                                      sx={{
+                                        fontSize: { xs: "10px", md: "12px" },
+                                      }}
+                                    >
+                                      {
+                                        getDataFromCalendar(item?.startDate)
+                                          ?.time
+                                      }{" "}
+                                      -{" "}
+                                      {getDataFromCalendar(item?.endDate)?.time}
+                                    </Typography>
+                                  </Box>
                                 </StyledBox>
                               ))
                             : null}
@@ -237,7 +252,9 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
               </Typography>
             ) : null}
             <Button
-              disabled={deleteLoading || isLoading || !slots}
+              disabled={
+                deleteLoading || isLoading || !slots || !selectedEventId
+              }
               onClick={handleContinue}
               variant='contained'
               sx={{

@@ -85,6 +85,11 @@ const handler = async (req: ReqProps, res: any) => {
           summary: `Consulenza con ${userMail}`,
           start: data.start,
           end: data.end,
+          extendedProperties: {
+            private: {
+              appointemntStatus: "booked",
+            },
+          },
         },
       });
 

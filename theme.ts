@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles/";
 
-const theme = createTheme({
+const theme = {
   palette: {
     primary: {
       main: "#7026BA",
@@ -141,6 +141,16 @@ const theme = createTheme({
       xl: 1440,
     },
   },
-});
+} as const;
 
-export { theme };
+type CustomTheme = {
+  [Key in keyof typeof theme]: typeof theme[Key];
+};
+declare module "@mui/material/styles/createTheme" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface Theme extends CustomTheme {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface ThemeOptions extends CustomTheme {}
+}
+
+export default createTheme(theme);
