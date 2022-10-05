@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
+import { triggerGACustomEvent } from "../../utils/tracking";
 
 const CustomStack = styled.div`
   & > *:not(:last-of-type) {
@@ -161,6 +162,11 @@ const DiscordBanner = () => {
                     <Button
                       variant='contained'
                       color='primary'
+                      onClick={
+                        type === "youtube"
+                          ? undefined
+                          : triggerGACustomEvent({ event: "join_discord" })
+                      }
                       endIcon={
                         <ArrowRightAltSharpIcon
                           sx={{

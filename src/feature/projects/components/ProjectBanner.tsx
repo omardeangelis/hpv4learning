@@ -6,6 +6,7 @@ import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import { useLayoutContext } from "../../../context/layout";
 import SeoLink from "../../../components/shared/SeoLink";
 import { createRowText } from "../../../utils/helpers";
+import { triggerGACustomEvent } from "../../../utils/tracking";
 
 interface Props {
   courseTitle?: string | null;
@@ -140,6 +141,10 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                   <Button
                     color='primary'
                     variant='contained'
+                    onClick={triggerGACustomEvent(
+                      { event: "click_to_udemy" },
+                      { hasLocation: true },
+                    )}
                     sx={{
                       width: "100%",
                       maxWidth: { xs: "105px", lg: "unset" },
