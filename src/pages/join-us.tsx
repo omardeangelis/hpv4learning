@@ -9,6 +9,7 @@ import { jobs } from "../asset/jobsdata";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import WebPageSchema from "../components/SEO/components/WebPageSchema";
+import { triggerGACustomEvent } from "../utils/tracking";
 
 const CustomStack = styled(Box)`
   .desktop-image {
@@ -123,6 +124,7 @@ const JoinUs = () => {
                   >
                     <SeoLink
                       isExternal
+                      onClick={triggerGACustomEvent({ event: "join_discord" })}
                       link={"https://discord.gg/pNhjB78F"}
                       rel='noopener'
                       target='_blank'

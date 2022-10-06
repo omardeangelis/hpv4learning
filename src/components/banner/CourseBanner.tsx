@@ -10,6 +10,7 @@ import {
 import { dateFormatter, isExpired } from "../../utils/helpers";
 import SeoLink from "../shared/SeoLink";
 import dayjs from "dayjs";
+import { triggerGACustomEvent } from "../../utils/tracking";
 
 const StyledBox = styled(Box)`
   border: 1px solid;
@@ -85,7 +86,7 @@ const CourseBanner = ({ title, date, prezzo, link, img }: Props) => {
               >
                 <Typography fontWeight={300} fontSize='10px'>
                   {`Scade il: ${dateFormatter(
-                    dayjs(date).add(30, "day").toString()
+                    dayjs(date).add(30, "day").toString(),
                   )}`}
                 </Typography>
               </Box>
@@ -126,6 +127,10 @@ const CourseBanner = ({ title, date, prezzo, link, img }: Props) => {
                       lg: "12px",
                     },
                   }}
+                  onClick={triggerGACustomEvent(
+                    { event: "click_to_udemy" },
+                    { hasLocation: true },
+                  )}
                   disabled={isExpired(date)}
                 >
                   {isExpired(date) ? "Esaurito" : `Solo 12.99€`}
