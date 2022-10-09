@@ -131,13 +131,18 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
           {onClose ? <ModalCloseButton onClose={onClose} /> : null}
         </ModalHeader>
         <ModalBody>
-          <Box
+          <Stack
+            direction='column'
             px='12px'
-            mb={{ xs: "auto", lg: "120px" }}
+            mb={{ xs: "auto", lg: "70px" }}
             alignItems='center'
             justifyContent='center'
           >
-            <Box px={{ xs: "10px", lg: "70px" }} pt='38px'>
+            <Box
+              px={{ xs: "10px", lg: "70px" }}
+              width={{ xs: "400px", lg: "600px" }}
+              pt='38px'
+            >
               <ModalStepper labels={reservationModalLabels} />
             </Box>
             <Box maxWidth='500px' mt='20px'>
@@ -237,7 +242,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                 />
               )}
             </FormControl>
-          </Box>
+          </Stack>
         </ModalBody>
         <ModalFooter>
           <Container>

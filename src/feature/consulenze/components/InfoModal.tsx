@@ -38,8 +38,12 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>
       <ModalBody>
-        <Box px='12px' mb={{ xs: "auto", lg: "100px" }}>
-          <Box px={{ xs: "10px", lg: "50px" }} py='28px'>
+        <Box px='12px' mb={{ xs: "auto", lg: "50px" }}>
+          <Box
+            px={{ xs: "10px", lg: "50px" }}
+            width={{ xs: "400px", lg: "600px" }}
+            py='28px'
+          >
             <ModalStepper labels={reservationModalLabels} />
           </Box>
           <Stack
