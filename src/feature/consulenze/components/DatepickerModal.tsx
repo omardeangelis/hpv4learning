@@ -36,21 +36,21 @@ type Props = {
 };
 
 const StyledBox = styled(Box)<{
-  appointmentStatus?: string;
-  isMobile: boolean;
+  appointmentstatus?: string;
+  ismobile: boolean;
 }>(
-  ({ isMobile, appointmentStatus }) => ({
-    maxWidth: isMobile ? "84px" : "115px",
+  ({ ismobile, appointmentstatus }) => ({
+    maxWidth: ismobile ? "84px" : "115px",
     width: "100%",
-    height: isMobile ? "40px" : "45px",
+    height: ismobile ? "40px" : "45px",
     border:
-      appointmentStatus === "booked" ? "none" : "1px solid var(--gray-300)",
+      appointmentstatus === "booked" ? "none" : "1px solid var(--gray-300)",
     borderRadius: "8px",
     color:
-      appointmentStatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
+      appointmentstatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
     backgroundColor:
-      appointmentStatus === "booked" ? "var(--gray-300)" : "none",
-    textDecoration: appointmentStatus === "booked" ? "line-through" : "none",
+      appointmentstatus === "booked" ? "var(--gray-300)" : "none",
+    textDecoration: appointmentstatus === "booked" ? "line-through" : "none",
     fontSize: "10px",
     fontWeight: "400",
     lineHeight: "15px",
@@ -61,7 +61,7 @@ const StyledBox = styled(Box)<{
   }),
   css`
     &:hover {
-      border: 1px solid var(--purple-400);
+      border: 1px solid var(--purple-400) !important;
     }
   `,
 );
@@ -188,9 +188,15 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                           {slot.items && !isEmpty(slot.items)
                             ? slot.items.map((item) => (
                                 <StyledBox
-                                  isMobile={isMobile}
-                                  appointmentStatus={item.appointemntStatus}
+                                  ismobile={isMobile}
+                                  appointmentstatus={item.appointemntStatus}
                                   onClick={() => handleSlotSelection(item.id)}
+                                  style={{
+                                    borderColor:
+                                      item.id === selectedEventId
+                                        ? "var(--purple-400)"
+                                        : "var(--gray-300)",
+                                  }}
                                   key={item?.startDate?.dateTime as string}
                                 >
                                   <Box px='6px'>
