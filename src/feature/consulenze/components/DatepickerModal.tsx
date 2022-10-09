@@ -27,6 +27,7 @@ import {
   useDeleteAppointmentMutation,
   useGetAppointmentByMailQuery,
 } from "../../../services/calendar";
+import * as Yup from "yup";
 
 type Props = {
   onBack: () => void;
@@ -35,21 +36,21 @@ type Props = {
 };
 
 const StyledBox = styled(Box)<{
-  appointmentStatus?: string;
-  isMobile: boolean;
+  appointmentstatus?: string;
+  ismobile: boolean;
 }>(
-  ({ isMobile, appointmentStatus }) => ({
-    maxWidth: isMobile ? "84px" : "115px",
+  ({ ismobile, appointmentstatus }) => ({
+    maxWidth: ismobile ? "84px" : "115px",
     width: "100%",
-    height: isMobile ? "40px" : "45px",
+    height: ismobile ? "40px" : "45px",
     border:
-      appointmentStatus === "booked" ? "none" : "1px solid var(--gray-300)",
+      appointmentstatus === "booked" ? "none" : "1px solid var(--gray-300)",
     borderRadius: "8px",
     color:
-      appointmentStatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
+      appointmentstatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
     backgroundColor:
-      appointmentStatus === "booked" ? "var(--gray-300)" : "none",
-    textDecoration: appointmentStatus === "booked" ? "line-through" : "none",
+      appointmentstatus === "booked" ? "var(--gray-300)" : "none",
+    textDecoration: appointmentstatus === "booked" ? "line-through" : "none",
     fontSize: "10px",
     fontWeight: "400",
     lineHeight: "15px",
@@ -60,17 +61,27 @@ const StyledBox = styled(Box)<{
   }),
   css`
     &:hover {
-      border: 1px solid var(--purple-400);
+      border: 1px solid var(--purple-400) !important;
     }
-  `
+  `,
 );
+
+const validationSchema = Yup.object().shape({
+  date: Yup.date()
+    .max(
+      new Date(Date.now() + 1000 * 60 * 60 * 24 * 60),
+      "Seleziona una data entro 60 giorni da oggi",
+    )
+    .required("Scegli una data"),
+});
 
 const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const [selectedDate, setSelectedDate] = React.useState<
     Dayjs | undefined | null
   >();
+  const [dateError, setDateError] = React.useState<string>("");
   const [selectedEventId, setSelectEventId] = React.useState<string | null>(
-    null
+    null,
   );
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
@@ -119,6 +130,14 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
     deleteLoading,
     deleteAppointment,
   ]);
+
+  React.useEffect(() => {
+    setDateError("");
+    if (selectedDate)
+      validationSchema
+        .validate({ date: selectedDate })
+        .catch((err) => setDateError(err.errors[0]));
+  }, [selectedDate]);
 
   return (
     <>
@@ -169,9 +188,15 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                           {slot.items && !isEmpty(slot.items)
                             ? slot.items.map((item) => (
                                 <StyledBox
-                                  isMobile={isMobile}
-                                  appointmentStatus={item.appointemntStatus}
+                                  ismobile={isMobile}
+                                  appointmentstatus={item.appointemntStatus}
                                   onClick={() => handleSlotSelection(item.id)}
+                                  style={{
+                                    borderColor:
+                                      item.id === selectedEventId
+                                        ? "var(--purple-400)"
+                                        : "var(--gray-300)",
+                                  }}
                                   key={item?.startDate?.dateTime as string}
                                 >
                                   <Box px='6px'>
@@ -220,6 +245,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
             <FormControl
               sx={{
                 width: "100%",
+                maxWidth: "480px",
               }}
             >
               {isMobile ? (
@@ -229,7 +255,9 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                   value={selectedDate}
                   onChange={handleChange}
                   disablePast
-                  renderInput={(params) => <TextField {...params} />}
+                  renderInput={(params) => (
+                    <TextField name='date' {...params} />
+                  )}
                 />
               ) : (
                 <DatePicker
@@ -238,9 +266,16 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                   value={selectedDate}
                   onChange={handleChange}
                   disablePast
-                  renderInput={(params) => <TextField {...params} />}
+                  renderInput={(params) => (
+                    <TextField name='date' {...params} />
+                  )}
                 />
               )}
+              {dateError ? (
+                <Typography variant='caption' color='red.400'>
+                  {dateError}
+                </Typography>
+              ) : null}
             </FormControl>
           </Stack>
         </ModalBody>
@@ -248,7 +283,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
           <Container>
             {!isLoading && !isEmpty(userAppointment) ? (
               <Typography color='red.400' variant='caption'>
-                Fatti furbo
+                Hai già un appuntamento prenotato, controlla il calendario
               </Typography>
             ) : null}
             {customError.value ? (
