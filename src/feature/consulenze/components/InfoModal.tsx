@@ -15,6 +15,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
 import { Form, Formik } from "formik";
+import * as Yup from "yup";
 
 type Props = {
   onBack: () => void;
@@ -25,6 +26,11 @@ const initialState = {
   professione: "",
   description: "",
 };
+
+const validationSchema = Yup.object().shape({
+  professione: Yup.string().max(100, "E'troppo lunga"),
+  description: Yup.string().max(300, "Ti prego..."),
+});
 
 const InfoModal = ({ onBack, onContinue }: Props) => {
   const { isMobile } = useResponsive();
@@ -73,30 +79,72 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
               lasciata sarà usata a scopi pubblicitari o per spammare promozioni
             </ModalTypography>
           </Stack>
-          <Formik onSubmit={onContinue} initialValues={initialState}>
-            {({ handleChange }) => {
+          <Formik
+            onSubmit={onContinue}
+            initialValues={initialState}
+            validationSchema={validationSchema}
+            validateOnMount
+          >
+            {({ handleChange, errors, touched }) => {
               return (
                 <Form id='info-form'>
                   <Box mt={isMobile ? "38px" : "74px"}>
-                    <Stack direction='column' spacing={2}>
-                      <TextField
-                        name='professione'
-                        id='outlined-basic'
-                        label='Professione'
-                        onChange={handleChange}
-                        size={isMobile ? "small" : "medium"}
-                      />
-                      <TextField
-                        name='description'
-                        id='outlined-basic'
-                        label='Descrizione'
-                        onChange={handleChange}
-                        sx={{
-                          "& .MuiInputBase-root": {
-                            height: 100,
-                          },
-                        }}
-                      />
+                    <Stack
+                      direction='column'
+                      spacing={2}
+                      alignItems='center'
+                      justifyContent='center'
+                    >
+                      <Stack
+                        width='100%'
+                        direction='column'
+                        alignItems='flex-start'
+                        justifyContent='center'
+                        maxWidth='480px'
+                      >
+                        <TextField
+                          name='professione'
+                          id='outlined-basic'
+                          label='Professione'
+                          onChange={handleChange}
+                          style={{
+                            width: "100%",
+                          }}
+                          size={isMobile ? "small" : "medium"}
+                        />
+                        <Typography variant='caption' color='red.400'>
+                          {errors.professione && touched.professione && (
+                            <p>{errors.professione}</p>
+                          )}
+                        </Typography>
+                      </Stack>
+                      <Stack
+                        width='100%'
+                        direction='column'
+                        alignItems='flex-start'
+                        justifyContent='center'
+                        maxWidth='480px'
+                      >
+                        <TextField
+                          name='description'
+                          id='outlined-basic'
+                          label='Descrizione'
+                          onChange={handleChange}
+                          style={{
+                            width: "100%",
+                          }}
+                          sx={{
+                            "& .MuiInputBase-root": {
+                              height: 100,
+                            },
+                          }}
+                        />
+                        <Typography variant='caption' color='red.400'>
+                          {errors.description && touched.description && (
+                            <p>{errors.description}</p>
+                          )}
+                        </Typography>
+                      </Stack>
                     </Stack>
                   </Box>
                 </Form>

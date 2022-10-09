@@ -118,7 +118,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [step]);
 
   React.useEffect(() => {
-    gotoStep("datepicker");
+    gotoStep("info");
   }, []);
 
   return (
