@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Container, Stack } from "@mui/system";
+import { Box, Container, css, Stack } from "@mui/system";
 import {
   ModalHeader,
   ModalBackButton,
@@ -34,43 +34,43 @@ type Props = {
   userMail: string;
 };
 
-/**
- * Trasformarlo in un oggetto che riceve una props disabled e cambia lo stile in base ad esso.
- *
- * P.S
- * Smetti di usare ste porco dio dio width fisse e usa maxWidth.
- */
-const StyledBox = styled(Box)`
-  max-width: 84px;
-  width: 100%;
-  height: 40px;
-  border: 1px solid var(--gray-300);
-  border-radius: 8px;
-  color: var(--gray-600);
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    border: 1px solid var(--purple-400);
-  }
-
-  @media screen and (min-width: 768px) {
-    max-width: 115px;
-    height: 45px;
-  }
-`;
+const StyledBox = styled(Box)<{
+  appointmentStatus?: string;
+  isMobile: boolean;
+}>(
+  ({ isMobile, appointmentStatus }) => ({
+    maxWidth: isMobile ? "84px" : "115px",
+    width: "100%",
+    height: isMobile ? "40px" : "45px",
+    border:
+      appointmentStatus === "booked" ? "none" : "1px solid var(--gray-300)",
+    borderRadius: "8px",
+    color:
+      appointmentStatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
+    backgroundColor:
+      appointmentStatus === "booked" ? "var(--gray-300)" : "none",
+    textDecoration: appointmentStatus === "booked" ? "line-through" : "none",
+    fontSize: "10px",
+    fontWeight: "400",
+    lineHeight: "15px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  }),
+  css`
+    &:hover {
+      border: 1px solid var(--purple-400);
+    }
+  `
+);
 
 const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const [selectedDate, setSelectedDate] = React.useState<
     Dayjs | undefined | null
   >();
   const [selectedEventId, setSelectEventId] = React.useState<string | null>(
-    null,
+    null
   );
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
@@ -131,13 +131,18 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
           {onClose ? <ModalCloseButton onClose={onClose} /> : null}
         </ModalHeader>
         <ModalBody>
-          <Box
+          <Stack
+            direction='column'
             px='12px'
-            mb={{ xs: "auto", lg: "120px" }}
+            mb={{ xs: "auto", lg: "70px" }}
             alignItems='center'
             justifyContent='center'
           >
-            <Box px={{ xs: "10px", lg: "70px" }} pt='38px'>
+            <Box
+              px={{ xs: "10px", lg: "70px" }}
+              width={{ xs: "400px", lg: "600px" }}
+              pt='38px'
+            >
               <ModalStepper labels={reservationModalLabels} />
             </Box>
             <Box maxWidth='500px' mt='20px'>
@@ -164,6 +169,8 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                           {slot.items && !isEmpty(slot.items)
                             ? slot.items.map((item) => (
                                 <StyledBox
+                                  isMobile={isMobile}
+                                  appointmentStatus={item.appointemntStatus}
                                   onClick={() => handleSlotSelection(item.id)}
                                   key={item?.startDate?.dateTime as string}
                                 >
@@ -235,7 +242,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                 />
               )}
             </FormControl>
-          </Box>
+          </Stack>
         </ModalBody>
         <ModalFooter>
           <Container>

@@ -65,7 +65,12 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
       <ModalBody>
         <ModalElipse pb={{ xs: "24px", lg: "38px" }}>
           <Stack direction='column' spacing={2}>
-            <ModalStepper labels={reservationModalLabels} />
+            <Box
+              px={{ xs: "10px", lg: "70px" }}
+              width={{ xs: "400px", lg: "600px" }}
+            >
+              <ModalStepper labels={reservationModalLabels} />
+            </Box>
             <Stack
               direction='row'
               justifyContent='center'

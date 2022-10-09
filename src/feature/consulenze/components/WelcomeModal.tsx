@@ -40,7 +40,12 @@ const WelcomeModal = ({ onContinue }: Props) => {
             alignItems='center'
             alignContent='center'
           >
-            <ModalStepper labels={reservationModalLabels} />
+            <Box
+              px={{ xs: "10px", lg: "70px" }}
+              width={{ xs: "400px", lg: "600px" }}
+            >
+              <ModalStepper labels={reservationModalLabels} />
+            </Box>
             <Box maxWidth='184px'>
               <StaticImage
                 src='../../../components/modal/images/calendar.png'
