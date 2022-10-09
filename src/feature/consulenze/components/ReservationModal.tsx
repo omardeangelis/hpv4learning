@@ -117,6 +117,10 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     }
   }, [step]);
 
+  React.useEffect(() => {
+    gotoStep("datepicker");
+  }, []);
+
   return (
     <Modal stepIndex={stepIndex} onClose={handleClose}>
       <ModalContent>{renderModalContent()}</ModalContent>
