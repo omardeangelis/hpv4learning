@@ -21,6 +21,38 @@ import { Formik, Form } from "formik";
 import { RootState } from "../../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { changeProvider } from "../../../store/reducers/consulenze";
+import * as Yup from "yup";
+import {
+  mailValidationRegex,
+  gmailEmailValidation,
+} from "../../../server/constants";
+
+const creareValidationSchema = (provider: "manual" | "gmail") =>
+  Yup.object().shape({
+    email: Yup.string()
+      .matches(
+        provider === "gmail"
+          ? mailValidationRegex && gmailEmailValidation
+          : mailValidationRegex,
+        {
+          excludeEmptyString: true,
+          message: `"Email non valida ${
+            provider === "gmail" ? "deve essere @gmail" : ""
+          }`,
+        },
+      )
+      .min(5, "Inseirisci almeno 5 caratteri")
+      .max(100, "massimo 10 caratteri")
+      .email(),
+    nome: Yup.string()
+      .min(2, "Inserisci almeno 2 lettere")
+      .max(100, "Non ha 100 lettere nel nome")
+      .notRequired(),
+    cognome: Yup.string()
+      .min(2, "Inserisci almeno 2 lettere")
+      .max(200, "Non ha 200 lettere nel nome")
+      .notRequired(),
+  });
 
 type initialValueProps = {
   email: string;
@@ -44,6 +76,11 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
   const dispatch = useDispatch();
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
+
+  const validationSchema = React.useMemo(
+    () => creareValidationSchema(provider),
+    [provider],
+  );
 
   const handleOnClick = React.useCallback(() => {
     dispatch(changeProvider());
@@ -106,8 +143,13 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
               </ModalTypography>
             ) : null}
           </Stack>
-          <Formik initialValues={initialValue} onSubmit={onContinue}>
-            {({ handleChange }) => (
+          <Formik
+            initialValues={initialValue}
+            onSubmit={onContinue}
+            validationSchema={validationSchema}
+            validateOnMount
+          >
+            {({ handleChange, errors, touched }) => (
               <Form id='provider-form'>
                 <Box mt={{ xs: "32px", lg: "40px" }}>
                   <Stack spacing={2}>
@@ -116,30 +158,58 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
                         direction={{ xs: "column", lg: "row" }}
                         spacing={2}
                       >
-                        <TextField
-                          name='nome'
-                          id='outlined-basic'
-                          label='Nome'
-                          size={isMobile ? "small" : "medium"}
-                          onChange={handleChange}
-                        />
-                        <TextField
-                          name='cognome'
-                          id='outlined-basic'
-                          label='Cognome'
-                          size={isMobile ? "small" : "medium"}
-                          onChange={handleChange}
-                        />
+                        <Box width='100%'>
+                          <TextField
+                            name='nome'
+                            id='outlined-basic'
+                            label='Nome'
+                            style={{
+                              width: "100%",
+                            }}
+                            size={isMobile ? "small" : "medium"}
+                            onChange={handleChange}
+                          />
+                          <Typography variant='caption' color='red.400'>
+                            {errors.nome && touched.nome && (
+                              <p>{errors.nome}</p>
+                            )}
+                          </Typography>
+                        </Box>
+                        <Box width='100%'>
+                          <TextField
+                            name='cognome'
+                            id='outlined-basic'
+                            label='Cognome'
+                            style={{
+                              width: "100%",
+                            }}
+                            size={isMobile ? "small" : "medium"}
+                            onChange={handleChange}
+                          />
+                          <Typography variant='caption' color='red.400'>
+                            {errors.cognome && touched.cognome && (
+                              <p>{errors.cognome}</p>
+                            )}
+                          </Typography>
+                        </Box>
                       </Stack>
                     ) : null}
-                    <TextField
-                      name='email'
-                      id='outlined-basic'
-                      label='Mail'
-                      size={isMobile ? "small" : "medium"}
-                      required
-                      onChange={handleChange}
-                    />
+                    <Box width='100%'>
+                      <TextField
+                        name='email'
+                        id='outlined-basic'
+                        label='Mail'
+                        size={isMobile ? "small" : "medium"}
+                        style={{
+                          width: "100%",
+                        }}
+                        required
+                        onChange={handleChange}
+                      />
+                      <Typography variant='caption' color='red.400'>
+                        {errors.email && touched.email && <p>{errors.email}</p>}
+                      </Typography>
+                    </Box>
                   </Stack>
                 </Box>
               </Form>
