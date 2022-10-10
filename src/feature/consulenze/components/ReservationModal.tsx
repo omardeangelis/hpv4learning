@@ -42,34 +42,45 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
     "error" as const,
   ]);
 
-  const onContinue = (values: Partial<FormData>) => {
-    console.log(values);
-    setFormData({ ...formData, ...values });
-    nextStep();
-  };
+  const onContinue = React.useCallback(
+    (values: Partial<FormData>) => {
+      console.log({ ...formData, ...values });
+      setFormData({ ...formData, ...values });
+      nextStep();
+    },
+    [nextStep, formData],
+  );
   const { provider } = useSelector((store: RootState) => store.consulenza);
-  const [bookAppointment, result] = useBookAppointmentMutation();
+  const [bookAppointment, { data, error }] = useBookAppointmentMutation();
 
   const onSumbit = React.useCallback(
     async (values: Partial<FormData>) => {
-      console.log(values);
       setFormData({ ...formData, ...values });
       try {
         await bookAppointment({
           ...formData,
           ...values,
           shouldSendMail: provider === "manual",
-        })
-          .unwrap()
-          .catch(() => gotoStep("error"));
-        if (result?.data?.hangoutLink)
-          localStorage.setItem("success_data", result.data.hangoutLink);
-        gotoStep("success");
+        });
+        if (error) {
+          gotoStep("error");
+        } else {
+          if (data?.hangoutLink)
+            localStorage.setItem("success_data", data.hangoutLink);
+          gotoStep("success");
+        }
       } catch (error) {
         gotoStep("error");
       }
     },
-    [formData, gotoStep, nextStep, bookAppointment, provider],
+    [
+      formData,
+      gotoStep,
+      nextStep,
+      bookAppointment,
+      provider,
+      data?.hangoutLink,
+    ],
   );
 
   console.log(formData);
@@ -83,7 +94,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
       setFormData({ ...formData, eventId });
       nextStep();
     },
-    [nextStep],
+    [nextStep, formData],
   );
 
   const renderModalContent = React.useCallback(() => {
