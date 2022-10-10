@@ -11,42 +11,38 @@ type ReqProps = {
   query: {
     [x: string]: string;
   };
-  body: {
-    email: string;
-    nome?: string;
-    cognome?: string;
-    professione?: string;
-    description?: string;
-    shouldSendMail?: boolean;
-  };
+  body: string;
 };
 
-const createCalendarDescription = (props: ReqProps["body"]) => {
-  let calendarDescription: string | undefined;
-  for (const key in props) {
-    if (Object.prototype.hasOwnProperty.call(props, key)) {
-      const element = props[key as keyof ReqProps["body"]];
+type ParsedBody = {
+  email: string;
+  nome?: string;
+  cognome?: string;
+  professione?: string;
+  description?: string;
+  shouldSendMail?: boolean;
+};
 
-      if (element) {
-        if (key === "email" || key === "shouldSendMail") continue;
-        calendarDescription += ` ${element}`;
-      }
-    }
-  }
+const createCalendarDescription = (props: ParsedBody) => {
+  const calendarDescription = `nome: ${props.nome ? props.nome : ""} cognome: ${
+    props.cognome ? props.cognome : ""
+  } descrizione: ${props.description ? props.description : ""} professione: ${
+    props.professione ? props.professione : ""
+  }`;
+
   return calendarDescription;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = async (req: ReqProps, res: any) => {
-  if (req.method === "PUT" && process.env.NODE_ENV === "production")
-    throw new Error("Use PUT Method");
+  if (req.method !== "PUT") throw new Error("Use PUT Method");
   if (!req.query) throw new Error("Mancano i query params nell'URL");
-  if (!req.body && process.env.NODE_ENV === "production")
-    throw new Error("Body mancante");
-  const description = createCalendarDescription(req.body);
-  const { email } = req.body;
+  if (!req.body) throw new Error("Body mancante");
+  const body = JSON.parse(req.body) as ParsedBody;
+  const description = createCalendarDescription(body);
+  const { email } = body;
   const { eventId } = req.query;
-  const userMail = process.env.NODE_ENV === "production" ? email : testingMail;
+  const userMail = email ? email : testingMail;
   if (!isValidMail(userMail)) throw new Error("Email non valida");
   try {
     const { data } = await calendar.events.get({
@@ -68,7 +64,7 @@ const handler = async (req: ReqProps, res: any) => {
             {
               email: userMail,
               responseStatus: "accepted",
-              displayName: req.body?.nome,
+              displayName: body?.nome,
             },
             {
               email: "omardeangelis.business@gmail.com",
@@ -95,7 +91,7 @@ const handler = async (req: ReqProps, res: any) => {
 
       const { start, hangoutLink } = responseData;
       let mailSended: boolean | undefined;
-      if (req.body.shouldSendMail)
+      if (body.shouldSendMail)
         try {
           const message = createCalendarConfirmationMail(
             userMail,
