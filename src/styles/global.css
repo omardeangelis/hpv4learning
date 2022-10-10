@@ -81,6 +81,7 @@
     /*
   Official Theme
   */
+    --gray-200: #F8F8F8;
     --gray-300: #E4E7EC;
     --gray-400: #D0D5DD;
     --gray-500: #6C757D;
@@ -95,6 +96,7 @@
     --purple-400: #8769FE;
     --purple-500: #A435F0;
     --purple-800: #341268;
+    --purple-900: #11081F;
     --purple-gradient-200: linear-gradient(180deg, #E9E3FF, white);
     --purple-gradient-800: : linear-gradient(180deg, #341268, #8769FE);
 
@@ -278,4 +280,101 @@ SOCIAL STYLE
 .Tooltip {
     pointer-events: none;
 
+}
+
+.float-animation {
+    animation: buttonStartFloatMobile 0ms ease 0s 1 forwards, buttonRotateAfterFloat 500ms ease 0s 1 forwards;
+}
+
+.unfloat-animation {
+    animation: buttonStopFloatMobile 0ms ease 0s 1 forwards;
+}
+
+@media screen and (min-width: 768px) {
+    .float-animation {
+        animation: buttonStartFloat 0ms ease 0s 1 forwards, buttonRotateAfterFloat 500ms ease 0s 1 forwards;
+    }
+
+    .unfloat-animation {
+        animation: buttonStopFloat 0ms ease 0s 1 forwards;
+    }
+}
+
+
+@keyframes buttonStopFloat {
+    0% {
+        border-radius: 50%;
+        width: 72px;
+        height: 72px;
+        background-color: var(--purple-400);
+    }
+
+    100% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 64px;
+        background-color: white;
+    }
+}
+
+
+@keyframes buttonStartFloat {
+    0% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 64px;
+        background-color: white;
+    }
+
+    100% {
+        border-radius: 50%;
+        width: 72px;
+        height: 72px;
+        background-color: var(--purple-400);
+    }
+}
+
+
+@keyframes buttonStopFloatMobile {
+    0% {
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        background-color: var(--purple-400);
+    }
+
+    100% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 56px;
+        background-color: white;
+    }
+}
+
+
+@keyframes buttonStartFloatMobile {
+    0% {
+        border-radius: 100px;
+        width: fit-content;
+        height: 56px;
+        background-color: white;
+    }
+
+    100% {
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        background-color: var(--purple-400);
+    }
+}
+
+@keyframes buttonRotateAfterFloat {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+
+    100% {
+        transform: rotateZ(720deg);
+    }
 }

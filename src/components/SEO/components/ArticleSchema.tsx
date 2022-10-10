@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import useArticleSchema from "../hooks/useArticleSchema";
 import useBreadcrumbSchema from "../hooks/useBreadcrumbSchema";
 import useWebPageSchema from "../hooks/useWebPageSchema";
@@ -42,14 +41,12 @@ const ArticleSchema = ({
   });
 
   return (
-    <Helmet>
-      <script type='application/ld+json'>
-        {JSON.stringify({
-          ...schema,
-          ["@graph"]: [...schema["@graph"], breadcrumbSchema, ...articleSchema],
-        })}
-      </script>
-    </Helmet>
+    <script type='application/ld+json'>
+      {JSON.stringify({
+        ...schema,
+        ["@graph"]: [...schema["@graph"], breadcrumbSchema, ...articleSchema],
+      })}
+    </script>
   );
 };
 
