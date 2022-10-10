@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Container, css, Stack } from "@mui/system";
+import { Box, Container, Stack } from "@mui/system";
 import {
   ModalHeader,
   ModalBackButton,
@@ -38,33 +38,30 @@ type Props = {
 const StyledBox = styled(Box)<{
   appointmentstatus?: string;
   ismobile: boolean;
-}>(
-  ({ ismobile, appointmentstatus }) => ({
-    maxWidth: ismobile ? "84px" : "115px",
-    width: "100%",
-    height: ismobile ? "40px" : "45px",
+}>(({ ismobile, appointmentstatus }) => ({
+  maxWidth: ismobile ? "84px" : "115px",
+  width: "100%",
+  height: ismobile ? "40px" : "45px",
+  border: appointmentstatus === "booked" ? "none" : "1px solid var(--gray-300)",
+  borderRadius: "8px",
+  color: appointmentstatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
+  backgroundColor: appointmentstatus === "booked" ? "var(--gray-300)" : "none",
+  textDecoration: appointmentstatus === "booked" ? "line-through" : "none",
+  fontSize: "10px",
+  fontWeight: "400",
+  lineHeight: "15px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+
+  "&:hover": {
     border:
-      appointmentstatus === "booked" ? "none" : "1px solid var(--gray-300)",
-    borderRadius: "8px",
-    color:
-      appointmentstatus === "booked" ? "var(--gray-500)" : "var(--gray-600)",
-    backgroundColor:
-      appointmentstatus === "booked" ? "var(--gray-300)" : "none",
-    textDecoration: appointmentstatus === "booked" ? "line-through" : "none",
-    fontSize: "10px",
-    fontWeight: "400",
-    lineHeight: "15px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-  }),
-  css`
-    &:hover {
-      border: 1px solid var(--purple-400) !important;
-    }
-  `,
-);
+      appointmentstatus === "booked"
+        ? "none"
+        : "1px solid var(--purple-400) !important",
+    cursor: appointmentstatus === "booked" ? "default" : "pointer",
+  },
+}));
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -98,13 +95,17 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
     setSelectedDate(newValue);
   };
 
-  const handleSlotSelection = React.useCallback((id: string) => {
-    setSelectEventId(id);
-    setCustomError({
-      msg: "",
-      value: false,
-    });
-  }, []);
+  const handleSlotSelection = React.useCallback(
+    (id: string, appointementStatus: string) => {
+      if (appointementStatus === "booked") return;
+      setSelectEventId(id);
+      setCustomError({
+        msg: "",
+        value: false,
+      });
+    },
+    [],
+  );
 
   const [deleteAppointment, { isLoading: deleteLoading }] =
     useDeleteAppointmentMutation();
@@ -190,7 +191,12 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                                 <StyledBox
                                   ismobile={isMobile}
                                   appointmentstatus={item.appointemntStatus}
-                                  onClick={() => handleSlotSelection(item.id)}
+                                  onClick={() =>
+                                    handleSlotSelection(
+                                      item.id,
+                                      item.appointemntStatus,
+                                    )
+                                  }
                                   style={{
                                     borderColor:
                                       item.id === selectedEventId
