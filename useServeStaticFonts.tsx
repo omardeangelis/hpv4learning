@@ -6,7 +6,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-Black.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -14,7 +14,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-BlackItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -22,7 +22,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-Bold.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -30,7 +30,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-BoldItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -38,7 +38,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-ExtraBold.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -46,7 +46,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-ExtraBoldItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -54,7 +54,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-ExtraLight.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -62,7 +62,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-ExtraLightItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -70,7 +70,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-Light.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -78,16 +78,16 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-Italic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
 
   <link
     key='Poppins'
     rel='preload'
-    href='/fonts/Medium-Bold.ttf'
+    href='/fonts/Poppins-Medium.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -95,16 +95,16 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-LightItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
 
   <link
     key='Poppins'
     rel='preload'
-    href='/fonts/Regular-Bold.ttf'
+    href='/fonts/Poppins-Regular.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -112,7 +112,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-MediumItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -120,7 +120,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-SemiBold.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -128,7 +128,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-SemiBoldItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -136,7 +136,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-Thin.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
   <link
@@ -144,7 +144,7 @@ export const useServeStaticFonts = () => [
     rel='preload'
     href='/fonts/Poppins-ThinItalic.ttf'
     as='font'
-    type='font/tff'
+    type='font/ttf'
     crossOrigin='anonymous'
   />,
 ];

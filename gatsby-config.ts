@@ -28,7 +28,16 @@ const config: GatsbyConfig = {
         spaceId: process.env.GATSBY_CONTENTFULL_SPACE_ID,
       },
     },
-    "gatsby-plugin-gatsby-cloud",
+    {
+      resolve: "gatsby-plugin-gatsby-cloud",
+      options: {
+        headers: {
+          "/fonts/*": ["Cache-Control: public, max-age=31536000, immutable"],
+          "/*.svg": ["Cache-Control: public, max-age=31536000, immutable"],
+          "/*.png": ["Cache-Control: public, max-age=31536000, immutable"],
+        },
+      },
+    },
     "gatsby-plugin-image",
     "gatsby-plugin-sitemap",
     {
