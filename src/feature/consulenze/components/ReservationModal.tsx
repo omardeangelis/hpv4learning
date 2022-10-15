@@ -10,8 +10,9 @@ import { ConsulenzeErrorModal } from "./ConsulenzeErrorModal";
 import DatepickerModal from "./DatepickerModal";
 import InfoModal from "./InfoModal";
 import { useBookAppointmentMutation } from "../../../services/calendar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store";
+import { saveSuccessMessage } from "../../../store/reducers/consulenze";
 
 type FormData = {
   email: string;
@@ -33,6 +34,7 @@ const initialData = {
 
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const [formData, setFormData] = React.useState<FormData>(initialData);
+  const dispatch = useDispatch();
   const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
@@ -62,28 +64,29 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
           ...values,
           shouldSendMail: provider === "manual",
         });
-        if (error) {
-          gotoStep("error");
-        } else {
-          if (data?.hangoutLink)
-            localStorage.setItem("success_data", data.hangoutLink);
-          gotoStep("success");
-        }
       } catch (error) {
         gotoStep("error");
       }
     },
-    [
-      formData,
-      gotoStep,
-      nextStep,
-      bookAppointment,
-      provider,
-      data?.hangoutLink,
-    ],
+    [formData, gotoStep, nextStep, bookAppointment, provider, data],
   );
 
-  console.log(formData);
+  React.useEffect(() => {
+    if (data) {
+      if (data.hangoutLink)
+        localStorage.setItem("success_data", data.hangoutLink);
+      dispatch(
+        saveSuccessMessage({
+          date: data.start,
+          hangoutLink: data.hangoutLink,
+        }),
+      );
+      gotoStep("success");
+    }
+    if (error) {
+      gotoStep("error");
+    }
+  }, [data, data?.start, data?.hangoutLink, dispatch, gotoStep, error]);
 
   const handleClose = React.useCallback(() => {
     navigate("/consulenze/");
@@ -114,15 +117,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
       case "info":
         return <InfoModal onBack={prevStep} onContinue={onSumbit} />;
       case "success":
-        return (
-          <SuccessModal
-            start={{
-              "dateTime": "2022-08-12T21:00:00+02:00",
-              "timeZone": "Europe/Rome",
-            }}
-            hangoutLink='Suca'
-          />
-        );
+        return <SuccessModal />;
       case "error":
         return <ConsulenzeErrorModal onContinue={() => gotoStep("welcome")} />;
     }
