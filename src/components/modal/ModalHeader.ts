@@ -8,7 +8,7 @@ export const ModalHeader = styled(Box)<{ hasborder?: true }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: ${(props) => (props.hasborder ? "1px solid #E4E7EC" : "none")};
+  border-bottom: 1px solid;
 
   & * {
     margin: auto 12px auto 12px;
@@ -20,6 +20,8 @@ export const ModalHeader = styled(Box)<{ hasborder?: true }>`
       margin: auto 20px auto 20px;
     }
   }
+  border-bottom-color: ${({ hasborder }) =>
+    hasborder ? "#E4E7EC" : "transparent"};
 `;
 
 export const ModalTitle = styled(Typography)`

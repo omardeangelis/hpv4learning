@@ -6,7 +6,6 @@ import { Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useHasMounted from "../../../hook/useHasMounted";
 import { BorderBox } from "../../../components/layout";
-import { calendar_v3 } from "googleapis";
 import { getDataFromCalendar } from "../utils/helpers";
 import {
   ModalBody,
@@ -16,25 +15,27 @@ import {
   ModalTitle,
 } from "../../../components/modal";
 import { useResponsive } from "../../../hook/useResponsive";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
-type NonNullableLink = NonNullable<calendar_v3.Schema$Event["hangoutLink"]>;
-type NonNullableStart = NonNullable<calendar_v3.Schema$Event["start"]>;
-type Props = {
-  start: NonNullableStart;
-  hangoutLink: NonNullableLink;
-};
-
-const SuccessModal = React.memo(({ start, hangoutLink }: Props) => {
-  const dates = getDataFromCalendar(start);
+const SuccessModal = React.memo(() => {
+  const { successMessage } = useSelector(
+    (store: RootState) => store.consulenza,
+  );
+  const dates = React.useMemo(() => {
+    if (successMessage?.date) return getDataFromCalendar(successMessage.date);
+  }, [successMessage?.date]);
   const { onClose } = useModalContext() || {};
   const { isMobile } = useResponsive();
   const [copy, setCopy] = React.useState<boolean>(false);
   const hasMounted = useHasMounted();
   const handleCopy = React.useCallback(async () => {
     if (!hasMounted) return;
-    if (!hangoutLink) return;
-    navigator.clipboard.writeText(hangoutLink).then(() => setCopy(true));
-  }, [hasMounted]);
+    if (!successMessage?.hangoutLink) return;
+    navigator.clipboard
+      .writeText(successMessage?.hangoutLink)
+      .then(() => setCopy(true));
+  }, [hasMounted, successMessage?.hangoutLink]);
 
   React.useEffect(() => {
     if (copy) {
@@ -46,7 +47,7 @@ const SuccessModal = React.memo(({ start, hangoutLink }: Props) => {
   }, [copy]);
   return (
     <>
-      <ModalHeader>
+      <ModalHeader hasborder>
         {!isMobile ? <ModalTitle>Appuntamento Fissato</ModalTitle> : null}
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>
@@ -96,50 +97,54 @@ const SuccessModal = React.memo(({ start, hangoutLink }: Props) => {
               ) : null}
             </Box>
           </Box>
-          <BorderBox
-            mx='auto'
-            mt='24px'
-            maxWidth='360px'
-            width='100%'
-            onClick={handleCopy}
-            sx={{
-              cursor: "pointer",
-              borderRadius: "8px",
-              background: "var(--gray-200)",
-              px: "8px",
-              ":hover": {
-                ".icon-box": {
-                  color: "var(--gray-700)",
-                },
-              },
-            }}
-          >
-            <Stack
-              flexDirection='row'
-              alignItems='center'
-              height='72px'
-              justifyContent='space-between'
-            >
-              <Typography fontSize='14px' color='gray.600'>
-                {hangoutLink}
-              </Typography>
-              <ContentCopyIcon
-                className='icon-box'
+          {successMessage?.hangoutLink ? (
+            <>
+              <BorderBox
+                mx='auto'
+                mt='24px'
+                maxWidth='360px'
+                width='100%'
+                onClick={handleCopy}
                 sx={{
-                  color: "gray.500",
+                  cursor: "pointer",
+                  borderRadius: "8px",
+                  background: "var(--gray-200)",
+                  px: "8px",
+                  ":hover": {
+                    ".icon-box": {
+                      color: "var(--gray-700)",
+                    },
+                  },
                 }}
-              />
-            </Stack>
-          </BorderBox>
+              >
+                <Stack
+                  flexDirection='row'
+                  alignItems='center'
+                  height='72px'
+                  justifyContent='space-between'
+                >
+                  <Typography fontSize='14px' color='gray.600'>
+                    {successMessage.hangoutLink}
+                  </Typography>
+                  <ContentCopyIcon
+                    className='icon-box'
+                    sx={{
+                      color: "gray.500",
+                    }}
+                  />
+                </Stack>
+              </BorderBox>
+              {copy ? (
+                <Box height='12px'>
+                  <Typography fontSize='12px'>Copiato negli appunti</Typography>
+                </Box>
+              ) : (
+                <Box height='12px' width='100%' />
+              )}
+            </>
+          ) : null}
         </Container>
 
-        {copy ? (
-          <Box height='12px'>
-            <Typography fontSize='12px'>Copiato negli appunti</Typography>
-          </Box>
-        ) : (
-          <Box height='12px' width='100%' />
-        )}
         <Container>
           <Typography
             mt='18px'
