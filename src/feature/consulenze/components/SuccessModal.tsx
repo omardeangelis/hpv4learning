@@ -8,7 +8,6 @@ import useHasMounted from "../../../hook/useHasMounted";
 import { BorderBox } from "../../../components/layout";
 import { getDataFromCalendar } from "../utils/helpers";
 import {
-  ModalBackButton,
   ModalBody,
   ModalCloseButton,
   ModalElipse,
@@ -49,7 +48,6 @@ const SuccessModal = React.memo(() => {
   return (
     <>
       <ModalHeader hasborder>
-        <ModalBackButton onBack={() => null} />
         {!isMobile ? <ModalTitle>Appuntamento Fissato</ModalTitle> : null}
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>

@@ -2,23 +2,25 @@ import { Box } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import { useResponsive } from "../../hook/useResponsive";
-import { useModalContext } from "./context";
 import { ModalCloseButton } from "./ModalButtons";
 import { ModalElipse } from "./ModalElipse";
 import { ModalHeader, ModalTitle } from "./ModalHeader";
+import { navigate } from "gatsby";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const ErrorModal = ({ children }: Props) => {
-  const { onClose } = useModalContext() || {};
+  const handleNavigate = React.useCallback(() => {
+    navigate(-1);
+  }, []);
   const { isMobile } = useResponsive();
   return (
     <>
       <ModalHeader>
         {isMobile ? null : <ModalTitle>C'è stato un Errore</ModalTitle>}
-        {onClose ? <ModalCloseButton onClose={onClose} /> : null}
+        {<ModalCloseButton onClose={handleNavigate} />}
       </ModalHeader>
       <ModalElipse>
         <Box maxWidth='184px' mb='38px'>
