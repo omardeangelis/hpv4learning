@@ -9,10 +9,15 @@ import ProviderModal from "./ProviderModal";
 import { ConsulenzeErrorModal } from "./ConsulenzeErrorModal";
 import DatepickerModal from "./DatepickerModal";
 import InfoModal from "./InfoModal";
-import { useBookAppointmentMutation } from "../../../services/calendar";
+import {
+  useBookAppointmentMutation,
+  useDeleteAppointmentMutation,
+  useGetAppointmentByMailQuery,
+} from "../../../services/calendar";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store";
 import { saveSuccessMessage } from "../../../store/reducers/consulenze";
+import { isEmpty } from "lodash";
 
 type FormData = {
   email: string;
@@ -35,6 +40,12 @@ const initialData = {
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const [formData, setFormData] = React.useState<FormData>(initialData);
   const dispatch = useDispatch();
+  const [deleteAppointment, { isLoading: deleteLoading }] =
+    useDeleteAppointmentMutation();
+  const { data: userAppointment } = useGetAppointmentByMailQuery(
+    formData.email,
+  );
+
   const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
     "welcome" as const,
     "provider" as const,
@@ -58,6 +69,15 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const onSumbit = React.useCallback(
     async (values: Partial<FormData>) => {
       setFormData({ ...formData, ...values });
+
+      if (userAppointment && !isEmpty(userAppointment)) {
+        try {
+          await deleteAppointment(userAppointment[0].id);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       try {
         await bookAppointment({
           ...formData,
@@ -68,7 +88,17 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         gotoStep("error");
       }
     },
-    [formData, gotoStep, nextStep, bookAppointment, provider, data],
+    [
+      formData,
+      gotoStep,
+      nextStep,
+      bookAppointment,
+      provider,
+      data,
+      deleteAppointment,
+      userAppointment,
+      userAppointment?.[0]?.id,
+    ],
   );
 
   React.useEffect(() => {
@@ -115,7 +145,13 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
           />
         );
       case "info":
-        return <InfoModal onBack={prevStep} onContinue={onSumbit} />;
+        return (
+          <InfoModal
+            onBack={prevStep}
+            deleteLoading={deleteLoading}
+            onContinue={onSumbit}
+          />
+        );
       case "success":
         return <SuccessModal />;
       case "error":

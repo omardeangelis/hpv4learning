@@ -21,6 +21,7 @@ import * as Yup from "yup";
 type Props = {
   onBack: () => void;
   onContinue: (params: { professione: string; description: string }) => void;
+  deleteLoading: boolean;
 };
 
 const initialState = {
@@ -33,7 +34,7 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().max(300, "Ti prego..."),
 });
 
-const InfoModal = ({ onBack, onContinue }: Props) => {
+const InfoModal = ({ onBack, onContinue, deleteLoading }: Props) => {
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext() || {};
 
@@ -166,7 +167,7 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
                   }}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? (
+                  {isSubmitting || deleteLoading ? (
                     <Box display='flex'>
                       <CircularProgress size={25} />
                     </Box>
