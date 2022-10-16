@@ -8,6 +8,8 @@ import { createRowText } from "../../../utils/helpers";
 import { useSelector, useDispatch } from "react-redux";
 import { closeProjectBanner } from "../../../store/reducers/uiSlice";
 import { RootState } from "../../../store";
+import { triggerGACustomEvent } from "../../../utils/tracking";
+
 interface Props {
   courseTitle?: string | null;
   prezzo?: number | null;
@@ -146,6 +148,10 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                   <Button
                     color='primary'
                     variant='contained'
+                    onClick={triggerGACustomEvent(
+                      { event: "click_to_udemy" },
+                      { hasLocation: true },
+                    )}
                     sx={{
                       width: "100%",
                       maxWidth: { xs: "105px", lg: "unset" },

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Button, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { triggerGACustomEvent } from "../../utils/tracking";
 import SeoLink from "../shared/SeoLink";
 
 const StyledBox = styled(Box)`
@@ -144,7 +145,7 @@ const CourseCoupon = ({
                 }}
               >
                 {`-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                  0
+                  0,
                 )}%`}
               </Typography>
             </Box>
@@ -175,6 +176,10 @@ const CourseCoupon = ({
                     borderRadius: "100px",
                     width: "100%",
                   }}
+                  onClick={triggerGACustomEvent(
+                    { event: "clic_to_udemy" },
+                    { hasLocation: true },
+                  )}
                 >
                   {isDisabled ? "Esaurito" : "Riscatta Coupon"}
                 </Button>

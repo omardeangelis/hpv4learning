@@ -4,6 +4,7 @@ import React from "react";
 import { CourseInfoProps, ResponsiveInfoProps } from "../types/course";
 import { createStarReview } from "../utils/general";
 import { convertToHHMMSS, dateFormatter } from "../utils/helpers";
+import { triggerGACustomEvent } from "../utils/tracking";
 import SeoLink from "./shared/SeoLink";
 
 const CourseInfo = ({
@@ -106,6 +107,14 @@ const CourseInfo = ({
                 borderRadius: "100px",
                 width: "100%",
               }}
+              onClick={
+                tipologia.toLowerCase() === "free"
+                  ? undefined
+                  : triggerGACustomEvent(
+                      { event: "click_to_udemy" },
+                      { hasLocation: true },
+                    )
+              }
             >
               {tipologia.toLowerCase() === "free"
                 ? "Vedi su Youtube"
@@ -190,6 +199,14 @@ const ResponsiveInfoBox = ({
                 borderRadius: "100px",
                 width: "100%",
               }}
+              onClick={
+                tipologia.toLowerCase() === "free"
+                  ? undefined
+                  : triggerGACustomEvent(
+                      { event: "click_to_udemy" },
+                      { hasLocation: true },
+                    )
+              }
             >
               {tipologia.toLowerCase() === "free"
                 ? "Vedi su Youtube"

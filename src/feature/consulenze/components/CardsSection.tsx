@@ -215,7 +215,7 @@ export const CardsSection = () => {
 export const StandardImageFragment = graphql`
   fragment FileImageFragment on File {
     childImageSharp {
-      gatsbyImageData
+      gatsbyImageData(placeholder: TRACED_SVG)
     }
   }
 `;
