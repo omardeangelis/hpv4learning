@@ -41,35 +41,8 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
     return data.latestProjects.edges[0];
   }, []);
 
-  const courseTitlesString = React.useMemo(() => {
-    return data.projects.group.map((el) => el.fieldValue).join(",");
-  }, []);
-
-  const breadcrumbs = React.useMemo(
-    () => [
-      {
-        text: "Home",
-        link: "/",
-      },
-      {
-        text: "Progetti",
-        link: "/progetti/",
-      },
-    ],
-    [],
-  );
   return (
     <Layout>
-      <MetaDecorator
-        metaTitle={"Impara grazie alla pratica"}
-        metaDescription={`Consolida le tue conoscenze in ${courseTitlesString} con progetti pratici`}
-      />
-      <WebPageSchema
-        title={"Impara grazie alla pratica"}
-        description={`Consolida le tue conoscenze in ${courseTitlesString} con progetti pratici`}
-        breadcrumbs={breadcrumbs}
-      />
-      <LinkHandler />
       <Container maxWidth='lg'>
         {latestProject ? <LatestProject {...latestProject} /> : null}
         {data.projects.group.map((post, index) => {
@@ -98,6 +71,40 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
         })}
       </Container>
     </Layout>
+  );
+};
+
+export const Head = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
+  const breadcrumbs = React.useMemo(
+    () => [
+      {
+        text: "Home",
+        link: "/",
+      },
+      {
+        text: "Progetti",
+        link: "/progetti/",
+      },
+    ],
+    [],
+  );
+
+  const courseTitlesString = React.useMemo(() => {
+    return data.projects.group.map((el) => el.fieldValue).join(",");
+  }, []);
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={"Impara grazie alla pratica"}
+        metaDescription={`Consolida le tue conoscenze in ${courseTitlesString} con progetti pratici`}
+      />
+      <WebPageSchema
+        title={"Impara grazie alla pratica"}
+        description={`Consolida le tue conoscenze in ${courseTitlesString} con progetti pratici`}
+        breadcrumbs={breadcrumbs}
+      />
+      <LinkHandler />
+    </>
   );
 };
 

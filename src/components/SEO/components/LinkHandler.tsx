@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import { useLocation } from "@reach/router";
 
 type Props = {
@@ -15,10 +14,10 @@ const LinkHandler = ({ paginatedPath }: Props) => {
   );
 
   return (
-    <Helmet>
+    <>
       <link href={link} rel='alternate' hrefLang={'it-IT"'} key={"it"} />
       <link href={link} rel='canonical' key={"it-IT"} />
-    </Helmet>
+    </>
   );
 };
 

@@ -21,26 +21,8 @@ const AboutPage = ({
   data: { allContentfulInsegnante: { nodes: InsegnanteProps[] } };
 }) => {
   const insegnanti = data.allContentfulInsegnante.nodes;
-  const breadcrumbs = React.useMemo(() => {
-    return [
-      { text: "Home", link: "/" },
-      { text: "Chi siamo", link: "/about/" },
-    ];
-  }, []);
   return (
     <Layout>
-      <MetaDecorator
-        metaTitle='Chi siamo'
-        metaDescription={
-          "La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi"
-        }
-      />
-      <LinkHandler />
-      <WebPageSchema
-        title='Chi siamo'
-        description='La storia dei Nostri insegnanti e le competenze che insegnano nei loro videocorsi'
-        breadcrumbs={breadcrumbs}
-      />
       <Box
         sx={{
           mt: { xs: "48px", lg: "96px" },
@@ -99,6 +81,32 @@ const AboutPage = ({
         <ComunityBanner />
       </Box>
     </Layout>
+  );
+};
+
+export const Head = () => {
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      { text: "Chi siamo", link: "/about/" },
+    ];
+  }, []);
+  return (
+    <>
+      <MetaDecorator
+        metaTitle='Chi siamo'
+        metaDescription={
+          "La storia dei nostri insegnanti e le competenze che insegnano nei loro videocorsi"
+        }
+      />
+      <LinkHandler />
+      <WebPageSchema
+        title='Chi siamo'
+        description='La storia dei nostri insegnanti e le competenze che insegnano nei loro videocorsi'
+        type='AboutPage'
+        breadcrumbs={breadcrumbs}
+      />
+    </>
   );
 };
 

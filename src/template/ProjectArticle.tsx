@@ -38,20 +38,6 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
     return data.project;
   }, [data]);
 
-  const breadcrumbs = React.useMemo(() => {
-    const courseSlug = queryData?.project_category?.[0]?.slug;
-    const slug = queryData?.slug;
-    return [
-      { text: "Home", link: "/" },
-      { text: "Progetti", link: "/progetti/" },
-      { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
-      {
-        text: queryData?.articleTitle,
-        link: `/progetti/${courseSlug}/${slug}/`,
-      },
-    ];
-  }, [queryData]);
-
   const bannerTitle = React.useMemo(() => {
     const corsi = queryData?.corsi?.[0];
     return `Inizia ora a studiare ${createRowText(corsi?.titolo as string)}`;
@@ -59,26 +45,6 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 
   return (
     <Layout>
-      <MetaDecorator
-        metaTitle={createRowText(queryData?.articleTitle as any)}
-        metaDescription={queryData?.metaDescription as any}
-        image={
-          queryData && (("https:" + queryData?.copertina?.file?.url) as any)
-        }
-      ></MetaDecorator>
-      <LinkHandler />
-      <ArticleSchema
-        title={createRowText(queryData?.articleTitle as any)}
-        description={queryData?.descrizione?.descrizione as any}
-        authorName='hpv4learning'
-        breadcrumbs={breadcrumbs as any}
-        image={
-          queryData && (("https:" + queryData?.copertina?.file?.url) as any)
-        }
-        imageAltText={createRowText(queryData?.articleTitle as any)}
-        modifiedDate={queryData?.updatedAt as any}
-        publishDate={queryData?.createdAt as any}
-      />
       <Container sx={{ padding: "0px" }} maxWidth={"lg"}>
         <FlexContainer sx={{ position: "relative", alignItems: "flex-start" }}>
           <Box>
@@ -124,6 +90,53 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
         </SeoLink>
       </BottomBanner>
     </Layout>
+  );
+};
+
+export const Head = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
+  const queryData = React.useMemo(() => {
+    return data.project;
+  }, [data]);
+  const breadcrumbs = React.useMemo(() => {
+    const courseSlug = queryData?.project_category?.[0]?.slug;
+    const slug = queryData?.slug;
+    return [
+      { text: "Home", link: "/" },
+      { text: "Progetti", link: "/progetti/" },
+      { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
+      {
+        text: queryData?.articleTitle,
+        link: `/progetti/${courseSlug}/${slug}/`,
+      },
+    ];
+  }, [
+    queryData?.project_category?.[0]?.slug,
+    queryData?.articleTitle,
+    queryData?.slug,
+  ]);
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={createRowText(queryData?.articleTitle as any)}
+        metaDescription={queryData?.metaDescription as any}
+        image={
+          queryData && (("https:" + queryData?.copertina?.file?.url) as any)
+        }
+      ></MetaDecorator>
+      <LinkHandler />
+      <ArticleSchema
+        title={createRowText(queryData?.articleTitle as any)}
+        description={queryData?.descrizione?.descrizione as any}
+        authorName='hpv4learning'
+        breadcrumbs={breadcrumbs as any}
+        image={
+          queryData && (("https:" + queryData?.copertina?.file?.url) as any)
+        }
+        imageAltText={createRowText(queryData?.articleTitle as any)}
+        modifiedDate={queryData?.updatedAt as any}
+        publishDate={queryData?.createdAt as any}
+      />
+    </>
   );
 };
 

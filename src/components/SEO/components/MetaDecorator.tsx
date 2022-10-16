@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet";
 import React from "react";
 import useSeoData from "../hooks/useSeoData";
 import { MetaDecoratorProps } from "../types";
@@ -30,14 +29,15 @@ const MetaDecorator = ({
   }, []);
 
   return (
-    <Helmet
-      htmlAttributes={{
-        it: "it",
-      }}
-      title={seoProps.title}
-      titleTemplate={seoProps.slogan ? `%s | ${seoProps.slogan}` : undefined}
-    >
+    <>
+      <title>
+        {" "}
+        {`${seoProps.title} ${
+          disableSlogan ? "" : `|| ${seoProps.slogan}`
+        }`}{" "}
+      </title>
       <meta name='description' content={seoProps.description} />
+      <meta name='it' content='Italian' />
       <meta property='og:title' content={seoProps.title} />
       <meta property='og:description' content={seoProps.description} />
       <meta property='og:type' content='website' />
@@ -66,7 +66,7 @@ const MetaDecorator = ({
             );
           })
         : null}
-    </Helmet>
+    </>
   );
 };
 

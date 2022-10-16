@@ -72,10 +72,6 @@ type Props = {
   location: {
     search: string;
   };
-  pageContext: {
-    slug: string;
-    categorySlug: string;
-  };
 };
 
 type StyledProps = {
@@ -103,32 +99,17 @@ const CustomStack = styled.div<StyledProps>`
 const SingleCoursePage = ({
   data,
   location,
-  pageContext: { slug, categorySlug },
 }: Props & PageProps<Queries.SingleCoursePageQuery>) => {
   const { contentfulCorsi: corso } = data;
   const projectRef = useRef<null | HTMLDivElement>(null);
   const { search } = location;
   const scrollToProjects = search && search.split("=")[1];
 
-  const creator = React.useMemo(() => {
-    if (corso?.insegnante && corso?.insegnante.length > 1)
-      return corso.insegnante.map((el) => el?.nome);
-    return corso?.insegnante?.[0]?.nome;
-  }, [corso?.insegnante]);
-
   const categoryName = React.useMemo(() => {
     return corso?.category?.filter(
       (el) => el?.name?.toLowerCase() !== "gratuiti",
     )?.[0]?.name as string;
   }, [corso?.category]);
-
-  const breadcrumbs = React.useMemo(() => {
-    return [
-      { text: "Home", link: "/" },
-      { text: categoryName, link: `/corsi/${categorySlug}/` },
-      { text: corso?.titolo, link: `/${slug}/` },
-    ];
-  }, [categoryName, categorySlug, corso?.titolo]);
 
   useEffect(() => {
     if (projectRef.current && scrollToProjects) {
@@ -138,30 +119,6 @@ const SingleCoursePage = ({
 
   return (
     <Layout enableFooterPadding>
-      <MetaDecorator
-        metaTitle={createRowText(corso?.titolo as any)}
-        metaDescription={corso?.riassunto?.riassunto as any}
-        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
-      ></MetaDecorator>
-      <LinkHandler />
-      <CourseSchema
-        title={createRowText(corso?.titolo as any)}
-        description={corso?.riassunto?.riassunto as any}
-        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
-        imageAltText={createRowText(corso?.titolo as any)}
-        rating={corso?.recensioni?.toString() as any}
-        creator={creator as any}
-        about={categorySlug}
-        audienceType={corso?.target as any}
-        isAccessibleForFree={
-          corso?.category?.some(
-            (el) => el?.name?.toLowerCase() === "gratuiti",
-          ) as any
-        }
-        breadcrumbs={breadcrumbs as any}
-        coursePrerequisites={corso?.requisiti as any}
-        recensioniRicevute={corso?.recensioniRicevute as any}
-      />
       <FlexContainer maxWidth='lg'>
         <StyledBox>
           <StyledContainer>
@@ -461,6 +418,64 @@ const SingleCoursePage = ({
         </Box>
       </FlexContainer>
     </Layout>
+  );
+};
+
+export const Head = ({
+  data,
+  pageContext: { slug, categorySlug },
+}: PageProps<
+  Queries.SingleCoursePageQuery,
+  { slug: string; categorySlug: string }
+>) => {
+  const { contentfulCorsi: corso } = data;
+
+  const categoryName = React.useMemo(() => {
+    return corso?.category?.filter(
+      (el) => el?.name?.toLowerCase() !== "gratuiti",
+    )?.[0]?.name as string;
+  }, [corso?.category]);
+
+  const breadcrumbs = React.useMemo(() => {
+    return [
+      { text: "Home", link: "/" },
+      { text: categoryName, link: `/corsi/${categorySlug}/` },
+      { text: corso?.titolo, link: `/${slug}/` },
+    ];
+  }, [categoryName, categorySlug, corso?.titolo]);
+
+  const creator = React.useMemo(() => {
+    if (corso?.insegnante && corso?.insegnante.length > 1)
+      return corso.insegnante.map((el) => el?.nome);
+    return corso?.insegnante?.[0]?.nome;
+  }, [corso?.insegnante]);
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={createRowText(corso?.titolo as any)}
+        metaDescription={corso?.riassunto?.riassunto as any}
+        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
+      ></MetaDecorator>
+      <LinkHandler />
+      <CourseSchema
+        title={createRowText(corso?.titolo as any)}
+        description={corso?.riassunto?.riassunto as any}
+        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
+        imageAltText={createRowText(corso?.titolo as any)}
+        rating={corso?.recensioni?.toString() as any}
+        creator={creator as any}
+        about={categorySlug}
+        audienceType={corso?.target as any}
+        isAccessibleForFree={
+          corso?.category?.some(
+            (el) => el?.name?.toLowerCase() === "gratuiti",
+          ) as any
+        }
+        breadcrumbs={breadcrumbs as any}
+        coursePrerequisites={corso?.requisiti as any}
+        recensioniRicevute={corso?.recensioniRicevute as any}
+      />
+    </>
   );
 };
 

@@ -53,18 +53,14 @@ export const LinkSection = ({ category, url, githubUrl }: Props) => {
       <Stack direction='row'>
         {url ? (
           <LinkContainer>
-            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-            {/* @ts-ignore */}
-            <SeoLink link={url} isExternal target='_blank'>
+            <SeoLink link={url} isExternal target='_blank' rel='nofollow'>
               Vedi
             </SeoLink>
           </LinkContainer>
         ) : null}
 
         {githubUrl ? (
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          /* @ts-ignore */
-          <SeoLink link={githubUrl} isExternal target='_blank'>
+          <SeoLink link={githubUrl} isExternal rel='nofollow' target='_blank'>
             <StyledGithubBox>
               <GitHubIcon
                 style={{

@@ -41,7 +41,7 @@ export const getIcon = (type: string, size?: { xs: string; lg: string }) => {
   }
 };
 
-export const createStarReview = (value: number) => {
+export const createStarReview = (value: number, size?: string) => {
   return Array.from({ length: 5 }, (_, index) => {
     const integer = index + 1;
     const half = index + 0.5;
@@ -52,7 +52,7 @@ export const createStarReview = (value: number) => {
           key={`star-${index}`}
           sx={{
             color: "purple.400",
-            fontSize: "14px",
+            fontSize: size || "14px",
           }}
         />
       );
@@ -63,7 +63,7 @@ export const createStarReview = (value: number) => {
           key={`star-${index}`}
           sx={{
             color: "purple.400",
-            fontSize: "14px",
+            fontSize: size || "14px",
           }}
         />
       );
@@ -73,7 +73,7 @@ export const createStarReview = (value: number) => {
         key={`star-${index}`}
         sx={{
           color: "purple.400",
-          fontSize: "14px",
+          fontSize: size || "14px",
         }}
       />
     );

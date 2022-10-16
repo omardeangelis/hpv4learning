@@ -3,11 +3,11 @@ import React from "react";
 import styled from "@emotion/styled";
 import CardHeader from "./CardHeader";
 import { Stack, Typography } from "@mui/material";
-import { Link as GatsbyLink } from "gatsby";
 import { getIcon } from "../../utils/general";
 import { InsegnanteProps } from "../../types/course";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { createBrandText } from "../../utils/helpers";
+import SeoLink from "./SeoLink";
 
 const CustomStack = styled(Box)`
   & > * {
@@ -145,7 +145,7 @@ const Insegnante = ({
             >
               {corsi.map((corso) => {
                 return (
-                  <GatsbyLink to={`/${corso.slug}/`}>
+                  <SeoLink link={`/${corso.slug}/`} isExternal={false}>
                     <Box mb='6px'>
                       <Stack
                         direction='row'
@@ -165,12 +165,12 @@ const Insegnante = ({
                           }}
                           color='purple.400'
                           dangerouslySetInnerHTML={{
-                            __html: createBrandText(corso.titolo),
+                            __html: createBrandText(corso.titolo) as string,
                           }}
-                        ></Typography>
+                        />
                       </Stack>
                     </Box>
-                  </GatsbyLink>
+                  </SeoLink>
                 );
               })}
             </Box>

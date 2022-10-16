@@ -3,9 +3,11 @@ import { Stack, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
-import { useLayoutContext } from "../../../context/layout";
 import SeoLink from "../../../components/shared/SeoLink";
 import { createRowText } from "../../../utils/helpers";
+import { useSelector, useDispatch } from "react-redux";
+import { closeProjectBanner } from "../../../store/reducers/uiSlice";
+import { RootState } from "../../../store";
 import { triggerGACustomEvent } from "../../../utils/tracking";
 
 interface Props {
@@ -65,9 +67,14 @@ const CloseButton = styled(Button)`
 `;
 
 export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
-  const context = useLayoutContext();
+  const { isProjectBannerOpen } = useSelector((state: RootState) => state.ui);
+  const dispatch = useDispatch();
+  const closeBanner = React.useCallback(
+    () => dispatch(closeProjectBanner()),
+    [dispatch],
+  );
 
-  if (context?.isBannerOpen) {
+  if (isProjectBannerOpen) {
     return (
       <BannerContainer sx={{ border: "1px solid", borderColor: "purple.200" }}>
         <Stack direction='column' spacing={{ xs: "unset", lg: "15px" }}>
@@ -89,7 +96,7 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               {createRowText(courseTitle as string)}
             </Typography>
 
-            <CloseButton onClick={() => context?.setIsBannerOpen(false)}>
+            <CloseButton onClick={closeBanner}>
               <DoDisturbOnIcon
                 sx={{
                   color: "#E4E7EC",
