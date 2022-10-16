@@ -9,10 +9,10 @@ import {
   ModalBody,
   ModalTypography,
   ModalStepper,
-  Spinner,
   ModalFooter,
 } from "../../../components/modal";
 import { Button, Typography, FormControl, TextField } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 import { useResponsive } from "../../../hook/useResponsive";
 import { useModalContext } from "../../../components/modal/context";
@@ -28,6 +28,7 @@ import {
   useGetAppointmentByMailQuery,
 } from "../../../services/calendar";
 import * as Yup from "yup";
+import { SkeletonDate } from "./SkeletonDate";
 
 type Props = {
   onBack: () => void;
@@ -227,7 +228,9 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                     );
                   })
                 ) : (
-                  <Spinner />
+                  <>
+                    <SkeletonDate />
+                  </>
                 )}
               </Stack>
             </Box>
@@ -307,7 +310,13 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
                 width: "100%",
               }}
             >
-              Avanti
+              {deleteLoading ? (
+                <Box display='flex'>
+                  <CircularProgress size={25} />
+                </Box>
+              ) : (
+                "Avanti"
+              )}
             </Button>
           </Container>
         </ModalFooter>

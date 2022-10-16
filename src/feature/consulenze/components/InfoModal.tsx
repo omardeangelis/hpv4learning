@@ -9,10 +9,10 @@ import {
   ModalTypography,
   ModalStepper,
   ModalFooter,
-  Spinner,
 } from "../../../components/modal";
 import { useResponsive } from "../../../hook/useResponsive";
 import { Button, TextField, Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
 import { Form, Formik } from "formik";
@@ -92,77 +92,67 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
                   </ModalTypography>
                 </Stack>
 
-                {isSubmitting ? (
-                  <Stack
-                    margin='10px'
-                    alignItems='center'
-                    justifyContent='center'
-                  >
-                    <Spinner />
-                  </Stack>
-                ) : (
-                  <Form id='info-form'>
-                    <Box mt={isMobile ? "38px" : "74px"}>
+                <Form id='info-form'>
+                  <Box mt={isMobile ? "38px" : "74px"}>
+                    <Stack
+                      direction='column'
+                      spacing={2}
+                      alignItems='center'
+                      justifyContent='center'
+                    >
                       <Stack
+                        width='100%'
                         direction='column'
-                        spacing={2}
-                        alignItems='center'
+                        alignItems='flex-start'
                         justifyContent='center'
+                        maxWidth='480px'
                       >
-                        <Stack
-                          width='100%'
-                          direction='column'
-                          alignItems='flex-start'
-                          justifyContent='center'
-                          maxWidth='480px'
-                        >
-                          <TextField
-                            name='professione'
-                            id='outlined-basic'
-                            label='Professione'
-                            onChange={handleChange}
-                            style={{
-                              width: "100%",
-                            }}
-                            size={isMobile ? "small" : "medium"}
-                          />
-                          <Typography variant='caption' color='red.400'>
-                            {errors.professione && touched.professione && (
-                              <p>{errors.professione}</p>
-                            )}
-                          </Typography>
-                        </Stack>
-                        <Stack
-                          width='100%'
-                          direction='column'
-                          alignItems='flex-start'
-                          justifyContent='center'
-                          maxWidth='480px'
-                        >
-                          <TextField
-                            name='description'
-                            id='outlined-basic'
-                            label='Descrizione'
-                            onChange={handleChange}
-                            style={{
-                              width: "100%",
-                            }}
-                            sx={{
-                              "& .MuiInputBase-root": {
-                                height: 100,
-                              },
-                            }}
-                          />
-                          <Typography variant='caption' color='red.400'>
-                            {errors.description && touched.description && (
-                              <p>{errors.description}</p>
-                            )}
-                          </Typography>
-                        </Stack>
+                        <TextField
+                          name='professione'
+                          id='outlined-basic'
+                          label='Professione'
+                          onChange={handleChange}
+                          style={{
+                            width: "100%",
+                          }}
+                          size={isMobile ? "small" : "medium"}
+                        />
+                        <Typography variant='caption' color='red.400'>
+                          {errors.professione && touched.professione && (
+                            <p>{errors.professione}</p>
+                          )}
+                        </Typography>
                       </Stack>
-                    </Box>
-                  </Form>
-                )}
+                      <Stack
+                        width='100%'
+                        direction='column'
+                        alignItems='flex-start'
+                        justifyContent='center'
+                        maxWidth='480px'
+                      >
+                        <TextField
+                          name='description'
+                          id='outlined-basic'
+                          label='Descrizione'
+                          onChange={handleChange}
+                          style={{
+                            width: "100%",
+                          }}
+                          sx={{
+                            "& .MuiInputBase-root": {
+                              height: 100,
+                            },
+                          }}
+                        />
+                        <Typography variant='caption' color='red.400'>
+                          {errors.description && touched.description && (
+                            <p>{errors.description}</p>
+                          )}
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </Box>
+                </Form>
               </Box>
             </ModalBody>
             <ModalFooter>
@@ -176,7 +166,13 @@ const InfoModal = ({ onBack, onContinue }: Props) => {
                   }}
                   disabled={isSubmitting}
                 >
-                  Avanti
+                  {isSubmitting ? (
+                    <Box display='flex'>
+                      <CircularProgress size={25} />
+                    </Box>
+                  ) : (
+                    "Prenota"
+                  )}
                 </Button>
               </Container>
             </ModalFooter>
