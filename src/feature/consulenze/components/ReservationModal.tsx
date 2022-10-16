@@ -69,15 +69,6 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const onSumbit = React.useCallback(
     async (values: Partial<FormData>) => {
       setFormData({ ...formData, ...values });
-
-      if (userAppointment && !isEmpty(userAppointment)) {
-        try {
-          await deleteAppointment(userAppointment[0].id);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
       try {
         await bookAppointment({
           ...formData,
@@ -86,6 +77,13 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         });
       } catch (error) {
         gotoStep("error");
+      }
+      if (userAppointment && !isEmpty(userAppointment)) {
+        try {
+          await deleteAppointment(userAppointment[0].id);
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
     [
@@ -145,13 +143,7 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
           />
         );
       case "info":
-        return (
-          <InfoModal
-            onBack={prevStep}
-            deleteLoading={deleteLoading}
-            onContinue={onSumbit}
-          />
-        );
+        return <InfoModal onBack={prevStep} onContinue={onSumbit} />;
       case "success":
         return <SuccessModal />;
       case "error":
