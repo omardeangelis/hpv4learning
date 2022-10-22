@@ -51,10 +51,10 @@ export const createPages = async ({ graphql, actions }) => {
     component: path.resolve("./src/template/ProjectsHome.tsx"),
   });
 
-  createPage({
-    path: "/consulenze/",
-    component: path.resolve("./src/template/Consulenze.tsx"),
-  });
+  // createPage({
+  //   path: "/consulenze/",
+  //   component: path.resolve("./src/template/Consulenze.tsx"),
+  // });
 
   categoryProjectQuery.data.allContentfulProjectCategory.nodes.forEach(
     (category) => {
