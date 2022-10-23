@@ -1,7 +1,7 @@
 import React from "react";
 import useSeoData from "./useSeoData";
 import useHasMounted from "../../../hook/useHasMounted";
-import { isArray } from "lodash";
+import isArray from "lodash/isArray";
 import { CourseSchemsProps } from "../types";
 
 const useCourseSchema = ({

@@ -1,6 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import { Stepper, Step, StepLabel } from "@mui/material";
+import Box from "@mui/system/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 import { useModalContext } from "./context";
 
 interface Props {

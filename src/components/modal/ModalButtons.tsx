@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { IconButton, IconButtonProps } from "@mui/material";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 
 interface CloseButtonProps {
   onClose: () => void;
