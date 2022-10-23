@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
-import { Button, Container, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Box from "@mui/system/Box";
 import React from "react";
 import SeoLink from "../components/shared/SeoLink";
 import Layout from "../components/shared/layout";
