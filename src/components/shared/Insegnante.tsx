@@ -1,8 +1,9 @@
-import { Box } from "@mui/system";
 import React from "react";
+import Box from "@mui/system/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
 import CardHeader from "./CardHeader";
-import { Stack, Typography } from "@mui/material";
 import { getIcon } from "../../utils/general";
 import { InsegnanteProps } from "../../types/course";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";

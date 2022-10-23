@@ -1,5 +1,7 @@
-import { Stack, StackProps } from "@mui/material";
-import { Box } from "@mui/system";
+// import { Box, Stack, StackProps } from "@mui/system";
+import Stack from "@mui/material/Stack/";
+import Box from "@mui/system/Box";
+import { StackProps } from "@mui/material/Stack/";
 import React from "react";
 
 type Props = {
