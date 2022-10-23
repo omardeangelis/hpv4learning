@@ -1,7 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
 import { graphql, useStaticQuery } from "gatsby";
 import { CategoryMenuProps } from "../../../types/layout";
