@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Stack, Typography } from "@mui/material";
-import { Box, BoxProps } from "@mui/system";
+import Box, { BoxProps } from "@mui/system/Box";
 import React from "react";
 import SeoLink from "../../../components/shared/SeoLink";
 
