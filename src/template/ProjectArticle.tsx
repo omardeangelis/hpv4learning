@@ -1,7 +1,8 @@
 import React from "react";
 import { graphql, PageProps } from "gatsby";
 import Layout from "../components/shared/layout";
-import { Box, Container } from "@mui/material";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
 import styled from "@emotion/styled";
 import {
   ArticleBody,

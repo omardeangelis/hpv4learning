@@ -19,7 +19,7 @@ import Box from "@mui/material/Box";
 import DoneIcon from "@mui/icons-material/Done";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import PersonIcon from "@mui/icons-material/Person";
-import { Container } from "@mui/material";
+import Container from "@mui/system/Container";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Stack, Box, Chip } from "@mui/material";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SeoLink from "../../../components/shared/SeoLink";
 

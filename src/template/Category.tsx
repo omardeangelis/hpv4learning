@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { Container, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Box from "@mui/system/Box";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 import CourseBanner from "../components/banner/CourseBanner";

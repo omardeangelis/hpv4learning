@@ -1,12 +1,11 @@
 import React from "react";
-import {
-  Box,
-  Container,
-  Button,
-  Typography,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
+import useTheme from "@mui/material/styles/useTheme";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 import styled from "@emotion/styled";
 import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
 import { triggerGACustomEvent } from "../../utils/tracking";

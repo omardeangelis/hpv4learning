@@ -9,7 +9,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 //gatsby
 import { Link as GastbyLink } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import { Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import styled from "@emotion/styled";
 import { CourseMenu } from "./CourseMenu";
 import { useNavigationLink } from "../hooks/useNavigationLink";

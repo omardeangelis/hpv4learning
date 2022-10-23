@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers";
 import SeoLink from "../../../components/shared/SeoLink";
 import { MobileOnlyProjectCard } from "./ProjectCard";
