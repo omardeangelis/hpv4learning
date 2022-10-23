@@ -1,5 +1,6 @@
-import { BoxProps, Box, Typography } from "@mui/material";
 import React from "react";
+import Box, { BoxProps } from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const FaqTitle = ({ text, ...rest }: BoxProps & { text: string }) => {
   return (
