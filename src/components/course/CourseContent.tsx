@@ -1,8 +1,10 @@
-import { Box } from "@mui/system";
 import React from "react";
+import Box from "@mui/system/Box";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
 import styled from "@emotion/styled";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import { createBrandText } from "../../utils/helpers";
 import { CoursePreviewProps } from "../../types/course";
 import CourseIcons from "./CourseIcons";

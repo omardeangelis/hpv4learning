@@ -1,5 +1,9 @@
 import React from "react";
-import { Box, Container, Stack } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import {
   ModalHeader,
   ModalBackButton,
@@ -14,8 +18,8 @@ import {
 import { reservationModalLabels } from "../utils/constants";
 import { useResponsive } from "../../../hook/useResponsive";
 import { StaticImage } from "gatsby-plugin-image";
-import { Button, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
+import { triggerGACustomEvent } from "../../../utils/tracking";
 
 type Props = {
   onContinue: () => void;
@@ -24,7 +28,12 @@ type Props = {
 const WelcomeModal = ({ onContinue }: Props) => {
   const { isMobile } = useResponsive();
   const { onClose } = useModalContext();
-
+  const handleCustomContinue = React.useCallback(() => {
+    triggerGACustomEvent({
+      event: "start_consulenza",
+    })();
+    onContinue();
+  }, [onContinue]);
   return (
     <>
       <ModalHeader hasborder>
@@ -101,7 +110,7 @@ const WelcomeModal = ({ onContinue }: Props) => {
         <ModalFooter>
           <Container>
             <Button
-              onClick={onContinue}
+              onClick={handleCustomContinue}
               variant='contained'
               sx={{
                 width: "100%",

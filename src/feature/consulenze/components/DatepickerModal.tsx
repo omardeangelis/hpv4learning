@@ -1,6 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Container, Stack } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import {
+  DatePicker,
+  MobileDatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers";
 import {
   ModalHeader,
   ModalBackButton,
@@ -11,24 +22,20 @@ import {
   ModalStepper,
   ModalFooter,
 } from "../../../components/modal";
-import { Button, Typography, FormControl, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 import { useResponsive } from "../../../hook/useResponsive";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Dayjs } from "dayjs";
 import { useCreateCalendarSlots } from "../hook/useCreateCalendarSlots";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { getDataFromCalendar } from "../utils/helpers";
-import {
-  useDeleteAppointmentMutation,
-  useGetAppointmentByMailQuery,
-} from "../../../services/calendar";
+import { useGetAppointmentByMailQuery } from "../../../services/calendar";
 import * as Yup from "yup";
 import { SkeletonDate } from "./SkeletonDate";
+import { saveUserAppointment } from "../../../store/reducers/consulenze";
+import { useDispatch } from "react-redux";
 
 type Props = {
   onBack: () => void;
@@ -86,6 +93,7 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
   const slots = useCreateCalendarSlots(selectedDate?.toDate().toString());
   const { data: userAppointment, isLoading } =
     useGetAppointmentByMailQuery(userMail);
+  const dispatch = useDispatch();
 
   const [customError, setCustomError] = React.useState({
     msg: "",
@@ -108,30 +116,14 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
     [],
   );
 
-  const [deleteAppointment, { isLoading: deleteLoading }] =
-    useDeleteAppointmentMutation();
-
   const handleContinue = React.useCallback(async () => {
     if (!selectedEventId) {
       setCustomError({ msg: "scegli il giorno", value: true });
       return;
     }
-    if (userAppointment && !isEmpty(userAppointment)) {
-      try {
-        await deleteAppointment(userAppointment[0].id);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    if (!deleteLoading) onContinue(selectedEventId);
-  }, [
-    userAppointment,
-    userAppointment?.[0]?.id,
-    selectedEventId,
-    deleteLoading,
-    deleteAppointment,
-  ]);
+    dispatch(saveUserAppointment(userAppointment));
+    onContinue(selectedEventId);
+  }, [selectedEventId]);
 
   React.useEffect(() => {
     setDateError("");
@@ -301,22 +293,14 @@ const DatepickerModal = ({ onBack, onContinue, userMail }: Props) => {
               </Typography>
             ) : null}
             <Button
-              disabled={
-                deleteLoading || isLoading || !slots || !selectedEventId
-              }
+              disabled={isLoading || !slots || !selectedEventId}
               onClick={handleContinue}
               variant='contained'
               sx={{
                 width: "100%",
               }}
             >
-              {deleteLoading ? (
-                <Box display='flex'>
-                  <CircularProgress size={25} />
-                </Box>
-              ) : (
-                "Avanti"
-              )}
+              Avanti
             </Button>
           </Container>
         </ModalFooter>

@@ -3,8 +3,8 @@ import { Link } from "gatsby";
 //Global Component
 import Layout from "../components/shared/layout";
 //Material Ui
-import { makeStyles } from "@mui/styles";
-import Container from "@mui/material/Container/Container";
+import makeStyles from "@mui/styles/makeStyles";
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";

@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 
 type Props = {
   title?: string;

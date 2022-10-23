@@ -1,14 +1,15 @@
 import React from "react";
+import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { Typography, Stack } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-import styled from "@emotion/styled";
 import { data } from "./footerdata";
 import SeoLink from "../../components/shared/SeoLink";
 import { StaticImage } from "gatsby-plugin-image";
 import useDropDownMenu from "../../hook/useDropDown";
+import { CookieConsent } from "../navigation/components/CookieManager";
 
 const CustomStack = styled(Box)`
   a:hover {
@@ -53,6 +54,12 @@ export const Footer = ({
         pt: { xs: "64px", lg: "96px" },
       }}
     >
+      <CookieConsent
+        siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
+        cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
+        lang='it'
+        apiKey=''
+      />
       <Container maxWidth='lg'>
         <CustomStack>
           <Box
@@ -147,6 +154,24 @@ export const Footer = ({
             );
           })}
         </CustomStack>
+
+        <Stack marginTop='24px' alignItems='flex-end' width='100%'>
+          <Typography
+            color='grey.600'
+            fontWeight={300}
+            sx={{
+              fontSize: "10px",
+            }}
+          >
+            <a
+              href='https://www.iubenda.com/privacy-policy/12511737'
+              target='_blank'
+              rel='nofollow'
+            >
+              Leggi la privacy policy
+            </a>
+          </Typography>
+        </Stack>
       </Container>
     </Box>
   );

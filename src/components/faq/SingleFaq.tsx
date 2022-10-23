@@ -1,9 +1,11 @@
 import React from "react";
-import { Stack, Box, Typography } from "@mui/material";
-import { BlockDescriptionProps } from "../../types";
-import { cleanStringFromHtlmTags } from "../../utils/helpers";
 import styled from "@emotion/styled";
-import { ExpandMoreOutlined } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import ExpandMoreOutlined from "@mui/icons-material/ExpandMoreOutlined";
+import { cleanStringFromHtlmTags } from "../../utils/helpers";
+import { BlockDescriptionProps } from "../../types";
 
 const StyledBox = styled(Box)`
   .faq-title-box {
@@ -92,7 +94,7 @@ const SingleFaq = ({
               dangerouslySetInnerHTML={{
                 __html: description.replace(
                   /(<p>&nbsp;<\/p>)|(<h2><span>&nbsp;<\/span><\/h2>)/g,
-                  ""
+                  "",
                 ),
               }}
             />

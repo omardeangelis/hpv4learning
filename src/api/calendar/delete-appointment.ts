@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { calendarId, calendar_key } from "../../server/constants";
 import { HttpMethod } from "../../server/types";
 import { calendar, auth } from "../../server/utils/api";
@@ -12,8 +12,7 @@ type ReqProps = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = async (req: ReqProps, res: any) => {
-  if (req.method !== "DELETE" && process.env.NODE_ENV === "production")
-    throw new Error("Use DELETE method");
+  if (req.method !== "DELETE") throw new Error("Use DELETE method");
   if (isEmpty(req.query)) throw new Error("Pass eventId as query param");
 
   const { eventId } = req.query;

@@ -1,14 +1,17 @@
 import React from "react";
+import styled from "@emotion/styled";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import {
   GatsbyImage,
   getImage,
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image";
-import { Box, Chip, Stack, Typography } from "@mui/material";
-import styled from "@emotion/styled";
 import { Styledtypography } from "./ArticleHero";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import dayjs from "dayjs";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import SeoLink from "../../../components/shared/SeoLink";

@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import Box from "@mui/system/Box";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import { useResponsive } from "../../hook/useResponsive";

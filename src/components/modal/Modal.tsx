@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box } from "@mui/system";
+import Box from "@mui/system/Box";
 import { Global, css } from "@emotion/react";
 import { ModalProvider } from "./context";
 

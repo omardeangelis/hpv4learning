@@ -1,9 +1,7 @@
-import { Container } from "@mui/material";
-import { graphql, useStaticQuery } from "gatsby";
-
 import React from "react";
+import Container from "@mui/material/Container";
+import { graphql, useStaticQuery } from "gatsby";
 import { ProjectSectionProps } from "../types";
-
 import { ProjectSection } from "./ProjectSection";
 
 export const HomeSection = () => {

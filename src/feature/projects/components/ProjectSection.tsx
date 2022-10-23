@@ -1,11 +1,12 @@
-import { Box, Stack } from "@mui/material";
+import React from "react";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import {
   GatsbyImage,
   getImage,
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image";
-import React from "react";
 import SeoLink from "../../../components/shared/SeoLink";
 import { ProjectSectionProps } from "../types";
 import { ProjectCard } from "./ProjectCard";

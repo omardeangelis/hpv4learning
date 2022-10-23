@@ -1,8 +1,11 @@
 import React from "react";
 import { useModalContext } from "../../../components/modal/context";
-import { Box, Container, Stack } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+
 import { StaticImage } from "gatsby-plugin-image";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useHasMounted from "../../../hook/useHasMounted";
 import { BorderBox } from "../../../components/layout";

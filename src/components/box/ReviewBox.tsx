@@ -1,6 +1,9 @@
-import { Avatar, Typography } from "@mui/material";
-import { Box, BoxProps, Stack } from "@mui/system";
 import React from "react";
+import Box, { BoxProps } from "@mui/system/Box";
+import Stack from "@mui/system/Stack";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+
 import { createStarReview } from "../../utils/general";
 import { BorderBox } from "../layout";
 

@@ -1,7 +1,9 @@
-import { Box } from "@mui/system";
 import React from "react";
-import { Stack, Typography, css } from "@mui/material";
 import styled from "@emotion/styled";
+import Box from "@mui/system/Box";
+import { css } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { LinkSection } from "./LinkSection";
 import dayjs from "dayjs";

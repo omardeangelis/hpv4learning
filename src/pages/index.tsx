@@ -10,12 +10,13 @@ import LinkHandler from "../components/SEO/components/LinkHandler";
 //Components
 import Hero from "../components/ui/Hero";
 //Material UI
-import Container from "@mui/material/Container/Container";
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ComunityBanner from "../components/banner/ComunityBanner";
 import CourseWall from "../components/course/CourseWall";
-import { Button, Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema";
 import { HomeSection } from "../feature/projects/components";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";

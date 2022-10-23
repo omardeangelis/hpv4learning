@@ -1,5 +1,10 @@
 import React from "react";
-import { Box, Container, Stack } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import {
   ModalHeader,
   ModalBackButton,
@@ -13,7 +18,6 @@ import {
   ModalFooter,
 } from "../../../components/modal";
 import { useResponsive } from "../../../hook/useResponsive";
-import { Button, TextField, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
 import { ProviderModalProvider } from "../context/providerModalContext";

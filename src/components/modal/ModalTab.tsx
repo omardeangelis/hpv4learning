@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import Box from "@mui/system/Box";
+import Typography from "@mui/material/Typography";
 import { StaticImage } from "gatsby-plugin-image";
 import { useProviderModalContext } from "../../feature/consulenze/context/providerModalContext";
 import { BorderBox } from "../layout";
