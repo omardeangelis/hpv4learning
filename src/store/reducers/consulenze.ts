@@ -6,14 +6,24 @@ export type SuccessPayload = {
   hangoutLink: calendar_v3.Schema$Event["hangoutLink"];
 };
 
+export type UserAppointment =
+  | {
+      id: string;
+      startDate: string;
+      endDate: string;
+    }[]
+  | undefined;
+
 type Props = {
   provider: "gmail" | "manual";
   successMessage: SuccessPayload | null;
+  userAppointment: UserAppointment | undefined;
 };
 
 const initialState: Props = {
   provider: "gmail",
   successMessage: null,
+  userAppointment: undefined,
 };
 
 const consulenzaSlice = createSlice({
@@ -26,9 +36,13 @@ const consulenzaSlice = createSlice({
     saveSuccessMessage(state, action: PayloadAction<SuccessPayload>) {
       state.successMessage = action.payload;
     },
+    saveUserAppointment(state, action: PayloadAction<UserAppointment>) {
+      state.userAppointment = action.payload;
+    },
   },
 });
 
-export const { changeProvider, saveSuccessMessage } = consulenzaSlice.actions;
+export const { changeProvider, saveSuccessMessage, saveUserAppointment } =
+  consulenzaSlice.actions;
 
 export default consulenzaSlice.reducer;
