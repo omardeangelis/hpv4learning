@@ -78,13 +78,6 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
       } catch (error) {
         gotoStep("error");
       }
-      if (userAppointment && !isEmpty(userAppointment)) {
-        try {
-          await deleteAppointment(userAppointment[0].id);
-        } catch (error) {
-          console.log(error);
-        }
-      }
     },
     [
       formData,
