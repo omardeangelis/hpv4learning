@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
-import { Box, Container } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
 import styled from "@emotion/styled";
 import { graphql, PageProps } from "gatsby";
 import React from "react";
