@@ -9,6 +9,7 @@ import { data } from "./footerdata";
 import SeoLink from "../../components/shared/SeoLink";
 import { StaticImage } from "gatsby-plugin-image";
 import useDropDownMenu from "../../hook/useDropDown";
+import { CookieConsent } from "../navigation/components/CookieManager";
 
 const CustomStack = styled(Box)`
   a:hover {
@@ -53,6 +54,12 @@ export const Footer = ({
         pt: { xs: "64px", lg: "96px" },
       }}
     >
+      <CookieConsent
+        siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
+        cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
+        lang='it'
+        apiKey=''
+      />
       <Container maxWidth='lg'>
         <CustomStack>
           <Box
