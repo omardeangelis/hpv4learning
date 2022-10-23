@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { Box } from "@mui/material";
-import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
+import styled from "@emotion/styled";
+import Box from "@mui/material/Box";
+import { graphql, useStaticQuery } from "gatsby";
 import { CourseCategoryProps, CoursePreviewProps } from "../../types/course";
 import CourseSection from "./CuorseSection";
 

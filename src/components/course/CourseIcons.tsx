@@ -1,5 +1,7 @@
 import React from "react";
-import { Stack, Typography, Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 import EqualizerOutlinedIcon from "@mui/icons-material/EqualizerOutlined";
 import { convertToHHMMSS } from "../../utils/helpers";

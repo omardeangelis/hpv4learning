@@ -1,5 +1,8 @@
-import { Button, Stack, useMediaQuery, useTheme } from "@mui/material";
-import { Box } from "@mui/system";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import useTheme from "@mui/material/styles/useTheme";
+import Box from "@mui/system/Box";
 import { Link } from "gatsby";
 import React from "react";
 import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
