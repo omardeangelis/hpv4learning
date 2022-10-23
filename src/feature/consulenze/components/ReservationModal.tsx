@@ -75,6 +75,13 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
           ...values,
           shouldSendMail: provider === "manual",
         });
+        if (userAppointment && !isEmpty(userAppointment)) {
+          try {
+            await deleteAppointment(userAppointment[0].id);
+          } catch (error) {
+            console.log(error);
+          }
+        }
       } catch (error) {
         gotoStep("error");
       }
