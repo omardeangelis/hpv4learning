@@ -1,7 +1,8 @@
-import { Typography } from "@mui/material";
-import { Container, Stack } from "@mui/system";
-import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/system/Stack";
+import Container from "@mui/system/Container";
+import { StaticImage } from "gatsby-plugin-image";
 import { ReviewBox } from "../../../components/box";
 import { text } from "../utils/constants";
 

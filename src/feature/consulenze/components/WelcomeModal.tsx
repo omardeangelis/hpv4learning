@@ -1,5 +1,9 @@
 import React from "react";
-import { Box, Container, Stack } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import {
   ModalHeader,
   ModalBackButton,
@@ -14,7 +18,6 @@ import {
 import { reservationModalLabels } from "../utils/constants";
 import { useResponsive } from "../../../hook/useResponsive";
 import { StaticImage } from "gatsby-plugin-image";
-import { Button, Typography } from "@mui/material";
 import { useModalContext } from "../../../components/modal/context";
 import { triggerGACustomEvent } from "../../../utils/tracking";
 

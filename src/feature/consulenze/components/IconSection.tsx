@@ -1,6 +1,9 @@
-import { Typography, Avatar } from "@mui/material";
-import { Box, Stack, Container } from "@mui/system";
 import React from "react";
+import Box from "@mui/system/Box";
+import Stack from "@mui/system/Stack";
+import Container from "@mui/system/Container";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
