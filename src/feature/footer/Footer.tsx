@@ -147,6 +147,24 @@ export const Footer = ({
             );
           })}
         </CustomStack>
+
+        <Stack marginTop='24px' alignItems='flex-end' width='100%'>
+          <Typography
+            color='grey.600'
+            fontWeight={300}
+            sx={{
+              fontSize: "10px",
+            }}
+          >
+            <a
+              href='https://www.iubenda.com/privacy-policy/12511737'
+              target='_blank'
+              rel='nofollow'
+            >
+              Leggi la privacy policy
+            </a>
+          </Typography>
+        </Stack>
       </Container>
     </Box>
   );
