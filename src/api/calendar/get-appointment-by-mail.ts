@@ -1,6 +1,6 @@
 import { calendar, auth } from "../../server/utils/api";
 import { calendarId, testingMail } from "../../server/constants";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { isValidMail } from "../../server/utils";
 import { HttpMethod } from "../../server/types";
 

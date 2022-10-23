@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { calendarId, calendar_key } from "../../server/constants";
 import { HttpMethod } from "../../server/types";
 import { calendar, auth } from "../../server/utils/api";

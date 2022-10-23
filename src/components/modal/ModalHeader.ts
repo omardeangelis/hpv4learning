@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/system/Box";
 
 export const ModalHeader = styled(Box)<{ hasborder?: true }>`
   position: relative;
