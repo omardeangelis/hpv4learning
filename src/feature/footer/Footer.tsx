@@ -1,10 +1,10 @@
 import React from "react";
+import styled from "@emotion/styled";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { Typography, Stack } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-import styled from "@emotion/styled";
 import { data } from "./footerdata";
 import SeoLink from "../../components/shared/SeoLink";
 import { StaticImage } from "gatsby-plugin-image";
