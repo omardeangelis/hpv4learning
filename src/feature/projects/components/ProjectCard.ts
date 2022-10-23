@@ -1,5 +1,5 @@
-import { Box, BoxProps } from "@mui/system";
 import styled from "@emotion/styled";
+import Box, { BoxProps } from "@mui/system/Box";
 export interface ProjectBox extends BoxProps {
   isMobileOnly?: true;
 }

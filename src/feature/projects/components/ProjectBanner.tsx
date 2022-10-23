@@ -1,7 +1,9 @@
 import React from "react";
-import { Stack, Typography, Button } from "@mui/material";
-import { Box } from "@mui/system";
 import styled from "@emotion/styled";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Box from "@mui/system/Box";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
 import SeoLink from "../../../components/shared/SeoLink";
 import { createRowText } from "../../../utils/helpers";

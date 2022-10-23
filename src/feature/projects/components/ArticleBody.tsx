@@ -1,6 +1,8 @@
 import React from "react";
-import { Box, css } from "@mui/system";
 import styled from "@emotion/styled";
+import { css } from "@mui/system";
+import Box from "@mui/system/Box";
+import Typography from "@mui/material/Typography";
 import {
   GatsbyImage,
   getImage,
@@ -8,7 +10,6 @@ import {
   ImageDataLike,
 } from "gatsby-plugin-image";
 import ReactMarkdown from "react-markdown";
-import { Typography } from "@mui/material";
 import { HeadingsList } from "./HeadingsList";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
