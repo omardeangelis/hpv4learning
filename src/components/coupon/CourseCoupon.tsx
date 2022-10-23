@@ -1,7 +1,10 @@
-import styled from "@emotion/styled";
-import { Button, Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import React from "react";
+import styled from "@emotion/styled";
+import Box from "@mui/system/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+
 import { triggerGACustomEvent } from "../../utils/tracking";
 import SeoLink from "../shared/SeoLink";
 
