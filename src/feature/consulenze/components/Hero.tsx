@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { StaticImage } from "gatsby-plugin-image";
-import { Box, Container } from "@mui/system";
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Typography from "@mui/material/Typography";
 import { RoundedButton } from "../../../components/layout";
 import { useConsulenzeContext } from "../context";
 import useHasMounted from "../../../hook/useHasMounted";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
+import { StaticImage } from "gatsby-plugin-image";
 
 const StyledBox = styled(Box)({
   backgroundImage:

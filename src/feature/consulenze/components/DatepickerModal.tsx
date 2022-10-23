@@ -1,6 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Container, Stack } from "@mui/system";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import {
+  DatePicker,
+  MobileDatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers";
 import {
   ModalHeader,
   ModalBackButton,
@@ -11,17 +22,14 @@ import {
   ModalStepper,
   ModalFooter,
 } from "../../../components/modal";
-import { Button, Typography, FormControl, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 import { useResponsive } from "../../../hook/useResponsive";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Dayjs } from "dayjs";
 import { useCreateCalendarSlots } from "../hook/useCreateCalendarSlots";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { getDataFromCalendar } from "../utils/helpers";
 import {
   useDeleteAppointmentMutation,

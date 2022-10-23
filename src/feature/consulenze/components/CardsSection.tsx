@@ -1,8 +1,10 @@
 import React from "react";
-import { text } from "../utils/constants";
 import styled from "@emotion/styled";
-import { Box, Container, Stack } from "@mui/system";
-import { Typography } from "@mui/material";
+import { text } from "../utils/constants";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
+import Stack from "@mui/system/Stack";
+import Typography from "@mui/material/Typography";
 import { graphql, useStaticQuery } from "gatsby";
 import {
   GatsbyImage,

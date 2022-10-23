@@ -1,6 +1,7 @@
-import { Typography } from "@mui/material";
-import { Box, Container } from "@mui/system";
 import React from "react";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/system/Box";
+import Container from "@mui/system/Container";
 import { RoundedButton } from "../../../components/layout";
 import { ModalBody, ModalFooter } from "../../../components/modal";
 import ErrorModal from "../../../components/modal/ErrorModal";
