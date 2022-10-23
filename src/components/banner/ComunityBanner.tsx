@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "@mui/material";
+import useTheme from "@mui/material/styles/useTheme";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
