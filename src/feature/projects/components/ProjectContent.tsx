@@ -1,6 +1,7 @@
-import { Stack, Typography } from "@mui/material";
-import { Box, BoxProps } from "@mui/system";
 import React from "react";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Box, { BoxProps } from "@mui/system/Box";
 
 type Props = {
   titolo?: null | string;

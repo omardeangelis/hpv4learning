@@ -1,5 +1,5 @@
-import { Box, BoxProps } from "@mui/system";
 import React from "react";
+import Box, { BoxProps } from "@mui/system/Box";
 
 export const ProjectImage = ({ children, ...rest }: BoxProps) => {
   return (

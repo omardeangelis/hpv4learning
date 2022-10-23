@@ -1,8 +1,9 @@
 import React from "react";
-import { ProjectCard, ProjectImage, ProjectContent } from "./index";
-
-import { Box, Typography, Container } from "@mui/material";
 import styled from "@emotion/styled";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { ProjectCard, ProjectImage, ProjectContent } from "./index";
 import {
   GatsbyImage,
   getImage,
