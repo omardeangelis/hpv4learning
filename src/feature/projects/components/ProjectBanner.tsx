@@ -35,7 +35,7 @@ const BannerContainer = styled(Box)`
     top: 140px;
     left: unset;
     bottom: unset;
-    width: 260px;
+    width: 362px;
     padding-left: 18px;
     padding-top: 25px;
     padding-bottom: 12px;
@@ -109,13 +109,17 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
           <Stack
             direction={{ xs: "row", lg: "column" }}
             alignItems='start'
-            justifyContent='space-between'
             spacing={{ xs: "unset", lg: "15px" }}
           >
             <Stack
               direction='row'
               alignItems={{ xs: "flex-end", lg: "center" }}
+              justifyContent='space-between'
+              width='100%'
               spacing={{ xs: "14px", lg: "32px" }}
+              sx={{
+                marginRight: { xs: "10px", lg: "unset" },
+              }}
             >
               <Typography
                 fontWeight={400}

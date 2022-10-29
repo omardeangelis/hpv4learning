@@ -27,6 +27,7 @@ import CourseContainer from "../components/course/CourseContainer";
 import CourseContent from "../components/course/CourseContent";
 import LinkHandler from "../components/SEO/components/LinkHandler";
 import CourseSchema from "../components/SEO/components/CourseSchema";
+import Stack from "@mui/system/Stack";
 dayjs.extend(relativeTime);
 
 const StyledContainer = styled(Box)`
@@ -386,7 +387,7 @@ const SingleCoursePage = ({
             )}
         </StyledBox>
         <Box
-          maxWidth='261px'
+          maxWidth='262px'
           sx={{
             mt: { xs: "0px", lg: "136px" },
             height: "fit-content",

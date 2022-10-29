@@ -75,7 +75,7 @@ const DiscordBanner = () => {
           py: { xs: "26px", lg: "55px" },
         }}
       >
-        <Container maxWidth='lg'>
+        <Container maxWidth='md'>
           <Box>
             <CustomStack>
               <Box className='banner-left'>
@@ -125,7 +125,7 @@ const DiscordBanner = () => {
                 <Box
                   sx={{
                     mt: { xs: "12px", lg: "24px" },
-                    maxWidth: { xs: "312px", lg: "374px" },
+                    maxWidth: { xs: "312px", lg: "465px" },
                   }}
                 >
                   <Typography

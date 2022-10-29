@@ -36,7 +36,7 @@ const IndexPage = () => {
     <Layout>
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: "48px", lg: "56px" },
         }}
       >
         <Container maxWidth='lg'>

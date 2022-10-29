@@ -39,6 +39,7 @@ type StyledProps = {
 const CustomStack = styled.div<StyledProps>`
   display: flex;
   flex-direction: column;
+  width: 100%;
   & > *:not(:last-of-type) {
     margin-bottom: 16px;
   }

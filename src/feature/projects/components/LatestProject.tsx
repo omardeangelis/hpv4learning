@@ -64,7 +64,7 @@ export const LatestProject = (
         </SeoLink>
         <Box
           sx={{
-            maxWidth: { lg: "486px" },
+            maxWidth: { lg: "562px" },
             mt: { xs: "10px", lg: "16px" },
           }}
         >
@@ -131,8 +131,8 @@ export const LatestProject = (
       {image ? (
         <Box
           sx={{
-            maxHeight: { xs: "205px", lg: "305px" },
-            maxWidth: "535px",
+            maxHeight: { xs: "205px", lg: "393px" },
+            maxWidth: "700px",
             width: "100%",
             borderRadius: "16px",
             marginTop: { xs: "24px", lg: "0" },

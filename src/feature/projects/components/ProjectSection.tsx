@@ -39,7 +39,7 @@ export const ProjectSection = ({
             >
               <Box
                 sx={{
-                  maxWidth: { xs: "unset", lg: "351px" },
+                  maxWidth: { xs: "unset", lg: "462px" },
                 }}
               >
                 <ProjectCard>
