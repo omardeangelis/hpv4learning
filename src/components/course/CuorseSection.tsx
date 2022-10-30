@@ -102,7 +102,7 @@ const CuorseSection = ({
             <Box
               key={el.slug}
               sx={{
-                maxWidth: { xs: "unset", lg: "382px" },
+                maxWidth: { xs: "unset", lg: "462px" },
                 width: "100%",
                 px: { xs: "12px", lg: "64px" },
                 py: { xs: "24px", lg: "51px" },

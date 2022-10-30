@@ -13,6 +13,7 @@ import LevelChip from "./Chip";
 
 const CustomStack = styled.div`
   display: flex;
+  width: 100%;
   & > *:not(:first-child) {
     margin-left: 15px;
   }
@@ -60,9 +61,8 @@ const CourseContent = ({
         <Box>
           <Box
             sx={{
-              maxWidth: "255px",
               width: { xs: "102px", lg: "100%" },
-              height: { xs: "102px", lg: "143px" },
+              height: { xs: "102px", lg: "unset" },
               borderRadius: "8px",
               overflow: "hidden",
               position: "relative",
@@ -102,7 +102,6 @@ const CourseContent = ({
             justifyContent: {
               xs: "space-between",
               sm: "initial",
-              lg: "initial",
             },
           }}
         >

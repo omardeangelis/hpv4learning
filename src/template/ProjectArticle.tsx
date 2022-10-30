@@ -55,10 +55,14 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
                   mt: { xs: "48px", lg: "96px" },
                 }}
               >
-                <Container maxWidth='lg'>
+                <Box
+                  sx={{
+                    maxWidth: { xs: "unset", lg: "1080px" },
+                  }}
+                >
                   <ArticleHero {...queryData} />
                   <ArticleBody {...queryData} />
-                </Container>
+                </Box>
               </Box>
             </StyledBox>
           </Box>
@@ -68,9 +72,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
             couponLink={queryData?.corsi?.[0]?.couponLink}
           />
         </FlexContainer>
-        <Container maxWidth='lg'>
-          <ArticleFooter {...data} />
-        </Container>
+        <ArticleFooter {...data} />
       </Container>
       <BottomBanner
         title={bannerTitle}
