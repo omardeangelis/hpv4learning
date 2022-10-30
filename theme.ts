@@ -68,10 +68,16 @@ const theme = {
         maxWidthLg: {
           maxWidth: "1440px !important",
           width: "calc(100% - 24px)",
+          padding: "0px",
+          "@media screen and (min-width: 768px)": {
+            width: "calc(100% - 24px)",
+          },
         },
         maxWidthMd: {
           maxWidth: "1153px !important",
           width: "calc(100% - 24px)",
+          padding: "0px",
+          "@media screen and (min-width: 768px)": {},
         },
       },
     },

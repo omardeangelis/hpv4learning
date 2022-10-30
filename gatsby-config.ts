@@ -32,9 +32,9 @@ const config: GatsbyConfig = {
       resolve: "gatsby-plugin-gatsby-cloud",
       options: {
         headers: {
-          "/fonts/*": ["Cache-Control: public, max-age=31536000, immutable"],
-          "/*.svg": ["Cache-Control: public, max-age=31536000, immutable"],
-          "/*.png": ["Cache-Control: public, max-age=31536000, immutable"],
+          "/fonts/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/*.svg": ["cache-control: public, max-age=31536000, immutable"],
+          "/*.png": ["cache-control: public, max-age=31536000, immutable"],
         },
       },
     },

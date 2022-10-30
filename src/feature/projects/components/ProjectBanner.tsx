@@ -125,7 +125,7 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                 fontWeight={400}
                 sx={{
                   fontSize: { xs: "12px", lg: "18px" },
-                  color: { xs: "#6C757D", lg: "#000" },
+                  color: "#6C757D",
                   textDecoration: "line-through",
                 }}
               >

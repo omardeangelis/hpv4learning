@@ -67,7 +67,7 @@ const DiscordBanner = () => {
   return (
     <Box
       sx={{
-        backgroundColor: type === "youtube" ? "red.300" : "purple.800",
+        backgroundColor: type === "youtube" ? "red.300" : "purple.900",
       }}
     >
       <Box
@@ -113,7 +113,7 @@ const DiscordBanner = () => {
                 >
                   <Typography
                     fontWeight={500}
-                    color={type === "youtube" ? "white" : "purple.400"}
+                    color={type === "youtube" ? "white" : "blue.400"}
                     sx={{
                       fontSize: { xs: "24px", lg: "36px" },
                       lineHeight: { xs: "30px", lg: "44px" },
@@ -130,7 +130,7 @@ const DiscordBanner = () => {
                 >
                   <Typography
                     fontWeight={400}
-                    color={type === "youtube" ? "white" : "purple.400"}
+                    color={type === "youtube" ? "white" : "blue.400"}
                     sx={{
                       fontSize: { xs: "14px", lg: "18px" },
                       lineHeight: { xs: "18px", lg: "22px" },
@@ -160,7 +160,6 @@ const DiscordBanner = () => {
                   >
                     <Button
                       variant='contained'
-                      color='primary'
                       onClick={
                         type === "youtube"
                           ? undefined
@@ -178,7 +177,8 @@ const DiscordBanner = () => {
                         borderColor: "#000",
                         borderRadius: "100px",
                         color: type === "youtube" ? "red.300" : "black",
-                        background: type === "youtube" ? "white" : "pruple.400",
+                        backgroundColor:
+                          type === "youtube" ? "white" : "blue.400",
                       }}
                     >
                       Unisciti
