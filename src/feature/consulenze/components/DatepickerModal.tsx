@@ -22,7 +22,6 @@ import {
   ModalStepper,
   ModalFooter,
 } from "../../../components/modal";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useResponsive } from "../../../hook/useResponsive";
 import { useModalContext } from "../../../components/modal/context";
 import { reservationModalLabels } from "../utils/constants";
