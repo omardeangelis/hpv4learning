@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box from "@mui/system/Box";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import React from "react"
+import styled from "@emotion/styled"
+import Box from "@mui/system/Box"
+import Button from "@mui/material/Button"
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
 
-import { triggerGACustomEvent } from "../../utils/tracking";
-import SeoLink from "../shared/SeoLink";
+import { triggerGACustomEvent } from "../../utils/tracking"
+import SeoLink from "../shared/SeoLink"
 
 const StyledBox = styled(Box)`
   position: fixed;
@@ -65,34 +65,34 @@ const StyledBox = styled(Box)`
       border-radius: 50%;
     }
   }
-`;
+`
 
 const CourseCoupon = ({
   prezzo,
   link,
   isDisabled,
 }: {
-  prezzo: number;
-  link?: string;
-  isDisabled?: boolean;
+  prezzo: number
+  link?: string
+  isDisabled?: boolean
 }) => {
   return (
     <StyledBox
-      width='100%'
+      width="100%"
       sx={{
         mt: { xs: "0px", lg: "68px" },
       }}
     >
       <Stack
-        direction='row'
-        alignItems='center'
+        direction="row"
+        alignItems="center"
         spacing={2}
         sx={{
           display: { xs: "none", lg: "flex" },
         }}
       >
         <Typography
-          color='grey.700'
+          color="grey.700"
           fontWeight={500}
           sx={{
             fontSize: "14px",
@@ -100,9 +100,9 @@ const CourseCoupon = ({
         >
           coupon
         </Typography>
-        <Box color='green.300'>
-          <Stack direction='row' alignItems='center' spacing={1}>
-            <div className='point'></div>{" "}
+        <Box color="green.300">
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <div className="point"></div>{" "}
             <div
               style={{
                 color: "inherit",
@@ -114,10 +114,10 @@ const CourseCoupon = ({
           </Stack>
         </Box>
       </Stack>
-      <Box mt='12px'>
-        <Box className='action-box'>
+      <Box mt="12px">
+        <Box className="action-box">
           <Stack
-            justifyContent='space-between'
+            justifyContent="space-between"
             sx={{
               flexDirection: {
                 xs: "column-reverse",
@@ -130,7 +130,7 @@ const CourseCoupon = ({
             }}
           >
             <Typography
-              color='grey.600'
+              color="grey.600"
               fontWeight={300}
               sx={{
                 fontSize: { xs: "14px", lg: "14px" },
@@ -139,21 +139,21 @@ const CourseCoupon = ({
             >
               {`${(prezzo / 100).toFixed(2)}€`}
             </Typography>
-            <Box className='sales no-mobile'>
+            <Box className="sales no-mobile">
               <Typography
-                color='white'
+                color="white"
                 fontWeight={500}
                 sx={{
                   fontSize: "10px",
                 }}
               >
                 {`-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                  0,
+                  0
                 )}%`}
               </Typography>
             </Box>
             <Typography
-              color='grey.800'
+              color="grey.800"
               fontWeight={400}
               sx={{
                 fontSize: "18px",
@@ -163,25 +163,25 @@ const CourseCoupon = ({
             </Typography>
           </Stack>
           <Box
-            mt='16px'
+            mt="16px"
             sx={{
               flexGrow: 1,
             }}
           >
             {!isDisabled ? (
-              <SeoLink link={link as string} isExternal rel='nofollow'>
+              <SeoLink link={link as string} isExternal rel="nofollow">
                 <Button
-                  variant='contained'
+                  variant="contained"
                   color={"primary"}
-                  size='large'
+                  size="large"
                   disabled={isDisabled}
                   sx={{
                     borderRadius: "100px",
                     width: "100%",
                   }}
                   onClick={triggerGACustomEvent(
-                    { event: "clic_to_udemy" },
-                    { hasLocation: true },
+                    { event: "click_to_udemy" },
+                    { hasLocation: true }
                   )}
                 >
                   {isDisabled ? "Esaurito" : "Riscatta Coupon"}
@@ -189,9 +189,9 @@ const CourseCoupon = ({
               </SeoLink>
             ) : (
               <Button
-                variant='contained'
+                variant="contained"
                 color={"primary"}
-                size='large'
+                size="large"
                 disabled={isDisabled}
                 sx={{
                   borderRadius: "100px",
@@ -205,7 +205,7 @@ const CourseCoupon = ({
         </Box>
       </Box>
     </StyledBox>
-  );
-};
+  )
+}
 
-export default CourseCoupon;
+export default CourseCoupon
