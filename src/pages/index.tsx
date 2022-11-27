@@ -21,8 +21,16 @@ import OrganizationSchema from "../components/SEO/components/OrganizationSchema"
 import { HomeSection } from "../feature/projects/components";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import { BottomBanner, RoundedButton } from "../components/layout";
+import {
+  useGetAllCourseStatsQuery,
+  useGetSingleCourseStatsByIdQuery,
+} from "../services/udemy";
 
 const IndexPage = () => {
+  // const { data } = useGetAllCourseStatsQuery();
+  // const { data } = useGetSingleCourseStatsByIdQuery(3999702);
+  // console.log(data);
+
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
   const goToCourseSection = React.useCallback(() => {
     if (!coursesPositionRef.current) {
