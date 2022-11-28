@@ -3,6 +3,7 @@ import React from "react"
 import { Navbar, Sidebar } from "../../feature/navigation/components"
 import { Footer } from "../../feature/footer"
 import { Script } from "gatsby"
+import { CookieConsent } from "../../feature/navigation/components/CookieManager"
 const Layout = ({
   children,
   disableColor,
@@ -24,7 +25,6 @@ const Layout = ({
         type="text/javascript"
         src="cdn.iubenda.com/cs/ccpa/stub.js"
       />
-
       <Script
         id="iubenda-2"
         key="iubenda-2"
@@ -34,6 +34,12 @@ const Layout = ({
         onLoad={() => {
           globalThis._iub.cc = "EU"
         }}
+      />
+      <CookieConsent
+        siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
+        cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
+        lang="it"
+        apiKey=""
       />
     </>
   )
