@@ -19,22 +19,26 @@ const Layout = ({
       <Sidebar />
       <main>{children}</main>
       <Footer enableFooterPadding={enableFooterPadding} />
+      <Script type="text/javascript">
+        {`
+          var _iub = _iub || [];
+_iub.csConfiguration = {"ccpaAcknowledgeOnDisplay":true,"consentOnContinuedBrowsing":false,"countryDetection":true,"enableCcpa":true,"enableLgpd":true,"floatingPreferencesButtonDisplay":"bottom-right","invalidateConsentWithoutLog":true,"lgpdAppliesGlobally":false,"perPurposeConsent":true,"whitelabel":false,"cookiePolicyId":${Number(
+          process.env.GATSBY_IUBENDA_POLICYID
+        )}"siteId":${Number(
+          process.env.GATSBY_IUBENDA_SITEID
+        )},"lang":"it", "banner":{ "acceptButtonDisplay":true,"closeButtonDisplay":false,"customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"position":"float-top-center","rejectButtonDisplay":true }};
+          `}
+      </Script>
       <Script
-        id="iubenda-1"
-        key="iubenda-1"
         type="text/javascript"
-        src="cdn.iubenda.com/cs/ccpa/stub.js"
-      />
+        src="//cdn.iubenda.com/cs/ccpa/stub.js"
+      ></Script>
       <Script
-        id="iubenda-2"
-        key="iubenda-2"
         type="text/javascript"
-        src="cdn.iubenda.com/cs/iubenda_cs.js"
+        src="//cdn.iubenda.com/cs/iubenda_cs.js"
+        charSet="UTF-8"
         async
-        onLoad={() => {
-          globalThis._iub.cc = "EU"
-        }}
-      />
+      ></Script>
       <CookieConsent
         siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
         cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
