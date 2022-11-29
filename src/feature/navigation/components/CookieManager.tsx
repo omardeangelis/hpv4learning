@@ -1,26 +1,26 @@
 /* eslint-disable no-underscore-dangle */
-import React from "react";
-import useHasMounted from "../../../hook/useHasMounted";
-import { useCookieConsentStyle } from "../hooks/useCookieConsentStyle";
+import React from "react"
+import useHasMounted from "../../../hook/useHasMounted"
+import { useCookieConsentStyle } from "../hooks/useCookieConsentStyle"
 
 export type CookieConsentProps = {
-  lang: string;
-  siteId: number;
-  cookiePolicyId: number;
-  apiKey: string;
-  perPurposeConsent?: boolean;
-  consentOnContinuedBrowsing?: boolean;
-  reloadOnConsent?: boolean;
-  askConsentAtCookiePolicyUpdate?: boolean;
-  enableRemoteConsent?: boolean;
-  priorConsent?: boolean;
-  invalidateConsentWithoutLog?: boolean;
-  whitelabel?: boolean;
-  gdprAppliesGlobally?: boolean;
-  privacyPolicyUrl?: string;
-  skipSaveContent?: boolean;
-  logLevel?: "debug" | "info" | "warn" | "error" | "fatal";
-};
+  lang: string
+  siteId: number
+  cookiePolicyId: number
+  apiKey: string
+  perPurposeConsent?: boolean
+  consentOnContinuedBrowsing?: boolean
+  reloadOnConsent?: boolean
+  askConsentAtCookiePolicyUpdate?: boolean
+  enableRemoteConsent?: boolean
+  priorConsent?: boolean
+  invalidateConsentWithoutLog?: boolean
+  whitelabel?: boolean
+  gdprAppliesGlobally?: boolean
+  privacyPolicyUrl?: string
+  skipSaveContent?: boolean
+  logLevel?: "debug" | "info" | "warn" | "error" | "fatal"
+}
 
 export const CookieConsent = React.memo(
   ({
@@ -35,11 +35,10 @@ export const CookieConsent = React.memo(
     askConsentAtCookiePolicyUpdate = true,
     ...rest
   }: CookieConsentProps) => {
-    const hasMounted = useHasMounted();
-    const bannerStyle = useCookieConsentStyle();
+    const bannerStyle = useCookieConsentStyle()
 
     React.useEffect(() => {
-      const iub = globalThis._iub || {};
+      const iub = globalThis._iub || {}
       globalThis._iub = {
         ...iub,
         csConfiguration: {
@@ -54,7 +53,7 @@ export const CookieConsent = React.memo(
           ...rest,
           banner: bannerStyle,
         },
-      };
+      }
     }, [
       askConsentAtCookiePolicyUpdate,
       bannerStyle,
@@ -66,37 +65,16 @@ export const CookieConsent = React.memo(
       perPurposeConsent,
       rest,
       siteId,
-    ]);
+    ])
 
     React.useEffect(() => {
-      const iub = globalThis._iub || {};
+      const iub = globalThis._iub || {}
       iub.cons_instructions = [
         ...(iub.cons_instructions || []),
         ["init", { api_key: apiKey }],
-      ];
-    }, [apiKey]);
+      ]
+    }, [apiKey])
 
-    React.useEffect(() => {
-      if (hasMounted) {
-        const script = document.createElement("script");
-        script.type = "text/javascript";
-        script.async = true;
-        script.src = "//cdn.iubenda.com/cs/iubenda_cs.js";
-        script.onload = () => {
-          globalThis._iub.cc = "EU";
-        };
-        if (document.body != null) {
-          document.body.appendChild(script);
-        }
-
-        return () => {
-          if (document.body != null) {
-            document.body.removeChild(script);
-          }
-        };
-      }
-    }, [apiKey, cookiePolicyId, lang, siteId, hasMounted]);
-
-    return null;
-  },
-);
+    return null
+  }
+)
