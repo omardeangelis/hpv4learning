@@ -36,59 +36,57 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
 
   return (
     <div>
-      <Container maxWidth='lg'>
-        <StyledTypography>Prossimo Progetto</StyledTypography>
-        {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
-        <SeoLink
-          isExternal={false}
-          link={nextProjectUrl}
-          style={{
-            display: "flex",
-            width: "fit-content",
+      <StyledTypography>Prossimo Progetto</StyledTypography>
+      {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
+      <SeoLink
+        isExternal={false}
+        link={nextProjectUrl}
+        style={{
+          display: "flex",
+          width: "fit-content",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: { xs: "unset", sm: "351px" },
           }}
         >
-          <Box
+          <ProjectCard
             sx={{
               maxWidth: { xs: "unset", sm: "351px" },
             }}
           >
-            <ProjectCard
-              sx={{
-                maxWidth: { xs: "unset", sm: "351px" },
-              }}
-            >
-              <ProjectImage>
-                {nextProject?.copertina ? (
-                  <GatsbyImage
-                    image={
-                      getImage(
-                        nextProject?.copertina as unknown as ImageDataLike,
-                      ) as IGatsbyImageData
-                    }
-                    alt={nextProject.articleTitle || "Anteprima del progetto"}
-                    style={{
-                      height: "100%",
-                    }}
-                  />
-                ) : (
-                  <Box
-                    sx={{
-                      backgroundColor: "purple.A100",
-                    }}
-                    width='100%'
-                  ></Box>
-                )}
-              </ProjectImage>
+            <ProjectImage>
+              {nextProject?.copertina ? (
+                <GatsbyImage
+                  image={
+                    getImage(
+                      nextProject?.copertina as unknown as ImageDataLike,
+                    ) as IGatsbyImageData
+                  }
+                  alt={nextProject.articleTitle || "Anteprima del progetto"}
+                  style={{
+                    height: "100%",
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    backgroundColor: "purple.A100",
+                  }}
+                  width='100%'
+                ></Box>
+              )}
+            </ProjectImage>
 
-              <ProjectContent
-                titolo={nextProject?.articleTitle as string | undefined}
-                label={props.project?.project_category?.[0]?.slug}
-                description={nextProject?.descrizione?.descrizione}
-              ></ProjectContent>
-            </ProjectCard>
-          </Box>
-        </SeoLink>
-      </Container>
+            <ProjectContent
+              titolo={nextProject?.articleTitle as string | undefined}
+              label={props.project?.project_category?.[0]?.slug}
+              description={nextProject?.descrizione?.descrizione}
+            ></ProjectContent>
+          </ProjectCard>
+        </Box>
+      </SeoLink>
     </div>
   );
 };

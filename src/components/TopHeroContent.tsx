@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 //Context
 
 //Hero Text and Image Component
-const TopHeroContent = ({ fn }: { fn: () => any }) => {
+const TopHeroContent = ({ fn }: { fn: () => void }) => {
   return (
     <Box>
       <Box>
@@ -38,10 +38,7 @@ const TopHeroContent = ({ fn }: { fn: () => any }) => {
             lineHeight: 1.7,
           }}
         >
-          Siamo un team di giovani professionisti impegnati nel costruire una
-          piattaforma
-          <strong className='brand-text'> di videocorsi italiana</strong> per le
-          nuove competenze digitali
+          La piattafroma di videocorsi italiana per le nuove competenze digitali
         </Typography>
       </Box>
       <Box

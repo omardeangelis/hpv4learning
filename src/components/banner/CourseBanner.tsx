@@ -79,7 +79,7 @@ const CourseBanner = ({ title, date, prezzo, link, img }: Props) => {
                   lineHeight: "18px",
                 }}
               >
-                {title.slice(0, 20) + "..."}
+                {title.slice(0, 32) + "..."}
               </Typography>
 
               <Box

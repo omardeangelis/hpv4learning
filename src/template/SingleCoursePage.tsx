@@ -131,13 +131,12 @@ const SingleCoursePage = ({
             >
               <Box>
                 <Typography
-                  sx={{
-                    fontSize: { xs: "36px", lg: "72px" },
-                    lineHeight: { xs: "39px", lg: "79px" },
-                  }}
                   component='h1'
-                  textAlign='center'
-                  fontWeight={700}
+                  fontWeight={600}
+                  sx={{
+                    fontSize: { xs: "36px", lg: "56px" },
+                    lineHeight: { xs: "44px", lg: "64px" },
+                  }}
                   dangerouslySetInnerHTML={{
                     __html: createBrandText(corso?.titolo as any) as string,
                   }}
@@ -386,7 +385,8 @@ const SingleCoursePage = ({
             )}
         </StyledBox>
         <Box
-          maxWidth='261px'
+          maxWidth='361px'
+          width='100%'
           sx={{
             mt: { xs: "0px", lg: "136px" },
             height: "fit-content",

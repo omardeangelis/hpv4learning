@@ -56,8 +56,8 @@ const StyledBox = styled(Box)`
     }
 
     .sales {
-      height: 34px;
-      width: 34px;
+      height: 38px;
+      width: 38px;
       display: flex;
       background: var(--purple-400);
       align-items: center;
@@ -84,9 +84,9 @@ const CourseCoupon = ({
       }}
     >
       <Stack
-        direction="row"
-        alignItems="center"
-        spacing={2}
+        direction='row'
+        alignItems='center'
+        justifyContent='space-between'
         sx={{
           display: { xs: "none", lg: "flex" },
         }}
@@ -100,17 +100,18 @@ const CourseCoupon = ({
         >
           coupon
         </Typography>
-        <Box color="green.300">
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <div className="point"></div>{" "}
-            <div
-              style={{
+        <Box color='green.300'>
+          <Stack direction='row' alignItems='center' spacing={1}>
+            <div className='point'></div>{" "}
+            <Typography
+              fontWeight={500}
+              sx={{
                 color: "inherit",
-                fontSize: "10px",
+                fontSize: "14px",
               }}
             >
               attivo
-            </div>
+            </Typography>
           </Stack>
         </Box>
       </Stack>
@@ -141,8 +142,8 @@ const CourseCoupon = ({
             </Typography>
             <Box className="sales no-mobile">
               <Typography
-                color="white"
-                fontWeight={500}
+                color='white'
+                fontWeight={600}
                 sx={{
                   fontSize: "10px",
                 }}
