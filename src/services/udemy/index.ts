@@ -7,9 +7,7 @@ export const udemySlice = createApi({
   reducerPath: "udemy",
   baseQuery: fetchBaseQuery({
     headers: {
-      "Accept": "application/json, text/plain, */*",
-      "Authorization": `Bearer ${UDEMY_TOKEN}`,
-      "Content-Type": "application/json;charset=utf-8",
+      "content-type": "application/json",,
     },
   }),
   endpoints: (builder) => ({

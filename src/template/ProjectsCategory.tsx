@@ -149,7 +149,7 @@ export const query = graphql`
       filter: { project_category: { elemMatch: { id: { eq: $id } } } }
       skip: $skip
       limit: $limit
-      sort: { fields: createdAt, order: ASC }
+      sort: { fields: createdAt, order: DESC }
     ) {
       nodes {
         titolo
