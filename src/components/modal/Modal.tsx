@@ -11,9 +11,11 @@ const ModalWrapper = styled(Box)({
   alignItems: "center",
   top: "0",
   left: "0",
-  height: "100vh",
   width: "100vw",
   zIndex: 200,
+  "@media screen and (min-width: 768px)": {
+    height: "100vh",
+  },
 });
 
 type Props = {

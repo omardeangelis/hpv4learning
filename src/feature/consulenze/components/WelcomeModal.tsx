@@ -81,6 +81,7 @@ const WelcomeModal = ({ onContinue }: Props) => {
                 Prenota una chiamata
               </Typography>
             ) : null}
+
             <ModalTypography
               color='var(--gray--500)'
               textAlign='center'
@@ -89,38 +90,25 @@ const WelcomeModal = ({ onContinue }: Props) => {
               lineHeight='24px'
               maxWidth='480px'
             >
-              Il mondo va veloce e noi anche. Lasciamo da parte i convenevoli e
-              la burocrazia e mettiamoci direttamente in contatto.
+              Nelle prossime schermate potrai prenotare una videochiamata che ti
+              verrà subito confermata scegliendo tra le date disponibili.
             </ModalTypography>
-            {isMobile ? (
-              <ModalTypography
-                color='var(--gray--500)'
-                textAlign='center'
-                fontSize='16px'
-                fontWeight={400}
-                lineHeight='24px'
-                maxWidth='480px'
-              >
-                Nelle prossime schermate potrai prenotare una videochiamata che
-                ti verrà subito confermata scegliendo tra le date disponibili.
-              </ModalTypography>
-            ) : null}
           </Stack>
         </Box>
-        <ModalFooter>
-          <Container>
-            <Button
-              onClick={handleCustomContinue}
-              variant='contained'
-              sx={{
-                width: "100%",
-              }}
-            >
-              Avanti
-            </Button>
-          </Container>
-        </ModalFooter>
       </ModalBody>
+      <ModalFooter>
+        <Container>
+          <Button
+            onClick={handleCustomContinue}
+            variant='contained'
+            sx={{
+              width: "100%",
+            }}
+          >
+            Avanti
+          </Button>
+        </Container>
+      </ModalFooter>
     </>
   );
 };
