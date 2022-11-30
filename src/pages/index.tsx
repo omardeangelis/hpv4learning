@@ -24,12 +24,16 @@ import { BottomBanner, RoundedButton } from "../components/layout";
 import {
   useGetAllCourseStatsQuery,
   useGetSingleCourseStatsByIdQuery,
+  useGetSingleCourseReviewByIdQuery,
+  useGetAllReviewsQuery,
 } from "../services/udemy";
 
 const IndexPage = () => {
   // const { data } = useGetAllCourseStatsQuery();
-  // const { data } = useGetSingleCourseStatsByIdQuery(3999702);
-  // console.log(data);
+  const { data } = useGetSingleCourseStatsByIdQuery();
+  // const { data } = useGetSingleCourseReviewByIdQuery();
+  // const { data } = useGetAllReviewsQuery();
+  console.log(data);
 
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
   const goToCourseSection = React.useCallback(() => {
