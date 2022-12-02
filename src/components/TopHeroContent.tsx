@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 //Material UI
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 //Context
 
 //Hero Text and Image Component
@@ -11,7 +11,7 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
     <Box>
       <Box>
         <Typography
-          component='h1'
+          component="h1"
           fontWeight={600}
           sx={{
             fontSize: { xs: "44px", lg: "72px" },
@@ -19,7 +19,7 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
             wordBreak: "break-all",
           }}
         >
-          <strong className='brand-text'>Professionisti</strong>
+          <strong className="brand-text">Professionisti</strong>
           <br />
           Non Professori
         </Typography>
@@ -30,7 +30,7 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
         }}
       >
         <Typography
-          color='grey.700'
+          color="grey.700"
           fontWeight={500}
           sx={{
             fontSize: { xs: "24px", lg: "24px" },
@@ -38,7 +38,8 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
             lineHeight: 1.7,
           }}
         >
-          La piattafroma di videocorsi italiana per le nuove competenze digitali
+          La piattafroma di videocorsi italiana per videomaker e sviluppatori
+          web{" "}
         </Typography>
       </Box>
       <Box
@@ -47,8 +48,8 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
         }}
       >
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={fn}
           sx={{
             height: "48px",
@@ -58,7 +59,7 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
         </Button>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default TopHeroContent;
+export default TopHeroContent

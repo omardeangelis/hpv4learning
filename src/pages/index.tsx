@@ -1,14 +1,13 @@
-import * as React from "react";
+import * as React from "react"
 //Global Layoaut
-import Layout from "../components/shared/layout";
-import IndexInfo from "../components/IndexInfo";
-import TopHeroContent from "../components/TopHeroContent";
+import Layout from "../components/shared/layout"
+import TopHeroContent from "../components/TopHeroContent"
 
 //Meta Title e SEO e Utils
-import SeoLink from "../components/shared/SeoLink";
-import LinkHandler from "../components/SEO/components/LinkHandler";
+import SeoLink from "../components/shared/SeoLink"
+import LinkHandler from "../components/SEO/components/LinkHandler"
 //Components
-import Hero from "../components/ui/Hero";
+import Hero from "../components/ui/Hero"
 //Material UI
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -21,6 +20,7 @@ import OrganizationSchema from "../components/SEO/components/OrganizationSchema"
 import { HomeSection } from "../feature/projects/components";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import { BottomBanner, RoundedButton } from "../components/layout";
+import { IndexInfo } from "../feature/home"
 import {
   useGetAllCourseStatsQuery,
   useGetSingleCourseStatsByIdQuery,
@@ -38,12 +38,12 @@ const IndexPage = () => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
   const goToCourseSection = React.useCallback(() => {
     if (!coursesPositionRef.current) {
-      return;
+      return
     }
     coursesPositionRef.current?.scrollIntoView({
       behavior: "smooth",
-    });
-  }, [coursesPositionRef.current]);
+    })
+  }, [coursesPositionRef.current])
   return (
     <Layout>
       <Box
@@ -51,47 +51,47 @@ const IndexPage = () => {
           mt: { xs: "48px", lg: "56px" },
         }}
       >
-        <Container maxWidth='lg'>
+        <Container maxWidth="lg">
           <Hero>
             <TopHeroContent fn={goToCourseSection} />
           </Hero>
         </Container>
       </Box>
-
-      {/* Sezione con le card  */}
       <Box
         sx={{
-          mt: { xs: "96px", lg: "136px" },
+          backgroundColor: "purple.400",
+          py: { xs: "36px", lg: "72px" },
+          mt: { xs: "48px", lg: "96px" },
         }}
       >
         <IndexInfo />
       </Box>
 
       <Container
-        maxWidth='lg'
+        maxWidth="lg"
         sx={{
-          mt: { xs: "96px", lg: "136px" },
+          mt: { xs: "48px", lg: "96px" },
         }}
       >
-        <Box component='section'>
+        <Box component="section">
           <Typography
-            variant={"h3"}
-            textAlign='center'
+            component={"h2"}
+            textAlign="center"
             sx={{
               fontSize: { xs: "36px", lg: "48px" },
               fontWeight: 600,
             }}
           >
-            I nostri <span className='brand-text'>corsi</span>
+            I nostri <span className="brand-text">corsi</span>
           </Typography>
-          <Box mt='34px' ref={coursesPositionRef}>
+          <Box mt="34px" ref={coursesPositionRef}>
             <CourseWall />
           </Box>
         </Box>
       </Container>
       <Box
         sx={{
-          mt: { xs: "96px", lg: "136px" },
+          mt: { xs: "48px", lg: "96px" },
         }}
       >
         <ComunityBanner />
@@ -99,16 +99,16 @@ const IndexPage = () => {
 
       <Box
         sx={{
-          mt: { xs: "96px", lg: "136px" },
+          mt: { xs: "48px", lg: "96px" },
         }}
       >
-        <Container maxWidth='lg'>
-          <Box mx='auto'>
-            <Box mx='auto' maxWidth='656px'>
+        <Container maxWidth="lg">
+          <Box mx="auto">
+            <Box mx="auto" maxWidth="656px">
               <Typography
                 fontWeight={600}
-                textAlign='center'
-                component='h2'
+                textAlign="center"
+                component="h2"
                 lineHeight={{
                   xs: "39px",
                   lg: "56px",
@@ -122,8 +122,8 @@ const IndexPage = () => {
               </Typography>
             </Box>
             <Box
-              mx='auto'
-              maxWidth='656px'
+              mx="auto"
+              maxWidth="656px"
               mt={{
                 xs: "16px",
                 lg: "24px",
@@ -131,7 +131,7 @@ const IndexPage = () => {
             >
               <Typography
                 fontWeight={400}
-                textAlign='center'
+                textAlign="center"
                 sx={{
                   color: "grey.600",
                 }}
@@ -151,15 +151,15 @@ const IndexPage = () => {
           </Box>
 
           <Stack
-            alignItems='center'
-            justifyContent='center'
+            alignItems="center"
+            justifyContent="center"
             mt={{
               xs: "24px",
               lg: "34px",
             }}
           >
-            <SeoLink isExternal={false} link='/progetti/'>
-              <Button variant='contained' size='large'>
+            <SeoLink isExternal={false} link="/progetti/">
+              <Button variant="contained" size="large">
                 Vedi tutti
               </Button>
             </SeoLink>
@@ -176,21 +176,21 @@ const IndexPage = () => {
       </Box>
       <Box
         sx={{
-          mt: { xs: "96px", lg: "108px" },
+          mt: { xs: "48px", lg: "96px" },
         }}
       >
         <BottomBanner
-          position='relative'
-          overflow='hidden'
+          position="relative"
+          overflow="hidden"
           title={
             <Typography
-              color='white'
+              color="white"
               fontSize={["24px", "34px"]}
               lineHeight={["29px", "39px"]}
-              textAlign='center'
+              textAlign="center"
               fontWeight={600}
             >
-              Hai bisogno di un <span className='brand-text'>sito web </span>su
+              Hai bisogno di un <span className="brand-text">sito web </span>su
               misura per le tue esigenze ?
             </Typography>
           }
@@ -199,11 +199,11 @@ const IndexPage = () => {
           }}
         >
           <Typography
-            width='100%'
-            fontSize='21px'
-            lineHeight='24px'
-            color='gray.200'
-            textAlign='center'
+            width="100%"
+            fontSize="21px"
+            lineHeight="24px"
+            color="gray.200"
+            textAlign="center"
             sx={{
               maxWidth: { xs: "unset", lg: "611px" },
             }}
@@ -211,11 +211,11 @@ const IndexPage = () => {
             Fissa una videochiamata in pochi step e raccontaci di che cosa hai
             bisogno.
           </Typography>
-          <SeoLink link='/consulenze/' isExternal={false}>
+          <SeoLink link="/consulenze/" isExternal={false}>
             <RoundedButton
-              variant='contained'
-              color='primary'
-              size='large'
+              variant="contained"
+              color="primary"
+              size="large"
               sx={{
                 px: "30px",
                 width: { xs: "100%", md: "unset" },
@@ -227,20 +227,20 @@ const IndexPage = () => {
         </BottomBanner>
       </Box>
     </Layout>
-  );
-};
+  )
+}
 
 export const Head = () => {
   return (
     <>
       <MetaDecorator
-        metaTitle='Videocorsi per sviluppatori web e videomakers'
-        metaDescription='Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti'
+        metaTitle="Videocorsi per sviluppatori web e videomakers"
+        metaDescription="Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti"
       />
       <OrganizationSchema />
       <LinkHandler />
     </>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage

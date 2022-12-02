@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles/";
+import { createTheme } from "@mui/material/styles/"
 
 const theme = {
   palette: {
@@ -17,6 +17,8 @@ const theme = {
     },
     //Official Theme Colors - Need to be full implemented
     gray: {
+      50: "#FCFCFC",
+      100: "#FAFAFA",
       200: "#F8F8F8",
       300: "#E4E7EC",
       400: "#D0D5DD",
@@ -36,6 +38,12 @@ const theme = {
       900: "#11081F",
       G200: "linear-gradient(180deg, #E9E3FF, white )",
       G800: "linear-gradient(180deg, #341268, #8769FE)",
+    },
+    orange: {
+      400: "#FF7D34",
+    },
+    yellow: {
+      400: "#FFEB34",
     },
     blue: {
       400: "#5865F2",
@@ -152,11 +160,11 @@ const theme = {
       xl: 1440,
     },
   },
-} as const;
+} as const
 
 type CustomTheme = {
-  [Key in keyof typeof theme]: typeof theme[Key];
-};
+  [Key in keyof typeof theme]: typeof theme[Key]
+}
 declare module "@mui/material/styles/createTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface Theme extends CustomTheme {}
@@ -164,4 +172,4 @@ declare module "@mui/material/styles/createTheme" {
   interface ThemeOptions extends CustomTheme {}
 }
 
-export default createTheme(theme);
+export default createTheme(theme)
