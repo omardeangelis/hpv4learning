@@ -7,7 +7,7 @@ export const udemySlice = createApi({
   reducerPath: "udemy",
   baseQuery: fetchBaseQuery({
     headers: {
-      "content-type": "application/json",,
+      "content-type": "application/json",
     },
   }),
   endpoints: (builder) => ({
