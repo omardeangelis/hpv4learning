@@ -1,12 +1,13 @@
-import fetch from "node-fetch";
-import { COURSES_IDS } from "../constants";
+import { COURSES_IDS, UDEMY_TOKEN } from "../constants";
+import { SingleCourseReviewsResponse, SingleCourseStatsResponse } from "./types";
+import { udemyFetch } from "./utils";
 
 export const getSingleCourseStatsById = async (id: number) => {
   try {
-    const res = await fetch(
+    const res = await udemyFetch(
       `https://www.udemy.com/api-2.0/courses/${id}/?page=1&page_size=32&ordering=-create&skip_caching=true&fields[course]=title,num_subscribers,num_subscribers_recent,rating,content_length_video`,
     );
-    const response = await res.json();
+    const response = await res.json() as SingleCourseStatsResponse;
     const courseStats = {
       title: response.title,
       rating: Number(response.rating.toFixed(1)),
@@ -23,7 +24,7 @@ export const getSingleCourseStatsById = async (id: number) => {
 export const getAllPaidCoursesStats = async () => {
   try {
     const promisesArray = COURSES_IDS.map((id) => getSingleCourseStatsById(id));
-    const res = await Promise.all(promisesArray);
+    const res = await Promise.all(promisesArray) as SingleCourseStatsResponse[];
 
     let totalSubscribers = 0;
     let totalRating = 0;
@@ -49,10 +50,10 @@ export const getAllPaidCoursesStats = async () => {
 
 export const getSingleCourseReviewsById = async (id: number) => {
   try {
-    const res = await fetch(
+    const res = await udemyFetch(
       `https://www.udemy.com/api-2.0/courses/${id}/reviews/?page=1&page_size=100`,
     );
-    const response = await res.json();
+    const response = await res.json() as SingleCourseReviewsResponse;
     console.log(response);
 
     const contentReviews = response.results.filter(
@@ -81,3 +82,22 @@ export const getAllReview = async () => {
     return { error: error };
   }
 };
+
+
+// export const getInstructorData= async () => {
+//   try {
+//      const res = await udemyFetch(
+//       `https://www.udemy.com/instructor-api/v1/taught-courses/courses/?fields[course]=visible_instructors,rating`
+//     );
+//     const response = await res.json();
+//     console.log(response);
+//     const instructorCourses = response.filter((el) => {
+//       return el.visible_instructors.name === instructor;
+//     })
+//     console.log(instructorCourses);
+    
+
+//   } catch (error) {
+//     return { error: error }
+//   }
+// };

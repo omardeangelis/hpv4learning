@@ -21,19 +21,8 @@ import { HomeSection } from "../feature/projects/components";
 import MetaDecorator from "../components/SEO/components/MetaDecorator";
 import { BottomBanner, RoundedButton } from "../components/layout";
 import { IndexInfo } from "../feature/home"
-import {
-  useGetAllCourseStatsQuery,
-  useGetSingleCourseStatsByIdQuery,
-  useGetSingleCourseReviewByIdQuery,
-  useGetAllReviewsQuery,
-} from "../services/udemy";
 
 const IndexPage = () => {
-  // const { data } = useGetAllCourseStatsQuery();
-  const { data } = useGetSingleCourseStatsByIdQuery();
-  // const { data } = useGetSingleCourseReviewByIdQuery();
-  // const { data } = useGetAllReviewsQuery();
-  console.log(data);
 
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null);
   const goToCourseSection = React.useCallback(() => {
