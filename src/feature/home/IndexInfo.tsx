@@ -98,7 +98,7 @@ export const Info = ({
 
 //Sezione Informativa
 export const IndexInfo = () => {
-  const { isLoading, isError, data } = useGetAllCourseStatsQuery()
+  const { isLoading, data } = useGetAllCourseStatsQuery()
   return (
     <Container>
       <Typography
