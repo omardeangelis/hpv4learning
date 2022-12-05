@@ -1,7 +1,17 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { UDEMY_TOKEN } from "../../server/constants";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-type SingleReview = { userName: string; rating: number; content: string };
+type SingleReview = { userName: string; rating: number; content: string }
+type GetAllCourseStatsResponse = {
+  totalSubscribers: number
+  averageRating: number
+  coursesHours: number
+}
+type GetSingleCourseReviewResponse = {
+  title: string
+  rating: number
+  totalSubscribers: number
+  coursehours: number
+}
 
 export const udemySlice = createApi({
   reducerPath: "udemy",
@@ -11,19 +21,12 @@ export const udemySlice = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAllCourseStats: builder.query<
-      { totalSubscribers: number; averageRating: number; coursesHours: number },
-      void
-    >({
+    getAllCourseStats: builder.query<GetAllCourseStatsResponse, void>({
       query: () => "/api/udemy/get-all-courses-stats",
+      keepUnusedDataFor: 60 * 1000 * 60 * 6,
     }),
     getSingleCourseStatsById: builder.query<
-      {
-        title: string;
-        rating: number;
-        totalSubscribers: number;
-        coursehours: number;
-      },
+      GetSingleCourseReviewResponse,
       number
     >({
       query: (id) => `/api/udemy/get-single-course-stats-by-id?id=${id}`,
@@ -35,11 +38,11 @@ export const udemySlice = createApi({
       query: () => "/api/udemy/get-all-review",
     }),
   }),
-});
+})
 
 export const {
   useGetAllCourseStatsQuery,
   useGetSingleCourseStatsByIdQuery,
   useGetSingleCourseReviewByIdQuery,
   useGetAllReviewsQuery,
-} = udemySlice;
+} = udemySlice

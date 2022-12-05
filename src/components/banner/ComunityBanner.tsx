@@ -1,14 +1,14 @@
-import React from "react";
-import useTheme from "@mui/material/styles/useTheme";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import React from "react"
+import useTheme from "@mui/material/styles/useTheme"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Button from "@mui/material/Button"
+import Typography from "@mui/material/Typography"
+import useMediaQuery from "@mui/material/useMediaQuery"
 
-import styled from "@emotion/styled";
-import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp";
-import { triggerGACustomEvent } from "../../utils/tracking";
+import styled from "@emotion/styled"
+import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp"
+import { triggerGACustomEvent } from "../../utils/tracking"
 
 const CustomStack = styled.div`
   & > *:not(:last-of-type) {
@@ -58,12 +58,12 @@ const CustomStack = styled.div`
       transition: all 125ms ease;
     }
   }
-`;
+`
 
 const DiscordBanner = () => {
-  const [type, setType] = React.useState<"discord" | "youtube">("discord");
-  const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+  const [type, setType] = React.useState<"discord" | "youtube">("youtube")
+  const theme = useTheme()
+  const sm = useMediaQuery(theme.breakpoints.down("sm"))
   return (
     <Box
       sx={{
@@ -75,11 +75,11 @@ const DiscordBanner = () => {
           py: { xs: "26px", lg: "55px" },
         }}
       >
-        <Container maxWidth='md'>
+        <Container maxWidth="md">
           <Box>
             <CustomStack>
-              <Box className='banner-left'>
-                <Box className='banner-action'>
+              <Box className="banner-left">
+                <Box className="banner-action">
                   <Button
                     size={sm ? "small" : "medium"}
                     sx={{
@@ -147,8 +147,8 @@ const DiscordBanner = () => {
                   }}
                 >
                   <a
-                    rel='noopener'
-                    target='_blank'
+                    rel="noopener"
+                    target="_blank"
                     href={
                       type === "discord"
                         ? "https://discord.gg/pNhjB78F"
@@ -159,7 +159,7 @@ const DiscordBanner = () => {
                     }}
                   >
                     <Button
-                      variant='contained'
+                      variant="contained"
                       onClick={
                         type === "youtube"
                           ? undefined
@@ -207,7 +207,7 @@ const DiscordBanner = () => {
         </Container>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default DiscordBanner;
+export default DiscordBanner

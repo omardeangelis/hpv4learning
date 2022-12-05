@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography"
 import styled from "@emotion/styled"
 import Skeleton from "@mui/material/Skeleton"
 import { BorderBox } from "../../components/layout"
+import { useGetAllCourseStatsQuery } from "../../services/udemy"
 
 const PureCssStack = styled(Box)`
   display: flex;
@@ -33,7 +34,7 @@ export const Info = ({
   subtitle,
   isLoading,
 }: {
-  title: string
+  title?: number
   subtitle: string
   isLoading?: boolean
 }) => {
@@ -82,6 +83,10 @@ export const Info = ({
           sx={{
             fontSize: { xs: "14px", lg: "18px" },
             fontWeight: 400,
+            maxWidth: {
+              xs: "unset",
+              lg: "206px",
+            },
           }}
         >
           {subtitle}
@@ -93,6 +98,7 @@ export const Info = ({
 
 //Sezione Informativa
 export const IndexInfo = () => {
+  const { isLoading, data } = useGetAllCourseStatsQuery()
   return (
     <Container>
       <Typography
@@ -113,9 +119,21 @@ export const IndexInfo = () => {
         }}
       >
         <PureCssStack>
-          <Info title="2100" subtitle="Studenti Totali" />
-          <Info title="4.5" subtitle="Voto Medio" />
-          <Info title="8475" subtitle="Minuti di corso" />
+          <Info
+            title={data?.totalSubscribers}
+            isLoading={isLoading}
+            subtitle="Studenti Totali"
+          />
+          <Info
+            title={data?.averageRating}
+            isLoading={isLoading}
+            subtitle="Voto Medio"
+          />
+          <Info
+            title={data?.coursesHours}
+            isLoading={isLoading}
+            subtitle="Ore di Corsi"
+          />
         </PureCssStack>
       </Box>
     </Container>
