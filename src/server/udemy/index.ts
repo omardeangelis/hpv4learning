@@ -1,7 +1,8 @@
-import { COURSES_IDS, UDEMY_TOKEN } from "../constants";
-import { InstructorDataResponse, ParsedInstructorDataResponse, SingleCourseReviewsResponse, SingleCourseStatsResponse, TaughtCourse, VisibleInstructor } from "./types";
+import { COURSES_IDS } from "../constants";
+import { InstructorDataResponse, SingleCourseReviewsResponse, SingleCourseStatsResponse } from "./types";
 import { udemyFetch } from "./utils";
 import uniqBy from "lodash/uniqBy"
+import { parseInstructorData } from "./parsers";
 
 export const getSingleCourseStatsById = async (id: number) => {
   try {
@@ -98,34 +99,3 @@ export const getInstructorData = async () => {
     return { error: error }
   }
 };
-
-const parseInstructorData = (response: InstructorDataResponse):ParsedInstructorDataResponse[] => {
-  const instructors: VisibleInstructor[] = [];
-  response.results.map((course: TaughtCourse) => {
-    course.visible_instructors.map((instructor: VisibleInstructor) => {
-      instructors.push(instructor);
-    })
-  })
-  console.log(instructors, "instructors");
-  
-  const uniqueInstructors: VisibleInstructor[] = Array.from(new Set(instructors)); 
-
-  console.log(uniqueInstructors, "unique");
-  
-
-  return uniqueInstructors.map((uniqueInstructor) => {
-    let rating = 0;
-    let counter = 0;
-    response.results.forEach((course) => {
-      course.visible_instructors.forEach((inst) => {
-        if (inst.title === uniqueInstructor.title && course.rating > 0) {
-           rating += course.rating;
-           counter++;
-        }
-      })
-    })
-       rating = rating / counter;
-      return {id: uniqueInstructor.id, title: uniqueInstructor.title, rating}
-  })
-  
-}
