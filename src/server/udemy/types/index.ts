@@ -17,7 +17,7 @@ export type SingleCourseStatsResponse = {
   courseHours: number;
 };
 
-export interface VisibleInstructor {
+export type VisibleInstructor = {
   _class: string;
   id: string;
   title: string;
@@ -25,14 +25,14 @@ export interface VisibleInstructor {
   locale: string;
 }
 
-export interface TaughtCourse {
+export type TaughtCourse = {
   _class: string;
   id: string;
   visible_instructors: VisibleInstructor[];
   rating: number;
 }
 
-export interface InstructorDataResponse {
+export type InstructorDataResponse = {
   count: number;
   next?: any;
   previous?: any;

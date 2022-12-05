@@ -92,8 +92,8 @@ export const getInstructorData = async () => {
       `https://www.udemy.com/instructor-api/v1/taught-courses/courses/?fields[course]=visible_instructors,rating`
     );
     const response = await res.json() as InstructorDataResponse;
-    const parsedResponse = parseInstructorData(response)
-    return uniqBy(parsedResponse, "id")
+    const parsedResponse = uniqBy(parseInstructorData(response), "id")
+    return parsedResponse;
 
   } catch (error) {
     return { error: error }
