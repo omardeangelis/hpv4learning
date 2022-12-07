@@ -1,6 +1,8 @@
-import { COURSES_IDS, UDEMY_TOKEN } from "../constants";
-import { SingleCourseReviewsResponse, SingleCourseStatsResponse } from "./types";
+import { COURSES_IDS } from "../constants";
+import { InstructorDataResponse, SingleCourseReviewsResponse, SingleCourseStatsResponse } from "./types";
 import { udemyFetch } from "./utils";
+import uniqBy from "lodash/uniqBy"
+import { parseInstructorData } from "./parsers";
 
 export const getSingleCourseStatsById = async (id: number) => {
   try {
@@ -84,20 +86,16 @@ export const getAllReview = async () => {
 };
 
 
-// export const getInstructorData= async () => {
-//   try {
-//      const res = await udemyFetch(
-//       `https://www.udemy.com/instructor-api/v1/taught-courses/courses/?fields[course]=visible_instructors,rating`
-//     );
-//     const response = await res.json();
-//     console.log(response);
-//     const instructorCourses = response.filter((el) => {
-//       return el.visible_instructors.name === instructor;
-//     })
-//     console.log(instructorCourses);
-    
+export const getInstructorData = async () => {
+  try {
+     const res = await udemyFetch(
+      `https://www.udemy.com/instructor-api/v1/taught-courses/courses/?fields[course]=visible_instructors,rating`
+    );
+    const response = await res.json() as InstructorDataResponse;
+    const parsedResponse = parseInstructorData(response);
+    return parsedResponse;
 
-//   } catch (error) {
-//     return { error: error }
-//   }
-// };
+  } catch (error) {
+    return { error: error }
+  }
+};
