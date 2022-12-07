@@ -11,8 +11,11 @@ import {
   SingleCourseReviewsResponse,
   SingleCourseStatsResponse,
   SingleReview,
+  InstructorDataResponse,
+  ParsedInstructorDataResponse
 } from "./types";
 import { udemyFetch } from "./utils";
+import { parseInstructorData } from "./parsers";
 
 export const getSingleCourseStatsById = async (
   id: number,
@@ -78,3 +81,17 @@ export const getAllReview = async (): Promise<
     return { error: error };
   }
 };
+
+export const getInstructorsData = async ():Promise<ParsedInstructorDataResponse[] | ResponseError> => {
+  try {
+     const res = await udemyFetch(
+      `https://www.udemy.com/instructor-api/v1/taught-courses/courses/?fields[course]=visible_instructors,rating`
+    );
+    const response = await res.json() as InstructorDataResponse;
+    const parsedResponse: ParsedInstructorDataResponse[] = parseInstructorData(response);
+    return parsedResponse;
+  } catch (error) {
+    return { error: error }
+  }
+};
+
