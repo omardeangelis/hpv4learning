@@ -1,12 +1,3 @@
-export type SingleCourseReviews = {
-  content: string;
-  rating: number;
-  user: { name: string };
-};
-
-export type SingleCourseReviewsResponse = {
-  results: SingleCourseReviews[];
-};
 
 export type SingleCourseStatsResponse = {
   title: string;
@@ -16,6 +7,38 @@ export type SingleCourseStatsResponse = {
   totalSubscribers: number;
   courseHours: number;
 };
+
+export type ParsedInstructorDataResponse = {
+  id: string,
+  title: string,
+  rating: number
+
+}
+
+export type GetAllCourseStatsResponse = { 
+  totalSubscribers: number
+  averageRating: number
+  coursesHours: number
+}
+
+export type GetSingleCourseStatsResponse = {
+  title: string
+  rating: number
+  totalSubscribers: number
+  courseHours: number
+}
+
+export type SingleCourseReview = { 
+  content: string
+  rating: number
+  user: { name: string }
+}
+
+export type SingleCourseReviewsResponse = { 
+  results: SingleCourseReview[]
+}
+
+export type SingleReview = { userName: string; rating: number; content: string }
 
 export type VisibleInstructor = {
   _class: string;
@@ -39,8 +62,8 @@ export type InstructorDataResponse = {
   results: TaughtCourse[];
 }
 
-export type ParsedInstructorDataResponse = {
-  id: string,
-  title: string,
-  rating: number
+
+export type ResponseError = { 
+  error: any
+  message?: string;
 }

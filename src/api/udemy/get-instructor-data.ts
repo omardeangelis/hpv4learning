@@ -1,6 +1,6 @@
 import { HttpMethod } from "../../server/types";
 import {
-  getInstructorData,
+  getInstructorsData,
 } from "../../server/udemy";
 
 type ReqProps = {
@@ -11,7 +11,7 @@ type ReqProps = {
 const handler = async (req: ReqProps, res: any) => {
   if (req.method !== "GET") throw new Error("Use GET Method");
   try {
-      const response = await getInstructorData();
+      const response = await getInstructorsData();
       res.status(200).json(response);
       console.log(response);
   } catch (error) {
