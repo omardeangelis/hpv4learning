@@ -4,7 +4,6 @@ import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import styled from "@emotion/styled"
-import { keyframes } from "@emotion/react"
 
 //Context
 
