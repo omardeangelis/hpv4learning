@@ -3,20 +3,37 @@ import React from "react"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
+import styled from "@emotion/styled"
+
 //Context
+
+const CustomButton = styled(Button)({
+  maxWidth: "260px",
+  height: "60px",
+  width: "100%",
+  borderRadius: "100px 10px 125px 100px",
+  fontSize: "18px",
+  textTransform: "uppercase",
+})
 
 //Hero Text and Image Component
 const TopHeroContent = ({ fn }: { fn: () => void }) => {
   return (
     <Box>
-      <Box>
+      <Box
+        maxWidth="862px"
+        width="100%"
+        sx={{
+          mx: "auto",
+        }}
+      >
         <Typography
           component="h1"
-          fontWeight={600}
+          fontWeight={700}
           sx={{
             fontSize: { xs: "44px", lg: "72px" },
             lineHeight: { xs: "52px", lg: "79px" },
-            wordBreak: "break-all",
+            textAlign: "center",
           }}
         >
           <strong className="brand-text">Professionisti</strong>
@@ -25,12 +42,15 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
         </Typography>
       </Box>
       <Box
+        maxWidth="562px"
         sx={{
-          mt: { xs: "16px", lg: "24px" },
+          mt: { xs: "24px", lg: "34px" },
+          mx: "auto",
         }}
       >
         <Typography
           color="grey.700"
+          textAlign="center"
           fontWeight={500}
           sx={{
             fontSize: { xs: "24px", lg: "24px" },
@@ -44,19 +64,21 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => {
       </Box>
       <Box
         sx={{
-          mt: { xs: "16px", lg: "24px" },
+          mt: { xs: "24px", lg: "34px" },
+          display: "flex",
+          justifyContent: "center",
         }}
       >
-        <Button
+        <CustomButton
           variant="contained"
           color="primary"
           onClick={fn}
           sx={{
-            height: "48px",
+            textTransform: "capitalize",
           }}
         >
           Scopri i corsi
-        </Button>
+        </CustomButton>
       </Box>
     </Box>
   )

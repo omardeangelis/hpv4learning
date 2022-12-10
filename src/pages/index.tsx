@@ -34,22 +34,13 @@ const IndexPage = () => {
   }, [coursesPositionRef.current])
   return (
     <Layout>
-      <Box
-        sx={{
-          mt: { xs: "48px", lg: "56px" },
-        }}
-      >
-        <Container maxWidth="lg">
-          <Hero>
-            <TopHeroContent fn={goToCourseSection} />
-          </Hero>
-        </Container>
-      </Box>
+      <Hero>
+        <TopHeroContent fn={goToCourseSection} />
+      </Hero>
       <Box
         sx={{
           backgroundColor: "purple.400",
           py: { xs: "36px", lg: "72px" },
-          mt: { xs: "48px", lg: "96px" },
         }}
       >
         <IndexInfo />
