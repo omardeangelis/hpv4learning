@@ -1,15 +1,14 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { data } from "./footerdata";
-import SeoLink from "../../components/shared/SeoLink";
-import { StaticImage } from "gatsby-plugin-image";
-import useDropDownMenu from "../../hook/useDropDown";
-import { CookieConsent } from "../navigation/components/CookieManager";
+import React from "react"
+import styled from "@emotion/styled"
+import Container from "@mui/material/Container"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Stack from "@mui/material/Stack"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { data } from "./footerdata"
+import SeoLink from "../../components/shared/SeoLink"
+import { StaticImage } from "gatsby-plugin-image"
+import useDropDownMenu from "../../hook/useDropDown"
 
 const CustomStack = styled(Box)`
   a:hover {
@@ -37,37 +36,31 @@ const CustomStack = styled(Box)`
       display: none;
     }
   }
-`;
+`
 
 export const Footer = ({
   enableFooterPadding,
 }: {
-  enableFooterPadding?: boolean;
+  enableFooterPadding?: boolean
 }) => {
-  const { toggleMenu } = useDropDownMenu(data.map((el) => el.id));
+  const { toggleMenu } = useDropDownMenu(data.map((el) => el.id))
 
   return (
     <Box
-      component='footer'
+      component="footer"
       sx={{
         pb: { xs: enableFooterPadding ? "96px" : "32px", lg: "96px" },
         pt: { xs: "64px", lg: "96px" },
       }}
     >
-      <CookieConsent
-        siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
-        cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
-        lang='it'
-        apiKey=''
-      />
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <CustomStack>
           <Box
             sx={{
               display: { xs: "none", lg: "block" },
             }}
           >
-            <SeoLink isExternal={false} link='/'>
+            <SeoLink isExternal={false} link="/">
               <Box
                 sx={{
                   mb: { xs: "24px", md: "0px" },
@@ -75,10 +68,10 @@ export const Footer = ({
                 }}
               >
                 <StaticImage
-                  src='../../images/logo.png'
-                  alt='Logo Hpv 4 Learning'
-                  placeholder='tracedSVG'
-                  layout='fixed'
+                  src="../../images/logo.png"
+                  alt="Logo Hpv 4 Learning"
+                  placeholder="tracedSVG"
+                  layout="fixed"
                   height={70}
                   width={70}
                 />
@@ -89,14 +82,14 @@ export const Footer = ({
             return (
               <Box key={el.id}>
                 <Stack
-                  direction='row'
-                  alignItems='center'
+                  direction="row"
+                  alignItems="center"
                   justifyContent={["space-between", "flex-start"]}
                   onClick={() => toggleMenu(el.id)}
-                  width='100%'
+                  width="100%"
                 >
                   <Typography
-                    color='grey.700'
+                    color="grey.700"
                     fontWeight={500}
                     sx={{
                       fontSize: "14px",
@@ -105,20 +98,20 @@ export const Footer = ({
                     {el.title}
                   </Typography>
                   <Box
-                    className='icon-container'
+                    className="icon-container"
                     sx={{
                       display: { xs: "block", lg: "none" },
                     }}
                   >
                     <ExpandMoreIcon
-                      fontSize='small'
+                      fontSize="small"
                       sx={{
                         color: "purple.800",
                       }}
                     />
                   </Box>
                 </Stack>
-                <Box mt='8px' id={`${el.id}-menu`}>
+                <Box mt="8px" id={`${el.id}-menu`}>
                   {el.items.map((item) => {
                     return (
                       <Box
@@ -137,7 +130,7 @@ export const Footer = ({
                           target={item.isExternal ? "_blank" : "self"}
                         >
                           <Typography
-                            color='grey.600'
+                            color="grey.600"
                             fontWeight={300}
                             sx={{
                               fontSize: "12px",
@@ -147,26 +140,26 @@ export const Footer = ({
                           </Typography>
                         </SeoLink>
                       </Box>
-                    );
+                    )
                   })}
                 </Box>
               </Box>
-            );
+            )
           })}
         </CustomStack>
 
-        <Stack marginTop='24px' alignItems='flex-end' width='100%'>
+        <Stack marginTop="24px" alignItems="flex-end" width="100%">
           <Typography
-            color='grey.600'
+            color="grey.600"
             fontWeight={300}
             sx={{
               fontSize: "10px",
             }}
           >
             <a
-              href='https://www.iubenda.com/privacy-policy/12511737'
-              target='_blank'
-              rel='nofollow'
+              href="https://www.iubenda.com/privacy-policy/12511737"
+              target="_blank"
+              rel="nofollow"
             >
               Leggi la privacy policy
             </a>
@@ -174,5 +167,5 @@ export const Footer = ({
         </Stack>
       </Container>
     </Box>
-  );
-};
+  )
+}
