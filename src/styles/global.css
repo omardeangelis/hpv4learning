@@ -81,6 +81,8 @@
     /*
   Official Theme
   */
+    --gray-50: #FCFCFC;
+    --gray-100: #FAFAFA;
     --gray-200: #F8F8F8;
     --gray-300: #E4E7EC;
     --gray-400: #D0D5DD;
@@ -99,12 +101,11 @@
     --purple-900: #11081F;
     --purple-gradient-200: linear-gradient(180deg, #E9E3FF, white);
     --purple-gradient-800: : linear-gradient(180deg, #341268, #8769FE);
-
     --blue-400: #5865F2;
-
+    --yellow-400: #FFEB34;
+    --orange-400: #FF7D34;
     --red-300: #FF3434;
     --red-400: #f00;
-
     --green-300: #1AC99F;
 
 }
