@@ -1,0 +1,14 @@
+[
+    {
+        "source": "/creare-video-aziendali/",
+        "target": "/creare-video-professionali-con-il-telefono/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/<*>",
+        "target": "/",
+        "status": "200",
+        "condition": null
+    }
+]
