@@ -24,7 +24,7 @@ const Layout = ({
           var _iub = _iub || [];
 _iub.csConfiguration = {"ccpaAcknowledgeOnDisplay":true,"consentOnContinuedBrowsing":false,"countryDetection":true,"enableCcpa":true,"enableLgpd":true,"floatingPreferencesButtonDisplay":"bottom-right","invalidateConsentWithoutLog":true,"lgpdAppliesGlobally":false,"perPurposeConsent":true,"whitelabel":false,"cookiePolicyId":${Number(
           process.env.GATSBY_IUBENDA_POLICYID
-        )}"siteId":${Number(
+        )},"siteId":${Number(
           process.env.GATSBY_IUBENDA_SITEID
         )},"lang":"it", "banner":{ "acceptButtonDisplay":true,"closeButtonDisplay":false,"customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"position":"float-top-center","rejectButtonDisplay":true }};
           `}
