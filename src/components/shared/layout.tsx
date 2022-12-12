@@ -39,12 +39,12 @@ _iub.csConfiguration = {"ccpaAcknowledgeOnDisplay":true,"consentOnContinuedBrows
         charSet="UTF-8"
         async
       ></Script>
-      <CookieConsent
+      {/* <CookieConsent
         siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
         cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
         lang="it"
         apiKey=""
-      />
+      /> */}
     </>
   )
 }
