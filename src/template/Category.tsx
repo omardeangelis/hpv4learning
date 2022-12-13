@@ -210,7 +210,7 @@ const Category = ({
                         title={corso.titolo}
                         img={corso.copertina}
                         prezzo={corso.prezzo}
-                        link={corso.couponLink as string}
+                        link={corso.promoLink as string}
                         date={corso.updatedAt}
                       />
                     </Box>
@@ -269,7 +269,7 @@ export const query = graphql`
           gatsbyImageData
         }
         categoria
-        couponLink
+        promoLink
         slug
         livello
         updatedAt
