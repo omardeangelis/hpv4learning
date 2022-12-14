@@ -172,8 +172,8 @@ const SingleCoursePage = ({
               durata={corso?.oreDiLezione as any}
               progetti={corso?.progetti?.length || 0}
               lezioni={corso?.lezioni as any}
-              link={corso?.udemyUrl && (corso?.udemyUrl as any)}
-              tipologia={corso?.categoria as any}
+              link={corso?.urlToBuy && (corso?.urlToBuy as any)}
+              tipologia={corso?.provider as any}
             />
           </Box>
 
@@ -403,13 +403,12 @@ const SingleCoursePage = ({
               lezioni={corso?.lezioni as any}
               lastUpdate={corso?.lastUpdate?.toString() as any}
               categoria={categoryName}
-              tipologia={corso?.categoria as any}
-              link={corso?.udemyUrl as any}
+              tipologia={corso?.provider as any}
+              link={corso?.urlToBuy as any}
             />
-            {corso?.categoria?.toLowerCase() === "free" &&
-            corso.couponLink ? null : (
+            {corso?.isFree && corso.promoLink ? null : (
               <CourseCoupon
-                link={corso?.couponLink as any}
+                link={corso?.promoLink as any}
                 prezzo={corso?.prezzo as any}
                 isDisabled={isExpired(corso?.updatedAt as any)}
               />
@@ -488,6 +487,8 @@ export const query = graphql`
       recensioni
       lastUpdate
       categoria
+      provider
+      isFree
       idCorso
       lezioni
       livello
@@ -496,11 +497,11 @@ export const query = graphql`
       prezzo
       sottotitolo
       titolo
-      udemyUrl
+      urlToBuy
       videoLink
       target
       couponCorso
-      couponLink
+      promoLink
       concetti
       updatedAt
       recensioniRicevute
@@ -578,7 +579,7 @@ export const query = graphql`
           gatsbyImageData
         }
         categoria
-        couponLink
+        promoLink
         slug
         livello
         oreDiLezione
