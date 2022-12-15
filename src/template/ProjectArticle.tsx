@@ -67,7 +67,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
           <ProjectBanner
             courseTitle={queryData?.corsi?.[0]?.titolo}
             prezzo={queryData?.corsi?.[0]?.prezzo}
-            couponLink={queryData?.corsi?.[0]?.couponLink}
+            couponLink={queryData?.corsi?.[0]?.promoLink}
           />
         </FlexContainer>
         <ArticleFooter {...data} />
@@ -176,7 +176,7 @@ export const query = graphql`
       corsi {
         titolo
         prezzo
-        couponLink
+        promoLink
         slug
       }
     }
