@@ -1,21 +1,21 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Box from "@mui/system/Box";
-import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
-import SeoLink from "../../../components/shared/SeoLink";
-import { createRowText } from "../../../utils/helpers";
-import { useSelector, useDispatch } from "react-redux";
-import { closeProjectBanner } from "../../../store/reducers/uiSlice";
-import { RootState } from "../../../store";
-import { triggerGACustomEvent } from "../../../utils/tracking";
+import React from "react"
+import styled from "@emotion/styled"
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
+import Box from "@mui/system/Box"
+import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn"
+import { useSelector, useDispatch } from "react-redux"
+import SeoLink from "../../../components/shared/SeoLink"
+import { createRowText } from "../../../utils/helpers"
+import { closeProjectBanner } from "../../../store/reducers/uiSlice"
+import { RootState } from "../../../store"
+import { triggerGACustomEvent } from "../../../utils/tracking"
 
 interface Props {
-  courseTitle?: string | null;
-  prezzo?: number | null;
-  couponLink?: string | null;
+  courseTitle?: string | null
+  prezzo?: number | null
+  couponLink?: string | null
 }
 
 const BannerContainer = styled(Box)`
@@ -40,7 +40,7 @@ const BannerContainer = styled(Box)`
     padding-top: 25px;
     padding-bottom: 12px;
   }
-`;
+`
 
 const SaleBox = styled(Box)`
   display: none;
@@ -57,7 +57,7 @@ const SaleBox = styled(Box)`
     align-items: center;
     justify-content: center;
   }
-`;
+`
 
 const CloseButton = styled(Button)`
   padding: 0;
@@ -66,33 +66,33 @@ const CloseButton = styled(Button)`
   @media screen and (min-width: 1024px) {
     display: none;
   }
-`;
+`
 
 export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
-  const { isProjectBannerOpen } = useSelector((state: RootState) => state.ui);
-  const dispatch = useDispatch();
+  const { isProjectBannerOpen } = useSelector((state: RootState) => state.ui)
+  const dispatch = useDispatch()
   const closeBanner = React.useCallback(
     () => dispatch(closeProjectBanner()),
-    [dispatch],
-  );
+    [dispatch]
+  )
 
   if (isProjectBannerOpen) {
     return (
-      <BannerContainer sx={{ border: "1px solid", borderColor: "purple.200" }}>
-        <Stack direction='column' spacing={{ xs: "unset", lg: "15px" }}>
+      <BannerContainer sx={{ border: `1px solid`, borderColor: `purple.200` }}>
+        <Stack direction="column" spacing={{ xs: `unset`, lg: `15px` }}>
           <Stack
-            direction='row'
-            alignItems='flex-start'
-            justifyContent='space-between'
+            direction="row"
+            alignItems="flex-start"
+            justifyContent="space-between"
           >
             <Typography
-              variant='caption'
+              variant="caption"
               fontWeight={500}
               sx={{
-                fontSize: { xs: "12px", lg: "14px" },
-                color: { xs: "#343A40", lg: "#000" },
-                maxWidth: { xs: "220px", lg: "100%" },
-                lineHeight: { xs: "16px", lg: "18px" },
+                fontSize: { xs: `12px`, lg: `14px` },
+                color: { xs: `#343A40`, lg: `#000` },
+                maxWidth: { xs: `220px`, lg: `100%` },
+                lineHeight: { xs: `16px`, lg: `18px` },
               }}
             >
               {createRowText(courseTitle as string)}
@@ -101,32 +101,32 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
             <CloseButton onClick={closeBanner}>
               <DoDisturbOnIcon
                 sx={{
-                  color: "#E4E7EC",
+                  color: `#E4E7EC`,
                 }}
               />
             </CloseButton>
           </Stack>
           <Stack
-            direction={{ xs: "row", lg: "column" }}
-            alignItems='start'
-            spacing={{ xs: "unset", lg: "15px" }}
+            direction={{ xs: `row`, lg: `column` }}
+            alignItems="start"
+            spacing={{ xs: `unset`, lg: `15px` }}
           >
             <Stack
-              direction='row'
-              alignItems={{ xs: "flex-end", lg: "center" }}
-              justifyContent='space-between'
-              width='100%'
-              spacing={{ xs: "14px", lg: "32px" }}
+              direction="row"
+              alignItems={{ xs: `flex-end`, lg: `center` }}
+              justifyContent="space-between"
+              width="100%"
+              spacing={{ xs: `14px`, lg: `32px` }}
               sx={{
-                marginRight: { xs: "10px", lg: "unset" },
+                marginRight: { xs: `10px`, lg: `unset` },
               }}
             >
               <Typography
                 fontWeight={400}
                 sx={{
-                  fontSize: { xs: "12px", lg: "18px" },
-                  color: "#6C757D",
-                  textDecoration: "line-through",
+                  fontSize: { xs: `12px`, lg: `18px` },
+                  color: `#6C757D`,
+                  textDecoration: `line-through`,
                 }}
               >
                 {prezzo ? `${(prezzo / 100).toFixed(2)}€` : null}
@@ -134,37 +134,37 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
               <SaleBox>
                 {prezzo
                   ? `-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                      0,
+                      0
                     )}%`
                   : null}
               </SaleBox>
               <Typography
                 fontWeight={500}
                 sx={{
-                  fontSize: { xs: "16px", lg: "18px" },
-                  color: "#000",
+                  fontSize: { xs: `16px`, lg: `18px` },
+                  color: `#000`,
                 }}
               >
                 12.99€
               </Typography>
             </Stack>
             {couponLink ? (
-              <Box sx={{ width: { xs: "unset", lg: "100%" } }}>
-                <SeoLink isExternal={true} link={couponLink} rel='noopener'>
+              <Box sx={{ width: { xs: `unset`, lg: `100%` } }}>
+                <SeoLink isExternal link={couponLink} rel="noopener">
                   <Button
-                    color='primary'
-                    variant='contained'
+                    color="primary"
+                    variant="contained"
                     onClick={triggerGACustomEvent(
-                      { event: "click_to_udemy" },
-                      { hasLocation: true },
+                      { event: `click_to_udemy` },
+                      { hasLocation: true }
                     )}
                     sx={{
-                      width: "100%",
-                      maxWidth: { xs: "105px", lg: "unset" },
-                      height: "27px",
-                      background: "#8769FE",
-                      color: "#fff",
-                      borderRadius: "100px",
+                      width: `100%`,
+                      maxWidth: { xs: `105px`, lg: `unset` },
+                      height: `27px`,
+                      background: `#8769FE`,
+                      color: `#fff`,
+                      borderRadius: `100px`,
                     }}
                   >
                     riscatta
@@ -175,7 +175,7 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
           </Stack>
         </Stack>
       </BannerContainer>
-    );
+    )
   }
-  return null;
-};
+  return null
+}

@@ -1,6 +1,6 @@
-import React from "react";
-import { Skeleton, Box } from "@mui/material";
-import styled from "@emotion/styled";
+import React from "react"
+import { Skeleton, Box } from "@mui/material"
+import styled from "@emotion/styled"
 
 const StyledBox = styled(Box)`
   .video {
@@ -10,52 +10,52 @@ const StyledBox = styled(Box)`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 const FrameVideo = ({ video }: { video: string }) => {
-  const [load, setLoad] = React.useState<boolean>(true);
+  const [load, setLoad] = React.useState<boolean>(true)
 
   return (
     <StyledBox
-      width='100%'
-      height='0'
-      borderRadius='16px'
-      overflow='hidden'
-      position='relative'
-      pb={load ? "0px" : "56.25%"}
+      width="100%"
+      height="0"
+      borderRadius="16px"
+      overflow="hidden"
+      position="relative"
+      pb={load ? `0px` : `56.25%`}
     >
       <iframe
-        style={{ display: "none" }}
+        style={{ display: `none` }}
         onLoad={() => setLoad(false)}
         src={video}
-      ></iframe>
+      />
       {load ? (
         <Skeleton
           sx={{
-            pb: "56.25%",
-            height: "0",
-            width: "inherit",
-            transform: "none",
+            pb: `56.25%`,
+            height: `0`,
+            width: `inherit`,
+            transform: `none`,
           }}
         />
       ) : (
         <iframe
-          id='player'
-          src={video + "?enablejsapi=1"}
-          title='YouTube video player'
-          frameBorder='0'
-          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          id="player"
+          src={`${video}?enablejsapi=1`}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          className='video'
-        ></iframe>
+          className="video"
+        />
       )}
     </StyledBox>
-  );
-};
+  )
+}
 
-export default FrameVideo;
+export default FrameVideo
 
-//Permette di inviare EVENTI al play, stop e complete state del video
+// Permette di inviare EVENTI al play, stop e complete state del video
 // function handleTagLoading() {
 //   if (typeof window.YT !== "undefined" && typeof YT.Player !== "undefined") {
 //     let player = new YT.Player("player", {

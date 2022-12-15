@@ -1,23 +1,23 @@
 export type CategoryType = {
-  categoria: string;
-  slug: string;
-};
+  categoria: string
+  slug: string
+}
 
 export type CategoryMenuProps = {
-  slug: string;
-  name: string;
-  seoDescription: string;
+  slug: string
+  name: string
+  seoDescription: string
   image?: {
     file: {
-      url: string;
-    };
-  };
-};
+      url: string
+    }
+  }
+}
 
 export type BlockDescriptionProps = {
-  description: string;
-  title: string;
-};
+  description: string
+  title: string
+}
 
 export type IconTypeProps =
   | "home"
@@ -27,4 +27,4 @@ export type IconTypeProps =
   | "videomakers"
   | "code"
   | "free"
-  | "school";
+  | "school"

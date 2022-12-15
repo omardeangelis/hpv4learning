@@ -1,10 +1,10 @@
-import { graphql, useStaticQuery } from "gatsby";
-import { SeoDefaultData } from "../types";
+import { graphql, useStaticQuery } from "gatsby"
+import { SeoDefaultData } from "../types"
 
 const useSeoData = () => {
-  const data: SeoDefaultData & { languagePath: string } = useStaticQuery(query);
-  return { ...data };
-};
+  const data: SeoDefaultData & { languagePath: string } = useStaticQuery(query)
+  return { ...data }
+}
 
 const query = graphql`
   query SiteMetaData {
@@ -22,5 +22,5 @@ const query = graphql`
       }
     }
   }
-`;
-export default useSeoData;
+`
+export default useSeoData

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box, { BoxProps } from "@mui/material/Box";
+import React from "react"
+import styled from "@emotion/styled"
+import Box, { BoxProps } from "@mui/material/Box"
 
 const CustomStack = styled.div`
   & > *:not(:first-of-type) {
@@ -12,14 +12,12 @@ const CustomStack = styled.div`
       margin-top: 34px;
     }
   }
-`;
+`
 
-const FaqContent = ({ children, ...rest }: BoxProps) => {
-  return (
-    <Box {...rest}>
-      <CustomStack>{children}</CustomStack>
-    </Box>
-  );
-};
+const FaqContent = ({ children, ...rest }: BoxProps) => (
+  <Box {...rest}>
+    <CustomStack>{children}</CustomStack>
+  </Box>
+)
 
-export default FaqContent;
+export default FaqContent

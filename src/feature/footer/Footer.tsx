@@ -5,9 +5,9 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { StaticImage } from "gatsby-plugin-image"
 import { data } from "./footerdata"
 import SeoLink from "../../components/shared/SeoLink"
-import { StaticImage } from "gatsby-plugin-image"
 import useDropDownMenu from "../../hook/useDropDown"
 
 const CustomStack = styled(Box)`
@@ -49,21 +49,21 @@ export const Footer = ({
     <Box
       component="footer"
       sx={{
-        pb: { xs: enableFooterPadding ? "96px" : "32px", lg: "96px" },
-        pt: { xs: "64px", lg: "96px" },
+        pb: { xs: enableFooterPadding ? `96px` : `32px`, lg: `96px` },
+        pt: { xs: `64px`, lg: `96px` },
       }}
     >
       <Container maxWidth="lg">
         <CustomStack>
           <Box
             sx={{
-              display: { xs: "none", lg: "block" },
+              display: { xs: `none`, lg: `block` },
             }}
           >
             <SeoLink isExternal={false} link="/">
               <Box
                 sx={{
-                  mb: { xs: "24px", md: "0px" },
+                  mb: { xs: `24px`, md: `0px` },
                   zIndex: 1,
                 }}
               >
@@ -78,74 +78,70 @@ export const Footer = ({
               </Box>
             </SeoLink>
           </Box>
-          {data.map((el) => {
-            return (
-              <Box key={el.id}>
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent={["space-between", "flex-start"]}
-                  onClick={() => toggleMenu(el.id)}
-                  width="100%"
+          {data.map((el) => (
+            <Box key={el.id}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent={[`space-between`, `flex-start`]}
+                onClick={() => toggleMenu(el.id)}
+                width="100%"
+              >
+                <Typography
+                  color="grey.700"
+                  fontWeight={500}
+                  sx={{
+                    fontSize: `14px`,
+                  }}
                 >
-                  <Typography
-                    color="grey.700"
-                    fontWeight={500}
+                  {el.title}
+                </Typography>
+                <Box
+                  className="icon-container"
+                  sx={{
+                    display: { xs: `block`, lg: `none` },
+                  }}
+                >
+                  <ExpandMoreIcon
+                    fontSize="small"
                     sx={{
-                      fontSize: "14px",
+                      color: `purple.800`,
                     }}
-                  >
-                    {el.title}
-                  </Typography>
+                  />
+                </Box>
+              </Stack>
+              <Box mt="8px" id={`${el.id}-menu`}>
+                {el.items.map((item) => (
                   <Box
-                    className="icon-container"
+                    key={item.slug}
                     sx={{
-                      display: { xs: "block", lg: "none" },
+                      py: {
+                        xs: `5px`,
+                        lg: `6px`,
+                      },
                     }}
                   >
-                    <ExpandMoreIcon
-                      fontSize="small"
-                      sx={{
-                        color: "purple.800",
-                      }}
-                    />
-                  </Box>
-                </Stack>
-                <Box mt="8px" id={`${el.id}-menu`}>
-                  {el.items.map((item) => {
-                    return (
-                      <Box
-                        key={item.slug}
+                    <SeoLink
+                      link={item.slug}
+                      isExternal={item.isExternal}
+                      rel={item.isExternal ? `nofollow` : `internal`}
+                      target={item.isExternal ? `_blank` : `self`}
+                    >
+                      <Typography
+                        color="grey.600"
+                        fontWeight={300}
                         sx={{
-                          py: {
-                            xs: "5px",
-                            lg: "6px",
-                          },
+                          fontSize: `12px`,
                         }}
                       >
-                        <SeoLink
-                          link={item.slug}
-                          isExternal={item.isExternal}
-                          rel={item.isExternal ? "nofollow" : "internal"}
-                          target={item.isExternal ? "_blank" : "self"}
-                        >
-                          <Typography
-                            color="grey.600"
-                            fontWeight={300}
-                            sx={{
-                              fontSize: "12px",
-                            }}
-                          >
-                            {item.title}
-                          </Typography>
-                        </SeoLink>
-                      </Box>
-                    )
-                  })}
-                </Box>
+                        {item.title}
+                      </Typography>
+                    </SeoLink>
+                  </Box>
+                ))}
               </Box>
-            )
-          })}
+            </Box>
+          ))}
         </CustomStack>
 
         <Stack marginTop="24px" alignItems="flex-end" width="100%">
@@ -153,13 +149,13 @@ export const Footer = ({
             color="grey.600"
             fontWeight={300}
             sx={{
-              fontSize: "10px",
+              fontSize: `10px`,
             }}
           >
             <a
               href="https://www.iubenda.com/privacy-policy/12511737"
               target="_blank"
-              rel="nofollow"
+              rel="nofollow noreferrer"
             >
               Leggi la privacy policy
             </a>

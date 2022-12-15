@@ -1,20 +1,20 @@
-import React from "react";
-import Container from "@mui/material/Container";
-import { graphql, useStaticQuery } from "gatsby";
-import { ProjectSectionProps } from "../types";
-import { ProjectSection } from "./ProjectSection";
+import React from "react"
+import Container from "@mui/material/Container"
+import { graphql, useStaticQuery } from "gatsby"
+import { ProjectSectionProps } from "../types"
+import { ProjectSection } from "./ProjectSection"
 
 export const HomeSection = () => {
   const {
     allContentfulProgetti: { nodes },
-  }: Queries.HomeProjectSectionQuery = useStaticQuery(query);
+  }: Queries.HomeProjectSectionQuery = useStaticQuery(query)
 
   return (
-    <Container maxWidth='lg'>
+    <Container maxWidth="lg">
       <ProjectSection projects={nodes as ProjectSectionProps} />
     </Container>
-  );
-};
+  )
+}
 
 const query = graphql`
   query HomeProjectSection {
@@ -36,4 +36,4 @@ const query = graphql`
       }
     }
   }
-`;
+`

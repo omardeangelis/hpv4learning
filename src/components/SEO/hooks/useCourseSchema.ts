@@ -1,8 +1,8 @@
-import React from "react";
-import useSeoData from "./useSeoData";
-import useHasMounted from "../../../hook/useHasMounted";
-import isArray from "lodash/isArray";
-import { CourseSchemsProps } from "../types";
+import React from "react"
+import isArray from "lodash/isArray"
+import useSeoData from "./useSeoData"
+import useHasMounted from "../../../hook/useHasMounted"
+import { CourseSchemsProps } from "../types"
 
 const useCourseSchema = ({
   title,
@@ -18,59 +18,60 @@ const useCourseSchema = ({
 }: CourseSchemsProps) => {
   const {
     site: { siteMetadata },
-  } = useSeoData();
+  } = useSeoData()
 
-  const hasMounted = useHasMounted();
+  const hasMounted = useHasMounted()
   const pathname = React.useMemo(() => {
-    if (hasMounted) return window.location.pathname;
-  }, [hasMounted]);
+    if (hasMounted) return window.location.pathname
+  }, [hasMounted])
   const courseCreator = React.useMemo(() => {
     if (isArray(creator))
-      return creator.map((el) => ({ "@type": "Person", "name": el }));
+      return creator.map((el) => ({ "@type": `Person`, name: el }))
 
-    return [{ "@type": "Person", "name": creator }];
-  }, [creator]);
+    return [{ "@type": `Person`, name: creator }]
+  }, [creator])
 
-  const courseJson = React.useMemo(() => {
-    return {
-      "@type": "Course",
-      "publisher": {
-        "@type": "Organization",
-        "@id": siteMetadata.siteUrl + "#organization",
-        "name": siteMetadata.author,
-        "sameAs": siteMetadata.siteUrl,
+  const courseJson = React.useMemo(
+    () => ({
+      "@type": `Course`,
+      publisher: {
+        "@type": `Organization`,
+        "@id": `${siteMetadata.siteUrl}#organization`,
+        name: siteMetadata.author,
+        sameAs: siteMetadata.siteUrl,
       },
       //   "provider": {
       //     "@type": "Organization",
       //     "name": "John Smilga",
       //     "sameAs": "www.udemy.com/user/janis-smilga-3/",
       //   },
-      "@id": siteMetadata.siteUrl + pathname + "#course",
-      "name": title,
-      "description": description,
-      "isAccessibleForFree": isAccessibleForFree,
-      "image": image,
-      "inLanguage": "it",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": audienceType,
+      "@id": `${siteMetadata.siteUrl + pathname}#course`,
+      name: title,
+      description,
+      isAccessibleForFree,
+      image,
+      inLanguage: `it`,
+      audience: {
+        "@type": `Audience`,
+        audienceType,
       },
-      "about": { "name": about },
-      "creator": courseCreator,
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": rating,
-        "ratingCount": recensioniRicevute,
-        "bestRating": 5,
-        "worstRating": 1,
+      about: { name: about },
+      creator: courseCreator,
+      aggregateRating: {
+        "@type": `AggregateRating`,
+        ratingValue: rating,
+        ratingCount: recensioniRicevute,
+        bestRating: 5,
+        worstRating: 1,
       },
-      "coursePrerequisites": {
-        "@type": "AlignmentObject",
-        "alignmentType": coursePrerequisites,
+      coursePrerequisites: {
+        "@type": `AlignmentObject`,
+        alignmentType: coursePrerequisites,
       },
-    };
-  }, []);
-  return courseJson;
-};
+    }),
+    []
+  )
+  return courseJson
+}
 
-export default useCourseSchema;
+export default useCourseSchema

@@ -1,48 +1,48 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { calendar_v3 } from "googleapis";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { calendar_v3 } from "googleapis"
 
 export type SuccessPayload = {
-  date: calendar_v3.Schema$Event["start"];
-  hangoutLink: calendar_v3.Schema$Event["hangoutLink"];
-};
+  date: calendar_v3.Schema$Event["start"]
+  hangoutLink: calendar_v3.Schema$Event["hangoutLink"]
+}
 
 export type UserAppointment =
   | {
-      id: string;
-      startDate: string;
-      endDate: string;
+      id: string
+      startDate: string
+      endDate: string
     }[]
-  | undefined;
+  | undefined
 
 type Props = {
-  provider: "gmail" | "manual";
-  successMessage: SuccessPayload | null;
-  userAppointment: UserAppointment | undefined;
-};
+  provider: "gmail" | "manual"
+  successMessage: SuccessPayload | null
+  userAppointment: UserAppointment | undefined
+}
 
 const initialState: Props = {
-  provider: "gmail",
+  provider: `gmail`,
   successMessage: null,
   userAppointment: undefined,
-};
+}
 
 const consulenzaSlice = createSlice({
-  name: "consulenze",
+  name: `consulenze`,
   initialState,
   reducers: {
     changeProvider(state) {
-      state.provider = state.provider === "gmail" ? "manual" : "gmail";
+      state.provider = state.provider === `gmail` ? `manual` : `gmail`
     },
     saveSuccessMessage(state, action: PayloadAction<SuccessPayload>) {
-      state.successMessage = action.payload;
+      state.successMessage = action.payload
     },
     saveUserAppointment(state, action: PayloadAction<UserAppointment>) {
-      state.userAppointment = action.payload;
+      state.userAppointment = action.payload
     },
   },
-});
+})
 
 export const { changeProvider, saveSuccessMessage, saveUserAppointment } =
-  consulenzaSlice.actions;
+  consulenzaSlice.actions
 
-export default consulenzaSlice.reducer;
+export default consulenzaSlice.reducer

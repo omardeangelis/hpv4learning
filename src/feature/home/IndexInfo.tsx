@@ -37,85 +37,83 @@ export const Info = ({
   title?: number
   subtitle: string
   isLoading?: boolean
-}) => {
-  return (
-    <BorderBox
-      sx={{
-        maxWidth: {
-          xs: "unset",
-          lg: "255px",
-        },
-        height: {
-          xs: "130px",
-          lg: "180px",
-        },
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "white",
-      }}
-      width="100%"
-      borderRadius="8px"
-    >
-      <Box>
-        {isLoading ? (
-          <Skeleton
-            width="120px"
-            sx={{
-              height: { xs: "54px", lg: "96px" },
-              mx: "auto",
-            }}
-          />
-        ) : (
-          <Typography
-            textAlign="center"
-            sx={{
-              fontSize: { xs: "39px", lg: "64px" },
-              fontWeight: 600,
-            }}
-          >
-            {title}
-          </Typography>
-        )}
-
+}) => (
+  <BorderBox
+    sx={{
+      maxWidth: {
+        xs: `unset`,
+        lg: `255px`,
+      },
+      height: {
+        xs: `130px`,
+        lg: `180px`,
+      },
+      display: `flex`,
+      justifyContent: `center`,
+      alignItems: `center`,
+      backgroundColor: `white`,
+    }}
+    width="100%"
+    borderRadius="8px"
+  >
+    <Box>
+      {isLoading ? (
+        <Skeleton
+          width="120px"
+          sx={{
+            height: { xs: `54px`, lg: `96px` },
+            mx: `auto`,
+          }}
+        />
+      ) : (
         <Typography
           textAlign="center"
           sx={{
-            fontSize: { xs: "14px", lg: "18px" },
-            fontWeight: 400,
-            maxWidth: {
-              xs: "unset",
-              lg: "206px",
-            },
+            fontSize: { xs: `39px`, lg: `64px` },
+            fontWeight: 600,
           }}
         >
-          {subtitle}
+          {title}
         </Typography>
-      </Box>
-    </BorderBox>
-  )
-}
+      )}
 
-//Sezione Informativa
+      <Typography
+        textAlign="center"
+        sx={{
+          fontSize: { xs: `14px`, lg: `18px` },
+          fontWeight: 400,
+          maxWidth: {
+            xs: `unset`,
+            lg: `206px`,
+          },
+        }}
+      >
+        {subtitle}
+      </Typography>
+    </Box>
+  </BorderBox>
+)
+
+// Sezione Informativa
 export const IndexInfo = () => {
   const { isLoading, data } = useGetAllCourseStatsQuery()
   return (
     <Container>
       <Typography
-        component={"h2"}
+        component={`h2`}
         textAlign="center"
         sx={{
-          fontSize: { xs: "36px", lg: "48px" },
+          fontSize: { xs: `36px`, lg: `48px` },
           fontWeight: 600,
         }}
       >
-        I nostri <span style={{ color: "white" }}> numeri </span>
+        I nostri <span style={{ color: `white` }}> numeri </span>
       </Typography>
       <Box
         mx="auto"
         maxWidth="833px"
         sx={{
-          mt: { xs: "24px", lg: "35px" },
+          mt: { xs: `24px`, lg: `35px` },
         }}
       >
         <PureCssStack>

@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 type ContextProps = {
-  openModal: () => void;
-};
+  openModal: () => void
+}
 
-const ConsulenzeContext = React.createContext<ContextProps | null>(null);
+const ConsulenzeContext = React.createContext<ContextProps | null>(null)
 
-export const ConsulenzeProvider = ConsulenzeContext.Provider;
+export const ConsulenzeProvider = ConsulenzeContext.Provider
 
-export const useConsulenzeContext = () => React.useContext(ConsulenzeContext);
+export const useConsulenzeContext = () => React.useContext(ConsulenzeContext)

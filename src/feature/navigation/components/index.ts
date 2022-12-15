@@ -1,3 +1,3 @@
-export * from "./CourseMenu";
-export * from "./Sidebar";
-export * from "./Navbar";
+export * from "./CourseMenu"
+export * from "./Sidebar"
+export * from "./Navbar"

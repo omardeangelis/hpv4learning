@@ -1,33 +1,34 @@
-import React, { useRef, useEffect } from "react";
-import { graphql, PageProps } from "gatsby";
-//Global Component e Variables
-import Layout from "../components/shared/layout";
-import MetaDecorator from "../components/SEO/components/MetaDecorator";
-//Utils
-import { createBrandText, createRowText, isExpired } from "../utils/helpers";
-//Components
-import { Projects } from "../feature/projects/components";
-import Video from "../components/ui/FrameVideo";
-import { CourseInfo, ResponsiveInfoBox } from "../components/CourseInfo";
-import CourseCoupon from "../components/coupon/CourseCoupon";
-import ListSection from "../components/ui/ListSection";
-import Insegnante from "../components/shared/Insegnante";
-//Material UI
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-//Icons
-import DoneIcon from "@mui/icons-material/Done";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import PersonIcon from "@mui/icons-material/Person";
-import Container from "@mui/system/Container";
-import styled from "@emotion/styled";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import CourseContainer from "../components/course/CourseContainer";
-import CourseContent from "../components/course/CourseContent";
-import LinkHandler from "../components/SEO/components/LinkHandler";
-import CourseSchema from "../components/SEO/components/CourseSchema";
-dayjs.extend(relativeTime);
+import React, { useRef, useEffect } from "react"
+import { graphql, PageProps } from "gatsby"
+// Global Component e Variables
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
+import DoneIcon from "@mui/icons-material/Done"
+import ArrowRightIcon from "@mui/icons-material/ArrowRight"
+import PersonIcon from "@mui/icons-material/Person"
+import Container from "@mui/system/Container"
+import styled from "@emotion/styled"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import Layout from "../components/shared/layout"
+import MetaDecorator from "../components/SEO/components/MetaDecorator"
+// Utils
+import { createBrandText, createRowText, isExpired } from "../utils/helpers"
+// Components
+import { Projects } from "../feature/projects/components"
+import Video from "../components/ui/FrameVideo"
+import { CourseInfo, ResponsiveInfoBox } from "../components/CourseInfo"
+import CourseCoupon from "../components/coupon/CourseCoupon"
+import ListSection from "../components/ui/ListSection"
+import Insegnante from "../components/shared/Insegnante"
+// Material UI
+// Icons
+import CourseContainer from "../components/course/CourseContainer"
+import CourseContent from "../components/course/CourseContent"
+import LinkHandler from "../components/SEO/components/LinkHandler"
+import CourseSchema from "../components/SEO/components/CourseSchema"
+
+dayjs.extend(relativeTime)
 
 const StyledContainer = styled(Box)`
   padding: 0px 0px;
@@ -36,7 +37,7 @@ const StyledContainer = styled(Box)`
     max-width: 887px;
     padding-right: 84px;
   }
-`;
+`
 
 const FlexContainer = styled(Container)`
   display: block;
@@ -44,13 +45,13 @@ const FlexContainer = styled(Container)`
   @media screen and (min-width: 1024px) {
     display: flex;
   }
-`;
+`
 
 const StyledBox = styled(Box)`
   strong {
     color: var(--purple-400);
   }
-`;
+`
 
 const TextWrapper = styled.div`
   h2 {
@@ -66,17 +67,17 @@ const TextWrapper = styled.div`
       margin: 21px 0px;
     }
   }
-`;
+`
 
 type Props = {
   location: {
-    search: string;
-  };
-};
+    search: string
+  }
+}
 
 type StyledProps = {
-  full: boolean;
-};
+  full: boolean
+}
 
 const CustomStack = styled.div<StyledProps>`
   display: flex;
@@ -88,54 +89,56 @@ const CustomStack = styled.div<StyledProps>`
   @media screen and (min-width: 767px) {
     & > *:not(:last-of-type) {
       margin-bottom: 0px;
-      margin-right: ${(props) => (props.full ? "unset" : "61px")};
+      margin-right: ${(props) => (props.full ? `unset` : `61px`)};
     }
     flex-direction: row;
     justify-content: ${(props) =>
-      props.full ? "space-between" : "flex-start"};
+      props.full ? `space-between` : `flex-start`};
   }
-`;
+`
 
 const SingleCoursePage = ({
   data,
   location,
 }: Props & PageProps<Queries.SingleCoursePageQuery>) => {
-  const { contentfulCorsi: corso } = data;
-  const projectRef = useRef<null | HTMLDivElement>(null);
-  const { search } = location;
-  const scrollToProjects = search && search.split("=")[1];
+  const { contentfulCorsi: corso } = data
+  const projectRef = useRef<null | HTMLDivElement>(null)
+  const { search } = location
+  const scrollToProjects = search && search.split(`=`)[1]
 
-  const categoryName = React.useMemo(() => {
-    return corso?.category?.filter(
-      (el) => el?.name?.toLowerCase() !== "gratuiti",
-    )?.[0]?.name as string;
-  }, [corso?.category]);
+  const categoryName = React.useMemo(
+    () =>
+      corso?.category?.filter(
+        (el) => el?.name?.toLowerCase() !== `gratuiti`
+      )?.[0]?.name as string,
+    [corso?.category]
+  )
 
   useEffect(() => {
     if (projectRef.current && scrollToProjects) {
-      projectRef.current.scrollIntoView();
+      projectRef.current.scrollIntoView()
     }
-  }, [scrollToProjects]);
+  }, [scrollToProjects])
 
   return (
     <Layout enableFooterPadding>
-      <FlexContainer maxWidth='lg'>
+      <FlexContainer maxWidth="lg">
         <StyledBox>
           <StyledContainer>
             {/* Titolo e Sottotiolo */}
             <Box
-              component='div'
+              component="div"
               sx={{
-                mt: { xs: "48px", lg: "96px" },
+                mt: { xs: `48px`, lg: `96px` },
               }}
             >
               <Box>
                 <Typography
-                  component='h1'
+                  component="h1"
                   fontWeight={600}
                   sx={{
-                    fontSize: { xs: "36px", lg: "56px" },
-                    lineHeight: { xs: "44px", lg: "64px" },
+                    fontSize: { xs: `36px`, lg: `56px` },
+                    lineHeight: { xs: `44px`, lg: `64px` },
                   }}
                   dangerouslySetInnerHTML={{
                     __html: createBrandText(corso?.titolo as any) as string,
@@ -146,13 +149,13 @@ const SingleCoursePage = ({
           </StyledContainer>
           <Box
             sx={{
-              mt: { xs: "48px", lg: "72px" },
+              mt: { xs: `48px`, lg: `72px` },
             }}
           >
-            <StyledContainer component='section'>
+            <StyledContainer component="section">
               <Box
                 sx={{
-                  mt: { xs: "8px", lg: "8px" },
+                  mt: { xs: `8px`, lg: `8px` },
                 }}
               >
                 <Video video={corso?.videoLink as any} />
@@ -162,8 +165,8 @@ const SingleCoursePage = ({
 
           <Box
             sx={{
-              display: { xs: "block", lg: "none" },
-              mt: "48px",
+              display: { xs: `block`, lg: `none` },
+              mt: `48px`,
             }}
           >
             <ResponsiveInfoBox
@@ -179,22 +182,22 @@ const SingleCoursePage = ({
 
           <Box
             sx={{
-              mt: { xs: "48px", lg: "136px" },
+              mt: { xs: `48px`, lg: `136px` },
             }}
           >
             <StyledContainer>
               <Box
                 sx={{
-                  maxWidth: { xs: "unset", lg: "712px" },
+                  maxWidth: { xs: `unset`, lg: `712px` },
                 }}
               >
                 <Typography
-                  component='h2'
+                  component="h2"
                   fontWeight={500}
-                  color='gray.700'
+                  color="gray.700"
                   sx={{
-                    fontSize: { xs: "21px", lg: "36px" },
-                    lineHeight: { xs: "28px", lg: "39px" },
+                    fontSize: { xs: `21px`, lg: `36px` },
+                    lineHeight: { xs: `28px`, lg: `39px` },
                   }}
                 >
                   {corso?.sottotitolo}
@@ -202,17 +205,17 @@ const SingleCoursePage = ({
               </Box>
               <Box
                 sx={{
-                  maxWidth: { xs: "unset", lg: "712px" },
-                  mt: { xs: "12px", lg: "24px" },
+                  maxWidth: { xs: `unset`, lg: `712px` },
+                  mt: { xs: `12px`, lg: `24px` },
                 }}
               >
                 <TextWrapper>
                   <Typography
-                    color='grey.600'
+                    color="grey.600"
                     fontWeight={300}
                     sx={{
-                      fontSize: { xs: "16px", lg: "16px" },
-                      lineHeight: { xs: "24px", lg: "24px" },
+                      fontSize: { xs: `16px`, lg: `16px` },
+                      lineHeight: { xs: `24px`, lg: `24px` },
                     }}
                     dangerouslySetInnerHTML={{
                       __html: corso?.descrizione?.childMarkdownRemark
@@ -226,19 +229,19 @@ const SingleCoursePage = ({
 
           {/* Liste di Requisiti e Concetti del corso */}
           <Box
-            component='section'
+            component="section"
             sx={{
-              mt: { xs: "36px", lg: "72px" },
+              mt: { xs: `36px`, lg: `72px` },
             }}
           >
             <StyledContainer>
               <Box>
                 <ListSection
-                  title='Che Cosa Imparerai'
+                  title="Che Cosa Imparerai"
                   icon={
                     <DoneIcon
                       sx={{
-                        color: "purple.400",
+                        color: `purple.400`,
                       }}
                     />
                   }
@@ -247,15 +250,15 @@ const SingleCoursePage = ({
               </Box>
               <Box
                 sx={{
-                  mt: { xs: "24px", lg: "34px" },
+                  mt: { xs: `24px`, lg: `34px` },
                 }}
               >
                 <ListSection
-                  title='A chi si rivolge'
+                  title="A chi si rivolge"
                   icon={
                     <PersonIcon
                       sx={{
-                        color: "purple.400",
+                        color: `purple.400`,
                       }}
                     />
                   }
@@ -264,15 +267,15 @@ const SingleCoursePage = ({
               </Box>
               <Box
                 sx={{
-                  mt: { xs: "24px", lg: "34px" },
+                  mt: { xs: `24px`, lg: `34px` },
                 }}
               >
                 <ListSection
-                  title='Requisiti Minimi'
+                  title="Requisiti Minimi"
                   icon={
                     <ArrowRightIcon
                       sx={{
-                        color: "purple.400",
+                        color: `purple.400`,
                       }}
                     />
                   }
@@ -284,37 +287,37 @@ const SingleCoursePage = ({
           {corso?.progetti && corso?.introduzioneProgetti ? (
             <Box
               sx={{
-                mt: { xs: "96px", lg: "136px" },
+                mt: { xs: `96px`, lg: `136px` },
               }}
             >
               <StyledContainer ref={projectRef}>
                 <Typography
-                  color='purple.400'
+                  color="purple.400"
                   fontWeight={600}
                   sx={{
-                    fontSize: { xs: "36px", lg: "56px" },
+                    fontSize: { xs: `36px`, lg: `56px` },
                   }}
                 >
                   Progetti
                 </Typography>
                 <Box
                   sx={{
-                    mt: { xs: "16px", lg: "24px" },
+                    mt: { xs: `16px`, lg: `24px` },
                   }}
                 >
                   <Typography
-                    color={"grey.500"}
+                    color={`grey.500`}
                     sx={{
-                      fontSize: { xs: "14px", lg: "16px" },
-                      lineHeight: { xs: "19px", lg: "22px" },
+                      fontSize: { xs: `14px`, lg: `16px` },
+                      lineHeight: { xs: `19px`, lg: `22px` },
                     }}
                     dangerouslySetInnerHTML={{
                       __html: corso?.introduzioneProgetti?.childMarkdownRemark
                         ?.html as any,
                     }}
-                  ></Typography>
+                  />
                 </Box>
-                <Box mt='24px'>
+                <Box mt="24px">
                   <Projects
                     data={corso.progetti as Queries.ContentfulProgetti[]}
                   />
@@ -325,73 +328,69 @@ const SingleCoursePage = ({
           <StyledContainer>
             <Box
               sx={{
-                mt: { xs: "48px", lg: "72px" },
+                mt: { xs: `48px`, lg: `72px` },
               }}
             >
               <Typography
-                color='purple.400'
+                color="purple.400"
                 fontWeight={500}
                 sx={{
-                  fontSize: { xs: "24px", lg: "36px" },
+                  fontSize: { xs: `24px`, lg: `36px` },
                 }}
               >
                 Insegnanti
               </Typography>
-              {data?.contentfulCorsi?.insegnante?.map((insegnante) => {
-                return (
-                  <Box
-                    key={insegnante?.cognome}
-                    sx={{
-                      mt: { xs: "24px", lg: "48px" },
-                    }}
-                  >
-                    <Insegnante {...(insegnante as any)} />
-                  </Box>
-                );
-              })}
+              {data?.contentfulCorsi?.insegnante?.map((insegnante) => (
+                <Box
+                  key={insegnante?.cognome}
+                  sx={{
+                    mt: { xs: `24px`, lg: `48px` },
+                  }}
+                >
+                  <Insegnante {...(insegnante as any)} />
+                </Box>
+              ))}
             </Box>
           </StyledContainer>
           {data?.allContentfulCorsi?.nodes &&
             data?.allContentfulCorsi?.nodes.length > 0 && (
               <Box
                 sx={{
-                  mt: { xs: "96px", lg: "136px" },
+                  mt: { xs: `96px`, lg: `136px` },
                 }}
               >
                 <Typography
                   fontWeight={500}
                   sx={{
-                    fontSize: { xs: "24px", lg: "34px" },
+                    fontSize: { xs: `24px`, lg: `34px` },
                   }}
                 >
                   Corsi Correlati
                 </Typography>
                 <Box
                   sx={{
-                    mt: { xs: "24px", lg: "36px" },
+                    mt: { xs: `24px`, lg: `36px` },
                   }}
                 >
                   <CustomStack full={false}>
-                    {data.allContentfulCorsi.nodes.map((corso) => {
-                      return (
-                        <CourseContainer key={corso.slug}>
-                          <CourseContent {...(corso as any)} />
-                        </CourseContainer>
-                      );
-                    })}
+                    {data.allContentfulCorsi.nodes.map((corso) => (
+                      <CourseContainer key={corso.slug}>
+                        <CourseContent {...(corso as any)} />
+                      </CourseContainer>
+                    ))}
                   </CustomStack>
                 </Box>
               </Box>
             )}
         </StyledBox>
         <Box
-          maxWidth='361px'
-          width='100%'
+          maxWidth="361px"
+          width="100%"
           sx={{
-            mt: { xs: "0px", lg: "136px" },
-            height: "fit-content",
-            position: "sticky",
-            top: "96px",
+            mt: { xs: `0px`, lg: `136px` },
+            height: `fit-content`,
+            position: `sticky`,
+            top: `96px`,
           }}
         >
           <Box>
@@ -406,6 +405,7 @@ const SingleCoursePage = ({
               tipologia={corso?.provider as any}
               link={corso?.urlToBuy as any}
             />
+
             {corso?.isFree && corso.promoLink ? null : (
               <CourseCoupon
                 link={corso?.promoLink as any}
@@ -417,8 +417,8 @@ const SingleCoursePage = ({
         </Box>
       </FlexContainer>
     </Layout>
-  );
-};
+  )
+}
 
 export const Head = ({
   data,
@@ -427,39 +427,42 @@ export const Head = ({
   Queries.SingleCoursePageQuery,
   { slug: string; categorySlug: string }
 >) => {
-  const { contentfulCorsi: corso } = data;
+  const { contentfulCorsi: corso } = data
 
-  const categoryName = React.useMemo(() => {
-    return corso?.category?.filter(
-      (el) => el?.name?.toLowerCase() !== "gratuiti",
-    )?.[0]?.name as string;
-  }, [corso?.category]);
+  const categoryName = React.useMemo(
+    () =>
+      corso?.category?.filter(
+        (el) => el?.name?.toLowerCase() !== `gratuiti`
+      )?.[0]?.name as string,
+    [corso?.category]
+  )
 
-  const breadcrumbs = React.useMemo(() => {
-    return [
-      { text: "Home", link: "/" },
+  const breadcrumbs = React.useMemo(
+    () => [
+      { text: `Home`, link: `/` },
       { text: categoryName, link: `/corsi/${categorySlug}/` },
       { text: corso?.titolo, link: `/${slug}/` },
-    ];
-  }, [categoryName, categorySlug, corso?.titolo]);
+    ],
+    [categoryName, categorySlug, corso?.titolo]
+  )
 
   const creator = React.useMemo(() => {
     if (corso?.insegnante && corso?.insegnante.length > 1)
-      return corso.insegnante.map((el) => el?.nome);
-    return corso?.insegnante?.[0]?.nome;
-  }, [corso?.insegnante]);
+      return corso.insegnante.map((el) => el?.nome)
+    return corso?.insegnante?.[0]?.nome
+  }, [corso?.insegnante])
   return (
     <>
       <MetaDecorator
         metaTitle={createRowText(corso?.titolo as any)}
         metaDescription={corso?.riassunto?.riassunto as any}
-        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
-      ></MetaDecorator>
+        image={corso && (`https:${corso?.copertina?.file?.url}` as any)}
+      />
       <LinkHandler />
       <CourseSchema
         title={createRowText(corso?.titolo as any)}
         description={corso?.riassunto?.riassunto as any}
-        image={corso && (("https:" + corso?.copertina?.file?.url) as any)}
+        image={corso && (`https:${corso?.copertina?.file?.url}` as any)}
         imageAltText={createRowText(corso?.titolo as any)}
         rating={corso?.recensioni?.toString() as any}
         creator={creator as any}
@@ -467,7 +470,7 @@ export const Head = ({
         audienceType={corso?.target as any}
         isAccessibleForFree={
           corso?.category?.some(
-            (el) => el?.name?.toLowerCase() === "gratuiti",
+            (el) => el?.name?.toLowerCase() === `gratuiti`
           ) as any
         }
         breadcrumbs={breadcrumbs as any}
@@ -475,8 +478,8 @@ export const Head = ({
         recensioniRicevute={corso?.recensioniRicevute as any}
       />
     </>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query SingleCoursePage($slug: String, $categorySlug: String!) {
@@ -589,6 +592,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default SingleCoursePage;
+export default SingleCoursePage

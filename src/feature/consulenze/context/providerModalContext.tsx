@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 
 type ContextProps = {
-  provider: "gmail" | "manual";
-};
+  provider: "gmail" | "manual"
+}
 
-const providerModalContext = React.createContext<ContextProps | null>(null);
+const providerModalContext = React.createContext<ContextProps | null>(null)
 
-export const ProviderModalProvider = providerModalContext.Provider;
+export const ProviderModalProvider = providerModalContext.Provider
 
 export const useProviderModalContext = () =>
-  React.useContext(providerModalContext);
+  React.useContext(providerModalContext)
