@@ -6,4 +6,4 @@ export type ProjectSectionProps = Pick<
   | "descrizione"
   | "articleTitle"
   | "slug"
->[];
+>[]

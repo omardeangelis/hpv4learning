@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box, { BoxProps } from "@mui/material/Box";
+import React from "react"
+import styled from "@emotion/styled"
+import Box, { BoxProps } from "@mui/material/Box"
 
 const StyledBox = styled(Box)`
   a {
@@ -10,10 +10,10 @@ const StyledBox = styled(Box)`
       color: var(--green-hover);
     }
   }
-`;
+`
 
-const FaqFooter = ({ children, ...rest }: BoxProps) => {
-  return <StyledBox {...rest}>{children}</StyledBox>;
-};
+const FaqFooter = ({ children, ...rest }: BoxProps) => (
+  <StyledBox {...rest}>{children}</StyledBox>
+)
 
-export default FaqFooter;
+export default FaqFooter

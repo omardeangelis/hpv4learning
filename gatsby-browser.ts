@@ -1,6 +1,6 @@
-import "./src/styles/font.css";
-import "./src/styles/global.css";
-import { GlobalProvider } from "./GlobalProvider";
-import { GatsbyBrowser } from "gatsby";
+import "./src/styles/font.css"
+import "./src/styles/global.css"
+import { GatsbyBrowser } from "gatsby"
+import { GlobalProvider } from "./GlobalProvider"
 
-export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = GlobalProvider;
+export const wrapRootElement: GatsbyBrowser["wrapRootElement"] = GlobalProvider

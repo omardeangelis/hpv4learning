@@ -1,13 +1,13 @@
-import React from "react";
-import useBreadcrumbSchema from "../hooks/useBreadcrumbSchema";
-import useCourseSchema from "../hooks/useCourseSchema";
-import useWebPageSchema from "../hooks/useWebPageSchema";
-import { breadCrumbProps, CourseSchemsProps } from "../types";
+import React from "react"
+import useBreadcrumbSchema from "../hooks/useBreadcrumbSchema"
+import useCourseSchema from "../hooks/useCourseSchema"
+import useWebPageSchema from "../hooks/useWebPageSchema"
+import { breadCrumbProps, CourseSchemsProps } from "../types"
 
 type Props = CourseSchemsProps & {
-  imageAltText: string;
-  breadcrumbs: breadCrumbProps[];
-};
+  imageAltText: string
+  breadcrumbs: breadCrumbProps[]
+}
 
 const CourseSchema = ({
   imageAltText,
@@ -23,9 +23,9 @@ const CourseSchema = ({
   coursePrerequisites,
   recensioniRicevute,
 }: Props) => {
-  const schema = useWebPageSchema({ title, description, image, imageAltText });
+  const schema = useWebPageSchema({ title, description, image, imageAltText })
 
-  const breadcrumbSchema = useBreadcrumbSchema(breadcrumbs);
+  const breadcrumbSchema = useBreadcrumbSchema(breadcrumbs)
   const courseSchema = useCourseSchema({
     title,
     description,
@@ -37,16 +37,16 @@ const CourseSchema = ({
     rating,
     coursePrerequisites,
     recensioniRicevute,
-  });
+  })
 
   return (
-    <script type='application/ld+json'>
+    <script type="application/ld+json">
       {JSON.stringify({
         ...schema,
-        ["@graph"]: [...schema["@graph"], breadcrumbSchema, courseSchema],
+        "@graph": [...schema[`@graph`], breadcrumbSchema, courseSchema],
       })}
     </script>
-  );
-};
+  )
+}
 
-export default CourseSchema;
+export default CourseSchema

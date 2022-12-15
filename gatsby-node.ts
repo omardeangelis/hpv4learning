@@ -12,7 +12,7 @@ import {
 type RedirectType = { source: string; target: string; status: string }
 
 const redirects: RedirectType[] = JSON.parse(
-  fs.readFileSync("./redirects.json", "utf-8")
+  fs.readFileSync(`./redirects.json`, `utf-8`)
 )
 
 export const createPages = async ({ graphql, actions }) => {
@@ -29,7 +29,7 @@ export const createPages = async ({ graphql, actions }) => {
       context: {
         slug: node.slug,
         categorySlug: node.category
-          .filter((category) => category.slug.toLowerCase() !== "gratuiti")[0]
+          .filter((category) => category.slug.toLowerCase() !== `gratuiti`)[0]
           .slug.toLowerCase(),
       },
     })
@@ -44,7 +44,7 @@ export const createPages = async ({ graphql, actions }) => {
     } = category
     createPage({
       path: `/corsi/${slug.toLowerCase()}/`,
-      component: path.resolve("./src/template/Category.tsx"),
+      component: path.resolve(`./src/template/Category.tsx`),
       context: {
         slug,
         name,
@@ -55,13 +55,13 @@ export const createPages = async ({ graphql, actions }) => {
   })
 
   createPage({
-    path: "/progetti/",
-    component: path.resolve("./src/template/ProjectsHome.tsx"),
+    path: `/progetti/`,
+    component: path.resolve(`./src/template/ProjectsHome.tsx`),
   })
 
   createPage({
-    path: "/consulenze/",
-    component: path.resolve("./src/template/Consulenze.tsx"),
+    path: `/consulenze/`,
+    component: path.resolve(`./src/template/Consulenze.tsx`),
   })
 
   categoryProjectQuery.data.allContentfulProjectCategory.nodes.forEach(
@@ -74,9 +74,9 @@ export const createPages = async ({ graphql, actions }) => {
           const start = numOfElement * index
           createPage({
             path: `/progetti/${category.slug.toLowerCase()}${
-              index === 0 ? "/" : `/${index + 1}/`
+              index === 0 ? `/` : `/${index + 1}/`
             }`,
-            component: path.resolve("./src/template/ProjectsCategory.tsx"),
+            component: path.resolve(`./src/template/ProjectsCategory.tsx`),
             context: {
               slug: category.slug.toLowerCase(),
               title: category.title,

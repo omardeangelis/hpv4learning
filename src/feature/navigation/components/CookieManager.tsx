@@ -71,7 +71,7 @@ export const CookieConsent = React.memo(
       const iub = globalThis._iub || {}
       iub.cons_instructions = [
         ...(iub.cons_instructions || []),
-        ["init", { api_key: apiKey }],
+        [`init`, { api_key: apiKey }],
       ]
     }, [apiKey])
 

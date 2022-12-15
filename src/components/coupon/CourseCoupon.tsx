@@ -75,138 +75,137 @@ const CourseCoupon = ({
   prezzo: number
   link?: string
   isDisabled?: boolean
-}) => {
-  return (
-    <StyledBox
-      width="100%"
+}) => (
+  <StyledBox
+    width="100%"
+    sx={{
+      mt: { xs: `0px`, lg: `68px` },
+    }}
+  >
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="space-between"
       sx={{
-        mt: { xs: "0px", lg: "68px" },
+        display: { xs: `none`, lg: `flex` },
       }}
     >
-      <Stack
-        direction='row'
-        alignItems='center'
-        justifyContent='space-between'
+      <Typography
+        color="grey.700"
+        fontWeight={500}
         sx={{
-          display: { xs: "none", lg: "flex" },
+          fontSize: `14px`,
         }}
       >
-        <Typography
-          color="grey.700"
-          fontWeight={500}
+        coupon
+      </Typography>
+      <Box color="green.300">
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <div className="point" />
+          {` `}
+          <Typography
+            fontWeight={500}
+            sx={{
+              color: `inherit`,
+              fontSize: `14px`,
+            }}
+          >
+            attivo
+          </Typography>
+        </Stack>
+      </Box>
+    </Stack>
+    <Box mt="12px">
+      <Box className="action-box">
+        <Stack
+          justifyContent="space-between"
           sx={{
-            fontSize: "14px",
+            flexDirection: {
+              xs: `column-reverse`,
+              lg: `row`,
+            },
+            alignItems: {
+              xs: `flex-end`,
+              lg: `center`,
+            },
           }}
         >
-          coupon
-        </Typography>
-        <Box color='green.300'>
-          <Stack direction='row' alignItems='center' spacing={1}>
-            <div className='point'></div>{" "}
-            <Typography
-              fontWeight={500}
-              sx={{
-                color: "inherit",
-                fontSize: "14px",
-              }}
-            >
-              attivo
-            </Typography>
-          </Stack>
-        </Box>
-      </Stack>
-      <Box mt="12px">
-        <Box className="action-box">
-          <Stack
-            justifyContent="space-between"
+          <Typography
+            color="grey.600"
+            fontWeight={300}
             sx={{
-              flexDirection: {
-                xs: "column-reverse",
-                lg: "row",
-              },
-              alignItems: {
-                xs: "flex-end",
-                lg: "center",
-              },
+              fontSize: { xs: `14px`, lg: `14px` },
+              textDecoration: `line-through`,
             }}
           >
+            {`${(prezzo / 100).toFixed(2)}€`}
+          </Typography>
+          <Box className="sales no-mobile">
             <Typography
-              color="grey.600"
-              fontWeight={300}
+              color="white"
+              fontWeight={600}
               sx={{
-                fontSize: { xs: "14px", lg: "14px" },
-                textDecoration: "line-through",
+                fontSize: `10px`,
               }}
             >
-              {`${(prezzo / 100).toFixed(2)}€`}
+              {`-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
+                0
+              )}%`}
             </Typography>
-            <Box className="sales no-mobile">
-              <Typography
-                color='white'
-                fontWeight={600}
-                sx={{
-                  fontSize: "10px",
-                }}
-              >
-                {`-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                  0
-                )}%`}
-              </Typography>
-            </Box>
-            <Typography
-              color="grey.800"
-              fontWeight={400}
-              sx={{
-                fontSize: "18px",
-              }}
-            >
-              12,99€
-            </Typography>
-          </Stack>
-          <Box
-            mt="16px"
+          </Box>
+          <Typography
+            color="grey.800"
+            fontWeight={400}
             sx={{
-              flexGrow: 1,
+              fontSize: `18px`,
             }}
           >
-            {!isDisabled ? (
-              <SeoLink link={link as string} isExternal rel="nofollow">
-                <Button
-                  variant="contained"
-                  color={"primary"}
-                  size="large"
-                  disabled={isDisabled}
-                  sx={{
-                    borderRadius: "100px",
-                    width: "100%",
-                  }}
-                  onClick={triggerGACustomEvent(
-                    { event: "click_to_udemy" },
-                    { hasLocation: true }
-                  )}
-                >
-                  {isDisabled ? "Esaurito" : "Riscatta Coupon"}
-                </Button>
-              </SeoLink>
-            ) : (
+            12,99€
+          </Typography>
+        </Stack>
+        <Box
+          mt="16px"
+          sx={{
+            flexGrow: 1,
+          }}
+        >
+          {!isDisabled ? (
+            <SeoLink link={link as string} isExternal rel="nofollow">
               <Button
                 variant="contained"
-                color={"primary"}
+                color={`primary`}
                 size="large"
                 disabled={isDisabled}
                 sx={{
-                  borderRadius: "100px",
-                  width: "100%",
+                  borderRadius: `100px`,
+                  width: `100%`,
                 }}
+                onClick={triggerGACustomEvent(
+                  { event: `click_to_udemy` },
+                  { hasLocation: true }
+                )}
               >
-                {isDisabled ? "Esaurito" : "Riscatta Coupon"}
+                {isDisabled ? `Esaurito` : `Riscatta Coupon`}
               </Button>
-            )}
-          </Box>
+            </SeoLink>
+          ) : (
+            <Button
+              variant="contained"
+              color={`primary`}
+              size="large"
+              disabled={isDisabled}
+              sx={{
+                borderRadius: `100px`,
+                width: `100%`,
+              }}
+            >
+              {isDisabled ? `Esaurito` : `Riscatta Coupon`}
+            </Button>
+          )}
         </Box>
       </Box>
-    </StyledBox>
-  )
-}
+    </Box>
+  </StyledBox>
+)
 
 export default CourseCoupon

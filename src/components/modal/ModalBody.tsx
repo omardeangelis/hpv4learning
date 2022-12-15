@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box";
+import styled from "@emotion/styled"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/system/Box"
 
 export const ModalBody = styled(Box)`
   display: flex;
@@ -11,7 +11,7 @@ export const ModalBody = styled(Box)`
   overflow-x: hidden;
   overflow-y: scroll;
   position: relative;
-`;
+`
 
 export const ModalTypography = styled(Typography)`
   color: var(--gray-500);
@@ -23,4 +23,4 @@ export const ModalTypography = styled(Typography)`
     font-size: 18px;
     line-height: 27px;
   } ;
-`;
+`

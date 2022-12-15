@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 type ContextProps = {
-  onClose?: () => any;
-  stepIndex?: number;
-};
+  onClose?: () => any
+  stepIndex?: number
+}
 
-const modalContext = React.createContext<ContextProps>({});
-export const ModalProvider = modalContext.Provider;
+const modalContext = React.createContext<ContextProps>({})
+export const ModalProvider = modalContext.Provider
 
-export const useModalContext = () => React.useContext(modalContext);
+export const useModalContext = () => React.useContext(modalContext)

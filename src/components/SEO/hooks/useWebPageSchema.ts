@@ -1,12 +1,12 @@
-import { GlobalSeoProps, WebPageType } from "../types";
-import useSeoData from "./useSeoData";
-import { useLocation } from "@reach/router";
-import React from "react";
-import useOrganizationSchema from "./useOrganizationSchema";
+import { useLocation } from "@reach/router"
+import React from "react"
+import { GlobalSeoProps, WebPageType } from "../types"
+import useSeoData from "./useSeoData"
+import useOrganizationSchema from "./useOrganizationSchema"
 
 type Props = {
-  type?: WebPageType;
-} & GlobalSeoProps;
+  type?: WebPageType
+} & GlobalSeoProps
 
 const useWebPageSchema = ({
   title,
@@ -17,64 +17,64 @@ const useWebPageSchema = ({
   modifiedDate,
   type,
 }: Props) => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   const {
     site: { siteMetadata },
-  } = useSeoData();
+  } = useSeoData()
 
-  const organizationData = useOrganizationSchema();
+  const organizationData = useOrganizationSchema()
 
   const seoTitle = React.useMemo(
     () => title || siteMetadata.title,
-    [siteMetadata.title],
-  );
+    [siteMetadata.title]
+  )
   const seoDescription = React.useMemo(
     () => description || siteMetadata.description,
-    [siteMetadata.description],
-  );
+    [siteMetadata.description]
+  )
   const siteAddress = React.useMemo(
     () => siteMetadata.siteUrl + pathname,
-    [siteMetadata.siteUrl, pathname],
-  );
+    [siteMetadata.siteUrl, pathname]
+  )
 
   const jsonLd = React.useMemo(
     () => ({
-      "@context": "https://schema.org",
+      "@context": `https://schema.org`,
       "@graph": [
         {
-          //CREATE DEFAULT SCHEMA FOR WEBSITE
-          "@type": "WebSite",
-          "@id": siteMetadata.siteUrl + "/" + "#website",
-          "url": siteMetadata.siteUrl + "/",
-          "name": siteMetadata.title,
+          // CREATE DEFAULT SCHEMA FOR WEBSITE
+          "@type": `WebSite`,
+          "@id": `${siteMetadata.siteUrl}/` + `#website`,
+          url: `${siteMetadata.siteUrl}/`,
+          name: siteMetadata.title,
         },
         {
-          //CREATE WEBPAGE SCHEMA COMPONENT
-          "@type": type || "WebPage",
-          "@id": siteAddress + "#webpage",
-          "url": siteAddress,
-          "inLanguage": "it",
-          "name": seoTitle,
-          "isPartOf": {
-            "@id": siteMetadata.siteUrl + "/" + "#website",
+          // CREATE WEBPAGE SCHEMA COMPONENT
+          "@type": type || `WebPage`,
+          "@id": `${siteAddress}#webpage`,
+          url: siteAddress,
+          inLanguage: `it`,
+          name: seoTitle,
+          isPartOf: {
+            "@id": `${siteMetadata.siteUrl}/` + `#website`,
           },
-          "image": {
-            "@type": "ImageObject",
-            "@id": siteAddress + "#primaryImage",
-            "url": image ? image : siteMetadata.siteUrl + siteMetadata.image,
-            "width": siteMetadata.imageWidth,
-            "height": siteMetadata.imageHeight,
-            "caption": imageAltText,
+          image: {
+            "@type": `ImageObject`,
+            "@id": `${siteAddress}#primaryImage`,
+            url: image || siteMetadata.siteUrl + siteMetadata.image,
+            width: siteMetadata.imageWidth,
+            height: siteMetadata.imageHeight,
+            caption: imageAltText,
           },
-          "primaryImageOfPage": {
-            "@id": siteAddress + "#primaryImage",
+          primaryImageOfPage: {
+            "@id": `${siteAddress}#primaryImage`,
           },
-          "datePublished": publishDate,
-          "dateModified": modifiedDate,
-          "description": seoDescription,
-          "publisher": organizationData,
-          "breadcrumb": {
-            "@id": siteMetadata.siteUrl + "/#breadcrumb",
+          datePublished: publishDate,
+          dateModified: modifiedDate,
+          description: seoDescription,
+          publisher: organizationData,
+          breadcrumb: {
+            "@id": `${siteMetadata.siteUrl}/#breadcrumb`,
           },
         },
       ],
@@ -89,10 +89,10 @@ const useWebPageSchema = ({
       siteMetadata.imageHeight,
       siteMetadata.imageWidth,
       organizationData,
-    ],
-  );
+    ]
+  )
 
-  return jsonLd;
-};
+  return jsonLd
+}
 
-export default useWebPageSchema;
+export default useWebPageSchema

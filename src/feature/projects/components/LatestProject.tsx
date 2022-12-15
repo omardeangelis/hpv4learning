@@ -1,21 +1,21 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import React from "react"
+import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
+import Chip from "@mui/material/Chip"
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
+import AccessTimeIcon from "@mui/icons-material/AccessTime"
 import {
   GatsbyImage,
   getImage,
   IGatsbyImageData,
   ImageDataLike,
-} from "gatsby-plugin-image";
-import { Styledtypography } from "./ArticleHero";
-import dayjs from "dayjs";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import SeoLink from "../../../components/shared/SeoLink";
-import { RoundedButton } from "../../../components/layout";
+} from "gatsby-plugin-image"
+import dayjs from "dayjs"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
+import { Styledtypography } from "./ArticleHero"
+import SeoLink from "../../../components/shared/SeoLink"
+import { RoundedButton } from "../../../components/layout"
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -26,7 +26,7 @@ const StyledBox = styled(Box)`
     justify-content: space-between;
     margin-top: 95px;
   }
-`;
+`
 
 const StyledChip = styled(Chip)`
   height: 20px;
@@ -39,48 +39,47 @@ const StyledChip = styled(Chip)`
   &:hover {
     background-color: #e9e3ff;
   }
-`;
+`
 
 export const LatestProject = (
-  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number],
+  props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number]
 ) => {
-  const latestProject = React.useMemo(() => {
-    return props.node;
-  }, [props]);
+  const latestProject = React.useMemo(() => props.node, [props])
 
-  const label = React.useMemo(() => {
-    return latestProject?.project_category?.[0]?.slug;
-  }, [latestProject]);
+  const label = React.useMemo(
+    () => latestProject?.project_category?.[0]?.slug,
+    [latestProject]
+  )
 
   const image = getImage(
-    latestProject?.copertina as unknown as ImageDataLike,
-  ) as IGatsbyImageData;
+    latestProject?.copertina as unknown as ImageDataLike
+  ) as IGatsbyImageData
 
   return (
     <StyledBox>
       <div>
         <SeoLink isExternal={false} link={`/progetti/${label}/`}>
-          <StyledChip label={label} variant='outlined' />
+          <StyledChip label={label} variant="outlined" />
         </SeoLink>
         <Box
           sx={{
-            maxWidth: { lg: "562px" },
-            mt: { xs: "10px", lg: "16px" },
+            maxWidth: { lg: `562px` },
+            mt: { xs: `10px`, lg: `16px` },
           }}
         >
           <Typography
-            fontSize={{ xs: "34px", lg: "48px" }}
-            lineHeight={{ xs: "39px", lg: "54px" }}
+            fontSize={{ xs: `34px`, lg: `48px` }}
+            lineHeight={{ xs: `39px`, lg: `54px` }}
             fontWeight={600}
           >
             {latestProject?.articleTitle}
           </Typography>
-          <Box mt={{ xs: "6px", lg: "8px" }}>
+          <Box mt={{ xs: `6px`, lg: `8px` }}>
             <Typography
-              fontSize='16px'
-              lineHeight='20px'
+              fontSize="16px"
+              lineHeight="20px"
               sx={{
-                color: "grey.600",
+                color: `grey.600`,
               }}
             >
               {latestProject.descrizione?.descrizione}
@@ -88,23 +87,24 @@ export const LatestProject = (
           </Box>
         </Box>
 
-        <Stack direction='row' spacing='20px' alignItems='center' mt='12px'>
-          <Styledtypography variant='caption'>By Hpv4Learning</Styledtypography>
+        <Stack direction="row" spacing="20px" alignItems="center" mt="12px">
+          <Styledtypography variant="caption">By Hpv4Learning</Styledtypography>
           {latestProject?.body?.childMarkdownRemark?.timeToRead ? (
             <Styledtypography
-              variant='caption'
+              variant="caption"
               sx={{
-                display: "flex",
-                alignItems: "center",
+                display: `flex`,
+                alignItems: `center`,
               }}
             >
-              <AccessTimeIcon sx={{ mr: "7px" }} />{" "}
+              <AccessTimeIcon sx={{ mr: `7px` }} />
+              {` `}
               {latestProject?.body?.childMarkdownRemark?.timeToRead} min
             </Styledtypography>
           ) : null}
           {latestProject?.createdAt ? (
-            <Styledtypography variant='caption'>
-              {dayjs(latestProject?.createdAt).format("DD/MM/YYYY")}
+            <Styledtypography variant="caption">
+              {dayjs(latestProject?.createdAt).format(`DD/MM/YYYY`)}
             </Styledtypography>
           ) : null}
         </Stack>
@@ -114,16 +114,16 @@ export const LatestProject = (
           link={`/progetti/${label}/${latestProject?.slug}/`}
         >
           <RoundedButton
-            size='small'
-            variant='outlined'
+            size="small"
+            variant="outlined"
             sx={{
-              height: { xs: "24px", lg: "36px" },
-              mt: { xs: "20px", lg: "24px" },
+              height: { xs: `24px`, lg: `36px` },
+              mt: { xs: `20px`, lg: `24px` },
             }}
           >
-            Vedi ultimo progetto{" "}
+            Vedi ultimo progetto{` `}
             <ArrowForwardIcon
-              sx={{ width: "12px", height: "12px", ml: "7px" }}
+              sx={{ width: `12px`, height: `12px`, ml: `7px` }}
             />
           </RoundedButton>
         </SeoLink>
@@ -131,13 +131,13 @@ export const LatestProject = (
       {image ? (
         <Box
           sx={{
-            maxHeight: { xs: "205px", lg: "393px" },
-            maxWidth: "700px",
-            width: "100%",
-            borderRadius: "16px",
-            marginTop: { xs: "24px", lg: "0" },
-            overflow: "hidden",
-            transform: "translateZ(0)",
+            maxHeight: { xs: `205px`, lg: `393px` },
+            maxWidth: `700px`,
+            width: `100%`,
+            borderRadius: `16px`,
+            marginTop: { xs: `24px`, lg: `0` },
+            overflow: `hidden`,
+            transform: `translateZ(0)`,
           }}
         >
           <GatsbyImage
@@ -147,5 +147,5 @@ export const LatestProject = (
         </Box>
       ) : null}
     </StyledBox>
-  );
-};
+  )
+}

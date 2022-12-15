@@ -1,20 +1,16 @@
-import React from "react";
-//Material UI
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-//Icon
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-//gatsby
-import { Link as GastbyLink } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
-import Stack from "@mui/material/Stack";
-import styled from "@emotion/styled";
-import { CourseMenu } from "./CourseMenu";
-import { useNavigationLink } from "../hooks/useNavigationLink";
-import { getIcon } from "../utils";
-import SeoLink from "../../../components/shared/SeoLink";
+import React from "react"
+// Material UI
+import Container from "@mui/material/Container"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import IconButton from "@mui/material/IconButton"
+// Icon
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded"
+// gatsby
+import { Link as GastbyLink } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
+import Stack from "@mui/material/Stack"
+import styled from "@emotion/styled"
 import {
   autoUpdate,
   flip,
@@ -26,8 +22,12 @@ import {
   useClick,
   useInteractions,
   useRole,
-} from "@floating-ui/react-dom-interactions";
-import { toggleSidebar } from "../../../store/reducers/uiSlice";
+} from "@floating-ui/react-dom-interactions"
+import { CourseMenu } from "./CourseMenu"
+import { useNavigationLink } from "../hooks/useNavigationLink"
+import { getIcon } from "../utils"
+import SeoLink from "../../../components/shared/SeoLink"
+import { toggleSidebar } from "../../../store/reducers/uiSlice"
 
 const StyledNav = styled(Box)`
   width: 100%;
@@ -47,7 +47,7 @@ const StyledNav = styled(Box)`
       border: 1px solid rgba(98, 0, 238, 0.05);
     }
   }
-`;
+`
 
 const StyledCenter = styled(Box)`
   display: none;
@@ -56,7 +56,7 @@ const StyledCenter = styled(Box)`
   @media screen and (min-width: 1024px) {
     display: block;
   }
-`;
+`
 
 const StyledRight = styled(Box)`
   display: block;
@@ -65,51 +65,51 @@ const StyledRight = styled(Box)`
   @media screen and (min-width: 1024px) {
     display: none;
   }
-`;
+`
 
 export const Navbar = ({ disableColor }: { disableColor?: true }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   const { x, y, reference, floating, strategy, context } = useFloating({
-    placement: "top",
+    placement: `top`,
     open,
     onOpenChange: setOpen,
     middleware: [offset(5), flip(), shift({ padding: 8 })],
     whileElementsMounted: autoUpdate,
-  });
+  })
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
     useClick(context),
     useFocus(context),
-    useRole(context, { role: "tooltip" }),
+    useRole(context, { role: `tooltip` }),
     useDismiss(context),
-  ]);
-  const links = useNavigationLink();
+  ])
+  const links = useNavigationLink()
   return (
     <>
       <StyledNav
-        component='nav'
+        component="nav"
         sx={{
-          background: disableColor ? "transparent" : "white",
-          borderBottom: "1px solid",
-          borderBottomColor: disableColor ? "transparent" : "purple.200",
-          position: disableColor ? "absolute" : "fixed",
+          background: disableColor ? `transparent` : `white`,
+          borderBottom: `1px solid`,
+          borderBottomColor: disableColor ? `transparent` : `purple.200`,
+          position: disableColor ? `absolute` : `fixed`,
         }}
       >
-        <Container maxWidth='lg'>
-          <Stack direction='row' alignItems='center' height='72px'>
+        <Container maxWidth="lg">
+          <Stack direction="row" alignItems="center" height="72px">
             {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
             <GastbyLink
-              to='/'
+              to="/"
               style={{
-                textDecoration: "none",
+                textDecoration: `none`,
               }}
             >
               <Box>
                 <StaticImage
-                  src='../../../images/logo.png'
-                  alt='Logo Hpv 4 Learning'
-                  placeholder='tracedSVG'
-                  layout='fixed'
+                  src="../../../images/logo.png"
+                  alt="Logo Hpv 4 Learning"
+                  placeholder="tracedSVG"
+                  layout="fixed"
                   height={70}
                   width={70}
                 />
@@ -117,9 +117,9 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
             </GastbyLink>
             <StyledCenter>
               <Stack
-                direction='row'
-                justifyContent='space-around'
-                alignItems='center'
+                direction="row"
+                justifyContent="space-around"
+                alignItems="center"
                 sx={{
                   flex: 1,
                 }}
@@ -128,75 +128,69 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
                   if (!link) {
                     return (
                       <Box
-                        key={text + "navbar"}
+                        key={`${text}navbar`}
                         {...getReferenceProps({
                           ref: reference,
-                          role: "_link",
+                          role: `_link`,
                         })}
                       >
-                        <Stack direction='row' spacing={2} alignItems='center'>
+                        <Stack direction="row" spacing={2} alignItems="center">
                           <Typography
                             sx={{
-                              fontSize: "1rem",
-                              lineHeight: "unset",
+                              fontSize: `1rem`,
+                              lineHeight: `unset`,
                               fontWeight: 500,
                             }}
-                            color={disableColor ? "white" : "gray.800"}
+                            color={disableColor ? `white` : `gray.800`}
                           >
                             {text}
                           </Typography>
                           {getIcon(icon, {
-                            color: disableColor ? "white" : "inherit",
+                            color: disableColor ? `white` : `inherit`,
                           })}
                         </Stack>
                       </Box>
-                    );
+                    )
                   }
                   return (
-                    <>
-                      <SeoLink
-                        isExternal={false}
-                        link={link}
-                        key={text + "navbar"}
-                      >
-                        <Box role='_link'>
-                          <Stack
-                            direction='row'
-                            spacing={2}
-                            alignItems='center'
+                    <SeoLink
+                      isExternal={false}
+                      link={link}
+                      key={`${text}navbar`}
+                    >
+                      <Box role="_link">
+                        <Stack direction="row" spacing={2} alignItems="center">
+                          <Typography
+                            sx={{
+                              fontSize: `1rem`,
+                              lineHeight: `unset`,
+                              fontWeight: 500,
+                            }}
+                            color={disableColor ? `white` : `gray.800`}
                           >
-                            <Typography
-                              sx={{
-                                fontSize: "1rem",
-                                lineHeight: "unset",
-                                fontWeight: 500,
-                              }}
-                              color={disableColor ? "white" : "gray.800"}
-                            >
-                              {text}
-                            </Typography>
-                            {getIcon(icon, {
-                              color: disableColor ? "white" : "purple.400",
-                            })}
-                          </Stack>
-                        </Box>
-                      </SeoLink>
-                    </>
-                  );
+                            {text}
+                          </Typography>
+                          {getIcon(icon, {
+                            color: disableColor ? `white` : `purple.400`,
+                          })}
+                        </Stack>
+                      </Box>
+                    </SeoLink>
+                  )
                 })}
               </Stack>
             </StyledCenter>
             <StyledRight>
               <Stack
-                direction='row'
-                justifyContent='flex-end'
-                alignItems='center'
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
               >
                 <IconButton
-                  color='default'
+                  color="default"
                   onClick={toggleSidebar}
                   sx={{
-                    background: disableColor ? "#E9E3FF" : "inherit",
+                    background: disableColor ? `#E9E3FF` : `inherit`,
                   }}
                 >
                   <MenuRoundedIcon />
@@ -206,7 +200,7 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
           </Stack>
         </Container>
       </StyledNav>
-      <Box height='72px' width='100px'></Box>
+      <Box height="72px" width="100px" />
       {open ? (
         <Box
           {...getFloatingProps({
@@ -222,5 +216,5 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
         </Box>
       ) : null}
     </>
-  );
-};
+  )
+}

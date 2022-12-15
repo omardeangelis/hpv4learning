@@ -1,21 +1,21 @@
 import * as React from "react"
-//Global Layoaut
-import Layout from "../components/shared/layout"
-import TopHeroContent from "../components/TopHeroContent"
-
-//Meta Title e SEO e Utils
-import SeoLink from "../components/shared/SeoLink"
-import LinkHandler from "../components/SEO/components/LinkHandler"
-//Components
-import Hero from "../components/ui/Hero"
-//Material UI
+// Global Layoaut
 import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
-import ComunityBanner from "../components/banner/ComunityBanner"
-import CourseWall from "../components/course/CourseWall"
 import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
+import Layout from "../components/shared/layout"
+import TopHeroContent from "../components/TopHeroContent"
+
+// Meta Title e SEO e Utils
+import SeoLink from "../components/shared/SeoLink"
+import LinkHandler from "../components/SEO/components/LinkHandler"
+// Components
+import Hero from "../components/ui/Hero"
+// Material UI
+import ComunityBanner from "../components/banner/ComunityBanner"
+import CourseWall from "../components/course/CourseWall"
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema"
 import { HomeSection } from "../feature/projects/components"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
@@ -29,7 +29,7 @@ const IndexPage = () => {
       return
     }
     coursesPositionRef.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: `smooth`,
     })
   }, [coursesPositionRef.current])
   return (
@@ -39,8 +39,8 @@ const IndexPage = () => {
       </Hero>
       <Box
         sx={{
-          backgroundColor: "purple.400",
-          py: { xs: "36px", lg: "72px" },
+          backgroundColor: `purple.400`,
+          py: { xs: `36px`, lg: `72px` },
         }}
       >
         <IndexInfo />
@@ -49,15 +49,15 @@ const IndexPage = () => {
       <Container
         maxWidth="lg"
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: `48px`, lg: `96px` },
         }}
       >
         <Box component="section">
           <Typography
-            component={"h2"}
+            component={`h2`}
             textAlign="center"
             sx={{
-              fontSize: { xs: "36px", lg: "48px" },
+              fontSize: { xs: `36px`, lg: `48px` },
               fontWeight: 600,
             }}
           >
@@ -70,7 +70,7 @@ const IndexPage = () => {
       </Container>
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: `48px`, lg: `96px` },
         }}
       >
         <ComunityBanner />
@@ -78,7 +78,7 @@ const IndexPage = () => {
 
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: `48px`, lg: `96px` },
         }}
       >
         <Container maxWidth="lg">
@@ -89,12 +89,12 @@ const IndexPage = () => {
                 textAlign="center"
                 component="h2"
                 lineHeight={{
-                  xs: "39px",
-                  lg: "56px",
+                  xs: `39px`,
+                  lg: `56px`,
                 }}
                 fontSize={{
-                  xs: "34px",
-                  lg: "48px",
+                  xs: `34px`,
+                  lg: `48px`,
                 }}
               >
                 Impara realizzando dei progetti pratici
@@ -104,23 +104,23 @@ const IndexPage = () => {
               mx="auto"
               maxWidth="656px"
               mt={{
-                xs: "16px",
-                lg: "24px",
+                xs: `16px`,
+                lg: `24px`,
               }}
             >
               <Typography
                 fontWeight={400}
                 textAlign="center"
                 sx={{
-                  color: "grey.600",
+                  color: `grey.600`,
                 }}
                 lineHeight={{
-                  xs: "20px",
-                  lg: "29px",
+                  xs: `20px`,
+                  lg: `29px`,
                 }}
                 fontSize={{
-                  xs: "18px",
-                  lg: "24px",
+                  xs: `18px`,
+                  lg: `24px`,
                 }}
               >
                 Un giusto equilibrio tra pratica e teoria è il miglior modo per
@@ -133,8 +133,8 @@ const IndexPage = () => {
             alignItems="center"
             justifyContent="center"
             mt={{
-              xs: "24px",
-              lg: "34px",
+              xs: `24px`,
+              lg: `34px`,
             }}
           >
             <SeoLink isExternal={false} link="/progetti/">
@@ -146,8 +146,8 @@ const IndexPage = () => {
         </Container>
         <Box
           mt={{
-            xs: "36px",
-            lg: "48px",
+            xs: `36px`,
+            lg: `48px`,
           }}
         >
           <HomeSection />
@@ -155,7 +155,7 @@ const IndexPage = () => {
       </Box>
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: `48px`, lg: `96px` },
         }}
       >
         <BottomBanner
@@ -164,8 +164,8 @@ const IndexPage = () => {
           title={
             <Typography
               color="white"
-              fontSize={["24px", "34px"]}
-              lineHeight={["29px", "39px"]}
+              fontSize={[`24px`, `34px`]}
+              lineHeight={[`29px`, `39px`]}
               textAlign="center"
               fontWeight={600}
             >
@@ -174,7 +174,7 @@ const IndexPage = () => {
             </Typography>
           }
           sx={{
-            backgroundColor: "purple.900",
+            backgroundColor: `purple.900`,
           }}
         >
           <Typography
@@ -184,7 +184,7 @@ const IndexPage = () => {
             color="gray.200"
             textAlign="center"
             sx={{
-              maxWidth: { xs: "unset", lg: "611px" },
+              maxWidth: { xs: `unset`, lg: `611px` },
             }}
           >
             Fissa una videochiamata in pochi step e raccontaci di che cosa hai
@@ -196,8 +196,8 @@ const IndexPage = () => {
               color="primary"
               size="large"
               sx={{
-                px: "30px",
-                width: { xs: "100%", md: "unset" },
+                px: `30px`,
+                width: { xs: `100%`, md: `unset` },
               }}
             >
               Scopri di più
@@ -209,17 +209,15 @@ const IndexPage = () => {
   )
 }
 
-export const Head = () => {
-  return (
-    <>
-      <MetaDecorator
-        metaTitle="Videocorsi per sviluppatori web e videomakers"
-        metaDescription="Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti"
-      />
-      <OrganizationSchema />
-      <LinkHandler />
-    </>
-  )
-}
+export const Head = () => (
+  <>
+    <MetaDecorator
+      metaTitle="Videocorsi per sviluppatori web e videomakers"
+      metaDescription="Diventa uno sviluppaotre web con videocorsi professionali per frontend. Inizia il tuo percorso con corsi di CSS e HTML gratuiti"
+    />
+    <OrganizationSchema />
+    <LinkHandler />
+  </>
+)
 
 export default IndexPage

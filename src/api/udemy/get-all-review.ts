@@ -1,23 +1,21 @@
-import { HttpMethod } from "../../server/types";
-import {
-  getAllReview,
-} from "../../server/udemy";
+import { HttpMethod } from "../../server/types"
+import { getAllReview } from "../../server/udemy"
 
 type ReqProps = {
-  method: HttpMethod;
-};
+  method: HttpMethod
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const handler = async (req: ReqProps, res: any) => {
-  if (req.method !== "GET") throw new Error("Use GET Method");
+  if (req.method !== `GET`) throw new Error(`Use GET Method`)
   try {
-    const response = await getAllReview();
-    res.status(200).json(response);
+    const response = await getAllReview()
+    res.status(200).json(response)
   } catch (error) {
     res.status(500).json({
-      error: error,
-    });
+      error,
+    })
   }
-};
+}
 
-export default handler;
+export default handler

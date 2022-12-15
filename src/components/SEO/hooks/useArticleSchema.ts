@@ -1,6 +1,6 @@
-import React from "react";
-import { ArticleSchemaProps } from "../types";
-import useSeoData from "./useSeoData";
+import React from "react"
+import { ArticleSchemaProps } from "../types"
+import useSeoData from "./useSeoData"
 
 const useArticleSchema = ({
   type,
@@ -13,53 +13,54 @@ const useArticleSchema = ({
 }: ArticleSchemaProps) => {
   const {
     site: { siteMetadata },
-  } = useSeoData();
+  } = useSeoData()
 
-  const url = React.useMemo(() => siteMetadata.siteUrl, []);
+  const url = React.useMemo(() => siteMetadata.siteUrl, [])
 
-  const articleJson = React.useMemo(() => {
-    return [
+  const articleJson = React.useMemo(
+    () => [
       {
-        "@type": type || "Article",
-        "@id": url + "#article",
-        "isPartOf": {
-          "@type": "WebPage",
-          "@id": url + "#webpage",
+        "@type": type || `Article`,
+        "@id": `${url}#article`,
+        isPartOf: {
+          "@type": `WebPage`,
+          "@id": `${url}#webpage`,
         },
-        "author": {
-          "@type": "Person",
-          "@id": url + "#author",
-          "name": siteMetadata.author,
+        author: {
+          "@type": `Person`,
+          "@id": `${url}#author`,
+          name: siteMetadata.author,
         },
-        "publisher": {
-          "@id": siteMetadata.siteUrl + "/#organization",
+        publisher: {
+          "@id": `${siteMetadata.siteUrl}/#organization`,
         },
-        "headline": title,
-        "description": description,
-        "datePublished": publishDate,
-        "dateModified": modifiedDate,
-        "mainEntityOfPage": url + "#webpage",
-        "image": {
-          "@type": "ImageObject",
-          "@id": image + "/#primaryImage",
+        headline: title,
+        description,
+        datePublished: publishDate,
+        dateModified: modifiedDate,
+        mainEntityOfPage: `${url}#webpage`,
+        image: {
+          "@type": `ImageObject`,
+          "@id": `${image}/#primaryImage`,
         },
       },
       {
-        "@type": "Person",
-        "@id": image + "/#author",
-        "name": authorName,
-        "image": {
-          "@type": "ImageObject",
-          "@id": image + "#author",
-          "url": image,
-          "caption": siteMetadata.author,
+        "@type": `Person`,
+        "@id": `${image}/#author`,
+        name: authorName,
+        image: {
+          "@type": `ImageObject`,
+          "@id": `${image}#author`,
+          url: image,
+          caption: siteMetadata.author,
         },
-        "description": siteMetadata.author,
+        description: siteMetadata.author,
       },
-    ];
-  }, []);
+    ],
+    []
+  )
 
-  return articleJson;
-};
+  return articleJson
+}
 
-export default useArticleSchema;
+export default useArticleSchema
