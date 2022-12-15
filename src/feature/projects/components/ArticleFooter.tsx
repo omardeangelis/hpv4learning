@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { ProjectCard, ProjectImage, ProjectContent } from "./index";
+import React from "react"
+import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
 import {
   GatsbyImage,
   getImage,
   IGatsbyImageData,
   ImageDataLike,
-} from "gatsby-plugin-image";
-import SeoLink from "../../../components/shared/SeoLink";
+} from "gatsby-plugin-image"
+import { ProjectCard, ProjectImage, ProjectContent } from "./index"
+import SeoLink from "../../../components/shared/SeoLink"
 
 const StyledTypography = styled(Typography)`
   font-weight: 600;
@@ -21,18 +21,16 @@ const StyledTypography = styled(Typography)`
     font-size: 24px;
     margin-top: 75px;
   }
-`;
+`
 
 export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
-  const nextProject = React.useMemo(() => {
-    return props.nextProject;
-  }, []);
+  const nextProject = React.useMemo(() => props.nextProject, [])
 
   const nextProjectUrl = React.useMemo(() => {
-    const courseSlug = props?.project?.project_category?.[0]?.slug;
-    const slug = props?.nextProject?.slug;
-    return `/progetti/${courseSlug}/${slug}/`;
-  }, []);
+    const courseSlug = props?.project?.project_category?.[0]?.slug
+    const slug = props?.nextProject?.slug
+    return `/progetti/${courseSlug}/${slug}/`
+  }, [])
 
   return (
     <div>
@@ -42,18 +40,18 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
         isExternal={false}
         link={nextProjectUrl}
         style={{
-          display: "flex",
-          width: "fit-content",
+          display: `flex`,
+          width: `fit-content`,
         }}
       >
         <Box
           sx={{
-            maxWidth: { xs: "unset", sm: "351px" },
+            maxWidth: { xs: `unset`, sm: `351px` },
           }}
         >
           <ProjectCard
             sx={{
-              maxWidth: { xs: "unset", sm: "351px" },
+              maxWidth: { xs: `unset`, sm: `351px` },
             }}
           >
             <ProjectImage>
@@ -61,21 +59,21 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
                 <GatsbyImage
                   image={
                     getImage(
-                      nextProject?.copertina as unknown as ImageDataLike,
+                      nextProject?.copertina as unknown as ImageDataLike
                     ) as IGatsbyImageData
                   }
-                  alt={nextProject.articleTitle || "Anteprima del progetto"}
+                  alt={nextProject.articleTitle || `Anteprima del progetto`}
                   style={{
-                    height: "100%",
+                    height: `100%`,
                   }}
                 />
               ) : (
                 <Box
                   sx={{
-                    backgroundColor: "purple.A100",
+                    backgroundColor: `purple.A100`,
                   }}
-                  width='100%'
-                ></Box>
+                  width="100%"
+                />
               )}
             </ProjectImage>
 
@@ -83,10 +81,10 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
               titolo={nextProject?.articleTitle as string | undefined}
               label={props.project?.project_category?.[0]?.slug}
               description={nextProject?.descrizione?.descrizione}
-            ></ProjectContent>
+            />
           </ProjectCard>
         </Box>
       </SeoLink>
     </div>
-  );
-};
+  )
+}

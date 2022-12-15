@@ -1,16 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { GetAllCourseStatsResponse, GetSingleCourseStatsResponse, SingleReview } from "../../server/udemy/types"
+import {
+  GetAllCourseStatsResponse,
+  GetSingleCourseStatsResponse,
+  SingleReview,
+} from "../../server/udemy/types"
 
 export const udemySlice = createApi({
-  reducerPath: "udemy",
+  reducerPath: `udemy`,
   baseQuery: fetchBaseQuery({
     headers: {
-      "content-type": "application/json",
+      "content-type": `application/json`,
     },
   }),
   endpoints: (builder) => ({
     getAllCourseStats: builder.query<GetAllCourseStatsResponse, void>({
-      query: () => "/api/udemy/get-all-courses-stats",
+      query: () => `/api/udemy/get-all-courses-stats`,
       keepUnusedDataFor: 60 * 1000 * 60 * 6,
     }),
     getSingleCourseStatsById: builder.query<
@@ -23,7 +27,7 @@ export const udemySlice = createApi({
       query: (id) => `/api/udemy/get-review-by-id?id=${id}`,
     }),
     getAllReviews: builder.query<SingleReview[], void>({
-      query: () => "/api/udemy/get-all-review",
+      query: () => `/api/udemy/get-all-review`,
     }),
   }),
 })

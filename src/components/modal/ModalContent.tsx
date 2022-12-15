@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { BoxProps } from "@mui/system";
-import { BorderBox } from "../layout/BorderBox";
+import React from "react"
+import styled from "@emotion/styled"
+import { BoxProps } from "@mui/system"
+import { BorderBox } from "../layout/BorderBox"
 
 type Props = {
-  children: JSX.Element | JSX.Element[];
-};
+  children: JSX.Element | JSX.Element[]
+}
 
 const ModalContainer = styled(BorderBox)`
   z-index: 200;
@@ -25,8 +25,8 @@ const ModalContainer = styled(BorderBox)`
     border-radius: 24px;
     overflow-y: hidden;
   }
-`;
+`
 
-export const ModalContent = ({ children, ...rest }: Props & BoxProps) => {
-  return <ModalContainer {...rest}>{children}</ModalContainer>;
-};
+export const ModalContent = ({ children, ...rest }: Props & BoxProps) => (
+  <ModalContainer {...rest}>{children}</ModalContainer>
+)

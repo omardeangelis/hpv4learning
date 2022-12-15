@@ -1,10 +1,13 @@
-import React from "react";
-import Box from "@mui/system/Box";
-import Container from "@mui/system/Container";
-import Stack from "@mui/system/Stack";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import React from "react"
+import Box from "@mui/system/Box"
+import Container from "@mui/system/Container"
+import Stack from "@mui/system/Stack"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import Typography from "@mui/material/Typography"
+import { Formik, Form } from "formik"
+import { useDispatch, useSelector } from "react-redux"
+import * as Yup from "yup"
 import {
   ModalHeader,
   ModalBackButton,
@@ -16,79 +19,76 @@ import {
   ModalElipse,
   ModalTab,
   ModalFooter,
-} from "../../../components/modal";
-import { useResponsive } from "../../../hook/useResponsive";
-import { useModalContext } from "../../../components/modal/context";
-import { reservationModalLabels } from "../utils/constants";
-import { ProviderModalProvider } from "../context/providerModalContext";
-import { Formik, Form } from "formik";
-import { RootState } from "../../../store";
-import { useDispatch, useSelector } from "react-redux";
-import { changeProvider } from "../../../store/reducers/consulenze";
-import * as Yup from "yup";
+} from "../../../components/modal"
+import { useResponsive } from "../../../hook/useResponsive"
+import { useModalContext } from "../../../components/modal/context"
+import { reservationModalLabels } from "../utils/constants"
+import { ProviderModalProvider } from "../context/providerModalContext"
+import { RootState } from "../../../store"
+import { changeProvider } from "../../../store/reducers/consulenze"
 import {
   mailValidationRegex,
   gmailEmailValidation,
-} from "../../../server/constants";
+} from "../../../server/constants"
 
 const creareValidationSchema = (provider: "manual" | "gmail") =>
   Yup.object().shape({
     email: Yup.string()
       .matches(
-        provider === "gmail"
+        provider === `gmail`
           ? mailValidationRegex && gmailEmailValidation
           : mailValidationRegex,
         {
           excludeEmptyString: true,
           message: `"Email non valida ${
-            provider === "gmail" ? "deve essere @gmail" : ""
+            provider === `gmail` ? `deve essere @gmail` : ``
           }`,
-        },
+        }
       )
-      .min(5, "Inseirisci almeno 5 caratteri")
-      .max(100, "massimo 10 caratteri")
+      .min(5, `Inseirisci almeno 5 caratteri`)
+      .max(100, `massimo 10 caratteri`)
       .email(),
     nome: Yup.string()
-      .min(2, "Inserisci almeno 2 lettere")
-      .max(100, "Non ha 100 lettere nel nome")
+      .min(2, `Inserisci almeno 2 lettere`)
+      .max(100, `Non ha 100 lettere nel nome`)
       .notRequired(),
     cognome: Yup.string()
-      .min(2, "Inserisci almeno 2 lettere")
-      .max(200, "Non ha 200 lettere nel nome")
+      .min(2, `Inserisci almeno 2 lettere`)
+      .max(200, `Non ha 200 lettere nel nome`)
       .notRequired(),
-  });
+  })
 
 type initialValueProps = {
-  email: string;
-  nome?: string;
-  cognome?: string;
-};
+  email: string
+  nome?: string
+  cognome?: string
+}
 
 const initialValue: initialValueProps = {
-  email: "",
-  nome: "",
-  cognome: "",
-};
+  email: ``,
+  nome: ``,
+  cognome: ``,
+}
 
 type Props = {
-  onBack: () => void;
-  onContinue: (param: initialValueProps) => void;
-};
+  onBack: () => void
+  onContinue: (param: initialValueProps) => void
+}
 
 const ProviderModal = ({ onBack, onContinue }: Props) => {
-  const { provider } = useSelector((store: RootState) => store.consulenza);
-  const dispatch = useDispatch();
-  const { isMobile } = useResponsive();
-  const { onClose } = useModalContext() || {};
+  const { provider } = useSelector((store: RootState) => store.consulenza)
+  const dispatch = useDispatch()
+  const { isMobile } = useResponsive()
+  const { onClose } = useModalContext() || {}
 
   const validationSchema = React.useMemo(
     () => creareValidationSchema(provider),
-    [provider],
-  );
+    [provider]
+  )
 
   const handleOnClick = React.useCallback(() => {
-    dispatch(changeProvider());
-  }, [dispatch]);
+    dispatch(changeProvider())
+  }, [dispatch])
 
   return (
     <ProviderModalProvider
@@ -104,45 +104,45 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
         {onClose ? <ModalCloseButton onClose={onClose} /> : null}
       </ModalHeader>
       <ModalBody>
-        <ModalElipse pb={{ xs: "24px", lg: "38px" }}>
-          <Stack direction='column' spacing={2}>
+        <ModalElipse pb={{ xs: `24px`, lg: `38px` }}>
+          <Stack direction="column" spacing={2}>
             <Box
-              px={{ xs: "10px", lg: "70px" }}
-              width={{ xs: "400px", lg: "600px" }}
+              px={{ xs: `10px`, lg: `70px` }}
+              width={{ xs: `400px`, lg: `600px` }}
             >
               <ModalStepper labels={reservationModalLabels} />
             </Box>
             <Stack
-              direction='row'
-              justifyContent='center'
+              direction="row"
+              justifyContent="center"
               spacing={4}
-              pb={isMobile ? "35px" : "20px"}
+              pb={isMobile ? `35px` : `20px`}
             >
-              <ModalTab isgmail={true} onClick={handleOnClick} />
+              <ModalTab isgmail onClick={handleOnClick} />
               <ModalTab isgmail={false} onClick={handleOnClick} />
             </Stack>
           </Stack>
         </ModalElipse>
-        <Box px='12px' mb={{ xs: "auto", lg: "120px" }}>
+        <Box px="12px" mb={{ xs: `auto`, lg: `120px` }}>
           <Stack
-            width='100%'
-            direction='column'
+            width="100%"
+            direction="column"
             spacing={2}
-            alignItems='center'
-            alignContent='center'
+            alignItems="center"
+            alignContent="center"
           >
             {isMobile ? (
               <Typography
-                fontSize='20px'
-                lineHeight='24px'
+                fontSize="20px"
+                lineHeight="24px"
                 fontWeight={600}
-                textAlign='center'
+                textAlign="center"
               >
                 Scegli come prenotare la chiamata
               </Typography>
             ) : null}
-            {!isMobile || (isMobile && provider === "gmail") ? (
-              <ModalTypography maxWidth='480px'>
+            {!isMobile || (isMobile && provider === `gmail`) ? (
+              <ModalTypography maxWidth="480px">
                 Scegli se usare Google Calendar o ricevere una mail
               </ModalTypography>
             ) : null}
@@ -154,43 +154,43 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
             validateOnMount
           >
             {({ handleChange, errors, touched }) => (
-              <Form id='provider-form'>
-                <Box mt={{ xs: "32px", lg: "40px" }}>
+              <Form id="provider-form">
+                <Box mt={{ xs: `32px`, lg: `40px` }}>
                   <Stack spacing={2}>
-                    {provider === "manual" ? (
+                    {provider === `manual` ? (
                       <Stack
-                        direction={{ xs: "column", lg: "row" }}
+                        direction={{ xs: `column`, lg: `row` }}
                         spacing={2}
                       >
-                        <Box width='100%'>
+                        <Box width="100%">
                           <TextField
-                            name='nome'
-                            id='outlined-basic'
-                            label='Nome'
+                            name="nome"
+                            id="outlined-basic"
+                            label="Nome"
                             style={{
-                              width: "100%",
+                              width: `100%`,
                             }}
-                            size={isMobile ? "small" : "medium"}
+                            size={isMobile ? `small` : `medium`}
                             onChange={handleChange}
                           />
-                          <Typography variant='caption' color='red.400'>
+                          <Typography variant="caption" color="red.400">
                             {errors.nome && touched.nome && (
                               <p>{errors.nome}</p>
                             )}
                           </Typography>
                         </Box>
-                        <Box width='100%'>
+                        <Box width="100%">
                           <TextField
-                            name='cognome'
-                            id='outlined-basic'
-                            label='Cognome'
+                            name="cognome"
+                            id="outlined-basic"
+                            label="Cognome"
                             style={{
-                              width: "100%",
+                              width: `100%`,
                             }}
-                            size={isMobile ? "small" : "medium"}
+                            size={isMobile ? `small` : `medium`}
                             onChange={handleChange}
                           />
-                          <Typography variant='caption' color='red.400'>
+                          <Typography variant="caption" color="red.400">
                             {errors.cognome && touched.cognome && (
                               <p>{errors.cognome}</p>
                             )}
@@ -198,19 +198,19 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
                         </Box>
                       </Stack>
                     ) : null}
-                    <Box width='100%'>
+                    <Box width="100%">
                       <TextField
-                        name='email'
-                        id='outlined-basic'
-                        label='Mail'
-                        size={isMobile ? "small" : "medium"}
+                        name="email"
+                        id="outlined-basic"
+                        label="Mail"
+                        size={isMobile ? `small` : `medium`}
                         style={{
-                          width: "100%",
+                          width: `100%`,
                         }}
                         required
                         onChange={handleChange}
                       />
-                      <Typography variant='caption' color='red.400'>
+                      <Typography variant="caption" color="red.400">
                         {errors.email && touched.email && <p>{errors.email}</p>}
                       </Typography>
                     </Box>
@@ -225,11 +225,11 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
       <ModalFooter>
         <Container>
           <Button
-            form='provider-form'
-            type='submit'
-            variant='contained'
+            form="provider-form"
+            type="submit"
+            variant="contained"
             sx={{
-              width: "100%",
+              width: `100%`,
             }}
           >
             Avanti
@@ -237,7 +237,7 @@ const ProviderModal = ({ onBack, onContinue }: Props) => {
         </Container>
       </ModalFooter>
     </ProviderModalProvider>
-  );
-};
+  )
+}
 
-export default ProviderModal;
+export default ProviderModal

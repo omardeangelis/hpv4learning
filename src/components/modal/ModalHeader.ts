@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box";
+import styled from "@emotion/styled"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/system/Box"
 
 export const ModalHeader = styled(Box)<{ hasborder?: true }>`
   position: relative;
@@ -21,8 +21,8 @@ export const ModalHeader = styled(Box)<{ hasborder?: true }>`
     }
   }
   border-bottom-color: ${({ hasborder }) =>
-    hasborder ? "#E4E7EC" : "transparent"};
-`;
+    hasborder ? `#E4E7EC` : `transparent`};
+`
 
 export const ModalTitle = styled(Typography)`
   font-size: 24px;
@@ -36,4 +36,4 @@ export const ModalTitle = styled(Typography)`
   margin-right: auto;
   text-align: center;
   z-index: 0;
-`;
+`

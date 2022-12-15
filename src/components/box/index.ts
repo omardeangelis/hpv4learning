@@ -1,1 +1,1 @@
-export * from "./ReviewBox";
+export * from "./ReviewBox"

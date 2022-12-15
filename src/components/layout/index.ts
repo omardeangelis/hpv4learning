@@ -1,3 +1,3 @@
-export * from "./BottomBanner";
-export * from "./RoundedButton";
-export * from "./BorderBox";
+export * from "./BottomBanner"
+export * from "./RoundedButton"
+export * from "./BorderBox"

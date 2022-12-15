@@ -9,7 +9,7 @@ const allCourseQuery = `
         }
     }
 }
-`;
+`
 
 const allCourseCategory = `
 {
@@ -24,7 +24,7 @@ const allCourseCategory = `
     }
   }
 }
-`;
+`
 
 const allProjectArticle = `
 {
@@ -42,7 +42,7 @@ const allProjectArticle = `
     }
   }
 }
-`;
+`
 
 const projectCategoriesPageQuery = `
 {
@@ -60,11 +60,11 @@ const projectCategoriesPageQuery = `
     }
   }
 }
-`;
+`
 
 export {
   allCourseQuery,
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
-};
+}

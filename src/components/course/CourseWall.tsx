@@ -1,27 +1,27 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
-import { graphql, useStaticQuery } from "gatsby";
-import { CourseCategoryProps, CoursePreviewProps } from "../../types/course";
-import CourseSection from "./CuorseSection";
+import React from "react"
+import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
+import { graphql, useStaticQuery } from "gatsby"
+import { CourseCategoryProps, CoursePreviewProps } from "../../types/course"
+import CourseSection from "./CuorseSection"
 
 type CourseDispettoProps = CoursePreviewProps & {
-  oreDiLezione: number;
-  livello: string;
+  oreDiLezione: number
+  livello: string
   category: {
-    slug: string;
-    name: string;
-  }[];
-};
+    slug: string
+    name: string
+  }[]
+}
 
 type Props = {
   allContentfulCorsi: {
     group: {
-      fieldValue: string;
-      nodes: CourseDispettoProps[];
-    }[];
-  };
-};
+      fieldValue: string
+      nodes: CourseDispettoProps[]
+    }[]
+  }
+}
 
 const StyledBox = styled.div`
   & > *:not(:first-of-type) {
@@ -32,32 +32,29 @@ const StyledBox = styled.div`
       margin-top: 64px;
     }
   }
-`;
+`
 
 const CourseWall = () => {
-  const data: Props = useStaticQuery(query);
+  const data: Props = useStaticQuery(query)
   const getCourseCategoryName = React.useCallback(
-    (category: CourseCategoryProps[], categorySlug: string) => {
-      return category.find((x) => x.slug === categorySlug.toLowerCase())?.name;
-    },
-    [],
-  );
+    (category: CourseCategoryProps[], categorySlug: string) =>
+      category.find((x) => x.slug === categorySlug.toLowerCase())?.name,
+    []
+  )
   return (
     <StyledBox>
-      {data.allContentfulCorsi.group.map(({ fieldValue, nodes }, index) => {
-        return (
-          <Box key={"course-wall" + index}>
-            <CourseSection
-              slug={fieldValue}
-              title={getCourseCategoryName(nodes[0].category, fieldValue)}
-              data={nodes}
-            />
-          </Box>
-        );
-      })}
+      {data.allContentfulCorsi.group.map(({ fieldValue, nodes }, index) => (
+        <Box key={`course-wall${index}`}>
+          <CourseSection
+            slug={fieldValue}
+            title={getCourseCategoryName(nodes[0].category, fieldValue)}
+            data={nodes}
+          />
+        </Box>
+      ))}
     </StyledBox>
-  );
-};
+  )
+}
 
 const query = graphql`
   query RelatedCourse {
@@ -83,6 +80,6 @@ const query = graphql`
       }
     }
   }
-`;
+`
 
-export default CourseWall;
+export default CourseWall

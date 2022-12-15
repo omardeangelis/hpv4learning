@@ -1,40 +1,40 @@
-import styled from "@emotion/styled";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Box from "@mui/system/Box";
-import { graphql, PageProps } from "gatsby";
-import React from "react";
-import CourseBanner from "../components/banner/CourseBanner";
-import CourseContainer from "../components/course/CourseContainer";
-import CourseContent from "../components/course/CourseContent";
-import LinkHandler from "../components/SEO/components/LinkHandler";
-import MetaDecorator from "../components/SEO/components/MetaDecorator";
-import WebPageSchema from "../components/SEO/components/WebPageSchema";
-import Layout from "../components/shared/layout";
-import { CoursePreviewProps } from "../types/course";
-import { rowalizer } from "../utils/helpers";
+import styled from "@emotion/styled"
+import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
+import Box from "@mui/system/Box"
+import { graphql, PageProps } from "gatsby"
+import React from "react"
+import CourseBanner from "../components/banner/CourseBanner"
+import CourseContainer from "../components/course/CourseContainer"
+import CourseContent from "../components/course/CourseContent"
+import LinkHandler from "../components/SEO/components/LinkHandler"
+import MetaDecorator from "../components/SEO/components/MetaDecorator"
+import WebPageSchema from "../components/SEO/components/WebPageSchema"
+import Layout from "../components/shared/layout"
+import { CoursePreviewProps } from "../types/course"
+import { rowalizer } from "../utils/helpers"
 
 type Props = {
   pageContext: {
-    description: string;
-    name: string;
-    alias?: string;
-  };
+    description: string
+    name: string
+    alias?: string
+  }
   data: {
     allContentfulCorsi: {
       nodes: (CoursePreviewProps & {
-        oreDiLezione: number;
-        livello: string;
-        updatedAt: Date;
-        prezzo: number;
-      })[];
-    };
-  };
-};
+        oreDiLezione: number
+        livello: string
+        updatedAt: Date
+        prezzo: number
+      })[]
+    }
+  }
+}
 
 type StyledProps = {
-  full: boolean;
-};
+  full: boolean
+}
 
 const CustomStack = styled.div<StyledProps>`
   display: flex;
@@ -46,65 +46,64 @@ const CustomStack = styled.div<StyledProps>`
   @media screen and (min-width: 767px) {
     & > *:not(:last-of-type) {
       margin-bottom: 0px;
-      margin-right: ${(props) => (props.full ? "unset" : "61px")};
+      margin-right: ${(props) => (props.full ? `unset` : `61px`)};
     }
     flex-direction: row;
     justify-content: ${(props) =>
-      props.full ? "space-between" : "flex-start"};
+      props.full ? `space-between` : `flex-start`};
   }
-`;
+`
 
 const Category = ({
   pageContext: { description, name, alias },
   data,
 }: Props) => {
-  const rows = React.useMemo(
-    () => rowalizer(data.allContentfulCorsi.nodes),
-    [],
-  );
-  const couponCourses = React.useMemo(() => {
-    return data.allContentfulCorsi.nodes.filter(
-      (corso) => corso.categoria && corso.categoria?.toLowerCase() !== "free",
-    );
-  }, []);
+  const rows = React.useMemo(() => rowalizer(data.allContentfulCorsi.nodes), [])
+  const couponCourses = React.useMemo(
+    () =>
+      data.allContentfulCorsi.nodes.filter(
+        (corso) => corso.categoria && corso.categoria?.toLowerCase() !== `free`
+      ),
+    []
+  )
 
   return (
     <Layout>
       <Box
         sx={{
-          mt: { xs: "48px", lg: "96px" },
+          mt: { xs: `48px`, lg: `96px` },
         }}
       >
-        <Container maxWidth='lg'>
-          <Box mx='auto'>
+        <Container maxWidth="lg">
+          <Box mx="auto">
             <Typography
-              component='h1'
-              textAlign='center'
+              component="h1"
+              textAlign="center"
               fontWeight={700}
               sx={{
-                fontSize: { xs: "36px", lg: "72px" },
-                lineHeight: { xs: "39px", lg: "79px" },
+                fontSize: { xs: `36px`, lg: `72px` },
+                lineHeight: { xs: `39px`, lg: `79px` },
               }}
             >
-              Corsi per <br className='desktop-new-line' />
-              <strong className='brand-text'>{alias || name}</strong>
+              Corsi per <br className="desktop-new-line" />
+              <strong className="brand-text">{alias || name}</strong>
             </Typography>
           </Box>
           <Box
             sx={{
-              mt: { xs: "24px", lg: "36px" },
-              maxWidth: "832px",
-              mx: "auto",
+              mt: { xs: `24px`, lg: `36px` },
+              maxWidth: `832px`,
+              mx: `auto`,
             }}
           >
             <Typography
-              component='h2'
+              component="h2"
               fontWeight={400}
-              textAlign='center'
+              textAlign="center"
               sx={{
-                fontSize: { xs: "16px", lg: "24px" },
-                lineHeight: { xs: "21px", lg: "28px" },
-                color: "gray.600",
+                fontSize: { xs: `16px`, lg: `24px` },
+                lineHeight: { xs: `21px`, lg: `28px` },
+                color: `gray.600`,
               }}
             >
               {description}
@@ -114,73 +113,69 @@ const Category = ({
 
         <Box
           sx={{
-            my: { xs: "48px", lg: "96px" },
+            my: { xs: `48px`, lg: `96px` },
           }}
         >
-          <Container maxWidth='lg'>
-            {rows?.map((row, index) => {
-              return (
-                <Box
-                  key={`${name}-section-${index}`}
-                  sx={{
-                    mt: { xs: "16px", lg: "48px" },
-                  }}
-                >
-                  <CustomStack full={row.length === 3}>
-                    {row.map((course) => {
-                      return (
-                        <CourseContainer key={course.slug}>
-                          <CourseContent {...course} />
-                        </CourseContainer>
-                      );
-                    })}
-                  </CustomStack>
-                </Box>
-              );
-            })}
+          <Container maxWidth="lg">
+            {rows?.map((row, index) => (
+              <Box
+                key={`${name}-section-${index}`}
+                sx={{
+                  mt: { xs: `16px`, lg: `48px` },
+                }}
+              >
+                <CustomStack full={row.length === 3}>
+                  {row.map((course) => (
+                    <CourseContainer key={course.slug}>
+                      <CourseContent {...course} />
+                    </CourseContainer>
+                  ))}
+                </CustomStack>
+              </Box>
+            ))}
           </Container>
         </Box>
         {couponCourses && couponCourses.length > 0 && (
           <Box
             sx={{
               mt: {
-                xs: "72px",
-                lg: "136px",
+                xs: `72px`,
+                lg: `136px`,
               },
             }}
           >
-            <Container maxWidth='lg'>
+            <Container maxWidth="lg">
               <Typography
-                component='h2'
+                component="h2"
                 fontWeight={600}
                 sx={{
-                  fontSize: { xs: "24px", lg: "48px" },
-                  lineHeight: { xs: "29px", lg: "56px" },
+                  fontSize: { xs: `24px`, lg: `48px` },
+                  lineHeight: { xs: `29px`, lg: `56px` },
                 }}
               >
-                Coupon e sconti <span className='brand-text'>riscattabili</span>
+                Coupon e sconti <span className="brand-text">riscattabili</span>
               </Typography>
 
               <Box
                 sx={{
                   mt: {
-                    xs: "12px",
-                    lg: "18px",
+                    xs: `12px`,
+                    lg: `18px`,
                   },
-                  maxWidth: "537px",
+                  maxWidth: `537px`,
                 }}
               >
                 <Typography
                   fontWeight={400}
-                  color='grey.6'
+                  color="grey.6"
                   sx={{
                     fontSize: {
-                      xs: "14px",
-                      lg: "16px",
+                      xs: `14px`,
+                      lg: `16px`,
                     },
                     lineHeight: {
-                      xs: "18px",
-                      lg: "21px",
+                      xs: `18px`,
+                      lg: `21px`,
                     },
                   }}
                 >
@@ -193,11 +188,12 @@ const Category = ({
               <Box
                 sx={{
                   mt: {
-                    xs: "24px",
-                    lg: "36px",
+                    xs: `24px`,
+                    lg: `36px`,
                   },
                 }}
               >
+                
                 {couponCourses.map((corso) => {
                   return (
                     <Box
@@ -210,7 +206,7 @@ const Category = ({
                         title={corso.titolo}
                         img={corso.copertina}
                         prezzo={corso.prezzo}
-                        link={corso.couponLink as string}
+                        link={corso.promoLink as string}
                         date={corso.updatedAt}
                       />
                     </Box>
@@ -222,8 +218,8 @@ const Category = ({
         )}
       </Box>
     </Layout>
-  );
-};
+  )
+}
 
 export const Head = ({
   pageContext,
@@ -231,16 +227,17 @@ export const Head = ({
   unknown,
   { description: string; name: string; alias?: string }
 >) => {
-  const { description, name, alias } = pageContext;
-  const breadcrumbs = React.useMemo(() => {
-    return [
-      { text: "Home", link: "/" },
+  const { description, name, alias } = pageContext
+  const breadcrumbs = React.useMemo(
+    () => [
+      { text: `Home`, link: `/` },
       {
         text: `Corsi per ${alias || name}`,
         link: `/corsi/${name.toLowerCase()}/`,
       },
-    ];
-  }, []);
+    ],
+    []
+  )
   return (
     <>
       <MetaDecorator
@@ -255,8 +252,8 @@ export const Head = ({
         breadcrumbs={breadcrumbs}
       />
     </>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query CategoryCourse($slug: String!) {
@@ -269,7 +266,7 @@ export const query = graphql`
           gatsbyImageData
         }
         categoria
-        couponLink
+        promoLink
         slug
         livello
         updatedAt
@@ -281,6 +278,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default Category;
+export default Category

@@ -61,18 +61,18 @@ const CustomStack = styled.div`
 `
 
 const DiscordBanner = () => {
-  const [type, setType] = React.useState<"discord" | "youtube">("youtube")
+  const [type, setType] = React.useState<"discord" | "youtube">(`youtube`)
   const theme = useTheme()
-  const sm = useMediaQuery(theme.breakpoints.down("sm"))
+  const sm = useMediaQuery(theme.breakpoints.down(`sm`))
   return (
     <Box
       sx={{
-        backgroundColor: type === "youtube" ? "red.300" : "purple.900",
+        backgroundColor: type === `youtube` ? `red.300` : `purple.900`,
       }}
     >
       <Box
         sx={{
-          py: { xs: "26px", lg: "55px" },
+          py: { xs: `26px`, lg: `55px` },
         }}
       >
         <Container maxWidth="md">
@@ -81,25 +81,25 @@ const DiscordBanner = () => {
               <Box className="banner-left">
                 <Box className="banner-action">
                   <Button
-                    size={sm ? "small" : "medium"}
+                    size={sm ? `small` : `medium`}
                     sx={{
-                      background: "#000",
-                      color: "blue.400",
-                      borderRadius: "100px",
+                      background: `#000`,
+                      color: `blue.400`,
+                      borderRadius: `100px`,
                     }}
-                    onClick={() => setType("discord")}
+                    onClick={() => setType(`discord`)}
                   >
                     Discord
                   </Button>
 
                   <Button
-                    size={sm ? "small" : "medium"}
+                    size={sm ? `small` : `medium`}
                     sx={{
-                      background: "#000",
-                      color: "red.300",
-                      borderRadius: "100px",
+                      background: `#000`,
+                      color: `red.300`,
+                      borderRadius: `100px`,
                     }}
-                    onClick={() => setType("youtube")}
+                    onClick={() => setType(`youtube`)}
                   >
                     Youtube
                   </Button>
@@ -107,16 +107,16 @@ const DiscordBanner = () => {
 
                 <Box
                   sx={{
-                    mt: { xs: "18px", lg: "48px" },
-                    maxWidth: { xs: "312px", lg: "442px" },
+                    mt: { xs: `18px`, lg: `48px` },
+                    maxWidth: { xs: `312px`, lg: `442px` },
                   }}
                 >
                   <Typography
                     fontWeight={500}
-                    color={type === "youtube" ? "white" : "blue.400"}
+                    color={type === `youtube` ? `white` : `blue.400`}
                     sx={{
-                      fontSize: { xs: "24px", lg: "36px" },
-                      lineHeight: { xs: "30px", lg: "44px" },
+                      fontSize: { xs: `24px`, lg: `36px` },
+                      lineHeight: { xs: `30px`, lg: `44px` },
                     }}
                   >
                     Unisciti alla Community
@@ -124,16 +124,16 @@ const DiscordBanner = () => {
                 </Box>
                 <Box
                   sx={{
-                    mt: { xs: "12px", lg: "24px" },
-                    maxWidth: { xs: "312px", lg: "465px" },
+                    mt: { xs: `12px`, lg: `24px` },
+                    maxWidth: { xs: `312px`, lg: `465px` },
                   }}
                 >
                   <Typography
                     fontWeight={400}
-                    color={type === "youtube" ? "white" : "blue.400"}
+                    color={type === `youtube` ? `white` : `blue.400`}
                     sx={{
-                      fontSize: { xs: "14px", lg: "18px" },
-                      lineHeight: { xs: "18px", lg: "22px" },
+                      fontSize: { xs: `14px`, lg: `18px` },
+                      lineHeight: { xs: `18px`, lg: `22px` },
                     }}
                   >
                     {`Unisciti al nostro canale ${type} per rimanere sempre aggiornato sui nostri contenuti, sconti ed iniziative.`}
@@ -142,43 +142,43 @@ const DiscordBanner = () => {
 
                 <Box
                   sx={{
-                    mt: { xs: "12px", lg: "24px" },
-                    mx: { xs: "auto", sm: "unset" },
+                    mt: { xs: `12px`, lg: `24px` },
+                    mx: { xs: `auto`, sm: `unset` },
                   }}
                 >
                   <a
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     target="_blank"
                     href={
-                      type === "discord"
-                        ? "https://discord.gg/pNhjB78F"
-                        : "https://www.youtube.com/c/HPVfilm"
+                      type === `discord`
+                        ? `https://discord.gg/pNhjB78F`
+                        : `https://www.youtube.com/c/HPVfilm`
                     }
                     style={{
-                      textDecoration: "none",
+                      textDecoration: `none`,
                     }}
                   >
                     <Button
                       variant="contained"
                       onClick={
-                        type === "youtube"
+                        type === `youtube`
                           ? undefined
-                          : triggerGACustomEvent({ event: "join_discord" })
+                          : triggerGACustomEvent({ event: `join_discord` })
                       }
                       endIcon={
                         <ArrowRightAltSharpIcon
                           sx={{
-                            color: type === "youtube" ? "red.300" : "black",
+                            color: type === `youtube` ? `red.300` : `black`,
                           }}
                         />
                       }
-                      size={sm ? "medium" : "large"}
+                      size={sm ? `medium` : `large`}
                       sx={{
-                        borderColor: "#000",
-                        borderRadius: "100px",
-                        color: type === "youtube" ? "red.300" : "black",
+                        borderColor: `#000`,
+                        borderRadius: `100px`,
+                        color: type === `youtube` ? `red.300` : `black`,
                         backgroundColor:
-                          type === "youtube" ? "white" : "blue.400",
+                          type === `youtube` ? `white` : `blue.400`,
                       }}
                     >
                       Unisciti
@@ -188,16 +188,16 @@ const DiscordBanner = () => {
               </Box>
               <Box
                 sx={{
-                  mx: { xs: "auto", sm: "unset" },
-                  maxWidth: { xs: "182px", lg: "358px" },
-                  maxHeight: { xs: "182px", lg: "358px" },
-                  height: "100%",
-                  width: "100%",
-                  display: "flex",
+                  mx: { xs: `auto`, sm: `unset` },
+                  maxWidth: { xs: `182px`, lg: `358px` },
+                  maxHeight: { xs: `182px`, lg: `358px` },
+                  height: `100%`,
+                  width: `100%`,
+                  display: `flex`,
                 }}
               >
                 <img
-                  style={{ width: "100%" }}
+                  style={{ width: `100%` }}
                   src={`/${type}-img.png`}
                   alt={`banner ${type}`}
                 />

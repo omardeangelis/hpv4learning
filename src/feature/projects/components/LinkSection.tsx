@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Chip from "@mui/material/Chip";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import SeoLink from "../../../components/shared/SeoLink";
+import React from "react"
+import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
+import Stack from "@mui/material/Stack"
+import Chip from "@mui/material/Chip"
+import GitHubIcon from "@mui/icons-material/GitHub"
+import SeoLink from "../../../components/shared/SeoLink"
 
 interface Props {
-  category?: string | null;
-  url?: string | null;
-  githubUrl?: string | null;
+  category?: string | null
+  url?: string | null
+  githubUrl?: string | null
 }
 
 const LinkContainer = styled(Box)`
@@ -25,7 +25,7 @@ const LinkContainer = styled(Box)`
     color: #8769fe;
     text-decoration: underline;
   }
-`;
+`
 
 const StyledChip = styled(Chip)`
   height: 20px;
@@ -38,42 +38,40 @@ const StyledChip = styled(Chip)`
   &:hover {
     background-color: #e9e3ff;
   }
-`;
+`
 
 const StyledGithubBox = styled(Box)`
   width: 24px;
   height: 24px;
-`;
+`
 
-export const LinkSection = ({ category, url, githubUrl }: Props) => {
-  return (
-    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-      <SeoLink isExternal={false} link={`/progetti/${category}/`}>
-        <StyledChip label={category} variant='outlined' />
-      </SeoLink>
+export const LinkSection = ({ category, url, githubUrl }: Props) => (
+  <Stack direction="row" alignItems="center" justifyContent="space-between">
+    <SeoLink isExternal={false} link={`/progetti/${category}/`}>
+      <StyledChip label={category} variant="outlined" />
+    </SeoLink>
 
-      <Stack direction='row'>
-        {url ? (
-          <LinkContainer>
-            <SeoLink link={url} isExternal target='_blank' rel='nofollow'>
-              Vedi
-            </SeoLink>
-          </LinkContainer>
-        ) : null}
-
-        {githubUrl ? (
-          <SeoLink link={githubUrl} isExternal rel='nofollow' target='_blank'>
-            <StyledGithubBox>
-              <GitHubIcon
-                style={{
-                  height: "100%",
-                  width: "100%",
-                }}
-              />
-            </StyledGithubBox>
+    <Stack direction="row">
+      {url ? (
+        <LinkContainer>
+          <SeoLink link={url} isExternal target="_blank" rel="nofollow">
+            Vedi
           </SeoLink>
-        ) : null}
-      </Stack>
+        </LinkContainer>
+      ) : null}
+
+      {githubUrl ? (
+        <SeoLink link={githubUrl} isExternal rel="nofollow" target="_blank">
+          <StyledGithubBox>
+            <GitHubIcon
+              style={{
+                height: `100%`,
+                width: `100%`,
+              }}
+            />
+          </StyledGithubBox>
+        </SeoLink>
+      ) : null}
     </Stack>
-  );
-};
+  </Stack>
+)

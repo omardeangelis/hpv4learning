@@ -1,55 +1,55 @@
-import React from "react";
+import React from "react"
 import {
   AvailableCalendarResponse,
   useGetAllAvailableCalendarsQuery,
-} from "../../../services/calendar";
-import { formatDates } from "../utils/helpers";
+} from "../../../services/calendar"
+import { formatDates } from "../utils/helpers"
 
 export const useCreateCalendarSlots = (startDate?: string) => {
   const [slots, setSlots] = React.useState<
     | {
-        date: string | undefined;
-        items: AvailableCalendarResponse[];
+        date: string | undefined
+        items: AvailableCalendarResponse[]
       }[]
     | undefined
-  >([]);
-  const { data, isLoading } = useGetAllAvailableCalendarsQuery(startDate);
+  >([])
+  const { data, isLoading } = useGetAllAvailableCalendarsQuery(startDate)
 
   const uniqueDates = React.useMemo(() => {
-    if (!data || isLoading) return;
+    if (!data || isLoading) return
 
-    const formattedDates = data.map((el) => {
-      return formatDates(el?.startDate?.dateTime);
-    });
+    const formattedDates = data.map((el) =>
+      formatDates(el?.startDate?.dateTime)
+    )
 
-    const uniqueDates = [...new Set(formattedDates)];
-    return uniqueDates;
-  }, [data, isLoading]);
+    const uniqueDates = [...new Set(formattedDates)]
+    return uniqueDates
+  }, [data, isLoading])
 
   const availableDates = React.useMemo(() => {
-    if (!uniqueDates) return;
+    if (!uniqueDates) return
     return uniqueDates.map((el) => ({
       date: el,
       items: [] as AvailableCalendarResponse[],
-    }));
-  }, [uniqueDates]);
+    }))
+  }, [uniqueDates])
 
   React.useEffect(() => {
-    if (!data || isLoading) return;
-    if (!availableDates) return;
+    if (!data || isLoading) return
+    if (!availableDates) return
 
     data.forEach((calendar) => {
       if (calendar?.startDate?.dateTime) {
         const timeIndex = availableDates.findIndex(
           (x) => x.date === formatDates(calendar?.startDate?.dateTime)
-        );
+        )
         if (timeIndex >= 0) {
-          availableDates[timeIndex].items.push(calendar);
+          availableDates[timeIndex].items.push(calendar)
         }
       }
-      setSlots(availableDates);
-    });
-  }, [availableDates, data, isLoading]);
+      setSlots(availableDates)
+    })
+  }, [availableDates, data, isLoading])
 
-  return slots;
-};
+  return slots
+}

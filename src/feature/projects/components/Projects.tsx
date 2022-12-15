@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Box from "@mui/material/Box";
-import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers";
-import SeoLink from "../../../components/shared/SeoLink";
-import { MobileOnlyProjectCard } from "./ProjectCard";
-import { ProjectImage } from "./ProjectImage";
-import { ProjectContent } from "./ProjectContent";
+import React from "react"
+import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
 import {
   GatsbyImage,
   getImage,
   IGatsbyImageData,
   ImageDataLike,
-} from "gatsby-plugin-image";
+} from "gatsby-plugin-image"
+import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers"
+import SeoLink from "../../../components/shared/SeoLink"
+import { MobileOnlyProjectCard } from "./ProjectCard"
+import { ProjectImage } from "./ProjectImage"
+import { ProjectContent } from "./ProjectContent"
 
 const CustomStack = styled(Box)`
   height: 100%;
@@ -36,75 +36,71 @@ const CustomStack = styled(Box)`
       }
     }
   }
-`;
+`
 
 export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
-  const rows = React.useMemo(() => rowalizer(data, 2), []);
+  const rows = React.useMemo(() => rowalizer(data, 2), [])
   return (
     <CustomStack>
-      {rows?.map((row, index) => {
-        return (
-          <Box
-            key={"progetto" + index}
-            className='row-container'
-            sx={{
-              mb: { xs: "0px", lg: "24px" },
-            }}
-          >
-            {row.map((progetto) => (
-              <SeoLink
-                isExternal={false}
-                link={`/progetti/${progetto?.project_category?.[0]?.slug}/${progetto?.slug}/`}
-                style={{
-                  display: "flex",
-                  width: "fit-content",
+      {rows?.map((row, index) => (
+        <Box
+          key={`progetto${index}`}
+          className="row-container"
+          sx={{
+            mb: { xs: `0px`, lg: `24px` },
+          }}
+        >
+          {row.map((progetto) => (
+            <SeoLink
+              isExternal={false}
+              link={`/progetti/${progetto?.project_category?.[0]?.slug}/${progetto?.slug}/`}
+              style={{
+                display: `flex`,
+                width: `fit-content`,
+              }}
+            >
+              <Box
+                sx={{
+                  maxWidth: { xs: `unset`, sm: `351px` },
                 }}
               >
-                <Box
-                  sx={{
-                    maxWidth: { xs: "unset", sm: "351px" },
-                  }}
-                >
-                  <MobileOnlyProjectCard>
-                    <ProjectImage>
-                      {progetto?.copertina ? (
-                        <GatsbyImage
-                          image={
-                            getImage(
-                              progetto?.copertina as unknown as ImageDataLike,
-                            ) as IGatsbyImageData
-                          }
-                          alt={
-                            progetto.articleTitle || "Anteprima del progetto"
-                          }
-                          style={{
-                            height: "100%",
-                          }}
-                        />
-                      ) : (
-                        <Box
-                          sx={{
-                            backgroundColor: "purple.A100",
-                          }}
-                          width='100%'
-                        ></Box>
-                      )}
-                    </ProjectImage>
+                <MobileOnlyProjectCard>
+                  <ProjectImage>
+                    {progetto?.copertina ? (
+                      <GatsbyImage
+                        image={
+                          getImage(
+                            progetto?.copertina as unknown as ImageDataLike
+                          ) as IGatsbyImageData
+                        }
+                        alt={progetto.articleTitle || `Anteprima del progetto`}
+                        style={{
+                          height: `100%`,
+                        }}
+                      />
+                    ) : (
+                      <Box
+                        sx={{
+                          backgroundColor: `purple.A100`,
+                        }}
+                        width="100%"
+                      />
+                    )}
+                  </ProjectImage>
 
-                    <ProjectContent
-                      titolo={progetto?.titolo}
-                      label={progetto?.project_category?.[0]?.title}
-                      description={cleanStringFromHtlmTags(
-                        progetto?.descrizione?.childMarkdownRemark?.html,
-                      )}
-                    />
-                  </MobileOnlyProjectCard>
-                </Box>
-              </SeoLink>
-            ))}
-          </Box>
-        );
-      })}
+                  <ProjectContent
+                    titolo={progetto?.titolo}
+                    label={progetto?.project_category?.[0]?.title}
+                    description={cleanStringFromHtlmTags(
+                      progetto?.descrizione?.childMarkdownRemark?.html
+                    )}
+                  />
+                </MobileOnlyProjectCard>
+              </Box>
+            </SeoLink>
+          ))}
+        </Box>
+      ))}
     </CustomStack>
-  );
-};
+  )
+}

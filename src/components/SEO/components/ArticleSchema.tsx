@@ -1,13 +1,13 @@
-import React from "react";
-import useArticleSchema from "../hooks/useArticleSchema";
-import useBreadcrumbSchema from "../hooks/useBreadcrumbSchema";
-import useWebPageSchema from "../hooks/useWebPageSchema";
-import { ArticleSchemaProps, breadCrumbProps } from "../types";
+import React from "react"
+import useArticleSchema from "../hooks/useArticleSchema"
+import useBreadcrumbSchema from "../hooks/useBreadcrumbSchema"
+import useWebPageSchema from "../hooks/useWebPageSchema"
+import { ArticleSchemaProps, breadCrumbProps } from "../types"
 
 type Props = ArticleSchemaProps & {
-  imageAltText: string;
-  breadcrumbs: breadCrumbProps[];
-};
+  imageAltText: string
+  breadcrumbs: breadCrumbProps[]
+}
 
 const ArticleSchema = ({
   type,
@@ -27,9 +27,9 @@ const ArticleSchema = ({
     publishDate,
     modifiedDate,
     imageAltText,
-  });
+  })
 
-  const breadcrumbSchema = useBreadcrumbSchema(breadcrumbs);
+  const breadcrumbSchema = useBreadcrumbSchema(breadcrumbs)
   const articleSchema = useArticleSchema({
     type,
     title,
@@ -38,16 +38,16 @@ const ArticleSchema = ({
     publishDate,
     modifiedDate,
     authorName,
-  });
+  })
 
   return (
-    <script type='application/ld+json'>
+    <script type="application/ld+json">
       {JSON.stringify({
         ...schema,
-        ["@graph"]: [...schema["@graph"], breadcrumbSchema, ...articleSchema],
+        "@graph": [...schema[`@graph`], breadcrumbSchema, ...articleSchema],
       })}
     </script>
-  );
-};
+  )
+}
 
-export default ArticleSchema;
+export default ArticleSchema
