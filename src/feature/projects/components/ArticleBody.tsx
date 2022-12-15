@@ -81,7 +81,7 @@ export const ArticleBody = React.memo(
         (heading) => heading?.value
       )
       return array
-    }, [])
+    }, [body?.childMarkdownRemark?.headings])
 
     React.useEffect(() => {
       setHasMounted(true)
@@ -113,13 +113,14 @@ export const ArticleBody = React.memo(
     React.useEffect(() => {
       if (hasMounted) {
         window.addEventListener(`hashchange`, () => {
+          // eslint-disable-next-line no-restricted-globals
           const { hash } = location
           if (hash) {
             moveToHashHeader(hash)
           }
         })
       }
-    }, [hasMounted])
+    }, [hasMounted, moveToHashHeader])
 
     return (
       <div>

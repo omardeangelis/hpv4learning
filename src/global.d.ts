@@ -5,6 +5,6 @@ declare interface Window {
 }
 
 export declare global {
-  // eslint-disable-next-line no-var
+  // eslint-disable-next-line no-var, vars-on-top, no-underscore-dangle
   var _iub: any
 }

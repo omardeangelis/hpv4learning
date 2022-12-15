@@ -125,7 +125,7 @@ export const Head = ({
         link: `/progetti/${slug}/`,
       },
     ],
-    []
+    [slug]
   )
 
   return (

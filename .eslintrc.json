@@ -17,7 +17,8 @@
   "globals": {
     "cy": true,
     "Cypress": true,
-    "JSX": true
+    "JSX": true,
+    "Queries": true
   },
   "rules": {
     "@typescript-eslint/no-unused-vars": [
@@ -64,7 +65,7 @@
     "linebreak-style": 0,
     "consistent-return": 0,
     "import": 0,
-    "camelcase": 1,
+    "camelcase": 0,
     "import/no-unresolved": 0,
     "func-names": 0,
     "import/no-extraneous-dependencies": 0,
