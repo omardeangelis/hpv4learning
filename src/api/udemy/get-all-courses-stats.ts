@@ -1,5 +1,5 @@
 import { HttpMethod } from "../../server/types"
-import { getAllPaidCoursesStats } from "../../server/udemy"
+import { getAllPaidAggregateCoursesStats } from "../../server/udemy"
 
 type ReqProps = {
   method: HttpMethod
@@ -9,7 +9,7 @@ type ReqProps = {
 const handler = async (req: ReqProps, res: any) => {
   if (req.method !== `GET`) throw new Error(`Use GET Method`)
   try {
-    const response = await getAllPaidCoursesStats()
+    const response = await getAllPaidAggregateCoursesStats()
     res.status(200).json(response)
   } catch (error) {
     res.status(500).json({

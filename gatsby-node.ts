@@ -1,6 +1,6 @@
-import { isEmpty } from "lodash"
+import { isArray, isEmpty } from "lodash"
 import path from "path"
-import { Actions } from "gatsby"
+import { Actions, GatsbyNode } from "gatsby"
 import * as fs from "fs"
 import {
   allCourseQuery,
@@ -8,12 +8,76 @@ import {
   allProjectArticle,
   projectCategoriesPageQuery,
 } from "./query"
+import {
+  getAllPaidAggregateCoursesStats,
+  getAllReview,
+  getAllPaidCourses,
+} from "./src/server/udemy"
 
 type RedirectType = { source: string; target: string; status: string }
 
 const redirects: RedirectType[] = JSON.parse(
   fs.readFileSync(`./redirects.json`, `utf-8`)
 )
+
+export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
+  createNodeId,
+  createContentDigest,
+  actions,
+}) => {
+  const { createNode } = actions
+  try {
+    const reviews = await getAllReview()
+    if (isArray(reviews)) {
+      reviews.forEach((review) => {
+        createNode({
+          ...review,
+          id: createNodeId(review.id.toString()),
+          internal: {
+            type: `UdemyReview`,
+            content: JSON.stringify(review),
+            contentDigest: createContentDigest(review),
+          },
+        })
+      })
+    }
+  } catch (error) {
+    throw new Error(`We Ragazzo, niente review`)
+  }
+  try {
+    const courseStats = await getAllPaidAggregateCoursesStats()
+    createNode({
+      ...courseStats,
+      id: createNodeId(`we-ragazzo`),
+      internal: {
+        type: `UdemyCoursesStats`,
+        content: JSON.stringify(courseStats),
+        contentDigest: createContentDigest(courseStats),
+      },
+    })
+  } catch (error) {
+    throw new Error(`We Ragazzo, niente statistiche dei corsi`)
+  }
+
+  try {
+    const courses = await getAllPaidCourses()
+    if (isArray(courses)) {
+      courses.forEach((course) => {
+        createNode({
+          ...course,
+          id: createNodeId(course.id),
+          internal: {
+            type: `UdemyPaidCourse`,
+            content: JSON.stringify(course),
+            contentDigest: createContentDigest(course),
+          },
+        })
+      })
+    }
+  } catch (error) {
+    throw new Error(`We Ragazzo, niente corsi ${error}`)
+  }
+}
 
 export const createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions as Actions
@@ -91,6 +155,7 @@ export const createPages = async ({ graphql, actions }) => {
               id: category.id,
             },
           })
+          return null
         })
       }
     }

@@ -11,7 +11,6 @@ const handler = async (req: ReqProps, res: any) => {
   try {
     const response = await getInstructorsData()
     res.status(200).json(response)
-    console.log(response)
   } catch (error) {
     res.status(500).json({
       error,
