@@ -5,6 +5,9 @@ export type SingleCourseStatsResponse = {
   content_length_video: number
   totalSubscribers: number
   courseHours: number
+  num_lectures: number
+  num_reviews: number
+  id: string
 }
 
 export type ParsedInstructorDataResponse = {
@@ -30,13 +33,19 @@ export type SingleCourseReview = {
   content: string
   rating: number
   user: { name: string }
+  id: number
 }
 
 export type SingleCourseReviewsResponse = {
   results: SingleCourseReview[]
 }
 
-export type SingleReview = { userName: string; rating: number; content: string }
+export type SingleReview = {
+  userName: string
+  rating: number
+  content: string
+  id: number
+}
 
 export type VisibleInstructor = {
   _class: string

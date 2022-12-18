@@ -105,7 +105,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
       <StaticImage
         src="../../feature/home/images/css_round.png"
         alt="Ragazza che studia sviluppo web"
-        placeholder="tracedSVG"
+        placeholder="blurred"
       />
     </ImageBox>
 
@@ -122,7 +122,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
       <StaticImage
         src="../../feature/home/images/react_round.png"
         alt="Ragazza che studia Frontend"
-        placeholder="tracedSVG"
+        placeholder="blurred"
       />
     </ImageBox>
 
@@ -139,7 +139,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
       <StaticImage
         src="../../feature/home/images/html_round.png"
         alt="Ragazza che studia sviluppo web"
-        placeholder="tracedSVG"
+        placeholder="blurred"
       />
     </ImageBox>
 
@@ -156,7 +156,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
       <StaticImage
         src="../../feature/home/images/premier_round.png"
         alt="Ragazza che studia sviluppo web"
-        placeholder="tracedSVG"
+        placeholder="blurred"
       />
     </ImageBox>
     <Box width="100%">
