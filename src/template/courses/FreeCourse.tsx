@@ -40,7 +40,7 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
     [contentfulCorsi?.livello, contentfulCorsi?.oreDiLezione]
   )
   return (
-    <Layout enableFooterPadding>
+    <Layout>
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">
           <Box
@@ -353,11 +353,7 @@ export const Head = ({
         creator={creator}
         about={categorySlug}
         audienceType={corso?.target ?? []}
-        isAccessibleForFree={
-          corso?.category?.some(
-            (el) => el?.name?.toLowerCase() === `gratuiti`
-          ) as any
-        }
+        isAccessibleForFree
         breadcrumbs={breadcrumbs}
         coursePrerequisites={corso?.requisiti as any}
       />

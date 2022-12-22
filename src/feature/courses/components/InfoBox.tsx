@@ -80,6 +80,99 @@ export const FreeCourseInfoBanner = ({
   </BorderBox>
 )
 
+type PayableCourseProps = {
+  lezioni: number
+  durata: number
+  students?: number
+  avgVote: number
+  price: number
+  progetti?: number
+  livello?: Queries.Maybe<string>
+}
+
+export const PaybleCourseInfoBanner = ({
+  livello = `Principiante`,
+  lezioni,
+  durata,
+  progetti = 0,
+  students,
+  avgVote,
+  price,
+}: PayableCourseProps) => (
+  <BorderBox
+    borderRadius="8px"
+    width="100%"
+    sx={{
+      maxWidth: { xs: `unset`, lg: `341px` },
+    }}
+  >
+    <Box p="18px">
+      <Typography
+        color="grey.800"
+        fontWeight={500}
+        sx={{
+          fontSize: `14px`,
+        }}
+      >
+        Informazioni aggiuntive
+      </Typography>
+      <Box mt="9px">
+        <Stack spacing="6px">
+          <InfoText key={`livello`} text={`Livello: ${livello}`} weight={400} />
+          <InfoText key={`lezioni`} text={`${lezioni} lezioni`} weight={400} />
+          <InfoText
+            key={`durata`}
+            text={`${convertToHHMMSS(durata)} ore di videocorso`}
+            weight={400}
+          />
+          {progetti > 0 ? (
+            <InfoText
+              key={`Progetti`}
+              text={`${progetti}: Progetti pratici`}
+              weight={400}
+            />
+          ) : null}
+          {students ? (
+            <InfoText
+              key={`studenti`}
+              text={`${students} studenti iscritti`}
+              weight={400}
+            />
+          ) : null}
+          <Box py="3px">
+            <Stack direction="row" alignItems="center" spacing={0.1}>
+              {createStarReview(avgVote)}
+              <Typography
+                fontWeight={300}
+                color="purple.400"
+                sx={{
+                  fontSize: `10px`,
+                }}
+              >
+                {avgVote}
+              </Typography>
+            </Stack>
+          </Box>
+          <InfoText
+            key={`Prezzo`}
+            text={`Prezzo originale: ${price}`}
+            weight={400}
+          />
+          <Stack spacing="4px" direction="row" alignItems="center">
+            <InfoText key={`Supporto`} text={`Supporto Preimum`} weight={300} />
+            <CheckCircleIcon
+              sx={{
+                color: `pruple.400`,
+              }}
+              fontSize="small"
+            />
+          </Stack>
+        </Stack>
+      </Box>
+    </Box>
+  </BorderBox>
+)
+
 const CourseInfo = ({
   livello,
   lezioni,
