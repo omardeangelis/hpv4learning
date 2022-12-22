@@ -26,6 +26,10 @@ import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
+import MetaDecorator from "../../components/SEO/components/MetaDecorator"
+import { createRowText } from "../../utils/helpers"
+import LinkHandler from "../../components/SEO/components/LinkHandler"
+import CourseSchema from "../../components/SEO/components/CourseSchema"
 
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
@@ -299,6 +303,65 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
         </Box>
       </Container>
     </Layout>
+  )
+}
+
+export const Head = ({
+  data,
+  pageContext: { slug, categorySlug },
+}: PageProps<
+  Queries.SingleCoursePageQuery,
+  { slug: string; categorySlug: string }
+>) => {
+  const { contentfulCorsi: corso } = data
+
+  const categoryName = React.useMemo(
+    () =>
+      corso?.category?.filter(
+        (el) => el?.name?.toLowerCase() !== `gratuiti`
+      )?.[0]?.name as string,
+    [corso?.category]
+  )
+
+  const breadcrumbs = React.useMemo(
+    () => [
+      { text: `Home`, link: `/` },
+      { text: categoryName, link: `/corsi/${categorySlug}/` },
+      { text: corso?.titolo as string, link: `/${slug}/` },
+    ],
+    [categoryName, categorySlug, corso?.titolo, slug]
+  )
+
+  const creator = React.useMemo(() => {
+    if (corso?.insegnante && corso?.insegnante.length > 1)
+      return corso.insegnante.map((el) => el?.nome)
+    return corso?.insegnante?.[0]?.nome
+  }, [corso?.insegnante])
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={createRowText(corso?.titolo as string)}
+        metaDescription={corso?.riassunto?.riassunto as string}
+        image={`https:${corso?.copertina?.file?.url}`}
+      />
+      <LinkHandler />
+      <CourseSchema
+        title={createRowText(corso?.titolo as any)}
+        description={corso?.riassunto?.riassunto as any}
+        image={`https:${corso?.copertina?.file?.url}` as string}
+        imageAltText={createRowText(corso?.titolo as string)}
+        creator={creator}
+        about={categorySlug}
+        audienceType={corso?.target ?? []}
+        isAccessibleForFree={
+          corso?.category?.some(
+            (el) => el?.name?.toLowerCase() === `gratuiti`
+          ) as any
+        }
+        breadcrumbs={breadcrumbs}
+        coursePrerequisites={corso?.requisiti as any}
+      />
+    </>
   )
 }
 
