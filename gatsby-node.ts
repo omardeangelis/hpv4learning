@@ -1,5 +1,5 @@
 import { isArray, isEmpty } from "lodash"
-import path from "path"
+import path, { resolve } from "path"
 import { Actions, GatsbyNode } from "gatsby"
 import * as fs from "fs"
 import {
@@ -13,6 +13,11 @@ import {
   getAllReview,
   getAllPaidCourses,
 } from "./src/server/udemy"
+import {
+  FreeCourseQueryProps,
+  freeCourseQuery,
+  createCoursePages,
+} from "./src/server/gatsby/pages/courses/createCoursePages"
 
 type RedirectType = { source: string; target: string; status: string }
 
@@ -85,6 +90,7 @@ export const createPages = async ({ graphql, actions }) => {
   const courseCategoryQuery = await graphql(allCourseCategory)
   const projectArticleQuery = await graphql(allProjectArticle)
   const categoryProjectQuery = await graphql(projectCategoriesPageQuery)
+  const freeCourses = (await graphql(freeCourseQuery)) as FreeCourseQueryProps
 
   singleCourseQuery.data.allContentfulCorsi.nodes.forEach((node) => {
     createPage({
@@ -190,4 +196,11 @@ export const createPages = async ({ graphql, actions }) => {
       statusCode: Number(redirect.status),
     })
   })
+
+  if (process.env.NODE_ENV === `development`)
+    createCoursePages({
+      corsi: freeCourses.data.allContentfulCorsi.nodes,
+      createPage,
+      component: resolve(`./src/template/courses/FreeCourse.tsx`),
+    })
 }
