@@ -227,7 +227,7 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                 >
                   <Typography
                     fontWeight={600}
-                    component="h2"
+                    component="h3"
                     sx={{
                       fontSize: { xs: `24px`, lg: `36px` },
                     }}
@@ -259,7 +259,7 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                       sx={{
                         fontSize: { xs: `24px`, lg: `34px` },
                       }}
-                      component="h2"
+                      component="h3"
                     >
                       Corsi Correlati
                     </Typography>

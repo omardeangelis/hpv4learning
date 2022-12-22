@@ -3,7 +3,6 @@ import path, { resolve } from "path"
 import { Actions, GatsbyNode } from "gatsby"
 import * as fs from "fs"
 import {
-  allCourseQuery,
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
@@ -14,8 +13,9 @@ import {
   getAllPaidCourses,
 } from "./src/server/udemy"
 import {
-  FreeCourseQueryProps,
+  CourseQueryProps,
   freeCourseQuery,
+  udemyCourseQuery,
   createCoursePages,
 } from "./src/server/gatsby/pages/courses/createCoursePages"
 
@@ -86,24 +86,11 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
 
 export const createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions as Actions
-  const singleCourseQuery = await graphql(allCourseQuery)
   const courseCategoryQuery = await graphql(allCourseCategory)
   const projectArticleQuery = await graphql(allProjectArticle)
   const categoryProjectQuery = await graphql(projectCategoriesPageQuery)
-  const freeCourses = (await graphql(freeCourseQuery)) as FreeCourseQueryProps
-
-  singleCourseQuery.data.allContentfulCorsi.nodes.forEach((node) => {
-    createPage({
-      path: node.slug,
-      component: path.resolve(`./src/template/SingleCoursePage.tsx`),
-      context: {
-        slug: node.slug,
-        categorySlug: node.category
-          .filter((category) => category.slug.toLowerCase() !== `gratuiti`)[0]
-          .slug.toLowerCase(),
-      },
-    })
-  })
+  const freeCourses = (await graphql(freeCourseQuery)) as CourseQueryProps
+  const udemyCourses = (await graphql(udemyCourseQuery)) as CourseQueryProps
 
   courseCategoryQuery.data.allContentfulCategory.nodes.forEach((category) => {
     const {
@@ -197,10 +184,18 @@ export const createPages = async ({ graphql, actions }) => {
     })
   })
 
-  if (process.env.NODE_ENV === `development`)
+  try {
     createCoursePages({
       corsi: freeCourses.data.allContentfulCorsi.nodes,
       createPage,
       component: resolve(`./src/template/courses/FreeCourse.tsx`),
     })
+    createCoursePages({
+      corsi: udemyCourses.data.allContentfulCorsi.nodes,
+      createPage,
+      component: resolve(`./src/template/courses/UdemyCourseTemplate.tsx`),
+    })
+  } catch (error) {
+    throw new Error(`We Ragazzo, volevi creare i corsi ? E invece: ${error}`)
+  }
 }

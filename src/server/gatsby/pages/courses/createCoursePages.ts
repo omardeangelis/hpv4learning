@@ -15,7 +15,22 @@ export const freeCourseQuery = `
   }
 }
 `
-export type FreeCourseQueryProps = {
+export const udemyCourseQuery = `
+{
+  allContentfulCorsi(
+    filter: {isFree: {eq: false}}
+  ) {
+    nodes {
+      slug
+      id
+       category {
+        slug
+      }
+    }
+  }
+}
+`
+export type CourseQueryProps = {
   data: {
     allContentfulCorsi: {
       nodes: Pick<
@@ -27,16 +42,16 @@ export type FreeCourseQueryProps = {
 }
 
 type Props = {
-  corsi: FreeCourseQueryProps["data"]["allContentfulCorsi"]["nodes"]
+  corsi: CourseQueryProps["data"]["allContentfulCorsi"]["nodes"]
 } & PageCreationHelperProps
 
 export const createCoursePages = ({ corsi, createPage, component }: Props) => {
   corsi.forEach((corso) => {
     const { slug: categorySlug } =
-      corso.category?.find((el) => el?.slug === `gratuiti`) || {}
+      corso.category?.find((el) => el?.slug !== `gratuiti`) || {}
     if (categorySlug)
       createPage({
-        path: `/test/${corso.slug}/`,
+        path: `/${corso.slug}/`,
         component,
         context: {
           id: corso.id,

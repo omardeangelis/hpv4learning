@@ -31,10 +31,10 @@ const StyledP = styled(Typography)(
 ) as typeof Typography
 
 export const MarkdownH2 = ({ node, ...props }: { node: any }) => (
-  <StyledH2 {...props} />
+  <StyledH2 {...props} component="h2" />
 )
 export const MarkdownH3 = ({ node, ...props }: { node: any }) => (
-  <StyledH3 {...props} />
+  <StyledH3 {...props} component="h3" />
 )
 export const MarkdownP = ({ node, ...props }: { node: any }) => (
   <StyledP {...props} component="p" />

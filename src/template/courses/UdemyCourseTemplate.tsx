@@ -240,7 +240,7 @@ const UdemyCourseTemplate: React.FC<
                 >
                   <Typography
                     fontWeight={600}
-                    component="h2"
+                    component="h3"
                     sx={{
                       fontSize: { xs: `24px`, lg: `36px` },
                     }}
@@ -272,7 +272,7 @@ const UdemyCourseTemplate: React.FC<
                       sx={{
                         fontSize: { xs: `24px`, lg: `34px` },
                       }}
-                      component="h2"
+                      component="h3"
                     >
                       Corsi Correlati
                     </Typography>
@@ -318,7 +318,9 @@ const UdemyCourseTemplate: React.FC<
                     <CourseCoupon
                       link={contentfulCorsi?.promoLink}
                       prezzo={contentfulCorsi?.prezzo}
-                      isDisabled={isExpired(contentfulCorsi?.updatedAt)}
+                      isDisabled={isExpired(
+                        contentfulCorsi?.updatedAt as unknown as Date
+                      )}
                     />
                   ) : null}
                 </Box>
@@ -477,8 +479,9 @@ export const query = graphql`
     allContentfulCorsi(
       filter: {
         category: { elemMatch: { slug: { eq: $categorySlug } } }
-        slug: { ne: $id }
+        id: { ne: $id }
       }
+      sort: { fields: createdAt, order: DESC }
       limit: 2
     ) {
       nodes {

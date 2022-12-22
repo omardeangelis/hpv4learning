@@ -17,6 +17,7 @@ export const ListSection = ({ title, list, icon }: Props) => (
   <Box>
     <Typography
       fontWeight={600}
+      component="h3"
       sx={{
         fontSize: { xs: `24px`, lg: `36px` },
       }}
