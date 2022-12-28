@@ -40,11 +40,6 @@ const useCourseSchema = ({
         name: siteMetadata.author,
         sameAs: siteMetadata.siteUrl,
       },
-      //   "provider": {
-      //     "@type": "Organization",
-      //     "name": "John Smilga",
-      //     "sameAs": "www.udemy.com/user/janis-smilga-3/",
-      //   },
       "@id": `${siteMetadata.siteUrl + pathname}#course`,
       name: title,
       description,

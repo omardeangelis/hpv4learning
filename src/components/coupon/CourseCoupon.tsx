@@ -34,7 +34,7 @@ const StyledBox = styled(Box)`
   }
 
   @media screen and (min-width: 1024px) {
-    border-radius: 24px;
+    border-radius: 8px;
     padding: 24px 16px;
     position: static;
     .point {
@@ -79,7 +79,7 @@ const CourseCoupon = ({
   <StyledBox
     width="100%"
     sx={{
-      mt: { xs: `0px`, lg: `68px` },
+      mt: { xs: `0px`, lg: `24px` },
     }}
   >
     <Stack

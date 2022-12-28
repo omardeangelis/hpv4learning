@@ -54,7 +54,7 @@ export const parseSingleCourseReviews = (
     (el) => el.content !== `` && el.rating >= 4
   )
   return contentReviews.map((el) => ({
-    course_id,
+    courseId: course_id,
     userName: el.user.name,
     rating: el.rating,
     content: el.content,
