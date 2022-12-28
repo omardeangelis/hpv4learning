@@ -32,6 +32,7 @@ export const rowalizer = <T>(array: T[], itemPerRow = 3) => {
       const start = index * itemPerRow
       const end = start + itemPerRow
       newArray.push(array.slice(start, end))
+      return null
     })
 
     return newArray

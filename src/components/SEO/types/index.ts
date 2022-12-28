@@ -71,10 +71,10 @@ export type CourseSchemsProps = {
   description: string
   image: string
   isAccessibleForFree: boolean
-  audienceType: string[]
+  audienceType: readonly Queries.Maybe<string>[]
   about: string
-  creator: string | string[]
-  rating: string
+  creator: string | (string | null | undefined)[] | null | undefined
+  rating?: string
   coursePrerequisites: string[]
-  recensioniRicevute: number
+  recensioniRicevute?: number
 }

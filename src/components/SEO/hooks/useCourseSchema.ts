@@ -57,19 +57,35 @@ const useCourseSchema = ({
       },
       about: { name: about },
       creator: courseCreator,
-      aggregateRating: {
-        "@type": `AggregateRating`,
-        ratingValue: rating,
-        ratingCount: recensioniRicevute,
-        bestRating: 5,
-        worstRating: 1,
-      },
+      aggregateRating: rating
+        ? {
+            "@type": `AggregateRating`,
+            ratingValue: rating,
+            ratingCount: recensioniRicevute,
+            bestRating: 5,
+            worstRating: 1,
+          }
+        : undefined,
       coursePrerequisites: {
         "@type": `AlignmentObject`,
         alignmentType: coursePrerequisites,
       },
     }),
-    []
+    [
+      about,
+      audienceType,
+      courseCreator,
+      coursePrerequisites,
+      description,
+      image,
+      isAccessibleForFree,
+      pathname,
+      rating,
+      recensioniRicevute,
+      siteMetadata.author,
+      siteMetadata.siteUrl,
+      title,
+    ]
   )
   return courseJson
 }
