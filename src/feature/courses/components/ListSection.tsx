@@ -43,7 +43,6 @@ export const ListSection = ({ title, list, icon }: Props) => (
           </ListItemIcon>
           <ListItemText>
             <Typography
-              color="grey.500"
               sx={{
                 fontSize: { xs: `14px`, lg: `18px` },
               }}

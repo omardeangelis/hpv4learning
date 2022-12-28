@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Avatar, Typography } from "@mui/material"
 import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import { graphql, PageProps } from "gatsby"
@@ -21,6 +21,7 @@ import {
   ListSection,
   CustomStack,
   PaybleCourseInfoBanner,
+  ReviewSection,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
@@ -31,6 +32,8 @@ import { createRowText, isExpired } from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
 import CourseCoupon from "../../components/coupon/CourseCoupon"
+import { BorderBox } from "../../components/layout"
+import { createStarReview } from "../../utils/general"
 
 const UdemyCourseTemplate: React.FC<
   PageProps<Queries.UdemyCoursePageQuery>
@@ -100,6 +103,72 @@ const UdemyCourseTemplate: React.FC<
                   />
                 </Box>
               ) : null}
+              {data.allUdemyReview.totalCount > 0 ? (
+                <Box
+                  sx={{
+                    mt: { xs: `24px`, lg: `48px` },
+                  }}
+                >
+                  <Typography
+                    component="h2"
+                    fontWeight={600}
+                    color="gray.700"
+                    sx={{
+                      fontSize: { xs: `21px`, lg: `36px` },
+                      lineHeight: { xs: `28px`, lg: `39px` },
+                    }}
+                  >
+                    Le ultime recensioni
+                  </Typography>
+                  <ReviewSection
+                    sx={{
+                      mt: { xs: `16px`, lg: `24px` },
+                    }}
+                  >
+                    {data.allUdemyReview.nodes.map((review) => (
+                      <BorderBox
+                        borderRadius="16px"
+                        width="100%"
+                        sx={{
+                          maxWidth: { xs: `unset`, lg: `274px` },
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            p: { xs: `24px`, lg: `16px` },
+                          }}
+                        >
+                          <Stack direction="row" spacing="16px">
+                            <Avatar
+                              variant="circular"
+                              sx={{
+                                width: `34px`,
+                                height: `34px`,
+                              }}
+                            >
+                              {review.userName?.charAt(0)}
+                            </Avatar>
+                            <Box>
+                              <Typography fontSize="16px" fontWeight={600}>
+                                {review.userName}
+                              </Typography>
+                              <Box>
+                                {createStarReview(review.rating as number)}
+                              </Box>
+                            </Box>
+                          </Stack>
+                          <Box mt="14px">
+                            <Typography fontSize="12px" fontWeight={300}>
+                              {review.content}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </BorderBox>
+                    ))}
+                  </ReviewSection>
+                </Box>
+              ) : null}
+
               <Box
                 sx={{
                   mt: { xs: `24px`, lg: `48px` },
@@ -107,7 +176,7 @@ const UdemyCourseTemplate: React.FC<
               >
                 <Typography
                   component="h2"
-                  fontWeight={500}
+                  fontWeight={600}
                   color="gray.700"
                   sx={{
                     fontSize: { xs: `21px`, lg: `36px` },
@@ -187,7 +256,7 @@ const UdemyCourseTemplate: React.FC<
               {!isEmpty(contentfulCorsi?.progetti) ? (
                 <Box
                   sx={{
-                    mt: { xs: `96px`, lg: `136px` },
+                    mt: { xs: `48px`, lg: `96px` },
                   }}
                 >
                   <Typography
@@ -393,7 +462,11 @@ export const Head = ({
 export default UdemyCourseTemplate
 
 export const query = graphql`
-  query UdemyCoursePage($id: String!, $categorySlug: String!) {
+  query UdemyCoursePage(
+    $id: String!
+    $course_id: Int!
+    $categorySlug: String!
+  ) {
     contentfulCorsi(id: { eq: $id }) {
       category {
         name
@@ -498,6 +571,15 @@ export const query = graphql`
           riassunto
         }
       }
+    }
+    allUdemyReview(filter: { course_id: { eq: $course_id } }, limit: 3) {
+      nodes {
+        rating
+        userName
+        content
+        id
+      }
+      totalCount
     }
   }
 `

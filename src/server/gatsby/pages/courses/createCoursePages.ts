@@ -23,6 +23,7 @@ export const udemyCourseQuery = `
     nodes {
       slug
       id
+      idCorso
        category {
         slug
       }
@@ -35,7 +36,7 @@ export type CourseQueryProps = {
     allContentfulCorsi: {
       nodes: Pick<
         Queries.ContentfulCorsiConnection["nodes"][number],
-        "slug" | "id" | "category"
+        "slug" | "id" | "category" | "idCorso"
       >[]
     }
   }
@@ -55,6 +56,7 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
         component,
         context: {
           id: corso.id,
+          course_id: Number(corso.idCorso),
           categorySlug,
         },
       })
