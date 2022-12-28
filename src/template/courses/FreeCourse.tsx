@@ -310,7 +310,7 @@ export const Head = ({
   data,
   pageContext: { slug, categorySlug },
 }: PageProps<
-  Queries.SingleCoursePageQuery,
+  Queries.FreeCoursePageQuery,
   { slug: string; categorySlug: string }
 >) => {
   const { contentfulCorsi: corso } = data

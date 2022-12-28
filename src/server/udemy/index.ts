@@ -58,7 +58,7 @@ export const getSingleCourseReviewsById = async (
       `https://www.udemy.com/api-2.0/courses/${id}/reviews/?page=1&page_size=100`
     )
     const response = (await res.json()) as SingleCourseReviewsResponse
-    return parseSingleCourseReviews(response)
+    return parseSingleCourseReviews(response, id)
   } catch (error) {
     return {
       error,

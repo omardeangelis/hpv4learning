@@ -47,12 +47,14 @@ export const parseAllPaidCoursesStats = (
 }
 
 export const parseSingleCourseReviews = (
-  response: SingleCourseReviewsResponse
+  response: SingleCourseReviewsResponse,
+  course_id: number
 ): SingleReview[] => {
   const contentReviews = response.results.filter(
     (el) => el.content !== `` && el.rating >= 4
   )
   return contentReviews.map((el) => ({
+    course_id,
     userName: el.user.name,
     rating: el.rating,
     content: el.content,
