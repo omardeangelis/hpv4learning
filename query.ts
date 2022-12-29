@@ -62,9 +62,20 @@ const projectCategoriesPageQuery = `
 }
 `
 
+const guideQuery = `
+ {
+  allContentfulGuida {
+    nodes {
+      slug
+    }
+  }
+}
+`
+
 export {
   allCourseQuery,
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
+  guideQuery,
 }

@@ -6,6 +6,7 @@ import {
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
+  guideQuery,
 } from "./query"
 import {
   getAllPaidAggregateCoursesStats,
@@ -89,6 +90,7 @@ export const createPages = async ({ graphql, actions }) => {
   const courseCategoryQuery = await graphql(allCourseCategory)
   const projectArticleQuery = await graphql(allProjectArticle)
   const categoryProjectQuery = await graphql(projectCategoriesPageQuery)
+  const allGuideQuery = await graphql(guideQuery)
   const freeCourses = (await graphql(freeCourseQuery)) as CourseQueryProps
   const udemyCourses = (await graphql(udemyCourseQuery)) as CourseQueryProps
 
@@ -172,6 +174,13 @@ export const createPages = async ({ graphql, actions }) => {
           courseId: project.corsi[0].idCorso,
         },
       })
+    })
+  })
+
+  allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
+    createPage({
+      path: `/guide/${guida.slug}/`,
+      component: path.resolve(`./src/template/Guide.tsx`),
     })
   })
 
