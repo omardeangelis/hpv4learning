@@ -470,6 +470,7 @@ export const Head = ({
           data.udemyPaidCourse?.num_reviews ||
           (corso?.recensioniRicevute as number)
         }
+        reviews={data.allUdemyReview.nodes}
       />
     </>
   )

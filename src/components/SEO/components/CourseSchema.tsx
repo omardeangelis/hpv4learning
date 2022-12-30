@@ -22,6 +22,7 @@ const CourseSchema = ({
   rating,
   coursePrerequisites,
   recensioniRicevute,
+  reviews,
 }: Props) => {
   const schema = useWebPageSchema({ title, description, image, imageAltText })
 
@@ -37,6 +38,7 @@ const CourseSchema = ({
     rating,
     coursePrerequisites,
     recensioniRicevute,
+    reviews,
   })
 
   return (

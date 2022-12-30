@@ -19,7 +19,7 @@ export const CourseSection = styled(Box)(
 )
 
 type StyledProps = {
-  full: boolean
+  full?: boolean
 }
 
 export const ReviewSection = styled(Box)(

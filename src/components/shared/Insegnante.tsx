@@ -144,7 +144,11 @@ const Insegnante = ({
             }}
           >
             {corsi.map((corso) => (
-              <SeoLink link={`/${corso.slug}/`} isExternal={false}>
+              <SeoLink
+                link={`/${corso.slug}/`}
+                isExternal={false}
+                key={`${corso.slug}-${cognome}`}
+              >
                 <Box mb="6px">
                   <Stack direction="row" spacing={[1]} alignItems="baseline">
                     <Box display="flex">
