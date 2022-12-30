@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
-import { StaticImage } from "gatsby-plugin-image"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 
 type Props = {
   title: string | null
@@ -39,14 +39,15 @@ const StyledBox = styled(Box)`
 export const Hero = ({ title, description }: Props) => (
   <Stack
     width="100%"
-    height={[`508px`, `718px`]}
+    height="100vh"
     justifyContent="center"
     alignItems="center"
     sx={{ backgroundColor: `#000` }}
   >
     <Stack
-      width={[`397px`, `883px`]}
-      height={[`194px`, `432px`]}
+      maxWidth={{ xs: `397px`, lg: `883px` }}
+      width="100%"
+      height={{ xs: `194px`, lg: `432px` }}
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
@@ -56,16 +57,18 @@ export const Hero = ({ title, description }: Props) => (
       }}
     >
       <Typography
-        fontSize={[`39px`, `72px`]}
-        lineHeight={[`44px`, `72px`]}
+        component="h1"
+        fontSize={{ xs: `39px`, lg: `72px` }}
+        lineHeight={{ xs: `44px`, lg: `72px` }}
         fontWeight={700}
         color="#fff"
       >
         {title && title}
       </Typography>
       <Typography
-        fontSize={[`18px`, `24px`]}
-        lineHeight={[`21px`, `36px`]}
+        component="h2"
+        fontSize={{ xs: `18px`, lg: `24px` }}
+        lineHeight={{ xs: `21px`, lg: `36px` }}
         fontWeight={500}
         color="#fff"
         textAlign="center"
@@ -74,11 +77,7 @@ export const Hero = ({ title, description }: Props) => (
         {description}
       </Typography>
       <StyledBox>
-        <StaticImage
-          src="./images/arrow-back.png"
-          alt="arrow-back"
-          placeholder="tracedSVG"
-        />
+        <KeyboardArrowDownIcon style={{ color: `white` }} />
       </StyledBox>
     </Stack>
   </Stack>

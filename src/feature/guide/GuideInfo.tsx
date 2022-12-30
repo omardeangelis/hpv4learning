@@ -11,8 +11,8 @@ type Props = {
 
 export const GuideInfo = ({ projects, courseMinutes, price }: Props) => (
   <Stack
-    flexDirection={[`column`, `row`]}
-    gap={[`16px`, `140px`]}
+    flexDirection={{ xs: `column`, lg: `row` }}
+    gap={{ xs: `16px`, lg: `140px` }}
     justifyContent="center"
   >
     {projects ? (

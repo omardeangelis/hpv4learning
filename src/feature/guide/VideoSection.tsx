@@ -33,13 +33,14 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
 
   return (
     <Box
-      height={[`506px`, `546px`]}
+      height={{ xs: `506px`, lg: `546px` }}
       position="relative"
       sx={{ backgroundColor: `#11081F` }}
     >
+      lg:
       <Box
-        height={[`266px`, `433px`]}
-        width={[`361px`, `588px`]}
+        height={{ xs: `266px`, lg: `433px` }}
+        width={{ xs: `361px`, lg: `588px` }}
         position="absolute"
         sx={{
           left: 0,
@@ -54,32 +55,32 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
         }}
       />
       <Stack
-        flexDirection={[`column`, `row`]}
+        flexDirection={{ xs: `column`, lg: `row` }}
         justifyContent="space-around"
         alignItems="center"
         gap="34px"
-        py={[`68px`, `86px`]}
-        px={[`36px`, `42px`]}
+        py={{ xs: `68px`, lg: `86px` }}
+        px={{ xs: `36px`, lg: `42px` }}
       >
         <Stack flexDirection="column" gap="24px">
           <Typography
             fontWeight={600}
-            fontSize={[`34px`, `48px`]}
-            lineHeight={[`34px`, `54px`]}
+            fontSize={{ xs: `34px`, lg: `48px` }}
+            lineHeight={{ xs: `34px`, lg: `54px` }}
             color="#fff"
             maxWidth="552px"
-            textAlign={[`center`, `left`]}
+            textAlign={{ xs: `center`, lg: `left` }}
           >
             Guarda il nostro{` `}
             <span className="brand-text">videocorso completo</span>
           </Typography>
           <Typography
             fontWeight={400}
-            fontSize={[`16px`, `18px`]}
-            lineHeight={[`24px`, `27px`]}
+            fontSize={{ xs: `16px`, lg: `18px` }}
+            lineHeight={{ xs: `24px`, lg: `27px` }}
             color="#fff"
-            maxWidth={[`unset`, `512px`]}
-            textAlign={[`center`, `left`]}
+            maxWidth={{ xs: `unset`, lg: `512px` }}
+            textAlign={{ xs: `center`, lg: `left` }}
           >
             Il modo più veloce per scoprire {argomento} è mettere le mani in
             pasta seguendo il nostro videocorso di {argomento}

@@ -123,7 +123,7 @@ export const Head = ({ data }: PageProps<Queries.GuideQuery>) => {
     () => [
       { text: `Home`, link: `/` },
       { text: `Guide`, link: `/guide/` },
-      { text: ``, link: `/guide/${queryData.slug}` },
+      { text: `${queryData.title}`, link: `/guide/${queryData.slug}` },
     ],
     []
   )

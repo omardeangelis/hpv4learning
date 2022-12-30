@@ -18,28 +18,28 @@ export const TextSection = ({
     justifyContent="center"
     alignItems="center"
     maxWidth="756px"
-    gap={[`16px`, `24px`]}
+    gap={{ xs: `16px`, lg: `24px` }}
   >
     <Typography
       fontWeight={500}
-      fontSize={[`16px`, `21px`]}
-      lineHeight={[`24px`, `31px`]}
+      fontSize={{ xs: `16px`, lg: `21px` }}
+      lineHeight={{ xs: `24px`, lg: `31px` }}
       textTransform="uppercase"
     >
       {domanda && domanda}
     </Typography>
     <Typography
       fontWeight={600}
-      fontSize={[`24px`, `39px`]}
-      lineHeight={[`34px`, `54px`]}
+      fontSize={{ xs: `24px`, lg: `39px` }}
+      lineHeight={{ xs: `34px`, lg: `54px` }}
       textAlign="center"
     >
       {rispostaPrincipale && rispostaPrincipale}
     </Typography>
     <Typography
       fontWeight={400}
-      fontSize={[`18px`, `21px`]}
-      lineHeight={[`24px`, `29px`]}
+      fontSize={{ xs: `18px`, lg: `21px` }}
+      lineHeight={{ xs: `24px`, lg: `29px` }}
       textAlign="center"
     >
       {rispostaAggiuntiva && rispostaAggiuntiva}

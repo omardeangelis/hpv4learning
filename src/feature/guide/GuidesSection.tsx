@@ -30,20 +30,20 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
     flexDirection="column"
     justifyContent="center"
     alignItems="center"
-    gap={[`16px`, `18px`]}
+    gap={{ xs: `16px`, lg: `18px` }}
     mt="36px"
   >
     <Typography
       fontWeight={600}
-      fontSize={[`34px`, `39px`]}
-      lineHeight={[`39px`, `54px`]}
+      fontSize={{ xs: `34px`, lg: `39px` }}
+      lineHeight={{ xs: `39px`, lg: `54px` }}
       textAlign="center"
     >
       Scopri le nostre mini guide
     </Typography>
     <Typography
       fontWeight={400}
-      fontSize={[`18px`, `21px`]}
+      fontSize={{ xs: `18px`, lg: `21px` }}
       lineHeight="29px"
       textAlign="center"
       maxWidth="756px"
