@@ -22,6 +22,24 @@ type StyledProps = {
   full: boolean
 }
 
+export const ReviewSection = styled(Box)(
+  css({
+    display: `flex`,
+    flexDirection: `column`,
+    "& >*:not(:first-of-type)": {
+      marginLeft: `0px`,
+      marginTop: `24px`,
+    },
+    "@media screen and (min-width:767px)": {
+      flexDirection: `row`,
+      "& >*:not(:first-of-type)": {
+        marginLeft: `24px`,
+        marginTop: `0px`,
+      },
+    },
+  })
+)
+
 export const CustomStack = styled(Box)<StyledProps>`
   display: flex;
   width: 100%;

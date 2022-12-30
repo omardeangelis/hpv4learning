@@ -119,7 +119,7 @@ export const PaybleCourseInfoBanner = ({
           <InfoText key={`lezioni`} text={`${lezioni} lezioni`} weight={300} />
           <InfoText
             key={`durata`}
-            text={`${convertToHHMMSS(durata)} ore di videocorso`}
+            text={`${durata} ore di videocorso`}
             weight={300}
           />
           {progetti > 0 ? (

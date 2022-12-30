@@ -27,7 +27,7 @@ import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
 import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import { createRowText } from "../../utils/helpers"
+import { createBrandText, createRowText } from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
 
@@ -52,13 +52,14 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
             <Typography
               component="h1"
               fontWeight={600}
+              dangerouslySetInnerHTML={{
+                __html: createBrandText(contentfulCorsi?.titolo) as string,
+              }}
               sx={{
                 fontSize: { xs: `36px`, lg: `56px` },
                 lineHeight: { xs: `44px`, lg: `64px` },
               }}
-            >
-              {contentfulCorsi?.titolo}
-            </Typography>
+            />
           </Box>
           <CourseAlignment
             sx={{
@@ -310,7 +311,7 @@ export const Head = ({
   data,
   pageContext: { slug, categorySlug },
 }: PageProps<
-  Queries.SingleCoursePageQuery,
+  Queries.FreeCoursePageQuery,
   { slug: string; categorySlug: string }
 >) => {
   const { contentfulCorsi: corso } = data

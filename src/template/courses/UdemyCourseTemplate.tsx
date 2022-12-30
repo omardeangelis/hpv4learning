@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Avatar, Typography } from "@mui/material"
 import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import { graphql, PageProps } from "gatsby"
@@ -21,16 +21,19 @@ import {
   ListSection,
   CustomStack,
   PaybleCourseInfoBanner,
+  ReviewSection,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
 import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import { createRowText, isExpired } from "../../utils/helpers"
+import { createBrandText, createRowText, isExpired } from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
 import CourseCoupon from "../../components/coupon/CourseCoupon"
+import { BorderBox } from "../../components/layout"
+import { createStarReview } from "../../utils/general"
 
 const UdemyCourseTemplate: React.FC<
   PageProps<Queries.UdemyCoursePageQuery>
@@ -62,13 +65,14 @@ const UdemyCourseTemplate: React.FC<
             <Typography
               component="h1"
               fontWeight={600}
+              dangerouslySetInnerHTML={{
+                __html: createBrandText(contentfulCorsi?.titolo) as string,
+              }}
               sx={{
                 fontSize: { xs: `36px`, lg: `56px` },
                 lineHeight: { xs: `44px`, lg: `64px` },
               }}
-            >
-              {contentfulCorsi?.titolo}
-            </Typography>
+            />
           </Box>
           <CourseAlignment
             sx={{
@@ -91,15 +95,86 @@ const UdemyCourseTemplate: React.FC<
                   }}
                 >
                   <PaybleCourseInfoBanner
-                    lezioni={contentfulCorsi?.lezioni as number}
+                    lezioni={data.udemyPaidCourse?.num_lectures as number}
                     livello={contentfulCorsi?.livello as string}
                     price={contentfulCorsi?.prezzo as number}
-                    avgVote={contentfulCorsi?.recensioni as number}
+                    avgVote={
+                      data.udemyPaidCourse?.rating ||
+                      (contentfulCorsi?.recensioni as number)
+                    }
                     durata={contentfulCorsi?.oreDiLezione as number}
                     progetti={contentfulCorsi?.progetti?.length}
+                    students={data.udemyPaidCourse?.totalSubscribers as number}
                   />
                 </Box>
               ) : null}
+              {data.allUdemyReview.totalCount > 0 ? (
+                <Box
+                  sx={{
+                    mt: { xs: `24px`, lg: `48px` },
+                  }}
+                >
+                  <Typography
+                    component="h2"
+                    fontWeight={600}
+                    color="gray.700"
+                    sx={{
+                      fontSize: { xs: `21px`, lg: `36px` },
+                      lineHeight: { xs: `28px`, lg: `39px` },
+                    }}
+                  >
+                    Le ultime recensioni
+                  </Typography>
+                  <ReviewSection
+                    sx={{
+                      mt: { xs: `16px`, lg: `24px` },
+                    }}
+                  >
+                    {data.allUdemyReview.nodes.map((review) => (
+                      <BorderBox
+                        key={review.id}
+                        borderRadius="16px"
+                        width="100%"
+                        sx={{
+                          maxWidth: { xs: `unset`, lg: `274px` },
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            p: { xs: `24px`, lg: `16px` },
+                          }}
+                        >
+                          <Stack direction="row" spacing="16px">
+                            <Avatar
+                              variant="circular"
+                              sx={{
+                                width: `34px`,
+                                height: `34px`,
+                              }}
+                            >
+                              {review.userName?.charAt(0)}
+                            </Avatar>
+                            <Box>
+                              <Typography fontSize="16px" fontWeight={600}>
+                                {review.userName}
+                              </Typography>
+                              <Box>
+                                {createStarReview(review.rating as number)}
+                              </Box>
+                            </Box>
+                          </Stack>
+                          <Box mt="14px">
+                            <Typography fontSize="12px" fontWeight={300}>
+                              {review.content}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </BorderBox>
+                    ))}
+                  </ReviewSection>
+                </Box>
+              ) : null}
+
               <Box
                 sx={{
                   mt: { xs: `24px`, lg: `48px` },
@@ -107,7 +182,7 @@ const UdemyCourseTemplate: React.FC<
               >
                 <Typography
                   component="h2"
-                  fontWeight={500}
+                  fontWeight={600}
                   color="gray.700"
                   sx={{
                     fontSize: { xs: `21px`, lg: `36px` },
@@ -187,7 +262,7 @@ const UdemyCourseTemplate: React.FC<
               {!isEmpty(contentfulCorsi?.progetti) ? (
                 <Box
                   sx={{
-                    mt: { xs: `96px`, lg: `136px` },
+                    mt: { xs: `48px`, lg: `96px` },
                   }}
                 >
                   <Typography
@@ -305,12 +380,16 @@ const UdemyCourseTemplate: React.FC<
               >
                 <Box>
                   <PaybleCourseInfoBanner
-                    lezioni={contentfulCorsi?.lezioni as number}
+                    lezioni={data.udemyPaidCourse?.num_lectures as number}
                     livello={contentfulCorsi?.livello as string}
                     price={contentfulCorsi?.prezzo as number}
-                    avgVote={contentfulCorsi?.recensioni as number}
-                    durata={contentfulCorsi?.oreDiLezione as number}
+                    avgVote={
+                      data.udemyPaidCourse?.rating ||
+                      (contentfulCorsi?.recensioni as number)
+                    }
+                    durata={data.udemyPaidCourse?.courseHours as number}
                     progetti={contentfulCorsi?.progetti?.length}
+                    students={data.udemyPaidCourse?.totalSubscribers as number}
                   />
                   {contentfulCorsi?.promoLink &&
                   contentfulCorsi.prezzo &&
@@ -337,7 +416,7 @@ export const Head = ({
   data,
   pageContext: { slug, categorySlug },
 }: PageProps<
-  Queries.SingleCoursePageQuery,
+  Queries.UdemyCoursePageQuery,
   { slug: string; categorySlug: string }
 >) => {
   const { contentfulCorsi: corso } = data
@@ -379,12 +458,18 @@ export const Head = ({
         imageAltText={createRowText(corso?.titolo as string)}
         creator={creator}
         about={categorySlug}
-        rating={corso?.recensioni?.toString() as any}
+        rating={
+          data.udemyPaidCourse?.rating?.toString() ||
+          (corso?.recensioni?.toString() as string)
+        }
         audienceType={corso?.target ?? []}
         isAccessibleForFree={false}
         breadcrumbs={breadcrumbs}
         coursePrerequisites={corso?.requisiti as any}
-        recensioniRicevute={corso?.recensioniRicevute as number}
+        recensioniRicevute={
+          data.udemyPaidCourse?.num_reviews ||
+          (corso?.recensioniRicevute as number)
+        }
       />
     </>
   )
@@ -393,7 +478,11 @@ export const Head = ({
 export default UdemyCourseTemplate
 
 export const query = graphql`
-  query UdemyCoursePage($id: String!, $categorySlug: String!) {
+  query UdemyCoursePage(
+    $id: String!
+    $course_id: Int!
+    $categorySlug: String!
+  ) {
     contentfulCorsi(id: { eq: $id }) {
       category {
         name
@@ -498,6 +587,22 @@ export const query = graphql`
           riassunto
         }
       }
+    }
+    udemyPaidCourse(courseId: { eq: $course_id }) {
+      num_reviews
+      num_lectures
+      rating
+      totalSubscribers
+      courseHours
+    }
+    allUdemyReview(filter: { courseId: { eq: $course_id } }, limit: 3) {
+      nodes {
+        rating
+        userName
+        content
+        id
+      }
+      totalCount
     }
   }
 `

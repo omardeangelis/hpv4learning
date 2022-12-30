@@ -70,6 +70,7 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
       courses.forEach((course) => {
         createNode({
           ...course,
+          courseId: course.id,
           id: createNodeId(course.id),
           internal: {
             type: `UdemyPaidCourse`,
