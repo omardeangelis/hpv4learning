@@ -52,6 +52,11 @@ const UdemyCourseTemplate: React.FC<
       contentfulCorsi?.recensioni,
     ]
   )
+
+  const partialReview = React.useMemo(
+    () => data.allUdemyReview.nodes.slice(0, 3),
+    [data.allUdemyReview.nodes]
+  )
   return (
     <Layout enableFooterPadding>
       <Container maxWidth="lg">
@@ -130,7 +135,7 @@ const UdemyCourseTemplate: React.FC<
                       mt: { xs: `16px`, lg: `24px` },
                     }}
                   >
-                    {data.allUdemyReview.nodes.map((review) => (
+                    {partialReview.map((review) => (
                       <BorderBox
                         key={review.id}
                         borderRadius="16px"
@@ -596,7 +601,7 @@ export const query = graphql`
       totalSubscribers
       courseHours
     }
-    allUdemyReview(filter: { courseId: { eq: $course_id } }, limit: 3) {
+    allUdemyReview(filter: { courseId: { eq: $course_id } }) {
       nodes {
         rating
         userName
