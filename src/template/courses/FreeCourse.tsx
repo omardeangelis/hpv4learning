@@ -269,7 +269,7 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                         mt: { xs: `24px`, lg: `36px` },
                       }}
                     >
-                      <CustomStack full={false}>
+                      <CustomStack full={undefined}>
                         {data.allContentfulCorsi.nodes.map((corso) => (
                           <CourseContainer key={corso.slug}>
                             <CourseContent {...(corso as any)} />

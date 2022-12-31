@@ -1,8 +1,22 @@
 import React from "react"
 import isArray from "lodash/isArray"
+import isEmpty from "lodash/isEmpty"
 import useSeoData from "./useSeoData"
 import useHasMounted from "../../../hook/useHasMounted"
-import { CourseSchemsProps } from "../types"
+import { CourseSchemsProps, Review } from "../types"
+
+const createReviews = (reviews: readonly Review[]) =>
+  reviews.map((review) => ({
+    "@type": `Review`,
+    author: review.userName,
+    reviewBody: review.content,
+    reviewRating: {
+      "@type": `Rating`,
+      bestRating: `5`,
+      ratingValue: review.rating,
+      worstRating: `1`,
+    },
+  }))
 
 const useCourseSchema = ({
   title,
@@ -15,6 +29,7 @@ const useCourseSchema = ({
   rating,
   coursePrerequisites,
   recensioniRicevute,
+  reviews,
 }: CourseSchemsProps) => {
   const {
     site: { siteMetadata },
@@ -30,6 +45,9 @@ const useCourseSchema = ({
 
     return [{ "@type": `Person`, name: creator }]
   }, [creator])
+
+  const hasReview = reviews && !isEmpty(reviews)
+  console.log(reviews, hasReview)
 
   const courseJson = React.useMemo(
     () => ({
@@ -61,6 +79,7 @@ const useCourseSchema = ({
             worstRating: 1,
           }
         : undefined,
+      review: hasReview ? createReviews(reviews) : undefined,
       coursePrerequisites: {
         "@type": `AlignmentObject`,
         alignmentType: coursePrerequisites,
@@ -80,6 +99,8 @@ const useCourseSchema = ({
       siteMetadata.author,
       siteMetadata.siteUrl,
       title,
+      reviews,
+      hasReview,
     ]
   )
   return courseJson
