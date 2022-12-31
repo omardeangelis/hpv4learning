@@ -13,23 +13,27 @@ type Props = {
 }
 
 const StyledBox = styled(Box)`
-  width: 322px;
-  height: 174px;
+  width: 260px;
+  height: 145px;
   border-radius: 16px;
   overflow: hidden;
   &:hover {
     cursor: pointer;
   }
   @media screen and (min-width: 1024px) {
+    width: 280px;
+    height: 162px;
+  }
+  @media screen and (min-width: 1024px) {
     width: 692px;
-    height: 374px;
+    height: 389px;
   }
 `
 
 export const VideoSection = ({ argomento, image, slug }: Props) => {
   const handleNavigate = React.useCallback(() => {
     navigate(`/${slug}/`)
-  }, [navigate])
+  }, [slug])
 
   return (
     <Box
@@ -40,7 +44,7 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
       lg:
       <Box
         height={{ xs: `266px`, lg: `433px` }}
-        width={{ xs: `361px`, lg: `588px` }}
+        width={{ xs: `280px`, sm: `361px`, lg: `588px` }}
         position="absolute"
         sx={{
           left: 0,
@@ -58,18 +62,18 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
         flexDirection={{ xs: `column`, lg: `row` }}
         justifyContent="space-around"
         alignItems="center"
-        gap="34px"
-        py={{ xs: `68px`, lg: `86px` }}
+        py={{ xs: `14px`, sm: `68px`, lg: `86px` }}
         px={{ xs: `36px`, lg: `42px` }}
       >
-        <Stack flexDirection="column" gap="24px">
+        <Stack flexDirection="column" mr={{ xs: `unset`, lg: `34px` }}>
           <Typography
             fontWeight={600}
             fontSize={{ xs: `34px`, lg: `48px` }}
             lineHeight={{ xs: `34px`, lg: `54px` }}
             color="#fff"
-            maxWidth="552px"
+            maxWidth={{ xs: `unset`, lg: `512px` }}
             textAlign={{ xs: `center`, lg: `left` }}
+            mb="24px"
           >
             Guarda il nostro{` `}
             <span className="brand-text">videocorso completo</span>
@@ -81,6 +85,7 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
             color="#fff"
             maxWidth={{ xs: `unset`, lg: `512px` }}
             textAlign={{ xs: `center`, lg: `left` }}
+            mb="24px"
           >
             Il modo più veloce per scoprire {argomento} è mettere le mani in
             pasta seguendo il nostro videocorso di {argomento}

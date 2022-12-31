@@ -7,7 +7,7 @@ import Skeleton from "@mui/material/Skeleton"
 import { BorderBox } from "../../components/layout"
 import { useGetAllCourseStatsQuery } from "../../services/udemy"
 
-const PureCssStack = styled(Box)`
+export const PureCssStack = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

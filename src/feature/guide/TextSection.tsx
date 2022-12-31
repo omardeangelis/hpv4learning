@@ -1,6 +1,7 @@
 import React from "react"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
+import styled from "@emotion/styled"
 
 type Props = {
   domanda: string | null
@@ -8,17 +9,27 @@ type Props = {
   rispostaAggiuntiva: string | null
 }
 
+const StyledStack = styled(Stack)`
+  & p {
+    margin-bottom: 16px;
+  }
+  @media screen and (min-width: 1024px) {
+    & p {
+      margin-bottom: 24px;
+    }
+  }
+`
+
 export const TextSection = ({
   domanda,
   rispostaPrincipale,
   rispostaAggiuntiva,
 }: Props) => (
-  <Stack
+  <StyledStack
     flexDirection="column"
     justifyContent="center"
     alignItems="center"
     maxWidth="756px"
-    gap={{ xs: `16px`, lg: `24px` }}
   >
     <Typography
       fontWeight={500}
@@ -44,5 +55,5 @@ export const TextSection = ({
     >
       {rispostaAggiuntiva && rispostaAggiuntiva}
     </Typography>
-  </Stack>
+  </StyledStack>
 )

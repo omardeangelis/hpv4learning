@@ -51,7 +51,6 @@ export const Hero = ({ title, description }: Props) => (
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      gap="24px"
       sx={{
         background: `radial-gradient(50% 50% at 50% 50%, rgba(255, 204, 204, 0.54) 0%, rgba(255, 56, 56, 0.24) 59.38%, rgba(255, 52, 52, 0) 100%)`,
       }}
@@ -62,6 +61,9 @@ export const Hero = ({ title, description }: Props) => (
         lineHeight={{ xs: `44px`, lg: `72px` }}
         fontWeight={700}
         color="#fff"
+        textAlign="center"
+        maxWidth="80%"
+        mb="24px"
       >
         {title && title}
       </Typography>
@@ -73,6 +75,7 @@ export const Hero = ({ title, description }: Props) => (
         color="#fff"
         textAlign="center"
         maxWidth="80%"
+        mb="24px"
       >
         {description}
       </Typography>

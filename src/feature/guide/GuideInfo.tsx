@@ -1,6 +1,5 @@
 import React from "react"
-import Stack from "@mui/material/Stack"
-import { Info } from "../home"
+import { Info, PureCssStack } from "../home"
 import { Project } from "./GuidesSection"
 
 type Props = {
@@ -10,11 +9,7 @@ type Props = {
 }
 
 export const GuideInfo = ({ projects, courseMinutes, price }: Props) => (
-  <Stack
-    flexDirection={{ xs: `column`, lg: `row` }}
-    gap={{ xs: `16px`, lg: `140px` }}
-    justifyContent="center"
-  >
+  <PureCssStack>
     {projects ? (
       <Info title={projects.length} subtitle="Articoli e Guide pratiche" />
     ) : null}
@@ -27,5 +22,5 @@ export const GuideInfo = ({ projects, courseMinutes, price }: Props) => (
     {price ? (
       <Info title={`${price / 100} €`} subtitle="Prezzo del corso completo" />
     ) : null}
-  </Stack>
+  </PureCssStack>
 )

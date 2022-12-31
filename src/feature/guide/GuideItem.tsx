@@ -25,7 +25,8 @@ export type Props = {
 }
 
 const StyledBorderBox = styled(BorderBox)`
-  width: 369px;
+  max-width: 369px;
+  width: 100%;
   height: 104px;
   border-radius: 8px;
   &:hover {
@@ -34,8 +35,21 @@ const StyledBorderBox = styled(BorderBox)`
     filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));
   }
   @media screen and (min-width: 1024px) {
-    width: 864px;
+    max-width: 864px;
     height: 140px;
+  }
+`
+
+const IconContainer = styled(Box)`
+  width: 20px;
+  height: 20px;
+  @media screen and (min-width: 1024px) {
+    margin-top: 33px;
+    margin-right: 21px;
+  }
+  & svg {
+    width: inherit;
+    height: inherit;
   }
 `
 
@@ -61,8 +75,8 @@ export const GuideItem = ({
   courseSlug,
   slug,
 }: Props) => (
-  <SeoLink isExternal={false} link={`/progetti/${courseSlug}/${slug}`}>
-    <StyledBorderBox component="article">
+  <StyledBorderBox component="article" mb={{ xs: `16px`, lg: `18px` }}>
+    <SeoLink isExternal={false} link={`/progetti/${courseSlug}/${slug}`}>
       <Stack
         flexDirection={{ xs: `column`, lg: `row` }}
         justifyContent="space-between"
@@ -118,16 +132,11 @@ export const GuideItem = ({
             {timeToRead} min
           </Typography>
           {` `}
-          <Box
-            width={{ xs: `15px`, lg: `20px` }}
-            height={{ xs: `15px`, lg: `20px` }}
-            mt={{ xs: `unset`, lg: `33px` }}
-            mr={{ xs: `unset`, lg: `21px` }}
-          >
+          <IconContainer>
             <CheckCircleOutlineIcon />
-          </Box>
+          </IconContainer>
         </Stack>
       </Stack>
-    </StyledBorderBox>
-  </SeoLink>
+    </SeoLink>
+  </StyledBorderBox>
 )

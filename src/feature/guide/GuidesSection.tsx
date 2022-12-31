@@ -30,7 +30,6 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
     flexDirection="column"
     justifyContent="center"
     alignItems="center"
-    gap={{ xs: `16px`, lg: `18px` }}
     mt="36px"
   >
     <Typography
@@ -38,6 +37,7 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
       fontSize={{ xs: `34px`, lg: `39px` }}
       lineHeight={{ xs: `39px`, lg: `54px` }}
       textAlign="center"
+      mb={{ xs: `16px`, lg: `18px` }}
     >
       Scopri le nostre mini guide
     </Typography>
@@ -47,6 +47,7 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
       lineHeight="29px"
       textAlign="center"
       maxWidth="756px"
+      mb={{ xs: `16px`, lg: `18px` }}
     >
       Per chi volesse entrare nel dettaglio e seguire lezioni mirate abbiamo
       creato una serie di guide incrementali
