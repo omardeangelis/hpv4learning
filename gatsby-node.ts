@@ -6,6 +6,7 @@ import {
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
+  guideQuery,
 } from "./query"
 import {
   getAllPaidAggregateCoursesStats,
@@ -18,6 +19,7 @@ import {
   udemyCourseQuery,
   createCoursePages,
 } from "./src/server/gatsby/pages/courses/createCoursePages"
+import { isProduction } from "./src/constants"
 
 type RedirectType = { source: string; target: string; status: string }
 
@@ -90,6 +92,7 @@ export const createPages = async ({ graphql, actions }) => {
   const courseCategoryQuery = await graphql(allCourseCategory)
   const projectArticleQuery = await graphql(allProjectArticle)
   const categoryProjectQuery = await graphql(projectCategoriesPageQuery)
+  const allGuideQuery = await graphql(guideQuery)
   const freeCourses = (await graphql(freeCourseQuery)) as CourseQueryProps
   const udemyCourses = (await graphql(udemyCourseQuery)) as CourseQueryProps
 
@@ -175,6 +178,15 @@ export const createPages = async ({ graphql, actions }) => {
       })
     })
   })
+
+  if (!isProduction) {
+    allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
+      createPage({
+        path: `/guide/${guida.slug}/`,
+        component: path.resolve(`./src/template/Guide.tsx`),
+      })
+    })
+  }
 
   redirects.forEach((redirect: RedirectType) => {
     createRedirect({
