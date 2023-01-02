@@ -19,6 +19,7 @@ import {
   udemyCourseQuery,
   createCoursePages,
 } from "./src/server/gatsby/pages/courses/createCoursePages"
+import { isProduction } from "./src/constants"
 
 type RedirectType = { source: string; target: string; status: string }
 
@@ -177,12 +178,14 @@ export const createPages = async ({ graphql, actions }) => {
     })
   })
 
-  allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
-    createPage({
-      path: `/guide/${guida.slug}/`,
-      component: path.resolve(`./src/template/Guide.tsx`),
+  if (!isProduction) {
+    allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
+      createPage({
+        path: `/guide/${guida.slug}/`,
+        component: path.resolve(`./src/template/Guide.tsx`),
+      })
     })
-  })
+  }
 
   redirects.forEach((redirect: RedirectType) => {
     createRedirect({
