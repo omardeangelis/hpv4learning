@@ -35,8 +35,8 @@ const Guide = ({ data }: PageProps<Queries.GuideQuery>) => {
         {queryData.corsi_correlati ? (
           <GuideInfo
             projects={queryData.articoli_e_progetti}
-            courseMinutes={queryData.corsi_correlati[0].oreDiLezione}
-            price={queryData.corsi_correlati[0].prezzo}
+            courseMinutes={queryData?.corsi_correlati?.[0]?.oreDiLezione}
+            price={queryData?.corsi_correlati?.[0]?.prezzo}
           />
         ) : null}
       </Box>

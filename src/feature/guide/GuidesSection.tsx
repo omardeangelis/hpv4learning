@@ -1,29 +1,26 @@
 import React from "react"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
+import styled from "@emotion/styled"
+import Box from "@mui/system/Box"
 import { GuideItem } from "./GuideItem"
 
+const StyledStack = styled(Box)({
+  "& > *:not(:first-of-type)": {
+    marginTop: `16px`,
+    "@media screen and (min-width: 768px)": {
+      marginTop: `24px`,
+    },
+  },
+})
+
 type Props = {
-  projects: Project[] | null
+  projects?: Projects
   courseSlug: string | null
 }
 
-export type Project = {
-  articleTitle: string
-  body: {
-    childrenMarkdownRemark: {
-      timeToRead: number
-    }[]
-  }
-  copertina: {
-    gatsbyImageData: IGatsbyImageData
-  }
-  descrizione: {
-    descrizione: string
-  }
-  slug: string
-}
+export type Projects =
+  Queries.GuideQuery["allContentfulGuida"]["nodes"][number]["articoli_e_progetti"]
 
 export const GuidesSection = ({ projects, courseSlug }: Props) => (
   <Stack
@@ -52,18 +49,20 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
       Per chi volesse entrare nel dettaglio e seguire lezioni mirate abbiamo
       creato una serie di guide incrementali
     </Typography>
-    {projects
-      ? projects.map((project: Project) => (
+    {projects ? (
+      <StyledStack>
+        {projects.map((project) => (
           <GuideItem
-            title={project.articleTitle}
-            description={project.descrizione.descrizione}
-            timeToRead={project.body.childrenMarkdownRemark[0].timeToRead}
-            image={project.copertina.gatsbyImageData}
-            alt={project.articleTitle}
+            key={project?.articleTitle as string}
+            articleTitle={project?.articleTitle}
+            descrizione={project?.descrizione}
+            body={project?.body}
+            copertina={project?.copertina}
             courseSlug={courseSlug}
-            slug={project.slug}
+            slug={project?.slug as string}
           />
-        ))
-      : null}
+        ))}
+      </StyledStack>
+    ) : null}
   </Stack>
 )

@@ -5,6 +5,7 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import React from "react"
 import styled from "@emotion/styled"
 import { navigate } from "gatsby"
+import { Container } from "@mui/system"
 import { RoundedButton } from "../../components/layout/RoundedButton"
 import SeoLink from "../../components/shared/SeoLink"
 
@@ -16,15 +17,12 @@ type Props = {
 
 const StyledBox = styled(Box)`
   width: 100%;
-  max-width: unset;
   border-radius: 16px;
   overflow: hidden;
   &:hover {
     cursor: pointer;
   }
-  @media screen and (min-width: 687px) {
-    max-width: 480px;
-  }
+
   @media screen and (min-width: 1024px) {
     max-width: 692px;
   }
@@ -37,13 +35,13 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
 
   return (
     <Box
-      height={{ xs: `536px`, lg: `566px` }}
       position="relative"
       sx={{ backgroundColor: `#11081F` }}
+      py={{ xs: `36px`, lg: `72px` }}
     >
       <Box
         height={{ xs: `266px`, lg: `433px` }}
-        width={{ xs: `280px`, sm: `361px`, lg: `588px` }}
+        maxWidth="568px"
         position="absolute"
         sx={{
           left: 0,
@@ -57,64 +55,64 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
           background: `radial-gradient(50% 50% at 50% 50%, rgba(135, 105, 254, 0.3) 0%, rgba(135, 105, 254, 0) 98.96%)`,
         }}
       />
-      <Stack
-        flexDirection={{ xs: `column`, lg: `row` }}
-        justifyContent="space-around"
-        alignItems="center"
-        py={{ xs: `14px`, sm: `68px`, lg: `86px` }}
-        px={{ xs: `36px`, lg: `42px` }}
-      >
+      <Container maxWidth="xl">
         <Stack
-          flexDirection="column"
-          mr={{ xs: `unset`, lg: `34px` }}
-          alignItems={{ xs: `center`, lg: `unset` }}
+          flexDirection={{ xs: `column`, lg: `row` }}
+          justifyContent="space-around"
+          alignItems="center"
         >
-          <Typography
-            fontWeight={600}
-            fontSize={{ xs: `34px`, lg: `48px` }}
-            lineHeight={{ xs: `34px`, lg: `54px` }}
-            color="#fff"
-            maxWidth={{ xs: `unset`, lg: `512px` }}
-            textAlign={{ xs: `center`, lg: `left` }}
-            mb="24px"
+          <Stack
+            flexDirection="column"
+            mr={{ xs: `unset`, lg: `34px` }}
+            alignItems={{ xs: `center`, lg: `unset` }}
           >
-            Guarda il nostro{` `}
-            <span className="brand-text">videocorso completo</span>
-          </Typography>
-          <Typography
-            fontWeight={400}
-            fontSize={{ xs: `16px`, lg: `18px` }}
-            lineHeight={{ xs: `24px`, lg: `27px` }}
-            color="#fff"
-            maxWidth={{ xs: `unset`, lg: `512px` }}
-            textAlign={{ xs: `center`, lg: `left` }}
-            mb="24px"
-          >
-            Il modo più veloce per scoprire {argomento} è mettere le mani in
-            pasta seguendo il nostro videocorso di {argomento}
-          </Typography>
-          <SeoLink isExternal={false} link={`/${slug}/`}>
-            <RoundedButton
-              size="large"
-              color="primary"
-              variant="contained"
-              sx={{
-                color: `#fff`,
-                fontSize: `18px`,
-                marginBottom: `24px`,
-              }}
+            <Typography
+              fontWeight={600}
+              fontSize={{ xs: `34px`, lg: `48px` }}
+              lineHeight={{ xs: `34px`, lg: `54px` }}
+              color="#fff"
+              maxWidth={{ xs: `unset`, lg: `512px` }}
+              textAlign={{ xs: `center`, lg: `left` }}
+              mb="24px"
             >
-              inizia ora
-            </RoundedButton>
-          </SeoLink>
-        </Stack>
+              Guarda il nostro{` `}
+              <span className="brand-text">videocorso completo</span>
+            </Typography>
+            <Typography
+              fontWeight={400}
+              fontSize={{ xs: `16px`, lg: `18px` }}
+              lineHeight={{ xs: `24px`, lg: `27px` }}
+              color="#fff"
+              maxWidth={{ xs: `unset`, lg: `512px` }}
+              textAlign={{ xs: `center`, lg: `left` }}
+              mb="24px"
+            >
+              Il modo più veloce per scoprire {argomento} è mettere le mani in
+              pasta seguendo il nostro videocorso di {argomento}
+            </Typography>
+            <SeoLink isExternal={false} link={`/${slug}/`}>
+              <RoundedButton
+                size="large"
+                color="primary"
+                variant="contained"
+                sx={{
+                  color: `#fff`,
+                  fontSize: `18px`,
+                  marginBottom: `24px`,
+                }}
+              >
+                inizia ora
+              </RoundedButton>
+            </SeoLink>
+          </Stack>
 
-        <StyledBox onClick={handleNavigate}>
-          {image ? (
-            <GatsbyImage image={image} alt={`Copertina ${argomento}`} />
-          ) : null}
-        </StyledBox>
-      </Stack>
+          <StyledBox onClick={handleNavigate}>
+            {image ? (
+              <GatsbyImage image={image} alt={`Copertina ${argomento}`} />
+            ) : null}
+          </StyledBox>
+        </Stack>
+      </Container>
     </Box>
   )
 }

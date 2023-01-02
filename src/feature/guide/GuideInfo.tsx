@@ -1,14 +1,12 @@
-
 import React from "react"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
 import { Info } from "../home"
-import { Project } from "./GuidesSection"
 
 type Props = {
-  projects: Project[] | null
-  courseMinutes: number | null
-  price: number | null
+  projects?: Queries.GuideQuery["allContentfulGuida"]["nodes"][number]["articoli_e_progetti"]
+  courseMinutes?: number | null
+  price?: number | null
 }
 
 export const PureCssStack = styled(Box)`
