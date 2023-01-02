@@ -1,5 +1,8 @@
+
 import React from "react"
-import { Info, PureCssStack } from "../home"
+import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
+import { Info } from "../home"
 import { Project } from "./GuidesSection"
 
 type Props = {
@@ -7,6 +10,28 @@ type Props = {
   courseMinutes: number | null
   price: number | null
 }
+
+export const PureCssStack = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  & > *:not(:first-of-type) {
+    margin-top: 16px;
+  }
+  @media screen and (min-width: 767px) {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    & > * {
+      margin-top: 0px;
+      &:not(:first-of-type) {
+        margin-top: 0px;
+        margin-left: 48px;
+      }
+    }
+  }
+`
 
 export const GuideInfo = ({ projects, courseMinutes, price }: Props) => (
   <PureCssStack>

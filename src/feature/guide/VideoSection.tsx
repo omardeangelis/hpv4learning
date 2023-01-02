@@ -5,6 +5,8 @@ import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import React from "react"
 import styled from "@emotion/styled"
 import { navigate } from "gatsby"
+import { RoundedButton } from "../../components/layout/RoundedButton"
+import SeoLink from "../../components/shared/SeoLink"
 
 type Props = {
   argomento: string
@@ -13,20 +15,18 @@ type Props = {
 }
 
 const StyledBox = styled(Box)`
-  width: 260px;
-  height: 145px;
+  width: 100%;
+  max-width: unset;
   border-radius: 16px;
   overflow: hidden;
   &:hover {
     cursor: pointer;
   }
-  @media screen and (min-width: 1024px) {
-    width: 280px;
-    height: 162px;
+  @media screen and (min-width: 687px) {
+    max-width: 480px;
   }
   @media screen and (min-width: 1024px) {
-    width: 692px;
-    height: 389px;
+    max-width: 692px;
   }
 `
 
@@ -37,11 +37,10 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
 
   return (
     <Box
-      height={{ xs: `506px`, lg: `546px` }}
+      height={{ xs: `536px`, lg: `566px` }}
       position="relative"
       sx={{ backgroundColor: `#11081F` }}
     >
-      lg:
       <Box
         height={{ xs: `266px`, lg: `433px` }}
         width={{ xs: `280px`, sm: `361px`, lg: `588px` }}
@@ -65,7 +64,11 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
         py={{ xs: `14px`, sm: `68px`, lg: `86px` }}
         px={{ xs: `36px`, lg: `42px` }}
       >
-        <Stack flexDirection="column" mr={{ xs: `unset`, lg: `34px` }}>
+        <Stack
+          flexDirection="column"
+          mr={{ xs: `unset`, lg: `34px` }}
+          alignItems={{ xs: `center`, lg: `unset` }}
+        >
           <Typography
             fontWeight={600}
             fontSize={{ xs: `34px`, lg: `48px` }}
@@ -90,6 +93,20 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
             Il modo più veloce per scoprire {argomento} è mettere le mani in
             pasta seguendo il nostro videocorso di {argomento}
           </Typography>
+          <SeoLink isExternal={false} link={`/${slug}/`}>
+            <RoundedButton
+              size="large"
+              color="primary"
+              variant="contained"
+              sx={{
+                color: `#fff`,
+                fontSize: `18px`,
+                marginBottom: `24px`,
+              }}
+            >
+              inizia ora
+            </RoundedButton>
+          </SeoLink>
         </Stack>
 
         <StyledBox onClick={handleNavigate}>

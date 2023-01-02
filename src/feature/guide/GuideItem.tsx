@@ -25,7 +25,6 @@ export type Props = {
 }
 
 const StyledBorderBox = styled(BorderBox)`
-  max-width: 369px;
   width: 100%;
   height: 104px;
   border-radius: 8px;
