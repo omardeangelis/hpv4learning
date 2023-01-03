@@ -151,7 +151,7 @@ const DiscordBanner = () => {
                     target="_blank"
                     href={
                       type === `discord`
-                        ? `https://discord.gg/pNhjB78F`
+                        ? `https://discord.gg/ZX2rPXx2BD`
                         : `https://www.youtube.com/c/HPVfilm`
                     }
                     style={{
