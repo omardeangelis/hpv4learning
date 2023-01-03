@@ -1,13 +1,25 @@
-import { isEmpty } from "lodash"
-import path from "path"
-import { Actions } from "gatsby"
+import { isArray, isEmpty } from "lodash"
+import path, { resolve } from "path"
+import { Actions, GatsbyNode } from "gatsby"
 import * as fs from "fs"
 import {
-  allCourseQuery,
   allCourseCategory,
   allProjectArticle,
   projectCategoriesPageQuery,
+  guideQuery,
 } from "./query"
+import {
+  getAllPaidAggregateCoursesStats,
+  getAllReview,
+  getAllPaidCourses,
+} from "./src/server/udemy"
+import {
+  CourseQueryProps,
+  freeCourseQuery,
+  udemyCourseQuery,
+  createCoursePages,
+} from "./src/server/gatsby/pages/courses/createCoursePages"
+import { isProduction } from "./src/constants"
 
 type RedirectType = { source: string; target: string; status: string }
 
@@ -15,25 +27,74 @@ const redirects: RedirectType[] = JSON.parse(
   fs.readFileSync(`./redirects.json`, `utf-8`)
 )
 
+export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
+  createNodeId,
+  createContentDigest,
+  actions,
+}) => {
+  const { createNode } = actions
+  try {
+    const reviews = await getAllReview()
+    if (isArray(reviews)) {
+      reviews.forEach((review) => {
+        createNode({
+          ...review,
+          id: createNodeId(review.id.toString()),
+          internal: {
+            type: `UdemyReview`,
+            content: JSON.stringify(review),
+            contentDigest: createContentDigest(review),
+          },
+        })
+      })
+    }
+  } catch (error) {
+    throw new Error(`We Ragazzo, niente review`)
+  }
+  try {
+    const courseStats = await getAllPaidAggregateCoursesStats()
+    createNode({
+      ...courseStats,
+      id: createNodeId(`we-ragazzo`),
+      internal: {
+        type: `UdemyCoursesStats`,
+        content: JSON.stringify(courseStats),
+        contentDigest: createContentDigest(courseStats),
+      },
+    })
+  } catch (error) {
+    throw new Error(`We Ragazzo, niente statistiche dei corsi`)
+  }
+
+  try {
+    const courses = await getAllPaidCourses()
+    if (isArray(courses)) {
+      courses.forEach((course) => {
+        createNode({
+          ...course,
+          courseId: course.id,
+          id: createNodeId(course.id),
+          internal: {
+            type: `UdemyPaidCourse`,
+            content: JSON.stringify(course),
+            contentDigest: createContentDigest(course),
+          },
+        })
+      })
+    }
+  } catch (error) {
+    throw new Error(`We Ragazzo, niente corsi ${error}`)
+  }
+}
+
 export const createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions as Actions
-  const singleCourseQuery = await graphql(allCourseQuery)
   const courseCategoryQuery = await graphql(allCourseCategory)
   const projectArticleQuery = await graphql(allProjectArticle)
   const categoryProjectQuery = await graphql(projectCategoriesPageQuery)
-
-  singleCourseQuery.data.allContentfulCorsi.nodes.forEach((node) => {
-    createPage({
-      path: node.slug,
-      component: path.resolve(`./src/template/SingleCoursePage.tsx`),
-      context: {
-        slug: node.slug,
-        categorySlug: node.category
-          .filter((category) => category.slug.toLowerCase() !== `gratuiti`)[0]
-          .slug.toLowerCase(),
-      },
-    })
-  })
+  const allGuideQuery = await graphql(guideQuery)
+  const freeCourses = (await graphql(freeCourseQuery)) as CourseQueryProps
+  const udemyCourses = (await graphql(udemyCourseQuery)) as CourseQueryProps
 
   courseCategoryQuery.data.allContentfulCategory.nodes.forEach((category) => {
     const {
@@ -91,6 +152,7 @@ export const createPages = async ({ graphql, actions }) => {
               id: category.id,
             },
           })
+          return null
         })
       }
     }
@@ -117,6 +179,15 @@ export const createPages = async ({ graphql, actions }) => {
     })
   })
 
+  if (!isProduction) {
+    allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
+      createPage({
+        path: `/guide/${guida.slug}/`,
+        component: path.resolve(`./src/template/Guide.tsx`),
+      })
+    })
+  }
+
   redirects.forEach((redirect: RedirectType) => {
     createRedirect({
       fromPath: redirect.source,
@@ -125,4 +196,19 @@ export const createPages = async ({ graphql, actions }) => {
       statusCode: Number(redirect.status),
     })
   })
+
+  try {
+    createCoursePages({
+      corsi: freeCourses.data.allContentfulCorsi.nodes,
+      createPage,
+      component: resolve(`./src/template/courses/FreeCourse.tsx`),
+    })
+    createCoursePages({
+      corsi: udemyCourses.data.allContentfulCorsi.nodes,
+      createPage,
+      component: resolve(`./src/template/courses/UdemyCourseTemplate.tsx`),
+    })
+  } catch (error) {
+    throw new Error(`We Ragazzo, volevi creare i corsi ? E invece: ${error}`)
+  }
 }

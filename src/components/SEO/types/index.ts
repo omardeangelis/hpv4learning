@@ -66,15 +66,20 @@ export type ArticleSchemaProps = {
   authorName: string
 }
 
+export type Review = Pick<
+  Queries.UdemyReview,
+  "content" | "userName" | "rating"
+>
 export type CourseSchemsProps = {
   title: string
   description: string
   image: string
   isAccessibleForFree: boolean
-  audienceType: string[]
+  audienceType: readonly Queries.Maybe<string>[]
   about: string
-  creator: string | string[]
-  rating: string
+  creator: string | (string | null | undefined)[] | null | undefined
+  rating?: string
   coursePrerequisites: string[]
-  recensioniRicevute: number
+  recensioniRicevute?: number
+  reviews?: readonly Review[]
 }

@@ -5,17 +5,19 @@ import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
+import { Box } from "@mui/system"
 
 type Props = {
   title: string
-  list: string[]
+  list: readonly Queries.Maybe<string>[]
   icon: React.ReactElement
 }
 
-const ListSection = ({ title, list, icon }: Props) => (
-  <>
+export const ListSection = ({ title, list, icon }: Props) => (
+  <Box>
     <Typography
       fontWeight={600}
+      component="h3"
       sx={{
         fontSize: { xs: `24px`, lg: `36px` },
       }}
@@ -41,7 +43,6 @@ const ListSection = ({ title, list, icon }: Props) => (
           </ListItemIcon>
           <ListItemText>
             <Typography
-              color="grey.500"
               sx={{
                 fontSize: { xs: `14px`, lg: `18px` },
               }}
@@ -52,7 +53,5 @@ const ListSection = ({ title, list, icon }: Props) => (
         </ListItem>
       ))}
     </List>
-  </>
+  </Box>
 )
-
-export default ListSection

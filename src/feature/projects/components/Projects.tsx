@@ -39,7 +39,7 @@ const CustomStack = styled(Box)`
 `
 
 export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
-  const rows = React.useMemo(() => rowalizer(data, 2), [])
+  const rows = React.useMemo(() => rowalizer(data, 2), [data])
   return (
     <CustomStack>
       {rows?.map((row, index) => (
@@ -52,6 +52,7 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
         >
           {row.map((progetto) => (
             <SeoLink
+              key={progetto.slug}
               isExternal={false}
               link={`/progetti/${progetto?.project_category?.[0]?.slug}/${progetto?.slug}/`}
               style={{

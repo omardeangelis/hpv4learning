@@ -60,6 +60,7 @@ const IndexPage = () => {
               fontSize: { xs: `36px`, lg: `48px` },
               fontWeight: 600,
             }}
+            id="corsi"
           >
             I nostri <span className="brand-text">corsi</span>
           </Typography>

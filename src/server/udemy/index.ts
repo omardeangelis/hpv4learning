@@ -17,12 +17,14 @@ import {
 } from "./types"
 import { udemyFetch } from "./utils"
 
+export * from "./api/getAllPaidCourses"
+
 export const getSingleCourseStatsById = async (
   id: number
 ): Promise<GetSingleCourseStatsResponse | ResponseError> => {
   try {
     const res = await udemyFetch(
-      `https://www.udemy.com/api-2.0/courses/${id}/?page=1&page_size=32&ordering=-create&skip_caching=true&fields[course]=title,num_subscribers,num_subscribers_recent,rating,content_length_video`
+      `https://www.udemy.com/api-2.0/courses/${id}/?page=1&page_size=32&ordering=-create&skip_caching=true&fields[course]=title,num_subscribers,num_subscribers_recent,rating,content_length_video,num_lectures,num_reviews`
     )
     const response = (await res.json()) as SingleCourseStatsResponse
     return parseSingleCourseStats(response)
@@ -34,7 +36,7 @@ export const getSingleCourseStatsById = async (
   }
 }
 
-export const getAllPaidCoursesStats = async (): Promise<
+export const getAllPaidAggregateCoursesStats = async (): Promise<
   GetAllCourseStatsResponse | ResponseError
 > => {
   try {
@@ -56,7 +58,7 @@ export const getSingleCourseReviewsById = async (
       `https://www.udemy.com/api-2.0/courses/${id}/reviews/?page=1&page_size=100`
     )
     const response = (await res.json()) as SingleCourseReviewsResponse
-    return parseSingleCourseReviews(response)
+    return parseSingleCourseReviews(response, id)
   } catch (error) {
     return {
       error,

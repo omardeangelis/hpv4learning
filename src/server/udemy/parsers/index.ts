@@ -1,7 +1,6 @@
 import { uniqBy } from "lodash"
 import {
   GetAllCourseStatsResponse,
-  GetSingleCourseStatsResponse,
   SingleCourseReviewsResponse,
   SingleCourseStatsResponse,
   SingleReview,
@@ -11,21 +10,24 @@ import {
   VisibleInstructor,
 } from "../types"
 
-export const parseSingleCourseStats = (
-  response: SingleCourseStatsResponse
-): GetSingleCourseStatsResponse => {
+export const parseSingleCourseStats = (response: SingleCourseStatsResponse) => {
   const courseStats = {
     title: response.title,
     rating: Number(response.rating.toFixed(1)),
     totalSubscribers: response.num_subscribers,
     courseHours: Math.ceil(response.content_length_video / 3600),
+    num_lectures: response.num_lectures,
+    num_reviews: response.num_reviews,
+    id: response.id,
   }
 
   return courseStats
 }
 
+export type SingleParsedCourse = ReturnType<typeof parseSingleCourseStats>
+
 export const parseAllPaidCoursesStats = (
-  response: SingleCourseStatsResponse[]
+  response: SingleParsedCourse[]
 ): GetAllCourseStatsResponse => {
   let totalSubscribers = 0
   let totalRating = 0
@@ -45,15 +47,18 @@ export const parseAllPaidCoursesStats = (
 }
 
 export const parseSingleCourseReviews = (
-  response: SingleCourseReviewsResponse
+  response: SingleCourseReviewsResponse,
+  course_id: number
 ): SingleReview[] => {
   const contentReviews = response.results.filter(
     (el) => el.content !== `` && el.rating >= 4
   )
   return contentReviews.map((el) => ({
+    courseId: course_id,
     userName: el.user.name,
     rating: el.rating,
     content: el.content,
+    id: el.id,
   }))
 }
 
@@ -61,8 +66,8 @@ export const parseInstructorData = (
   response: InstructorDataResponse
 ): ParsedInstructorDataResponse[] => {
   const instructors: VisibleInstructor[] = []
-  response.results.map((course: TaughtCourse) => {
-    course.visible_instructors.map((instructor: VisibleInstructor) => {
+  response.results.forEach((course: TaughtCourse) => {
+    course.visible_instructors.forEach((instructor: VisibleInstructor) => {
       instructors.push(instructor)
     })
   })

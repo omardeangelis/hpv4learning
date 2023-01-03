@@ -34,7 +34,7 @@ export const Info = ({
   subtitle,
   isLoading,
 }: {
-  title?: number
+  title?: number | string
   subtitle: string
   isLoading?: boolean
 }) => (

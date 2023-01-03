@@ -12,19 +12,20 @@ const StyledBox = styled(Box)`
   }
 `
 
-const FrameVideo = ({ video }: { video: string }) => {
+export const PreviewVideo = ({ video }: { video: string }) => {
   const [load, setLoad] = React.useState<boolean>(true)
 
   return (
     <StyledBox
       width="100%"
-      height="0"
+      height="auto"
       borderRadius="16px"
       overflow="hidden"
       position="relative"
       pb={load ? `0px` : `56.25%`}
     >
       <iframe
+        title={video}
         style={{ display: `none` }}
         onLoad={() => setLoad(false)}
         src={video}
@@ -43,17 +44,17 @@ const FrameVideo = ({ video }: { video: string }) => {
           id="player"
           src={`${video}?enablejsapi=1`}
           title="YouTube video player"
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className="video"
+          style={{
+            border: `0px`,
+          }}
         />
       )}
     </StyledBox>
   )
 }
-
-export default FrameVideo
 
 // Permette di inviare EVENTI al play, stop e complete state del video
 // function handleTagLoading() {

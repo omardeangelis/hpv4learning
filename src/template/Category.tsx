@@ -33,7 +33,7 @@ type Props = {
 }
 
 type StyledProps = {
-  full: boolean
+  full?: string
 }
 
 const CustomStack = styled.div<StyledProps>`
@@ -64,7 +64,7 @@ const Category = ({
       data.allContentfulCorsi.nodes.filter(
         (corso) => corso.categoria && corso.categoria?.toLowerCase() !== `free`
       ),
-    []
+    [data.allContentfulCorsi.nodes]
   )
 
   return (
@@ -124,7 +124,7 @@ const Category = ({
                   mt: { xs: `16px`, lg: `48px` },
                 }}
               >
-                <CustomStack full={row.length === 3}>
+                <CustomStack full={row.length === 3 ? `false` : undefined}>
                   {row.map((course) => (
                     <CourseContainer key={course.slug}>
                       <CourseContent {...course} />
@@ -193,25 +193,22 @@ const Category = ({
                   },
                 }}
               >
-                
-                {couponCourses.map((corso) => {
-                  return (
-                    <Box
-                      key={corso.titolo}
-                      sx={{
-                        mb: "12px",
-                      }}
-                    >
-                      <CourseBanner
-                        title={corso.titolo}
-                        img={corso.copertina}
-                        prezzo={corso.prezzo}
-                        link={corso.promoLink as string}
-                        date={corso.updatedAt}
-                      />
-                    </Box>
-                  );
-                })}
+                {couponCourses.map((corso) => (
+                  <Box
+                    key={corso.titolo}
+                    sx={{
+                      mb: `12px`,
+                    }}
+                  >
+                    <CourseBanner
+                      title={corso.titolo}
+                      img={corso.copertina}
+                      prezzo={corso.prezzo}
+                      link={corso.promoLink as string}
+                      date={corso.updatedAt}
+                    />
+                  </Box>
+                ))}
               </Box>
             </Container>
           </Box>

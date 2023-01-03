@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { SingleParsedCourse } from "../../server/udemy/parsers"
 import {
   GetAllCourseStatsResponse,
-  GetSingleCourseStatsResponse,
   SingleReview,
 } from "../../server/udemy/types"
 
@@ -17,10 +17,7 @@ export const udemySlice = createApi({
       query: () => `/api/udemy/get-all-courses-stats`,
       keepUnusedDataFor: 60 * 1000 * 60 * 6,
     }),
-    getSingleCourseStatsById: builder.query<
-      GetSingleCourseStatsResponse,
-      number
-    >({
+    getSingleCourseStatsById: builder.query<SingleParsedCourse, number>({
       query: (id) => `/api/udemy/get-single-course-stats-by-id?id=${id}`,
     }),
     getSingleCourseReviewById: builder.query<SingleReview[], number>({
