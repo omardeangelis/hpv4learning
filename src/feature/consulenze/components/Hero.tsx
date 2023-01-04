@@ -81,15 +81,7 @@ export const Hero = () => {
 
       setTimeout(() => setAnimationCompleted(false), 750)
     }
-  }, [
-    hasMounted,
-    buttonElement,
-    placeholderBtn,
-    buttonElement?.classList,
-    animationCompleted,
-    ref.current?.getBoundingClientRect(),
-    ref,
-  ])
+  }, [hasMounted, buttonElement, placeholderBtn, animationCompleted, ref])
 
   useEffect(() => {
     if (hasMounted) {
@@ -108,13 +100,13 @@ export const Hero = () => {
         right="0px"
         width="100%"
         sx={{
-          display: { xs: `none`, lg: `block` },
+          display: { xs: `none`, xl: `block` },
         }}
       >
         <StaticImage
           src="../images/desktop-hero-layer.png"
           alt="Scegli il sito su misura per te"
-          placeholder="tracedSVG"
+          placeholder="blurred"
         />
       </Box>
 
@@ -126,13 +118,13 @@ export const Hero = () => {
         right="0px"
         width="100%"
         sx={{
-          display: { xs: `block`, lg: `none` },
+          display: { xs: `block`, xl: `none` },
         }}
       >
         <StaticImage
           src="../images/small-overlay.png"
           alt="Scegli il sito su misura per te"
-          placeholder="tracedSVG"
+          placeholder="blurred"
         />
       </Box>
       <Box
@@ -141,13 +133,13 @@ export const Hero = () => {
         right="0px"
         width="100%"
         sx={{
-          bottom: { xs: `0px`, md: `-50px` },
+          bottom: { xs: `0px`, md: `-80px` },
         }}
       >
         <StaticImage
           src="../images/bottom-hero.png"
           alt="Guadagna Grazie ad un Sito performante"
-          placeholder="tracedSVG"
+          placeholder="blurred"
         />
       </Box>
 
@@ -164,7 +156,7 @@ export const Hero = () => {
         <StaticImage
           src="../images/mongolfiera.png"
           alt="Ottieni clienti grazie ad un sito web"
-          placeholder="tracedSVG"
+          placeholder="blurred"
         />
       </Box>
       <Box display="flex" alignItems="center" justifyContent="center">

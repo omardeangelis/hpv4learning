@@ -16,36 +16,32 @@ const Consulenze = () => (
   </Layout>
 )
 
-export const Head = () => {
-  const breadcrumbs = React.useMemo(
-    () => [
-      {
-        text: `Home`,
-        link: `/`,
-      },
-      {
-        text: `Contattaci`,
-        link: `/consulenze/`,
-      },
-    ],
-    []
-  )
-  return (
-    <>
-      <MetaDecorator
-        metaTitle="Contattaci: Siti Web per professionisti"
-        metaDescription="Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web"
-        disableSlogan
-      />
-      <WebPageSchema
-        title="Contattaci: Siti Web per professionisti"
-        description="Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web"
-        type="ContactPage"
-        breadcrumbs={breadcrumbs}
-      />
-      <LinkHandler />
-    </>
-  )
-}
+const breadcrumbs = [
+  {
+    text: `Home`,
+    link: `/`,
+  },
+  {
+    text: `Contattaci`,
+    link: `/consulenze/`,
+  },
+]
+
+export const Head = () => (
+  <>
+    <MetaDecorator
+      metaTitle="Contattaci: Siti Web per professionisti"
+      metaDescription="Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web"
+      disableSlogan
+    />
+    <WebPageSchema
+      title="Contattaci: Siti Web per professionisti"
+      description="Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web"
+      type="ContactPage"
+      breadcrumbs={breadcrumbs}
+    />
+    <LinkHandler />
+  </>
+)
 
 export default Consulenze
