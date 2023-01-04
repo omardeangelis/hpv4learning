@@ -98,7 +98,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
         width: { xs: `135px`, sm: `160px`, xl: `220px` },
         height: { xs: `135px`, sm: `160px`, xl: `220px` },
         left: `9.86%`,
-        top: { xs: `2%`, lg: `10%` },
+        top: { xs: `1%`, lg: `10%` },
         animationDelay: `0.3s`,
       }}
     >
@@ -132,7 +132,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
         width: { xs: `110px`, sm: `180px`, xl: `250px` },
         height: { xs: `110px`, sm: `180px`, xl: `250px` },
         right: `8%`,
-        top: `8%`,
+        top: `5%`,
         animationDelay: `0.4s`,
       }}
     >
