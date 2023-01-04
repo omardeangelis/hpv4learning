@@ -98,7 +98,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
         width: { xs: `135px`, sm: `160px`, xl: `220px` },
         height: { xs: `135px`, sm: `160px`, xl: `220px` },
         left: `9.86%`,
-        top: { xs: `4%`, lg: `10%` },
+        top: { xs: `2%`, lg: `10%` },
         animationDelay: `0.3s`,
       }}
     >
@@ -115,7 +115,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
         width: { xs: `110px`, sm: `175px`, xl: `250px` },
         height: { xs: `110px`, sm: `175px`, xl: `250px` },
         left: { xs: `4%`, lg: `10.5%` },
-        bottom: { xs: `7%`, lg: `10%` },
+        bottom: { xs: `5%`, lg: `10%` },
         animationDelay: `0.5s`,
       }}
     >
@@ -132,7 +132,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
         width: { xs: `110px`, sm: `180px`, xl: `250px` },
         height: { xs: `110px`, sm: `180px`, xl: `250px` },
         right: `8%`,
-        top: `10%`,
+        top: `8%`,
         animationDelay: `0.4s`,
       }}
     >
@@ -149,7 +149,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
         width: { xs: `110px`, sm: `195px`, xl: `245px` },
         height: { xs: `110px`, sm: `195px`, xl: `245px` },
         right: `12%`,
-        bottom: { xs: `3%`, lg: `12%` },
+        bottom: { xs: `2%`, lg: `12%` },
         animationDelay: `0.7s`,
       }}
     >
