@@ -24,7 +24,7 @@ const StyledBox = styled(Box)`
 
 type Props = {
   title: string
-  date: Date
+  date: Date | string
   prezzo: number
   link: string
   img: ImageDataLike
