@@ -8,7 +8,10 @@ import { CourseSchemsProps, Review } from "../types"
 const createReviews = (reviews: readonly Review[]) =>
   reviews.map((review) => ({
     "@type": `Review`,
-    author: review.userName,
+    author: {
+      "@type": `Person`,
+      name: review.userName,
+    },
     reviewBody: review.content,
     reviewRating: {
       "@type": `Rating`,
@@ -47,7 +50,6 @@ const useCourseSchema = ({
   }, [creator])
 
   const hasReview = reviews && !isEmpty(reviews)
-  console.log(reviews, hasReview)
 
   const courseJson = React.useMemo(
     () => ({
