@@ -27,7 +27,7 @@ const ErrorModal = ({ children }: Props) => {
           <StaticImage
             src="./images/close.png"
             alt="C'è stato un errore"
-            placeholder="tracedSVG"
+            placeholder="blurred"
           />
         </Box>
       </ModalElipse>

@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "@emotion/styled"
-import Box from "@mui/system/Box"
+import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { StaticImage } from "gatsby-plugin-image"
 import { useProviderModalContext } from "../../feature/consulenze/context/providerModalContext"
@@ -73,7 +73,7 @@ export const ModalTab = ({ isgmail, onClick }: Props) => {
             <StaticImage
               src="./images/google-icon.png"
               alt="Google"
-              placeholder="tracedSVG"
+              placeholder="blurred"
             />
           </ImageBox>
           <Typography
@@ -99,7 +99,7 @@ export const ModalTab = ({ isgmail, onClick }: Props) => {
             <StaticImage
               src="./images/form-line.png"
               alt="Form"
-              placeholder="tracedSVG"
+              placeholder="blurred"
             />
           </ImageBox>
           <Typography

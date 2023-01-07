@@ -1,7 +1,7 @@
 import React from "react"
-import Box from "@mui/system/Box"
-import Container from "@mui/system/Container"
-import Stack from "@mui/system/Stack"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Stack from "@mui/material/Stack"
 
 import { StaticImage } from "gatsby-plugin-image"
 import Typography from "@mui/material/Typography"
@@ -57,7 +57,7 @@ const SuccessModal = React.memo(() => {
           <StaticImage
             src="../../../components/modal/images/success.png"
             alt="Completato con successo"
-            placeholder="tracedSVG"
+            placeholder="blurred"
           />
         </Box>
       </ModalElipse>
