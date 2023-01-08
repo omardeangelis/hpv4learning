@@ -1,7 +1,7 @@
 import React from "react"
-import Box from "@mui/system/Box"
-import Container from "@mui/system/Container"
-import Stack from "@mui/system/Stack"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { StaticImage } from "gatsby-plugin-image"
@@ -59,7 +59,7 @@ const WelcomeModal = ({ onContinue }: Props) => {
               <StaticImage
                 src="../../../components/modal/images/calendar.png"
                 alt="Calendario"
-                placeholder="tracedSVG"
+                placeholder="blurred"
               />
             </Box>
           </Stack>

@@ -69,6 +69,7 @@ const CourseContent = ({
               transform: `translateZ(0)`,
             }}
           >
+            {}
             <GatsbyImage
               image={getImage(copertina) as IGatsbyImageData}
               alt={`immagine di copertina`}
@@ -118,7 +119,7 @@ const CourseContent = ({
               fontSize="16px"
               color="gray.700"
               dangerouslySetInnerHTML={{
-                __html: createBrandText(titolo),
+                __html: createBrandText(titolo) as string,
               }}
             />
           </Box>

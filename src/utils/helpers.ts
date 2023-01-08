@@ -24,7 +24,7 @@ export const convertToHHMMSS = (time: number, short = false) => {
   return `${H}h ${i}m ${s}s`
 }
 
-export const rowalizer = <T>(array: T[], itemPerRow = 3) => {
+export const rowalizer = <T>(array: T[] | readonly T[], itemPerRow = 3) => {
   if (array) {
     const newArray: T[][] = []
     const rows = Math.ceil(array.length / itemPerRow)
@@ -53,7 +53,7 @@ export function cleanStringFromHtlmTags(text?: string | null) {
     .replace(/(<p>&nbsp;<\/p>)|(<h2><span>&nbsp;<\/span><\/h2>)/g, ``)
 }
 
-export const isExpired = (date: Date) =>
+export const isExpired = (date: Date | string) =>
   dayjs().isAfter(dayjs(date).add(30, `day`), `day`)
 
 // Permette di dispatchare eventi Google

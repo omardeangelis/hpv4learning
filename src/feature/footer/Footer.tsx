@@ -70,7 +70,7 @@ export const Footer = ({
                 <StaticImage
                   src="../../images/logo.png"
                   alt="Logo Hpv 4 Learning"
-                  placeholder="tracedSVG"
+                  placeholder="dominantColor"
                   layout="fixed"
                   height={70}
                   width={70}

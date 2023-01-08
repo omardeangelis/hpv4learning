@@ -108,7 +108,7 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
                 <StaticImage
                   src="../../../images/logo.png"
                   alt="Logo Hpv 4 Learning"
-                  placeholder="tracedSVG"
+                  placeholder="blurred"
                   layout="fixed"
                   height={70}
                   width={70}

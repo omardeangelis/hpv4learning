@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "@emotion/styled"
-import Box from "@mui/system/Box"
-import Container from "@mui/system/Container"
-import Stack from "@mui/system/Stack"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { graphql, useStaticQuery } from "gatsby"
 import {
@@ -118,7 +118,7 @@ export const CardsSection = () => {
                       <StaticImage
                         src="../images/small-overlay.png"
                         alt={card.title}
-                        placeholder="tracedSVG"
+                        placeholder="dominantColor"
                       />
                     </Box>
                   </Box>
@@ -217,7 +217,7 @@ export const CardsSection = () => {
 export const StandardImageFragment = graphql`
   fragment FileImageFragment on File {
     childImageSharp {
-      gatsbyImageData(placeholder: TRACED_SVG)
+      gatsbyImageData(placeholder: DOMINANT_COLOR)
     }
   }
 `

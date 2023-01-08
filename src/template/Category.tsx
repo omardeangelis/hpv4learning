@@ -11,26 +11,7 @@ import LinkHandler from "../components/SEO/components/LinkHandler"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import Layout from "../components/shared/layout"
-import { CoursePreviewProps } from "../types/course"
 import { rowalizer } from "../utils/helpers"
-
-type Props = {
-  pageContext: {
-    description: string
-    name: string
-    alias?: string
-  }
-  data: {
-    allContentfulCorsi: {
-      nodes: (CoursePreviewProps & {
-        oreDiLezione: number
-        livello: string
-        updatedAt: Date
-        prezzo: number
-      })[]
-    }
-  }
-}
 
 type StyledProps = {
   full?: string
@@ -54,11 +35,22 @@ const CustomStack = styled.div<StyledProps>`
   }
 `
 
-const Category = ({
-  pageContext: { description, name, alias },
-  data,
-}: Props) => {
-  const rows = React.useMemo(() => rowalizer(data.allContentfulCorsi.nodes), [])
+type ContextProps = {
+  description: string
+  name: string
+  alias: string
+}
+
+const Category: React.FC<
+  PageProps<Queries.CategoryCourseQuery, ContextProps>
+> = ({ pageContext: { description, name, alias }, data }) => {
+  const rows = React.useMemo(
+    () =>
+      data?.allContentfulCorsi?.nodes
+        ? rowalizer(data?.allContentfulCorsi?.nodes)
+        : null,
+    [data?.allContentfulCorsi?.nodes]
+  )
   const couponCourses = React.useMemo(
     () =>
       data.allContentfulCorsi.nodes.filter(
@@ -117,9 +109,9 @@ const Category = ({
           }}
         >
           <Container maxWidth="lg">
-            {rows?.map((row, index) => (
+            {rows?.map((row) => (
               <Box
-                key={`${name}-section-${index}`}
+                key={`${name}-section`}
                 sx={{
                   mt: { xs: `16px`, lg: `48px` },
                 }}
@@ -127,7 +119,7 @@ const Category = ({
                 <CustomStack full={row.length === 3 ? `false` : undefined}>
                   {row.map((course) => (
                     <CourseContainer key={course.slug}>
-                      <CourseContent {...course} />
+                      <CourseContent {...(course as any)} />
                     </CourseContainer>
                   ))}
                 </CustomStack>
@@ -193,22 +185,28 @@ const Category = ({
                   },
                 }}
               >
-                {couponCourses.map((corso) => (
-                  <Box
-                    key={corso.titolo}
-                    sx={{
-                      mb: `12px`,
-                    }}
-                  >
-                    <CourseBanner
-                      title={corso.titolo}
-                      img={corso.copertina}
-                      prezzo={corso.prezzo}
-                      link={corso.promoLink as string}
-                      date={corso.updatedAt}
-                    />
-                  </Box>
-                ))}
+                {couponCourses.map((corso) =>
+                  corso.titolo &&
+                  corso.copertina &&
+                  corso.prezzo &&
+                  corso.promoLink &&
+                  corso.updatedAt ? (
+                    <Box
+                      key={corso.titolo}
+                      sx={{
+                        mb: `12px`,
+                      }}
+                    >
+                      <CourseBanner
+                        title={corso.titolo}
+                        img={corso.copertina}
+                        prezzo={corso.prezzo}
+                        link={corso.promoLink}
+                        date={corso.updatedAt}
+                      />
+                    </Box>
+                  ) : null
+                )}
               </Box>
             </Container>
           </Box>
@@ -218,12 +216,7 @@ const Category = ({
   )
 }
 
-export const Head = ({
-  pageContext,
-}: PageProps<
-  unknown,
-  { description: string; name: string; alias?: string }
->) => {
+export const Head = ({ pageContext }: PageProps<unknown, ContextProps>) => {
   const { description, name, alias } = pageContext
   const breadcrumbs = React.useMemo(
     () => [
@@ -233,7 +226,7 @@ export const Head = ({
         link: `/corsi/${name.toLowerCase()}/`,
       },
     ],
-    []
+    [alias, name]
   )
   return (
     <>

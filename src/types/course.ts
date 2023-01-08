@@ -1,11 +1,9 @@
 import { ImageDataLike } from "gatsby-plugin-image"
 
 export type CoursePreviewProps = {
-  copertina: ImageDataLike & {
-    file?: {
-      url: string
-    }
-  }
+  copertina: NonNullable<
+    Queries.CategoryCourseQuery["allContentfulCorsi"]["nodes"][number]
+  >["copertina"]
   slug: string
   titolo: string
   couponLink?: string
