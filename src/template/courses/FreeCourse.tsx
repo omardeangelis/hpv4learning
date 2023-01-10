@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import { Button, Divider, Typography } from "@mui/material"
 import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import { graphql, PageProps } from "gatsby"
@@ -10,6 +10,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import PersonIcon from "@mui/icons-material/Person"
 import { Stack } from "@mui/system"
 import isEmpty from "lodash/isEmpty"
+import TimerIcon from "@mui/icons-material/Timer"
+import CodeIcon from "@mui/icons-material/Code"
 import Layout from "../../components/shared/layout"
 import {
   CourseAlignment,
@@ -21,6 +23,10 @@ import {
   MarkdownP,
   ListSection,
   CustomStack,
+  BannerWrapper,
+  BannerBody,
+  BannerAction,
+  BannerActionIcon,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
@@ -297,6 +303,64 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                     durata={contentfulCorsi?.oreDiLezione as number}
                     progetti={contentfulCorsi?.progetti?.length || 0}
                   />
+                </Box>
+                <Box mt="24px">
+                  <BannerWrapper width="100%">
+                    <BannerBody>
+                      <Box
+                        maxWidth="64px"
+                        height="36px"
+                        width="100%"
+                        sx={{
+                          borderRadius: `4px`,
+                          overflow: `hidden`,
+                          background: `red`,
+                          transform: `translateZ(0)`,
+                        }}
+                      >
+                        {/* <GatsbyImage image={undefined} alt="text" /> */}
+                      </Box>
+                      <Box ml="8px" width="100%">
+                        <Typography
+                          sx={{
+                            fontSize: `14px`,
+                            lineHeight: `18px`,
+                            fontWeight: 600,
+                          }}
+                        >
+                          Continua ad imparare
+                        </Typography>
+                        <Box mt="4px">
+                          <Typography
+                            sx={{
+                              fontSize: `12px`,
+                              lineHeight: `18px`,
+                            }}
+                          >
+                            Lorem ipsum dolor sit amet....
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </BannerBody>
+                    <Divider
+                      sx={{
+                        my: `12px`,
+                      }}
+                    />
+                    <BannerAction isFree>
+                      <BannerActionIcon
+                        icon={<CodeIcon fontSize="small" />}
+                        text="17.5"
+                      />
+                      <BannerActionIcon
+                        icon={<TimerIcon fontSize="small" />}
+                        text="17.5"
+                      />
+                      <Button variant="outlined" color="primary" size="small">
+                        Inizia
+                      </Button>
+                    </BannerAction>
+                  </BannerWrapper>
                 </Box>
               </Box>
             ) : null}
