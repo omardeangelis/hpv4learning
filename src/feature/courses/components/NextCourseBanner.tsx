@@ -1,11 +1,14 @@
-import { Button, Divider, Typography } from "@mui/material"
-import { Box, BoxProps } from "@mui/system"
+import Typography from "@mui/material/Typography"
+import Divider from "@mui/material/Divider"
+import Button from "@mui/material/Button"
+import Box, { BoxProps } from "@mui/system/Box"
 import React from "react"
 import StarIcon from "@mui/icons-material/Star"
 import PersonIcon from "@mui/icons-material/Person"
 import TimerIcon from "@mui/icons-material/Timer"
 import CodeIcon from "@mui/icons-material/Code"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { navigate } from "gatsby"
 import {
   BannerWrapper,
   BannerBody,
@@ -69,7 +72,11 @@ const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
 }
 
 export const FreeBannerCourse = () => {
-  const { durata, category } = useCourseBannerContext()
+  const { durata, category, slug } = useCourseBannerContext()
+
+  const handleNavigate = React.useCallback(() => {
+    navigate(`/${slug}/`)
+  }, [slug])
 
   return (
     <NextCourseBanner>
@@ -86,7 +93,12 @@ export const FreeBannerCourse = () => {
             content={category}
           />
         ) : null}
-        <Button variant="outlined" color="primary" size="small">
+        <Button
+          variant="outlined"
+          color="primary"
+          size="small"
+          onClick={handleNavigate}
+        >
           Inizia
         </Button>
       </BannerAction>
@@ -95,8 +107,10 @@ export const FreeBannerCourse = () => {
 }
 
 export const PayableBannerCourse = () => {
-  const { students, avgVote } = useCourseBannerContext()
-
+  const { students, avgRating, slug } = useCourseBannerContext()
+  const handleNavigate = React.useCallback(() => {
+    navigate(`/${slug}/`)
+  }, [slug])
   return (
     <NextCourseBanner>
       <BannerAction>
@@ -106,13 +120,18 @@ export const PayableBannerCourse = () => {
             content={students}
           />
         ) : null}
-        {avgVote ? (
+        {avgRating ? (
           <BannerActionIcon
             icon={<StarIcon fontSize="small" />}
-            content={avgVote}
+            content={avgRating}
           />
         ) : null}
-        <Button variant="outlined" color="primary" size="small">
+        <Button
+          variant="outlined"
+          color="primary"
+          size="small"
+          onClick={handleNavigate}
+        >
           Inizia
         </Button>
       </BannerAction>

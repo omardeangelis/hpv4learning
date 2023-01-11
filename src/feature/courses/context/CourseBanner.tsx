@@ -6,7 +6,7 @@ type ContextProps = {
   slug?: Queries.Maybe<string>
   image?: ImageDataLike
   students?: Queries.Maybe<number>
-  avgVote?: Queries.Maybe<number>
+  avgRating?: Queries.Maybe<number>
   category?: Queries.Maybe<string>
   durata?: Queries.Maybe<string>
 }

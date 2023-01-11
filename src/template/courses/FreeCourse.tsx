@@ -24,6 +24,7 @@ import {
   ListSection,
   CustomStack,
   FreeBannerCourse,
+  PayableBannerCourse,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
@@ -42,7 +43,7 @@ import { CourseBannerProvider } from "../../feature/courses/context/CourseBanner
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
 }) => {
-  const { contentfulCorsi } = data
+  const { contentfulCorsi, udemyPaidCourse } = data
   const hasBanner = React.useMemo(
     () => contentfulCorsi?.livello && contentfulCorsi.oreDiLezione,
     [contentfulCorsi?.livello, contentfulCorsi?.oreDiLezione]
@@ -66,6 +67,8 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
       )}h`,
       slug: contentfulCorsi?.nextCourse?.slug,
       image: contentfulCorsi?.nextCourse?.copertina as ImageDataLike,
+      avgRating: udemyPaidCourse?.rating,
+      students: udemyPaidCourse?.totalSubscribers,
     }),
     [
       contentfulCorsi?.nextCourse?.copertina,
@@ -73,6 +76,8 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
       contentfulCorsi?.nextCourse?.slug,
       contentfulCorsi?.nextCourse?.titolo,
       nextCourseCategory,
+      udemyPaidCourse?.rating,
+      udemyPaidCourse?.totalSubscribers,
     ]
   )
 
@@ -335,11 +340,17 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                     progetti={contentfulCorsi?.progetti?.length || 0}
                   />
                 </Box>
-                <Box mt="24px">
-                  <CourseBannerProvider value={bannerCtx}>
-                    <FreeBannerCourse />
-                  </CourseBannerProvider>
-                </Box>
+                {contentfulCorsi?.nextCourse ? (
+                  <Box mt="24px">
+                    <CourseBannerProvider value={bannerCtx}>
+                      {contentfulCorsi.nextCourse.isFree ? (
+                        <FreeBannerCourse />
+                      ) : (
+                        <PayableBannerCourse />
+                      )}
+                    </CourseBannerProvider>
+                  </Box>
+                ) : null}
               </Box>
             ) : null}
           </CourseAlignment>
@@ -407,7 +418,11 @@ export const Head = ({
 export default FreeCourseTemplate
 
 export const query = graphql`
-  query FreeCoursePage($id: String!, $categorySlug: String!) {
+  query FreeCoursePage(
+    $id: String!
+    $categorySlug: String!
+    $nextCourseId: Int!
+  ) {
     contentfulCorsi(id: { eq: $id }) {
       category {
         name
@@ -482,6 +497,8 @@ export const query = graphql`
         oreDiLezione
         titolo
         slug
+        isFree
+        idCorso
         copertina {
           gatsbyImageData
         }
@@ -490,7 +507,6 @@ export const query = graphql`
         }
       }
     }
-
     allContentfulCorsi(
       filter: {
         category: { elemMatch: { slug: { eq: $categorySlug } } }
@@ -513,6 +529,10 @@ export const query = graphql`
           riassunto
         }
       }
+    }
+    udemyPaidCourse(courseId: { eq: $nextCourseId }) {
+      rating
+      totalSubscribers
     }
   }
 `

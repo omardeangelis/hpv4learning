@@ -12,7 +12,7 @@ export const freeCourseQuery = `
         slug
       }
       nextCourse {
-        id
+        idCorso
       }
     }
   }
@@ -31,7 +31,7 @@ export const udemyCourseQuery = `
         slug
       }
        nextCourse {
-        id
+        idCorso
       }
     }
   }
@@ -64,7 +64,7 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
           id: corso.id,
           course_id: Number(corso.idCorso),
           categorySlug,
-          nextCourseId: corso.nextCourse?.id,
+          nextCourseId: Number(corso.nextCourse?.idCorso),
         },
       })
   })
