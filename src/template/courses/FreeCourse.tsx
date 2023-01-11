@@ -1,4 +1,4 @@
-import { Button, Divider, Typography } from "@mui/material"
+import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import { graphql, PageProps } from "gatsby"
@@ -10,8 +10,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import PersonIcon from "@mui/icons-material/Person"
 import { Stack } from "@mui/system"
 import isEmpty from "lodash/isEmpty"
-import TimerIcon from "@mui/icons-material/Timer"
-import CodeIcon from "@mui/icons-material/Code"
+
+import { ImageDataLike } from "gatsby-plugin-image"
 import Layout from "../../components/shared/layout"
 import {
   CourseAlignment,
@@ -23,19 +23,21 @@ import {
   MarkdownP,
   ListSection,
   CustomStack,
-  BannerWrapper,
-  BannerBody,
-  BannerAction,
-  BannerActionIcon,
+  FreeBannerCourse,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
 import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import { createBrandText, createRowText } from "../../utils/helpers"
+import {
+  convertToHHMMSS,
+  createBrandText,
+  createRowText,
+} from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
+import { CourseBannerProvider } from "../../feature/courses/context/CourseBanner"
 
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
@@ -45,6 +47,35 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
     () => contentfulCorsi?.livello && contentfulCorsi.oreDiLezione,
     [contentfulCorsi?.livello, contentfulCorsi?.oreDiLezione]
   )
+
+  const nextCourseCategory = React.useMemo(
+    () =>
+      contentfulCorsi?.nextCourse?.category?.filter(
+        (el) => el?.name?.toLowerCase() !== `gratuiti`
+      )?.[0]?.name as string,
+    [contentfulCorsi?.nextCourse?.category]
+  )
+
+  const bannerCtx = React.useMemo(
+    () => ({
+      category: nextCourseCategory,
+      title: contentfulCorsi?.nextCourse?.titolo,
+      durata: `${convertToHHMMSS(
+        contentfulCorsi?.nextCourse?.oreDiLezione as number,
+        true
+      )}h`,
+      slug: contentfulCorsi?.nextCourse?.slug,
+      image: contentfulCorsi?.nextCourse?.copertina as ImageDataLike,
+    }),
+    [
+      contentfulCorsi?.nextCourse?.copertina,
+      contentfulCorsi?.nextCourse?.oreDiLezione,
+      contentfulCorsi?.nextCourse?.slug,
+      contentfulCorsi?.nextCourse?.titolo,
+      nextCourseCategory,
+    ]
+  )
+
   return (
     <Layout>
       <Container maxWidth="lg">
@@ -305,62 +336,9 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                   />
                 </Box>
                 <Box mt="24px">
-                  <BannerWrapper width="100%">
-                    <BannerBody>
-                      <Box
-                        maxWidth="64px"
-                        height="36px"
-                        width="100%"
-                        sx={{
-                          borderRadius: `4px`,
-                          overflow: `hidden`,
-                          background: `red`,
-                          transform: `translateZ(0)`,
-                        }}
-                      >
-                        {/* <GatsbyImage image={undefined} alt="text" /> */}
-                      </Box>
-                      <Box ml="8px" width="100%">
-                        <Typography
-                          sx={{
-                            fontSize: `14px`,
-                            lineHeight: `18px`,
-                            fontWeight: 600,
-                          }}
-                        >
-                          Continua ad imparare
-                        </Typography>
-                        <Box mt="4px">
-                          <Typography
-                            sx={{
-                              fontSize: `12px`,
-                              lineHeight: `18px`,
-                            }}
-                          >
-                            Lorem ipsum dolor sit amet....
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </BannerBody>
-                    <Divider
-                      sx={{
-                        my: `12px`,
-                      }}
-                    />
-                    <BannerAction isFree>
-                      <BannerActionIcon
-                        icon={<CodeIcon fontSize="small" />}
-                        text="17.5"
-                      />
-                      <BannerActionIcon
-                        icon={<TimerIcon fontSize="small" />}
-                        text="17.5"
-                      />
-                      <Button variant="outlined" color="primary" size="small">
-                        Inizia
-                      </Button>
-                    </BannerAction>
-                  </BannerWrapper>
+                  <CourseBannerProvider value={bannerCtx}>
+                    <FreeBannerCourse />
+                  </CourseBannerProvider>
                 </Box>
               </Box>
             ) : null}
@@ -499,6 +477,17 @@ export const query = graphql`
       }
       introduzioneProgetti {
         introduzioneProgetti
+      }
+      nextCourse {
+        oreDiLezione
+        titolo
+        slug
+        copertina {
+          gatsbyImageData
+        }
+        category {
+          name
+        }
       }
     }
 

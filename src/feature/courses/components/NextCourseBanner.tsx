@@ -1,46 +1,40 @@
 import { Button, Divider, Typography } from "@mui/material"
-import { Box, Stack } from "@mui/system"
-import { GatsbyImage } from "gatsby-plugin-image"
+import { Box, BoxProps } from "@mui/system"
 import React from "react"
-import MoneyOffCsredSharpIcon from "@mui/icons-material/MoneyOffCsredSharp"
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney"
+import StarIcon from "@mui/icons-material/Star"
+import PersonIcon from "@mui/icons-material/Person"
 import TimerIcon from "@mui/icons-material/Timer"
 import CodeIcon from "@mui/icons-material/Code"
-import { BorderBox } from "../../../components/layout"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import {
+  BannerWrapper,
+  BannerBody,
+  BannerAction,
+  BannerActionIcon,
+} from "./CourseBanner"
+import { useCourseBannerContext } from "../context/CourseBanner"
 
-type Props = {
-  isFree?: boolean
-}
+const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
+  const { title, image } = useCourseBannerContext()
 
-const NextCourseBanner: React.FC<Props> = ({ isFree }) => (
-  <BorderBox
-    sx={{
-      borderRadius: `8px`,
-      width: `100%`,
-    }}
-  >
-    <Box
-      sx={{
-        padding: `16px`,
-      }}
-    >
-      <Stack
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="flex-start"
-      >
+  const gatsbyImage = React.useMemo(
+    () => (image ? getImage(image) : null),
+    [image]
+  )
+
+  return (
+    <BannerWrapper width="100%" {...rest}>
+      <BannerBody>
         <Box
           maxWidth="64px"
-          height="36px"
           width="100%"
           sx={{
             borderRadius: `4px`,
             overflow: `hidden`,
-            background: `red`,
             transform: `translateZ(0)`,
           }}
         >
-          {/* <GatsbyImage image={undefined} alt="text" /> */}
+          {gatsbyImage ? <GatsbyImage image={gatsbyImage} alt="text" /> : null}
         </Box>
         <Box ml="8px" width="100%">
           <Typography
@@ -50,7 +44,7 @@ const NextCourseBanner: React.FC<Props> = ({ isFree }) => (
               fontWeight: 600,
             }}
           >
-            Continua ad imparare
+            Scopri il Prossimo corso
           </Typography>
           <Box mt="4px">
             <Typography
@@ -59,67 +53,69 @@ const NextCourseBanner: React.FC<Props> = ({ isFree }) => (
                 lineHeight: `18px`,
               }}
             >
-              Lorem ipsum dolor sit amet....
+              {`${title?.slice(0, 32)}...`}
             </Typography>
           </Box>
         </Box>
-      </Stack>
-      <Box mt="12px">
-        <Divider />
-      </Box>
-      <Box mt="12px">
-        <Stack
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          {isFree ? (
-            <MoneyOffCsredSharpIcon
-              sx={{
-                color: `purple.400`,
-              }}
-              fontSize="small"
-            />
-          ) : (
-            <AttachMoneyIcon
-              sx={{
-                color: `purple.400`,
-              }}
-              fontSize="small"
-            />
-          )}
+      </BannerBody>
+      <Divider
+        sx={{
+          my: `12px`,
+        }}
+      />
+      {children}
+    </BannerWrapper>
+  )
+}
 
-          <Stack flexDirection="row" alignItems="center">
-            <TimerIcon fontSize="small" />
-            <Typography
-              sx={{
-                ml: `4px`,
-                fontSize: `12px`,
-                lineHeight: `14px`,
-              }}
-            >
-              17.5
-            </Typography>
-          </Stack>
-          <Stack flexDirection="row" alignItems="center">
-            <CodeIcon fontSize="small" />
-            <Typography
-              sx={{
-                ml: `4px`,
-                fontSize: `12px`,
-                lineHeight: `14px`,
-              }}
-            >
-              17.5
-            </Typography>
-          </Stack>
-          <Button variant="outlined" color="primary" size="small">
-            Inizia
-          </Button>
-        </Stack>
-      </Box>
-    </Box>
-  </BorderBox>
-)
+export const FreeBannerCourse = () => {
+  const { durata, category } = useCourseBannerContext()
 
-export default NextCourseBanner
+  return (
+    <NextCourseBanner>
+      <BannerAction isFree>
+        {durata ? (
+          <BannerActionIcon
+            icon={<TimerIcon fontSize="small" />}
+            content={durata}
+          />
+        ) : null}
+        {category ? (
+          <BannerActionIcon
+            icon={<CodeIcon fontSize="small" />}
+            content={category}
+          />
+        ) : null}
+        <Button variant="outlined" color="primary" size="small">
+          Inizia
+        </Button>
+      </BannerAction>
+    </NextCourseBanner>
+  )
+}
+
+export const PayableBannerCourse = () => {
+  const { students, avgVote } = useCourseBannerContext()
+
+  return (
+    <NextCourseBanner>
+      <BannerAction>
+        {students ? (
+          <BannerActionIcon
+            icon={<PersonIcon fontSize="small" />}
+            content={students}
+          />
+        ) : null}
+        {avgVote ? (
+          <BannerActionIcon
+            icon={<StarIcon fontSize="small" />}
+            content={avgVote}
+          />
+        ) : null}
+        <Button variant="outlined" color="primary" size="small">
+          Inizia
+        </Button>
+      </BannerAction>
+    </NextCourseBanner>
+  )
+}

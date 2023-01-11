@@ -11,6 +11,9 @@ export const freeCourseQuery = `
        category {
         slug
       }
+      nextCourse {
+        id
+      }
     }
   }
 }
@@ -27,6 +30,9 @@ export const udemyCourseQuery = `
        category {
         slug
       }
+       nextCourse {
+        id
+      }
     }
   }
 }
@@ -36,7 +42,7 @@ export type CourseQueryProps = {
     allContentfulCorsi: {
       nodes: Pick<
         Queries.ContentfulCorsiConnection["nodes"][number],
-        "slug" | "id" | "category" | "idCorso"
+        "slug" | "id" | "category" | "idCorso" | "nextCourse"
       >[]
     }
   }
@@ -58,6 +64,7 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
           id: corso.id,
           course_id: Number(corso.idCorso),
           categorySlug,
+          nextCourseId: corso.nextCourse?.id,
         },
       })
   })

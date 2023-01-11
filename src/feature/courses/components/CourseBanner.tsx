@@ -26,7 +26,7 @@ export const BannerAction = ({
   isFree,
   children,
   ...rest
-}: StackProps & { isFree: boolean }) => (
+}: StackProps & { isFree?: boolean }) => (
   <Stack
     flexDirection="row"
     alignItems="center"
@@ -54,9 +54,9 @@ export const BannerAction = ({
 
 export const BannerActionIcon = ({
   icon,
-  text,
+  content,
   ...rest
-}: { icon: React.ReactNode; text: string } & StackProps) => (
+}: { icon: React.ReactNode; content: string | number } & StackProps) => (
   <Stack flexDirection="row" alignItems="center" {...rest}>
     {icon}
     <Typography
@@ -66,7 +66,7 @@ export const BannerActionIcon = ({
         lineHeight: `14px`,
       }}
     >
-      {text}
+      {content}
     </Typography>
   </Stack>
 )
