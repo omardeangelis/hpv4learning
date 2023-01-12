@@ -1,19 +1,26 @@
 import { PageCreationHelperProps } from "../../types"
 
-export const freeCourseQuery = `
-{
-  allContentfulCorsi(
-    filter: {isFree: {eq: true}}
-  ) {
-    nodes {
+const COURSEFIELDS = `
+
       slug
       id
+      idCorso
        category {
         slug
       }
       nextCourse {
         idCorso
       }
+
+`
+
+export const freeCourseQuery = `
+{
+  allContentfulCorsi(
+    filter: {isFree: {eq: true}}
+  ) {
+    nodes{
+      ${COURSEFIELDS}
     }
   }
 }
@@ -24,15 +31,7 @@ export const udemyCourseQuery = `
     filter: {isFree: {eq: false}}
   ) {
     nodes {
-      slug
-      id
-      idCorso
-       category {
-        slug
-      }
-       nextCourse {
-        idCorso
-      }
+      ${COURSEFIELDS}
     }
   }
 }
@@ -54,6 +53,7 @@ type Props = {
 
 export const createCoursePages = ({ corsi, createPage, component }: Props) => {
   corsi.forEach((corso) => {
+    const nextCourseID = corso?.nextCourse?.idCorso ?? 0
     const { slug: categorySlug } =
       corso.category?.find((el) => el?.slug !== `gratuiti`) || {}
     if (categorySlug)
@@ -64,9 +64,7 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
           id: corso.id,
           course_id: Number(corso.idCorso),
           categorySlug,
-          nextCourseId: corso.nextCourse?.idCorso
-            ? Number(corso.nextCourse?.idCorso)
-            : 0,
+          nextCourseId: Number(nextCourseID),
         },
       })
   })
