@@ -64,7 +64,9 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
           id: corso.id,
           course_id: Number(corso.idCorso),
           categorySlug,
-          nextCourseId: Number(corso.nextCourse?.idCorso),
+          nextCourseId: corso.nextCourse?.idCorso
+            ? Number(corso.nextCourse?.idCorso)
+            : 0,
         },
       })
   })
