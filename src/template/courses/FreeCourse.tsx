@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import { graphql, PageProps } from "gatsby"
@@ -10,6 +10,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import PersonIcon from "@mui/icons-material/Person"
 import { Stack } from "@mui/system"
 import isEmpty from "lodash/isEmpty"
+
+import { ImageDataLike } from "gatsby-plugin-image"
 import Layout from "../../components/shared/layout"
 import {
   CourseAlignment,
@@ -21,24 +23,64 @@ import {
   MarkdownP,
   ListSection,
   CustomStack,
+  FreeBannerCourse,
+  PayableBannerCourse,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
 import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import { createBrandText, createRowText } from "../../utils/helpers"
+import {
+  convertToHHMMSS,
+  createBrandText,
+  createRowText,
+} from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
+import { CourseBannerProvider } from "../../feature/courses/context/CourseBanner"
 
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
 }) => {
-  const { contentfulCorsi } = data
+  const { contentfulCorsi, udemyPaidCourse } = data
   const hasBanner = React.useMemo(
     () => contentfulCorsi?.livello && contentfulCorsi.oreDiLezione,
     [contentfulCorsi?.livello, contentfulCorsi?.oreDiLezione]
   )
+
+  const nextCourseCategory = React.useMemo(
+    () =>
+      contentfulCorsi?.nextCourse?.category?.filter(
+        (el) => el?.name?.toLowerCase() !== `gratuiti`
+      )?.[0]?.name as string,
+    [contentfulCorsi?.nextCourse?.category]
+  )
+
+  const bannerCtx = React.useMemo(
+    () => ({
+      category: nextCourseCategory,
+      title: contentfulCorsi?.nextCourse?.titolo,
+      durata: `${convertToHHMMSS(
+        contentfulCorsi?.nextCourse?.oreDiLezione as number,
+        true
+      )}h`,
+      slug: contentfulCorsi?.nextCourse?.slug,
+      image: contentfulCorsi?.nextCourse?.copertina as ImageDataLike,
+      avgRating: udemyPaidCourse?.rating,
+      students: udemyPaidCourse?.totalSubscribers,
+    }),
+    [
+      contentfulCorsi?.nextCourse?.copertina,
+      contentfulCorsi?.nextCourse?.oreDiLezione,
+      contentfulCorsi?.nextCourse?.slug,
+      contentfulCorsi?.nextCourse?.titolo,
+      nextCourseCategory,
+      udemyPaidCourse?.rating,
+      udemyPaidCourse?.totalSubscribers,
+    ]
+  )
+
   return (
     <Layout>
       <Container maxWidth="lg">
@@ -298,6 +340,17 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                     progetti={contentfulCorsi?.progetti?.length || 0}
                   />
                 </Box>
+                {contentfulCorsi?.nextCourse ? (
+                  <Box mt="24px">
+                    <CourseBannerProvider value={bannerCtx}>
+                      {contentfulCorsi.nextCourse.isFree ? (
+                        <FreeBannerCourse />
+                      ) : (
+                        <PayableBannerCourse />
+                      )}
+                    </CourseBannerProvider>
+                  </Box>
+                ) : null}
               </Box>
             ) : null}
           </CourseAlignment>
@@ -365,7 +418,11 @@ export const Head = ({
 export default FreeCourseTemplate
 
 export const query = graphql`
-  query FreeCoursePage($id: String!, $categorySlug: String!) {
+  query FreeCoursePage(
+    $id: String!
+    $categorySlug: String!
+    $nextCourseId: Int!
+  ) {
     contentfulCorsi(id: { eq: $id }) {
       category {
         name
@@ -436,8 +493,20 @@ export const query = graphql`
       introduzioneProgetti {
         introduzioneProgetti
       }
+      nextCourse {
+        oreDiLezione
+        titolo
+        slug
+        isFree
+        idCorso
+        copertina {
+          gatsbyImageData
+        }
+        category {
+          name
+        }
+      }
     }
-
     allContentfulCorsi(
       filter: {
         category: { elemMatch: { slug: { eq: $categorySlug } } }
@@ -460,6 +529,10 @@ export const query = graphql`
           riassunto
         }
       }
+    }
+    udemyPaidCourse(courseId: { eq: $nextCourseId }) {
+      rating
+      totalSubscribers
     }
   }
 `
