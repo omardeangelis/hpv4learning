@@ -1,6 +1,7 @@
 import React from "react"
 import { Skeleton, Box } from "@mui/material"
 import styled from "@emotion/styled"
+import { BoxProps } from "@mui/system/Box"
 
 const StyledBox = styled(Box)`
   .video {
@@ -12,7 +13,10 @@ const StyledBox = styled(Box)`
   }
 `
 
-export const PreviewVideo = ({ video }: { video: string }) => {
+export const PreviewVideo = ({
+  video,
+  ...rest
+}: { video: string } & BoxProps) => {
   const [load, setLoad] = React.useState<boolean>(true)
 
   return (
@@ -23,6 +27,7 @@ export const PreviewVideo = ({ video }: { video: string }) => {
       overflow="hidden"
       position="relative"
       pb={load ? `0px` : `56.25%`}
+      {...rest}
     >
       <iframe
         title={video}
