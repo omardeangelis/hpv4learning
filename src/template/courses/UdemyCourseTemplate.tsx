@@ -28,12 +28,12 @@ import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
 import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import { createBrandText, createRowText, isExpired } from "../../utils/helpers"
+import { createBrandText, createRowText } from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
-import CourseCoupon from "../../components/coupon/CourseCoupon"
 import { BorderBox } from "../../components/layout"
 import { createStarReview } from "../../utils/general"
+import { PayableCourseBanner } from "../../feature/courses/components/PayableCourseBanner"
 
 const UdemyCourseTemplate: React.FC<
   PageProps<Queries.UdemyCoursePageQuery>
@@ -61,27 +61,9 @@ const UdemyCourseTemplate: React.FC<
     <Layout enableFooterPadding>
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">
-          <Box
-            sx={{
-              maxWidth: { xs: `unset`, lg: `887px` },
-              mt: { xs: `48px`, lg: `96px` },
-            }}
-          >
-            <Typography
-              component="h1"
-              fontWeight={600}
-              dangerouslySetInnerHTML={{
-                __html: createBrandText(contentfulCorsi?.titolo) as string,
-              }}
-              sx={{
-                fontSize: { xs: `36px`, lg: `56px` },
-                lineHeight: { xs: `44px`, lg: `64px` },
-              }}
-            />
-          </Box>
           <CourseAlignment
             sx={{
-              mt: { xs: `24px`, lg: `48px` },
+              mt: { xs: `48px`, lg: `96px` },
             }}
           >
             <CourseSection
@@ -89,8 +71,28 @@ const UdemyCourseTemplate: React.FC<
                 paddingRight: { xs: `0px`, lg: `84px` },
               }}
             >
+              <Box
+                sx={{
+                  maxWidth: { xs: `unset`, lg: `887px` },
+                }}
+              >
+                <Typography
+                  component="h1"
+                  fontWeight={600}
+                  dangerouslySetInnerHTML={{
+                    __html: createBrandText(contentfulCorsi?.titolo) as string,
+                  }}
+                  sx={{
+                    fontSize: { xs: `36px`, lg: `56px` },
+                    lineHeight: { xs: `44px`, lg: `64px` },
+                  }}
+                />
+              </Box>
               {contentfulCorsi?.videoLink ? (
-                <PreviewVideo video={contentfulCorsi.videoLink} />
+                <PreviewVideo
+                  video={contentfulCorsi.videoLink}
+                  sx={{ mt: { xs: `24px`, lg: `34px` } }}
+                />
               ) : null}
               {hasBanner ? (
                 <Box
@@ -377,34 +379,31 @@ const UdemyCourseTemplate: React.FC<
                 maxWidth="341px"
                 width="100%"
                 sx={{
-                  display: { xs: `none`, lg: `block` },
                   height: `fit-content`,
                   position: `sticky`,
-                  top: `96px`,
+                  top: { xs: `unset`, lg: `96px` },
+                  bottom: { xs: `0`, lg: `unset` },
                 }}
               >
                 <Box>
-                  <PaybleCourseInfoBanner
-                    lezioni={data.udemyPaidCourse?.num_lectures as number}
-                    livello={contentfulCorsi?.livello as string}
-                    price={contentfulCorsi?.prezzo as number}
-                    avgVote={
-                      data.udemyPaidCourse?.rating ||
-                      (contentfulCorsi?.recensioni as number)
-                    }
-                    durata={data.udemyPaidCourse?.courseHours as number}
-                    progetti={contentfulCorsi?.progetti?.length}
-                    students={data.udemyPaidCourse?.totalSubscribers as number}
-                  />
-                  {contentfulCorsi?.promoLink &&
-                  contentfulCorsi.prezzo &&
-                  contentfulCorsi.updatedAt ? (
-                    <CourseCoupon
+                  {contentfulCorsi?.copertina?.gatsbyImageData &&
+                  contentfulCorsi?.prezzo &&
+                  contentfulCorsi?.promoLink ? (
+                    <PayableCourseBanner
+                      image={contentfulCorsi?.copertina?.gatsbyImageData}
+                      price={contentfulCorsi?.prezzo as number}
                       link={contentfulCorsi?.promoLink}
-                      prezzo={contentfulCorsi?.prezzo}
-                      isDisabled={isExpired(
-                        contentfulCorsi?.updatedAt as unknown as Date
-                      )}
+                      lezioni={data.udemyPaidCourse?.num_lectures as number}
+                      livello={contentfulCorsi?.livello as string}
+                      avgVote={
+                        data.udemyPaidCourse?.rating ||
+                        (contentfulCorsi?.recensioni as number)
+                      }
+                      durata={data.udemyPaidCourse?.courseHours as number}
+                      progetti={contentfulCorsi?.progetti?.length || 0}
+                      students={
+                        data.udemyPaidCourse?.totalSubscribers as number
+                      }
                     />
                   ) : null}
                 </Box>

@@ -1,5 +1,6 @@
-import { Stack, Typography } from "@mui/material"
-import { Box } from "@mui/system"
+import Typography from "@mui/material/Typography"
+import Stack from "@mui/material/Stack"
+import Box, { BoxProps } from "@mui/system/Box"
 import React from "react"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import { BorderBox } from "../../../components/layout"
@@ -57,7 +58,7 @@ export const FreeCourseInfoBanner = ({
           <Stack spacing="4px" direction="row" alignItems="center">
             <InfoText
               key={`Supporto`}
-              text={`Supporto Preimum`}
+              text={`Supporto Premium`}
               weight={300}
               style={{
                 textDecoration: `line-through`,
@@ -85,7 +86,7 @@ type PayableCourseProps = {
   price: number
   progetti?: number
   livello?: Queries.Maybe<string>
-}
+} & BoxProps
 
 export const PaybleCourseInfoBanner = ({
   livello = `Principiante`,
@@ -95,6 +96,7 @@ export const PaybleCourseInfoBanner = ({
   students,
   avgVote,
   price,
+  ...rest
 }: PayableCourseProps) => (
   <BorderBox
     borderRadius="8px"
@@ -102,8 +104,9 @@ export const PaybleCourseInfoBanner = ({
     sx={{
       maxWidth: { xs: `unset`, lg: `341px` },
     }}
+    {...rest}
   >
-    <Box p="18px">
+    <Box p="16px">
       <Typography
         color="grey.800"
         fontWeight={600}
@@ -113,8 +116,8 @@ export const PaybleCourseInfoBanner = ({
       >
         Informazioni aggiuntive
       </Typography>
-      <Box mt="9px">
-        <Stack spacing="6px">
+      <Box mt="4px">
+        <Stack>
           <InfoText key={`livello`} text={`Livello: ${livello}`} weight={300} />
           <InfoText key={`lezioni`} text={`${lezioni} lezioni`} weight={300} />
           <InfoText
@@ -125,7 +128,7 @@ export const PaybleCourseInfoBanner = ({
           {progetti > 0 ? (
             <InfoText
               key={`Progetti`}
-              text={`${progetti}: Progetti pratici`}
+              text={`${progetti} Progetti pratici`}
               weight={300}
             />
           ) : null}
@@ -164,7 +167,7 @@ export const PaybleCourseInfoBanner = ({
             weight={300}
           />
           <Stack spacing="4px" direction="row" alignItems="center">
-            <InfoText key={`Supporto`} text={`Supporto Preimum`} weight={300} />
+            <InfoText key={`Supporto`} text={`Supporto Premium`} weight={300} />
             <CheckCircleIcon
               sx={{
                 color: `purple.400`,
