@@ -1,8 +1,7 @@
-import { Box, BoxProps, Stack, StackProps } from "@mui/system"
+import Box, { BoxProps } from "@mui/system/Box"
+import Stack, { StackProps } from "@mui/system/Stack"
 import React from "react"
-import MoneyOffCsredSharpIcon from "@mui/icons-material/MoneyOffCsredSharp"
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney"
-import { Typography } from "@mui/material"
+import Typography from "@mui/material/Typography"
 import { BorderBox } from "../../../components/layout"
 
 export const BannerWrapper = ({ children, ...rest }: BoxProps) => (
@@ -22,32 +21,13 @@ export const BannerBody = ({ children, ...rest }: StackProps) => (
   </Stack>
 )
 
-export const BannerAction = ({
-  isFree,
-  children,
-  ...rest
-}: StackProps & { isFree?: boolean }) => (
+export const BannerAction = ({ children, ...rest }: StackProps) => (
   <Stack
     flexDirection="row"
     alignItems="center"
     justifyContent="space-between"
     {...rest}
   >
-    {isFree ? (
-      <MoneyOffCsredSharpIcon
-        sx={{
-          color: `purple.400`,
-        }}
-        fontSize="small"
-      />
-    ) : (
-      <AttachMoneyIcon
-        sx={{
-          color: `purple.400`,
-        }}
-        fontSize="small"
-      />
-    )}
     {children}
   </Stack>
 )

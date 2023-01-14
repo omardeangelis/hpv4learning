@@ -63,6 +63,7 @@ const UdemyCourseTemplate: React.FC<
         <Box maxWidth="1200px" mx="auto">
           <CourseAlignment
             sx={{
+              display: { xs: `block`, lg: `flex` },
               mt: { xs: `48px`, lg: `96px` },
             }}
           >

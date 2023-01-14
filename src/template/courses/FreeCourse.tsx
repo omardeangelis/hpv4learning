@@ -85,27 +85,10 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
     <Layout>
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">
-          <Box
-            sx={{
-              maxWidth: { xs: `unset`, lg: `887px` },
-              mt: { xs: `48px`, lg: `96px` },
-            }}
-          >
-            <Typography
-              component="h1"
-              fontWeight={600}
-              dangerouslySetInnerHTML={{
-                __html: createBrandText(contentfulCorsi?.titolo) as string,
-              }}
-              sx={{
-                fontSize: { xs: `36px`, lg: `56px` },
-                lineHeight: { xs: `44px`, lg: `64px` },
-              }}
-            />
-          </Box>
           <CourseAlignment
             sx={{
-              mt: { xs: `24px`, lg: `48px` },
+              display: { xs: `block`, lg: `flex` },
+              mt: { xs: `48px`, lg: `96px` },
             }}
           >
             <CourseSection
@@ -113,8 +96,26 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                 paddingRight: { xs: `0px`, lg: `84px` },
               }}
             >
+              <Typography
+                component="h1"
+                fontWeight={600}
+                dangerouslySetInnerHTML={{
+                  __html: createBrandText(contentfulCorsi?.titolo) as string,
+                }}
+                sx={{
+                  fontSize: { xs: `36px`, lg: `56px` },
+                  lineHeight: { xs: `44px`, lg: `64px` },
+                }}
+              />
+
               {contentfulCorsi?.videoLink ? (
-                <PreviewVideo video={contentfulCorsi.videoLink} />
+                <Box
+                  sx={{
+                    mt: { xs: `24px`, lg: `48px` },
+                  }}
+                >
+                  <PreviewVideo video={contentfulCorsi.videoLink} />
+                </Box>
               ) : null}
               {hasBanner ? (
                 <Box
@@ -214,6 +215,35 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                   />
                 ) : null}
               </Stack>
+
+              {contentfulCorsi?.nextCourse ? (
+                <Box
+                  mt="24px"
+                  sx={{
+                    display: { lg: `none` },
+                  }}
+                >
+                  <Typography
+                    fontWeight={600}
+                    component="h3"
+                    sx={{
+                      fontSize: { xs: `24px`, lg: `34px` },
+                    }}
+                  >
+                    Cosa Studiare Dopo
+                  </Typography>
+                  <Box mt="16px">
+                    <CourseBannerProvider value={bannerCtx}>
+                      {contentfulCorsi.nextCourse.isFree ? (
+                        <FreeBannerCourse />
+                      ) : (
+                        <PayableBannerCourse />
+                      )}
+                    </CourseBannerProvider>
+                  </Box>
+                </Box>
+              ) : null}
+
               {!isEmpty(contentfulCorsi?.progetti) ? (
                 <Box
                   sx={{
