@@ -72,7 +72,7 @@ const useCourseSchema = ({
       },
       about: { name: about },
       creator: courseCreator,
-      aggregateRating: rating
+      aggregateRating: Number(rating)
         ? {
             "@type": `AggregateRating`,
             ratingValue: rating,
