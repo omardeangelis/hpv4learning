@@ -11,7 +11,7 @@ import {
   getImage,
 } from "gatsby-plugin-image"
 import dayjs from "dayjs"
-import { dateFormatter, isExpired } from "../../utils/helpers"
+import { dateFormatter } from "../../utils/helpers"
 import SeoLink from "../shared/SeoLink"
 import { triggerGACustomEvent } from "../../utils/tracking"
 
@@ -129,9 +129,8 @@ const CourseBanner = ({ title, date, prezzo, link, img }: Props) => (
                   { event: `click_to_udemy` },
                   { hasLocation: true }
                 )}
-                disabled={isExpired(date)}
               >
-                {isExpired(date) ? `Esaurito` : `Solo 12.99€`}
+                {`Solo 12.99€`}
               </Button>
             </SeoLink>
           </Box>
