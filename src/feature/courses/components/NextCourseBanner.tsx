@@ -3,6 +3,8 @@ import Divider from "@mui/material/Divider"
 import Button from "@mui/material/Button"
 import Box, { BoxProps } from "@mui/system/Box"
 import React from "react"
+import MoneyOffCsredSharpIcon from "@mui/icons-material/MoneyOffCsredSharp"
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney"
 import StarIcon from "@mui/icons-material/Star"
 import PersonIcon from "@mui/icons-material/Person"
 import TimerIcon from "@mui/icons-material/Timer"
@@ -80,7 +82,13 @@ export const FreeBannerCourse = () => {
 
   return (
     <NextCourseBanner>
-      <BannerAction isFree>
+      <BannerAction>
+        <MoneyOffCsredSharpIcon
+          sx={{
+            color: `purple.400`,
+          }}
+          fontSize="small"
+        />
         {durata ? (
           <BannerActionIcon
             icon={<TimerIcon fontSize="small" />}
@@ -114,6 +122,12 @@ export const PayableBannerCourse = () => {
   return (
     <NextCourseBanner>
       <BannerAction>
+        <AttachMoneyIcon
+          sx={{
+            color: `purple.400`,
+          }}
+          fontSize="small"
+        />
         {students ? (
           <BannerActionIcon
             icon={<PersonIcon fontSize="small" />}
