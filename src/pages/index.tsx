@@ -39,7 +39,7 @@ const IndexPage = () => {
       </Hero>
       <Box
         sx={{
-          backgroundColor: `purple.900`,
+          backgroundColor: ``,
           py: { xs: `36px`, lg: `72px` },
         }}
       >
@@ -56,14 +56,14 @@ const IndexPage = () => {
           <Typography
             component={`h2`}
             textAlign="center"
+            color="white"
             sx={{
               fontSize: { xs: `36px`, lg: `48px` },
               fontWeight: 600,
-              color: `#fff`,
             }}
             id="corsi"
           >
-            I nostri corsi
+            I nostri <span className="brand-text">corsi</span>
           </Typography>
           <Box mt="34px" ref={coursesPositionRef}>
             <CourseWall />
