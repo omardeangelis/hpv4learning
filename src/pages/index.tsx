@@ -14,7 +14,7 @@ import LinkHandler from "../components/SEO/components/LinkHandler"
 // Components
 import Hero from "../components/ui/Hero"
 // Material UI
-import ComunityBanner from "../components/banner/ComunityBanner"
+import { CommunityBanner } from "../components/banner"
 import CourseWall from "../components/course/CourseWall"
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema"
 import { HomeSection } from "../feature/projects/components"
@@ -31,7 +31,7 @@ const IndexPage = () => {
     coursesPositionRef.current?.scrollIntoView({
       behavior: `smooth`,
     })
-  }, [coursesPositionRef.current])
+  }, [])
   return (
     <Layout>
       <Hero>
@@ -39,7 +39,7 @@ const IndexPage = () => {
       </Hero>
       <Box
         sx={{
-          backgroundColor: `purple.400`,
+          backgroundColor: `purple.900`,
           py: { xs: `36px`, lg: `72px` },
         }}
       >
@@ -59,10 +59,11 @@ const IndexPage = () => {
             sx={{
               fontSize: { xs: `36px`, lg: `48px` },
               fontWeight: 600,
+              color: `#fff`,
             }}
             id="corsi"
           >
-            I nostri <span className="brand-text">corsi</span>
+            I nostri corsi
           </Typography>
           <Box mt="34px" ref={coursesPositionRef}>
             <CourseWall />
@@ -72,9 +73,33 @@ const IndexPage = () => {
       <Box
         sx={{
           mt: { xs: `48px`, lg: `96px` },
+          py: `72px`,
+          background: `#000`,
         }}
       >
-        <ComunityBanner />
+        <Typography
+          fontWeight={600}
+          textAlign="center"
+          color="white"
+          component="h2"
+          lineHeight={{
+            xs: `39px`,
+            lg: `56px`,
+          }}
+          fontSize={{
+            xs: `34px`,
+            lg: `48px`,
+          }}
+        >
+          Scopri la nostra community di studenti
+        </Typography>
+        <Box
+          sx={{
+            mt: { xs: `24px`, lg: `34px` },
+          }}
+        >
+          <CommunityBanner />
+        </Box>
       </Box>
 
       <Box

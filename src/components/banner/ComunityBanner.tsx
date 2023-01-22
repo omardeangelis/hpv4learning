@@ -1,213 +1,45 @@
 import React from "react"
-import useTheme from "@mui/material/styles/useTheme"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
-import Button from "@mui/material/Button"
-import Typography from "@mui/material/Typography"
-import useMediaQuery from "@mui/material/useMediaQuery"
-
 import styled from "@emotion/styled"
-import ArrowRightAltSharpIcon from "@mui/icons-material/ArrowRightAltSharp"
-import { triggerGACustomEvent } from "../../utils/tracking"
+import { BannerCard } from "./BannerCard"
 
-const CustomStack = styled.div`
-  & > *:not(:last-of-type) {
-    margin-bottom: 24px;
-  }
+const CustomStack = styled(Box)({
+  display: `flex`,
+  flexDirection: `column`,
+  alignItems: `center`,
+  "& > *:not(:first-of-type)": {
+    marginTop: `16px`,
+    marginLeft: `0px`,
+  },
+  "@media screen and (min-width: 768px)": {
+    flexDirection: `row`,
 
-  transition: all 125ms ease;
+    "& > *:not(:first-of-type)": {
+      marginTop: `0px`,
+      marginLeft: `24px`,
+    },
+  },
+})
 
-  .banner-action {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    & > *:not(:last-of-type) {
-      margin-right: 12px;
-    }
-  }
-
-  .banner-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  @media screen and (min-width: 767px) {
-    & > *:not(:last-of-type) {
-      margin-bottom: 0px;
-    }
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .banner-action {
-      justify-content: flex-start;
-      margin-right: auto;
-      button:hover {
-        background: #121212;
-      }
-    }
-
-    .banner-left {
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: initial;
-      text-align: left;
-      transition: all 125ms ease;
-    }
-  }
-`
-
-const DiscordBanner = () => {
-  const [type, setType] = React.useState<"discord" | "youtube">(`youtube`)
-  const theme = useTheme()
-  const sm = useMediaQuery(theme.breakpoints.down(`sm`))
-  return (
-    <Box
-      sx={{
-        backgroundColor: type === `youtube` ? `red.300` : `purple.900`,
-      }}
+export const CommunityBanner = () => (
+  <Container maxWidth="lg">
+    <CustomStack
+      sx={{ flexDirection: { xs: `column`, lg: `row` } }}
+      justifyContent="center"
     >
-      <Box
-        sx={{
-          py: { xs: `26px`, lg: `55px` },
-        }}
-      >
-        <Container maxWidth="md">
-          <Box>
-            <CustomStack>
-              <Box className="banner-left">
-                <Box className="banner-action">
-                  <Button
-                    size={sm ? `small` : `medium`}
-                    sx={{
-                      background: `#000`,
-                      color: `blue.400`,
-                      borderRadius: `100px`,
-                    }}
-                    onClick={() => setType(`discord`)}
-                  >
-                    Discord
-                  </Button>
-
-                  <Button
-                    size={sm ? `small` : `medium`}
-                    sx={{
-                      background: `#000`,
-                      color: `red.300`,
-                      borderRadius: `100px`,
-                    }}
-                    onClick={() => setType(`youtube`)}
-                  >
-                    Youtube
-                  </Button>
-                </Box>
-
-                <Box
-                  sx={{
-                    mt: { xs: `18px`, lg: `48px` },
-                    maxWidth: { xs: `312px`, lg: `442px` },
-                  }}
-                >
-                  <Typography
-                    fontWeight={500}
-                    color={type === `youtube` ? `white` : `blue.400`}
-                    sx={{
-                      fontSize: { xs: `24px`, lg: `36px` },
-                      lineHeight: { xs: `30px`, lg: `44px` },
-                    }}
-                  >
-                    Unisciti alla Community
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    mt: { xs: `12px`, lg: `24px` },
-                    maxWidth: { xs: `312px`, lg: `465px` },
-                  }}
-                >
-                  <Typography
-                    fontWeight={400}
-                    color={type === `youtube` ? `white` : `blue.400`}
-                    sx={{
-                      fontSize: { xs: `14px`, lg: `18px` },
-                      lineHeight: { xs: `18px`, lg: `22px` },
-                    }}
-                  >
-                    {`Unisciti al nostro canale ${type} per rimanere sempre aggiornato sui nostri contenuti, sconti ed iniziative.`}
-                  </Typography>
-                </Box>
-
-                <Box
-                  sx={{
-                    mt: { xs: `12px`, lg: `24px` },
-                    mx: { xs: `auto`, sm: `unset` },
-                  }}
-                >
-                  <a
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    href={
-                      type === `discord`
-                        ? `https://discord.gg/ZX2rPXx2BD`
-                        : `https://www.youtube.com/c/HPVfilm`
-                    }
-                    style={{
-                      textDecoration: `none`,
-                    }}
-                  >
-                    <Button
-                      variant="contained"
-                      onClick={
-                        type === `youtube`
-                          ? undefined
-                          : triggerGACustomEvent({ event: `join_discord` })
-                      }
-                      endIcon={
-                        <ArrowRightAltSharpIcon
-                          sx={{
-                            color: type === `youtube` ? `red.300` : `black`,
-                          }}
-                        />
-                      }
-                      size={sm ? `medium` : `large`}
-                      sx={{
-                        borderColor: `#000`,
-                        borderRadius: `100px`,
-                        color: type === `youtube` ? `red.300` : `black`,
-                        backgroundColor:
-                          type === `youtube` ? `white` : `blue.400`,
-                      }}
-                    >
-                      Unisciti
-                    </Button>
-                  </a>
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  mx: { xs: `auto`, sm: `unset` },
-                  maxWidth: { xs: `182px`, lg: `358px` },
-                  maxHeight: { xs: `182px`, lg: `358px` },
-                  height: `100%`,
-                  width: `100%`,
-                  display: `flex`,
-                }}
-              >
-                <img
-                  style={{ width: `100%` }}
-                  src={`/${type}-img.png`}
-                  alt={`banner ${type}`}
-                />
-              </Box>
-            </CustomStack>
-          </Box>
-        </Container>
-      </Box>
-    </Box>
-  )
-}
-
-export default DiscordBanner
+      <BannerCard
+        kind="discord"
+        title="Incontra altri studenti e partecipa ai nostri eventi live"
+        description="Studia insieme ad altre sviluppatori e lavora sulle tue soft skill grazie a percorsi ed eventi esclusivi"
+        link={`https://discord.gg/ZX2rPXx2BD`}
+      />
+      <BannerCard
+        kind="yt"
+        title="Incontra altri studenti e partecipa ai nostri eventi live"
+        description="Studia insieme ad altre sviluppatori e lavora sulle tue soft skill grazie a percorsi ed eventi esclusivi"
+        link="https://www.youtube.com/c/HPVfilm"
+      />
+    </CustomStack>
+  </Container>
+)
