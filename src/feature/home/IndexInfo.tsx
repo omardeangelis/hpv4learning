@@ -102,12 +102,13 @@ export const IndexInfo = () => {
       <Typography
         component={`h2`}
         textAlign="center"
+        color="white"
         sx={{
           fontSize: { xs: `36px`, lg: `48px` },
           fontWeight: 600,
         }}
       >
-        I nostri <span style={{ color: `white` }}> numeri </span>
+        I nostri numeri
       </Typography>
       <Box
         mx="auto"
