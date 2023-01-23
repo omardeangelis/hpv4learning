@@ -36,8 +36,8 @@ export const CommunityBanner = () => (
       />
       <BannerCard
         kind="yt"
-        title="Incontra altri studenti e partecipa ai nostri eventi live"
-        description="Studia insieme ad altre sviluppatori e lavora sulle tue soft skill grazie a percorsi ed eventi esclusivi"
+        title="Rimani aggiornato sui contenuti gratuiti che rilasciamo"
+        description="Sul nostro canale Youtube troverai tutti i nostri video e playlist gratuite"
         link="https://www.youtube.com/c/HPVfilm"
       />
     </CustomStack>

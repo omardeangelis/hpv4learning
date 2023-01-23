@@ -56,7 +56,6 @@ const IndexPage = () => {
           <Typography
             component={`h2`}
             textAlign="center"
-            color="white"
             sx={{
               fontSize: { xs: `36px`, lg: `48px` },
               fontWeight: 600,
