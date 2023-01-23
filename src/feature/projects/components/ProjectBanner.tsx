@@ -4,18 +4,19 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Box from "@mui/system/Box"
-import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn"
 import { useSelector, useDispatch } from "react-redux"
 import SeoLink from "../../../components/shared/SeoLink"
 import { createRowText } from "../../../utils/helpers"
-import { closeProjectBanner } from "../../../store/reducers/uiSlice"
 import { RootState } from "../../../store"
 import { triggerGACustomEvent } from "../../../utils/tracking"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
+import truncate from "lodash/truncate"
 
 interface Props {
   courseTitle?: string | null
   prezzo?: number | null
   couponLink?: string | null
+  image?: IGatsbyImageData | null
 }
 
 const BannerContainer = styled(Box)`
@@ -24,11 +25,9 @@ const BannerContainer = styled(Box)`
   right: 0;
   left: 0;
   box-shadow: 0px 1px 2px 0px #0000001a;
-  border-radius: 12px;
-  margin: 15px;
-  padding: 10px;
+  padding: 8px 16px;
   background: #fff;
-  z-index: 2;
+  z-index: 4;
   @media screen and (min-width: 1024px) {
     position: sticky;
     right: 5%;
@@ -42,48 +41,39 @@ const BannerContainer = styled(Box)`
   }
 `
 
-const SaleBox = styled(Box)`
-  display: none;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #8769fe;
-  color: #fff;
-  font-weight: 600;
-  font-size: 8px;
-
+export const ImageBox = styled(Box)`
+  width: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  transform: translateZ(0);
   @media screen and (min-width: 1024px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-left: 0px;
   }
 `
 
-const CloseButton = styled(Button)`
-  padding: 0;
-  width: 15px;
-  height: 15px;
-  @media screen and (min-width: 1024px) {
-    display: none;
-  }
-`
-
-export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
+export const ProjectBanner = ({ courseTitle, couponLink, image }: Props) => {
   const { isProjectBannerOpen } = useSelector((state: RootState) => state.ui)
-  const dispatch = useDispatch()
-  const closeBanner = React.useCallback(
-    () => dispatch(closeProjectBanner()),
-    [dispatch]
-  )
 
   if (isProjectBannerOpen) {
     return (
       <BannerContainer sx={{ border: `1px solid`, borderColor: `purple.200` }}>
-        <Stack direction="column" spacing={{ xs: `unset`, lg: `15px` }}>
+        <Stack
+          direction="row"
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
+          <ImageBox>
+            {image ? <GatsbyImage image={image} alt="Copertina" /> : null}
+          </ImageBox>
+
           <Stack
-            direction="row"
-            alignItems="flex-start"
-            justifyContent="space-between"
+            flexDirection="column"
+            maxWidth="218px"
+            width="100%"
+            spacing="10px"
           >
             <Typography
               variant="caption"
@@ -95,59 +85,9 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                 lineHeight: { xs: `16px`, lg: `18px` },
               }}
             >
-              {createRowText(courseTitle as string)}
+              {truncate(createRowText(courseTitle as string))}
             </Typography>
 
-            <CloseButton onClick={closeBanner}>
-              <DoDisturbOnIcon
-                sx={{
-                  color: `#E4E7EC`,
-                }}
-              />
-            </CloseButton>
-          </Stack>
-          <Stack
-            direction={{ xs: `row`, lg: `column` }}
-            alignItems="start"
-            spacing={{ xs: `unset`, lg: `15px` }}
-          >
-            <Stack
-              direction="row"
-              alignItems={{ xs: `flex-end`, lg: `center` }}
-              justifyContent="space-between"
-              width="100%"
-              spacing={{ xs: `14px`, lg: `32px` }}
-              sx={{
-                marginRight: { xs: `10px`, lg: `unset` },
-              }}
-            >
-              <Typography
-                fontWeight={400}
-                sx={{
-                  fontSize: { xs: `12px`, lg: `18px` },
-                  color: `#6C757D`,
-                  textDecoration: `line-through`,
-                }}
-              >
-                {prezzo ? `${(prezzo / 100).toFixed(2)}€` : null}
-              </Typography>
-              <SaleBox>
-                {prezzo
-                  ? `-${Math.ceil(100 - (12.99 * 100) / (prezzo / 100)).toFixed(
-                      0
-                    )}%`
-                  : null}
-              </SaleBox>
-              <Typography
-                fontWeight={500}
-                sx={{
-                  fontSize: { xs: `16px`, lg: `18px` },
-                  color: `#000`,
-                }}
-              >
-                12.99€
-              </Typography>
-            </Stack>
             {couponLink ? (
               <Box sx={{ width: { xs: `unset`, lg: `100%` } }}>
                 <SeoLink isExternal link={couponLink} rel="noopener">
@@ -160,14 +100,13 @@ export const ProjectBanner = ({ courseTitle, prezzo, couponLink }: Props) => {
                     )}
                     sx={{
                       width: `100%`,
-                      maxWidth: { xs: `105px`, lg: `unset` },
                       height: `27px`,
                       background: `#8769FE`,
                       color: `#fff`,
-                      borderRadius: `100px`,
+                      borderRadius: `4px`,
                     }}
                   >
-                    riscatta
+                    Vedi Corso
                   </Button>
                 </SeoLink>
               </Box>

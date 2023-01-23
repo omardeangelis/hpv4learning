@@ -36,6 +36,7 @@ const allProjectArticle = `
         slug
         ordine
         corsi {
+          id
           idCorso
         }
       }
