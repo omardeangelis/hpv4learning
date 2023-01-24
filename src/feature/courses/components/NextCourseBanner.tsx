@@ -18,6 +18,7 @@ import {
   BannerActionIcon,
 } from "./CourseBanner"
 import { useCourseBannerContext } from "../context/CourseBanner"
+import { triggerGACustomEvent } from "../../../utils/tracking"
 
 const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
   const { title, image } = useCourseBannerContext()
@@ -74,11 +75,15 @@ const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
 }
 
 export const FreeBannerCourse = () => {
-  const { durata, category, slug } = useCourseBannerContext()
+  const { durata, category, slug, title } = useCourseBannerContext()
 
   const handleNavigate = React.useCallback(() => {
+    triggerGACustomEvent({
+      event: `next_course_banner`,
+      content: title as string,
+    })()
     navigate(`/${slug}/`)
-  }, [slug])
+  }, [slug, title])
 
   return (
     <NextCourseBanner>
@@ -115,10 +120,14 @@ export const FreeBannerCourse = () => {
 }
 
 export const PayableBannerCourse = () => {
-  const { students, avgRating, slug } = useCourseBannerContext()
+  const { students, avgRating, slug, title } = useCourseBannerContext()
   const handleNavigate = React.useCallback(() => {
+    triggerGACustomEvent({
+      event: `next_course_banner`,
+      content: title as string,
+    })()
     navigate(`/${slug}/`)
-  }, [slug])
+  }, [slug, title])
   return (
     <NextCourseBanner>
       <BannerAction>
