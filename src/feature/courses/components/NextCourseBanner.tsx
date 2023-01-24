@@ -18,11 +18,9 @@ import {
   BannerActionIcon,
 } from "./CourseBanner"
 import { useCourseBannerContext } from "../context/CourseBanner"
-import { triggerGACustomEvent } from "../../../utils/tracking"
 
 const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
   const { title, image } = useCourseBannerContext()
-
   const gatsbyImage = React.useMemo(
     () => (image ? getImage(image) : null),
     [image]
@@ -75,15 +73,14 @@ const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
 }
 
 export const FreeBannerCourse = () => {
-  const { durata, category, slug, title } = useCourseBannerContext()
+  const { durata, category, slug, eventTrackerCallback } =
+    useCourseBannerContext()
 
   const handleNavigate = React.useCallback(() => {
-    triggerGACustomEvent({
-      event: `next_course_banner`,
-      content: title as string,
-    })()
+    if (eventTrackerCallback) eventTrackerCallback()
+
     navigate(`/${slug}/`)
-  }, [slug, title])
+  }, [slug, eventTrackerCallback])
 
   return (
     <NextCourseBanner>
@@ -120,14 +117,12 @@ export const FreeBannerCourse = () => {
 }
 
 export const PayableBannerCourse = () => {
-  const { students, avgRating, slug, title } = useCourseBannerContext()
+  const { students, avgRating, slug, eventTrackerCallback } =
+    useCourseBannerContext()
   const handleNavigate = React.useCallback(() => {
-    triggerGACustomEvent({
-      event: `next_course_banner`,
-      content: title as string,
-    })()
+    if (eventTrackerCallback) eventTrackerCallback()
     navigate(`/${slug}/`)
-  }, [slug, title])
+  }, [slug, eventTrackerCallback])
   return (
     <NextCourseBanner>
       <BannerAction>

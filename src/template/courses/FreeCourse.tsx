@@ -39,6 +39,7 @@ import {
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
 import { CourseBannerProvider } from "../../feature/courses/context/CourseBanner"
+import { triggerGACustomEvent } from "../../utils/tracking"
 
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
@@ -69,6 +70,10 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
       image: contentfulCorsi?.nextCourse?.copertina as ImageDataLike,
       avgRating: udemyPaidCourse?.rating,
       students: udemyPaidCourse?.totalSubscribers,
+      eventTrackerCallback: triggerGACustomEvent({
+        event: `next_course_banner`,
+        content: contentfulCorsi?.nextCourse?.titolo as string,
+      }),
     }),
     [
       contentfulCorsi?.nextCourse?.copertina,

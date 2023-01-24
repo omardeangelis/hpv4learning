@@ -9,6 +9,7 @@ type ContextProps = {
   avgRating?: Queries.Maybe<number>
   category?: Queries.Maybe<string>
   durata?: Queries.Maybe<string>
+  eventTrackerCallback?: () => void
 }
 
 const initialValue: ContextProps = {

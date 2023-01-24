@@ -4,6 +4,7 @@ import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import styled from "@emotion/styled"
 import Stack from "@mui/material/Stack"
+import { ImageDataLike } from "gatsby-plugin-image"
 import Layout from "../components/shared/layout"
 import {
   ArticleBody,
@@ -21,7 +22,7 @@ import {
   PayableBannerCourse,
 } from "../feature/courses/components/NextCourseBanner"
 import { CourseBannerProvider } from "../feature/courses/context/CourseBanner"
-import { ImageDataLike } from "gatsby-plugin-image"
+import { triggerGACustomEvent } from "../utils/tracking"
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -54,6 +55,10 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
       image: course?.copertina?.gatsbyImageData as ImageDataLike,
       avgRating: udemyPaidCourse?.rating,
       students: udemyPaidCourse?.totalSubscribers,
+      eventTrackerCallback: triggerGACustomEvent({
+        event: `article_to_course`,
+        content: course?.titolo,
+      }),
     }),
     [
       course?.copertina,
@@ -66,11 +71,6 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
     ]
   )
 
-  const bannerTitle = React.useMemo(() => {
-    const corsi = queryData?.corsi?.[0]
-    return `Inizia ora a studiare ${createRowText(corsi?.titolo as string)}`
-  }, [queryData?.corsi?.[0]])
-
   return (
     <Layout>
       <Container sx={{ padding: `0px` }} maxWidth={`lg`}>
@@ -78,7 +78,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
           sx={{
             position: `relative`,
             alignItems: `flex-start`,
-            justifyContent: "center",
+            justifyContent: `center`,
           }}
         >
           <Box>
@@ -91,7 +91,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
                 <Box
                   sx={{
                     maxWidth: { xs: `unset`, lg: `1080px` },
-                    margin: "auto",
+                    margin: `auto`,
                   }}
                 >
                   <ArticleHero {...queryData} />
@@ -109,13 +109,13 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
                 height: `fit-content`,
                 position: `sticky`,
                 top: { xs: `unset`, lg: `96px` },
-                bottom: { xs: "0", lg: "unset" },
-                marginTop: { xs: "unset", lg: "96px" },
+                bottom: { xs: `0`, lg: `unset` },
+                marginTop: { xs: `unset`, lg: `96px` },
               }}
             >
               <Stack
                 flexDirection="column"
-                sx={{ display: { xs: "none", lg: "block" } }}
+                sx={{ display: { xs: `none`, lg: `block` } }}
               >
                 <Box>
                   <PaybleCourseInfoBanner
@@ -143,7 +143,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
                 </Box>
               </Stack>
 
-              <Box sx={{ display: { xs: "unset", lg: "none" } }}>
+              <Box sx={{ display: { xs: `unset`, lg: `none` } }}>
                 <ProjectBanner
                   courseTitle={course?.titolo}
                   couponLink={course?.promoLink}
@@ -172,11 +172,7 @@ export const Head = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
         link: `/progetti/${courseSlug}/${slug}/`,
       },
     ]
-  }, [
-    queryData?.project_category?.[0]?.slug,
-    queryData?.articleTitle,
-    queryData?.slug,
-  ])
+  }, [queryData?.articleTitle, queryData?.project_category, queryData?.slug])
   return (
     <>
       <MetaDecorator
