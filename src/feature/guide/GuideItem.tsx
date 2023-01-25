@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { IGatsbyImageData } from "gatsby-plugin-image/dist/src/components/gatsby-image.browser"
 import Typography from "@mui/material/Typography"
-import Box from "@mui/material/Box"
+import Box, { BoxProps } from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
 import { Divider } from "@mui/material"
@@ -16,11 +16,11 @@ type ItemImageProps = {
   alt: string
 }
 
-export type Props = Partial<NonNullable<Projects>[number]> & {
-  // eslint-disable-next-line react/no-unused-prop-types
-  courseSlug: string | null
-  trackingCallback: () => void;
-}
+export type Props = Partial<NonNullable<Projects>[number]> &
+  BoxProps & {
+    // eslint-disable-next-line react/no-unused-prop-types
+    courseSlug: string | null
+  }
 
 const StyledBorderBox = styled(BorderBox)`
   width: 100%;
@@ -70,11 +70,9 @@ export const GuideItem = (props: Props) => {
     copertina,
     descrizione,
     body,
-    trackingCallback
   } = props || {}
   return (
     <StyledBorderBox
-      onClick={trackingCallback}
       component="article"
       p={{ xs: `16px`, lg: `0px` }}
       width="100%"

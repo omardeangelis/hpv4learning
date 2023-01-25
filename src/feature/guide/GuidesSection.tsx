@@ -61,9 +61,9 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
             copertina={project?.copertina}
             courseSlug={courseSlug}
             slug={project?.slug as string}
-            trackingCallback={triggerGACustomEvent({
+            onClick={triggerGACustomEvent({
               event: "guide_to_article",
-              progress: index + 1,
+              content: index + 1,
             })}
           />
         ))}
