@@ -45,7 +45,6 @@ export const ProjectCard = styled(Box)({
       fontSize: `12px`,
       height: `16px`,
       width: `fit-content`,
-      display: `flex`,
       justifyContent: `center`,
       alignItems: `center`,
       borderRadius: `4px`,
