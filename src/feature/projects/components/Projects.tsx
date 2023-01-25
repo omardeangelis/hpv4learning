@@ -1,17 +1,11 @@
 import React from "react"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
-import {
-  GatsbyImage,
-  getImage,
-  IGatsbyImageData,
-  ImageDataLike,
-} from "gatsby-plugin-image"
 import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers"
 import SeoLink from "../../../components/shared/SeoLink"
 import { MobileOnlyProjectCard } from "./ProjectCard"
-import { ProjectImage } from "./ProjectImage"
 import { ProjectContent } from "./ProjectContent"
+import { ItemImage } from "../../guide/GuideItem"
 
 const CustomStack = styled(Box)`
   height: 100%;
@@ -66,28 +60,13 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
                 }}
               >
                 <MobileOnlyProjectCard>
-                  <ProjectImage>
-                    {progetto?.copertina ? (
-                      <GatsbyImage
-                        image={
-                          getImage(
-                            progetto?.copertina as unknown as ImageDataLike
-                          ) as IGatsbyImageData
-                        }
-                        alt={progetto.articleTitle || `Anteprima del progetto`}
-                        style={{
-                          height: `100%`,
-                        }}
-                      />
-                    ) : (
-                      <Box
-                        sx={{
-                          backgroundColor: `purple.A100`,
-                        }}
-                        width="100%"
-                      />
-                    )}
-                  </ProjectImage>
+                  {progetto?.copertina?.gatsbyImageData ? (
+                    <ItemImage
+                      image={progetto?.copertina?.gatsbyImageData}
+                      alt={progetto?.titolo as string}
+                      sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
+                    />
+                  ) : null}
 
                   <ProjectContent
                     titolo={progetto?.titolo}

@@ -16,7 +16,11 @@ export const ProjectContent = ({
   ...rest
 }: Props & BoxProps) => (
   <Box className="content-box" {...rest}>
-    <Stack direction="column" alignItems="initial" spacing="8px">
+    <Stack
+      direction="column"
+      alignItems="initial"
+      spacing={{ xs: "4px", lg: "8px" }}
+    >
       {titolo ? (
         <Typography component="h3" fontWeight={600}>
           {titolo}
@@ -33,7 +37,11 @@ export const ProjectContent = ({
           {description}
         </Typography>
       ) : null}
-      {label ? <Box className="label-box">{label}</Box> : null}
+      {label ? (
+        <Box sx={{ display: { xs: "none", lg: "flex" } }} className="label-box">
+          {label}
+        </Box>
+      ) : null}
     </Stack>
   </Box>
 )

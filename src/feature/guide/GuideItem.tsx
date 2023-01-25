@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
-import { Divider } from "@mui/material"
+import { BoxProps, Divider } from "@mui/material"
 import { BorderBox } from "../../components/layout"
 import SeoLink from "../../components/shared/SeoLink"
 import { Projects } from "./GuidesSection"
@@ -46,7 +46,11 @@ const IconContainer = styled(Box)`
   }
 `
 
-export const ItemImage = ({ image, alt }: ItemImageProps) => (
+export const ItemImage = ({
+  image,
+  alt,
+  ...rest
+}: ItemImageProps & BoxProps) => (
   <Box
     maxWidth={{ xs: `73px`, lg: `247px` }}
     width="100%"
@@ -56,6 +60,7 @@ export const ItemImage = ({ image, alt }: ItemImageProps) => (
     style={{
       transform: `translateZ(0)`,
     }}
+    {...rest}
   >
     <GatsbyImage style={{ height: `100%` }} image={image} alt={alt} />
   </Box>
