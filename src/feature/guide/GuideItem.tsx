@@ -19,6 +19,7 @@ type ItemImageProps = {
 export type Props = Partial<NonNullable<Projects>[number]> & {
   // eslint-disable-next-line react/no-unused-prop-types
   courseSlug: string | null
+  trackingCallback: () => void;
 }
 
 const StyledBorderBox = styled(BorderBox)`
@@ -69,9 +70,11 @@ export const GuideItem = (props: Props) => {
     copertina,
     descrizione,
     body,
+    trackingCallback
   } = props || {}
   return (
     <StyledBorderBox
+      onClick={trackingCallback}
       component="article"
       p={{ xs: `16px`, lg: `0px` }}
       width="100%"

@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack"
 import styled from "@emotion/styled"
 import Box from "@mui/system/Box"
 import { GuideItem } from "./GuideItem"
+import { triggerGACustomEvent } from "../../utils/tracking"
 
 const StyledStack = styled(Box)({
   "& > *:not(:first-of-type)": {
@@ -51,7 +52,7 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
     </Typography>
     {projects ? (
       <StyledStack>
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <GuideItem
             key={project?.articleTitle as string}
             articleTitle={project?.articleTitle}
@@ -60,6 +61,10 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
             copertina={project?.copertina}
             courseSlug={courseSlug}
             slug={project?.slug as string}
+            trackingCallback={triggerGACustomEvent({
+              event: "guide_to_article",
+              progress: index + 1,
+            })}
           />
         ))}
       </StyledStack>
