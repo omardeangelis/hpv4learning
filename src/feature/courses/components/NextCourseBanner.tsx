@@ -21,7 +21,6 @@ import { useCourseBannerContext } from "../context/CourseBanner"
 
 const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
   const { title, image } = useCourseBannerContext()
-
   const gatsbyImage = React.useMemo(
     () => (image ? getImage(image) : null),
     [image]
@@ -74,11 +73,14 @@ const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
 }
 
 export const FreeBannerCourse = () => {
-  const { durata, category, slug } = useCourseBannerContext()
+  const { durata, category, slug, eventTrackerCallback } =
+    useCourseBannerContext()
 
   const handleNavigate = React.useCallback(() => {
+    if (eventTrackerCallback) eventTrackerCallback()
+
     navigate(`/${slug}/`)
-  }, [slug])
+  }, [slug, eventTrackerCallback])
 
   return (
     <NextCourseBanner>
@@ -115,10 +117,12 @@ export const FreeBannerCourse = () => {
 }
 
 export const PayableBannerCourse = () => {
-  const { students, avgRating, slug } = useCourseBannerContext()
+  const { students, avgRating, slug, eventTrackerCallback } =
+    useCourseBannerContext()
   const handleNavigate = React.useCallback(() => {
+    if (eventTrackerCallback) eventTrackerCallback()
     navigate(`/${slug}/`)
-  }, [slug])
+  }, [slug, eventTrackerCallback])
   return (
     <NextCourseBanner>
       <BannerAction>
