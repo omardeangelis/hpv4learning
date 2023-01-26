@@ -39,7 +39,7 @@ const IndexPage = () => {
       </Hero>
       <Box
         sx={{
-          backgroundColor: ``,
+          backgroundColor: `#000`,
           py: { xs: `36px`, lg: `72px` },
         }}
       >
