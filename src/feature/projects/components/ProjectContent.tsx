@@ -22,7 +22,11 @@ export const ProjectContent = ({
       spacing={{ xs: "4px", lg: "8px" }}
     >
       {titolo ? (
-        <Typography component="h3" fontWeight={600}>
+        <Typography
+          component="h3"
+          fontWeight={600}
+          lineHeight={{ xs: 1.2, lg: 1.5 }}
+        >
           {titolo}
         </Typography>
       ) : null}

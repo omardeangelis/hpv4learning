@@ -37,6 +37,7 @@ export const ProjectSection = ({
           >
             <ProjectCard>
               <ItemImage
+                className="img-box"
                 image={post?.copertina?.gatsbyImageData as IGatsbyImageData}
                 alt={post.titolo as string}
                 sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
