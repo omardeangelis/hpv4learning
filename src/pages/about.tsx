@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography"
 
 // Gatsby
 import { graphql } from "gatsby"
-import ComunityBanner from "../components/banner/ComunityBanner"
+import { CommunityBanner } from "../components/banner"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import Layout from "../components/shared/layout"
 import Insegnante from "../components/shared/Insegnante"
@@ -74,9 +74,10 @@ const AboutPage = ({
       <Box
         sx={{
           mt: { xs: `96px`, lg: `136px` },
+          py: { xs: `36px`, lg: `72px` },
         }}
       >
-        <ComunityBanner />
+        <CommunityBanner />
       </Box>
     </Layout>
   )

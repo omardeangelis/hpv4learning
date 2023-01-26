@@ -4,7 +4,6 @@ import styled from "@emotion/styled"
 
 export const CourseAlignment = styled(Box)(
   css({
-    display: [`block`, `flex`],
     position: `relative`,
     marginLeft: `auto`,
     marginRight: `auto`,

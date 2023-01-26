@@ -173,7 +173,8 @@ export const createPages = async ({ graphql, actions }) => {
         context: {
           id: project.id,
           nextProjectOrder,
-          courseId: project.corsi[0].idCorso,
+          udemyCourseId: Number(project.corsi[0].idCorso),
+          courseId: project.corsi[0].id,
         },
       })
     })

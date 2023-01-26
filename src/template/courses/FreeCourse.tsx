@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material"
+import Typography from "@mui/material/Typography"
 import Box from "@mui/system/Box"
 import Container from "@mui/system/Container"
 import { graphql, PageProps } from "gatsby"
@@ -10,6 +10,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import PersonIcon from "@mui/icons-material/Person"
 import { Stack } from "@mui/system"
 import isEmpty from "lodash/isEmpty"
+
+import { ImageDataLike } from "gatsby-plugin-image"
 import Layout from "../../components/shared/layout"
 import {
   CourseAlignment,
@@ -21,49 +23,77 @@ import {
   MarkdownP,
   ListSection,
   CustomStack,
+  FreeBannerCourse,
+  PayableBannerCourse,
 } from "../../feature/courses/components"
 import { Projects } from "../../feature/projects/components"
 import Insegnante from "../../components/shared/Insegnante"
 import CourseContainer from "../../components/course/CourseContainer"
 import CourseContent from "../../components/course/CourseContent"
 import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import { createBrandText, createRowText } from "../../utils/helpers"
+import {
+  convertToHHMMSS,
+  createBrandText,
+  createRowText,
+} from "../../utils/helpers"
 import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
+import { CourseBannerProvider } from "../../feature/courses/context/CourseBanner"
+import { triggerGACustomEvent } from "../../utils/tracking"
 
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
 }) => {
-  const { contentfulCorsi } = data
+  const { contentfulCorsi, udemyPaidCourse } = data
   const hasBanner = React.useMemo(
     () => contentfulCorsi?.livello && contentfulCorsi.oreDiLezione,
     [contentfulCorsi?.livello, contentfulCorsi?.oreDiLezione]
   )
+
+  const nextCourseCategory = React.useMemo(
+    () =>
+      contentfulCorsi?.nextCourse?.category?.filter(
+        (el) => el?.name?.toLowerCase() !== `gratuiti`
+      )?.[0]?.name as string,
+    [contentfulCorsi?.nextCourse?.category]
+  )
+
+  const bannerCtx = React.useMemo(
+    () => ({
+      category: nextCourseCategory,
+      title: contentfulCorsi?.nextCourse?.titolo,
+      durata: `${convertToHHMMSS(
+        contentfulCorsi?.nextCourse?.oreDiLezione as number,
+        true
+      )}h`,
+      slug: contentfulCorsi?.nextCourse?.slug,
+      image: contentfulCorsi?.nextCourse?.copertina as ImageDataLike,
+      avgRating: udemyPaidCourse?.rating,
+      students: udemyPaidCourse?.totalSubscribers,
+      eventTrackerCallback: triggerGACustomEvent({
+        event: `next_course_banner`,
+        content: contentfulCorsi?.nextCourse?.titolo as string,
+      }),
+    }),
+    [
+      contentfulCorsi?.nextCourse?.copertina,
+      contentfulCorsi?.nextCourse?.oreDiLezione,
+      contentfulCorsi?.nextCourse?.slug,
+      contentfulCorsi?.nextCourse?.titolo,
+      nextCourseCategory,
+      udemyPaidCourse?.rating,
+      udemyPaidCourse?.totalSubscribers,
+    ]
+  )
+
   return (
     <Layout>
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">
-          <Box
-            sx={{
-              maxWidth: { xs: `unset`, lg: `887px` },
-              mt: { xs: `48px`, lg: `96px` },
-            }}
-          >
-            <Typography
-              component="h1"
-              fontWeight={600}
-              dangerouslySetInnerHTML={{
-                __html: createBrandText(contentfulCorsi?.titolo) as string,
-              }}
-              sx={{
-                fontSize: { xs: `36px`, lg: `56px` },
-                lineHeight: { xs: `44px`, lg: `64px` },
-              }}
-            />
-          </Box>
           <CourseAlignment
             sx={{
-              mt: { xs: `24px`, lg: `48px` },
+              display: { xs: `block`, lg: `flex` },
+              mt: { xs: `48px`, lg: `96px` },
             }}
           >
             <CourseSection
@@ -71,8 +101,26 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                 paddingRight: { xs: `0px`, lg: `84px` },
               }}
             >
+              <Typography
+                component="h1"
+                fontWeight={600}
+                dangerouslySetInnerHTML={{
+                  __html: createBrandText(contentfulCorsi?.titolo) as string,
+                }}
+                sx={{
+                  fontSize: { xs: `36px`, lg: `56px` },
+                  lineHeight: { xs: `44px`, lg: `64px` },
+                }}
+              />
+
               {contentfulCorsi?.videoLink ? (
-                <PreviewVideo video={contentfulCorsi.videoLink} />
+                <Box
+                  sx={{
+                    mt: { xs: `24px`, lg: `48px` },
+                  }}
+                >
+                  <PreviewVideo video={contentfulCorsi.videoLink} />
+                </Box>
               ) : null}
               {hasBanner ? (
                 <Box
@@ -172,6 +220,35 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                   />
                 ) : null}
               </Stack>
+
+              {contentfulCorsi?.nextCourse ? (
+                <Box
+                  mt="24px"
+                  sx={{
+                    display: { lg: `none` },
+                  }}
+                >
+                  <Typography
+                    fontWeight={600}
+                    component="h3"
+                    sx={{
+                      fontSize: { xs: `24px`, lg: `34px` },
+                    }}
+                  >
+                    Cosa Studiare Dopo
+                  </Typography>
+                  <Box mt="16px">
+                    <CourseBannerProvider value={bannerCtx}>
+                      {contentfulCorsi.nextCourse.isFree ? (
+                        <FreeBannerCourse />
+                      ) : (
+                        <PayableBannerCourse />
+                      )}
+                    </CourseBannerProvider>
+                  </Box>
+                </Box>
+              ) : null}
+
               {!isEmpty(contentfulCorsi?.progetti) ? (
                 <Box
                   sx={{
@@ -298,6 +375,17 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                     progetti={contentfulCorsi?.progetti?.length || 0}
                   />
                 </Box>
+                {contentfulCorsi?.nextCourse ? (
+                  <Box mt="24px">
+                    <CourseBannerProvider value={bannerCtx}>
+                      {contentfulCorsi.nextCourse.isFree ? (
+                        <FreeBannerCourse />
+                      ) : (
+                        <PayableBannerCourse />
+                      )}
+                    </CourseBannerProvider>
+                  </Box>
+                ) : null}
               </Box>
             ) : null}
           </CourseAlignment>
@@ -365,7 +453,11 @@ export const Head = ({
 export default FreeCourseTemplate
 
 export const query = graphql`
-  query FreeCoursePage($id: String!, $categorySlug: String!) {
+  query FreeCoursePage(
+    $id: String!
+    $categorySlug: String!
+    $nextCourseId: Int!
+  ) {
     contentfulCorsi(id: { eq: $id }) {
       category {
         name
@@ -436,8 +528,20 @@ export const query = graphql`
       introduzioneProgetti {
         introduzioneProgetti
       }
+      nextCourse {
+        oreDiLezione
+        titolo
+        slug
+        isFree
+        idCorso
+        copertina {
+          gatsbyImageData
+        }
+        category {
+          name
+        }
+      }
     }
-
     allContentfulCorsi(
       filter: {
         category: { elemMatch: { slug: { eq: $categorySlug } } }
@@ -460,6 +564,10 @@ export const query = graphql`
           riassunto
         }
       }
+    }
+    udemyPaidCourse(courseId: { eq: $nextCourseId }) {
+      rating
+      totalSubscribers
     }
   }
 `

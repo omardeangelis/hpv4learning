@@ -47,6 +47,11 @@ const data = [
     title: `Progetti pratici`,
     items: [
       {
+        title: `Come creare un contatore in Javascript`,
+        slug: `/progetti/javascript/creare-contatore-javascript/`,
+        isExternal: false,
+      },
+      {
         title: `React`,
         slug: `/progetti/react/`,
         isExternal: false,

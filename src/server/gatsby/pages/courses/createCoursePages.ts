@@ -1,16 +1,26 @@
 import { PageCreationHelperProps } from "../../types"
 
+const COURSEFIELDS = `
+
+      slug
+      id
+      idCorso
+       category {
+        slug
+      }
+      nextCourse {
+        idCorso
+      }
+
+`
+
 export const freeCourseQuery = `
 {
   allContentfulCorsi(
     filter: {isFree: {eq: true}}
   ) {
-    nodes {
-      slug
-      id
-       category {
-        slug
-      }
+    nodes{
+      ${COURSEFIELDS}
     }
   }
 }
@@ -21,12 +31,7 @@ export const udemyCourseQuery = `
     filter: {isFree: {eq: false}}
   ) {
     nodes {
-      slug
-      id
-      idCorso
-       category {
-        slug
-      }
+      ${COURSEFIELDS}
     }
   }
 }
@@ -36,7 +41,7 @@ export type CourseQueryProps = {
     allContentfulCorsi: {
       nodes: Pick<
         Queries.ContentfulCorsiConnection["nodes"][number],
-        "slug" | "id" | "category" | "idCorso"
+        "slug" | "id" | "category" | "idCorso" | "nextCourse"
       >[]
     }
   }
@@ -48,6 +53,7 @@ type Props = {
 
 export const createCoursePages = ({ corsi, createPage, component }: Props) => {
   corsi.forEach((corso) => {
+    const nextCourseID = corso?.nextCourse?.idCorso ?? 0
     const { slug: categorySlug } =
       corso.category?.find((el) => el?.slug !== `gratuiti`) || {}
     if (categorySlug)
@@ -58,6 +64,7 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
           id: corso.id,
           course_id: Number(corso.idCorso),
           categorySlug,
+          nextCourseId: Number(nextCourseID),
         },
       })
   })
