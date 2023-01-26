@@ -5,7 +5,7 @@ import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers"
 import SeoLink from "../../../components/shared/SeoLink"
 import { MobileOnlyProjectCard } from "./ProjectCard"
 import { ProjectContent } from "./ProjectContent"
-import { ItemImage } from "../../guide/GuideItem"
+import { ItemImage } from "../../../components/shared/ItemImage"
 
 const CustomStack = styled(Box)`
   height: 100%;

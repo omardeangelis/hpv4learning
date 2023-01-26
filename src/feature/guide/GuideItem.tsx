@@ -1,20 +1,14 @@
 import React from "react"
 import styled from "@emotion/styled"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { IGatsbyImageData } from "gatsby-plugin-image/dist/src/components/gatsby-image.browser"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
-import { BoxProps, Divider } from "@mui/material"
+import { Divider } from "@mui/material"
 import { BorderBox } from "../../components/layout"
 import SeoLink from "../../components/shared/SeoLink"
 import { Projects } from "./GuidesSection"
-
-type ItemImageProps = {
-  image: IGatsbyImageData
-  alt: string
-}
+import { ItemImage } from "../../components/shared/ItemImage"
 
 export type Props = Partial<NonNullable<Projects>[number]> & {
   // eslint-disable-next-line react/no-unused-prop-types
@@ -45,26 +39,6 @@ const IconContainer = styled(Box)`
     height: inherit;
   }
 `
-
-export const ItemImage = ({
-  image,
-  alt,
-  ...rest
-}: ItemImageProps & BoxProps) => (
-  <Box
-    maxWidth={{ xs: `73px`, lg: `247px` }}
-    width="100%"
-    height={{ xs: `41px`, lg: `140px` }}
-    borderRadius={{ xs: `4px`, lg: `8px 0 0 8px` }}
-    overflow="hidden"
-    style={{
-      transform: `translateZ(0)`,
-    }}
-    {...rest}
-  >
-    <GatsbyImage style={{ height: `100%` }} image={image} alt={alt} />
-  </Box>
-)
 
 export const GuideItem = (props: Props) => {
   const {

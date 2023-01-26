@@ -6,7 +6,7 @@ import SeoLink from "../../../components/shared/SeoLink"
 import { ProjectSectionProps } from "../types"
 import { ProjectCard } from "./ProjectCard"
 import { ProjectContent } from "./ProjectContent"
-import { ItemImage } from "../../guide/GuideItem"
+import { ItemImage } from "../../../components/shared/ItemImage"
 
 export const ProjectSection = ({
   projects,
