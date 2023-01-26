@@ -8,6 +8,7 @@ import { navigate } from "gatsby"
 import { Container } from "@mui/system"
 import { RoundedButton } from "../../components/layout/RoundedButton"
 import SeoLink from "../../components/shared/SeoLink"
+import { triggerGACustomEvent } from "../../utils/tracking"
 
 type Props = {
   argomento: string
@@ -92,6 +93,7 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
             </Typography>
             <SeoLink isExternal={false} link={`/${slug}/`}>
               <RoundedButton
+                onClick={triggerGACustomEvent({ event: "guide_to_course" })}
                 size="large"
                 color="primary"
                 variant="contained"
