@@ -47,7 +47,7 @@
     "gatsby-source-contentful": "^7.19.1",
     "gatsby-source-filesystem": "^4.21.1",
     "gatsby-transformer-json": "^4.21.0",
-    "gatsby-transformer-remark": "^5.21.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.21.0",
     "googleapis": "105",
     "lodash": "^4.17.21",

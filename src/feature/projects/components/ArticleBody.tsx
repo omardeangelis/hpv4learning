@@ -171,7 +171,10 @@ export const ArticleBody = React.memo(
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
               img: ({ node, ...props }) => (
                 <StyledBox>
-                  <img style={{ width: `100%`, height: `100%` }} {...props} />
+                  <img
+                    style={{ maxWidth: `100%`, height: `100%` }}
+                    {...props}
+                  />
                 </StyledBox>
               ),
             }}
