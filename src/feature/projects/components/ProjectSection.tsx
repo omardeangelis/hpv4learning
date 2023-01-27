@@ -1,7 +1,7 @@
 import React from "react"
 import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
-import { IGatsbyImageData } from "gatsby-plugin-image"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import SeoLink from "../../../components/shared/SeoLink"
 import { ProjectSectionProps } from "../types"
 import { ProjectCard } from "./ProjectCard"
@@ -38,10 +38,15 @@ export const ProjectSection = ({
             <ProjectCard>
               <ItemImage
                 className="img-box"
-                image={post?.copertina?.gatsbyImageData as IGatsbyImageData}
-                alt={post.titolo as string}
                 sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
-              />
+              >
+                <GatsbyImage
+                  style={{ height: `100%` }}
+                  image={post?.copertina?.gatsbyImageData as IGatsbyImageData}
+                  alt={post.titolo as string}
+                />
+              </ItemImage>
+
               <ProjectContent
                 titolo={post.articleTitle}
                 description={post.descrizione?.descrizione}

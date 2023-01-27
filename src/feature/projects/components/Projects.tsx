@@ -6,6 +6,7 @@ import SeoLink from "../../../components/shared/SeoLink"
 import { MobileOnlyProjectCard } from "./ProjectCard"
 import { ProjectContent } from "./ProjectContent"
 import { ItemImage } from "../../../components/shared/ItemImage"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const CustomStack = styled(Box)`
   height: 100%;
@@ -61,11 +62,13 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
               >
                 <MobileOnlyProjectCard>
                   {progetto?.copertina?.gatsbyImageData ? (
-                    <ItemImage
-                      image={progetto?.copertina?.gatsbyImageData}
-                      alt={progetto?.titolo as string}
-                      sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
-                    />
+                    <ItemImage sx={{ marginLeft: { xs: "15px", lg: "unset" } }}>
+                      <GatsbyImage
+                        style={{ height: `100%` }}
+                        image={progetto?.copertina?.gatsbyImageData}
+                        alt={progetto?.titolo as string}
+                      />
+                    </ItemImage>
                   ) : null}
 
                   <ProjectContent

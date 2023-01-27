@@ -9,6 +9,7 @@ import { BorderBox } from "../../components/layout"
 import SeoLink from "../../components/shared/SeoLink"
 import { Projects } from "./GuidesSection"
 import { ItemImage } from "../../components/shared/ItemImage"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 export type Props = Partial<NonNullable<Projects>[number]> & {
   // eslint-disable-next-line react/no-unused-prop-types
@@ -59,10 +60,9 @@ export const GuideItem = (props: Props) => {
         <Stack flexDirection={{ xs: `column`, lg: `row` }}>
           <Stack flexDirection="row" alignItems="center">
             {copertina?.gatsbyImageData ? (
-              <ItemImage
-                image={copertina?.gatsbyImageData}
-                alt={title as string}
-              />
+              <ItemImage>
+                <GatsbyImage style={{ height: `100%` }} image={copertina?.gatsbyImageData} alt={title as string} />
+              </ItemImage>
             ) : null}
             {` `}
             <Stack

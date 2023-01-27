@@ -1,19 +1,8 @@
 import React from "react"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { IGatsbyImageData } from "gatsby-plugin-image/dist/src/components/gatsby-image.browser"
 import Box from "@mui/material/Box"
 import { BoxProps } from "@mui/material"
 
-type ItemImageProps = {
-  image: IGatsbyImageData
-  alt: string
-}
-
-export const ItemImage = ({
-  image,
-  alt,
-  ...rest
-}: ItemImageProps & BoxProps) => (
+export const ItemImage = ({ children, ...rest }: BoxProps) => (
   <Box
     maxWidth={{ xs: `73px`, lg: `247px` }}
     width="100%"
@@ -25,6 +14,6 @@ export const ItemImage = ({
     }}
     {...rest}
   >
-    <GatsbyImage style={{ height: `100%` }} image={image} alt={alt} />
+    {children}
   </Box>
 )
