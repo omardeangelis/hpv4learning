@@ -1,7 +1,5 @@
 import React from "react"
 import styled from "@emotion/styled"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { IGatsbyImageData } from "gatsby-plugin-image/dist/src/components/gatsby-image.browser"
 import Typography from "@mui/material/Typography"
 import Box, { BoxProps } from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
@@ -10,11 +8,8 @@ import { Divider } from "@mui/material"
 import { BorderBox } from "../../components/layout"
 import SeoLink from "../../components/shared/SeoLink"
 import { Projects } from "./GuidesSection"
-
-type ItemImageProps = {
-  image: IGatsbyImageData
-  alt: string
-}
+import { ItemImage } from "../../components/shared/ItemImage"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 export type Props = Partial<NonNullable<Projects>[number]> &
   BoxProps & {
@@ -47,21 +42,6 @@ const IconContainer = styled(Box)`
   }
 `
 
-export const ItemImage = ({ image, alt }: ItemImageProps) => (
-  <Box
-    maxWidth={{ xs: `73px`, lg: `247px` }}
-    width="100%"
-    height={{ xs: `41px`, lg: `140px` }}
-    borderRadius={{ xs: `4px`, lg: `8px 0 0 8px` }}
-    overflow="hidden"
-    style={{
-      transform: `translateZ(0)`,
-    }}
-  >
-    <GatsbyImage style={{ height: `100%` }} image={image} alt={alt} />
-  </Box>
-)
-
 export const GuideItem = (props: Props) => {
   const {
     articleTitle: title,
@@ -81,10 +61,9 @@ export const GuideItem = (props: Props) => {
         <Stack flexDirection={{ xs: `column`, lg: `row` }}>
           <Stack flexDirection="row" alignItems="center">
             {copertina?.gatsbyImageData ? (
-              <ItemImage
-                image={copertina?.gatsbyImageData}
-                alt={title as string}
-              />
+              <ItemImage>
+                <GatsbyImage style={{ height: `100%` }} image={copertina?.gatsbyImageData} alt={title as string} />
+              </ItemImage>
             ) : null}
             {` `}
             <Stack

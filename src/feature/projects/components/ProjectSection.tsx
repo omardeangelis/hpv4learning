@@ -1,17 +1,12 @@
 import React from "react"
 import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
-import {
-  GatsbyImage,
-  getImage,
-  IGatsbyImageData,
-  ImageDataLike,
-} from "gatsby-plugin-image"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import SeoLink from "../../../components/shared/SeoLink"
 import { ProjectSectionProps } from "../types"
 import { ProjectCard } from "./ProjectCard"
 import { ProjectContent } from "./ProjectContent"
-import { ProjectImage } from "./ProjectImage"
+import { ItemImage } from "../../../components/shared/ItemImage"
 
 export const ProjectSection = ({
   projects,
@@ -41,19 +36,17 @@ export const ProjectSection = ({
             }}
           >
             <ProjectCard>
-              <ProjectImage>
+              <ItemImage
+                className="img-box"
+                sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
+              >
                 <GatsbyImage
-                  style={{
-                    height: `100%`,
-                  }}
-                  image={
-                    getImage(
-                      post.copertina?.gatsbyImageData as ImageDataLike
-                    ) as IGatsbyImageData
-                  }
-                  alt={post.articleTitle as string}
+                  style={{ height: `100%` }}
+                  image={post?.copertina?.gatsbyImageData as IGatsbyImageData}
+                  alt={post.titolo as string}
                 />
-              </ProjectImage>
+              </ItemImage>
+
               <ProjectContent
                 titolo={post.articleTitle}
                 description={post.descrizione?.descrizione}
