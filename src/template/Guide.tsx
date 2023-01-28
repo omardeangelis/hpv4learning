@@ -22,6 +22,10 @@ const Guide = ({ data }: PageProps<Queries.GuideQuery>) => {
     [data]
   )
 
+  const students = React.useMemo(
+    () => data.udemyPaidCourse?.totalSubscribers,
+    [data.udemyPaidCourse?.totalSubscribers]
+  )
   return (
     <Layout>
       <Hero title={queryData.title} description={queryData.metaDescription} />
@@ -37,6 +41,7 @@ const Guide = ({ data }: PageProps<Queries.GuideQuery>) => {
             projects={queryData.articoli_e_progetti}
             courseMinutes={queryData?.corsi_correlati?.[0]?.oreDiLezione}
             price={queryData?.corsi_correlati?.[0]?.prezzo}
+            totalSubscribers={students}
           />
         ) : null}
       </Box>
