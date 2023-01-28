@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import React from "react"
 import styled from "@emotion/styled"
 import Typography from "@mui/material/Typography"
@@ -5,18 +6,17 @@ import Box, { BoxProps } from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
 import { Divider } from "@mui/material"
+import { GatsbyImage } from "gatsby-plugin-image"
 import { BorderBox } from "../../components/layout"
 import SeoLink from "../../components/shared/SeoLink"
 import { Projects } from "./GuidesSection"
 import { ItemImage } from "../../components/shared/ItemImage"
-import { GatsbyImage } from "gatsby-plugin-image"
 
-export type Props = Partial<NonNullable<Projects>[number]> &
-  BoxProps & {
-    // eslint-disable-next-line react/no-unused-prop-types
-    courseSlug: string | null
-  }
-
+export type Props = {
+  descrizione: any
+  project_category: any[]
+} & Partial<NonNullable<Projects>[number]> &
+  BoxProps
 const StyledBorderBox = styled(BorderBox)`
   width: 100%;
   border-radius: 8px;
@@ -33,8 +33,6 @@ const IconContainer = styled(Box)`
   width: 20px;
   height: 20px;
   @media screen and (min-width: 1024px) {
-    margin-top: 33px;
-    margin-right: 21px;
   }
   & svg {
     width: inherit;
@@ -45,38 +43,58 @@ const IconContainer = styled(Box)`
 export const GuideItem = (props: Props) => {
   const {
     articleTitle: title,
-    slug,
-    courseSlug,
     copertina,
     descrizione,
     body,
+    internal,
+    project_category,
+    slug,
   } = props || {}
+
+  const baseLink = React.useMemo(
+    () =>
+      internal?.type === `ContentfulProgetti`
+        ? `/progetti/${project_category?.[0]?.slug}/${slug}/`
+        : `/${slug}/`,
+    [internal?.type, project_category, slug]
+  )
+
   return (
     <StyledBorderBox
       component="article"
       p={{ xs: `16px`, lg: `0px` }}
       width="100%"
     >
-      <SeoLink isExternal={false} link={`/progetti/${courseSlug}/${slug}`}>
-        <Stack flexDirection={{ xs: `column`, lg: `row` }}>
+      <SeoLink isExternal={false} link={baseLink}>
+        <Stack
+          flexDirection={{ xs: `column`, lg: `row` }}
+          alignItems={{ xs: `space-between` }}
+          justifyContent="space-between"
+          width="100%"
+        >
           <Stack flexDirection="row" alignItems="center">
             {copertina?.gatsbyImageData ? (
               <ItemImage>
-                <GatsbyImage style={{ height: `100%` }} image={copertina?.gatsbyImageData} alt={title as string} />
+                <GatsbyImage
+                  style={{ height: `100%` }}
+                  image={copertina?.gatsbyImageData}
+                  alt={title as string}
+                />
               </ItemImage>
             ) : null}
             {` `}
             <Stack
               flexDirection="column"
               justifyContent="center"
-              pl={{ xs: `17px`, lg: `30px` }}
+              pl={{ xs: `16px`, lg: `30px` }}
+              maxWidth="487px"
             >
               <Typography
                 component="h3"
                 fontWeight={500}
                 fontSize={{ xs: `12px`, lg: `18px` }}
                 lineHeight={{ xs: `18px`, lg: `24px` }}
-                width={{ xs: `unset`, lg: `90%` }}
+                width={{ xs: `unset`, lg: `100%` }}
               >
                 {title}
               </Typography>
@@ -84,9 +102,9 @@ export const GuideItem = (props: Props) => {
                 fontWeight={400}
                 fontSize={{ xs: `10px`, lg: `16px` }}
                 lineHeight={{ xs: `12px`, lg: `24px` }}
-                width={{ xs: `unset`, lg: `90%` }}
+                width={{ xs: `unset`, lg: `100%` }}
               >
-                {descrizione?.descrizione}
+                {descrizione?.descrizione || descrizione}
               </Typography>
             </Stack>
           </Stack>
@@ -96,8 +114,9 @@ export const GuideItem = (props: Props) => {
           <Stack
             flexDirection={{ xs: `row`, lg: `column-reverse` }}
             justifyContent="space-between"
-            alignItems="center"
-            mt={{ xs: `12px`, lg: `0px` }}
+            alignItems="flex-end"
+            pt={{ xs: `12px`, lg: `30px` }}
+            pr={{ xs: `0px`, lg: `30px` }}
             pb={{ xs: `0px`, lg: `16px` }}
           >
             {` `}

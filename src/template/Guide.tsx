@@ -32,7 +32,7 @@ const Guide = ({ data }: PageProps<Queries.GuideQuery>) => {
           mx: `12px`,
         }}
       >
-        {queryData.corsi_correlati ? (
+        {queryData?.corsi_correlati ? (
           <GuideInfo
             projects={queryData.articoli_e_progetti}
             courseMinutes={queryData?.corsi_correlati?.[0]?.oreDiLezione}
@@ -76,10 +76,7 @@ const Guide = ({ data }: PageProps<Queries.GuideQuery>) => {
           mx: `12px`,
         }}
       >
-        <GuidesSection
-          projects={queryData.articoli_e_progetti}
-          courseSlug={data.allContentfulGuida.group[0].fieldValue}
-        />
+        <GuidesSection projects={queryData.articoli_e_progetti} />
       </Box>
 
       <Box
@@ -125,7 +122,7 @@ export const Head = ({ data }: PageProps<Queries.GuideQuery>) => {
       { text: `Guide`, link: `/guide/` },
       { text: `${queryData.title}`, link: `/guide/${queryData.slug}` },
     ],
-    []
+    [queryData.slug, queryData.title]
   )
   return (
     <>
@@ -144,7 +141,7 @@ export const Head = ({ data }: PageProps<Queries.GuideQuery>) => {
 }
 
 export const query = graphql`
-  query Guide {
+  query Guide($courseId: Int!) {
     allContentfulGuida {
       nodes {
         argomento
@@ -155,21 +152,6 @@ export const query = graphql`
         metaTitle
         metaDescription
         slug
-        articoli_e_progetti {
-          articleTitle
-          body {
-            childrenMarkdownRemark {
-              timeToRead
-            }
-          }
-          copertina {
-            gatsbyImageData
-          }
-          descrizione {
-            descrizione
-          }
-          slug
-        }
         corsi_correlati {
           copertina {
             gatsbyImageData
@@ -178,10 +160,50 @@ export const query = graphql`
           oreDiLezione
           prezzo
         }
+        articoli_e_progetti {
+          ... on ContentfulArticolo {
+            internal {
+              type
+            }
+            articleTitle: title
+            body {
+              childrenMarkdownRemark {
+                timeToRead
+              }
+            }
+            short_description
+            copertina {
+              gatsbyImageData
+            }
+            slug
+          }
+          ... on ContentfulProgetti {
+            articleTitle
+            internal {
+              type
+            }
+            titolo
+            project_category {
+              slug
+            }
+            body {
+              childrenMarkdownRemark {
+                timeToRead
+              }
+            }
+            copertina {
+              gatsbyImageData
+            }
+            descrizione {
+              descrizione
+            }
+            slug
+          }
+        }
       }
-      group(field: articoli_e_progetti___project_category___slug) {
-        fieldValue
-      }
+    }
+    udemyPaidCourse(courseId: { eq: $courseId }) {
+      totalSubscribers
     }
   }
 `

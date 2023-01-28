@@ -63,11 +63,35 @@ const projectCategoriesPageQuery = `
 }
 `
 
+type CorsiCorrelati = {
+  idCorso: string
+}
+
+type Node = {
+  slug: string
+  corsi_correlati: CorsiCorrelati[]
+}
+
+type AllContentfulGuida = {
+  nodes: Node[]
+}
+
+type Data = {
+  allContentfulGuida: AllContentfulGuida
+}
+
+export type GuideQueryProps = {
+  data: Data
+}
+
 const guideQuery = `
  {
   allContentfulGuida {
     nodes {
       slug
+      corsi_correlati {
+        idCorso
+      }
     }
   }
 }

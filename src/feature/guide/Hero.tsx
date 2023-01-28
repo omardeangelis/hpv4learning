@@ -62,7 +62,7 @@ export const Hero = ({ title, description }: Props) => (
         fontWeight={700}
         color="#fff"
         textAlign="center"
-        maxWidth="80%"
+        width="100%"
         mb="24px"
       >
         {title && title}
@@ -74,7 +74,7 @@ export const Hero = ({ title, description }: Props) => (
         fontWeight={500}
         color="#fff"
         textAlign="center"
-        maxWidth="80%"
+        width="100%"
         mb="24px"
       >
         {description}
