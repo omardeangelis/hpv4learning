@@ -15,15 +15,14 @@ const StyledStack = styled(Box)({
   },
 })
 
-type Props = {
-  projects?: Projects
-  courseSlug: string | null
-}
-
 export type Projects =
   Queries.GuideQuery["allContentfulGuida"]["nodes"][number]["articoli_e_progetti"]
 
-export const GuidesSection = ({ projects, courseSlug }: Props) => (
+type Props = {
+  projects?: Projects
+}
+
+export const GuidesSection = ({ projects }: Props) => (
   <Stack
     flexDirection="column"
     justifyContent="center"
@@ -52,21 +51,23 @@ export const GuidesSection = ({ projects, courseSlug }: Props) => (
     </Typography>
     {projects ? (
       <StyledStack>
-        {projects.map((project, index) => (
-          <GuideItem
-            key={project?.articleTitle as string}
-            articleTitle={project?.articleTitle}
-            descrizione={project?.descrizione}
-            body={project?.body}
-            copertina={project?.copertina}
-            courseSlug={courseSlug}
-            slug={project?.slug as string}
-            onClick={triggerGACustomEvent({
-              event: "guide_to_article",
-              content: index + 1,
-            })}
-          />
-        ))}
+        {projects.map((project, index) => {
+          const filippinata = {
+            ...project,
+            descrizione:
+              project.descrizione?.descrizione || project.short_description,
+          }
+          return (
+            <GuideItem
+              key={project?.slug}
+              {...filippinata}
+              onClick={triggerGACustomEvent({
+                event: `guide_to_article`,
+                content: index + 1,
+              })}
+            />
+          )
+        })}
       </StyledStack>
     ) : null}
   </Stack>
