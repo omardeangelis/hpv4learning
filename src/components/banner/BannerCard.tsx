@@ -30,7 +30,7 @@ export const BannerCard = ({
 }: Props) => {
   const handleNavigation = React.useCallback(() => {
     const event = kind === `discord` ? `join_discord` : `yt_channel_view`
-    triggerGACustomEvent({ event })
+    triggerGACustomEvent({ event })()
     navigate(link)
   }, [link, kind])
   return (
