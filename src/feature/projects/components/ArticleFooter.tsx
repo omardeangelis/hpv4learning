@@ -2,15 +2,15 @@ import React from "react"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
 import {
   GatsbyImage,
   getImage,
   IGatsbyImageData,
   ImageDataLike,
 } from "gatsby-plugin-image"
-import { ProjectCard, ProjectImage, ProjectContent } from "./index"
+import { ProjectCard, ProjectContent } from "./index"
 import SeoLink from "../../../components/shared/SeoLink"
+import { ItemImage } from "../../../components/shared/ItemImage"
 
 const StyledTypography = styled(Typography)`
   font-weight: 600;
@@ -54,7 +54,10 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
               maxWidth: { xs: `unset`, sm: `351px` },
             }}
           >
-            <ProjectImage>
+            <ItemImage
+              className="img-box"
+              sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
+            >
               {nextProject?.copertina ? (
                 <GatsbyImage
                   image={
@@ -75,7 +78,7 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
                   width="100%"
                 />
               )}
-            </ProjectImage>
+            </ItemImage>
 
             <ProjectContent
               titolo={nextProject?.articleTitle as string | undefined}

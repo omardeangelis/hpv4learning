@@ -7,6 +7,7 @@ type Props = {
   projects?: Queries.GuideQuery["allContentfulGuida"]["nodes"][number]["articoli_e_progetti"]
   courseMinutes?: number | null
   price?: number | null
+  totalSubscribers?: number | string | null
 }
 
 export const PureCssStack = styled(Box)`
@@ -31,7 +32,12 @@ export const PureCssStack = styled(Box)`
   }
 `
 
-export const GuideInfo = ({ projects, courseMinutes, price }: Props) => (
+export const GuideInfo = ({
+  projects,
+  courseMinutes,
+  price,
+  totalSubscribers,
+}: Props) => (
   <PureCssStack>
     {projects ? (
       <Info title={projects.length} subtitle="Articoli e Guide pratiche" />
@@ -42,8 +48,15 @@ export const GuideInfo = ({ projects, courseMinutes, price }: Props) => (
         subtitle="Minuti di videocorso pratico"
       />
     ) : null}
+    {totalSubscribers ? (
+      <Info
+        title={`${totalSubscribers}`}
+        subtitle="Studenti iscritti al corso"
+      />
+    ) : null}
+
     {price ? (
-      <Info title={`${price / 100} €`} subtitle="Prezzo del corso completo" />
+      <Info title={`${price / 100}€`} subtitle="Prezzo del corso completo" />
     ) : null}
   </PureCssStack>
 )

@@ -48,7 +48,7 @@ const NextCourseBanner: React.FC<BoxProps> = ({ children, ...rest }) => {
               fontWeight: 600,
             }}
           >
-            Scopri il Prossimo corso
+            Scopri il corso completo
           </Typography>
           <Box mt="4px">
             <Typography

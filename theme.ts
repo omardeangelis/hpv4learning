@@ -96,14 +96,14 @@ const theme = {
           minWidth: `24px`,
           padding: `0px 16px`,
           borderRadius: `8px`,
-          textTransform: `capitalize`,
+          textTransform: `unset`,
         },
         sizeMedium: {
           height: `36px`,
           minWidth: `36px`,
           padding: `0px 16px`,
           borderRadius: `12px`,
-          textTransform: `capitalize`,
+          textTransform: `unset`,
           fontSize: `14px`,
         },
         sizeLarge: {
@@ -111,7 +111,7 @@ const theme = {
           minWidth: `48px`,
           padding: `0px 16px`,
           borderRadius: `12px`,
-          textTransform: `capitalize`,
+          textTransform: `unset`,
           fontSize: `16px`,
         },
         containedPrimary: {

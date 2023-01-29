@@ -57,7 +57,7 @@ const TopHeroContent = ({ fn }: { fn: () => void }) => (
           lineHeight: 1.7,
         }}
       >
-        La piattafroma di videocorsi italiana per videomaker e sviluppatori web
+        La piattaforma di videocorsi italiana per videomaker e sviluppatori web
         {` `}
       </Typography>
     </Box>

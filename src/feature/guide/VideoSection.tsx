@@ -31,6 +31,7 @@ const StyledBox = styled(Box)`
 
 export const VideoSection = ({ argomento, image, slug }: Props) => {
   const handleNavigate = React.useCallback(() => {
+    triggerGACustomEvent({ event: `guide_to_course` })()
     navigate(`/${slug}/`)
   }, [slug])
 
@@ -93,7 +94,7 @@ export const VideoSection = ({ argomento, image, slug }: Props) => {
             </Typography>
             <SeoLink isExternal={false} link={`/${slug}/`}>
               <RoundedButton
-                onClick={triggerGACustomEvent({ event: "guide_to_course" })}
+                onClick={triggerGACustomEvent({ event: `guide_to_course` })}
                 size="large"
                 color="primary"
                 variant="contained"
