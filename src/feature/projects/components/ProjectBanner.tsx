@@ -4,17 +4,16 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Box from "@mui/system/Box"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
+import truncate from "lodash/truncate"
 import SeoLink from "../../../components/shared/SeoLink"
 import { createRowText } from "../../../utils/helpers"
 import { RootState } from "../../../store"
 import { triggerGACustomEvent } from "../../../utils/tracking"
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
-import truncate from "lodash/truncate"
 
 interface Props {
   courseTitle?: string | null
-  prezzo?: number | null
   couponLink?: string | null
   image?: IGatsbyImageData | null
 }

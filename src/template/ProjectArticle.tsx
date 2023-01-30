@@ -126,7 +126,10 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
                       data.udemyPaidCourse?.rating ||
                       (course.recensioni as number)
                     }
-                    durata={course.oreDiLezione as number}
+                    durata={
+                      data.udemyPaidCourse?.courseHours ||
+                      (course.oreDiLezione as number)
+                    }
                     progetti={course.progetti?.length as number}
                     students={data.udemyPaidCourse?.totalSubscribers as number}
                   />
