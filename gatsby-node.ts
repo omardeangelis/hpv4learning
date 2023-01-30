@@ -167,17 +167,17 @@ export const createPages = async ({ graphql, actions }) => {
     category.nodes.forEach((project) => {
       const nextProjectOrder =
         project.ordine === maxProjectsOrders ? 1 : project.ordine + 1
-
-      createPage({
-        path: `/progetti/${slug}/${project.slug}/`,
-        component: path.resolve(`./src/template/ProjectArticle.tsx`),
-        context: {
-          id: project.id,
-          nextProjectOrder,
-          udemyCourseId: Number(project.corsi[0].idCorso),
-          courseId: project.corsi[0].id,
-        },
-      })
+      if (project?.corsi?.[0]?.id)
+        createPage({
+          path: `/progetti/${slug}/${project.slug}/`,
+          component: path.resolve(`./src/template/ProjectArticle.tsx`),
+          context: {
+            id: project.id,
+            nextProjectOrder,
+            udemyCourseId: Number(project?.corsi?.[0]?.idCorso || 0),
+            courseId: project.corsi[0].id,
+          },
+        })
     })
   })
 
