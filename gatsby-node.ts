@@ -20,6 +20,11 @@ import {
   udemyCourseQuery,
   createCoursePages,
 } from "./src/server/gatsby/pages/courses/createCoursePages"
+import {
+  ArticleQueryProps,
+  articleQuery,
+  createArticlePages,
+} from "./src/server/gatsby/pages/blog/createArticlePages"
 import { isProduction } from "./src/constants"
 
 type RedirectType = { source: string; target: string; status: string }
@@ -96,6 +101,7 @@ export const createPages = async ({ graphql, actions }) => {
   const allGuideQuery = (await graphql(guideQuery)) as GuideQueryProps
   const freeCourses = (await graphql(freeCourseQuery)) as CourseQueryProps
   const udemyCourses = (await graphql(udemyCourseQuery)) as CourseQueryProps
+  const articles = (await graphql(articleQuery)) as ArticleQueryProps
 
   courseCategoryQuery.data.allContentfulCategory.nodes.forEach((category) => {
     const {
@@ -216,5 +222,17 @@ export const createPages = async ({ graphql, actions }) => {
     })
   } catch (error) {
     throw new Error(`We Ragazzo, volevi creare i corsi ? E invece: ${error}`)
+  }
+
+  try {
+    createArticlePages({
+      articoli: articles.data.allContentfulArticolo.nodes,
+      createPage,
+      component: resolve(`./src/template/Article.tsx`),
+    })
+  } catch (error) {
+    throw new Error(
+      `We Ragazzo, volevi creare gli articoli ? E invece: ${error}`
+    )
   }
 }
