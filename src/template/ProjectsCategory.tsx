@@ -152,7 +152,7 @@ export const query = graphql`
       nodes {
         titolo
         slug
-        articleTitle
+        meta_title
         copertina {
           gatsbyImageData
         }

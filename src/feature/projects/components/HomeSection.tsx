@@ -22,7 +22,7 @@ const query = graphql`
       nodes {
         titolo
         slug
-        articleTitle
+        meta_title
         descrizione {
           descrizione
         }

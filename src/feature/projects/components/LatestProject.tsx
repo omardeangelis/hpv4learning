@@ -72,7 +72,7 @@ export const LatestProject = (
             lineHeight={{ xs: `39px`, lg: `54px` }}
             fontWeight={600}
           >
-            {latestProject?.articleTitle}
+            {latestProject?.meta_title}
           </Typography>
           <Box mt={{ xs: `6px`, lg: `8px` }}>
             <Typography
@@ -142,7 +142,7 @@ export const LatestProject = (
         >
           <GatsbyImage
             image={image}
-            alt={latestProject?.articleTitle as string}
+            alt={latestProject?.meta_title as string}
           />
         </Box>
       ) : null}

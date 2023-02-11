@@ -171,26 +171,26 @@ export const Head = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
       { text: `Progetti`, link: `/progetti/` },
       { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
       {
-        text: queryData?.articleTitle,
+        text: queryData?.meta_title,
         link: `/progetti/${courseSlug}/${slug}/`,
       },
     ]
-  }, [queryData?.articleTitle, queryData?.project_category, queryData?.slug])
+  }, [queryData?.meta_title, queryData?.project_category, queryData?.slug])
   return (
     <>
       <MetaDecorator
-        metaTitle={createRowText(queryData?.articleTitle as any)}
+        metaTitle={createRowText(queryData?.meta_title as any)}
         metaDescription={queryData?.metaDescription as any}
         image={queryData && (`https:${queryData?.copertina?.file?.url}` as any)}
       />
       <LinkHandler />
       <ArticleSchema
-        title={createRowText(queryData?.articleTitle as any)}
+        title={createRowText(queryData?.meta_title as any)}
         description={queryData?.descrizione?.descrizione as any}
         authorName="hpv4learning"
         breadcrumbs={breadcrumbs as any}
         image={queryData && (`https:${queryData?.copertina?.file?.url}` as any)}
-        imageAltText={createRowText(queryData?.articleTitle as any)}
+        imageAltText={createRowText(queryData?.meta_title as any)}
         modifiedDate={queryData?.updatedAt as any}
         publishDate={queryData?.createdAt as any}
       />
@@ -210,7 +210,8 @@ export const query = graphql`
     project: contentfulProgetti(id: { eq: $id }) {
       id
       titolo
-      articleTitle
+      meta_title
+      short_description
       slug
       metaDescription
       ordine
@@ -272,11 +273,12 @@ export const query = graphql`
       ordine: { eq: $nextProjectOrder }
       corsi: { elemMatch: { id: { eq: $courseId } } }
     ) {
-      articleTitle
       slug
       descrizione {
         descrizione
       }
+      meta_title
+      short_description
       copertina {
         gatsbyImageData
       }
