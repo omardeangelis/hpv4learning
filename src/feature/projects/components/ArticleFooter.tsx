@@ -23,14 +23,15 @@ const StyledTypography = styled(Typography)`
   }
 `
 
-export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
-  const nextProject = React.useMemo(() => props.nextProject, [])
-
+export const ArticleFooter = ({
+  nextProject,
+  project,
+}: Queries.SingleProjectQuery) => {
   const nextProjectUrl = React.useMemo(() => {
-    const courseSlug = props?.project?.project_category?.[0]?.slug
-    const slug = props?.nextProject?.slug
+    const courseSlug = project?.project_category?.[0]?.slug
+    const slug = nextProject?.slug
     return `/progetti/${courseSlug}/${slug}/`
-  }, [])
+  }, [nextProject, project])
 
   return (
     <div>
@@ -56,7 +57,7 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
           >
             <ItemImage
               className="img-box"
-              sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
+              sx={{ marginLeft: { xs: `15px`, lg: `unset` } }}
             >
               {nextProject?.copertina ? (
                 <GatsbyImage
@@ -65,7 +66,7 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
                       nextProject?.copertina as unknown as ImageDataLike
                     ) as IGatsbyImageData
                   }
-                  alt={nextProject.articleTitle || `Anteprima del progetto`}
+                  alt={nextProject.meta_title || `Anteprima del progetto`}
                   style={{
                     height: `100%`,
                   }}
@@ -81,8 +82,8 @@ export const ArticleFooter = (props: Queries.SingleProjectQuery) => {
             </ItemImage>
 
             <ProjectContent
-              titolo={nextProject?.articleTitle as string | undefined}
-              label={props.project?.project_category?.[0]?.slug}
+              titolo={nextProject?.meta_title as string | undefined}
+              label={project?.project_category?.[0]?.slug}
               description={nextProject?.descrizione?.descrizione}
             />
           </ProjectCard>

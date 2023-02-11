@@ -38,7 +38,7 @@ export const ProjectSection = ({
             <ProjectCard>
               <ItemImage
                 className="img-box"
-                sx={{ marginLeft: { xs: "15px", lg: "unset" } }}
+                sx={{ marginLeft: { xs: `15px`, lg: `unset` } }}
               >
                 <GatsbyImage
                   style={{ height: `100%` }}
@@ -48,7 +48,7 @@ export const ProjectSection = ({
               </ItemImage>
 
               <ProjectContent
-                titolo={post.articleTitle}
+                titolo={post?.meta_title}
                 description={post.descrizione?.descrizione}
                 label={post?.project_category?.[0]?.title}
               />

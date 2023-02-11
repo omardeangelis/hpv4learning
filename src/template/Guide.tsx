@@ -170,7 +170,10 @@ export const query = graphql`
             internal {
               type
             }
-            articleTitle: title
+            tag {
+              slug
+            }
+            titolo
             body {
               childrenMarkdownRemark {
                 timeToRead
@@ -183,7 +186,7 @@ export const query = graphql`
             slug
           }
           ... on ContentfulProgetti {
-            articleTitle
+            titolo
             internal {
               type
             }

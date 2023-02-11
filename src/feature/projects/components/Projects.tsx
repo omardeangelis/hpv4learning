@@ -1,12 +1,12 @@
 import React from "react"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
+import { GatsbyImage } from "gatsby-plugin-image"
 import { cleanStringFromHtlmTags, rowalizer } from "../../../utils/helpers"
 import SeoLink from "../../../components/shared/SeoLink"
 import { MobileOnlyProjectCard } from "./ProjectCard"
 import { ProjectContent } from "./ProjectContent"
 import { ItemImage } from "../../../components/shared/ItemImage"
-import { GatsbyImage } from "gatsby-plugin-image"
 
 const CustomStack = styled(Box)`
   height: 100%;
@@ -62,7 +62,7 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
               >
                 <MobileOnlyProjectCard>
                   {progetto?.copertina?.gatsbyImageData ? (
-                    <ItemImage sx={{ marginLeft: { xs: "15px", lg: "unset" } }}>
+                    <ItemImage sx={{ marginLeft: { xs: `15px`, lg: `unset` } }}>
                       <GatsbyImage
                         style={{ height: `100%` }}
                         image={progetto?.copertina?.gatsbyImageData}

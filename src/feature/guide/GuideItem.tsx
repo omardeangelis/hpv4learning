@@ -15,6 +15,9 @@ import { ItemImage } from "../../components/shared/ItemImage"
 export type Props = {
   descrizione: any
   project_category: any[]
+  tag: {
+    slug: string
+  }
 } & Partial<NonNullable<Projects>[number]> &
   BoxProps
 const StyledBorderBox = styled(BorderBox)`
@@ -42,21 +45,22 @@ const IconContainer = styled(Box)`
 
 export const GuideItem = (props: Props) => {
   const {
-    articleTitle: title,
+    titolo,
     copertina,
     descrizione,
     body,
     internal,
     project_category,
     slug,
+    tag,
   } = props || {}
 
   const baseLink = React.useMemo(
     () =>
       internal?.type === `ContentfulProgetti`
         ? `/progetti/${project_category?.[0]?.slug}/${slug}/`
-        : `/${slug}/`,
-    [internal?.type, project_category, slug]
+        : `/blog/${tag?.slug}/${slug}/`,
+    [internal?.type, project_category, slug, tag?.slug]
   )
 
   return (
@@ -78,7 +82,7 @@ export const GuideItem = (props: Props) => {
                 <GatsbyImage
                   style={{ height: `100%` }}
                   image={copertina?.gatsbyImageData}
-                  alt={title as string}
+                  alt={titolo as string}
                 />
               </ItemImage>
             ) : null}
@@ -96,7 +100,7 @@ export const GuideItem = (props: Props) => {
                 lineHeight={{ xs: `18px`, lg: `24px` }}
                 width={{ xs: `unset`, lg: `100%` }}
               >
-                {title}
+                {titolo}
               </Typography>
               <Typography
                 fontWeight={400}
