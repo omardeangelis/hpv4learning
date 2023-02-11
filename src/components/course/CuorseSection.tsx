@@ -34,10 +34,20 @@ type DataProps = CoursePreviewProps & {
 }
 
 type Props = { data: DataProps[] } & (
-  | { disableLink: true; slug?: never; title?: string; disableTitle?: boolean }
+  | {
+      disableLink: true
+      slug?: never
+      title?: string | null
+      disableTitle?: boolean
+    }
   | { disableTitle: true; title: never; slug?: string; disableLink?: boolean }
   | { disableLink?: true; disableTitle?: true; slug?: never; title?: never }
-  | { title?: string; slug?: string; disableLink?: never; disableTitle?: never }
+  | {
+      title?: string | null
+      slug?: string
+      disableLink?: never
+      disableTitle?: never
+    }
 )
 
 const CuorseSection = ({
