@@ -5,9 +5,10 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { styled } from "@mui/system"
 import Button from "@mui/material/Button"
+import { navigate } from "@reach/router"
 import { BorderBox } from "../../../components/layout"
-import SeoLink from "../../../components/shared/SeoLink"
 import { PaybleCourseInfoBanner } from "./InfoBox"
+import { triggerGACustomEvent } from "../../../utils/tracking"
 
 type Props = {
   image: IGatsbyImageData | undefined | null
@@ -45,64 +46,71 @@ export const PayableCourseBanner = ({
   livello,
   progetti,
   students,
-}: Props) => (
-  <BorderBox
-    borderRadius="8px"
-    width="100%"
-    sx={{
-      maxWidth: { xs: `unset`, lg: `341px` },
-      position: { xs: `fixed`, lg: `static` },
-      bottom: { xs: `0`, lg: `unset` },
-      right: { xs: `0`, lg: `unset` },
-      left: { xs: `0`, lg: `unset` },
-      backgroundColor: `#fff`,
-    }}
-  >
-    <Stack
-      flexDirection={{ xs: `row`, lg: `column` }}
-      alignItems="center"
-      justifyContent={{ xs: `space-between`, lg: `unset` }}
+}: Props) => {
+  const handleBuyCourse = React.useCallback(() => {
+    if (link) {
+      triggerGACustomEvent({ event: `click_to_udemy` })()
+      navigate(link)
+    }
+  }, [link])
+  return (
+    <BorderBox
+      borderRadius="8px"
+      width="100%"
+      sx={{
+        maxWidth: { xs: `unset`, lg: `341px` },
+        position: { xs: `fixed`, lg: `static` },
+        bottom: { xs: `0`, lg: `unset` },
+        right: { xs: `0`, lg: `unset` },
+        left: { xs: `0`, lg: `unset` },
+        backgroundColor: `#fff`,
+      }}
     >
-      <ImageBox>
-        {image ? <GatsbyImage image={image} alt="Copertina" /> : null}
-      </ImageBox>
-      <Box
-        p="16px"
-        pb={{ xs: `16px`, lg: `0px` }}
-        sx={{
-          marginRight: { xs: `15px`, lg: `0` },
-          width: { xs: `60%`, lg: `100%` },
-        }}
+      <Stack
+        flexDirection={{ xs: `row`, lg: `column` }}
+        alignItems="center"
+        justifyContent={{ xs: `space-between`, lg: `unset` }}
       >
-        <Stack
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
+        <ImageBox>
+          {image ? <GatsbyImage image={image} alt="Copertina" /> : null}
+        </ImageBox>
+        <Box
+          p="16px"
+          pb={{ xs: `16px`, lg: `0px` }}
+          sx={{
+            marginRight: { xs: `15px`, lg: `0` },
+            width: { xs: `60%`, lg: `100%` },
+          }}
         >
-          <Typography fontSize={21} fontWeight={500}>
-            12,99€
-          </Typography>
-          <Typography
-            fontSize={12}
-            fontWeight={400}
-            color="#6C757D"
-            sx={{ textDecoration: `line-through` }}
-          >{`${(price / 100).toFixed(2)} €`}</Typography>
-          <Typography
-            fontSize={12}
-            fontWeight={500}
-            color="#6C757D"
-          >{`${Math.ceil(100 - (12.99 * 100) / (price / 100)).toFixed(
-            0
-          )}% sconto`}</Typography>
-        </Stack>
+          <Stack
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography fontSize={21} fontWeight={500}>
+              12,99€
+            </Typography>
+            <Typography
+              fontSize={12}
+              fontWeight={400}
+              color="#6C757D"
+              sx={{ textDecoration: `line-through` }}
+            >{`${(price / 100).toFixed(2)} €`}</Typography>
+            <Typography
+              fontSize={12}
+              fontWeight={500}
+              color="#6C757D"
+            >{`${Math.ceil(100 - (12.99 * 100) / (price / 100)).toFixed(
+              0
+            )}% sconto`}</Typography>
+          </Stack>
 
-        <Box marginTop={{ xs: `none`, lg: `10px` }}>
-          <SeoLink link={link as string} isExternal rel="nofollow">
+          <Box marginTop={{ xs: `none`, lg: `10px` }}>
             <Button
               variant="contained"
               color={`primary`}
               size="small"
+              onClick={handleBuyCourse}
               sx={{
                 borderRadius: `4px`,
                 width: `100%`,
@@ -111,21 +119,21 @@ export const PayableCourseBanner = ({
             >
               Acquista
             </Button>
-          </SeoLink>
+          </Box>
         </Box>
-      </Box>
-      <Box sx={{ display: { xs: `none`, lg: `block` }, width: `100%` }}>
-        <PaybleCourseInfoBanner
-          lezioni={lezioni}
-          livello={livello}
-          price={price}
-          avgVote={avgVote}
-          durata={durata}
-          progetti={progetti}
-          students={students}
-          sx={{ border: `none !important` }}
-        />
-      </Box>
-    </Stack>
-  </BorderBox>
-)
+        <Box sx={{ display: { xs: `none`, lg: `block` }, width: `100%` }}>
+          <PaybleCourseInfoBanner
+            lezioni={lezioni}
+            livello={livello}
+            price={price}
+            avgVote={avgVote}
+            durata={durata}
+            progetti={progetti}
+            students={students}
+            sx={{ border: `none !important` }}
+          />
+        </Box>
+      </Stack>
+    </BorderBox>
+  )
+}
