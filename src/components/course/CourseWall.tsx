@@ -2,26 +2,7 @@ import React from "react"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
 import { graphql, useStaticQuery } from "gatsby"
-import { CourseCategoryProps, CoursePreviewProps } from "../../types/course"
 import CourseSection from "./CuorseSection"
-
-type CourseDispettoProps = CoursePreviewProps & {
-  oreDiLezione: number
-  livello: string
-  category: {
-    slug: string
-    name: string
-  }[]
-}
-
-type Props = {
-  allContentfulCorsi: {
-    group: {
-      fieldValue: string
-      nodes: CourseDispettoProps[]
-    }[]
-  }
-}
 
 const StyledBox = styled.div`
   & > *:not(:first-of-type) {
@@ -43,17 +24,24 @@ const CourseWall = () => {
     ) => category.find((x) => x.slug === categorySlug.toLowerCase())?.name,
     []
   )
-  const filteredCourses = React.useMemo(() => {
-    return data.allContentfulCorsi.group.map(({ fieldValue, nodes }) => {
-      if (fieldValue?.toLowerCase() === "gratuiti") return { nodes, fieldValue }
-      return { fieldValue, nodes: nodes.filter((x) => !x?.isFree).slice(0, 3) }
-    })
-  }, [data.allContentfulCorsi.group])
+  const filteredCourses = React.useMemo(
+    () =>
+      data.allContentfulCorsi.group.map(({ fieldValue, nodes }) => {
+        if (fieldValue?.toLowerCase() === `gratuiti`)
+          return { nodes, fieldValue }
+        return {
+          fieldValue,
+          nodes: nodes.filter((x) => !x?.isFree).slice(0, 3),
+        }
+      }),
+    [data.allContentfulCorsi.group]
+  )
 
   return (
     <StyledBox>
       {filteredCourses.map(({ fieldValue, nodes }, index) =>
         fieldValue && nodes[0].category ? (
+          // eslint-disable-next-line react/no-array-index-key
           <Box key={`course-wall${index}`}>
             <CourseSection
               slug={fieldValue}
@@ -79,6 +67,7 @@ const query = graphql`
       group(field: category___slug) {
         fieldValue
         nodes {
+          promoLink
           category {
             name
             slug
