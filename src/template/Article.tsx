@@ -1,9 +1,9 @@
 import { PageProps, graphql } from "gatsby"
 import React from "react"
-import Layout from "../components/shared/layout"
 import Container from "@mui/material/Container"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
+import Layout from "../components/shared/layout"
 import { ArticleHero } from "../feature/projects/components/ArticleHero"
 import { ArticleBody } from "../feature/projects/components/ArticleBody"
 
