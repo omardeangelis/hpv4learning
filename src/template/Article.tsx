@@ -4,7 +4,7 @@ import Container from "@mui/material/Container"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
 import Layout from "../components/shared/layout"
-import { ArticleHero } from "../feature/projects/components/ArticleHero"
+import { ArticleHero } from "../feature/blog"
 import { ArticleBody } from "../feature/projects/components/ArticleBody"
 
 const FlexContainer = styled(Box)`
@@ -49,7 +49,6 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
                     margin: `auto`,
                   }}
                 >
-                  <div>{article?.titolo}</div>
                   <ArticleHero {...article} />
                   <ArticleBody {...article} />
                 </Box>
@@ -99,6 +98,16 @@ export const query = graphql`
       titolo
       slug
       ordine
+      meta_title
+      meta_description
+      createdAt
+      updatedAt
+      guida {
+        slug
+        corsi_correlati {
+          slug
+        }
+      }
       copertina {
         gatsbyImageData
         file {
@@ -116,8 +125,6 @@ export const query = graphql`
           timeToRead
         }
       }
-      createdAt
-      updatedAt
     }
   }
 `

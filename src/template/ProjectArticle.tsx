@@ -8,7 +8,7 @@ import { ImageDataLike } from "gatsby-plugin-image"
 import Layout from "../components/shared/layout"
 import {
   ArticleBody,
-  ArticleHero,
+  ProjectHero,
   ProjectBanner,
   ArticleFooter,
 } from "../feature/projects/components"
@@ -94,7 +94,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
                     margin: `auto`,
                   }}
                 >
-                  <ArticleHero {...queryData} />
+                  <ProjectHero {...queryData} />
                   <ArticleBody {...queryData} />
                 </Box>
               </Box>
