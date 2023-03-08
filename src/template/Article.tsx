@@ -3,9 +3,12 @@ import React from "react"
 import Container from "@mui/material/Container"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
 import Layout from "../components/shared/layout"
 import { ArticleHero } from "../feature/blog"
 import { ArticleBody } from "../feature/projects/components/ArticleBody"
+import { BottomBanner, RoundedButton } from "../components/layout"
+import SeoLink from "../components/shared/SeoLink"
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -57,6 +60,63 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
           </Box>
         </FlexContainer>
       </Container>
+      <Box
+        sx={{
+          mt: { xs: `48px`, lg: `96px` },
+        }}
+      >
+        <BottomBanner
+          position="relative"
+          overflow="hidden"
+          title={
+            <Typography
+              color="white"
+              fontSize={[`24px`, `34px`]}
+              lineHeight={[`29px`, `39px`]}
+              textAlign="center"
+              fontWeight={600}
+            >
+              Scopri la nostra guida completa su{` `}
+              <span className="brand-text">
+                {article?.guida?.[0]?.argomento}
+                {` `}
+              </span>
+            </Typography>
+          }
+          sx={{
+            backgroundColor: `purple.900`,
+          }}
+        >
+          <Typography
+            width="100%"
+            fontSize="21px"
+            lineHeight="24px"
+            color="gray.200"
+            textAlign="center"
+            sx={{
+              maxWidth: { xs: `unset`, lg: `611px` },
+            }}
+          >
+            {article?.guida?.[0]?.metaDescription}
+          </Typography>
+          <SeoLink
+            link={`/guide/${article?.guida?.[0]?.slug}/`}
+            isExternal={false}
+          >
+            <RoundedButton
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                px: `30px`,
+                width: { xs: `100%`, md: `unset` },
+              }}
+            >
+              Leggi
+            </RoundedButton>
+          </SeoLink>
+        </BottomBanner>
+      </Box>
     </Layout>
   )
 }
@@ -103,7 +163,13 @@ export const query = graphql`
       createdAt
       updatedAt
       guida {
+        title
+        metaDescription
         slug
+        argomento
+        copertina {
+          gatsbyImageData
+        }
         corsi_correlati {
           slug
         }

@@ -36,7 +36,6 @@ export const ArticleFooter = ({
   return (
     <div>
       <StyledTypography>Prossimo Progetto</StyledTypography>
-      {/* @ts-ignore gatsby link as broken type. Update as soon as possible */}
       <SeoLink
         isExternal={false}
         link={nextProjectUrl}
