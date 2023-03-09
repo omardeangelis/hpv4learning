@@ -69,6 +69,7 @@ type CorsiCorrelati = {
 
 type Node = {
   slug: string
+  is_Visible: boolean
   corsi_correlati: CorsiCorrelati[]
 }
 
@@ -89,6 +90,7 @@ const guideQuery = `
   allContentfulGuida {
     nodes {
       slug
+      is_Visible
       corsi_correlati {
         idCorso
       }

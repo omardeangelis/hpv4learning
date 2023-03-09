@@ -187,9 +187,9 @@ export const createPages = async ({ graphql, actions }) => {
     })
   })
 
-  if (!isProduction) {
-    allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
-      const courseId = guida.corsi_correlati[0].idCorso
+  allGuideQuery.data.allContentfulGuida.nodes.forEach((guida) => {
+    const courseId = guida.corsi_correlati[0].idCorso
+    if (guida.is_Visible || !isProduction)
       createPage({
         path: `/guide/${guida.slug}/`,
         component: path.resolve(`./src/template/Guide.tsx`),
@@ -197,8 +197,7 @@ export const createPages = async ({ graphql, actions }) => {
           courseId: Number(courseId || 0),
         },
       })
-    })
-  }
+  })
 
   redirects.forEach((redirect: RedirectType) => {
     createRedirect({
