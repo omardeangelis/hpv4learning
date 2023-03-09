@@ -4,11 +4,22 @@ import Container from "@mui/material/Container"
 import styled from "@emotion/styled"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
+import { ImageDataLike } from "gatsby-plugin-image"
+import { Stack } from "@mui/system"
 import Layout from "../components/shared/layout"
 import { ArticleHero } from "../feature/blog"
 import { ArticleBody } from "../feature/projects/components/ArticleBody"
 import { BottomBanner, RoundedButton } from "../components/layout"
 import SeoLink from "../components/shared/SeoLink"
+import { convertToHHMMSS } from "../utils/helpers"
+import { triggerGACustomEvent } from "../utils/tracking"
+import {
+  PaybleCourseInfoBanner,
+  FreeBannerCourse,
+  PayableBannerCourse,
+} from "../feature/courses/components"
+import { CourseBannerProvider } from "../feature/courses/context/CourseBanner"
+import { ProjectBanner } from "../feature/projects/components"
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -29,6 +40,36 @@ const StyledBox = styled(Box)`
 
 const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
   const article = React.useMemo(() => data.article, [data])
+  const course = React.useMemo(
+    () => data?.article?.guida?.[0]?.corsi_correlati?.[0],
+    [data]
+  )
+  const udemyPaidCourse = React.useMemo(() => data?.udemyPaidCourse, [data])
+
+  const bannerCtx = React.useMemo(
+    () => ({
+      category: course?.categoria,
+      title: course?.titolo,
+      durata: `${convertToHHMMSS(course?.oreDiLezione as number, true)}h`,
+      slug: course?.slug,
+      image: course?.copertina?.gatsbyImageData as ImageDataLike,
+      avgRating: udemyPaidCourse?.rating,
+      students: udemyPaidCourse?.totalSubscribers,
+      eventTrackerCallback: triggerGACustomEvent({
+        event: `article_to_course`,
+        content: course?.titolo,
+      }),
+    }),
+    [
+      course?.copertina,
+      course?.oreDiLezione,
+      course?.slug,
+      course?.titolo,
+      course?.categoria,
+      udemyPaidCourse?.rating,
+      udemyPaidCourse?.totalSubscribers,
+    ]
+  )
   return (
     <Layout>
       <Container sx={{ padding: `0px` }} maxWidth={`lg`}>
@@ -58,6 +99,60 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
               </Box>
             </StyledBox>
           </Box>
+          {course ? (
+            <Box
+              maxWidth="341px"
+              width="100%"
+              sx={{
+                height: `fit-content`,
+                position: `sticky`,
+                top: { xs: `unset`, lg: `96px` },
+                bottom: { xs: `0`, lg: `unset` },
+                marginTop: { xs: `unset`, lg: `96px` },
+              }}
+            >
+              <Stack
+                flexDirection="column"
+                sx={{ display: { xs: `none`, lg: `block` } }}
+              >
+                <Box>
+                  <PaybleCourseInfoBanner
+                    lezioni={data.udemyPaidCourse?.num_lectures as number}
+                    livello={course.livello as string}
+                    price={course.prezzo as number}
+                    avgVote={
+                      data.udemyPaidCourse?.rating ||
+                      (course?.recensioni as number)
+                    }
+                    durata={
+                      data.udemyPaidCourse?.courseHours ||
+                      (course.oreDiLezione as number)
+                    }
+                    progetti={course?.progetti?.length as number}
+                    students={data.udemyPaidCourse?.totalSubscribers as number}
+                  />
+                </Box>
+
+                <Box mt="24px">
+                  <CourseBannerProvider value={bannerCtx}>
+                    {course.isFree ? (
+                      <FreeBannerCourse />
+                    ) : (
+                      <PayableBannerCourse />
+                    )}
+                  </CourseBannerProvider>
+                </Box>
+              </Stack>
+
+              <Box sx={{ display: { xs: `unset`, lg: `none` } }}>
+                <ProjectBanner
+                  courseTitle={course?.titolo}
+                  couponLink={course?.promoLink}
+                  image={course?.copertina?.gatsbyImageData}
+                />
+              </Box>
+            </Box>
+          ) : null}
         </FlexContainer>
       </Container>
       <Box
@@ -152,7 +247,7 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
 export default Article
 
 export const query = graphql`
-  query SingleArticle($id: String!) {
+  query SingleArticle($id: String!, $udemyCourseId: Int!) {
     article: contentfulArticolo(id: { eq: $id }) {
       id
       titolo
@@ -172,6 +267,20 @@ export const query = graphql`
         }
         corsi_correlati {
           slug
+          isFree
+          promoLink
+          livello
+          oreDiLezione
+          prezzo
+          recensioni
+          progetti {
+            id
+          }
+          categoria
+          titolo
+          copertina {
+            gatsbyImageData
+          }
         }
       }
       copertina {
@@ -191,6 +300,13 @@ export const query = graphql`
           timeToRead
         }
       }
+    }
+    udemyPaidCourse(courseId: { eq: $udemyCourseId }) {
+      num_reviews
+      num_lectures
+      rating
+      totalSubscribers
+      courseHours
     }
   }
 `
