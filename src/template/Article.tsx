@@ -1,4 +1,4 @@
-import { PageProps, graphql } from "gatsby"
+import { PageProps, graphql, HeadFC } from "gatsby"
 import React from "react"
 import Container from "@mui/material/Container"
 import styled from "@emotion/styled"
@@ -6,6 +6,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { ImageDataLike } from "gatsby-plugin-image"
 import { Stack } from "@mui/system"
+import { useLocation } from "@reach/router"
 import Layout from "../components/shared/layout"
 import { ArticleHero } from "../feature/blog"
 import { ArticleBody } from "../feature/projects/components/ArticleBody"
@@ -20,6 +21,9 @@ import {
 } from "../feature/courses/components"
 import { CourseBannerProvider } from "../feature/courses/context/CourseBanner"
 import { ProjectBanner } from "../feature/projects/components"
+import MetaDecorator from "../components/SEO/components/MetaDecorator"
+import LinkHandler from "../components/SEO/components/LinkHandler"
+import ArticleSchema from "../components/SEO/components/ArticleSchema"
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -216,33 +220,50 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
   )
 }
 
-// const breadcrumbs = [
-//   {
-//     text: `Home`,
-//     link: `/`,
-//   },
-//   {
-//     text: `Contattaci`,
-//     link: `/consulenze/`,
-//   },
-// ]
+export const Head: HeadFC<Queries.SingleArticleQuery> = ({ data }) => {
+  const article = data?.article
+  const [guida] = React.useMemo(() => article?.guida, [article]) || []
+  const { pathname } = useLocation()
 
-// export const Head = () => (
-//   <>
-//     <MetaDecorator
-//       metaTitle="Contattaci: Siti Web per professionisti"
-//       metaDescription="Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web"
-//       disableSlogan
-//     />
-//     <WebPageSchema
-//       title="Contattaci: Siti Web per professionisti"
-//       description="Fissa una chiamata per studiare con noi la miglior soluzione e sviluppare un preventivo per il tuo sito web"
-//       type="ContactPage"
-//       breadcrumbs={breadcrumbs}
-//     />
-//     <LinkHandler />
-//   </>
-// )
+  const breadcrumbs = React.useMemo(
+    () => [
+      {
+        text: `Home`,
+        link: `/`,
+      },
+      {
+        text: guida?.title || `Guide`,
+        link: `/guide/${guida?.slug}/`,
+      },
+      {
+        text: article?.titolo as string,
+        link: pathname,
+      },
+    ],
+    [article, guida, pathname]
+  )
+
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={article?.titolo as string}
+        metaDescription={article?.meta_description as string}
+        disableSlogan
+      />
+      <ArticleSchema
+        title={article?.titolo as string}
+        description={article?.meta_description as string}
+        breadcrumbs={breadcrumbs}
+        image={article?.copertina?.file?.url as string}
+        imageAltText={article?.titolo as string}
+        publishDate={article?.createdAt as string}
+        modifiedDate={article?.updatedAt as string}
+        authorName="@hpv4learning"
+      />
+      <LinkHandler />
+    </>
+  )
+}
 
 export default Article
 
