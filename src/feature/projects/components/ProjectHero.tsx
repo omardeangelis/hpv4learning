@@ -31,7 +31,7 @@ const StyledBox = styled(Box)(
   })
 )
 
-export const ArticleHero = (
+export const ProjectHero = (
   props: Omit<Queries.SingleProjectQuery["project"], "id">
 ) => {
   const {

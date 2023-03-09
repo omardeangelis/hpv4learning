@@ -11,6 +11,11 @@ export const articleQuery = `
       }
       titolo
       slug
+      guida {
+        corsi_correlati {
+          idCorso
+        }
+      }
     }
   } 
 }
@@ -21,7 +26,7 @@ export type ArticleQueryProps = {
     allContentfulArticolo: {
       nodes: Pick<
         Queries.ContentfulArticoloConnection["nodes"][number],
-        "id" | "titolo" | "slug" | "tag"
+        "id" | "titolo" | "slug" | "tag" | "guida"
       >[]
     }
   }
@@ -39,12 +44,14 @@ export const createArticlePages = ({
   articoli.forEach((articolo) => {
     const articleSlug = articolo.slug
     const tagSlug = articolo.tag?.slug
+    const courseId = articolo.guida?.[0]?.corsi_correlati?.[0]?.idCorso
     if (tagSlug)
       createPage({
         path: `/blog/${tagSlug}/${articleSlug}/`,
         component,
         context: {
           id: articolo.id,
+          udemyCourseId: Number(courseId || 0),
         },
       })
   })

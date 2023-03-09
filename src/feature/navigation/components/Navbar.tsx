@@ -36,7 +36,7 @@ const StyledNav = styled(Box)`
   left: 0px;
   right: 0px;
   z-index: 4;
-  [role="_link"] {
+  [data-role="_link"] {
     border: 1px solid transparent;
     transition: all 125ms ease;
     padding: 8px 12px;
@@ -89,15 +89,13 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
       <StyledNav
         component="nav"
         sx={{
-          background: disableColor ? `transparent` : `white`,
-          borderBottom: `1px solid`,
-          borderBottomColor: disableColor ? `transparent` : `purple.200`,
+          background: disableColor ? `transparent` : `rgba(255, 255, 255, 0.8)`,
+          backdropFilter: `saturate(180%) blur(20px)`,
           position: disableColor ? `absolute` : `fixed`,
         }}
       >
         <Container maxWidth="lg">
           <Stack direction="row" alignItems="center" height="72px">
-            {/* @ts-ignore gatsby link as broken type. Update as soon as possible*/}
             <GastbyLink
               to="/"
               style={{
@@ -158,7 +156,7 @@ export const Navbar = ({ disableColor }: { disableColor?: true }) => {
                       link={link}
                       key={`${text}navbar`}
                     >
-                      <Box role="_link">
+                      <Box data-role="_link">
                         <Stack direction="row" spacing={2} alignItems="center">
                           <Typography
                             sx={{

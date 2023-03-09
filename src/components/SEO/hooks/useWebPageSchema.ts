@@ -26,11 +26,11 @@ const useWebPageSchema = ({
 
   const seoTitle = React.useMemo(
     () => title || siteMetadata.title,
-    [siteMetadata.title]
+    [siteMetadata.title, title]
   )
   const seoDescription = React.useMemo(
     () => description || siteMetadata.description,
-    [siteMetadata.description]
+    [description, siteMetadata.description]
   )
   const siteAddress = React.useMemo(
     () => siteMetadata.siteUrl + pathname,
@@ -44,7 +44,7 @@ const useWebPageSchema = ({
         {
           // CREATE DEFAULT SCHEMA FOR WEBSITE
           "@type": `WebSite`,
-          "@id": `${siteMetadata.siteUrl}/` + `#website`,
+          "@id": `${siteMetadata.siteUrl}/#website`,
           url: `${siteMetadata.siteUrl}/`,
           name: siteMetadata.title,
         },
@@ -56,7 +56,7 @@ const useWebPageSchema = ({
           inLanguage: `it`,
           name: seoTitle,
           isPartOf: {
-            "@id": `${siteMetadata.siteUrl}/` + `#website`,
+            "@id": `${siteMetadata.siteUrl}/#website`,
           },
           image: {
             "@type": `ImageObject`,
@@ -82,12 +82,17 @@ const useWebPageSchema = ({
     [
       siteMetadata.siteUrl,
       siteMetadata.title,
+      siteMetadata.image,
+      siteMetadata.imageWidth,
+      siteMetadata.imageHeight,
+      type,
       siteAddress,
       seoTitle,
+      image,
+      imageAltText,
+      publishDate,
+      modifiedDate,
       seoDescription,
-      siteMetadata.image,
-      siteMetadata.imageHeight,
-      siteMetadata.imageWidth,
       organizationData,
     ]
   )
