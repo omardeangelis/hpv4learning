@@ -31,11 +31,11 @@ const StyledBox = styled(Box)(
   })
 )
 
-export const ArticleHero = (
+export const ProjectHero = (
   props: Omit<Queries.SingleProjectQuery["project"], "id">
 ) => {
   const {
-    articleTitle,
+    meta_title,
     url,
     createdAt,
     metaDescription,
@@ -60,7 +60,7 @@ export const ArticleHero = (
             lineHeight: { xs: `44px`, lg: `56px` },
           }}
         >
-          {articleTitle}
+          {meta_title}
         </Typography>
       </Box>
 

@@ -45,12 +45,13 @@ type Props = CoursePreviewProps &
 const CourseContent = ({
   copertina,
   titolo,
+  isFree,
   slug,
   riassunto,
   oreDiLezione,
   livello,
   categoria,
-  couponLink,
+  promoLink,
   disableIcons,
 }: Props) => {
   const theme = useTheme()
@@ -142,12 +143,12 @@ const CourseContent = ({
 
           <Box
             sx={{
-              mt: { xs: `4px`, lg: `18px` },
+              mt: { xs: `10px`, lg: `18px` },
             }}
           >
             <CourseAction
-              isFreeCourse={categoria === `free`}
-              buyLink={couponLink && couponLink}
+              isFreeCourse={isFree}
+              buyLink={promoLink}
               pageLink={slug}
             />
           </Box>

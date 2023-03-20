@@ -2,7 +2,6 @@ import React from "react"
 import styled from "@emotion/styled"
 import { css } from "@mui/system"
 import Box from "@mui/system/Box"
-import Typography from "@mui/material/Typography"
 import {
   GatsbyImage,
   getImage,
@@ -10,9 +9,14 @@ import {
   ImageDataLike,
 } from "gatsby-plugin-image"
 import ReactMarkdown from "react-markdown"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { HeadingsList } from "./HeadingsList"
+import {
+  MarkdownCode,
+  MarkdownH2,
+  MarkdownH3,
+  MarkdownImage,
+  MarkdownP,
+} from "../../courses/components"
 
 const ImageBox = styled(Box)(
   css({
@@ -23,45 +27,6 @@ const ImageBox = styled(Box)(
     transform: `translateZ(0)`,
   })
 )
-
-const StyledH2 = styled(Typography)(
-  css({
-    fontSize: [`24px`, `28px`],
-    fontWeight: `600`,
-    lineHeigth: `29px`,
-    marginTop: `24px`,
-  })
-) as typeof Typography
-
-const StyledH3 = styled(Typography)(
-  css({
-    fontSize: [`20px`, `22px`],
-    fontWeight: `600`,
-    lineHeigth: `25px`,
-    marginTop: `20px`,
-  })
-) as typeof Typography
-
-const StyledP = styled(Typography)(
-  css({
-    fontSize: [`16px`, `18px`],
-    fontWeight: `400`,
-    lineHeigth: `12px`,
-    marginTop: `16px`,
-  })
-) as typeof Typography
-
-const StyledBox = styled(Box)`
-  max-width: 1280px;
-  border-radius: 16px;
-  overflow: hidden;
-  transform: translateZ(0);
-  height: 205px;
-
-  @media screen and (min-width: 767px) {
-    height: 405px;
-  }
-`
 
 export const ArticleBody = React.memo(
   (props: Omit<Queries.SingleProjectQuery["project"], "id">) => {
@@ -146,39 +111,18 @@ export const ArticleBody = React.memo(
         ) : null}
         {body?.body ? (
           <ReactMarkdown
-            children={body.body}
             components={{
+              h2: MarkdownH2,
+              h3: MarkdownH3,
+              p: MarkdownP,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              h2: ({ node, ...props }) => (
-                <StyledH2 {...props} component="h2" />
-              ),
+              code: MarkdownCode,
               // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              h3: ({ node, ...props }) => (
-                <StyledH3 component="h3" {...props} />
-              ),
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              p: ({ node, ...props }) => <StyledP component="p" {...props} />,
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              code: ({ node, ...props }) => (
-                <SyntaxHighlighter
-                  language="javascript"
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  style={dracula}
-                  {...props}
-                />
-              ),
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              img: ({ node, ...props }) => (
-                <StyledBox>
-                  <img
-                    style={{ maxWidth: `100%`, height: `100%` }}
-                    {...props}
-                  />
-                </StyledBox>
-              ),
+              img: MarkdownImage,
             }}
-          />
+          >
+            {body.body}
+          </ReactMarkdown>
         ) : null}
       </div>
     )

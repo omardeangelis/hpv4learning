@@ -113,7 +113,7 @@ export const query = graphql`
         fieldValue
         nodes {
           titolo
-          articleTitle
+          meta_title
           slug
           descrizione {
             descrizione
@@ -135,7 +135,7 @@ export const query = graphql`
       edges {
         node {
           titolo
-          articleTitle
+          meta_title
           slug
           descrizione {
             descrizione

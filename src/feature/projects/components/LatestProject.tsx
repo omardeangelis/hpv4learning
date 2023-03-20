@@ -13,7 +13,7 @@ import {
 } from "gatsby-plugin-image"
 import dayjs from "dayjs"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-import { Styledtypography } from "./ArticleHero"
+import { Styledtypography } from "./ProjectHero"
 import SeoLink from "../../../components/shared/SeoLink"
 import { RoundedButton } from "../../../components/layout"
 
@@ -44,7 +44,7 @@ const StyledChip = styled(Chip)`
 export const LatestProject = (
   props: Queries.ProjectHomePageQuery["latestProjects"]["edges"][number]
 ) => {
-  const latestProject = React.useMemo(() => props.node, [props])
+  const { node: latestProject } = React.useMemo(() => props, [props])
 
   const label = React.useMemo(
     () => latestProject?.project_category?.[0]?.slug,
@@ -72,7 +72,7 @@ export const LatestProject = (
             lineHeight={{ xs: `39px`, lg: `54px` }}
             fontWeight={600}
           >
-            {latestProject?.articleTitle}
+            {latestProject?.meta_title}
           </Typography>
           <Box mt={{ xs: `6px`, lg: `8px` }}>
             <Typography
@@ -142,7 +142,7 @@ export const LatestProject = (
         >
           <GatsbyImage
             image={image}
-            alt={latestProject?.articleTitle as string}
+            alt={latestProject?.meta_title as string}
           />
         </Box>
       ) : null}

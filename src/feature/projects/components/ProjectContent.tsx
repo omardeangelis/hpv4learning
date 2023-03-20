@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography"
 import Box, { BoxProps } from "@mui/system/Box"
 
 type Props = {
-  titolo?: null | string
+  titolo?: string | null
   label?: string | null
   description?: string | null
 }
@@ -14,12 +14,12 @@ export const ProjectContent = ({
   description,
   label,
   ...rest
-}: Props & BoxProps) => (
+}: Props & Omit<BoxProps, "title">) => (
   <Box className="content-box" {...rest}>
     <Stack
       direction="column"
       alignItems="initial"
-      spacing={{ xs: "4px", lg: "8px" }}
+      spacing={{ xs: `4px`, lg: `8px` }}
     >
       {titolo ? (
         <Typography
@@ -42,7 +42,7 @@ export const ProjectContent = ({
         </Typography>
       ) : null}
       {label ? (
-        <Box sx={{ display: { xs: "none", lg: "flex" } }} className="label-box">
+        <Box sx={{ display: { xs: `none`, lg: `flex` } }} className="label-box">
           {label}
         </Box>
       ) : null}

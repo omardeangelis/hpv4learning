@@ -6,7 +6,8 @@ export type CoursePreviewProps = {
   >["copertina"]
   slug: string
   titolo: string
-  couponLink?: string
+  promoLink?: string
+  isFree?: boolean
   categoria?: "free" | "udemy"
   riassunto: {
     riassunto: string
