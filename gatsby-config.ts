@@ -40,6 +40,7 @@ const config: GatsbyConfig = {
     },
     `gatsby-plugin-image`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
