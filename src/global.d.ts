@@ -4,9 +4,11 @@ declare interface Window {
   dataLayer: Record<string, any>[]
 }
 
-export declare global {
+export declare namespace global {
   // eslint-disable-next-line no-var, vars-on-top, no-underscore-dangle
   var _iub: any
   // eslint-disable-next-line no-var, vars-on-top, no-underscore-dangle
   var dataLayer: Record<string, any>[]
 }
+
+declare module "react-helmet"

@@ -1,6 +1,6 @@
 import React from "react"
 
-export const useServeStaticFonts = () => [
+export const Fonts = [
   <link
     key="Poppins"
     rel="preload"

@@ -40,6 +40,7 @@ const config: GatsbyConfig = {
     },
     `gatsby-plugin-image`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-vanilla-extract`,
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {

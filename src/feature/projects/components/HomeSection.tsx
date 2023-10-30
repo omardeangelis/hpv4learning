@@ -16,24 +16,22 @@ export const HomeSection = () => {
   )
 }
 
-const query = graphql`
-  query HomeProjectSection {
-    allContentfulProgetti(limit: 3, sort: { order: ASC, fields: createdAt }) {
-      nodes {
-        titolo
+const query = graphql`query HomeProjectSection {
+  allContentfulProgetti(limit: 3, sort: {createdAt: ASC}) {
+    nodes {
+      titolo
+      slug
+      meta_title
+      descrizione {
+        descrizione
+      }
+      copertina {
+        gatsbyImageData
+      }
+      project_category {
         slug
-        meta_title
-        descrizione {
-          descrizione
-        }
-        copertina {
-          gatsbyImageData
-        }
-        project_category {
-          slug
-          title
-        }
+        title
       }
     }
   }
-`
+}`

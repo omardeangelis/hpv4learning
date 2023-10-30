@@ -1,14 +1,15 @@
 import "./src/styles/global.css"
 import "./src/styles/font.css"
 import { GatsbySSR } from "gatsby"
+import { lightThemeClass } from "old-ui"
 import { GlobalProvider } from "./GlobalProvider"
-import { useServeStaticFonts } from "./useServeStaticFonts"
+import { Fonts } from "./Fonts"
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({
   setHeadComponents,
   setHtmlAttributes,
 }) => {
-  setHeadComponents([...useServeStaticFonts()])
-  setHtmlAttributes({ lang: `it` })
+  setHeadComponents(Fonts)
+  setHtmlAttributes({ lang: `it`, className: lightThemeClass })
 }
 export const wrapRootElement: GatsbySSR["wrapRootElement"] = GlobalProvider
