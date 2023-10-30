@@ -1,5 +1,6 @@
 import { config as dotenv } from "dotenv"
 import { GatsbyConfig } from "gatsby"
+import netlifyAdapter from "gatsby-adapter-netlify"
 
 dotenv({
   path: `.env.${process.env.NODE_ENV}`,
@@ -7,6 +8,9 @@ dotenv({
 console.log(process.env.NODE_ENV)
 
 const config: GatsbyConfig = {
+  adapter: netlifyAdapter({
+    excludeDatastoreFromEngineFunction: true,
+  }),
   graphqlTypegen: true,
   trailingSlash: `always`,
   siteMetadata: {

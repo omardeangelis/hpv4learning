@@ -39,6 +39,7 @@
     "dotenv": "^8.2.0",
     "formik": "^2.2.9",
     "gatsby": "^5.12.9",
+    "gatsby-adapter-netlify": "^1.0.2",
     "gatsby-plugin-create-client-paths": "^4.9.0",
     "gatsby-plugin-gatsby-cloud": "^5.12.2",
     "gatsby-plugin-google-tagmanager": "^5.12.3",
