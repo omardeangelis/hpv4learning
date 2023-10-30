@@ -26,10 +26,9 @@ const allCourseCategory = `
 }
 `
 
-const allProjectArticle = `
-{
+const allProjectArticle = `{
   allContentfulProgetti {
-    group(field: project_category___slug) {
+    group(field: {project_category: {slug: SELECT}}) {
       fieldValue
       nodes {
         id
@@ -42,8 +41,7 @@ const allProjectArticle = `
       }
     }
   }
-}
-`
+}`
 
 const projectCategoriesPageQuery = `
 {

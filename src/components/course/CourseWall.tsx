@@ -61,32 +61,30 @@ const CourseWall = () => {
   )
 }
 
-const query = graphql`
-  query RelatedCourse {
-    allContentfulCorsi(sort: { fields: createdAt, order: DESC }) {
-      group(field: category___slug) {
-        fieldValue
-        nodes {
-          promoLink
-          category {
-            name
-            slug
-          }
-          copertina {
-            gatsbyImageData
-          }
+const query = graphql`query RelatedCourse {
+  allContentfulCorsi(sort: {createdAt: DESC}) {
+    group(field: {category: {slug: SELECT}}) {
+      fieldValue
+      nodes {
+        promoLink
+        category {
+          name
           slug
-          oreDiLezione
-          titolo
-          livello
-          riassunto {
-            riassunto
-          }
-          isFree
         }
+        copertina {
+          gatsbyImageData
+        }
+        slug
+        oreDiLezione
+        titolo
+        livello
+        riassunto {
+          riassunto
+        }
+        isFree
       }
     }
   }
-`
+}`
 
 export default CourseWall
