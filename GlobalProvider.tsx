@@ -3,6 +3,7 @@ import React from "react"
 import { ThemeProvider } from "@mui/material/styles"
 import { Helmet } from "react-helmet"
 import { Provider } from "react-redux"
+import { ThemeProvider as OldProvider } from "old-ui"
 import theme from "./theme"
 import { store } from "./src/store"
 
@@ -12,7 +13,16 @@ export const GlobalProvider = ({ element }: { element: React.ReactNode }) => (
       <meta name="viewport" content="initial-scale=1, width=device-width" />
     </Helmet>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>{element}</ThemeProvider>
+      <OldProvider
+        options={{
+          colorMode: {
+            defaultMode: `light`,
+          },
+          shouldApplyFontFamily: true,
+        }}
+      >
+        <ThemeProvider theme={theme}>{element}</ThemeProvider>
+      </OldProvider>
     </Provider>
   </React.Fragment>
 )

@@ -10,7 +10,6 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight"
 import PersonIcon from "@mui/icons-material/Person"
 import { Stack } from "@mui/system"
 import isEmpty from "lodash/isEmpty"
-
 import { ImageDataLike } from "gatsby-plugin-image"
 import Layout from "../../components/shared/layout"
 import {
@@ -547,7 +546,7 @@ export const query = graphql`
         category: { elemMatch: { slug: { eq: $categorySlug } } }
         id: { ne: $id }
       }
-      sort: { fields: createdAt, order: DESC }
+      sort: { createdAt: DESC }
       limit: 2
     ) {
       nodes {

@@ -141,39 +141,35 @@ export const Head = ({
   )
 }
 
-export const query = graphql`
-  query ProjectCategoryPage($id: String!, $skip: Int!, $limit: Int!) {
-    allContentfulProgetti(
-      filter: { project_category: { elemMatch: { id: { eq: $id } } } }
-      skip: $skip
-      limit: $limit
-      sort: { fields: createdAt, order: ASC }
-    ) {
-      nodes {
-        titolo
-        slug
-        meta_title
-        copertina {
-          gatsbyImageData
-        }
-        descrizione {
-          descrizione
-        }
-        project_category {
-          title
-          slug
-        }
-      }
-    }
-    corso: contentfulCorsi(
-      progetti: {
-        elemMatch: { project_category: { elemMatch: { id: { eq: $id } } } }
-      }
-    ) {
+export const query = graphql`query ProjectCategoryPage($id: String!, $skip: Int!, $limit: Int!) {
+  allContentfulProgetti(
+    filter: {project_category: {elemMatch: {id: {eq: $id}}}}
+    skip: $skip
+    limit: $limit
+    sort: {createdAt: ASC}
+  ) {
+    nodes {
       titolo
       slug
+      meta_title
+      copertina {
+        gatsbyImageData
+      }
+      descrizione {
+        descrizione
+      }
+      project_category {
+        title
+        slug
+      }
     }
   }
-`
+  corso: contentfulCorsi(
+    progetti: {elemMatch: {project_category: {elemMatch: {id: {eq: $id}}}}}
+  ) {
+    titolo
+    slug
+  }
+}`
 
 export default ProjectsCategory

@@ -483,132 +483,123 @@ export const Head = ({
 
 export default UdemyCourseTemplate
 
-export const query = graphql`
-  query UdemyCoursePage(
-    $id: String!
-    $course_id: Int!
-    $categorySlug: String!
-  ) {
-    contentfulCorsi(id: { eq: $id }) {
-      category {
-        name
+export const query = graphql`query UdemyCoursePage($id: String!, $course_id: Int!, $categorySlug: String!) {
+  contentfulCorsi(id: {eq: $id}) {
+    category {
+      name
+    }
+    recensioni
+    lastUpdate
+    categoria
+    provider
+    isFree
+    idCorso
+    lezioni
+    livello
+    slug
+    oreDiLezione
+    prezzo
+    sottotitolo
+    titolo
+    urlToBuy
+    videoLink
+    target
+    couponCorso
+    promoLink
+    concetti
+    updatedAt
+    recensioniRicevute
+    insegnante {
+      nome
+      cognome
+      professione
+      img {
+        gatsbyImageData
       }
-      recensioni
-      lastUpdate
-      categoria
-      provider
-      isFree
-      idCorso
-      lezioni
-      livello
-      slug
-      oreDiLezione
-      prezzo
-      sottotitolo
-      titolo
-      urlToBuy
-      videoLink
-      target
-      couponCorso
-      promoLink
-      concetti
-      updatedAt
-      recensioniRicevute
-      insegnante {
-        nome
-        cognome
-        professione
-        img {
-          gatsbyImageData
+      bio {
+        bio
+        childMarkdownRemark {
+          html
         }
-        bio {
-          bio
-          childMarkdownRemark {
-            html
-          }
-        }
-        corsi {
-          titolo
+      }
+      corsi {
+        titolo
+        slug
+        category {
           slug
-          category {
-            slug
-          }
         }
       }
-      requisiti
+    }
+    requisiti
+    riassunto {
+      riassunto
+    }
+    descrizione {
+      descrizione
+    }
+    copertina {
+      gatsbyImageData
+      file {
+        url
+      }
+    }
+    introduzioneProgetti {
+      introduzioneProgetti
+    }
+    progetti {
+      titolo
+      slug
+      meta_title
+      url
+      ordine
+      copertina {
+        gatsbyImageData
+      }
+      project_category {
+        title
+        slug
+      }
+      descrizione {
+        childMarkdownRemark {
+          html
+        }
+      }
+    }
+  }
+  allContentfulCorsi(
+    filter: {category: {elemMatch: {slug: {eq: $categorySlug}}}, id: {ne: $id}}
+    sort: {createdAt: DESC}
+    limit: 2
+  ) {
+    nodes {
+      titolo
+      copertina {
+        gatsbyImageData
+      }
+      categoria
+      promoLink
+      slug
+      livello
+      oreDiLezione
       riassunto {
         riassunto
       }
-      descrizione {
-        descrizione
-      }
-      copertina {
-        gatsbyImageData
-        file {
-          url
-        }
-      }
-      introduzioneProgetti {
-        introduzioneProgetti
-      }
-      progetti {
-        titolo
-        slug
-        meta_title
-        url
-        ordine
-        copertina {
-          gatsbyImageData
-        }
-        project_category {
-          title
-          slug
-        }
-        descrizione {
-          childMarkdownRemark {
-            html
-          }
-        }
-      }
-    }
-    allContentfulCorsi(
-      filter: {
-        category: { elemMatch: { slug: { eq: $categorySlug } } }
-        id: { ne: $id }
-      }
-      sort: { fields: createdAt, order: DESC }
-      limit: 2
-    ) {
-      nodes {
-        titolo
-        copertina {
-          gatsbyImageData
-        }
-        categoria
-        promoLink
-        slug
-        livello
-        oreDiLezione
-        riassunto {
-          riassunto
-        }
-      }
-    }
-    udemyPaidCourse(courseId: { eq: $course_id }) {
-      num_reviews
-      num_lectures
-      rating
-      totalSubscribers
-      courseHours
-    }
-    allUdemyReview(filter: { courseId: { eq: $course_id } }) {
-      nodes {
-        rating
-        userName
-        content
-        id
-      }
-      totalCount
     }
   }
-`
+  udemyPaidCourse(courseId: {eq: $course_id}) {
+    num_reviews
+    num_lectures
+    rating
+    totalSubscribers
+    courseHours
+  }
+  allUdemyReview(filter: {courseId: {eq: $course_id}}) {
+    nodes {
+      rating
+      userName
+      content
+      id
+    }
+    totalCount
+  }
+}`

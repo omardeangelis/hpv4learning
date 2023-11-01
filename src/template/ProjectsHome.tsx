@@ -106,56 +106,51 @@ export const Head = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
   )
 }
 
-export const query = graphql`
-  query ProjectHomePage {
-    projects: allContentfulProgetti(sort: { fields: createdAt, order: DESC }) {
-      group(field: project_category___title, limit: 3) {
-        fieldValue
-        nodes {
-          titolo
-          meta_title
-          slug
-          descrizione {
-            descrizione
-          }
-          project_category {
-            slug
-            title
-          }
-          copertina {
-            gatsbyImageData
-          }
+export const query = graphql`query ProjectHomePage {
+  projects: allContentfulProgetti(sort: {createdAt: DESC}) {
+    group(field: {project_category: {title: SELECT}}, limit: 3) {
+      fieldValue
+      nodes {
+        titolo
+        meta_title
+        slug
+        descrizione {
+          descrizione
         }
-      }
-    }
-    latestProjects: allContentfulProgetti(
-      sort: { fields: createdAt, order: DESC }
-      limit: 1
-    ) {
-      edges {
-        node {
-          titolo
-          meta_title
+        project_category {
           slug
-          descrizione {
-            descrizione
-          }
-          project_category {
-            slug
-          }
-          createdAt
-          body {
-            childMarkdownRemark {
-              timeToRead
-            }
-          }
-          copertina {
-            gatsbyImageData
-          }
+          title
+        }
+        copertina {
+          gatsbyImageData
         }
       }
     }
   }
-`
+  latestProjects: allContentfulProgetti(sort: {createdAt: DESC}, limit: 1) {
+    edges {
+      node {
+        titolo
+        meta_title
+        slug
+        descrizione {
+          descrizione
+        }
+        project_category {
+          slug
+        }
+        createdAt
+        body {
+          childMarkdownRemark {
+            timeToRead
+          }
+        }
+        copertina {
+          gatsbyImageData
+        }
+      }
+    }
+  }
+}`
 
 export default ProjectsHome
