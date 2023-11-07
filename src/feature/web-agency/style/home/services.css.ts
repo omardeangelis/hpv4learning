@@ -6,9 +6,19 @@ export const serviceGrid = style({
   gridTemplateColumns: `repeat(1, 1fr)`,
   gridGap: `.5rem`,
   alignContent: `stretch`,
+  height: `-webkit-fill-available`,
   "@media": {
     [breakpoints.md]: {
       gridTemplateColumns: `repeat(3, 1fr)`,
+    },
+  },
+})
+
+export const safariServiceCardHeightFix = style({
+  height: `-webkit-fit-content`,
+  "@media": {
+    [breakpoints.md]: {
+      height: `auto`,
     },
   },
 })

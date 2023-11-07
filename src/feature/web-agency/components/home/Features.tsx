@@ -4,6 +4,7 @@ import Avatar from "@mui/material/Avatar"
 import DesignServicesIcon from "@mui/icons-material/DesignServices"
 import CodeRounded from "@mui/icons-material/CodeRounded"
 import SchoolRounded from "@mui/icons-material/SchoolRounded"
+import { navigate } from "@reach/router"
 import { Card, CardContent } from "../../../../components/v2/cards/base"
 import { featureCard } from "../../style/home/feature.css"
 
@@ -20,7 +21,7 @@ export const Features = () => (
       width: `full`,
     }}
   >
-    <Card isAnimated background={`white`} className={featureCard}>
+    <Card isAnimated background={`white`} className={featureCard} disableHover>
       <CardContent
         justify={`space-between`}
         align="flex-start"
@@ -74,6 +75,7 @@ export const Features = () => (
       background={`white`}
       className={featureCard}
       mt={{ mobile: 0, md: 24 }}
+      onClick={() => navigate(`https://www.ariannatdesign.com/`)}
     >
       <CardContent
         justify={`space-between`}
@@ -123,7 +125,12 @@ export const Features = () => (
         </VStack>
       </CardContent>
     </Card>
-    <Card isAnimated background={`white`} className={featureCard}>
+    <Card
+      isAnimated
+      background={`white`}
+      className={featureCard}
+      onClick={() => navigate(`/`)}
+    >
       <CardContent
         justify={`space-between`}
         align="flex-start"

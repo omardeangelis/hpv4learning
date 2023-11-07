@@ -2,7 +2,11 @@ import { Body, Box, Button, HStack, Stack, Text, VStack } from "old-ui"
 import React from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import { navigate } from "@reach/router"
-import { hiddenImgfromMd, serviceGrid } from "../../style/home/services.css"
+import {
+  hiddenImgfromMd,
+  safariServiceCardHeightFix,
+  serviceGrid,
+} from "../../style/home/services.css"
 import {
   Card,
   CardContent,
@@ -12,7 +16,12 @@ import {
 const Services = () => (
   <VStack align="flex-start" spacing={48} sprinkles={{ width: `full` }}>
     <Box className={serviceGrid}>
-      <Card disableHover isAnimated background="purple10">
+      <Card
+        disableHover
+        isAnimated
+        background="purple10"
+        className={safariServiceCardHeightFix}
+      >
         <CardContent
           spacing={12}
           direction="column"

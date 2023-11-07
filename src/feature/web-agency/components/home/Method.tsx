@@ -17,6 +17,32 @@ export const Method = () => {
   const [scope, animate] = useAnimate()
   const isInView = useInView(scope, { once: true, amount: 0.66 })
 
+  const handleHoverEnter = React.useCallback(() => {
+    const elements = scope.current.querySelectorAll(`span`)
+    if (elements.length > 0) {
+      ;[...elements].reverse().forEach((element, index) => {
+        animate(
+          element,
+          { rotate: 6 * (index + 1) },
+          { duration: 0.225, delay: index * 0.1 }
+        )
+      })
+    }
+  }, [animate, scope])
+
+  const handleHoverLeave = React.useCallback(() => {
+    const elements = scope.current.querySelectorAll(`span`)
+    if (elements.length > 0) {
+      ;[...elements].forEach((element, index) => {
+        animate(
+          element,
+          { rotate: -6 * (index + 1) },
+          { duration: 0.225, delay: index * 0.1 }
+        )
+      })
+    }
+  }, [animate, scope])
+
   React.useEffect(() => {
     if (isInView) {
       const elements = scope.current.querySelectorAll(`span`)
@@ -97,7 +123,12 @@ export const Method = () => {
           ref={scope}
           className={methodCardBox}
         >
-          <Card disableHover className={methodCard}>
+          <Card
+            disableHover
+            className={methodCard}
+            onMouseEnter={handleHoverEnter}
+            onMouseLeave={handleHoverLeave}
+          >
             <CardContent
               justify="center"
               align="center"

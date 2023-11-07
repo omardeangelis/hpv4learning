@@ -5,6 +5,7 @@ export const cardImageBox = style({
   justifyContent: `center`,
   alignItems: `center`,
   width: `100%`,
+  transform: `translateZ(0)`,
 })
 
 export const absoluteImageBox = style({
