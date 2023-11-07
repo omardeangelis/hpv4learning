@@ -115,7 +115,7 @@ const config: GatsbyConfig = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/consulenze/*`] },
+      options: { prefixes: [`/consulenze/*`, `/web-agency/*`] },
     },
   ],
 }

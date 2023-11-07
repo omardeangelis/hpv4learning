@@ -18,7 +18,7 @@ export const GlobalProvider = ({ element }: { element: React.ReactNode }) => (
           colorMode: {
             defaultMode: `light`,
           },
-          shouldApplyFontFamily: true,
+          shouldApplyFontFamily: false,
         }}
       >
         <ThemeProvider theme={theme}>{element}</ThemeProvider>

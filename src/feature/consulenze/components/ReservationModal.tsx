@@ -40,8 +40,7 @@ const initialData = {
 export const ReservationModal: React.FC<RouteComponentProps> = () => {
   const [formData, setFormData] = React.useState<FormData>(initialData)
   const dispatch = useDispatch()
-  const [deleteAppointment, { isLoading: deleteLoading }] =
-    useDeleteAppointmentMutation()
+  const [deleteAppointment] = useDeleteAppointmentMutation()
   const { data: userAppointment } = useGetAppointmentByMailQuery(formData.email)
 
   const { step, stepIndex, nextStep, prevStep, gotoStep } = useSteps([
@@ -55,7 +54,6 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
 
   const onContinue = React.useCallback(
     (values: Partial<FormData>) => {
-      console.log({ ...formData, ...values })
       setFormData({ ...formData, ...values })
       nextStep()
     },
@@ -76,24 +74,22 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         if (userAppointment && !isEmpty(userAppointment)) {
           try {
             await deleteAppointment(userAppointment[0].id)
-          } catch (error) {
-            console.log(error)
+          } catch (errors) {
+            // eslint-disable-next-line no-console
+            console.log(errors)
           }
         }
-      } catch (error) {
+      } catch (err) {
         gotoStep(`error`)
       }
     },
     [
       formData,
-      gotoStep,
-      nextStep,
       bookAppointment,
       provider,
-      data,
-      deleteAppointment,
       userAppointment,
-      userAppointment?.[0]?.id,
+      deleteAppointment,
+      gotoStep,
     ]
   )
 
@@ -115,8 +111,8 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
   }, [data, data?.start, data?.hangoutLink, dispatch, gotoStep, error])
 
   const handleClose = React.useCallback(() => {
-    navigate(`/consulenze/`)
-  }, [navigate])
+    navigate(-1)
+  }, [])
 
   const handleContinue = React.useCallback(
     (eventId: string) => {
@@ -146,8 +142,20 @@ export const ReservationModal: React.FC<RouteComponentProps> = () => {
         return <SuccessModal />
       case `error`:
         return <ConsulenzeErrorModal onContinue={() => gotoStep(`welcome`)} />
+      default:
+        // eslint-disable-next-line react/jsx-no-useless-fragment
+        return <></>
     }
-  }, [step])
+  }, [
+    formData.email,
+    gotoStep,
+    handleContinue,
+    nextStep,
+    onContinue,
+    onSumbit,
+    prevStep,
+    step,
+  ])
 
   return (
     <Modal stepIndex={stepIndex} onClose={handleClose}>
