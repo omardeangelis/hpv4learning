@@ -19,4 +19,5 @@ export const absoluteImageBox = style({
   width: `100%`,
   height: `100%`,
   overflow: `hidden`,
+  transform: `translateZ(0)`,
 })

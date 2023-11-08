@@ -7,6 +7,7 @@ export const genericCardContainer = style({
   borderRadius: `1.5rem`,
   position: `relative`,
   overflow: `hidden`,
+  transform: `translateZ(0)`,
   "@media": {
     [breakpoints.md]: {
       padding: `1.5rem`,
