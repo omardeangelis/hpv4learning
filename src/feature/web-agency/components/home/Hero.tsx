@@ -171,17 +171,17 @@ export const Hero = () => (
               >
                 Veloci, responsivi e super preformanti
               </Body>
+              <CardImage isAbsolute>
+                <StaticImage
+                  placeholder="none"
+                  src="../../images/card-2-hero.png"
+                  alt="card purple background"
+                  style={{
+                    height: `100%`,
+                  }}
+                />
+              </CardImage>
             </CardContent>
-            <CardImage isAbsolute>
-              <StaticImage
-                placeholder="none"
-                src="../../images/card-2-hero.png"
-                alt="card purple background"
-                style={{
-                  height: `100%`,
-                }}
-              />
-            </CardImage>
           </Card>
           <Card
             disableHover
@@ -217,17 +217,17 @@ export const Hero = () => (
               >
                 Nessun tool. Persone preparate.
               </Body>
+              <CardImage isAbsolute>
+                <StaticImage
+                  placeholder="none"
+                  src="../../images/card-3-hero.png"
+                  alt="card purple background"
+                  style={{
+                    height: `100%`,
+                  }}
+                />
+              </CardImage>
             </CardContent>
-            <CardImage isAbsolute>
-              <StaticImage
-                placeholder="none"
-                src="../../images/card-3-hero.png"
-                alt="card purple background"
-                style={{
-                  height: `100%`,
-                }}
-              />
-            </CardImage>
           </Card>
         </HStack>
       </Box>

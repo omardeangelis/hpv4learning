@@ -33,6 +33,8 @@ export const methodCard = style({
   maxHeight: `512px`,
   height: `312px`,
   width: `100%`,
+  overflow: `hidden`,
+  transform: `translateZ(0)`,
   "@media": {
     [breakpoints.md]: {
       maxWidth: `452px`,
