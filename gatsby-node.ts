@@ -236,7 +236,11 @@ export const createPages = async ({ graphql, actions }) => {
   }
 
   createPage({
-    path: `/web-agency/siti-economici`,
+    path: `/web-agency/`,
+    component: resolve(`./src/template/web-agency/home/index.tsx`),
+  })
+  createPage({
+    path: `/web-agency/siti-economici/`,
     component: resolve(`./src/template/web-agency/siti-economici/index.tsx`),
   })
 }

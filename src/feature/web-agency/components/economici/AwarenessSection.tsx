@@ -1,14 +1,16 @@
 import { Box, Heading, VStack } from "old-ui"
 import React from "react"
-import { navigate } from "gatsby"
 import { useTextFadeInAnimation } from "../../../../hook/useTextFadeInAnimation"
 import { Pillolone } from "../../../../components/v2/pillolone/Pillolone"
+import { useContactForm } from "../../context/FormContext"
 
 export const AwarenessSection = () => {
   const { ref, fadeInStyle } = useTextFadeInAnimation({
     once: true,
     amount: 0.5,
   })
+  const { open } = useContactForm()
+
   return (
     <VStack
       align="center"
@@ -35,11 +37,7 @@ export const AwarenessSection = () => {
           costruito intorno alla nostra attività”
         </Heading>
       </Box>
-      <Pillolone
-        role="button"
-        colorScheme="orange"
-        onClick={() => navigate(`prenota`)}
-      >
+      <Pillolone role="button" colorScheme="orange" onClick={open}>
         Richiedi un preventivo
       </Pillolone>
     </VStack>

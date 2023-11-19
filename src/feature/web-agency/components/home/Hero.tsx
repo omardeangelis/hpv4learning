@@ -1,7 +1,6 @@
 import React from "react"
 import { Body, Box, Button, HStack, Heading, VStack } from "old-ui"
 import { StaticImage } from "gatsby-plugin-image"
-import { navigate } from "@reach/router"
 import { CardHeroContainer } from "../../../../components/v2/cards/hero/CardHero"
 import {
   awarenessTexts,
@@ -18,176 +17,78 @@ import {
   CardImage,
   CardContent,
 } from "../../../../components/v2/cards/base"
+import { useContactForm } from "../../context/FormContext"
 
-export const Hero = () => (
-  <CardHeroContainer className={heroCard}>
-    <Box className={heroLayout}>
-      <Box className={heroTexts}>
-        <VStack spacing={24} align="flex-start">
-          <Heading as="h1" fontWeight={700} variant="5xl">
-            Siti web per aziende e professionisti
-          </Heading>
-          <Box className={mainBtnBox}>
-            <Button
-              variant="purple"
-              size="md"
-              onClick={() => navigate(`prenota`)}
-            >
-              Scopri di più
-            </Button>
-          </Box>
-        </VStack>
+export const Hero = () => {
+  const { open } = useContactForm()
 
-        <VStack
-          spacing={16}
-          align="flex-start"
-          justify={`flex-end`}
-          className={awarenessTexts}
-        >
-          <Body
-            fontWeight={500}
-            variant="lg"
-            sprinkles={{
-              color: `grey300`,
-            }}
-          >
-            Siamo un’agenzia creativa che realizza siti web su misura e
-            personalizzati per ogni azienda.
-          </Body>
-          <HStack spacing={16}>
-            <Box
-              borderColor={`grey20`}
-              style={{
-                borderWidth: `1px`,
-                borderStyle: `solid`,
-              }}
-              className={imageBox}
-            >
-              <StaticImage
-                placeholder="none"
-                src="../../images/hpvfilm-png.png"
-                alt="Hpv Film Logo"
-              />
+  return (
+    <CardHeroContainer className={heroCard}>
+      <Box className={heroLayout}>
+        <Box className={heroTexts}>
+          <VStack spacing={24} align="flex-start">
+            <Heading as="h1" fontWeight={700} variant="5xl">
+              Siti web per aziende e professionisti
+            </Heading>
+            <Box className={mainBtnBox}>
+              <Button variant="purple" size="md" onClick={open}>
+                Scopri di più
+              </Button>
             </Box>
-            <Box
-              borderColor={`grey20`}
-              style={{
-                borderWidth: `1px`,
-                borderStyle: `solid`,
-              }}
-              className={imageBox}
-            >
-              <StaticImage
-                placeholder="none"
-                src="../../images/udemy-png.webp"
-                alt="Udemy Logo"
-              />
-            </Box>
-          </HStack>
-        </VStack>
-      </Box>
-      <Box className={cardBlock}>
-        <Card
-          disableHover
-          __background={`linear-gradient(180deg, #7951BC 0%, #002032 100%)`}
-        >
-          <CardContent
-            direction={`column`}
-            spacing={{ mobile: 24, lg: `unset` }}
-            justify="space-between"
-            sprinkles={{
-              height: `full`,
-            }}
+          </VStack>
+
+          <VStack
+            spacing={16}
+            align="flex-start"
+            justify={`flex-end`}
+            className={awarenessTexts}
           >
             <Body
-              variant="xxl"
-              fontWeight={700}
-              sprinkles={{
-                color: `white`,
-              }}
-            >
-              Ad ogni sito il suo designer
-            </Body>
-            <Body
+              fontWeight={500}
               variant="lg"
               sprinkles={{
-                color: `white`,
-                __zIndex: 1,
-                maxWidth: `calc(100% - 48px)`,
+                color: `grey300`,
               }}
             >
-              Non usiamo template. Ogni sito ha un design unico.
+              Siamo un’agenzia creativa che realizza siti web su misura e
+              personalizzati per ogni azienda.
             </Body>
-            <CardImage isAbsolute className={topCardImage}>
-              <StaticImage
-                placeholder="none"
-                src="../../images/geometric cube.png"
-                alt="A 3d geometric cube"
+            <HStack spacing={16}>
+              <Box
+                borderColor={`grey20`}
                 style={{
-                  height: `100%`,
+                  borderWidth: `1px`,
+                  borderStyle: `solid`,
                 }}
-              />
-            </CardImage>
-          </CardContent>
-        </Card>
-        <HStack
-          align="stretch"
-          spacing={{
-            mobile: 16,
-            md: 24,
-          }}
-        >
-          <Card
-            disableHover
-            style={{
-              flex: 1,
-            }}
-          >
-            <CardContent
-              direction={`column`}
-              spacing={{ mobile: 24, lg: `unset` }}
-              justify="space-between"
-              sprinkles={{
-                height: `full`,
-              }}
-            >
-              <Button
-                onClick={() => navigate(`prenota`)}
-                variant="purple"
-                size={`md`}
-                style={{
-                  zIndex: 2,
-                }}
+                className={imageBox}
               >
-                Contattaci
-              </Button>
-              <Body
-                variant="xl"
-                fontWeight={700}
-                sprinkles={{
-                  color: `white`,
-                  __zIndex: 1,
-                }}
-              >
-                Veloci, responsivi e super preformanti
-              </Body>
-              <CardImage isAbsolute>
                 <StaticImage
                   placeholder="none"
-                  src="../../images/card-2-hero.png"
-                  alt="card purple background"
-                  style={{
-                    height: `100%`,
-                  }}
+                  src="../../images/hpvfilm-png.png"
+                  alt="Hpv Film Logo"
                 />
-              </CardImage>
-            </CardContent>
-          </Card>
+              </Box>
+              <Box
+                borderColor={`grey20`}
+                style={{
+                  borderWidth: `1px`,
+                  borderStyle: `solid`,
+                }}
+                className={imageBox}
+              >
+                <StaticImage
+                  placeholder="none"
+                  src="../../images/udemy-png.webp"
+                  alt="Udemy Logo"
+                />
+              </Box>
+            </HStack>
+          </VStack>
+        </Box>
+        <Box className={cardBlock}>
           <Card
             disableHover
-            style={{
-              flex: 1,
-            }}
+            __background={`linear-gradient(180deg, #7951BC 0%, #002032 100%)`}
           >
             <CardContent
               direction={`column`}
@@ -198,30 +99,29 @@ export const Hero = () => (
               }}
             >
               <Body
-                variant="xl"
+                variant="xxl"
                 fontWeight={700}
                 sprinkles={{
                   color: `white`,
-                  __zIndex: 1,
                 }}
               >
-                Un team di sviluppatori al tuo servizio.
+                Ad ogni sito il suo designer
               </Body>
               <Body
                 variant="lg"
-                fontWeight={500}
                 sprinkles={{
                   color: `white`,
                   __zIndex: 1,
+                  maxWidth: `calc(100% - 48px)`,
                 }}
               >
-                Nessun tool. Persone preparate.
+                Non usiamo template. Ogni sito ha un design unico.
               </Body>
-              <CardImage isAbsolute>
+              <CardImage isAbsolute className={topCardImage}>
                 <StaticImage
                   placeholder="none"
-                  src="../../images/card-3-hero.png"
-                  alt="card purple background"
+                  src="../../images/geometric cube.png"
+                  alt="A 3d geometric cube"
                   style={{
                     height: `100%`,
                   }}
@@ -229,8 +129,108 @@ export const Hero = () => (
               </CardImage>
             </CardContent>
           </Card>
-        </HStack>
+          <HStack
+            align="stretch"
+            spacing={{
+              mobile: 16,
+              md: 24,
+            }}
+          >
+            <Card
+              disableHover
+              style={{
+                flex: 1,
+              }}
+            >
+              <CardContent
+                direction={`column`}
+                spacing={{ mobile: 24, lg: `unset` }}
+                justify="space-between"
+                sprinkles={{
+                  height: `full`,
+                }}
+              >
+                <Button
+                  onClick={open}
+                  variant="purple"
+                  size={`md`}
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  Contattaci
+                </Button>
+                <Body
+                  variant="xl"
+                  fontWeight={700}
+                  sprinkles={{
+                    color: `white`,
+                    __zIndex: 1,
+                  }}
+                >
+                  Veloci, responsivi e super preformanti
+                </Body>
+                <CardImage isAbsolute>
+                  <StaticImage
+                    placeholder="none"
+                    src="../../images/card-2-hero.png"
+                    alt="card purple background"
+                    style={{
+                      height: `100%`,
+                    }}
+                  />
+                </CardImage>
+              </CardContent>
+            </Card>
+            <Card
+              disableHover
+              style={{
+                flex: 1,
+              }}
+            >
+              <CardContent
+                direction={`column`}
+                spacing={{ mobile: 24, lg: `unset` }}
+                justify="space-between"
+                sprinkles={{
+                  height: `full`,
+                }}
+              >
+                <Body
+                  variant="xl"
+                  fontWeight={700}
+                  sprinkles={{
+                    color: `white`,
+                    __zIndex: 1,
+                  }}
+                >
+                  Un team di sviluppatori al tuo servizio.
+                </Body>
+                <Body
+                  variant="lg"
+                  fontWeight={500}
+                  sprinkles={{
+                    color: `white`,
+                    __zIndex: 1,
+                  }}
+                >
+                  Nessun tool. Persone preparate.
+                </Body>
+                <CardImage isAbsolute>
+                  <StaticImage
+                    placeholder="none"
+                    src="../../images/card-3-hero.png"
+                    alt="card purple background"
+                    style={{
+                      height: `100%`,
+                    }}
+                  />
+                </CardImage>
+              </CardContent>
+            </Card>
+          </HStack>
+        </Box>
       </Box>
-    </Box>
-  </CardHeroContainer>
-)
+    </CardHeroContainer>
+  )
+}

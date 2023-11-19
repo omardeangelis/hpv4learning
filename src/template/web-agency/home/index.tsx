@@ -1,18 +1,14 @@
 import React from "react"
-import { Router } from "@reach/router"
-import { WebAgencyHomePage } from "../../feature/web-agency/pages/WebAgencyHomePage"
-import MetaDecorator from "../../components/SEO/components/MetaDecorator"
-import LinkHandler from "../../components/SEO/components/LinkHandler"
-import WebPageSchema from "../../components/SEO/components/WebPageSchema"
-import { ReservationModal } from "../../feature/consulenze/components"
+import { WebAgencyHomePage } from "../../../feature/web-agency/pages/WebAgencyHomePage"
+import MetaDecorator from "../../../components/SEO/components/MetaDecorator"
+import LinkHandler from "../../../components/SEO/components/LinkHandler"
+import WebPageSchema from "../../../components/SEO/components/WebPageSchema"
+import { PageWithForm } from "../../../feature/web-agency/components/core/PageWithForm"
 
 const WebAgencyHome = () => (
-  <>
-    <Router basepath="/web-agency/">
-      <ReservationModal path="/prenota/" />
-    </Router>
+  <PageWithForm>
     <WebAgencyHomePage />
-  </>
+  </PageWithForm>
 )
 
 export const Head = () => (

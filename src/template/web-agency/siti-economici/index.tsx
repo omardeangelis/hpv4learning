@@ -1,18 +1,14 @@
-import { Router } from "@reach/router"
 import React from "react"
 import LinkHandler from "../../../components/SEO/components/LinkHandler"
 import MetaDecorator from "../../../components/SEO/components/MetaDecorator"
 import WebPageSchema from "../../../components/SEO/components/WebPageSchema"
-import { ReservationModal } from "../../../feature/consulenze/components"
 import { SitiEconomiciPage } from "../../../feature/web-agency/pages/SitiEconomiciPage"
+import { PageWithForm } from "../../../feature/web-agency/components/core/PageWithForm"
 
 const SitiEconomici = () => (
-  <>
-    <Router basepath="/web-agency/siti-economici">
-      <ReservationModal path="/prenota/" />
-    </Router>
+  <PageWithForm>
     <SitiEconomiciPage />
-  </>
+  </PageWithForm>
 )
 
 export const Head = () => (

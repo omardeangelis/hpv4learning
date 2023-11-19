@@ -19,6 +19,7 @@ export const CreativitySection = () => {
     once: true,
     amount: 0.5,
   })
+
   return (
     <VStack
       spacing={{
