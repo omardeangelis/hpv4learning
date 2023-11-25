@@ -15,11 +15,13 @@ import { Method } from "../components/home/Method"
 import { Features } from "../components/home/Features"
 import { PartnerSection } from "../components/home/PartnerSection"
 import { useContactForm } from "../context/FormContext"
+import { HeroSpacer } from "../../navigation/v2/components/HeroSpacer"
 
 export const WebAgencyHomePage = () => {
   const { open } = useContactForm()
   return (
     <Layout>
+      <HeroSpacer />
       <Box
         mt={{
           mobile: 12,

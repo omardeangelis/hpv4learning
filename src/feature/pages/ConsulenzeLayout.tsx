@@ -9,6 +9,7 @@ import {
   ReviewSection,
 } from "../consulenze/components"
 import { ConsulenzeProvider } from "../consulenze/context"
+import { HeroSpacer } from "../navigation/v2/components/HeroSpacer"
 
 export const ConsulenzeLayout = () => {
   const openModal = React.useCallback(
@@ -20,67 +21,66 @@ export const ConsulenzeLayout = () => {
 
   return (
     <ConsulenzeProvider value={context}>
-      <Box mt="-72px">
-        <Hero />
+      <HeroSpacer __background="linear-gradient(270deg, #E7A7FF 0%, #8769FE 51.56%, #341268)" />
+      <Hero />
+      <Box
+        sx={{
+          backgroundImage: `linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 48.96%, #FFFFFF 100%)`,
+        }}
+      >
         <Box
           sx={{
-            backgroundImage: `linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 48.96%, #FFFFFF 100%)`,
+            mt: {
+              xs: `48px`,
+              lg: `144px`,
+            },
           }}
         >
-          <Box
+          <IconSection />
+        </Box>
+        <Box
+          sx={{
+            mt: {
+              xs: `48px`,
+              lg: `144px`,
+            },
+          }}
+        >
+          <CardsSection />
+        </Box>
+        <Box
+          sx={{
+            mt: {
+              xs: `48px`,
+              lg: `144px`,
+            },
+          }}
+        >
+          <ReviewSection />
+        </Box>
+        <Box
+          sx={{
+            mt: {
+              xs: `48px`,
+              lg: `144px`,
+            },
+          }}
+        >
+          <BottomBanner
+            title="Facciamo due chiacchiere, è gratis"
             sx={{
-              mt: {
-                xs: `48px`,
-                lg: `144px`,
-              },
+              backgroundColor: `purple.A100`,
             }}
           >
-            <IconSection />
-          </Box>
-          <Box
-            sx={{
-              mt: {
-                xs: `48px`,
-                lg: `144px`,
-              },
-            }}
-          >
-            <CardsSection />
-          </Box>
-          <Box
-            sx={{
-              mt: {
-                xs: `48px`,
-                lg: `144px`,
-              },
-            }}
-          >
-            <ReviewSection />
-          </Box>
-          <Box
-            sx={{
-              mt: {
-                xs: `48px`,
-                lg: `144px`,
-              },
-            }}
-          >
-            <BottomBanner
-              title="Facciamo due chiacchiere, è gratis"
-              sx={{
-                backgroundColor: `purple.A100`,
-              }}
+            <RoundedButton
+              size="large"
+              variant="contained"
+              color="primary"
+              onClick={openModal}
             >
-              <RoundedButton
-                size="large"
-                variant="contained"
-                color="primary"
-                onClick={openModal}
-              >
-                Prenota una call
-              </RoundedButton>
-            </BottomBanner>
-          </Box>
+              Prenota una call
+            </RoundedButton>
+          </BottomBanner>
         </Box>
       </Box>
     </ConsulenzeProvider>

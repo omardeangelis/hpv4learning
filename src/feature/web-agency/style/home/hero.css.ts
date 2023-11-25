@@ -49,15 +49,6 @@ export const awarenessTexts = style({
   },
 })
 
-export const mainBtnBox = style({
-  display: `none`,
-  "@media": {
-    [breakpoints.md]: {
-      display: `block`,
-    },
-  },
-})
-
 export const cardBlock = style({
   display: `grid`,
   gridTemplateRows: `1fr 1fr`,

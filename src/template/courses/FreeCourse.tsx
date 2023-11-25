@@ -39,6 +39,7 @@ import LinkHandler from "../../components/SEO/components/LinkHandler"
 import CourseSchema from "../../components/SEO/components/CourseSchema"
 import { CourseBannerProvider } from "../../feature/courses/context/CourseBanner"
 import { triggerGACustomEvent } from "../../utils/tracking"
+import { HeroSpacer } from "../../feature/navigation/v2/components/HeroSpacer"
 
 const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
   data,
@@ -87,6 +88,7 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
 
   return (
     <Layout>
+      <HeroSpacer />
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">
           <CourseAlignment
@@ -364,7 +366,7 @@ const FreeCourseTemplate: React.FC<PageProps<Queries.FreeCoursePageQuery>> = ({
                   display: { xs: `none`, lg: `block` },
                   height: `fit-content`,
                   position: `sticky`,
-                  top: `96px`,
+                  top: `10rem`,
                 }}
               >
                 <Box>

@@ -4,7 +4,6 @@ import { Script } from "gatsby"
 import { Sidebar } from "../../feature/navigation/components"
 import { Footer } from "../../feature/footer"
 import { Navbar } from "../../feature/navigation/v2/components/Navbar"
-import { mainContainer } from "./style/layout.css"
 
 const Layout = ({
   children,
@@ -19,7 +18,7 @@ const Layout = ({
     {/* <Navbar disableColor={disableColor} /> */}
     <Navbar />
     <Sidebar />
-    <main className={mainContainer}>{children}</main>
+    <main>{children}</main>
     <Footer enableFooterPadding={enableFooterPadding} />
     <Script type="text/javascript">
       {`

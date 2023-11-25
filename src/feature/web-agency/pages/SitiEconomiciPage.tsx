@@ -15,15 +15,18 @@ import { CreativitySection } from "../components/economici/CreativitySection"
 import { serviceSpacer } from "../style/economici/service.css"
 import { semiEllipse, semiTopEllipse } from "../style/economici/creativity.css"
 import { useContactForm } from "../context/FormContext"
+import { HeroSpacer } from "../../navigation/v2/components/HeroSpacer"
 
 export const SitiEconomiciPage = () => {
   const { open } = useContactForm()
 
   return (
     <Layout>
+      <HeroSpacer background="orange10" />
       <Box
         background="orange10"
         position="relative"
+        className="hero-navigation-padding"
         style={{
           overflow: `hidden`,
         }}

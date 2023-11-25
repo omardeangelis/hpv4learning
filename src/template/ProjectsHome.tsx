@@ -12,6 +12,7 @@ import { ProjectSectionProps } from "../feature/projects/types"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
+import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
 
 const LinkContainer = styled(Box)`
   display: flex;
@@ -38,14 +39,18 @@ const StyledStack = styled(Stack)`
 `
 
 const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
-  const latestProject = React.useMemo(() => data.latestProjects.edges[0], [])
+  const latestProject = React.useMemo(
+    () => data.latestProjects.edges[0],
+    [data.latestProjects.edges]
+  )
 
   return (
     <Layout>
+      <HeroSpacer />
       <Container maxWidth="lg">
         {latestProject ? <LatestProject {...latestProject} /> : null}
-        {data.projects.group.map((post, index) => (
-          <div key={index}>
+        {data.projects.group.map((post) => (
+          <div key={post.fieldValue}>
             <StyledStack direction="row" justifyContent="space-between">
               <Typography
                 component="h2"
@@ -63,7 +68,9 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
                 </SeoLink>
               </LinkContainer>
             </StyledStack>
-            <ProjectSection projects={post.nodes as ProjectSectionProps} />
+            <ProjectSection
+              projects={post.nodes as unknown as ProjectSectionProps}
+            />
           </div>
         ))}
       </Container>
@@ -88,7 +95,7 @@ export const Head = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
 
   const courseTitlesString = React.useMemo(
     () => data.projects.group.map((el) => el.fieldValue).join(`,`),
-    []
+    [data.projects.group]
   )
   return (
     <>
@@ -106,51 +113,53 @@ export const Head = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
   )
 }
 
-export const query = graphql`query ProjectHomePage {
-  projects: allContentfulProgetti(sort: {createdAt: DESC}) {
-    group(field: {project_category: {title: SELECT}}, limit: 3) {
-      fieldValue
-      nodes {
-        titolo
-        meta_title
-        slug
-        descrizione {
-          descrizione
-        }
-        project_category {
+export const query = graphql`
+  query ProjectHomePage {
+    projects: allContentfulProgetti(sort: { createdAt: DESC }) {
+      group(field: { project_category: { title: SELECT } }, limit: 3) {
+        fieldValue
+        nodes {
+          titolo
+          meta_title
           slug
-          title
-        }
-        copertina {
-          gatsbyImageData
-        }
-      }
-    }
-  }
-  latestProjects: allContentfulProgetti(sort: {createdAt: DESC}, limit: 1) {
-    edges {
-      node {
-        titolo
-        meta_title
-        slug
-        descrizione {
-          descrizione
-        }
-        project_category {
-          slug
-        }
-        createdAt
-        body {
-          childMarkdownRemark {
-            timeToRead
+          descrizione {
+            descrizione
+          }
+          project_category {
+            slug
+            title
+          }
+          copertina {
+            gatsbyImageData
           }
         }
-        copertina {
-          gatsbyImageData
+      }
+    }
+    latestProjects: allContentfulProgetti(sort: { createdAt: DESC }, limit: 1) {
+      edges {
+        node {
+          titolo
+          meta_title
+          slug
+          descrizione {
+            descrizione
+          }
+          project_category {
+            slug
+          }
+          createdAt
+          body {
+            childMarkdownRemark {
+              timeToRead
+            }
+          }
+          copertina {
+            gatsbyImageData
+          }
         }
       }
     }
   }
-}`
+`
 
 export default ProjectsHome

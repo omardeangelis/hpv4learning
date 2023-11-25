@@ -132,7 +132,7 @@ export const AcademyTooltip = React.forwardRef<HTMLDivElement, any>(
               <SeoLink link="/about/" isExternal={false}>
                 <TooltipNavItem>Insegnanti</TooltipNavItem>
               </SeoLink>
-              <SeoLink link="/lavora-con-noi/" isExternal={false}>
+              <SeoLink link="/join-us/" isExternal={false}>
                 <TooltipNavItem>Unisciti</TooltipNavItem>
               </SeoLink>
             </VStack>

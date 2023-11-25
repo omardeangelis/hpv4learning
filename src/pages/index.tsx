@@ -21,6 +21,7 @@ import { HomeSection } from "../feature/projects/components"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import { BottomBanner, RoundedButton } from "../components/layout"
 import { IndexInfo } from "../feature/home"
+import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
 
 const IndexPage = () => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null)
@@ -34,6 +35,7 @@ const IndexPage = () => {
   }, [])
   return (
     <Layout>
+      <HeroSpacer />
       <Hero>
         <TopHeroContent fn={goToCourseSection} />
       </Hero>

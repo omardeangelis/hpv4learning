@@ -178,19 +178,7 @@
 
 }
 
-html {
-    overflow-x: hidden;
-    font-family: 'Poppins', sans-serif !important;
 
-}
-
-body {
-    background-color: white;
-    color: var(--dark-text-color);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /* overflow-x: hidden; */
-}
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

@@ -91,6 +91,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
     justifyContent="center"
     alignItems="center"
     height={`calc(100vh - 72px)`}
+    className="hero-navigation-padding"
   >
     <ImageBox
       anim={fadeInFromLeft}

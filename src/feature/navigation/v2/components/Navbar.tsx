@@ -1,6 +1,5 @@
-import { Body, Box, Container, HStack } from "old-ui"
+import { Body, Box, Button, Container, HStack } from "old-ui"
 import React, { useState } from "react"
-import { BsBookmarkHeartFill } from "react-icons/bs"
 import { StaticImage } from "gatsby-plugin-image"
 import {
   useFloating,
@@ -10,19 +9,23 @@ import {
   offset,
 } from "@floating-ui/react"
 import { navigate } from "gatsby"
-import {
-  navBarContainer,
-  navItem,
-  navSaveItem,
-  navbar,
-} from "../style/navbar.css"
-import { Avatar } from "../../../../components/avatar/components/Avatar"
+import { useLocation } from "@reach/router"
+import { navBarContainer, navItem, navbar } from "../style/navbar.css"
 import { AcademyTooltip } from "./AcademyTooltip"
 import { AgencyTooltip } from "./AgencyTooltip"
+import { useContactForm } from "../../../web-agency/context/FormContext"
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAgencyOpen, setIsAgencyOpen] = useState(false)
+  const { open } = useContactForm()
+  const { pathname } = useLocation()
+  const handleContactClick = React.useCallback(() => {
+    if (pathname.includes(`/web-agency`)) {
+      return open()
+    }
+    navigate(`/web-agency/?form=open`)
+  }, [open, pathname])
 
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
@@ -143,14 +146,9 @@ export const Navbar = () => {
                   </Box>
                 </HStack>
               </HStack>
-              <Avatar
-                shape="circle"
-                __height={36}
-                __width={36}
-                className={navSaveItem}
-              >
-                <BsBookmarkHeartFill size={20} />
-              </Avatar>
+              <Button size="md" variant="purple" onClick={handleContactClick}>
+                Contattaci
+              </Button>
             </HStack>
           </Box>
         </Container>

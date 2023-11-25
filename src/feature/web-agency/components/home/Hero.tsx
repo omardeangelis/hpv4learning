@@ -9,7 +9,6 @@ import {
   heroLayout,
   heroTexts,
   imageBox,
-  mainBtnBox,
   topCardImage,
 } from "../../style/home/hero.css"
 import {
@@ -30,11 +29,6 @@ export const Hero = () => {
             <Heading as="h1" fontWeight={700} variant="5xl">
               Siti web per aziende e professionisti
             </Heading>
-            <Box className={mainBtnBox}>
-              <Button variant="purple" size="md" onClick={open}>
-                Scopri di più
-              </Button>
-            </Box>
           </VStack>
 
           <VStack

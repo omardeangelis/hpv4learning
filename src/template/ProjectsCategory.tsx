@@ -13,6 +13,7 @@ import Paginatior from "../feature/navigation/components/Paginatior"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import LinkHandler from "../components/SEO/components/LinkHandler"
+import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
 
 type Props = {
   pageContext: {
@@ -33,6 +34,7 @@ const ProjectsCategory = ({
   },
 }: PageProps<Queries.ProjectCategoryPageQuery> & Props) => (
   <Layout>
+    <HeroSpacer />
     <Container maxWidth="lg">
       <Box maxWidth="756px" mx="auto" mt={{ xs: `48px`, lg: `96px` }}>
         <Typography
@@ -69,9 +71,11 @@ const ProjectsCategory = ({
           mt: { xs: `48px`, lg: `96px` },
         }}
       >
-        {rowalizer(progetti as ProjectSectionProps)?.map((row, index) => (
-          <ProjectSection projects={row} key={slug + index} />
-        ))}
+        {rowalizer(progetti as unknown as ProjectSectionProps)?.map(
+          (row, index) => (
+            <ProjectSection projects={row} key={slug + index} />
+          )
+        )}
       </Stack>
     </Container>
     {hasNextPage || currentPage > 1 ? (
@@ -141,35 +145,39 @@ export const Head = ({
   )
 }
 
-export const query = graphql`query ProjectCategoryPage($id: String!, $skip: Int!, $limit: Int!) {
-  allContentfulProgetti(
-    filter: {project_category: {elemMatch: {id: {eq: $id}}}}
-    skip: $skip
-    limit: $limit
-    sort: {createdAt: ASC}
-  ) {
-    nodes {
-      titolo
-      slug
-      meta_title
-      copertina {
-        gatsbyImageData
-      }
-      descrizione {
-        descrizione
-      }
-      project_category {
-        title
+export const query = graphql`
+  query ProjectCategoryPage($id: String!, $skip: Int!, $limit: Int!) {
+    allContentfulProgetti(
+      filter: { project_category: { elemMatch: { id: { eq: $id } } } }
+      skip: $skip
+      limit: $limit
+      sort: { createdAt: ASC }
+    ) {
+      nodes {
+        titolo
         slug
+        meta_title
+        copertina {
+          gatsbyImageData
+        }
+        descrizione {
+          descrizione
+        }
+        project_category {
+          title
+          slug
+        }
       }
     }
+    corso: contentfulCorsi(
+      progetti: {
+        elemMatch: { project_category: { elemMatch: { id: { eq: $id } } } }
+      }
+    ) {
+      titolo
+      slug
+    }
   }
-  corso: contentfulCorsi(
-    progetti: {elemMatch: {project_category: {elemMatch: {id: {eq: $id}}}}}
-  ) {
-    titolo
-    slug
-  }
-}`
+`
 
 export default ProjectsCategory
