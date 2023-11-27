@@ -1,4 +1,4 @@
-import { Body, Box, Button, Container, HStack } from "old-ui"
+import { Body, Box, Button, HStack, ResponsiveContainer } from "old-ui"
 import React, { useState } from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import {
@@ -10,10 +10,17 @@ import {
 } from "@floating-ui/react"
 import { navigate } from "gatsby"
 import { useLocation } from "@reach/router"
-import { navBarContainer, navItem, navbar } from "../style/navbar.css"
+import {
+  btnBox,
+  navBarContainer,
+  navItem,
+  navbar,
+  sidebaBox,
+} from "../style/navbar.css"
 import { AcademyTooltip } from "./AcademyTooltip"
 import { AgencyTooltip } from "./AgencyTooltip"
 import { useContactForm } from "../../../web-agency/context/FormContext"
+import { Sidebar } from "./Sidebar"
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -80,7 +87,7 @@ export const Navbar = () => {
   return (
     <>
       <Box className={navBarContainer}>
-        <Container variant="xl">
+        <ResponsiveContainer variant="xl">
           <Box
             borderRadius={9999}
             className={navbar}
@@ -103,6 +110,7 @@ export const Navbar = () => {
                   onClick={() => navigate(`/`)}
                   style={{
                     cursor: `pointer`,
+                    zIndex: 10,
                   }}
                 >
                   <StaticImage
@@ -146,12 +154,17 @@ export const Navbar = () => {
                   </Box>
                 </HStack>
               </HStack>
-              <Button size="md" variant="purple" onClick={handleContactClick}>
-                Contattaci
-              </Button>
+              <Box className={btnBox}>
+                <Button size="md" variant="purple" onClick={handleContactClick}>
+                  Contattaci
+                </Button>
+              </Box>
+              <Box className={sidebaBox}>
+                <Sidebar />
+              </Box>
             </HStack>
           </Box>
-        </Container>
+        </ResponsiveContainer>
       </Box>
       {isOpen ? (
         <AcademyTooltip
