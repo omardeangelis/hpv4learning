@@ -14,7 +14,7 @@ import Insegnante from "../components/shared/Insegnante"
 import { InsegnanteProps } from "../types/course"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
-import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const AboutPage = ({
   data,

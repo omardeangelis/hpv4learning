@@ -1,217 +1,184 @@
-import React from "react"
-// Material UI
-import Container from "@mui/material/Container"
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography"
-import IconButton from "@mui/material/IconButton"
-// Icon
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded"
-// gatsby
-import { Link as GastbyLink } from "gatsby"
+import { Body, Box, Button, HStack, ResponsiveContainer } from "old-ui"
+import React, { useState } from "react"
 import { StaticImage } from "gatsby-plugin-image"
-import Stack from "@mui/material/Stack"
-import styled from "@emotion/styled"
 import {
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  useDismiss,
   useFloating,
-  useFocus,
-  useClick,
+  useHover,
   useInteractions,
-  useRole,
-} from "@floating-ui/react-dom-interactions"
-import { CourseMenu } from "./CourseMenu"
-import { useNavigationLink } from "../hooks/useNavigationLink"
-import { getIcon } from "../utils"
-import SeoLink from "../../../components/shared/SeoLink"
-import { toggleSidebar } from "../../../store/reducers/uiSlice"
+  safePolygon,
+  offset,
+} from "@floating-ui/react"
+import { navigate } from "gatsby"
+import { useLocation } from "@reach/router"
+import {
+  btnBox,
+  navBarContainer,
+  navItem,
+  navbar,
+  sidebaBox,
+} from "../style/navbar.css"
+import { AcademyTooltip } from "./AcademyTooltip"
+import { AgencyTooltip } from "./AgencyTooltip"
+import { useContactForm } from "../../web-agency/context/FormContext"
+import { Sidebar } from "./sidebar/Sidebar"
 
-const StyledNav = styled(Box)`
-  width: 100%;
-  /* position: fixed; */
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  z-index: 4;
-  [data-role="_link"] {
-    border: 1px solid transparent;
-    transition: all 125ms ease;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 100px;
-    &:hover {
-      background: rgba(98, 0, 238, 0.025);
-      border: 1px solid rgba(98, 0, 238, 0.05);
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isAgencyOpen, setIsAgencyOpen] = useState(false)
+  const { open } = useContactForm()
+  const { pathname } = useLocation()
+  const handleContactClick = React.useCallback(() => {
+    if (pathname.includes(`/web-agency`)) {
+      return open()
     }
-  }
-`
+    navigate(`/web-agency/?form=open`)
+  }, [open, pathname])
 
-const StyledCenter = styled(Box)`
-  display: none;
-  flex: 1;
-
-  @media screen and (min-width: 1024px) {
-    display: block;
-  }
-`
-
-const StyledRight = styled(Box)`
-  display: block;
-  flex: 1;
-
-  @media screen and (min-width: 1024px) {
-    display: none;
-  }
-`
-
-export const Navbar = ({ disableColor }: { disableColor?: true }) => {
-  const [open, setOpen] = React.useState(false)
-  const { x, y, reference, floating, strategy, context } = useFloating({
-    placement: `top`,
-    open,
-    onOpenChange: setOpen,
-    middleware: [offset(5), flip(), shift({ padding: 8 })],
-    whileElementsMounted: autoUpdate,
+  const { refs, floatingStyles, context } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: `bottom-start`,
+    strategy: `fixed`,
+    middleware: [
+      offset({
+        mainAxis: 48,
+        crossAxis: -32,
+      }),
+    ],
   })
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    useClick(context),
-    useFocus(context),
-    useRole(context, { role: `tooltip` }),
-    useDismiss(context),
-  ])
-  const links = useNavigationLink()
+  const {
+    refs: agencyRefs,
+    floatingStyles: agencyFloatingStyles,
+    context: agencyContext,
+  } = useFloating({
+    open: isAgencyOpen,
+    onOpenChange: setIsAgencyOpen,
+    placement: `bottom-start`,
+    strategy: `fixed`,
+    middleware: [
+      offset({
+        mainAxis: 48,
+        crossAxis: -32,
+      }),
+    ],
+  })
+
+  const agencyHover = useHover(agencyContext, {
+    handleClose: safePolygon({
+      blockPointerEvents: true,
+      buffer: 16,
+    }),
+  })
+
+  const {
+    getReferenceProps: getAgencyReferenceProps,
+    getFloatingProps: getAgencyFloatingProps,
+  } = useInteractions([agencyHover])
+
+  const hover = useHover(context, {
+    handleClose: safePolygon({
+      blockPointerEvents: true,
+      buffer: 16,
+    }),
+  })
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([hover])
   return (
     <>
-      <StyledNav
-        component="nav"
-        sx={{
-          background: disableColor ? `transparent` : `rgba(255, 255, 255, 0.8)`,
-          backdropFilter: `saturate(180%) blur(20px)`,
-          position: disableColor ? `absolute` : `fixed`,
-        }}
-      >
-        <Container maxWidth="lg">
-          <Stack direction="row" alignItems="center" height="72px">
-            <GastbyLink
-              to="/"
-              style={{
-                textDecoration: `none`,
+      <Box className={navBarContainer}>
+        <ResponsiveContainer variant="xl">
+          <Box
+            borderRadius={9999}
+            className={navbar}
+            style={{
+              borderWidth: 1,
+              borderStyle: `solid`,
+            }}
+            borderColor="grey20"
+            background={`white`}
+          >
+            <HStack
+              align="center"
+              justify={`space-between`}
+              sprinkles={{
+                width: `full`,
               }}
             >
-              <Box>
-                <StaticImage
-                  src="../../../images/logo.png"
-                  alt="Logo Hpv 4 Learning"
-                  placeholder="blurred"
-                  layout="fixed"
-                  height={70}
-                  width={70}
-                />
-              </Box>
-            </GastbyLink>
-            <StyledCenter>
-              <Stack
-                direction="row"
-                justifyContent="space-around"
-                alignItems="center"
-                sx={{
-                  flex: 1,
-                }}
-              >
-                {links.map(({ text, link, icon }) => {
-                  if (!link) {
-                    return (
-                      <Box
-                        key={`${text}navbar`}
-                        {...getReferenceProps({
-                          ref: reference,
-                          role: `_link`,
-                        })}
-                      >
-                        <Stack direction="row" spacing={2} alignItems="center">
-                          <Typography
-                            sx={{
-                              fontSize: `1rem`,
-                              lineHeight: `unset`,
-                              fontWeight: 500,
-                            }}
-                            color={disableColor ? `white` : `gray.800`}
-                          >
-                            {text}
-                          </Typography>
-                          {getIcon(icon, {
-                            color: disableColor ? `white` : `inherit`,
-                          })}
-                        </Stack>
-                      </Box>
-                    )
-                  }
-                  return (
-                    <SeoLink
-                      isExternal={false}
-                      link={link}
-                      key={`${text}navbar`}
-                    >
-                      <Box data-role="_link">
-                        <Stack direction="row" spacing={2} alignItems="center">
-                          <Typography
-                            sx={{
-                              fontSize: `1rem`,
-                              lineHeight: `unset`,
-                              fontWeight: 500,
-                            }}
-                            color={disableColor ? `white` : `gray.800`}
-                          >
-                            {text}
-                          </Typography>
-                          {getIcon(icon, {
-                            color: disableColor ? `white` : `purple.400`,
-                          })}
-                        </Stack>
-                      </Box>
-                    </SeoLink>
-                  )
-                })}
-              </Stack>
-            </StyledCenter>
-            <StyledRight>
-              <Stack
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="center"
-              >
-                <IconButton
-                  color="default"
-                  onClick={toggleSidebar}
-                  sx={{
-                    background: disableColor ? `#E9E3FF` : `inherit`,
+              <HStack spacing={16} align={`center`} justify={`flex-start`}>
+                <Box
+                  onClick={() => navigate(`/`)}
+                  style={{
+                    cursor: `pointer`,
+                    zIndex: 10,
                   }}
                 >
-                  <MenuRoundedIcon />
-                </IconButton>
-              </Stack>
-            </StyledRight>
-          </Stack>
-        </Container>
-      </StyledNav>
-      <Box height="72px" width="100px" />
-      {open ? (
-        <Box
-          {...getFloatingProps({
-            ref: floating,
-            style: {
-              position: strategy,
-              top: y ?? 0,
-              left: x ?? 0,
-            },
-          })}
-        >
-          <CourseMenu />
-        </Box>
+                  <StaticImage
+                    src="../assets/logo.png"
+                    alt="Logo Hpv 4 Learning"
+                    placeholder="blurred"
+                    layout="fixed"
+                    height={36}
+                    width={36}
+                  />
+                </Box>
+                {` `}
+                <HStack spacing={4} align={`center`} justify={`flex-start`}>
+                  <Box
+                    className={navItem}
+                    ref={refs.setReference}
+                    {...getReferenceProps()}
+                  >
+                    <Body
+                      variant="md"
+                      sprinkles={{
+                        __color: `inherit`,
+                      }}
+                    >
+                      Academy
+                    </Body>
+                  </Box>
+                  <Box
+                    className={navItem}
+                    ref={agencyRefs.setReference}
+                    {...getAgencyReferenceProps()}
+                  >
+                    <Body
+                      variant="md"
+                      sprinkles={{
+                        __color: `inherit`,
+                      }}
+                    >
+                      Web Agency
+                    </Body>
+                  </Box>
+                </HStack>
+              </HStack>
+              <Box className={btnBox}>
+                <Button size="md" variant="purple" onClick={handleContactClick}>
+                  Contattaci
+                </Button>
+              </Box>
+              <Box className={sidebaBox}>
+                <Sidebar />
+              </Box>
+            </HStack>
+          </Box>
+        </ResponsiveContainer>
+      </Box>
+      {isOpen ? (
+        <AcademyTooltip
+          ref={refs.setFloating}
+          {...getFloatingProps()}
+          style={floatingStyles}
+        />
+      ) : null}
+      {isAgencyOpen ? (
+        <AgencyTooltip
+          ref={agencyRefs.setFloating}
+          {...getAgencyFloatingProps()}
+          style={agencyFloatingStyles}
+        />
       ) : null}
     </>
   )

@@ -12,7 +12,7 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import Layout from "../components/shared/layout"
 import { rowalizer } from "../utils/helpers"
-import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 type StyledProps = {
   full?: string
@@ -258,6 +258,8 @@ export const query = graphql`
           gatsbyImageData
         }
         categoria
+        promoLink
+        isFree
         promoLink
         slug
         livello

@@ -1,6 +1,6 @@
 import { Body, Box, HStack, VStack } from "old-ui"
 import React from "react"
-import SeoLink from "../../../../components/shared/SeoLink"
+import SeoLink from "../../../components/shared/SeoLink"
 import { TooltipNavItem } from "./TooltipNavItem"
 
 export const AcademyTooltip = React.forwardRef<HTMLDivElement, any>(

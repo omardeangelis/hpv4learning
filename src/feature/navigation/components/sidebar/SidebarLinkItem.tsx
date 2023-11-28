@@ -2,7 +2,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { Box } from "old-ui"
 import { BoxExtendedProps } from "../../../../types/system"
-import { sidebarLinkItem } from "../style/sidebar.css"
+import { sidebarLinkItem } from "../../style/sidebar.css"
 
 const itemVariants = {
   open: {

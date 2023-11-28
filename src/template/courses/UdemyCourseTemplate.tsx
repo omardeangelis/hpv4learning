@@ -34,7 +34,7 @@ import CourseSchema from "../../components/SEO/components/CourseSchema"
 import { BorderBox } from "../../components/layout"
 import { createStarReview } from "../../utils/general"
 import { PayableCourseBanner } from "../../feature/courses/components/PayableCourseBanner"
-import { HeroSpacer } from "../../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../../feature/navigation/components/HeroSpacer"
 
 const UdemyCourseTemplate: React.FC<
   PageProps<Queries.UdemyCoursePageQuery>

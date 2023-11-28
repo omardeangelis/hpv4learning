@@ -15,7 +15,7 @@ import { CreativitySection } from "../components/economici/CreativitySection"
 import { serviceSpacer } from "../style/economici/service.css"
 import { semiEllipse, semiTopEllipse } from "../style/economici/creativity.css"
 import { useContactForm } from "../context/FormContext"
-import { HeroSpacer } from "../../navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../../navigation/components/HeroSpacer"
 
 export const SitiEconomiciPage = () => {
   const { open } = useContactForm()

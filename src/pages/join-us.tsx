@@ -13,7 +13,7 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import { triggerGACustomEvent } from "../utils/tracking"
-import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const CustomStack = styled(Box)`
   .desktop-image {

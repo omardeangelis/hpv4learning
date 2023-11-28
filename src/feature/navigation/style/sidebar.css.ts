@@ -1,10 +1,16 @@
 import { style } from "@vanilla-extract/css"
-import { breakpoints } from "../../../../constants/breakpoints"
+import { breakpoints } from "../../../constants/breakpoints"
 
 export const sidebarContainer = style({
   position: `fixed`,
   left: 0,
   width: `100%`,
+  display: `block`,
+  "@media": {
+    [breakpoints.md]: {
+      display: `none`,
+    },
+  },
 })
 
 export const sidebarStyle = style({

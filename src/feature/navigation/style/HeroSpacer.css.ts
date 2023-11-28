@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css"
-import { breakpoints } from "../../../../constants/breakpoints"
+import { breakpoints } from "../../../constants/breakpoints"
 
 export const heroSpacer = style({
   paddingBottom: `12rem`,

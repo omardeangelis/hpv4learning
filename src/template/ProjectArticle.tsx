@@ -23,7 +23,7 @@ import {
 } from "../feature/courses/components/NextCourseBanner"
 import { CourseBannerProvider } from "../feature/courses/context/CourseBanner"
 import { triggerGACustomEvent } from "../utils/tracking"
-import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const FlexContainer = styled(Box)`
   display: block;

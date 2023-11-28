@@ -13,7 +13,7 @@ import Paginatior from "../feature/navigation/components/Paginatior"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import LinkHandler from "../components/SEO/components/LinkHandler"
-import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 type Props = {
   pageContext: {

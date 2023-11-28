@@ -24,7 +24,7 @@ import { ProjectBanner } from "../feature/projects/components"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import ArticleSchema from "../components/SEO/components/ArticleSchema"
-import { HeroSpacer } from "../feature/navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const FlexContainer = styled(Box)`
   display: block;

@@ -9,7 +9,7 @@ import {
   ReviewSection,
 } from "../consulenze/components"
 import { ConsulenzeProvider } from "../consulenze/context"
-import { HeroSpacer } from "../navigation/v2/components/HeroSpacer"
+import { HeroSpacer } from "../navigation/components/HeroSpacer"
 
 export const ConsulenzeLayout = () => {
   const openModal = React.useCallback(

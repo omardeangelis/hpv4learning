@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { Avatar } from "../../../../components/avatar/components/Avatar"
-import { sidebarButton } from "../style/sidebar.css"
+import { sidebarButton } from "../../style/sidebar.css"
 
 const Path = (props: any) => (
   <motion.path

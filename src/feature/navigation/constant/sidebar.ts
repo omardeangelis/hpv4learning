@@ -1,7 +1,7 @@
 export const SIDEBAR = {
   web_agency: [
     {
-      name: `Vedi tutti`,
+      name: `Servizi`,
       url: `/web-agency`,
       id: `web-agency`,
     },

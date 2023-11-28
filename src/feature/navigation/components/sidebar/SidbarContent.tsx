@@ -1,7 +1,7 @@
 import { Body, Box, Container, HStack } from "old-ui"
 import React from "react"
 import { motion } from "framer-motion"
-import { sidebarContent } from "../style/sidebar.css"
+import { sidebarContent } from "../../style/sidebar.css"
 import { SidebarItem } from "./SidebarItem"
 import { Accordion } from "../../../../components/v2/accordion/Accordion"
 import { AccordionItem } from "../../../../components/v2/accordion/AccordionItem"
@@ -9,14 +9,18 @@ import { AccordionItemHeader } from "../../../../components/v2/accordion/Accordi
 import { AccordionIcon } from "../../../../components/v2/accordion/AccordionIcon"
 import { AccordionItemContent } from "../../../../components/v2/accordion/AccordionItemContent"
 import { SidebarLinkItem } from "./SidebarLinkItem"
-import { SIDEBAR } from "../constant/sidebar"
+import { SIDEBAR } from "../../constant/sidebar"
 import SeoLink from "../../../../components/shared/SeoLink"
 
 const variants = {
   open: {
+    opacity: 1,
+    display: `initial`,
     transition: { staggerChildren: 0.07, delayChildren: 0.2 },
   },
   closed: {
+    opacity: 0,
+    display: `none`,
     transition: { staggerChildren: 0.05, staggerDirection: -1 },
   },
 }

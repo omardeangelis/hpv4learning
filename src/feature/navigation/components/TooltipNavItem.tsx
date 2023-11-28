@@ -1,7 +1,7 @@
 import { Body, Box } from "old-ui"
 import React from "react"
 import clsx from "clsx"
-import { BoxExtendedProps } from "../../../../types/system"
+import { BoxExtendedProps } from "../../../types/system"
 import { tooltipNavItem } from "../style/tooltip.css"
 
 type TooltipNavItemProps = React.FC<BoxExtendedProps<HTMLDivElement>>

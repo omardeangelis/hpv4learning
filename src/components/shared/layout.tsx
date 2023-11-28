@@ -1,23 +1,19 @@
 import React from "react"
 // Custom Component
 import { Script } from "gatsby"
-import { Sidebar } from "../../feature/navigation/components"
 import { Footer } from "../../feature/footer"
-import { Navbar } from "../../feature/navigation/v2/components/Navbar"
+import { Navbar } from "../../feature/navigation/components/Navbar"
 
 const Layout = ({
   children,
-  disableColor,
   enableFooterPadding,
 }: {
   children: React.ReactNode
-  disableColor?: true
   enableFooterPadding?: true
 }) => (
   <>
     {/* <Navbar disableColor={disableColor} /> */}
     <Navbar />
-    <Sidebar />
     <main>{children}</main>
     <Footer enableFooterPadding={enableFooterPadding} />
     <Script type="text/javascript">
