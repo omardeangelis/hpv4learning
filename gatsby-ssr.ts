@@ -8,8 +8,10 @@ import { Fonts } from "./Fonts"
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({
   setHeadComponents,
   setHtmlAttributes,
+  setBodyAttributes,
 }) => {
   setHeadComponents(Fonts)
-  setHtmlAttributes({ lang: `it`, className: lightThemeClass })
+  setHtmlAttributes({ lang: `it` })
+  setBodyAttributes({ className: lightThemeClass })
 }
 export const wrapRootElement: GatsbySSR["wrapRootElement"] = GlobalProvider

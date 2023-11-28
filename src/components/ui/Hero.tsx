@@ -73,6 +73,7 @@ const ImageBox = styled(Box)<{ anim?: Keyframes }>(
     position: `absolute`,
     animation: `${anim}`,
     animationDuration: `2s`,
+    animationDelay: `0.5s`,
     opacity: 0,
     // animationDirection: "alternate",
     animationFillMode: `forwards`,
