@@ -122,7 +122,7 @@ export const CreativitySection = () => {
                 }}
               >
                 Non è un sito ma un percorso. Iniziamo con prodotto semplice e
-                funzionante
+                cresciamo insieme.
               </Body>
               <CardImage isAbsolute>
                 <StaticImage

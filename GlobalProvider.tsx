@@ -6,6 +6,9 @@ import { Provider } from "react-redux"
 import { ThemeProvider as OldProvider } from "old-ui"
 import theme from "./theme"
 import { store } from "./src/store"
+import "./src/styles/font.css"
+import "./src/styles/global.css"
+import "./src/styles/global-vanilla.css"
 
 export const GlobalProvider = ({ element }: { element: React.ReactNode }) => (
   <React.Fragment>

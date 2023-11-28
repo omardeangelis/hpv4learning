@@ -23,6 +23,7 @@ import {
 } from "../feature/courses/components/NextCourseBanner"
 import { CourseBannerProvider } from "../feature/courses/context/CourseBanner"
 import { triggerGACustomEvent } from "../utils/tracking"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -73,6 +74,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
 
   return (
     <Layout>
+      <HeroSpacer />
       <Container sx={{ padding: `0px` }} maxWidth={`lg`}>
         <FlexContainer
           sx={{
@@ -108,7 +110,7 @@ const ProjectArticle = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
               sx={{
                 height: `fit-content`,
                 position: `sticky`,
-                top: { xs: `unset`, lg: `96px` },
+                top: { xs: `unset`, lg: `10rem` },
                 bottom: { xs: `0`, lg: `unset` },
                 marginTop: { xs: `unset`, lg: `96px` },
               }}

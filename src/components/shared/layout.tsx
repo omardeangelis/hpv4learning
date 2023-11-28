@@ -1,24 +1,23 @@
 import React from "react"
 // Custom Component
 import { Script } from "gatsby"
-import { Navbar, Sidebar } from "../../feature/navigation/components"
+import { BoxProps } from "old-ui"
 import { Footer } from "../../feature/footer"
-import { CookieConsent } from "../../feature/navigation/components/CookieManager"
+import { Navbar } from "../../feature/navigation/components/Navbar"
+
+type FooterColorProps = BoxProps["color"]
 
 const Layout = ({
   children,
-  disableColor,
-  enableFooterPadding,
+  footerColor,
 }: {
   children: React.ReactNode
-  disableColor?: true
-  enableFooterPadding?: true
+  footerColor?: FooterColorProps
 }) => (
   <>
-    <Navbar disableColor={disableColor} />
-    <Sidebar />
+    <Navbar />
     <main>{children}</main>
-    <Footer enableFooterPadding={enableFooterPadding} />
+    <Footer background={footerColor} />
     <Script type="text/javascript">
       {`
           var _iub = _iub || [];
@@ -33,15 +32,8 @@ _iub.csConfiguration = {"ccpaAcknowledgeOnDisplay":true,"consentOnContinuedBrows
     <Script
       type="text/javascript"
       src="//cdn.iubenda.com/cs/iubenda_cs.js"
-      charSet="UTF-8"
       async
     />
-    {/* <CookieConsent
-        siteId={Number(process.env.GATSBY_IUBENDA_SITEID) as number}
-        cookiePolicyId={Number(process.env.GATSBY_IUBENDA_POLICYID)}
-        lang="it"
-        apiKey=""
-      /> */}
   </>
 )
 

@@ -34,20 +34,20 @@ export const semiEllipse = style({
 
 export const semiTopEllipse = style({
   position: `absolute`,
-  top: `-200px`,
+  top: `-170px`,
   left: `0`,
   right: `0`,
   width: `150%`,
-  height: `200px`,
+  height: `170px`,
   borderRadius: `50% 50% 0 0 / 100% 100% 0 0`,
   "@media": {
     [breakpoints.md]: {
-      top: `-300px`,
-      height: `300px`,
+      top: `-200px`,
+      height: `200px`,
     },
     [breakpoints.lg]: {
-      top: `-400px`,
-      height: `400px`,
+      top: `-300px`,
+      height: `300px`,
     },
   },
 })

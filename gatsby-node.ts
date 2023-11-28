@@ -128,7 +128,7 @@ export const createPages = async ({ graphql, actions }) => {
   })
 
   createPage({
-    path: `/consulenze/`,
+    path: `/formazione/`,
     component: path.resolve(`./src/template/Consulenze.tsx`),
   })
 

@@ -123,7 +123,7 @@ export const Hero = () => {
       >
         <StaticImage
           src="../images/small-overlay.png"
-          alt="Scegli il sito su misura per te"
+          alt="Formazione Aziendale per il tuo business"
           placeholder="blurred"
         />
       </Box>
@@ -138,7 +138,7 @@ export const Hero = () => {
       >
         <StaticImage
           src="../images/bottom-hero.png"
-          alt="Guadagna Grazie ad un Sito performante"
+          alt="Formazione in React"
           placeholder="blurred"
         />
       </Box>
@@ -155,7 +155,7 @@ export const Hero = () => {
       >
         <StaticImage
           src="../images/mongolfiera.png"
-          alt="Ottieni clienti grazie ad un sito web"
+          alt="Fromazione in Gatsby Js"
           placeholder="blurred"
         />
       </Box>
@@ -172,7 +172,7 @@ export const Hero = () => {
               component="h1"
               textAlign="center"
             >
-              Realizza il tuo sito web
+              Formazione Aziendale per il tuo business
             </Typography>
             <Box
               sx={{
@@ -189,8 +189,8 @@ export const Hero = () => {
                 }}
                 component="p"
               >
-                Fissa una chiamata per studiare con noi la miglior soluzione e
-                sviluppare un preventivo misurato sulle tue esigenze{` `}
+                Creiamo videocorsi e corsi in aula per la tua azienda o la tua
+                piattaforma di learning
               </Typography>
             </Box>
             <Box
