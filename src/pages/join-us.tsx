@@ -44,7 +44,7 @@ const JobsStack = styled(Box)`
 `
 
 const JoinUs = () => (
-  <Layout disableColor>
+  <Layout>
     <HeroSpacer __background="#341268" />
     <Box
       sx={{

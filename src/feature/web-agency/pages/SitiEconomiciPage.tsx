@@ -21,7 +21,7 @@ export const SitiEconomiciPage = () => {
   const { open } = useContactForm()
 
   return (
-    <Layout>
+    <Layout footerColor="purple600">
       <HeroSpacer background="orange10" />
       <Box
         background="orange10"

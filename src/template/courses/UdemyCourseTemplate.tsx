@@ -59,7 +59,7 @@ const UdemyCourseTemplate: React.FC<
     [data.allUdemyReview.nodes]
   )
   return (
-    <Layout enableFooterPadding>
+    <Layout>
       <HeroSpacer />
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">

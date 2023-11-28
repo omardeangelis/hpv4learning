@@ -12,12 +12,12 @@ export const SIDEBAR = {
     },
     {
       name: `Formazione`,
-      url: `/consulenze/`,
+      url: `/formazione/`,
       id: `formazione`,
     },
     {
       name: `Conatattaci`,
-      url: `/consulenze/prenota`,
+      url: `/formazione/prenota`,
       id: `contattaci`,
     },
   ],

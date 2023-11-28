@@ -78,10 +78,10 @@ export const AgencyTooltip = React.forwardRef<HTMLDivElement, any>(
                   <Body variant="lg" fontWeight={600}>
                     Formazione
                   </Body>
-                  <SeoLink link="/consulenze/" isExternal={false}>
+                  <SeoLink link="/formazione/" isExternal={false}>
                     <TooltipNavItem>Formazione Aziendale</TooltipNavItem>
                   </SeoLink>
-                  <SeoLink link="/consulenze/" isExternal={false}>
+                  <SeoLink link="/formazione/" isExternal={false}>
                     <TooltipNavItem>Creazione Videocorsi</TooltipNavItem>
                   </SeoLink>
                 </VStack>
@@ -99,7 +99,7 @@ export const AgencyTooltip = React.forwardRef<HTMLDivElement, any>(
               <Body variant="xl" fontWeight={700}>
                 Hai un'idea ?
               </Body>
-              <SeoLink link="/consulenze/prenota" isExternal={false}>
+              <SeoLink link="/formazione/prenota" isExternal={false}>
                 <TooltipNavItem>Contattaci</TooltipNavItem>
               </SeoLink>
             </VStack>

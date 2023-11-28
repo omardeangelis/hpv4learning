@@ -1,14 +1,15 @@
 import React from "react"
 import styled from "@emotion/styled"
-import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { StaticImage } from "gatsby-plugin-image"
+import { Box as OldBox, ResponsiveContainer } from "old-ui"
 import { data } from "./footerdata"
 import SeoLink from "../../components/shared/SeoLink"
 import useDropDownMenu from "../../hook/useDropDown"
+import { BoxExtendedProps } from "../../types/system"
 
 const CustomStack = styled(Box)`
   a:hover {
@@ -38,22 +39,26 @@ const CustomStack = styled(Box)`
   }
 `
 
-export const Footer = ({
-  enableFooterPadding,
-}: {
-  enableFooterPadding?: boolean
-}) => {
+export const Footer: React.FC<
+  Omit<BoxExtendedProps<HTMLDivElement>, "children">
+> = ({ ...rest }) => {
   const { toggleMenu } = useDropDownMenu(data.map((el) => el.id))
+  const isDark =
+    rest.background?.toString().includes(`600`) ||
+    rest.background?.toString().includes(`500`) ||
+    rest.background?.toString().includes(`700`)
 
+  const textColor = isDark ? `white` : `grey.700`
   return (
-    <Box
-      component="footer"
-      sx={{
-        pb: { xs: enableFooterPadding ? `96px` : `32px`, lg: `96px` },
-        pt: { xs: `64px`, lg: `96px` },
+    <OldBox
+      as="footer"
+      {...rest}
+      py={{
+        mobile: 48,
+        md: 96,
       }}
     >
-      <Container maxWidth="lg">
+      <ResponsiveContainer variant="xl">
         <CustomStack>
           <Box
             sx={{
@@ -88,7 +93,7 @@ export const Footer = ({
                 width="100%"
               >
                 <Typography
-                  color="grey.700"
+                  color={textColor}
                   fontWeight={500}
                   sx={{
                     fontSize: `14px`,
@@ -128,7 +133,7 @@ export const Footer = ({
                       target={item.isExternal ? `_blank` : `self`}
                     >
                       <Typography
-                        color="grey.600"
+                        color={isDark ? `white` : `grey.600`}
                         fontWeight={300}
                         sx={{
                           fontSize: `12px`,
@@ -161,7 +166,7 @@ export const Footer = ({
             </a>
           </Typography>
         </Stack>
-      </Container>
-    </Box>
+      </ResponsiveContainer>
+    </OldBox>
   )
 }

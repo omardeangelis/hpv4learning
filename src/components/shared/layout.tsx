@@ -1,21 +1,23 @@
 import React from "react"
 // Custom Component
 import { Script } from "gatsby"
+import { BoxProps } from "old-ui"
 import { Footer } from "../../feature/footer"
 import { Navbar } from "../../feature/navigation/components/Navbar"
 
+type FooterColorProps = BoxProps["color"]
+
 const Layout = ({
   children,
-  enableFooterPadding,
+  footerColor,
 }: {
   children: React.ReactNode
-  enableFooterPadding?: true
+  footerColor?: FooterColorProps
 }) => (
   <>
-    {/* <Navbar disableColor={disableColor} /> */}
     <Navbar />
     <main>{children}</main>
-    <Footer enableFooterPadding={enableFooterPadding} />
+    <Footer background={footerColor} />
     <Script type="text/javascript">
       {`
           var _iub = _iub || [];

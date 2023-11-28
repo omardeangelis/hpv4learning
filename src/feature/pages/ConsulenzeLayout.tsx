@@ -13,7 +13,7 @@ import { HeroSpacer } from "../navigation/components/HeroSpacer"
 
 export const ConsulenzeLayout = () => {
   const openModal = React.useCallback(
-    () => navigate(`/consulenze/prenota/`),
+    () => navigate(`/formazione/prenota/`),
     []
   )
 

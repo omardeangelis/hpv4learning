@@ -6,6 +6,18 @@
         "condition": null
     },
     {
+        "source": "/consulenze/",
+        "target": "/formazione/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/consulenze/prenota/",
+        "target": "/formazione/prenota/",
+        "status": "301",
+        "condition": null
+    },
+    {
         "source": "/<*>",
         "target": "/",
         "status": "200",
