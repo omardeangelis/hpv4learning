@@ -16,9 +16,19 @@ import { serviceSpacer } from "../style/economici/service.css"
 import { semiEllipse, semiTopEllipse } from "../style/economici/creativity.css"
 import { useContactForm } from "../context/FormContext"
 import { HeroSpacer } from "../../navigation/components/HeroSpacer"
+import { useGATracking } from "../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../services/tracking/constant/web_agency"
 
 export const SitiEconomiciPage = () => {
   const { open } = useContactForm()
+  const { gaTracker } = useGATracking()
+
+  const handleClickOpen = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_econ_footer_click,
+    })
+    open()
+  }, [gaTracker, open])
 
   return (
     <Layout footerColor="purple600">
@@ -115,7 +125,7 @@ export const SitiEconomiciPage = () => {
               >
                 Inizia con un sito economico
               </Heading>
-              <Button onClick={open} variant="purple" size="md">
+              <Button onClick={handleClickOpen} variant="purple" size="md">
                 Contattaci
               </Button>
             </VStack>

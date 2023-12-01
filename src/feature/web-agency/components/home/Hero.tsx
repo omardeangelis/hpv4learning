@@ -17,10 +17,17 @@ import {
   CardContent,
 } from "../../../../components/v2/cards/base"
 import { useContactForm } from "../../context/FormContext"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
 
 export const Hero = () => {
   const { open } = useContactForm()
-
+  const { gaTracker } = useGATracking() || {}
+  const handleContactClick = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: `navigation_cta_click`,
+    })
+    open()
+  }, [gaTracker, open])
   return (
     <CardHeroContainer className={heroCard}>
       <Box className={heroLayout}>
@@ -145,7 +152,7 @@ export const Hero = () => {
                 }}
               >
                 <Button
-                  onClick={open}
+                  onClick={handleContactClick}
                   variant="purple"
                   size={`md`}
                   style={{

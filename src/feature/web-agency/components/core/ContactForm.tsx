@@ -16,6 +16,8 @@ import { useContactForm } from "../../context/FormContext"
 import { modalOpenStyle } from "../../style/core/contact-form.css"
 import { useSteps } from "../../../../components/v2/modal/hooks/useSteps"
 import { SuccessForm } from "./SuccessForm"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../../services/tracking/constant/web_agency"
 
 const validationSchema = yup.object({
   name: yup.string().required(`Il nome è obbligatorio`),
@@ -42,6 +44,13 @@ export type ContactFormValues = typeof initialValues
 
 const ContactFormModal = () => {
   const { close } = useContactForm()
+  const { gaTracker } = useGATracking()
+  const sendModalOpenEvent = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_modal_open,
+    })
+  }, [gaTracker])
+
   const [customError, setCustomError] = React.useState<string | null>(null)
   const { step, stepIndex, nextStep } = useSteps([
     `contact` as const,
@@ -66,6 +75,10 @@ const ContactFormModal = () => {
     },
     [nextStep]
   )
+
+  React.useEffect(() => {
+    sendModalOpenEvent()
+  }, [sendModalOpenEvent])
 
   return (
     <Modal onClose={close} stepIndex={stepIndex}>

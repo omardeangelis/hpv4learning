@@ -16,11 +16,21 @@ import { Features } from "../components/home/Features"
 import { PartnerSection } from "../components/home/PartnerSection"
 import { useContactForm } from "../context/FormContext"
 import { HeroSpacer } from "../../navigation/components/HeroSpacer"
+import { useGATracking } from "../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../services/tracking/constant/web_agency"
 
 export const WebAgencyHomePage = () => {
   const { open } = useContactForm()
+  const { gaTracker } = useGATracking() || {}
+
+  const handleBannerClick = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_footer_click,
+    })
+    open()
+  }, [gaTracker, open])
   return (
-    <Layout>
+    <Layout footerColor={`purple600`}>
       <HeroSpacer />
       <Box
         mt={{
@@ -164,7 +174,7 @@ export const WebAgencyHomePage = () => {
               >
                 Costruiamo rete collabora con noi{` `}
               </Heading>
-              <Button onClick={open} variant="purple" size="md">
+              <Button onClick={handleBannerClick} variant="purple" size="md">
                 Contattaci
               </Button>
             </VStack>

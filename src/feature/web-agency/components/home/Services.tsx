@@ -13,10 +13,33 @@ import {
   CardImage,
 } from "../../../../components/v2/cards/base"
 import { useContactForm } from "../../context/FormContext"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../../services/tracking/constant/web_agency"
 
 const Services = () => {
   const { open } = useContactForm()
+  const { gaTracker } = useGATracking() || {}
+  const handleServiceClick = React.useCallback(
+    ({ content, isValidRoute }: { content: string; isValidRoute?: true }) => {
+      gaTracker?.sendEvent({
+        eventName: webAgencyEvents.agency_service_view,
+        payload: {
+          content,
+        },
+      })
+      if (isValidRoute) {
+        return navigate(`siti-economici/`)
+      }
+    },
+    [gaTracker]
+  )
 
+  const handleContactClick = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_service_contact,
+    })
+    open()
+  }, [gaTracker, open])
   return (
     <VStack align="flex-start" spacing={48} sprinkles={{ width: `full` }}>
       <Box className={serviceGrid}>
@@ -25,6 +48,7 @@ const Services = () => {
           isAnimated
           background="purple10"
           className={safariServiceCardHeightFix}
+          onClick={() => handleServiceClick({ content: `gestionale` })}
         >
           <CardContent
             spacing={12}
@@ -69,7 +93,14 @@ const Services = () => {
           <Card
             isAnimated
             background="purple20"
-            onClick={() => navigate(`siti-economici/`)}
+            onClick={
+              () =>
+                handleServiceClick({
+                  content: `siti-economici`,
+                  isValidRoute: true,
+                })
+              // navigate(`siti-economici/`)
+            }
           >
             <CardContent
               spacing={12}
@@ -102,6 +133,7 @@ const Services = () => {
             style={{
               flex: 1,
             }}
+            onClick={() => handleServiceClick({ content: `ecommerce` })}
           >
             <CardContent
               spacing={12}
@@ -153,6 +185,7 @@ const Services = () => {
             style={{
               flex: 1,
             }}
+            onClick={() => handleServiceClick({ content: `blog` })}
           >
             <CardContent
               spacing={12}
@@ -185,7 +218,12 @@ const Services = () => {
               </CardImage>
             </CardContent>
           </Card>
-          <Card disableHover isAnimated background="purple10">
+          <Card
+            disableHover
+            isAnimated
+            background="purple10"
+            onClick={() => handleServiceClick({ content: `landing-page` })}
+          >
             <CardContent
               spacing={12}
               direction="column"
@@ -231,7 +269,7 @@ const Services = () => {
           <Body variant="xl" fontWeight={600}>
             Contattaci
           </Body>
-          <Button size="md" variant="purple" onClick={open}>
+          <Button size="md" variant="purple" onClick={handleContactClick}>
             Fissa una chiamata
           </Button>
         </HStack>
