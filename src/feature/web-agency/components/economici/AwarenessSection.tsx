@@ -3,6 +3,8 @@ import React from "react"
 import { useTextFadeInAnimation } from "../../../../hook/useTextFadeInAnimation"
 import { Pillolone } from "../../../../components/v2/pillolone/Pillolone"
 import { useContactForm } from "../../context/FormContext"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../../services/tracking/constant/web_agency"
 
 export const AwarenessSection = () => {
   const { ref, fadeInStyle } = useTextFadeInAnimation({
@@ -10,6 +12,14 @@ export const AwarenessSection = () => {
     amount: 0.5,
   })
   const { open } = useContactForm()
+  const { gaTracker } = useGATracking()
+
+  const handleClick = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_econ_pillolone_click,
+    })
+    open()
+  }, [gaTracker, open])
 
   return (
     <VStack
@@ -37,7 +47,7 @@ export const AwarenessSection = () => {
           costruito intorno alla nostra attività”
         </Heading>
       </Box>
-      <Pillolone role="button" colorScheme="orange" onClick={open}>
+      <Pillolone role="button" colorScheme="orange" onClick={handleClick}>
         Richiedi un preventivo
       </Pillolone>
     </VStack>

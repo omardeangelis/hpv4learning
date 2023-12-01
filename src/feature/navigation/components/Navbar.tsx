@@ -21,18 +21,24 @@ import { AcademyTooltip } from "./AcademyTooltip"
 import { AgencyTooltip } from "./AgencyTooltip"
 import { useContactForm } from "../../web-agency/context/FormContext"
 import { Sidebar } from "./sidebar/Sidebar"
+import { useGATracking } from "../../../services/tracking/context/GATrackerProvider"
+import { navigationEvents } from "../../../services/tracking/constant/navigation"
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isAgencyOpen, setIsAgencyOpen] = useState(false)
+  const { gaTracker } = useGATracking() || {}
   const { open } = useContactForm()
   const { pathname } = useLocation()
   const handleContactClick = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: navigationEvents.navigation_cta_click,
+    })
     if (pathname.includes(`/web-agency`)) {
       return open()
     }
     navigate(`/web-agency/?form=open`)
-  }, [open, pathname])
+  }, [gaTracker, open, pathname])
 
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,

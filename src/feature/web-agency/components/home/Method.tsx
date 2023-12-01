@@ -12,6 +12,8 @@ import {
   CardContent,
   CardImage,
 } from "../../../../components/v2/cards/base"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../../services/tracking/constant/web_agency"
 
 export const Method = () => {
   const [scope, animate] = useAnimate()
@@ -57,6 +59,13 @@ export const Method = () => {
       }
     }
   }, [animate, isInView, scope])
+
+  const { gaTracker } = useGATracking() || {}
+  const handleMethodClick = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_method,
+    })
+  }, [gaTracker])
   return (
     <Box position="relative">
       <VStack
@@ -140,7 +149,9 @@ export const Method = () => {
                 zIndex: 1,
               }}
             >
-              <Button variant="purple">Scopri di piu</Button>
+              <Button variant="purple" onClick={handleMethodClick}>
+                Scopri di piu
+              </Button>
             </CardContent>
             <CardImage isAbsolute>
               <StaticImage

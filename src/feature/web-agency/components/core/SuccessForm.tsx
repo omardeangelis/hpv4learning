@@ -9,9 +9,22 @@ import {
   ModalCloseButton,
 } from "../../../../components/v2/modal/components/ModalHeader"
 import { useModalContext } from "../../../../components/v2/modal/context/ModalProvider"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../../services/tracking/constant/web_agency"
 
 export const SuccessForm = () => {
   const { onClose } = useModalContext() || {}
+  const { gaTracker } = useGATracking() || {}
+
+  const dispatchContactSuccessEvent = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_modal_contact,
+    })
+  }, [gaTracker])
+
+  React.useEffect(() => {
+    dispatchContactSuccessEvent()
+  }, [dispatchContactSuccessEvent])
   return (
     <ModalContent>
       <ModalHeader>

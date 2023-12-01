@@ -1,6 +1,6 @@
 import { isProduction } from "../constants"
 
-const isBrowser = typeof window !== `undefined`
+export const isBrowser = typeof window !== `undefined`
 
 export const triggerGACustomEvent: (
   param: Record<string, string | number | undefined | null>,

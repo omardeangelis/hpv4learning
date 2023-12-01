@@ -11,9 +11,19 @@ import {
 } from "old-ui"
 import { heroImgBox, heroTextAlign } from "../../style/economici/hero.css"
 import { useContactForm } from "../../context/FormContext"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { webAgencyEvents } from "../../../../services/tracking/constant/web_agency"
 
 export const Hero = () => {
   const { open } = useContactForm()
+  const { gaTracker } = useGATracking()
+
+  const handleClickOpen = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: webAgencyEvents.agency_econ_hero_click,
+    })
+    open()
+  }, [gaTracker, open])
 
   return (
     <Box
@@ -82,7 +92,7 @@ export const Hero = () => {
             </Body>
             <Button
               variant="purple"
-              onClick={open}
+              onClick={handleClickOpen}
               style={{
                 zIndex: 2,
               }}
