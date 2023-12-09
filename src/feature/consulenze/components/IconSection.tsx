@@ -4,9 +4,8 @@ import Stack from "@mui/system/Stack"
 import Container from "@mui/system/Container"
 import Typography from "@mui/material/Typography"
 import Avatar from "@mui/material/Avatar"
-import DesignServicesIcon from "@mui/icons-material/DesignServices"
-import ConstructionIcon from "@mui/icons-material/Construction"
-import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder"
+import DesignServicesIcon from "@mui/icons-material/CodeRounded"
+import CameraIcon from "@mui/icons-material/VideoCallRounded"
 
 type Props = {
   icon: React.ReactElement
@@ -80,7 +79,9 @@ export const IconSection = () => (
       <Stack
         sx={{
           flexDirection: { xs: `column`, lg: `row` },
-          justifyContent: `space-between`,
+          justifyContent: `center`,
+          alignItems: `stretch`,
+          gap: `48px`,
         }}
       >
         <IconBox
@@ -102,8 +103,8 @@ export const IconSection = () => (
               />
             </Avatar>
           }
-          title={`Design`}
-          description="Realizziamo design personalizzati senza utilizzare template, creando prodotti originali e modellati su ogni business"
+          title={`Frontend & SSR`}
+          description="Formazione e corsi per sviluppare web app con React, Next.js e Gatsby, seguendo le best practices"
         />
 
         <IconBox
@@ -116,7 +117,7 @@ export const IconSection = () => (
                 background: `rgba(26, 201, 159, 0.26)`,
               }}
             >
-              <CreateNewFolderIcon
+              <CameraIcon
                 sx={{
                   fontSize: `36px`,
                   color: `green.300`,
@@ -125,31 +126,8 @@ export const IconSection = () => (
               />
             </Avatar>
           }
-          title={`Gestionale`}
-          description="Sarà possibile modificare sezioni del proprio sito grazie ad un gestionale comodo e pratico"
-        />
-
-        <IconBox
-          icon={
-            <Avatar
-              variant="circular"
-              sx={{
-                width: `72px`,
-                height: `72px`,
-                background: `rgba(255, 52, 52, 0.17)`,
-              }}
-            >
-              <ConstructionIcon
-                sx={{
-                  fontSize: `36px`,
-                  color: `red.300`,
-                  fill: `red.300`,
-                }}
-              />
-            </Avatar>
-          }
-          title={`Manutenzione`}
-          description="Saremo a vostra disposizione per supportarvi ogni qualvolta si verificasse un problema"
+          title={`VideoMaking`}
+          description="Offriamo formazione tramite videocorsi e presso la nostra struttura per diventare un professionista del video making"
         />
       </Stack>
     </Box>

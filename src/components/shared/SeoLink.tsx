@@ -12,6 +12,7 @@ const SeoLink = ({
   target,
   style,
   className,
+  ...rest
 }: {
   isExternal: boolean
   link: string
@@ -29,6 +30,7 @@ const SeoLink = ({
         rel={rel}
         target={target}
         className={className ? `noselect ${className}` : `noselect`}
+        {...rest}
       >
         {children}
       </a>
@@ -39,6 +41,7 @@ const SeoLink = ({
       style={{ textDecoration: `none`, color: `inherit`, ...style }}
       to={link}
       className="noselect"
+      {...rest}
     >
       {children}
     </Link>

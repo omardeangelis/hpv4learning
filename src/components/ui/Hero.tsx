@@ -73,6 +73,7 @@ const ImageBox = styled(Box)<{ anim?: Keyframes }>(
     position: `absolute`,
     animation: `${anim}`,
     animationDuration: `2s`,
+    animationDelay: `0.5s`,
     opacity: 0,
     // animationDirection: "alternate",
     animationFillMode: `forwards`,
@@ -91,6 +92,7 @@ const Hero = ({ children }: { children: React.ReactChild }) => (
     justifyContent="center"
     alignItems="center"
     height={`calc(100vh - 72px)`}
+    className="hero-navigation-padding"
   >
     <ImageBox
       anim={fadeInFromLeft}

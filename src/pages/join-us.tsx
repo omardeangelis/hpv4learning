@@ -13,6 +13,7 @@ import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import { triggerGACustomEvent } from "../utils/tracking"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const CustomStack = styled(Box)`
   .desktop-image {
@@ -43,7 +44,8 @@ const JobsStack = styled(Box)`
 `
 
 const JoinUs = () => (
-  <Layout disableColor>
+  <Layout>
+    <HeroSpacer __background="#341268" />
     <Box
       sx={{
         background: `linear-gradient(180deg, #341268, #8769FE)`,
