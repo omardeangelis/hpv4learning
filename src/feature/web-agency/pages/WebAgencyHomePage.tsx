@@ -11,7 +11,7 @@ import {
 import Layout from "../../../components/shared/layout"
 import { Hero } from "../components/home/Hero"
 import Services from "../components/home/Services"
-import { Method } from "../components/home/Method"
+// import { Method } from "../components/home/Method"
 import { Features } from "../components/home/Features"
 import { PartnerSection } from "../components/home/PartnerSection"
 import { useContactForm } from "../context/FormContext"
@@ -72,7 +72,7 @@ export const WebAgencyHomePage = () => {
           </ResponsiveContainer>
         </Box>
       </Box>
-      <Box
+      {/* <Box
         mt={{
           mobile: 48,
           md: 128,
@@ -81,7 +81,7 @@ export const WebAgencyHomePage = () => {
         <Container variant="xl" as="section">
           <Method />
         </Container>
-      </Box>
+      </Box> */}
       <Box
         mt={{
           mobile: 48,
