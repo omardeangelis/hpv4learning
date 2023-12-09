@@ -21,6 +21,7 @@ import { HomeSection } from "../feature/projects/components"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import { BottomBanner, RoundedButton } from "../components/layout"
 import { IndexInfo } from "../feature/home"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const IndexPage = () => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null)
@@ -34,6 +35,7 @@ const IndexPage = () => {
   }, [])
   return (
     <Layout>
+      <HeroSpacer />
       <Hero>
         <TopHeroContent fn={goToCourseSection} />
       </Hero>
@@ -212,10 +214,9 @@ const IndexPage = () => {
               maxWidth: { xs: `unset`, lg: `611px` },
             }}
           >
-            Fissa una videochiamata in pochi step e raccontaci di che cosa hai
-            bisogno.
+            Scopri i nostri servizi di consulenza e sviluppo web
           </Typography>
-          <SeoLink link="/consulenze/" isExternal={false}>
+          <SeoLink link="/web-agency/" isExternal={false}>
             <RoundedButton
               variant="contained"
               color="primary"

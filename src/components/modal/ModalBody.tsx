@@ -22,5 +22,5 @@ export const ModalTypography = styled(Typography)`
   @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 27px;
-  } ;
+  }
 `

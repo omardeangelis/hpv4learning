@@ -24,6 +24,7 @@ import { ProjectBanner } from "../feature/projects/components"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import ArticleSchema from "../components/SEO/components/ArticleSchema"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const FlexContainer = styled(Box)`
   display: block;
@@ -76,6 +77,7 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
   )
   return (
     <Layout>
+      <HeroSpacer />
       <Container sx={{ padding: `0px` }} maxWidth={`lg`}>
         <FlexContainer
           sx={{
@@ -110,7 +112,7 @@ const Article = ({ data }: PageProps<Queries.SingleArticleQuery>) => {
               sx={{
                 height: `fit-content`,
                 position: `sticky`,
-                top: { xs: `unset`, lg: `96px` },
+                top: { xs: `unset`, lg: `10rem` },
                 bottom: { xs: `0`, lg: `unset` },
                 marginTop: { xs: `unset`, lg: `96px` },
               }}

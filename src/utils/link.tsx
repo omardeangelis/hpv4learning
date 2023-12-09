@@ -70,7 +70,9 @@ const SocialBar = ({ className }: { className?: string }) => (
                 color="inherit"
                 titleAccess={text}
                 href={url}
-                className={`social-icon`}
+                style={{
+                  margin: `0 1rem`,
+                }}
               >
                 {icon}
               </SvgIcon>

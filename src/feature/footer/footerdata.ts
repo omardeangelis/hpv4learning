@@ -23,21 +23,21 @@ const data = [
 
   {
     id: `cvfuer`,
-    title: `Team`,
+    title: `Servizi`,
     items: [
       {
-        title: `Chi Siamo`,
-        slug: `/about/`,
+        title: `Tutti i servizi`,
+        slug: `/web-agency/`,
         isExternal: false,
       },
       {
-        title: `Lavora con noi`,
-        slug: `/join-us/`,
+        title: `Siti Economici`,
+        slug: `/web-agency/siti-economici/`,
         isExternal: false,
       },
       {
-        title: `Contattaci`,
-        slug: `/consulenze/`,
+        title: `Formazione`,
+        slug: `/formazione/`,
         isExternal: false,
       },
     ],

@@ -45,7 +45,7 @@ export const CardsSection = () => {
           lineHeight: { xs: `39px`, lg: `56px` },
         }}
       >
-        Perché realizzare un sito web ?
+        Perché realizzare un videocorso ?
       </Typography>
       <Box sx={{ mt: { xs: `24px`, lg: `48px` } }}>
         <Stack flexDirection="column" alignItems="center">

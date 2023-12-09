@@ -14,6 +14,7 @@ import Insegnante from "../components/shared/Insegnante"
 import { InsegnanteProps } from "../types/course"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 import WebPageSchema from "../components/SEO/components/WebPageSchema"
+import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const AboutPage = ({
   data,
@@ -23,6 +24,7 @@ const AboutPage = ({
   const insegnanti = data.allContentfulInsegnante.nodes
   return (
     <Layout>
+      <HeroSpacer />
       <Box
         sx={{
           mt: { xs: `48px`, lg: `96px` },

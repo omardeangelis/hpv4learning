@@ -128,7 +128,7 @@ export const createPages = async ({ graphql, actions }) => {
   })
 
   createPage({
-    path: `/consulenze/`,
+    path: `/formazione/`,
     component: path.resolve(`./src/template/Consulenze.tsx`),
   })
 
@@ -234,4 +234,13 @@ export const createPages = async ({ graphql, actions }) => {
       `We Ragazzo, volevi creare gli articoli ? E invece: ${error}`
     )
   }
+
+  createPage({
+    path: `/web-agency/`,
+    component: resolve(`./src/template/web-agency/home/index.tsx`),
+  })
+  createPage({
+    path: `/web-agency/siti-economici/`,
+    component: resolve(`./src/template/web-agency/siti-economici/index.tsx`),
+  })
 }

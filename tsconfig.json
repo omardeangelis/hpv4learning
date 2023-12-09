@@ -4,6 +4,7 @@
     "target": "esnext",
     "jsx": "react",
     "lib": ["dom", "es2015", "es2017"],
+    "typeRoots": ["./node_modules/@types", "./src/global.d.ts"],
     "strict": true,
     "noEmit": true,
     "isolatedModules": true,
@@ -16,7 +17,8 @@
     "preserveConstEnums": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
   },
   "include": ["./src/**/*", "iubenda.tsx"],
   "exclude": ["node_modules", "public", ".cache", "./gatsby-*.ts"]

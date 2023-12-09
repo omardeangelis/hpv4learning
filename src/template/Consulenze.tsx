@@ -8,8 +8,8 @@ import WebPageSchema from "../components/SEO/components/WebPageSchema"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 
 const Consulenze = () => (
-  <Layout disableColor>
-    <Router basepath="/consulenze/">
+  <Layout>
+    <Router basepath="/formazione/">
       <ReservationModal path="/prenota/" />
     </Router>
     <ConsulenzeLayout />
@@ -23,7 +23,7 @@ const breadcrumbs = [
   },
   {
     text: `Contattaci`,
-    link: `/consulenze/`,
+    link: `/formazione/`,
   },
 ]
 

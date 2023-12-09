@@ -34,6 +34,7 @@ import CourseSchema from "../../components/SEO/components/CourseSchema"
 import { BorderBox } from "../../components/layout"
 import { createStarReview } from "../../utils/general"
 import { PayableCourseBanner } from "../../feature/courses/components/PayableCourseBanner"
+import { HeroSpacer } from "../../feature/navigation/components/HeroSpacer"
 
 const UdemyCourseTemplate: React.FC<
   PageProps<Queries.UdemyCoursePageQuery>
@@ -58,7 +59,8 @@ const UdemyCourseTemplate: React.FC<
     [data.allUdemyReview.nodes]
   )
   return (
-    <Layout enableFooterPadding>
+    <Layout>
+      <HeroSpacer />
       <Container maxWidth="lg">
         <Box maxWidth="1200px" mx="auto">
           <CourseAlignment
@@ -382,7 +384,7 @@ const UdemyCourseTemplate: React.FC<
                 sx={{
                   height: `fit-content`,
                   position: `sticky`,
-                  top: { xs: `unset`, lg: `96px` },
+                  top: { xs: `unset`, lg: `10rem` },
                   bottom: { xs: `0`, lg: `unset` },
                 }}
               >
@@ -483,123 +485,132 @@ export const Head = ({
 
 export default UdemyCourseTemplate
 
-export const query = graphql`query UdemyCoursePage($id: String!, $course_id: Int!, $categorySlug: String!) {
-  contentfulCorsi(id: {eq: $id}) {
-    category {
-      name
-    }
-    recensioni
-    lastUpdate
-    categoria
-    provider
-    isFree
-    idCorso
-    lezioni
-    livello
-    slug
-    oreDiLezione
-    prezzo
-    sottotitolo
-    titolo
-    urlToBuy
-    videoLink
-    target
-    couponCorso
-    promoLink
-    concetti
-    updatedAt
-    recensioniRicevute
-    insegnante {
-      nome
-      cognome
-      professione
-      img {
-        gatsbyImageData
-      }
-      bio {
-        bio
-        childMarkdownRemark {
-          html
-        }
-      }
-      corsi {
-        titolo
-        slug
-        category {
-          slug
-        }
-      }
-    }
-    requisiti
-    riassunto {
-      riassunto
-    }
-    descrizione {
-      descrizione
-    }
-    copertina {
-      gatsbyImageData
-      file {
-        url
-      }
-    }
-    introduzioneProgetti {
-      introduzioneProgetti
-    }
-    progetti {
-      titolo
-      slug
-      meta_title
-      url
-      ordine
-      copertina {
-        gatsbyImageData
-      }
-      project_category {
-        title
-        slug
-      }
-      descrizione {
-        childMarkdownRemark {
-          html
-        }
-      }
-    }
-  }
-  allContentfulCorsi(
-    filter: {category: {elemMatch: {slug: {eq: $categorySlug}}}, id: {ne: $id}}
-    sort: {createdAt: DESC}
-    limit: 2
+export const query = graphql`
+  query UdemyCoursePage(
+    $id: String!
+    $course_id: Int!
+    $categorySlug: String!
   ) {
-    nodes {
-      titolo
-      copertina {
-        gatsbyImageData
+    contentfulCorsi(id: { eq: $id }) {
+      category {
+        name
       }
+      recensioni
+      lastUpdate
       categoria
-      promoLink
-      slug
+      provider
+      isFree
+      idCorso
+      lezioni
       livello
+      slug
       oreDiLezione
+      prezzo
+      sottotitolo
+      titolo
+      urlToBuy
+      videoLink
+      target
+      couponCorso
+      promoLink
+      concetti
+      updatedAt
+      recensioniRicevute
+      insegnante {
+        nome
+        cognome
+        professione
+        img {
+          gatsbyImageData
+        }
+        bio {
+          bio
+          childMarkdownRemark {
+            html
+          }
+        }
+        corsi {
+          titolo
+          slug
+          category {
+            slug
+          }
+        }
+      }
+      requisiti
       riassunto {
         riassunto
       }
+      descrizione {
+        descrizione
+      }
+      copertina {
+        gatsbyImageData
+        file {
+          url
+        }
+      }
+      introduzioneProgetti {
+        introduzioneProgetti
+      }
+      progetti {
+        titolo
+        slug
+        meta_title
+        url
+        ordine
+        copertina {
+          gatsbyImageData
+        }
+        project_category {
+          title
+          slug
+        }
+        descrizione {
+          childMarkdownRemark {
+            html
+          }
+        }
+      }
     }
-  }
-  udemyPaidCourse(courseId: {eq: $course_id}) {
-    num_reviews
-    num_lectures
-    rating
-    totalSubscribers
-    courseHours
-  }
-  allUdemyReview(filter: {courseId: {eq: $course_id}}) {
-    nodes {
+    allContentfulCorsi(
+      filter: {
+        category: { elemMatch: { slug: { eq: $categorySlug } } }
+        id: { ne: $id }
+      }
+      sort: { createdAt: DESC }
+      limit: 2
+    ) {
+      nodes {
+        titolo
+        copertina {
+          gatsbyImageData
+        }
+        categoria
+        promoLink
+        slug
+        livello
+        oreDiLezione
+        riassunto {
+          riassunto
+        }
+      }
+    }
+    udemyPaidCourse(courseId: { eq: $course_id }) {
+      num_reviews
+      num_lectures
       rating
-      userName
-      content
-      id
+      totalSubscribers
+      courseHours
     }
-    totalCount
+    allUdemyReview(filter: { courseId: { eq: $course_id } }) {
+      nodes {
+        rating
+        userName
+        content
+        id
+      }
+      totalCount
+    }
   }
-}`
+`
