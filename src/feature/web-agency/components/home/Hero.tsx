@@ -153,7 +153,8 @@ export const Hero = () => {
               >
                 <Button
                   onClick={handleContactClick}
-                  variant="purple"
+                  variant="solid"
+                  colorScheme="theme"
                   size={`md`}
                   style={{
                     zIndex: 2,

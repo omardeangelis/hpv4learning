@@ -76,7 +76,13 @@ export const SuccessForm = () => {
         </VStack>
       </ModalBody>
       <ModalFooter>
-        <Button isFullWidth variant="purple" size="md" onClick={onClose}>
+        <Button
+          isFullWidth
+          variant="solid"
+          colorScheme="purple"
+          size="md"
+          onClick={onClose}
+        >
           Chiudi
         </Button>
       </ModalFooter>

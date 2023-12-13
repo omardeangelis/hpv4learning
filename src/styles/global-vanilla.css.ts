@@ -6,8 +6,8 @@ globalStyle(`html`, {
 })
 
 globalStyle(`body`, {
-  backgroundColor: `#fff`,
-  color: `#000`,
+  background: `white`,
+  color: `black`,
   WebkitFontSmoothing: `antialiased`,
   MozOsxFontSmoothing: `grayscale`,
 })

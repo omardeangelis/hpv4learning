@@ -174,7 +174,12 @@ export const WebAgencyHomePage = () => {
               >
                 Costruiamo rete collabora con noi{` `}
               </Heading>
-              <Button onClick={handleBannerClick} variant="purple" size="md">
+              <Button
+                onClick={handleBannerClick}
+                variant="solid"
+                colorScheme="purple"
+                size="md"
+              >
                 Contattaci
               </Button>
             </VStack>

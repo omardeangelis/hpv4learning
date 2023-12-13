@@ -269,7 +269,12 @@ const Services = () => {
           <Body variant="xl" fontWeight={600}>
             Contattaci
           </Body>
-          <Button size="md" variant="purple" onClick={handleContactClick}>
+          <Button
+            size="md"
+            variant="solid"
+            colorScheme="purple"
+            onClick={handleContactClick}
+          >
             Fissa una chiamata
           </Button>
         </HStack>

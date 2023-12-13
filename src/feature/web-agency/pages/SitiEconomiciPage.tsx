@@ -125,7 +125,12 @@ export const SitiEconomiciPage = () => {
               >
                 Inizia con un sito economico
               </Heading>
-              <Button onClick={handleClickOpen} variant="purple" size="md">
+              <Button
+                onClick={handleClickOpen}
+                variant="solid"
+                colorScheme="purple"
+                size="md"
+              >
                 Contattaci
               </Button>
             </VStack>
