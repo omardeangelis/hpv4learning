@@ -27,7 +27,14 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <HeroSpacer background="grey10" />
+      <HeroSpacer
+        background="grey10"
+        display={{
+          mobile: `none`,
+          lg: `block`,
+        }}
+      />
+
       <NewHero />
       <Box
         sx={{

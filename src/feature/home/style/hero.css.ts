@@ -5,18 +5,18 @@ export const customHeroButton = style({
   display: `flex`,
   justifyContent: `space-between`,
   alignItems: `center`,
-  maxWidth: 152,
   width: `100%`,
   height: 52,
   borderRadius: 8,
   overflow: `hidden`,
   cursor: `pointer`,
   transition: `all 0.3s ease`,
+  zIndex: 8,
   ":hover": {
     boxShadow: `inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5)`,
   },
   "@media": {
-    [`${breakpoints.sm}`]: {
+    [`${breakpoints.md}`]: {
       maxWidth: 320,
       height: 84,
     },
@@ -32,7 +32,7 @@ export const leftButtonSide = style({
   height: 52,
   backgroundColor: `#fff`,
   "@media": {
-    [`${breakpoints.sm}`]: {
+    [`${breakpoints.md}`]: {
       width: `100%`,
       height: 84,
     },
@@ -48,7 +48,7 @@ export const rightButtonSide = style({
   justifyContent: `center`,
   transition: `all 0.3s ease`,
   "@media": {
-    [`${breakpoints.sm}`]: {
+    [`${breakpoints.md}`]: {
       minWidth: 84,
       height: 84,
     },
@@ -105,7 +105,6 @@ export const heroCardDeafult = style({
   alignItems: `flex-start`,
   justifyContent: `flex-end`,
   width: `100%`,
-
   transition: `all 0.4s ease`,
 })
 

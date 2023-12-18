@@ -23,7 +23,7 @@ const variants = {
     transition: { duration: 0.4 },
   },
   closed: {
-    opacity: 0.9,
+    opacity: 0.8,
     width: `33.333333%`,
     transition: { duration: 0.4 },
   },
