@@ -6,13 +6,12 @@ import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
 import Layout from "../components/shared/layout"
-import TopHeroContent from "../components/TopHeroContent"
 
 // Meta Title e SEO e Utils
 import SeoLink from "../components/shared/SeoLink"
 import LinkHandler from "../components/SEO/components/LinkHandler"
 // Components
-import Hero from "../components/ui/Hero"
+import { Hero as NewHero } from "../feature/home/components/hero/Hero"
 // Material UI
 import { CommunityBanner } from "../components/banner"
 import CourseWall from "../components/course/CourseWall"
@@ -25,20 +24,11 @@ import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 
 const IndexPage = () => {
   const coursesPositionRef = React.useRef<null | HTMLDivElement>(null)
-  const goToCourseSection = React.useCallback(() => {
-    if (!coursesPositionRef.current) {
-      return
-    }
-    coursesPositionRef.current?.scrollIntoView({
-      behavior: `smooth`,
-    })
-  }, [])
+
   return (
     <Layout>
-      <HeroSpacer />
-      <Hero>
-        <TopHeroContent fn={goToCourseSection} />
-      </Hero>
+      <HeroSpacer background="grey10" />
+      <NewHero />
       <Box
         sx={{
           backgroundColor: `#000`,
