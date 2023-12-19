@@ -1,6 +1,7 @@
 import React from "react"
 import { Box } from "old-ui"
 import clsx from "clsx"
+import { navigate } from "gatsby"
 import {
   customHeroButton,
   leftButtonSide,
@@ -26,8 +27,16 @@ export const HeroButton = () => {
         return isAcademyButton
     }
   }, [extendedCard])
+
+  const handleNavigate = React.useCallback(() => {
+    navigate(`/web-agency/?form=open`)
+  }, [])
   return (
-    <Box className={customHeroButton} boxShadow="loose">
+    <Box
+      className={customHeroButton}
+      boxShadow="loose"
+      onClick={handleNavigate}
+    >
       <Box className={leftButtonSide}>Contattaci</Box>
       <Box className={clsx(rightButtonSide, classes)}>
         <Box className={rightButtonHiddenLayer} />

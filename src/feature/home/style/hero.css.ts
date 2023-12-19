@@ -106,6 +106,7 @@ export const heroCardDeafult = style({
   justifyContent: `flex-end`,
   width: `100%`,
   transition: `all 0.4s ease`,
+  cursor: `pointer`,
 })
 
 export const heroCardOpen = style({

@@ -3,6 +3,7 @@ import React from "react"
 import clsx from "clsx"
 import { StaticImage } from "gatsby-plugin-image"
 import { motion } from "framer-motion"
+import { navigate } from "gatsby"
 import {
   heroCardClosed,
   heroCardOpen,
@@ -42,6 +43,22 @@ const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
     () => clsx(heroCardDeafult, isOpen ? heroCardOpen : heroCardClosed),
     [isOpen]
   )
+
+  const handleNavigate = React.useCallback(() => {
+    switch (extendedCard) {
+      case `academy`:
+        navigate(`/academy`)
+        break
+      case `agency`:
+        navigate(`/web-agency`)
+        break
+      case `edu`:
+        navigate(`/formazione`)
+        break
+      default:
+        break
+    }
+  }, [extendedCard])
   return (
     <motion.article variants={variants} animate={isOpen ? `open` : `closed`}>
       <Box
@@ -52,6 +69,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
         p={{ sm: 24, lg: 72 }}
         className={classes}
         onMouseEnter={() => setExtendedCard(cardType)}
+        onClick={handleNavigate}
       >
         <motion.div
           variants={textVariants}

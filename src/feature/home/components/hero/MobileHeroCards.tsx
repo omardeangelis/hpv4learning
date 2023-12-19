@@ -1,13 +1,17 @@
 import { StaticImage } from "gatsby-plugin-image"
-import { Box, HStack, Text, VStack } from "old-ui"
+import { Box, HStack, StackProps, Text, VStack } from "old-ui"
+import { navigate } from "gatsby"
 import React from "react"
 
-const MobileHeroCard = ({
-  children,
-  text,
-}: {
+type MobileHeroCardProps = StackProps & {
   children: React.ReactNode
   text: string
+}
+
+const MobileHeroCard: React.FC<MobileHeroCardProps> = ({
+  children,
+  text,
+  ...rest
 }) => (
   <VStack
     spacing={8}
@@ -15,6 +19,7 @@ const MobileHeroCard = ({
       width: `full`,
       __zIndex: 8,
     }}
+    {...rest}
   >
     <Box
       overflow="hidden"
@@ -59,7 +64,7 @@ export const MobileHeroCards = () => (
       width: `full`,
     }}
   >
-    <MobileHeroCard text="Academy">
+    <MobileHeroCard text="Academy" onClick={() => navigate(`/academy/`)}>
       <StaticImage
         src="../../images/mobile-academy.png"
         alt="Sviluppo Web"
@@ -68,7 +73,10 @@ export const MobileHeroCards = () => (
         }}
       />
     </MobileHeroCard>
-    <MobileHeroCard text="Sviluppo Web">
+    <MobileHeroCard
+      text="Sviluppo Web"
+      onClick={() => navigate(`/web-agency/`)}
+    >
       <StaticImage
         src="../../images/mobile-web-agancy.png"
         alt="Sviluppo Web"
@@ -78,7 +86,7 @@ export const MobileHeroCards = () => (
         }}
       />
     </MobileHeroCard>
-    <MobileHeroCard text="Formazione">
+    <MobileHeroCard text="Formazione" onClick={() => navigate(`/formazione/`)}>
       <StaticImage
         src="../../images/mobile-edu.png"
         alt="Sviluppo Web"
