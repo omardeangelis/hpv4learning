@@ -1,6 +1,7 @@
 import * as React from "react"
 // Global Layoaut
 
+import { Box } from "old-ui"
 import Layout from "../components/shared/layout"
 
 // Meta Title e SEO e Utils
@@ -11,6 +12,7 @@ import { Hero as NewHero } from "../feature/home/components/hero/Hero"
 import OrganizationSchema from "../components/SEO/components/OrganizationSchema"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
+import { ServiceSection } from "../feature/home/components/service/ServiceSection"
 
 const IndexPage = () => (
   <Layout>
@@ -22,6 +24,14 @@ const IndexPage = () => (
       }}
     />
     <NewHero />
+    <Box
+      mt={{
+        mobile: 48,
+        lg: 96,
+      }}
+    >
+      <ServiceSection />
+    </Box>
   </Layout>
 )
 

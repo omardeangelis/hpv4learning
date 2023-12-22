@@ -14,6 +14,9 @@ import { MobileHeroCards } from "./MobileHeroCards"
 const DesktopHero = () => (
   <Box
     background="grey10"
+    __minHeight="calc(100vh - 8rem)"
+    display="flex"
+    alignItems="center"
     paddingTop={{
       mobile: 16,
       md: 24,
