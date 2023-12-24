@@ -1,7 +1,15 @@
 import React from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import {
+  motion,
+  useInView,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion"
 import { Box, Heading, ResponsiveContainer } from "old-ui"
 import { AcademyService } from "./AcademyService"
+import { servicesFixedContainer } from "../../style/services.css"
+import { WebAgencyService } from "./WebAgencyService"
 
 export const ServiceSection = () => {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -9,6 +17,44 @@ export const ServiceSection = () => {
     target: ref,
   })
   const x = useTransform(scrollYProgress, [1, 0], [600, 0])
+
+  const scrollRef = React.useRef<HTMLDivElement>(null)
+
+  const ghostRef = React.useRef<HTMLDivElement>(null)
+  const targetRef = React.useRef<HTMLDivElement>(null)
+  const { scrollYProgress: fixedScrollYProgress } = useScroll({
+    target: targetRef,
+  })
+  const [scrollRange, setScrollRange] = React.useState(0)
+  const [viewportW, setViewportW] = React.useState(0)
+  const isInView = useInView(scrollRef, { margin: `50% 0px 0px 0px` })
+
+  React.useEffect(() => {
+    if (scrollRef.current) {
+      setScrollRange(scrollRef.current.scrollWidth)
+    }
+  }, [])
+
+  const onResize = React.useCallback((entries: any[]) => {
+    entries.forEach((entry) => {
+      setViewportW(entry.contentRect.width)
+    })
+  }, [])
+
+  React.useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => onResize(entries))
+    resizeObserver.observe(ghostRef.current as any)
+    return () => resizeObserver.disconnect()
+  }, [onResize])
+
+  const transform = useTransform(
+    fixedScrollYProgress,
+    [0, 1],
+    [0, -scrollRange + viewportW / 2]
+  )
+  const physics = { damping: 10, mass: 0.1, stiffness: 45 }
+  const spring = useSpring(transform, physics)
+
   return (
     <>
       <Box ref={ref} overflowX={`hidden`}>
@@ -25,17 +71,17 @@ export const ServiceSection = () => {
           </motion.div>
         </ResponsiveContainer>
       </Box>
-      <Box __height={`200vh`} position="relative">
-        <Box
-          position="sticky"
-          style={{ top: 0 }}
-          display="flex"
-          alignItems="flex-start"
+      <Box __height={`300vh`} position="relative" ref={targetRef}>
+        <motion.div
+          ref={scrollRef}
+          className={servicesFixedContainer}
+          style={{ x: spring }}
         >
           <AcademyService />
-          <AcademyService />
-        </Box>
+          <WebAgencyService />
+        </motion.div>
       </Box>
+      <div ref={ghostRef} style={{ width: scrollRange, height: 0 }} />
     </>
   )
 }

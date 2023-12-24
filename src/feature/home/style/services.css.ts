@@ -5,7 +5,7 @@ export const servicesFixedContainer = style({
   position: `sticky`,
   top: 0,
   display: `flex`,
-  alignItems: `center`,
+  alignItems: `flex-start`,
 })
 
 export const academyRoundedAvatar = style({

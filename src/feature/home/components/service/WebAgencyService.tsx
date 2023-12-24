@@ -48,7 +48,7 @@ const dotTransition = {
   ease: `easeInOut`,
 }
 
-export const AcademyService = () => {
+export const WebAgencyService = () => {
   const { isLoading, data } = useGetAllCourseStatsQuery()
   const delayAnimation = React.useMemo(() => {
     if (isLoading) {
@@ -59,7 +59,7 @@ export const AcademyService = () => {
   return (
     <Box
       // ref={ref as any}
-      background="purple10"
+      background="orange10"
       __minHeight="100vh"
       __width="100vw"
       py={{
