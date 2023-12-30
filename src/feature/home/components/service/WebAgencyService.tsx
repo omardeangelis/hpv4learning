@@ -1,181 +1,161 @@
 import {
   Body,
   Box,
-  Button,
   ResponsiveContainer,
   Stack,
   VStack,
   Text,
+  Button,
+  Icon,
+  HStack,
+  Heading,
 } from "old-ui"
 import React from "react"
-import clsx from "clsx"
-import { motion } from "framer-motion"
+import { StaticImage } from "gatsby-plugin-image"
+
 import {
-  academyRoundedAvatar,
-  academySectionGrid,
-  box1,
-  box2,
-  box3,
-} from "../../style/services.css"
-import { useGetAllCourseStatsQuery } from "../../../../services/udemy"
-import { CategoryCourseSection } from "./AcademyCategoryCourse"
+  CategoryCourseCard,
+  CategoryCourseFooter,
+  CategoryCourseHeader,
+  CategoryCourseImage,
+} from "./AcademyCategoryCourse"
+import SeoLink from "../../../../components/shared/SeoLink"
 
-const containerVariants = {
-  initial: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-  animate: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-}
-
-const dotVariants = {
-  initial: {
-    y: `0%`,
-  },
-  animate: {
-    y: `5%`,
-  },
-}
-
-const dotTransition = {
-  duration: 0.5,
-  yoyo: Infinity,
-  ease: `easeInOut`,
-}
-
-export const WebAgencyService = () => {
-  const { isLoading, data } = useGetAllCourseStatsQuery()
-  const delayAnimation = React.useMemo(() => {
-    if (isLoading) {
-      return `animate`
-    }
-    setTimeout(() => `initial`, 1000)
-  }, [isLoading])
-  return (
-    <Box
-      // ref={ref as any}
-      background="orange10"
-      __minHeight="100vh"
-      __width="100vw"
-      py={{
-        mobile: 48,
-        md: 96,
-      }}
-      borderRadius={32}
-      display="flex"
-      alignItems="center"
-      style={{
-        flex: `0 0 auto`,
-      }}
-    >
-      <ResponsiveContainer variant="xl">
-        <VStack
-          spacing={32}
-          justify="flex-start"
+export const WebAgencyService = () => (
+  <Box
+    background="orange10"
+    __minHeight="100vh"
+    __width="100vw"
+    py={{
+      mobile: 48,
+      md: 96,
+    }}
+    borderRadius={32}
+    display="flex"
+    alignItems="center"
+    style={{
+      flex: `0 0 auto`,
+    }}
+  >
+    <ResponsiveContainer variant="xl">
+      <VStack
+        spacing={96}
+        justify="flex-start"
+        align="center"
+        sprinkles={{
+          width: `full`,
+        }}
+      >
+        <Stack
+          direction={{
+            mobile: `column`,
+            lg: `row`,
+          }}
+          spacing={{
+            mobile: 32,
+            lg: 24,
+          }}
           align="center"
+          justify="space-between"
           sprinkles={{
             width: `full`,
           }}
         >
-          <Stack
-            direction={{
-              mobile: `column`,
-              lg: `row`,
+          <Text
+            variant={{
+              mobile: `2xl`,
+              md: `6xl`,
             }}
-            spacing={{
-              mobile: 32,
-              lg: 0,
-            }}
-            align="center"
-            justify="space-between"
+            as="h2"
+            fontWeight={600}
+          >
+            Realizza
+            <br />
+            il tuo sito
+          </Text>
+          <Box __maxWidth={393} overflow="hidden" width="full">
+            <StaticImage
+              src="../../images/agancy-card-circles.png"
+              alt="Cerchi con dentro scritto adatto ad ogni business"
+              placeholder="blurred"
+            />
+          </Box>
+          <VStack
+            spacing={16}
+            align="flex-start"
             sprinkles={{
-              width: `full`,
+              __maxWidth: 346,
             }}
           >
-            <VStack
-              spacing={24}
-              align="flex-start"
-              sprinkles={{
-                __width: `-webkit-fill-available`,
+            <Body variant="xl">
+              Nessun template. Disegnamo e sviluppiamo il tuo sito per darti il
+              miglior prodotto.
+            </Body>
+            <SeoLink link={`/web-agancy`} isExternal={false}>
+              <Button
+                colorScheme="theme"
+                rightIcon={<Icon icon="arrowRightOutline" />}
+              >
+                Scopri di più
+              </Button>
+            </SeoLink>
+          </VStack>
+        </Stack>
+        <Stack
+          spacing={16}
+          sprinkles={{
+            width: `full`,
+          }}
+          direction={{
+            mobile: `column`,
+            lg: `row`,
+          }}
+          align="flex-end"
+          justify="space-between"
+        >
+          <CategoryCourseCard background="red50">
+            <CategoryCourseHeader>
+              <Body variant="xl" as="h3" fontWeight={600}>
+                Inizia con un sito economico
+              </Body>
+              <Body
+                variant="md"
+                sprinkles={{
+                  __maxWidth: `70%`,
+                }}
+              >
+                Non lasciare che il costo sia un ostacolo. Con le nostre opzioni
+                economiche, iniziare la tua avventura online
+              </Body>
+            </CategoryCourseHeader>
+            <CategoryCourseImage
+              style={{
+                maxWidth: 120,
+                maxHeight: 120,
               }}
             >
-              <Text
-                variant={{
-                  mobile: `2xl`,
-                  md: `6xl`,
-                }}
-                as="h2"
-                fontWeight={600}
-              >
-                Impara
-                <br />
-                nuove skills
-              </Text>
-              <Button colorScheme="purple">Vai all'academy</Button>
-            </VStack>
-            <motion.div
-              variants={containerVariants}
-              initial="initial"
-              animate={delayAnimation}
-              className={academySectionGrid}
-            >
-              <motion.div
-                variants={dotVariants}
-                transition={dotTransition}
-                className={clsx(academyRoundedAvatar, box1)}
-              >
-                <Body
-                  variant="lg"
-                  sprinkles={{ textAlign: `center` }}
-                  fontWeight={600}
-                >
-                  {data?.totalSubscribers}
-                  <br />
-                  Studenti
-                </Body>
-              </motion.div>
-              <motion.div
-                variants={dotVariants}
-                transition={dotTransition}
-                className={clsx(academyRoundedAvatar, box2)}
-              >
-                <Body
-                  variant="lg"
-                  sprinkles={{ textAlign: `center` }}
-                  fontWeight={600}
-                >
-                  {data?.coursesHours}
-                  <br />
-                  ore
-                </Body>
-              </motion.div>
-              <motion.div
-                className={clsx(academyRoundedAvatar, box3)}
-                variants={dotVariants}
-                transition={dotTransition}
-              >
-                <Body
-                  variant="lg"
-                  sprinkles={{ textAlign: `center` }}
-                  fontWeight={600}
-                >
-                  {data?.averageRating}
-                  <br />
-                  voto medio
-                </Body>
-              </motion.div>
-            </motion.div>
-          </Stack>
-          <CategoryCourseSection />
-        </VStack>
-      </ResponsiveContainer>
-    </Box>
-  )
-}
+              <StaticImage
+                src="../../images/agency-card-img.png"
+                alt="logo html javascript e css"
+              />
+            </CategoryCourseImage>
+            <CategoryCourseFooter>
+              <SeoLink link={`/web-agancy/siti-economici`} isExternal={false}>
+                <Button colorScheme="theme">Scopri di più</Button>
+              </SeoLink>
+            </CategoryCourseFooter>
+          </CategoryCourseCard>
+          <HStack spacing="unset" align="flex-end" justify="end">
+            <Heading variant="5xl" fontWeight={600}>
+              ll Tuo Sito,
+              <br />
+              Il Tuo Budget
+            </Heading>
+          </HStack>
+        </Stack>
+      </VStack>
+    </ResponsiveContainer>
+  </Box>
+)
 
 // export const AcademyService = AcademyBox

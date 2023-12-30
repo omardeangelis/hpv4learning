@@ -1,11 +1,5 @@
 import React from "react"
-import {
-  motion,
-  useInView,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion"
+import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 import { Box, Heading, ResponsiveContainer } from "old-ui"
 import { AcademyService } from "./AcademyService"
 import { servicesFixedContainer } from "../../style/services.css"
@@ -27,7 +21,6 @@ export const ServiceSection = () => {
   })
   const [scrollRange, setScrollRange] = React.useState(0)
   const [viewportW, setViewportW] = React.useState(0)
-  const isInView = useInView(scrollRef, { margin: `50% 0px 0px 0px` })
 
   React.useEffect(() => {
     if (scrollRef.current) {
@@ -50,9 +43,9 @@ export const ServiceSection = () => {
   const transform = useTransform(
     fixedScrollYProgress,
     [0, 1],
-    [0, -scrollRange + viewportW / 2]
+    [0, -viewportW / 2]
   )
-  const physics = { damping: 10, mass: 0.1, stiffness: 45 }
+  const physics = { damping: 10, mass: 0.1, stiffness: 100 }
   const spring = useSpring(transform, physics)
 
   return (
@@ -71,7 +64,15 @@ export const ServiceSection = () => {
           </motion.div>
         </ResponsiveContainer>
       </Box>
-      <Box __height={`300vh`} position="relative" ref={targetRef}>
+      <Box
+        display={{
+          mobile: `none`,
+          lg: `block`,
+        }}
+        __minHeight={`200vh`}
+        position="relative"
+        ref={targetRef}
+      >
         <motion.div
           ref={scrollRef}
           className={servicesFixedContainer}
@@ -80,6 +81,15 @@ export const ServiceSection = () => {
           <AcademyService />
           <WebAgencyService />
         </motion.div>
+      </Box>
+      <Box
+        display={{
+          mobile: `block`,
+          lg: `none`,
+        }}
+      >
+        <AcademyService />
+        <WebAgencyService />
       </Box>
       <div ref={ghostRef} style={{ width: scrollRange, height: 0 }} />
     </>

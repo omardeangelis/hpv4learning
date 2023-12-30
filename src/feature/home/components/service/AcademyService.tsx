@@ -19,6 +19,7 @@ import {
 } from "../../style/services.css"
 import { useGetAllCourseStatsQuery } from "../../../../services/udemy"
 import { CategoryCourseSection } from "./AcademyCategoryCourse"
+import SeoLink from "../../../../components/shared/SeoLink"
 
 const containerVariants = {
   initial: {
@@ -116,7 +117,9 @@ export const AcademyService = () => {
                 <br />
                 nuove skills
               </Text>
-              <Button colorScheme="purple">Vai all'academy</Button>
+              <SeoLink isExternal={false} link="/academy/">
+                <Button colorScheme="purple">Vai all'academy</Button>
+              </SeoLink>
             </VStack>
             <motion.div
               variants={containerVariants}

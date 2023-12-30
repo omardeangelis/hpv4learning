@@ -13,6 +13,7 @@ import OrganizationSchema from "../components/SEO/components/OrganizationSchema"
 import MetaDecorator from "../components/SEO/components/MetaDecorator"
 import { HeroSpacer } from "../feature/navigation/components/HeroSpacer"
 import { ServiceSection } from "../feature/home/components/service/ServiceSection"
+import { HomeBanner } from "../feature/home/components/banner/HomeBanner"
 
 const IndexPage = () => (
   <Layout>
@@ -31,6 +32,14 @@ const IndexPage = () => (
       }}
     >
       <ServiceSection />
+    </Box>
+    <Box
+      mt={{
+        mobile: 48,
+        lg: 96,
+      }}
+    >
+      <HomeBanner />
     </Box>
   </Layout>
 )

@@ -102,7 +102,6 @@ export const Navbar = () => {
               borderStyle: `solid`,
             }}
             borderColor="grey20"
-            background={`white`}
           >
             <HStack
               align="center"
