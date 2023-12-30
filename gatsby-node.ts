@@ -111,7 +111,7 @@ export const createPages = async ({ graphql, actions }) => {
       alias,
     } = category
     createPage({
-      path: `/corsi/${slug.toLowerCase()}/`,
+      path: `/academy/corsi/${slug.toLowerCase()}/`,
       component: path.resolve(`./src/template/Category.tsx`),
       context: {
         slug,
@@ -128,7 +128,7 @@ export const createPages = async ({ graphql, actions }) => {
   })
 
   createPage({
-    path: `/progetti/`,
+    path: `/academy/progetti/`,
     component: path.resolve(`./src/template/ProjectsHome.tsx`),
   })
 
@@ -146,7 +146,7 @@ export const createPages = async ({ graphql, actions }) => {
         Array.from({ length: pages }, (_, index) => {
           const start = numOfElement * index
           createPage({
-            path: `/progetti/${category.slug.toLowerCase()}${
+            path: `/academy/progetti/${category.slug.toLowerCase()}${
               index === 0 ? `/` : `/${index + 1}/`
             }`,
             component: path.resolve(`./src/template/ProjectsCategory.tsx`),
@@ -180,7 +180,7 @@ export const createPages = async ({ graphql, actions }) => {
         project.ordine === maxProjectsOrders ? 1 : project.ordine + 1
       if (project?.corsi?.[0]?.id)
         createPage({
-          path: `/progetti/${slug}/${project.slug}/`,
+          path: `/academy/progetti/${slug}/${project.slug}/`,
           component: path.resolve(`./src/template/ProjectArticle.tsx`),
           context: {
             id: project.id,
@@ -196,7 +196,7 @@ export const createPages = async ({ graphql, actions }) => {
     const courseId = guida.corsi_correlati[0].idCorso
     if (guida.is_Visible || !isProduction)
       createPage({
-        path: `/guide/${guida.slug}/`,
+        path: `/academy/guide/${guida.slug}/`,
         component: path.resolve(`./src/template/Guide.tsx`),
         context: {
           courseId: Number(courseId || 0),

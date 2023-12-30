@@ -71,25 +71,29 @@ export const AcademyTooltip = React.forwardRef<HTMLDivElement, any>(
                       Corsi
                     </Body>
                     <SeoLink
-                      link="/corsi/sviluppatori-web/"
+                      link="/academy/corsi/sviluppatori-web/"
                       isExternal={false}
                       onClick={() =>
-                        handleLinkClick(`/corsi/sviluppatori-web/`)
+                        handleLinkClick(`/academy/corsi/sviluppatori-web/`)
                       }
                     >
                       <TooltipNavItem>Sviluppo Web</TooltipNavItem>
                     </SeoLink>
                     <SeoLink
-                      link="/corsi/videomakers/"
+                      link="/academy/corsi/videomakers/"
                       isExternal={false}
-                      onClick={() => handleLinkClick(`/corsi/videomakers/`)}
+                      onClick={() =>
+                        handleLinkClick(`/academy/corsi/videomakers/`)
+                      }
                     >
                       <TooltipNavItem>Videomaking</TooltipNavItem>
                     </SeoLink>
                     <SeoLink
-                      link="/corsi/gratuiti/"
+                      link="/academy/corsi/gratuiti/"
                       isExternal={false}
-                      onClick={() => handleLinkClick(`/corsi/gratuiti/`)}
+                      onClick={() =>
+                        handleLinkClick(`/academy/corsi/gratuiti/`)
+                      }
                     >
                       <TooltipNavItem>Gratuiti</TooltipNavItem>
                     </SeoLink>
@@ -105,26 +109,32 @@ export const AcademyTooltip = React.forwardRef<HTMLDivElement, any>(
                       Progetti Pratici
                     </Body>
                     <SeoLink
-                      link="/progetti/javascript/"
+                      link="/academy/progetti/javascript/"
                       className="link-gtm"
                       isExternal={false}
-                      onClick={() => handleLinkClick(`/progetti/javascript/`)}
+                      onClick={() =>
+                        handleLinkClick(`/academy/progetti/javascript/`)
+                      }
                     >
                       <TooltipNavItem>Javascript</TooltipNavItem>
                     </SeoLink>
                     <SeoLink
-                      link="/progetti/react/"
+                      link="/academy/progetti/react/"
                       className="link-gtm"
                       isExternal={false}
-                      onClick={() => handleLinkClick(`/progetti/react/`)}
+                      onClick={() =>
+                        handleLinkClick(`/academy/progetti/react/`)
+                      }
                     >
                       <TooltipNavItem>React</TooltipNavItem>
                     </SeoLink>
                     <SeoLink
                       className="link-gtm"
-                      link="/progetti/videomaker/"
+                      link="/academy/progetti/videomaker/"
                       isExternal={false}
-                      onClick={() => handleLinkClick(`/progetti/videomaker/`)}
+                      onClick={() =>
+                        handleLinkClick(`/academy/progetti/videomaker/`)
+                      }
                     >
                       <TooltipNavItem>Videomaking</TooltipNavItem>
                     </SeoLink>
@@ -142,11 +152,11 @@ export const AcademyTooltip = React.forwardRef<HTMLDivElement, any>(
                     </Body>
                     <SeoLink
                       className="link-gtm"
-                      link="/progetti/javascript/creare-contatore-javascript/"
+                      link="/academy/progetti/javascript/creare-contatore-javascript/"
                       isExternal={false}
                       onClick={() =>
                         handleLinkClick(
-                          `/progetti/javascript/creare-contatore-javascript/`
+                          `/academy/progetti/javascript/creare-contatore-javascript/`
                         )
                       }
                     >
@@ -154,18 +164,22 @@ export const AcademyTooltip = React.forwardRef<HTMLDivElement, any>(
                     </SeoLink>
                     <SeoLink
                       className="link-gtm"
-                      link="/guide/imparare-react-da-zero/"
+                      link="/academy/guide/imparare-react-da-zero/"
                       isExternal={false}
-                      onClick={() => handleLinkClick(`/guide/imparare-react/`)}
+                      onClick={() =>
+                        handleLinkClick(`/academy/guide/imparare-react/`)
+                      }
                     >
                       <TooltipNavItem>Guida a React</TooltipNavItem>
                     </SeoLink>
                     <SeoLink
                       className="link-gtm"
-                      link="/PremierePro-Guida-Completa-Gratuita/"
+                      link="/academy/corsi/PremierePro-Guida-Completa-Gratuita/"
                       isExternal={false}
                       onClick={() =>
-                        handleLinkClick(`/PremierePro-Guida-Completa-Gratuita/`)
+                        handleLinkClick(
+                          `/academy/corsi/PremierePro-Guida-Completa-Gratuita/`
+                        )
                       }
                     >
                       <TooltipNavItem>Montaggio Video</TooltipNavItem>

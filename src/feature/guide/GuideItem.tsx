@@ -58,8 +58,8 @@ export const GuideItem = (props: Props) => {
   const baseLink = React.useMemo(
     () =>
       internal?.type === `ContentfulProgetti`
-        ? `/progetti/${project_category?.[0]?.slug}/${slug}/`
-        : `/blog/${tag?.slug}/${slug}/`,
+        ? `/academy/progetti/${project_category?.[0]?.slug}/${slug}/`
+        : `/academy/guide/${tag?.slug}/${slug}/`,
     [internal?.type, project_category, slug, tag?.slug]
   )
 

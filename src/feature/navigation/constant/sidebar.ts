@@ -24,27 +24,27 @@ export const SIDEBAR = {
   Academy: [
     {
       name: `Sviluppo Web`,
-      url: `/corsi/sviluppatori-web/`,
+      url: `/academy/corsi/sviluppatori-web/`,
       id: `sviluppo-web`,
     },
     {
       name: `Video Making`,
-      url: `/corsi/videomakers/`,
+      url: `/academy/corsi/videomakers/`,
       id: `video-making`,
     },
     {
       name: `Gratuiti`,
-      url: `/corsi/gratuiti/`,
+      url: `/academy/corsi/gratuiti/`,
       id: `gratuiti`,
     },
     {
       name: `Progetti Pratici`,
-      url: `/progetti/`,
+      url: `/academy/progetti/`,
       id: `progetti-pratici`,
     },
     {
       name: `Chi siamo`,
-      url: `/insegnanti`,
+      url: `/academy/insegnanti`,
       id: `chi-siamo`,
     },
   ],

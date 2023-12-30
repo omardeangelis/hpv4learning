@@ -48,7 +48,10 @@ const CourseAction = ({ pageLink, buyLink, isFreeCourse }: Props) => {
           </Button>
         )}
 
-        <Link to={`/${pageLink}/`} style={{ textDecoration: `none` }}>
+        <Link
+          to={`/academy/corsi/${pageLink}/`}
+          style={{ textDecoration: `none` }}
+        >
           <Button
             variant={!buyLink && !isFreeCourse ? `contained` : `outlined`}
             color="primary"

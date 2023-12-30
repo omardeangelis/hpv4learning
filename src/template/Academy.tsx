@@ -164,7 +164,7 @@ const Academy = () => {
               lg: `34px`,
             }}
           >
-            <SeoLink isExternal={false} link="/progetti/">
+            <SeoLink isExternal={false} link="/academy/progetti/">
               <Button variant="contained" size="large">
                 Vedi tutti
               </Button>
