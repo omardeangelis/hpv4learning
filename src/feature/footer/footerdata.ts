@@ -48,22 +48,22 @@ const data = [
     items: [
       {
         title: `Come creare un contatore in Javascript`,
-        slug: `/progetti/javascript/creare-contatore-javascript/`,
+        slug: `/academy/progetti/javascript/creare-contatore-javascript/`,
         isExternal: false,
       },
       {
         title: `React`,
-        slug: `/progetti/react/`,
+        slug: `/academy/progetti/react/`,
         isExternal: false,
       },
       {
         title: `Javascript`,
-        slug: `/progetti/javascript/`,
+        slug: `/academy/progetti/javascript/`,
         isExternal: false,
       },
       {
         title: `Videomaking`,
-        slug: `/progetti/videomaker/`,
+        slug: `/academy/progetti/videomaker/`,
         isExternal: false,
       },
     ],

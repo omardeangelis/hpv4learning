@@ -111,7 +111,7 @@ export const LatestProject = (
 
         <SeoLink
           isExternal={false}
-          link={`/progetti/${label}/${latestProject?.slug}/`}
+          link={`/academy/progetti/${label}/${latestProject?.slug}/`}
         >
           <RoundedButton
             size="small"

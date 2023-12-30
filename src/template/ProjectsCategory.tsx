@@ -121,15 +121,15 @@ export const Head = ({
         link: `/`,
       },
       {
-        text: `Home`,
-        link: `/progetti/`,
+        text: `Progetti`,
+        link: `/academy/progetti/`,
       },
       {
-        text: `Home`,
-        link: `/progetti/${slug}/`,
+        text: metaTitle,
+        link: `/academy/progetti/${slug}/`,
       },
     ],
-    [slug]
+    [slug, metaTitle]
   )
 
   return (

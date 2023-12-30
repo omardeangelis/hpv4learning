@@ -23,7 +23,7 @@ export const ProjectSection = ({
       <Box key={`progetto${index}`} className="row-container">
         <SeoLink
           isExternal={false}
-          link={`/progetti/${post?.project_category?.[0]?.slug}/${post?.slug}/`}
+          link={`/academy/progetti/${post?.project_category?.[0]?.slug}/${post?.slug}/`}
           style={{
             display: `flex`,
             width: `fit-content`,
