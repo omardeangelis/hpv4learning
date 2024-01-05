@@ -20,6 +20,8 @@ import {
 import { useGetAllCourseStatsQuery } from "../../../../services/udemy"
 import { CategoryCourseSection } from "./AcademyCategoryCourse"
 import SeoLink from "../../../../components/shared/SeoLink"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { homePageEvents } from "../../../../services/tracking/constant/homepage"
 
 const containerVariants = {
   initial: {
@@ -51,6 +53,7 @@ const dotTransition = {
 
 export const AcademyService = () => {
   const { isLoading, data } = useGetAllCourseStatsQuery()
+  const { gaTracker } = useGATracking()
   const delayAnimation = React.useMemo(() => {
     if (isLoading) {
       return `animate`
@@ -117,7 +120,15 @@ export const AcademyService = () => {
                 <br />
                 nuove skills
               </Text>
-              <SeoLink isExternal={false} link="/academy/">
+              <SeoLink
+                isExternal={false}
+                link="/academy/"
+                onClick={() =>
+                  gaTracker?.sendEvent({
+                    eventName: homePageEvents.home_explore_academy,
+                  })
+                }
+              >
                 <Button colorScheme="purple">Vai all'academy</Button>
               </SeoLink>
             </VStack>

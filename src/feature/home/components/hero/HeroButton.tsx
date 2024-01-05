@@ -12,9 +12,12 @@ import {
   isFormazioneButton,
 } from "../../style/hero.css"
 import { useHomeHeroContext } from "../../context/HomeHeroContext"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { homePageEvents } from "../../../../services/tracking/constant/homepage"
 
 export const HeroButton = () => {
   const { extendedCard } = useHomeHeroContext()
+  const { gaTracker } = useGATracking()
   const classes = React.useMemo(() => {
     switch (extendedCard) {
       case `academy`:
@@ -29,8 +32,11 @@ export const HeroButton = () => {
   }, [extendedCard])
 
   const handleNavigate = React.useCallback(() => {
+    gaTracker?.sendEvent({
+      eventName: homePageEvents.home_hero_contact,
+    })
     navigate(`/web-agency/?form=open`)
-  }, [])
+  }, [gaTracker])
   return (
     <Box
       className={customHeroButton}

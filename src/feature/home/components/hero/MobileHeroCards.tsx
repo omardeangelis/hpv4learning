@@ -2,6 +2,8 @@ import { StaticImage } from "gatsby-plugin-image"
 import { Box, HStack, StackProps, Text, VStack } from "old-ui"
 import { navigate } from "gatsby"
 import React from "react"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { homePageEvents } from "../../../../services/tracking/constant/homepage"
 
 type MobileHeroCardProps = StackProps & {
   children: React.ReactNode
@@ -55,46 +57,73 @@ const MobileHeroCard: React.FC<MobileHeroCardProps> = ({
   </VStack>
 )
 
-export const MobileHeroCards = () => (
-  <HStack
-    justify="space-between"
-    align="center"
-    spacing={8}
-    sprinkles={{
-      width: `full`,
-    }}
-  >
-    <MobileHeroCard text="Academy" onClick={() => navigate(`/academy/`)}>
-      <StaticImage
-        src="../../images/mobile-academy.png"
-        alt="Sviluppo Web"
-        style={{
-          width: `100%`,
-        }}
-      />
-    </MobileHeroCard>
-    <MobileHeroCard
-      text="Sviluppo Web"
-      onClick={() => navigate(`/web-agency/`)}
+export const MobileHeroCards = () => {
+  const { gaTracker } = useGATracking()
+  const handleNavigate = React.useCallback(
+    ({ path, payload }: { path: string; payload: string }) => {
+      gaTracker?.sendEvent({
+        eventName: homePageEvents.home_hero_card_click,
+        payload: {
+          content: payload,
+        },
+      })
+      navigate(path)
+    },
+    [gaTracker]
+  )
+  return (
+    <HStack
+      justify="space-between"
+      align="center"
+      spacing={8}
+      sprinkles={{
+        width: `full`,
+      }}
     >
-      <StaticImage
-        src="../../images/mobile-web-agancy.png"
-        alt="Sviluppo Web"
-        style={{
-          height: `100%`,
-          width: `100%`,
-        }}
-      />
-    </MobileHeroCard>
-    <MobileHeroCard text="Formazione" onClick={() => navigate(`/formazione/`)}>
-      <StaticImage
-        src="../../images/mobile-edu.png"
-        alt="Sviluppo Web"
-        style={{
-          height: `100%`,
-          width: `100%`,
-        }}
-      />
-    </MobileHeroCard>
-  </HStack>
-)
+      <MobileHeroCard
+        text="Academy"
+        onClick={() =>
+          handleNavigate({ path: `/academy/`, payload: `academy` })
+        }
+      >
+        <StaticImage
+          src="../../images/mobile-academy.png"
+          alt="Sviluppo Web"
+          style={{
+            width: `100%`,
+          }}
+        />
+      </MobileHeroCard>
+      <MobileHeroCard
+        text="Sviluppo Web"
+        onClick={() =>
+          handleNavigate({ path: `/web-agency/`, payload: `web-agency` })
+        }
+      >
+        <StaticImage
+          src="../../images/mobile-web-agancy.png"
+          alt="Sviluppo Web"
+          style={{
+            height: `100%`,
+            width: `100%`,
+          }}
+        />
+      </MobileHeroCard>
+      <MobileHeroCard
+        text="Formazione"
+        onClick={() =>
+          handleNavigate({ path: `/formazione/`, payload: `formazione` })
+        }
+      >
+        <StaticImage
+          src="../../images/mobile-edu.png"
+          alt="Sviluppo Web"
+          style={{
+            height: `100%`,
+            width: `100%`,
+          }}
+        />
+      </MobileHeroCard>
+    </HStack>
+  )
+}
