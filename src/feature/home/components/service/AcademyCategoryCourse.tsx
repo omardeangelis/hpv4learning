@@ -5,6 +5,8 @@ import { StaticImage } from "gatsby-plugin-image"
 import { courseHomeCard, courseHomeCardImage } from "../../style/services.css"
 import { BoxExtendedProps } from "../../../../types/system"
 import SeoLink from "../../../../components/shared/SeoLink"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { homePageEvents } from "../../../../services/tracking/constant/homepage"
 
 const AcademyCategoryCard: React.ForwardRefRenderFunction<
   "div",
@@ -103,6 +105,8 @@ export const CategoryCourseSection = () => {
       ),
     [courseCategories, parseCategory]
   )
+
+  const { gaTracker } = useGATracking()
   return (
     <Stack
       spacing={16}
@@ -155,6 +159,14 @@ export const CategoryCourseSection = () => {
           <SeoLink
             link={parsedCourseCategoriesLookupTable[`sviluppatore-web`].slug}
             isExternal={false}
+            onClick={() => {
+              gaTracker?.sendEvent({
+                eventName: homePageEvents.home_explore_courses,
+                payload: {
+                  content: `dev`,
+                },
+              })
+            }}
           >
             <Button colorScheme="theme">Scopri di più</Button>
           </SeoLink>
@@ -188,6 +200,14 @@ export const CategoryCourseSection = () => {
           <SeoLink
             link={parsedCourseCategoriesLookupTable.videomakers.slug}
             isExternal={false}
+            onClick={() => {
+              gaTracker?.sendEvent({
+                eventName: homePageEvents.home_explore_courses,
+                payload: {
+                  content: `video`,
+                },
+              })
+            }}
           >
             <Button colorScheme="theme">Scopri di più</Button>
           </SeoLink>
@@ -222,6 +242,14 @@ export const CategoryCourseSection = () => {
           <SeoLink
             link={parsedCourseCategoriesLookupTable.gratuiti.slug}
             isExternal={false}
+            onClick={() => {
+              gaTracker?.sendEvent({
+                eventName: homePageEvents.home_explore_courses,
+                payload: {
+                  content: `rump-up`,
+                },
+              })
+            }}
           >
             <Button colorScheme="theme">Scopri di più</Button>
           </SeoLink>

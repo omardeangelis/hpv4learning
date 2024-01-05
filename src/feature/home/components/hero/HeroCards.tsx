@@ -10,6 +10,8 @@ import {
   heroCardDeafult,
 } from "../../style/hero.css"
 import { HeroCardEnum, useHomeHeroContext } from "../../context/HomeHeroContext"
+import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
+import { homePageEvents } from "../../../../services/tracking/constant/homepage"
 
 type HeroCardProps = {
   cardType: HeroCardEnum
@@ -37,6 +39,7 @@ const textVariants = {
 
 const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
   const { extendedCard, setExtendedCard } = useHomeHeroContext()
+  const { gaTracker } = useGATracking()
   const isOpen = cardType === extendedCard
 
   const classes = React.useMemo(
@@ -47,18 +50,36 @@ const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
   const handleNavigate = React.useCallback(() => {
     switch (extendedCard) {
       case `academy`:
+        gaTracker?.sendEvent({
+          eventName: homePageEvents.home_hero_card_click,
+          payload: {
+            content: `academy`,
+          },
+        })
         navigate(`/academy`)
         break
       case `agency`:
+        gaTracker?.sendEvent({
+          eventName: homePageEvents.home_hero_card_click,
+          payload: {
+            content: `web-agency`,
+          },
+        })
         navigate(`/web-agency`)
         break
       case `edu`:
+        gaTracker?.sendEvent({
+          eventName: homePageEvents.home_hero_card_click,
+          payload: {
+            content: `formazione`,
+          },
+        })
         navigate(`/formazione`)
         break
       default:
         break
     }
-  }, [extendedCard])
+  }, [extendedCard, gaTracker])
   return (
     <motion.article variants={variants} animate={isOpen ? `open` : `closed`}>
       <Box
