@@ -49,7 +49,7 @@ export const Projects = ({ data }: { data: Queries.ContentfulProgetti[] }) => {
             <SeoLink
               key={progetto.slug}
               isExternal={false}
-              link={`/progetti/${progetto?.project_category?.[0]?.slug}/${progetto?.slug}/`}
+              link={`/academy/progetti/${progetto?.project_category?.[0]?.slug}/${progetto?.slug}/`}
               style={{
                 display: `flex`,
                 width: `fit-content`,

@@ -58,7 +58,7 @@ export const createCoursePages = ({ corsi, createPage, component }: Props) => {
       corso.category?.find((el) => el?.slug !== `gratuiti`) || {}
     if (categorySlug)
       createPage({
-        path: `/${corso.slug}/`,
+        path: `/academy/corsi/${corso.slug}/`,
         component,
         context: {
           id: corso.id,

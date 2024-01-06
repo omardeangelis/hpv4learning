@@ -68,7 +68,7 @@ const Guide = ({ data }: PageProps<Queries.GuideQuery>) => {
       >
         {queryData.corsi_correlati ? (
           <VideoSection
-            argomento="Git e Github"
+            argomento={queryData.argomento as string}
             image={queryData.corsi_correlati[0]?.copertina?.gatsbyImageData}
             slug={queryData.corsi_correlati[0]?.slug}
           />

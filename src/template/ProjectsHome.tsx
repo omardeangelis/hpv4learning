@@ -62,7 +62,7 @@ const ProjectsHome = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
               <LinkContainer>
                 <SeoLink
                   isExternal={false}
-                  link={`/progetti/${post?.fieldValue?.toLowerCase()}/`}
+                  link={`/academy/progetti/${post?.fieldValue?.toLowerCase()}/`}
                 >
                   Vedi tutti
                 </SeoLink>
@@ -87,7 +87,7 @@ export const Head = ({ data }: PageProps<Queries.ProjectHomePageQuery>) => {
       },
       {
         text: `Progetti`,
-        link: `/progetti/`,
+        link: `/academy/progetti/`,
       },
     ],
     []

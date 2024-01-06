@@ -40,7 +40,7 @@ const SeoLink = ({
     <Link
       style={{ textDecoration: `none`, color: `inherit`, ...style }}
       to={link}
-      className="noselect"
+      className={className ? `noselect ${className}` : `noselect`}
       {...rest}
     >
       {children}

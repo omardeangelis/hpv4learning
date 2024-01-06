@@ -18,6 +18,354 @@
         "condition": null
     },
     {
+        "source": "/progetti/",
+        "target": "/academy/progetti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/2/",
+        "target": "/academy/progetti/javascript/2/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/ajax-api-in-javascript/",
+        "target": "/academy/progetti/javascript/ajax-api-in-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/usare-api-javascript/",
+        "target": "/academy/progetti/javascript/usare-api-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/creare-sito-javascript-html-css/",
+        "target": "/academy/progetti/javascript/creare-sito-javascript-html-css/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/usare-localstorage-javascript/",
+        "target": "/academy/progetti/javascript/usare-localstorage-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/manipolare-dom-tab-javascript/",
+        "target": "/academy/progetti/javascript/manipolare-dom-tab-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/creare-dropdown-javascript/",
+        "target": "/academy/progetti/javascript/creare-dropdown-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/menu-tendina-javascript/",
+        "target": "/academy/progetti/javascript/menu-tendina-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/creare-slider-javascript/",
+        "target": "/academy/progetti/javascript/creare-slider-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/usare-darkmode-javascript/",
+        "target": "/academy/progetti/javascript/usare-darkmode-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/creare-sidebar-in-javascript/",
+        "target": "/academy/progetti/javascript/creare-sidebar-in-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/javascript/creare-contatore-javascript/",
+        "target": "/academy/progetti/javascript/creare-contatore-javascript/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/",
+        "target": "/academy/progetti/react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/2/",
+        "target": "/academy/progetti/react/2/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/react-come-usare-useEffect/",
+        "target": "/academy/progetti/react/react-come-usare-useEffect/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/react-darkmode-localstorage/",
+        "target": "/academy/progetti/react/react-darkmode-localstorage/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/creare-dropdown-react/",
+        "target": "/academy/progetti/react/creare-dropdown-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/creare-sidebar-usecontext-react/",
+        "target": "/academy/progetti/react/creare-sidebar-usecontext-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/carrello-react-usereducer/",
+        "target": "/academy/progetti/react/carrello-react-usereducer/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/usare-redux-toolkit-react/",
+        "target": "/academy/progetti/react/usare-redux-toolkit-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/creare-applicazione-avanzata-react/",
+        "target": "/academy/progetti/react/creare-applicazione-avanzata-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/usare-form-react/",
+        "target": "/academy/progetti/react/usare-form-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/usare-api-react/",
+        "target": "/academy/progetti/react/usare-api-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/react-useeffect-slider/",
+        "target": "/academy/progetti/react/react-useeffect-slider/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/react/come-usare-react-usestate-hook/",
+        "target": "/academy/progetti/react/come-usare-react-usestate-hook/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/gatsby/",
+        "target": "/academy/progetti/gatsby/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/gatsby/creare-un-blog-di-cucina-con-gatsby-e-sanity-come-gestionale/",
+        "target": "/academy/progetti/gatsby/creare-un-blog-di-cucina-con-gatsby-e-sanity-come-gestionale/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/",
+        "target": "/academy/progetti/videomaker/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/2/",
+        "target": "/academy/progetti/videomaker/2/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/tecnice-ripresa-film/",
+        "target": "/academy/progetti/videomaker/tecnice-ripresa-film/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/usare-i-campi-video/",
+        "target": "/academy/progetti/videomaker/usare-i-campi-video/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/illuminazione-tre-luci/",
+        "target": "/academy/progetti/videomaker/illuminazione-tre-luci/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/come-iniziare-montaggio-video/",
+        "target": "/academy/progetti/videomaker/come-iniziare-montaggio-video/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/riparare-audio-danneggiato/",
+        "target": "/academy/progetti/videomaker/riparare-audio-danneggiato/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/creare-primo-video-da-solo/",
+        "target": "/academy/progetti/videomaker/creare-primo-video-da-solo/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/come-funziona-color-correction/",
+        "target": "/academy/progetti/videomaker/come-funziona-color-correction/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/foglio-di-produzione-cinematografico/",
+        "target": "/academy/progetti/videomaker/foglio-di-produzione-cinematografico/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/riconoscere-le-inquadrature-cinematografiche/",
+        "target": "/academy/progetti/videomaker/riconoscere-le-inquadrature-cinematografiche/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/schema-luci-la-luce-di-rimbalzo/",
+        "target": "/academy/progetti/videomaker/schema-luci-la-luce-di-rimbalzo/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/progetti/videomaker/campi-e-inquadrature-come-riconoscerle/",
+        "target": "/academy/progetti/videomaker/campi-e-inquadrature-come-riconoscerle/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/guide/imparare-react-da-zero/",
+        "target": "/academy/guide/imparare-react-da-zero/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/guide/react/cosa-studiare-dopo-react/",
+        "target": "/academy/guide/react/cosa-studiare-dopo-react/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/guide/react/che-cosa-e-react-e-perche-studiarlo/",
+        "target": "/academy/guide/react/che-cosa-e-react-e-perche-studiarlo/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/guide/react/concetti-fondamentali-di-react-e-jsx/",
+        "target": "/academy/guide/react/concetti-fondamentali-di-react-e-jsx/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/guide/react/utilizzare-il-context-per-passare-dati-a-componenti-innestati/",
+        "target": "/academy/guide/react/utilizzare-il-context-per-passare-dati-a-componenti-innestati/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corsi/sviluppatori-web/",
+        "target": "/academy/corsi/sviluppatori-web/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corsi/gratuiti/",
+        "target": "/academy/corsi/gratuiti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corsi/videomakers/",
+        "target": "/academy/corsi/videomakers/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corso-react-hook-teoria-progetti/",
+        "target": "/academy/corsi/corso-react-hook-teoria-progetti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corso-javascript-per-principianti/",
+        "target": "/academy/corsi/corso-javascript-per-principianti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corso-gatsbyjs-italiano/",
+        "target": "/academy/corsi/corso-gatsbyjs-italiano/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corso-html-per-principianti/",
+        "target": "/academy/corsi/corso-html-per-principianti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corso-css-per-principianti/",
+        "target": "/academy/corsi/corso-css-per-principianti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/corso-git-per-principianti/",
+        "target": "/academy/corsi/corso-git-per-principianti/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/videomaking-da-passione-a-professione/",
+        "target": "/academy/corsi/videomaking-da-passione-a-professione/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/creare-video-professionali-con-il-telefono/",
+        "target": "/academy/corsi/creare-video-professionali-con-il-telefono/",
+        "status": "301",
+        "condition": null
+    },
+    {
+        "source": "/PremierePro-Guida-Completa-Gratuita/",
+        "target": "/academy/corsi/premiere-pro-guida-completa-gratuita/",
+        "status": "301",
+        "condition": null
+    },
+    {
         "source": "/<*>",
         "target": "/",
         "status": "200",

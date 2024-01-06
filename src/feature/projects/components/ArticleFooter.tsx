@@ -30,7 +30,7 @@ export const ArticleFooter = ({
   const nextProjectUrl = React.useMemo(() => {
     const courseSlug = project?.project_category?.[0]?.slug
     const slug = nextProject?.slug
-    return `/progetti/${courseSlug}/${slug}/`
+    return `/academy/progetti/${courseSlug}/${slug}/`
   }, [nextProject, project])
 
   return (
