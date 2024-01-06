@@ -63,6 +63,9 @@ export const HomeBanner = () => {
           className={homeBannerImage}
           src="../../images/home-banner-bg.png"
           alt="Home Banner"
+          style={{
+            position: `absolute`,
+          }}
         />
       </Box>
     </ResponsiveContainer>

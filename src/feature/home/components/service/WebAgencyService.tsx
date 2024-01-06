@@ -22,6 +22,8 @@ import {
 import SeoLink from "../../../../components/shared/SeoLink"
 import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
 import { homePageEvents } from "../../../../services/tracking/constant/homepage"
+import { webAgencyBigCard } from "../../style/services.css"
+import { hideFromMd, hideUpToMd } from "../../../../styles/general.css"
 
 export const WebAgencyService = () => {
   const { gaTracker } = useGATracking()
@@ -34,7 +36,7 @@ export const WebAgencyService = () => {
         mobile: 48,
         md: 96,
       }}
-      borderRadius={32}
+      className={webAgencyBigCard}
       display="flex"
       alignItems="center"
       style={{
@@ -74,7 +76,8 @@ export const WebAgencyService = () => {
               fontWeight={600}
             >
               Realizza
-              <br />
+              <br className={hideUpToMd} />
+              <span className={hideFromMd}> </span>
               il tuo sito
             </Text>
             <Box __maxWidth={393} overflow="hidden" width="full">
@@ -119,10 +122,13 @@ export const WebAgencyService = () => {
               width: `full`,
             }}
             direction={{
-              mobile: `column`,
+              mobile: `column-reverse`,
               lg: `row`,
             }}
-            align="flex-end"
+            align={{
+              mobile: `center`,
+              lg: `flex-end`,
+            }}
             justify="space-between"
           >
             <CategoryCourseCard background="red50">
@@ -166,10 +172,17 @@ export const WebAgencyService = () => {
               </CategoryCourseFooter>
             </CategoryCourseCard>
             <HStack spacing="unset" align="flex-end" justify="end">
-              <Heading variant="5xl" fontWeight={600}>
-                ll Tuo Sito,
-                <br />
-                Il Tuo Budget
+              <Heading
+                variant="5xl"
+                fontWeight={600}
+                sprinkles={{
+                  textAlign: `center`,
+                }}
+              >
+                ll tuo sito,
+                <br className={hideUpToMd} />
+                <span className={hideFromMd}> </span>
+                il tuo budget
               </Heading>
             </HStack>
           </Stack>

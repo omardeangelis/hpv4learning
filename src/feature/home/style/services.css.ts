@@ -8,6 +8,20 @@ export const servicesFixedContainer = style({
   alignItems: `flex-start`,
 })
 
+export const academyBigCard = style({
+  borderRadius: `1rem 1rem 0 0`,
+  [breakpoints.md]: {
+    borderRadius: `2rem`,
+  },
+})
+
+export const webAgencyBigCard = style({
+  borderRadius: `0 0 1rem 1rem`,
+  [breakpoints.md]: {
+    borderRadius: `2rem`,
+  },
+})
+
 export const academyRoundedAvatar = style({
   borderRadius: `50%`,
   display: `flex`,

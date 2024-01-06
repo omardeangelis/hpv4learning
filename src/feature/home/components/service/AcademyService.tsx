@@ -11,6 +11,7 @@ import React from "react"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import {
+  academyBigCard,
   academyRoundedAvatar,
   academySectionGrid,
   box1,
@@ -22,6 +23,7 @@ import { CategoryCourseSection } from "./AcademyCategoryCourse"
 import SeoLink from "../../../../components/shared/SeoLink"
 import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
 import { homePageEvents } from "../../../../services/tracking/constant/homepage"
+import { hideFromMd, hideUpToMd } from "../../../../styles/general.css"
 
 const containerVariants = {
   initial: {
@@ -62,7 +64,6 @@ export const AcademyService = () => {
   }, [isLoading])
   return (
     <Box
-      // ref={ref as any}
       background="purple10"
       __minHeight="100vh"
       __width="100vw"
@@ -70,7 +71,7 @@ export const AcademyService = () => {
         mobile: 48,
         md: 96,
       }}
-      borderRadius={32}
+      className={academyBigCard}
       display="flex"
       alignItems="center"
       style={{
@@ -117,10 +118,12 @@ export const AcademyService = () => {
                 fontWeight={600}
               >
                 Impara
-                <br />
+                <br className={hideUpToMd} />
+                <span className={hideFromMd}> </span>
                 nuove skills
               </Text>
               <SeoLink
+                className={hideUpToMd}
                 isExternal={false}
                 link="/academy/"
                 onClick={() =>
