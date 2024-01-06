@@ -149,7 +149,11 @@ export const Method = () => {
                 zIndex: 1,
               }}
             >
-              <Button variant="purple" onClick={handleMethodClick}>
+              <Button
+                variant="solid"
+                colorScheme="purple"
+                onClick={handleMethodClick}
+              >
                 Scopri di piu
               </Button>
             </CardContent>

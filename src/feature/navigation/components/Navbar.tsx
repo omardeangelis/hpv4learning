@@ -102,7 +102,6 @@ export const Navbar = () => {
               borderStyle: `solid`,
             }}
             borderColor="grey20"
-            background={`white`}
           >
             <HStack
               align="center"
@@ -161,7 +160,12 @@ export const Navbar = () => {
                 </HStack>
               </HStack>
               <Box className={btnBox}>
-                <Button size="md" variant="purple" onClick={handleContactClick}>
+                <Button
+                  size="md"
+                  variant="solid"
+                  colorScheme="purple"
+                  onClick={handleContactClick}
+                >
                   Contattaci
                 </Button>
               </Box>

@@ -47,7 +47,7 @@ export const createArticlePages = ({
     const courseId = articolo.guida?.[0]?.corsi_correlati?.[0]?.idCorso
     if (tagSlug)
       createPage({
-        path: `/blog/${tagSlug}/${articleSlug}/`,
+        path: `/academy/guide/${tagSlug}/${articleSlug}/`,
         component,
         context: {
           id: articolo.id,

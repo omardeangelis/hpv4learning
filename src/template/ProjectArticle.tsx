@@ -170,11 +170,14 @@ export const Head = ({ data }: PageProps<Queries.SingleProjectQuery>) => {
     const slug = queryData?.slug
     return [
       { text: `Home`, link: `/` },
-      { text: `Progetti`, link: `/progetti/` },
-      { text: `Progetti ${courseSlug}`, link: `/progetti/${courseSlug}/` },
+      { text: `Progetti`, link: `/academy/progetti/` },
+      {
+        text: `Progetti ${courseSlug}`,
+        link: `/academy/progetti/${courseSlug}/`,
+      },
       {
         text: queryData?.meta_title,
-        link: `/progetti/${courseSlug}/${slug}/`,
+        link: `/academy/progetti/${courseSlug}/${slug}/`,
       },
     ]
   }, [queryData?.meta_title, queryData?.project_category, queryData?.slug])

@@ -6,8 +6,9 @@ globalStyle(`html`, {
 })
 
 globalStyle(`body`, {
-  backgroundColor: `#fff`,
-  color: `#000`,
+  // overflowX: `hidden`,
+  background: `white`,
+  color: `black`,
   WebkitFontSmoothing: `antialiased`,
   MozOsxFontSmoothing: `grayscale`,
 })

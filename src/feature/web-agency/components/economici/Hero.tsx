@@ -91,7 +91,8 @@ export const Hero = () => {
               digitalizzare i propri servizi
             </Body>
             <Button
-              variant="purple"
+              variant="solid"
+              colorScheme="purple"
               onClick={handleClickOpen}
               style={{
                 zIndex: 2,

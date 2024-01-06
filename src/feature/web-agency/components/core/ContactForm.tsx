@@ -207,7 +207,10 @@ const ContactFormModal = () => {
                   <Button
                     role="button"
                     isFullWidth
-                    variant={!isValid || isSubmitting ? `disabled` : `purple`}
+                    variant="solid"
+                    colorScheme={
+                      !isValid || isSubmitting ? `disabled` : `purple`
+                    }
                     size="md"
                     onClick={() => handleSubmit()}
                   >
