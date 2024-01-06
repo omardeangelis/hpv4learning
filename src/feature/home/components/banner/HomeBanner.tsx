@@ -1,10 +1,7 @@
 import { StaticImage } from "gatsby-plugin-image"
 import { Body, Box, Button, Heading, ResponsiveContainer, VStack } from "old-ui"
 import React from "react"
-import {
-  homeBannerContainer,
-  homeBannerImage,
-} from "../../style/home-banner.css"
+import { homeBannerContainer } from "../../style/home-banner.css"
 import SeoLink from "../../../../components/shared/SeoLink"
 import { useGATracking } from "../../../../services/tracking/context/GATrackerProvider"
 import { homePageEvents } from "../../../../services/tracking/constant/homepage"
@@ -60,10 +57,13 @@ export const HomeBanner = () => {
           </SeoLink>
         </VStack>
         <StaticImage
-          className={homeBannerImage}
           src="../../images/home-banner-bg.png"
           alt="Home Banner"
           style={{
+            width: `100%`,
+            height: `100%`,
+            objectFit: `cover`,
+            objectPosition: `center`,
             position: `absolute`,
           }}
         />
