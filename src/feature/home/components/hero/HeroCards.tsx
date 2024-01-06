@@ -17,6 +17,7 @@ type HeroCardProps = {
   cardType: HeroCardEnum
   children?: React.ReactNode
   text?: string
+  defaultState?: "open" | "closed"
 }
 
 const variants = {
@@ -37,7 +38,12 @@ const textVariants = {
   closed: { rotate: -90, fontWeight: 400, transition: { duration: 0.4 } },
 }
 
-const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
+const HeroCard: React.FC<HeroCardProps> = ({
+  cardType,
+  children,
+  text,
+  defaultState = `closed`,
+}) => {
   const { extendedCard, setExtendedCard } = useHomeHeroContext()
   const { gaTracker } = useGATracking()
   const isOpen = cardType === extendedCard
@@ -81,7 +87,11 @@ const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
     }
   }, [extendedCard, gaTracker])
   return (
-    <motion.article variants={variants} animate={isOpen ? `open` : `closed`}>
+    <motion.article
+      variants={variants}
+      initial={defaultState}
+      animate={isOpen ? `open` : `closed`}
+    >
       <Box
         borderRadius={16}
         position="relative"
@@ -94,6 +104,8 @@ const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
       >
         <motion.div
           variants={textVariants}
+          initial={defaultState}
+          animate={isOpen ? `open` : `closed`}
           style={{
             zIndex: 3,
           }}
@@ -142,7 +154,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ cardType, children, text }) => {
 }
 
 export const HeroCards = () => (
-  <Box width="full">
+  <Box width="full" overflow="hidden">
     <HStack
       justify="space-between"
       align="center"
@@ -151,7 +163,7 @@ export const HeroCards = () => (
         width: `full`,
       }}
     >
-      <HeroCard cardType="academy" text="Academy">
+      <HeroCard cardType="academy" text="Academy" defaultState="open">
         <StaticImage
           src="../../images/academy-hero-vero.jpg"
           alt="Hero Card Background"
