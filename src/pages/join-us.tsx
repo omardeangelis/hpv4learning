@@ -141,7 +141,7 @@ const JoinUs = () => (
                   </SeoLink>
                   <a
                     className="noselect"
-                    href="mailto:hpv4learning@hpvfilm.it"
+                    href="mailto:supporto@hpv4learning.it"
                     rel="noopener"
                     style={{
                       textDecoration: `none`,

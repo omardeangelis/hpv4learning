@@ -66,11 +66,11 @@ export const SuccessForm = () => {
             Per qualsiasi problema rivolgersi alla mail <br />
             <a
               className="brand-text"
-              href="mailto:omardeangelis.business@gmail.com"
+              href="mailto:supporto@hpv4learning.it"
               title="Mail per il supporto"
               rel="nofollow"
             >
-              omardeangelis.business@gmail.com
+              supporto@hpv4learning.it
             </a>
           </Body>
         </VStack>
