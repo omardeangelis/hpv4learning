@@ -158,11 +158,11 @@ const SuccessModal = React.memo(() => {
             Per qualsiasi problema rivolgersi alla mail <br />
             <a
               className="brand-text"
-              href="mailto:hpv4learning@hpvfilm.it"
+              href="mailto:supporto@hpv4learning.it"
               title="Mail per il supporto"
               rel="nofollow"
             >
-              hpv4learning@hpvfilm.it
+              supporto@hpv4learning.it
             </a>
           </Typography>
         </Container>
